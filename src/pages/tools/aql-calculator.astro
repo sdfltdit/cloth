@@ -1,0 +1,1051 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Free AQL Calculator | ISO 2859-1 Sample Size & Acceptance Numbers";
+const pageDescription = "Calculate sample size and acceptance/rejection numbers instantly with our free AQL calculator. Based on ISO 2859-1 ANSI/ASQ Z1.4 standard for garment, textile, and product quality inspection. Get accurate sampling plans for critical, major, and minor defects.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free AQL Calculator",
+  "description": "Calculate sample size and acceptance/rejection numbers based on ISO 2859-1 ANSI/ASQ Z1.4 standard for quality inspection in garment, textile, and manufacturing industries",
+  "url": "https://sdfltd.com/tools/aql-calculator",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@id": "https://sdfltd.com/#org"
+  },
+  "keywords": "AQL calculator, sample size calculator, acceptance sampling, ISO 2859-1, ANSI/ASQ Z1.4, quality inspection, garment inspection, sampling plan, acceptance number, rejection number"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is AQL in quality inspection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AQL (Acceptable Quality Limit) is the maximum percentage of defects considered acceptable in a production batch. It's a statistical sampling method defined by ISO 2859-1 and ANSI/ASQ Z1.4 standards used worldwide for quality control in manufacturing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the standard AQL levels for garments?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The garment industry standard is: Critical defects AQL 0 (zero tolerance), Major defects AQL 2.5, and Minor defects AQL 4.0, using General Inspection Level II. This combination balances quality assurance with practical inspection costs for apparel production."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between Ac and Re numbers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ac (Acceptance number) is the maximum number of defects allowed for the lot to pass. Re (Rejection number) is the minimum number of defects that causes the lot to fail. For example, Ac=10, Re=11 means 10 or fewer defects pass, 11 or more fail."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the inspection levels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Special inspection levels (S-1 to S-4) are used for small samples or destructive testing. General levels I, II, and III are for normal inspection, with Level II being the standard. Level I requires smaller samples (less strict), Level III requires larger samples (more strict)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I choose the right AQL for my product?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Consider defect severity and your quality requirements. Critical defects (safety issues) should always use AQL 0. Major defects affecting function typically use AQL 1.5–2.5. Minor cosmetic issues often use AQL 4.0–6.5. Your buyer's requirements and industry standards should guide your choice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if a lot fails AQL inspection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When a lot fails AQL inspection, common actions include: 100% inspection of the entire lot to remove defective units, rework to fix defects, shipment rejection, or negotiating with the supplier. The action depends on your contract and the severity of quality issues."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this calculator suitable for all industries?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This calculator implements the ISO 2859-1 / ANSI/ASQ Z1.4 standard, which is used across manufacturing industries including textiles, electronics, automotive, and pharmaceuticals. While the standard is universal, different industries may prefer specific AQL combinations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is AQL 2.5?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AQL 2.5 means the acceptable quality limit is set at 2.5%. This is the most commonly used AQL value for general consumer products and is the industry standard for major defects in pre-shipment inspections. With AQL 2.5, a lot is statistically expected to contain no more than 2.5% defective units."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I interpret the AQL accept and reject numbers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "After inspecting the specified sample size, count the total number of defective units found. If the count is equal to or less than the Accept number (Ac), the lot passes inspection. If the count is equal to or greater than the Reject number (Re), the lot fails. For example, with Ac = 3 and Re = 4, finding 3 or fewer defects means the lot is accepted; 4 or more means it is rejected."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  .aql-page {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+  }
+
+  .aql-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .aql-section {
+    padding: 3rem 0;
+  }
+
+  .aql-section--no-border {
+    border-bottom: none;
+  }
+
+  .breadcrumb {
+    font-size: 0.72rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+
+  .breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    color: #fff;
+  }
+
+  .section-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 200;
+    color: #fff;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .page-subtitle {
+    font-size: 0.95rem;
+    color: #fff;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .calculator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .calc-card {
+    background-color: #000;
+    border: none;
+    padding: 2rem;
+  }
+
+  .calc-card-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-input,
+  .form-select {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #dc2626;
+    min-height: 44px;
+    cursor: pointer;
+  }
+
+  .form-input:focus,
+  .form-select:focus {
+    outline: none;
+    border-color: #dc2626;
+  }
+
+  .form-input.error,
+  .form-select.error {
+    border-color: #dc2626;
+  }
+
+  .defect-row {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: none;
+  }
+
+  .defect-row:last-child {
+    border-bottom: none;
+  }
+
+  .defect-type {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .results-card {
+    background-color: #000;
+    border: none;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    border: 1px solid #dc2626;
+  }
+
+  .result-label {
+    font-size: 0.85rem;
+    color: #fff;
+  }
+
+  .result-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .result-value--highlight {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .pass-fail-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: none;
+  }
+
+  .pass-fail-input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #dc2626;
+    margin-bottom: 1rem;
+    min-height: 44px;
+  }
+
+  .pass-fail-input:focus {
+    outline: none;
+    border-color: #dc2626;
+  }
+
+  .pass-fail-input.error {
+    border-color: #dc2626;
+  }
+
+  .pass-fail-result {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-radius: 4px;
+  }
+
+  .pass-fail-result--pass {
+    background-color: #000;
+    color: #fff;
+    border: none;
+  }
+
+  .pass-fail-result--fail {
+    background-color: #000;
+    color: #fff;
+    border: none;
+  }
+
+  .pass-fail-result--pending {
+    background-color: #000;
+    color: #fff;
+    border: none;
+  }
+
+  .defect-rate {
+    font-size: 0.85rem;
+    color: #fff;
+    text-align: center;
+    margin-top: 0.75rem;
+  }
+
+  .explanation-box {
+    background-color: #000;
+    border: none;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .explanation-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .explanation-text {
+    font-size: 0.85rem;
+    color: #fff;
+    line-height: 1.7;
+  }
+
+  .example-section {
+    background-color: #000;
+    border: none;
+    padding: 2rem;
+  }
+
+  .example-step {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: none;
+  }
+
+  .example-step:last-child {
+    margin-bottom: 0;
+  }
+
+  .example-step-number {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .example-step-text {
+    font-size: 0.9rem;
+    color: #fff;
+    line-height: 1.7;
+  }
+
+  .industry-note {
+    background-color: #000;
+    border-left: none;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .industry-note-text {
+    font-size: 0.85rem;
+    color: #fff;
+    line-height: 1.7;
+  }
+
+  .faq-item {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    padding: 1.25rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    min-height: 44px;
+    font-family: inherit;
+  }
+
+  .faq-question:hover {
+    color: #fff;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: transform 0.2s;
+    color: #fff;
+  }
+
+  .faq-icon--open {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    display: none;
+    padding-bottom: 1.25rem;
+  }
+
+  .faq-answer--visible {
+    display: block;
+  }
+
+  .faq-answer p {
+    font-size: 0.9rem;
+    color: #fff;
+    line-height: 1.8;
+  }
+
+  .faq-answer a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  .faq-answer a:hover {
+    border-bottom: none;
+  }
+
+  @media (max-width: 768px) {
+    .calculator-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .defect-row {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .aql-section {
+      padding: 2rem 0;
+    }
+  }
+</style>
+
+<div class="aql-page">
+
+  <!-- HERO -->
+  <section class="aql-section aql-section--no-border">
+    <div class="aql-container" style="text-align: center;">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Home</a>
+        <span style="margin: 0 0.5rem; color: #fff;">›</span>
+        <a href="/tools">Tools</a>
+        <span style="margin: 0 0.5rem; color: #fff;">›</span>
+        AQL Calculator
+      </nav>
+      <span class="section-label">Free Quality Control Tool</span>
+      <h1 class="page-title">Free AQL Calculator<br>Sample Size & Acceptance Numbers</h1>
+      <p class="page-subtitle">Calculate sample size and acceptance/rejection numbers instantly using ISO 2859-1 ANSI/ASQ Z1.4 standard. Perfect for garment, textile, and product quality inspection. Get accurate sampling plans for critical, major, and minor defects in seconds.</p>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="aql-section">
+    <div class="aql-container">
+      <div class="calculator-grid">
+        
+        <!-- INPUTS -->
+        <div class="calc-card">
+          <h2 class="calc-card-title">Inspection Parameters</h2>
+          
+          <div class="form-group">
+            <label class="form-label" for="lot-quantity">Order/Lot Quantity</label>
+            <input type="number" id="lot-quantity" class="form-input" placeholder="e.g., 5000" min="2" value="5000">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="inspection-level">Inspection Level</label>
+            <select id="inspection-level" class="form-select">
+              <option value="S1">Special S-1</option>
+              <option value="S2">Special S-2</option>
+              <option value="S3">Special S-3</option>
+              <option value="S4">Special S-4</option>
+              <option value="GI">General I</option>
+              <option value="GII" selected>General II (Default)</option>
+              <option value="GIII">General III</option>
+            </select>
+          </div>
+
+          <h3 style="font-size: 0.85rem; font-weight: 500; color: #fff; margin: 1.5rem 0 1rem;">AQL Limits by Defect Type</h3>
+
+          <div class="defect-row">
+            <div class="defect-type">Critical Defects</div>
+            <div>
+              <select id="critical-aql" class="form-select">
+                <option value="0" selected>0 (Zero Tolerance)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="defect-row">
+            <div class="defect-type">Major Defects</div>
+            <div>
+              <select id="major-aql" class="form-select">
+                <option value="0.065">0.065</option>
+                <option value="0.1">0.1</option>
+                <option value="0.15">0.15</option>
+                <option value="0.25">0.25</option>
+                <option value="0.40">0.40</option>
+                <option value="0.65">0.65</option>
+                <option value="1.0">1.0</option>
+                <option value="1.5">1.5</option>
+                <option value="2.5" selected>2.5</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="defect-row">
+            <div class="defect-type">Minor Defects</div>
+            <div>
+              <select id="minor-aql" class="form-select">
+                <option value="0.065">0.065</option>
+                <option value="0.1">0.1</option>
+                <option value="0.15">0.15</option>
+                <option value="0.25">0.25</option>
+                <option value="0.40">0.40</option>
+                <option value="0.65">0.65</option>
+                <option value="1.0">1.0</option>
+                <option value="1.5">1.5</option>
+                <option value="2.5">2.5</option>
+                <option value="4.0" selected>4.0</option>
+                <option value="6.5">6.5</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="industry-note">
+            <p class="industry-note-text">Industry standard for garments: Critical 0, Major 2.5, Minor 4.0 at General Level II</p>
+          </div>
+        </div>
+
+        <!-- OUTPUTS -->
+        <div class="calc-card">
+          <h2 class="calc-card-title">Inspection Results</h2>
+
+          <div class="results-card">
+            <div class="result-row">
+              <span class="result-label">Sample Size Code Letter</span>
+              <span class="result-value result-value--highlight" id="code-letter">-</span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Sample Size</span>
+              <span class="result-value result-value--highlight" id="sample-size">-</span>
+            </div>
+          </div>
+
+          <div class="results-card">
+            <div class="result-row">
+              <span class="result-label">Critical (Ac/Re)</span>
+              <span class="result-value" id="critical-acre">0 / 1</span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Major (Ac/Re)</span>
+              <span class="result-value" id="major-acre">-</span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Minor (Ac/Re)</span>
+              <span class="result-value" id="minor-acre">-</span>
+            </div>
+          </div>
+
+          <div class="pass-fail-section">
+            <label class="form-label" for="actual-defects">Enter Actual Defects Found</label>
+            <input type="number" id="actual-defects" class="pass-fail-input" placeholder="e.g., 5" min="0">
+            <div class="pass-fail-result pass-fail-result--pending" id="pass-fail-result">
+              Enter defects to check result
+            </div>
+            <div class="defect-rate" id="defect-rate"></div>
+          </div>
+
+          <div class="explanation-box">
+            <h3 class="explanation-title">What This Means</h3>
+            <p class="explanation-text" id="explanation-text">
+              Enter your lot quantity and inspection parameters to see sample size requirements. The calculator will show how many units to inspect and the acceptance/rejection numbers for each defect type.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IS AQL SECTION -->
+  <section class="aql-section">
+    <div class="aql-container">
+      <span class="section-label">Understanding AQL</span>
+      <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; color: #fff; margin-bottom: 1.5rem;">What is Acceptable Quality Limit (AQL)?</h2>
+      <p style="font-size: 0.95rem; color: #fff; line-height: 1.8; max-width: 800px; margin-bottom: 1.5rem;">
+        Acceptable Quality Limit (AQL) is a statistical sampling method defined by the international standard ISO 2859-1 (also known as ANSI/ASQ Z1.4 in the United States). It determines how many units from a production lot should be randomly inspected and the maximum number of defective units allowed before the lot is rejected. AQL sampling is the cornerstone of modern quality control inspection used by importers, retailers, brands, and third-party inspection companies worldwide to make objective, data-driven accept/reject decisions on manufactured goods.
+      </p>
+      <p style="font-size: 0.95rem; color: #fff; line-height: 1.8; max-width: 800px; margin-bottom: 1.5rem;">
+        Instead of inspecting 100% of products (which is prohibitively expensive and time-consuming for large production runs), AQL sampling achieves statistically comparable confidence with a fraction of the units inspected  typically between 80 and 315 units for common lot sizes. This saves significant time and cost while still protecting buyers from shipping defective goods.
+      </p>
+      
+      <h3 style="font-size: 1.1rem; font-weight: 500; color: #fff; margin: 2rem 0 1rem;">Three Types of Defects in AQL Sampling</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+        <div style="background-color: #000; padding: 1.5rem;">
+          <h4 style="font-size: 0.9rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Critical Defects (AQL 0.0–0.65%)</h4>
+          <p style="font-size: 0.85rem; color: #fff; line-height: 1.6;">Defects that pose a safety hazard or violate mandatory regulations. Examples include sharp edges on children's toys, electrical hazards, or toxic materials. Critical defects typically use AQL 0.0, meaning zero tolerance  any critical defect found results in lot rejection.</p>
+        </div>
+        <div style="background-color: #000; padding: 1.5rem;">
+          <h4 style="font-size: 0.9rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Major Defects (AQL 1.0–2.5%)</h4>
+          <p style="font-size: 0.85rem; color: #fff; line-height: 1.6;">Defects that affect the product's function or usability. Examples include a zipper that doesn't close, a motor that doesn't start, or incorrect labeling. The industry standard for major defects is AQL 2.5.</p>
+        </div>
+        <div style="background-color: #000; padding: 1.5rem;">
+          <h4 style="font-size: 0.9rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Minor Defects (AQL 2.5–4.0%)</h4>
+          <p style="font-size: 0.85rem; color: #fff; line-height: 1.6;">Cosmetic imperfections that do not affect the product's function. Examples include slight color variation, minor scratches, or loose threads. The standard for minor defects is AQL 4.0.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKED EXAMPLE -->
+  <section class="aql-section">
+    <div class="aql-container">
+      <span class="section-label">Step-by-Step Guide</span>
+      <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; color: #fff; margin-bottom: 1.5rem;">How AQL Calculation Works</h2>
+      
+      <div class="example-section">
+        <h3 style="font-size: 1.1rem; font-weight: 500; color: #fff; margin-bottom: 1.5rem;">Example: 5,000 Garment Order</h3>
+        
+        <div class="example-step">
+          <div class="example-step-number">Step 1: Determine Sample Size Code</div>
+          <p class="example-step-text">For a lot of 5,000 units at General Inspection Level II, look up Table A. The lot range 3,201–10,000 with Level GII gives code letter "L".</p>
+        </div>
+
+        <div class="example-step">
+          <div class="example-step-number">Step 2: Find Sample Size</div>
+          <p class="example-step-text">Code letter "L" in Table B shows a sample size of 200 units. This means you inspect 200 randomly selected garments from the 5,000-unit lot.</p>
+        </div>
+
+        <div class="example-step">
+          <div class="example-step-number">Step 3: Determine Acceptance Numbers</div>
+          <p class="example-step-text">For AQL 2.5 (Major defects), code letter L shows Ac=10, Re=11. This means if you find 10 or fewer major defects, the lot passes. If you find 11 or more, it fails.</p>
+        </div>
+
+        <div class="example-step">
+          <div class="example-step-number">Step 4: Apply to All Defect Types</div>
+          <p class="example-step-text">Critical defects always use Ac=0, Re=1 (zero tolerance). For AQL 4.0 (Minor defects), code letter L shows Ac=14, Re=15.</p>
+        </div>
+
+        <div class="example-step">
+          <div class="example-step-number">Step 5: Make Decision</div>
+          <p class="example-step-text">After inspecting 200 units, count actual defects found. Compare against each Ac/Re threshold. If any defect type exceeds its Re number, the entire lot is rejected or requires 100% inspection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="aql-section aql-section--no-border">
+    <div class="aql-container">
+      <span class="section-label">Common Questions</span>
+      <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; color: #fff; margin-bottom: 1.5rem;">Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is AQL in quality inspection?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>AQL (Acceptable Quality Limit) is the maximum percentage of defects considered acceptable in a production batch. It's a statistical sampling method defined by ISO 2859-1 and ANSI/ASQ Z1.4 standards used worldwide for quality control in manufacturing.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What are the standard AQL levels for garments?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>The garment industry standard is: Critical defects AQL 0 (zero tolerance), Major defects AQL 2.5, and Minor defects AQL 4.0, using General Inspection Level II. This combination balances quality assurance with practical inspection costs for apparel production.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is the difference between Ac and Re numbers?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Ac (Acceptance number) is the maximum number of defects allowed for the lot to pass. Re (Rejection number) is the minimum number of defects that causes the lot to fail. For example, Ac=10, Re=11 means 10 or fewer defects pass, 11 or more fail.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What are the inspection levels?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Special inspection levels (S-1 to S-4) are used for small samples or destructive testing. General levels I, II, and III are for normal inspection, with Level II being the standard. Level I requires smaller samples (less strict), Level III requires larger samples (more strict).</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How do I choose the right AQL for my product?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Consider defect severity and your quality requirements. Critical defects (safety issues) should always use AQL 0. Major defects affecting function typically use AQL 1.5–2.5. Minor cosmetic issues often use AQL 4.0–6.5. Your buyer's requirements and industry standards should guide your choice.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What happens if a lot fails AQL inspection?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>When a lot fails AQL inspection, common actions include: 100% inspection of the entire lot to remove defective units, rework to fix defects, shipment rejection, or negotiating with the supplier. The action depends on your contract and the severity of quality issues.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is this calculator suitable for all industries?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>This calculator implements the ISO 2859-1 / ANSI/ASQ Z1.4 standard, which is used across manufacturing industries including textiles, electronics, automotive, and pharmaceuticals. While the standard is universal, different industries may prefer specific AQL combinations.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is AQL 2.5?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>AQL 2.5 means the acceptable quality limit is set at 2.5%. This is the most commonly used AQL value for general consumer products and is the industry standard for major defects in pre-shipment inspections. With AQL 2.5, a lot is statistically expected to contain no more than 2.5% defective units. It strikes a balance between quality assurance and practical inspection costs.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How do I interpret the AQL accept and reject numbers?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>After inspecting the specified sample size, count the total number of defective units found. If the count is equal to or less than the Accept number (Ac), the lot passes inspection. If the count is equal to or greater than the Reject number (Re), the lot fails. For example, with Ac = 3 and Re = 4, finding 3 or fewer defects means the lot is accepted; 4 or more means it is rejected.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is the difference between General Inspection Level I, II, and III?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>General Inspection Level II is the default and most widely used level. Level I requires fewer samples (less discrimination) and is used when lower inspection costs are needed or the process is well-established. Level III requires more samples (higher discrimination) and is used when stricter quality assurance is required, such as for safety-critical products. The higher the level, the larger the sample size and the greater the statistical confidence in the result.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is AQL sampling the same as 100% inspection?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. AQL is a statistical sampling method where only a randomly selected portion of the lot is inspected. It provides a high confidence level that the lot meets quality requirements without inspecting every unit. 100% inspection checks every single unit and is typically reserved for critical safety items or very small lot sizes. AQL sampling is far more cost-effective for large production runs.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What are Special Inspection Levels S-1 through S-4?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Special Inspection Levels (S-1, S-2, S-3, S-4) are used when very small sample sizes are needed, typically for destructive testing where inspected units cannot be sold, or for expensive products where minimizing sample size is important. S-1 uses the smallest sample and S-4 the largest among special levels. These levels provide lower statistical discrimination than general levels but are appropriate when testing is costly or destructive.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // Table A: Sample Size Code Letter (Lot Size → Code Letter)
+  const tableA = {
+    lotRanges: [
+      { min: 2, max: 8, codes: { S1: 'A', S2: 'A', S3: 'A', S4: 'A', GI: 'A', GII: 'A', GIII: 'B' } },
+      { min: 9, max: 15, codes: { S1: 'A', S2: 'A', S3: 'A', S4: 'A', GI: 'A', GII: 'B', GIII: 'C' } },
+      { min: 16, max: 25, codes: { S1: 'A', S2: 'A', S3: 'B', S4: 'B', GI: 'B', GII: 'C', GIII: 'D' } },
+      { min: 26, max: 50, codes: { S1: 'A', S2: 'B', S3: 'B', S4: 'C', GI: 'C', GII: 'D', GIII: 'E' } },
+      { min: 51, max: 90, codes: { S1: 'B', S2: 'B', S3: 'C', S4: 'C', GI: 'C', GII: 'E', GIII: 'F' } },
+      { min: 91, max: 150, codes: { S1: 'B', S2: 'B', S3: 'C', S4: 'D', GI: 'D', GII: 'F', GIII: 'G' } },
+      { min: 151, max: 280, codes: { S1: 'B', S2: 'C', S3: 'D', S4: 'E', GI: 'E', GII: 'G', GIII: 'H' } },
+      { min: 281, max: 500, codes: { S1: 'B', S2: 'C', S3: 'D', S4: 'E', GI: 'F', GII: 'H', GIII: 'J' } },
+      { min: 501, max: 1200, codes: { S1: 'C', S2: 'C', S3: 'E', S4: 'F', GI: 'G', GII: 'J', GIII: 'K' } },
+      { min: 1201, max: 3200, codes: { S1: 'C', S2: 'D', S3: 'E', S4: 'G', GI: 'H', GII: 'K', GIII: 'L' } },
+      { min: 3201, max: 10000, codes: { S1: 'C', S2: 'D', S3: 'F', S4: 'G', GI: 'J', GII: 'L', GIII: 'M' } },
+      { min: 10001, max: 35000, codes: { S1: 'C', S2: 'D', S3: 'F', S4: 'H', GI: 'K', GII: 'M', GIII: 'N' } },
+      { min: 35001, max: 150000, codes: { S1: 'D', S2: 'E', S3: 'G', S4: 'J', GI: 'L', GII: 'N', GIII: 'P' } },
+      { min: 150001, max: 500000, codes: { S1: 'D', S2: 'E', S3: 'G', S4: 'J', GI: 'M', GII: 'P', GIII: 'Q' } },
+      { min: 500001, max: Infinity, codes: { S1: 'D', S2: 'E', S3: 'H', S4: 'K', GI: 'N', GII: 'Q', GIII: 'R' } }
+    ]
+  };
+
+  // Table B: Sample Size and Ac/Re by Code Letter and AQL
+  const tableB = {
+    'A': { sampleSize: 2, aql: { '0.065': null, '0.1': null, '0.15': null, '0.25': null, '0.40': null, '0.65': null, '1.0': null, '1.5': null, '2.5': null, '4.0': null, '6.5': { ac: 0, re: 1 } } },
+    'B': { sampleSize: 3, aql: { '0.065': null, '0.1': null, '0.15': null, '0.25': null, '0.40': null, '0.65': null, '1.0': null, '1.5': null, '2.5': null, '4.0': { ac: 0, re: 1 }, '6.5': { ac: 1, re: 2 } } },
+    'C': { sampleSize: 5, aql: { '0.065': null, '0.1': null, '0.15': null, '0.25': null, '0.40': null, '0.65': null, '1.0': null, '1.5': null, '2.5': { ac: 0, re: 1 }, '4.0': { ac: 0, re: 1 }, '6.5': { ac: 1, re: 2 } } },
+    'D': { sampleSize: 8, aql: { '0.065': null, '0.1': null, '0.15': null, '0.25': null, '0.40': null, '0.65': null, '1.0': null, '1.5': { ac: 0, re: 1 }, '2.5': { ac: 0, re: 1 }, '4.0': { ac: 1, re: 2 }, '6.5': { ac: 2, re: 3 } } },
+    'E': { sampleSize: 13, aql: { '0.065': null, '0.1': null, '0.15': null, '0.25': null, '0.40': null, '0.65': null, '1.0': { ac: 0, re: 1 }, '1.5': { ac: 0, re: 1 }, '2.5': { ac: 1, re: 2 }, '4.0': { ac: 1, re: 2 }, '6.5': { ac: 2, re: 3 } } },
+    'F': { sampleSize: 20, aql: { '0.065': null, '0.1': null, '0.15': null, '0.25': null, '0.40': null, '0.65': { ac: 0, re: 1 }, '1.0': { ac: 0, re: 1 }, '1.5': { ac: 1, re: 2 }, '2.5': { ac: 1, re: 2 }, '4.0': { ac: 2, re: 3 }, '6.5': { ac: 3, re: 4 } } },
+    'G': { sampleSize: 32, aql: { '0.065': null, '0.1': null, '0.15': null, '0.25': null, '0.40': { ac: 0, re: 1 }, '0.65': { ac: 0, re: 1 }, '1.0': { ac: 1, re: 2 }, '1.5': { ac: 1, re: 2 }, '2.5': { ac: 2, re: 3 }, '4.0': { ac: 3, re: 4 }, '6.5': { ac: 5, re: 6 } } },
+    'H': { sampleSize: 50, aql: { '0.065': null, '0.1': null, '0.15': null, '0.25': { ac: 0, re: 1 }, '0.40': { ac: 0, re: 1 }, '0.65': { ac: 1, re: 2 }, '1.0': { ac: 1, re: 2 }, '1.5': { ac: 2, re: 3 }, '2.5': { ac: 3, re: 4 }, '4.0': { ac: 5, re: 6 }, '6.5': { ac: 7, re: 8 } } },
+    'J': { sampleSize: 80, aql: { '0.065': null, '0.1': null, '0.15': { ac: 0, re: 1 }, '0.25': { ac: 0, re: 1 }, '0.40': { ac: 1, re: 2 }, '0.65': { ac: 1, re: 2 }, '1.0': { ac: 2, re: 3 }, '1.5': { ac: 3, re: 4 }, '2.5': { ac: 5, re: 6 }, '4.0': { ac: 7, re: 8 }, '6.5': { ac: 10, re: 11 } } },
+    'K': { sampleSize: 125, aql: { '0.065': null, '0.1': { ac: 0, re: 1 }, '0.15': { ac: 0, re: 1 }, '0.25': { ac: 1, re: 2 }, '0.40': { ac: 1, re: 2 }, '0.65': { ac: 2, re: 3 }, '1.0': { ac: 3, re: 4 }, '1.5': { ac: 5, re: 6 }, '2.5': { ac: 7, re: 8 }, '4.0': { ac: 10, re: 11 }, '6.5': { ac: 14, re: 15 } } },
+    'L': { sampleSize: 200, aql: { '0.065': { ac: 0, re: 1 }, '0.1': { ac: 0, re: 1 }, '0.15': { ac: 1, re: 2 }, '0.25': { ac: 1, re: 2 }, '0.40': { ac: 2, re: 3 }, '0.65': { ac: 3, re: 4 }, '1.0': { ac: 5, re: 6 }, '1.5': { ac: 7, re: 8 }, '2.5': { ac: 10, re: 11 }, '4.0': { ac: 14, re: 15 }, '6.5': { ac: 21, re: 22 } } },
+    'M': { sampleSize: 315, aql: { '0.065': { ac: 0, re: 1 }, '0.1': { ac: 1, re: 2 }, '0.15': { ac: 1, re: 2 }, '0.25': { ac: 2, re: 3 }, '0.40': { ac: 3, re: 4 }, '0.65': { ac: 5, re: 6 }, '1.0': { ac: 7, re: 8 }, '1.5': { ac: 10, re: 11 }, '2.5': { ac: 14, re: 15 }, '4.0': { ac: 21, re: 22 }, '6.5': null } },
+    'N': { sampleSize: 500, aql: { '0.065': { ac: 1, re: 2 }, '0.1': { ac: 1, re: 2 }, '0.15': { ac: 2, re: 3 }, '0.25': { ac: 3, re: 4 }, '0.40': { ac: 5, re: 6 }, '0.65': { ac: 7, re: 8 }, '1.0': { ac: 10, re: 11 }, '1.5': { ac: 14, re: 15 }, '2.5': { ac: 21, re: 22 }, '4.0': null, '6.5': null } },
+    'P': { sampleSize: 800, aql: { '0.065': { ac: 1, re: 2 }, '0.1': { ac: 2, re: 3 }, '0.15': { ac: 3, re: 4 }, '0.25': { ac: 5, re: 6 }, '0.40': { ac: 7, re: 8 }, '0.65': { ac: 10, re: 11 }, '1.0': { ac: 14, re: 15 }, '1.5': { ac: 21, re: 22 }, '2.5': null, '4.0': null, '6.5': null } },
+    'Q': { sampleSize: 1250, aql: { '0.065': { ac: 2, re: 3 }, '0.1': { ac: 3, re: 4 }, '0.15': { ac: 5, re: 6 }, '0.25': { ac: 7, re: 8 }, '0.40': { ac: 10, re: 11 }, '0.65': { ac: 14, re: 15 }, '1.0': { ac: 21, re: 22 }, '1.5': null, '2.5': null, '4.0': null, '6.5': null } },
+    'R': { sampleSize: 2000, aql: { '0.065': { ac: 3, re: 4 }, '0.1': { ac: 5, re: 6 }, '0.15': { ac: 7, re: 8 }, '0.25': { ac: 10, re: 11 }, '0.40': { ac: 14, re: 15 }, '0.65': { ac: 21, re: 22 }, '1.0': null, '1.5': null, '2.5': null, '4.0': null, '6.5': null } }
+  };
+
+  // DOM Elements
+  const lotQuantityInput = document.getElementById('lot-quantity');
+  const inspectionLevelSelect = document.getElementById('inspection-level');
+  const criticalAqlSelect = document.getElementById('critical-aql');
+  const majorAqlSelect = document.getElementById('major-aql');
+  const minorAqlSelect = document.getElementById('minor-aql');
+  const actualDefectsInput = document.getElementById('actual-defects');
+  
+  const codeLetterEl = document.getElementById('code-letter');
+  const sampleSizeEl = document.getElementById('sample-size');
+  const criticalAcReEl = document.getElementById('critical-acre');
+  const majorAcReEl = document.getElementById('major-acre');
+  const minorAcReEl = document.getElementById('minor-acre');
+  const passFailResultEl = document.getElementById('pass-fail-result');
+  const defectRateEl = document.getElementById('defect-rate');
+  const explanationTextEl = document.getElementById('explanation-text');
+
+  // Get code letter from lot size and inspection level
+  function getCodeLetter(lotSize, inspectionLevel) {
+    for (const range of tableA.lotRanges) {
+      if (lotSize >= range.min && lotSize <= range.max) {
+        return range.codes[inspectionLevel] || null;
+      }
+    }
+    return null;
+  }
+
+  // Format Ac/Re display
+  function formatAcRe(acRe) {
+    if (!acRe) return '*';
+    return `${acRe.ac} / ${acRe.re}`;
+  }
+
+  // Calculate and update results
+  function calculateAQL() {
+    const lotSize = parseInt(lotQuantityInput.value) || 0;
+    const inspectionLevel = inspectionLevelSelect.value;
+    const majorAql = majorAqlSelect.value;
+    const minorAql = minorAqlSelect.value;
+
+    if (lotSize < 2) {
+      codeLetterEl.textContent = '-';
+      sampleSizeEl.textContent = '-';
+      majorAcReEl.textContent = '-';
+      minorAcReEl.textContent = '-';
+      explanationTextEl.textContent = 'Enter a lot quantity of at least 2 units to calculate sample size.';
+      return;
+    }
+
+    // Get code letter
+    const codeLetter = getCodeLetter(lotSize, inspectionLevel);
+    
+    if (!codeLetter) {
+      codeLetterEl.textContent = '-';
+      sampleSizeEl.textContent = '-';
+      majorAcReEl.textContent = '-';
+      minorAcReEl.textContent = '-';
+      explanationTextEl.textContent = 'Unable to determine code letter for the given parameters.';
+      return;
+    }
+
+    // Get sample size and AQL data
+    const tableBData = tableB[codeLetter];
+    if (!tableBData) {
+      codeLetterEl.textContent = '-';
+      sampleSizeEl.textContent = '-';
+      return;
+    }
+
+    const sampleSize = tableBData.sampleSize;
+    const majorAcRe = tableBData.aql[majorAql];
+    const minorAcRe = tableBData.aql[minorAql];
+
+    // Update display
+    codeLetterEl.textContent = codeLetter;
+    sampleSizeEl.textContent = `${sampleSize} units`;
+    majorAcReEl.textContent = formatAcRe(majorAcRe);
+    minorAcReEl.textContent = formatAcRe(minorAcRe);
+
+    // Update explanation
+    let explanation = `For a lot of ${lotSize.toLocaleString()} units at ${inspectionLevel === 'GII' ? 'General Level II' : inspectionLevel + ' level'}, inspect ${sampleSize} units. `;
+    
+    if (majorAcRe) {
+      explanation += `Major defects: accept if ≤${majorAcRe.ac}, reject if ≥${majorAcRe.re}. `;
+    } else {
+      explanation += `Major defects at AQL ${majorAql}: use switched sampling plan. `;
+    }
+    
+    if (minorAcRe) {
+      explanation += `Minor defects: accept if ≤${minorAcRe.ac}, reject if ≥${minorAcRe.re}. `;
+    } else {
+      explanation += `Minor defects at AQL ${minorAql}: use switched sampling plan. `;
+    }
+    
+    explanation += `Critical defects always require zero tolerance (Ac=0, Re=1).`;
+    
+    explanationTextEl.textContent = explanation;
+
+    // Update pass/fail if defects entered
+    checkPassFail();
+  }
+
+  // Check pass/fail based on actual defects
+  function checkPassFail() {
+    const actualDefects = parseInt(actualDefectsInput.value);
+    const sampleSizeText = sampleSizeEl.textContent;
+    
+    if (!sampleSizeText || sampleSizeText === '-') {
+      passFailResultEl.className = 'pass-fail-result pass-fail-result--pending';
+      passFailResultEl.textContent = 'Enter parameters first';
+      defectRateEl.textContent = '';
+      return;
+    }
+
+    const sampleSize = parseInt(sampleSizeText.replace(' units', ''));
+    
+    if (isNaN(actualDefects) || actualDefects === 0) {
+      passFailResultEl.className = 'pass-fail-result pass-fail-result--pending';
+      passFailResultEl.textContent = 'Enter actual defects found';
+      defectRateEl.textContent = '';
+      return;
+    }
+
+    // Use major AQL for pass/fail determination (most common practice)
+    const majorAql = majorAqlSelect.value;
+    const codeLetter = codeLetterEl.textContent;
+    const tableBData = tableB[codeLetter];
+    
+    if (!tableBData) return;
+
+    const majorAcRe = tableBData.aql[majorAql];
+    
+    if (!majorAcRe) {
+      passFailResultEl.className = 'pass-fail-result pass-fail-result--pending';
+      passFailResultEl.textContent = 'Use switched sampling plan';
+      defectRateEl.textContent = '';
+      return;
+    }
+
+    const passed = actualDefects <= majorAcRe.ac;
+    
+    if (passed) {
+      passFailResultEl.className = 'pass-fail-result pass-fail-result--pass';
+      passFailResultEl.textContent = 'PASS ✓';
+    } else {
+      passFailResultEl.className = 'pass-fail-result pass-fail-result--fail';
+      passFailResultEl.textContent = 'FAIL ✗';
+    }
+
+    // Calculate defect rate
+    const defectRate = ((actualDefects / sampleSize) * 100).toFixed(2);
+    defectRateEl.textContent = `Defect rate: ${defectRate}% (${actualDefects}/${sampleSize} units)`;
+  }
+
+  // Event listeners
+  lotQuantityInput.addEventListener('input', calculateAQL);
+  inspectionLevelSelect.addEventListener('change', calculateAQL);
+  criticalAqlSelect.addEventListener('change', calculateAQL);
+  majorAqlSelect.addEventListener('change', calculateAQL);
+  minorAqlSelect.addEventListener('change', calculateAQL);
+  actualDefectsInput.addEventListener('input', checkPassFail);
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const answer = button.nextElementSibling;
+      const icon = button.querySelector('.faq-icon');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      
+      button.setAttribute('aria-expanded', !isExpanded);
+      answer.classList.toggle('faq-answer--visible');
+      icon.classList.toggle('faq-icon--open');
+    });
+  });
+
+  // Initial calculation
+  calculateAQL();
+</script>
+
+</BaseLayout>

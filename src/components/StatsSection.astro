@@ -1,0 +1,99 @@
+---
+export interface Props {
+  yearsExp: number;
+}
+
+const { yearsExp } = Astro.props;
+---
+
+<section class="stats-section">
+	<div class="stats-container">
+		<div class="stats-grid">
+			<div class="stat-item">
+				<div class="stat-num" id="stat-years">{yearsExp}+</div>
+				<div class="stat-label">Years Manufacturing Experience</div>
+			</div>
+			<div class="stat-item">
+				<div class="stat-num" id="stat-moq">300</div>
+				<div class="stat-label">Pieces Low MOQ</div>
+			</div>
+			<div class="stat-item">
+				<div class="stat-num" id="stat-capacity">50,000</div>
+				<div class="stat-label">Pieces Production Capacity</div>
+			</div>
+			<div class="stat-item">
+				<div class="stat-num" id="stat-certs">13</div>
+				<div class="stat-label">Sustainable Certifications</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+  .stats-section {
+    padding: 80px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .stats-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    text-align: center;
+  }
+  .stat-item {
+    border-top: 1px solid #333;
+    padding-top: 1.5rem;
+    padding: 1.5rem 1rem 0;
+  }
+  .stat-num {
+    font-size: 1.875rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    color: #fff;
+    font-size: 0.85rem;
+  }
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .stats-section { padding: 48px 0; }
+  }
+  @media (max-width: 480px) {
+    .stats-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script is:inline>
+(function(){
+  const yearsExp = {yearsExp};
+  function animateCount(el, target, suffix) {
+    var start = 0;
+    var duration = 1500;
+    var step = target / (duration / 16);
+    var timer = setInterval(function() {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.textContent = Math.floor(start).toLocaleString() + (suffix || '');
+    }, 16);
+  }
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        animateCount(document.getElementById('stat-years'), yearsExp, '+');
+        animateCount(document.getElementById('stat-moq'), 300, '');
+        animateCount(document.getElementById('stat-capacity'), 50000, '');
+        animateCount(document.getElementById('stat-certs'), 13, '');
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  var section = document.querySelector('.stats-grid');
+  if (section) observer.observe(section);
+})();
+</script>

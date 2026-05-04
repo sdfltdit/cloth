@@ -1,0 +1,329 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const currentUrl = Astro.url.href;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} url={currentUrl} />
+
+    <link rel="preload" as="image" href="/hero.webp" type="image/webp" fetchpriority="high" imagesizes="(max-width: 768px) 100vw, 50vw" imagesrcset="/hero.webp 1920w, /hero-768.webp 768w" />
+    
+    <!-- Hreflang: single URL for all regions  no country-specific pages -->
+    <link rel="alternate" hreflang="x-default" href="https://sdfltd.com/" />
+    <link rel="alternate" hreflang="en-US" href="https://sdfltd.com/clothing-manufacturer-usa" />
+    <link rel="alternate" hreflang="en-GB" href="https://sdfltd.com/clothing-manufacturer-uk" />
+    <link rel="alternate" hreflang="en-CA" href="https://sdfltd.com/clothing-manufacturer-canada" />
+    <link rel="alternate" hreflang="en-AU" href="https://sdfltd.com/clothing-manufacturer-australia" />
+    <link rel="alternate" hreflang="en" href="https://sdfltd.com/clothing-manufacturers" />
+
+    <!-- Self-Hosted Fonts with font-display: swap -->
+    <style is:inline>
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: url('/fonts/inter-v13-latin-300.woff2') format('woff2'),
+             url('/fonts/inter-v13-latin-300.woff') format('woff');
+      }
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/inter-v13-latin-regular.woff2') format('woff2'),
+             url('/fonts/inter-v13-latin-regular.woff') format('woff');
+      }
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url('/fonts/inter-v13-latin-500.woff2') format('woff2'),
+             url('/fonts/inter-v13-latin-500.woff') format('woff');
+      }
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url('/fonts/inter-v13-latin-600.woff2') format('woff2'),
+             url('/fonts/inter-v13-latin-600.woff') format('woff');
+      }
+    </style>
+
+    <!-- Critical CSS - Minimal Above-the-Fold Only -->
+<style is:inline> *,*::before,*::after {box-sizing:border-box;margin:0;padding:0}html {scroll-behavior:smooth}body {background:#000;color:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;font-size:17px;line-height:1.7;letter-spacing:0.01em;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100vw}.skip-link {position:absolute;top:-100%;left:0;background:#000;color:#fff;padding:8px 16px;z-index:9999;font-size:14px;text-decoration:none}.skip-link:focus {top:0}#main-nav {position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:0.6px solid #333}.nav-inner {display:flex;align-items:center;justify-content:space-between;height:56px;max-width:1200px;margin:0 auto;padding:0 1.5rem;gap:1rem}.nav-logo {display:flex;align-items:center;gap:8px;text-decoration:none}.nav-logo-text {font-size:1.1rem;font-weight:600;letter-spacing:0.08em;color:#fff}.nav-links {display:flex;align-items:center;gap:0;list-style:none;flex-wrap:nowrap;white-space:nowrap}.nav-links a {font-size:0.72rem;letter-spacing:0.08em;color:#fff;text-transform:uppercase;transition:color 0.2s;padding:0 0.75rem;white-space:nowrap;text-decoration:none}#mobile-toggle {display:none;background:none;border:none;cursor:pointer;padding:4px;align-items:center;justify-content:center;min-width:44px;min-height:44px}@media (max-width:768px) {#mobile-toggle {display:flex}.nav-links {display:none !important}}#mobile-menu {display:none;flex-direction:column;padding:1rem 1.5rem;border-top:1px solid #1a1a1a;gap:0}#mobile-menu.open {display:flex}#mobile-menu a {display:block;padding:0.75rem 0;font-size:0.85rem;letter-spacing:0.1em;color:#fff;text-transform:uppercase;border-bottom:1px solid #111;text-decoration:none}.hero-section {min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center}@media (max-width:768px) {.hero-section {grid-template-columns:1fr;min-height:auto}}.hero-left {padding:60px 40px 40px;max-width:600px}@media (max-width:768px) {.hero-left {padding:48px 1.5rem 32px;max-width:100%}}.hero-left h1 {font-size:clamp(2.5rem,4.5vw,4.2rem);font-weight:200;color:#fff;line-height:1.15;letter-spacing:0.02em;margin-bottom:1rem;contain:layout style paint;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif}.container {width:100%;max-width:1200px;margin:0 auto;padding:0 1.5rem}h1,h2,h3,h4 {font-family:'Inter',sans-serif;font-weight:500;letter-spacing:0.05em;line-height:1.2;color:#fff}a {color:inherit;text-decoration:none}body:not(.loaded) .particles,body:not(.loaded)::before,body:not(.loaded)::after {animation-play-state:paused !important}@media (prefers-reduced-motion:reduce) {* {animation-duration:0.01ms !important;transition-duration:0.01ms !important}}@media (max-width:768px) {button,a,input[type="submit"],input[type="button"],[role="button"] {min-height:44px;min-width:44px}}</style>
+
+    <!-- Font Preload for LCP Optimization -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCo3FwrK3iLTcviYwY.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Non-Critical CSS - Loaded normally (no inline JS for CSP compliance) -->
+    <link rel="stylesheet" href="/styles/global.css" />
+
+    <!-- Optimized Script Bundles -->
+    
+    
+    <script src="/scripts/app.js" defer></script>
+    <script src="/scripts/faq-accordion-new.js" defer></script>
+    <script src="/scripts/sw-register.js" defer></script>
+    
+    <!-- Footer Toggle Function -->
+    <script type="module">
+      function toggleFooter(section) {
+        // Only work on mobile (screen width <= 768px)
+        if (window.innerWidth > 768) return;
+        
+        const sectionDiv = document.querySelector(`[data-section="${section}"]`);
+        if (!sectionDiv) return;
+        
+        const list = sectionDiv.querySelector('.footer-links-list');
+        const button = sectionDiv.querySelector('button');
+        const arrow = sectionDiv.querySelector('.footer-arrow');
+        
+        if (!list || !button) return;
+        
+        const isOpen = list.classList.contains('open');
+        
+        // Close all other sections
+        document.querySelectorAll('.footer-links-list').forEach(otherList => {
+          otherList.classList.remove('open');
+        });
+        document.querySelectorAll('.footer-grid button').forEach(otherButton => {
+          otherButton.setAttribute('aria-expanded', 'false');
+          const otherArrow = otherButton.querySelector('.footer-arrow');
+          if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
+        });
+        
+        // Toggle current section
+        if (!isOpen) {
+          list.classList.add('open');
+          button.setAttribute('aria-expanded', 'true');
+          if (arrow) arrow.style.transform = 'rotate(180deg)';
+        } else {
+          list.classList.remove('open');
+          button.setAttribute('aria-expanded', 'false');
+          if (arrow) arrow.style.transform = 'rotate(0deg)';
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- Floating Particles Background -->
+    <div class="particles" aria-hidden="true">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav id="main-nav" role="navigation" aria-label="Main navigation">
+      <div class="nav-inner">
+        <a href="/" class="nav-logo" aria-label="SDF Clothing" title="SDF Clothing - Home">
+          <img
+            src="/logo-small.webp"
+            alt="SDF Clothing Logo"
+            width="36"
+            height="36"
+            loading="eager"
+            style="display:block;flex-shrink:0;"
+          />
+          <div>
+            <div class="nav-logo-text">SDF Clothing</div>
+            <div class="nav-logo-sub">Since 1998</div>
+          </div>
+        </a>
+
+        <ul class="nav-links" role="list">
+          <li><a href="/" title="Overview of SDF Clothing">Overview</a></li>
+          <li><a href="/about" title="Our company story and history">Story</a></li>
+          <li><a href="/products" title="Our product offerings">Offerings</a></li>
+          <li><a href="/work-process" title="Our manufacturing expertise">Expertise</a></li>
+          <li><a href="/certifications" title="Our quality certifications">Excellence</a></li>
+          <li><a href="/csr" title="Community and CSR initiatives">Community</a></li>
+          <li><a href="/contact" class="nav-cta" title="Contact us for inquiries">Reach Out</a></li>
+        </ul>
+
+        <button id="mobile-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <line x1="2" y1="6" x2="20" y2="6"/>
+            <line x1="2" y1="11" x2="20" y2="11"/>
+            <line x1="2" y1="16" x2="20" y2="16"/>
+          </svg>
+        </button>
+      </div>
+
+      <div id="mobile-menu" role="menu">
+        <a href="/" role="menuitem" title="Overview of SDF Clothing">Overview</a>
+        <a href="/about" role="menuitem" title="Our company story">Our Story</a>
+        <a href="/products" role="menuitem" title="Our product offerings">Offerings</a>
+        <a href="/work-process" role="menuitem" title="Our manufacturing process">Process</a>
+        <a href="/certifications" role="menuitem" title="Our certifications">Excellence</a>
+        <a href="/about" role="menuitem" title="About SDF Clothing">About</a>
+        <a href="/contact" class="mobile-cta" role="menuitem" title="Contact us">Reach Out →</a>
+      </div>
+    </nav>
+
+    <main id="main-content"><slot /></main>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-grid">
+
+          <div>
+            <img src="/logo-small.webp" alt="SDF Clothing" width="72" height="36" loading="lazy" style="margin-bottom:1rem;object-fit:contain;" />
+            <p style="font-size:0.75rem;color:#fff;line-height:1.7;margin-bottom:1rem;max-width:220px;">Ethical clothing manufacturers in Bangladesh supplying OEM and private label apparel to fashion brands worldwide since 1998.</p>
+            <p style="font-size:0.75rem;color:#fff;line-height:1.7;">House 125, Road 01<br/>Baridhara DOHS, Dhaka 1212<br/>Bangladesh</p>
+          </div>
+
+          <div data-section="company">
+            <button onclick="toggleFooter('company')" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#fff;font-weight:500;display:block;margin-bottom:1rem;width:100%;text-align:left;border:none;background:none;cursor:pointer;padding:0;position:relative;" aria-expanded="false">
+              <span>Company</span>
+              <svg class="footer-arrow" style="position:absolute;right:0;top:50%;transform:translateY(-50%);transition:transform 0.3s ease;" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M2 3.5 L5 6.5 L8 3.5"/>
+              </svg>
+            </button>
+            <ul class="footer-links-list" style="list-style:none;">
+              <li style="margin-bottom:0.6rem;"><a href="/" style="font-size:0.8rem;color:#fff;transition:color 0.2s;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Our product offerings">Offerings</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Quality certifications">Excellence</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Proof and testimonials">Proof</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/about" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Our company story">Story</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Manufacturing expertise">Expertise</a></li>
+              <li><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Community initiatives">Community</a></li>
+            </ul>
+          </div>
+
+          <div data-section="services">
+            <button onclick="toggleFooter('services')" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#fff;font-weight:500;display:block;margin-bottom:1rem;width:100%;text-align:left;border:none;background:none;cursor:pointer;padding:0;position:relative;" aria-expanded="false">
+              <span>Services</span>
+              <svg class="footer-arrow" style="position:absolute;right:0;top:50%;transform:translateY(-50%);transition:transform 0.3s ease;" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M2 3.5 L5 6.5 L8 3.5"/>
+              </svg>
+            </button>
+            <ul class="footer-links-list" style="list-style:none;">
+              <li style="margin-bottom:0.6rem;"><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Private label manufacturing">Private Label</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="OEM manufacturing services">OEM Manufacturing</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Low minimum order quantity">Low MOQ</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Manufacturing for startups">For Startups</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Cut Make Trim services">CMT Services</a></li>
+              <li><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Boutique production services">Boutique Production</a></li>
+            </ul>
+          </div>
+
+          <div data-section="briefing">
+            <button onclick="toggleFooter('briefing')" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#fff;font-weight:500;display:block;margin-bottom:1rem;width:100%;text-align:left;border:none;background:none;cursor:pointer;padding:0;position:relative;" aria-expanded="false">
+              <span>Briefing</span>
+              <svg class="footer-arrow" style="position:absolute;right:0;top:50%;transform:translateY(-50%);transition:transform 0.3s ease;" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M2 3.5 L5 6.5 L8 3.5"/>
+              </svg>
+            </button>
+            <ul class="footer-links-list" style="list-style:none;">
+              <li style="margin-bottom:0.6rem;"><a href="/journal" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Read our journal entries">Journal Entry</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/insights" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Industry insights and news">Industry Insight</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/careers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="View open positions">Open Positions</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Read case studies">Case Studies</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Take a virtual factory tour">Factory Tour</a></li>
+              <li><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="View client success stories">Client Wins</a></li>
+            </ul>
+          </div>
+
+          <div data-section="resources">
+            <button onclick="toggleFooter('resources')" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#fff;font-weight:500;display:block;margin-bottom:1rem;width:100%;text-align:left;border:none;background:none;cursor:pointer;padding:0;position:relative;" aria-expanded="false">
+              <span>Resources</span>
+              <svg class="footer-arrow" style="position:absolute;right:0;top:50%;transform:translateY(-50%);transition:transform 0.3s ease;" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M2 3.5 L5 6.5 L8 3.5"/>
+              </svg>
+            </button>
+            <ul class="footer-links-list" style="list-style:none;">
+              <li style="margin-bottom:0.6rem;"><a href="/tools/wash-care-label-generator" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Generate wash care labels">Label Generator</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/tools/gsm-converter" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Convert GSM measurements">GSM Converter</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/tools/color-converter" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Convert color formats">Color Converter</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/tools/aql-calculator" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Calculate AQL sampling">AQL Calculator</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/tools/hs-code" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="HS code reference guide">HS Code Reference</a></li>
+              <li><a href="/tools/shrinkage-calculator" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Calculate fabric shrinkage">Shrinkage Calculator</a></li>
+            </ul>
+          </div>
+
+          <div data-section="social">
+            <button onclick="toggleFooter('social')" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#fff;font-weight:500;display:block;margin-bottom:1rem;width:100%;text-align:left;border:none;background:none;cursor:pointer;padding:0;position:relative;" aria-expanded="false">
+              <span>Social</span>
+              <svg class="footer-arrow" style="position:absolute;right:0;top:50%;transform:translateY(-50%);transition:transform 0.3s ease;" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M2 3.5 L5 6.5 L8 3.5"/>
+              </svg>
+            </button>
+            <ul class="footer-links-list" style="list-style:none;">
+              <li style="margin-bottom:0.6rem;"><a href="https://linkedin.com/company/sdfclothing" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Follow us on LinkedIn">LinkedIn</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="https://twitter.com/sdfclothing" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Follow us on Twitter">Twitter / X</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="https://reddit.com/r/sdfclothing" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Join us on Reddit">Reddit</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="https://quora.com/profile/SDF-Clothing" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Find us on Quora">Quora</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="https://pinterest.com/sdfclothing" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Follow us on Pinterest">Pinterest</a></li>
+              <li><a href="https://slideshare.net/sdfclothing" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="View our presentations on SlideShare">SlideShare</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div class="footer-bottom-inner">
+          <p class="footer-copyright">
+            © <span id="copyright-year"></span> SDF Clothing. All rights reserved. <a href="/terms" style="color:#fff;text-decoration:underline;margin-left:0.5rem;" title="Read our Terms of Service">Terms of Service</a>
+          </p>
+          <div class="footer-social-links">
+            <a href="https://wa.me/8801911733226" target="_blank" rel="noopener noreferrer" title="WhatsApp">WhatsApp</a>
+            <a href="https://t.me/+8801911733226" target="_blank" rel="noopener noreferrer" title="Telegram">Telegram</a>
+            <a href="https://signal.me/#p/+8801911733226" target="_blank" rel="noopener noreferrer" title="Signal">Signal</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Dynamic Copyright Year -->
+    <script type="module">
+      document.getElementById('copyright-year').textContent = new Date().getFullYear();
+    </script>
+
+    <!-- Cookie Consent Popup -->
+    <div id="cookie-consent" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #0a0a0a; border-top: 1px solid #1a1a1a; z-index: 1000; padding: 1rem 1.5rem;">
+      <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+        <p style="font-size: 0.78rem; color: #fff; margin: 0; flex: 1; min-width: 200px;">
+          We use cookies to improve your experience. See our <a href="/privacy" style="color: #ccc; text-decoration: none;" title="Read our Privacy Policy">Privacy Policy</a>.
+        </p>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <button id="accept-cookies" style="background: #666; color: #fff; border: none; padding: 0.5rem 1rem; font-size: 0.78rem; font-weight: 500; border-radius: 4px; cursor: pointer; transition: background 0.2s; min-height: 44px; min-width: 44px;">
+            Accept All
+          </button>
+          <button id="decline-cookies" style="background: transparent; color: #fff; border: 1px solid #333; padding: 0.5rem 1rem; font-size: 0.78rem; font-weight: 500; border-radius: 4px; cursor: pointer; transition: border-color 0.2s; min-height: 44px; min-width: 44px;">
+            Decline
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>   </button>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

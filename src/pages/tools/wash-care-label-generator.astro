@@ -1,0 +1,1074 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Free Wash Care Label Generator | ISO 3758 Care Symbols Tool";
+const pageDescription = "Industry-grade wash care label generator. Select fabric type, construction, dye, and finishes to auto-generate ISO 3758 compliant care symbols. Download PNG labels. Includes USA ASTM D5489, EU ISO 3758, Japan JIS L0001, China GB/T 8685 requirements.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Wash Care Label Generator",
+  "description": "Industry-grade wash care label generator with ISO 3758 compliant care symbols. Generate professional garment care labels based on fabric type, construction, dye type, and special finishes.",
+  "url": "https://sdfltd.com/tools/wash-care-label-generator",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "provider": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<style>
+  .wash-page {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    min-height: auto;
+    padding: 0;
+    margin: 0;
+    padding-top: 0 !important;
+  }
+
+  .wash-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 200;
+    color: #fff;
+    margin-bottom: 0;
+    line-height: 1.2;
+  }
+
+  .page-subtitle {
+    font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+    color: #fff;
+    max-width: 700px;
+    line-height: 1.6;
+    padding-bottom: 0;
+    margin: 0.5rem auto 0 auto;
+    text-align: center;
+  }
+
+  .hero-section {
+    text-align: center;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0 1rem 0;
+    margin: 0;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: auto !important;
+    grid-template-columns: unset !important;
+  }
+
+  .section-title {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 1rem;
+    margin-top: -0.5rem;
+    text-align: center;
+  }
+
+  .wash-section {
+    padding: 2rem 0;
+    border-bottom: none;
+  }
+
+  .wash-section--no-border {
+    border-bottom: none;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .form-select {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #dc2626;
+    min-height: 48px;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  .form-select:focus {
+    outline: none;
+    border-color: #dc2626;
+  }
+
+  .form-select option {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .generate-btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 2rem auto 0;
+    background-color: #dc2626;
+    color: #fff;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    min-height: 48px;
+    border: 1px solid #dc2626;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+  }
+
+  .generate-btn:hover {
+    background-color: #000;
+    color: #dc2626;
+  }
+
+  .symbols-container {
+    display: none;
+    margin-top: 3rem;
+  }
+
+  .symbols-container--visible {
+    display: block;
+  }
+
+  .symbols-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .symbol-card {
+    background-color: #000;
+    border: 1px solid #dc2626;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .symbol-svg {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+  }
+
+  .symbol-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .symbol-instruction {
+    font-size: 0.8rem;
+    color: #fff;
+    line-height: 1.5;
+  }
+
+  .label-preview-container {
+    display: none;
+    margin-top: 3rem;
+  }
+
+  .label-preview-container--visible {
+    display: block;
+  }
+
+  .label-preview {
+    background-color: #000;
+    border: 2px solid #dc2626;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .label-preview-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+
+  .label-symbols-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .label-symbol {
+    width: 60px;
+    height: 60px;
+  }
+
+  .download-btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 2rem auto 0;
+    background-color: #000;
+    color: #dc2626;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    min-height: 48px;
+    border: 1px solid #dc2626;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+  }
+
+  .download-btn:hover {
+    background-color: #dc2626;
+    color: #fff;
+  }
+
+  .requirements-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    background-color: transparent;
+    border: none;
+  }
+
+  .requirements-card {
+    background-color: #000;
+    padding: 2rem;
+    border: 1px solid #dc2626;
+  }
+
+  .requirements-country {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .requirements-standard {
+    font-size: 0.85rem;
+    color: #dc2626;
+    margin-bottom: 1rem;
+    font-family: monospace;
+  }
+
+  .requirements-text {
+    font-size: clamp(0.85rem, 1.5vw, 0.9rem);
+    color: #fff;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    border-bottom: none;
+    margin-bottom: 1rem;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    min-height: 44px;
+    font-family: inherit;
+  }
+
+  .faq-question:hover {
+    color: #fff;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: transform 0.2s;
+    color: #fff;
+  }
+
+  .faq-icon--open {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    display: none;
+    padding-bottom: 1.5rem;
+  }
+
+  .faq-answer--visible {
+    display: block;
+  }
+
+  .faq-answer p {
+    font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+    color: #fff;
+    line-height: 1.8;
+  }
+
+  .cta-section {
+    text-align: center;
+  }
+
+  .cta-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .cta-text {
+    font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+    color: #fff;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background-color: #dc2626;
+    color: #fff;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    min-height: 44px;
+    min-width: 44px;
+    border: 1px solid #dc2626;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .cta-button:hover {
+    background-color: #000;
+    color: #dc2626;
+  }
+
+  @media (max-width: 768px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .requirements-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .wash-section {
+      padding: 1.5rem 0;
+    }
+
+    .hero-section {
+      padding: 2rem 0;
+    }
+
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+    }
+
+    .symbols-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .wash-container {
+      padding: 0 1rem;
+    }
+
+    .page-title {
+      font-size: 1.75rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+    }
+
+    .symbols-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="wash-page">
+
+  <!-- HERO SECTION -->
+  <div class="wash-container">
+    <div class="hero-section">
+      <span class="section-label">Industry Tool · Free · No Signup</span>
+      <h1 class="page-title">Wash Care Label Generator</h1>
+      <p class="page-subtitle">Professional ISO 3758 compliant care label generator. Select your fabric specifications and automatically generate correct washing, bleaching, drying, ironing, and dry cleaning symbols. Download ready-to-use PNG labels.</p>
+    </div>
+  </div>
+
+  <!-- GENERATOR FORM -->
+  <section class="wash-section" style="padding: 0 !important; margin-top: 0;">
+    <div class="wash-container">
+      <h2 class="section-title">Fabric Specifications</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="fabric-type">Fabric Type</label>
+          <select id="fabric-type" class="form-select">
+            <option value="">Select fabric type</option>
+            <option value="cotton">Cotton</option>
+            <option value="polyester">Polyester</option>
+            <option value="nylon">Nylon</option>
+            <option value="wool">Wool</option>
+            <option value="silk">Silk</option>
+            <option value="linen">Linen</option>
+            <option value="viscose">Viscose</option>
+            <option value="acrylic">Acrylic</option>
+            <option value="spandex">Spandex/Lycra</option>
+            <option value="cotton-poly">Cotton-Polyester Blend</option>
+            <option value="cotton-elastane">Cotton-Elastane Blend</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fabric-construction">Fabric Construction</label>
+          <select id="fabric-construction" class="form-select">
+            <option value="">Select construction</option>
+            <option value="woven">Woven</option>
+            <option value="knit">Knit</option>
+            <option value="non-woven">Non-woven</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="dye-type">Dye Type</label>
+          <select id="dye-type" class="form-select">
+            <option value="">Select dye type</option>
+            <option value="reactive">Reactive</option>
+            <option value="disperse">Disperse</option>
+            <option value="acid">Acid</option>
+            <option value="vat">Vat</option>
+            <option value="pigment">Pigment</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="special-finishes">Special Finishes</label>
+          <select id="special-finishes" class="form-select">
+            <option value="">Select finish</option>
+            <option value="none">None</option>
+            <option value="embroidery">Embroidery</option>
+            <option value="print">Print</option>
+            <option value="coating">Coating</option>
+            <option value="stone-wash">Stone Wash</option>
+            <option value="enzyme-wash">Enzyme Wash</option>
+          </select>
+        </div>
+      </div>
+      <button id="generate-btn" class="generate-btn">Generate Care Symbols</button>
+    </div>
+  </section>
+
+  <!-- CARE SYMBOLS DISPLAY -->
+  <section class="wash-section">
+    <div class="wash-container">
+      <div id="symbols-container" class="symbols-container">
+        <h2 class="section-title">Generated ISO 3758 Care Symbols</h2>
+        <div class="symbols-grid" id="symbols-grid">
+          <!-- Symbols will be dynamically inserted here -->
+        </div>
+
+        <div id="label-preview-container" class="label-preview-container">
+          <h2 class="section-title">Complete Care Label Preview</h2>
+          <div class="label-preview" id="label-preview">
+            <p class="label-preview-title">CARE INSTRUCTIONS</p>
+            <div class="label-symbols-row" id="label-symbols-row">
+              <!-- Label symbols will be inserted here -->
+            </div>
+          </div>
+          <button id="download-btn" class="download-btn">Download Label as PNG</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTRY REQUIREMENTS -->
+  <section class="wash-section">
+    <div class="wash-container">
+      <h2 class="section-title">Country-Specific Care Label Requirements</h2>
+      <div class="requirements-grid">
+        <div class="requirements-card">
+          <h3 class="requirements-country">USA</h3>
+          <p class="requirements-standard">ASTM D5489</p>
+          <p class="requirements-text">Care labels must provide instructions for regular care of the garment. Labels must be permanently attached and remain legible throughout the garment's useful life. Both washing and dry cleaning instructions must be provided if applicable. Water temperature, drying method, and ironing instructions are mandatory.</p>
+        </div>
+        <div class="requirements-card">
+          <h3 class="requirements-country">European Union</h3>
+          <p class="requirements-standard">ISO 3758:2012/2023</p>
+          <p class="requirements-text">Care labeling using symbols is mandatory for textile products. Symbols must follow ISO 3758 standard. Labels must be durable and legible. The system uses five basic care symbols: washing, bleaching, drying, ironing, and dry cleaning. Additional symbols provide specific treatment details.</p>
+        </div>
+        <div class="requirements-card">
+          <h3 class="requirements-country">Japan</h3>
+          <p class="requirements-standard">JIS L0001</p>
+          <p class="requirements-text">Japan uses JIS L0001 standard for care labeling. Symbols are similar to ISO but with some variations. Labels must be written in Japanese characters with care symbols. The standard specifies 41 basic care symbols covering washing, bleaching, drying, ironing, and dry cleaning methods.</p>
+        </div>
+        <div class="requirements-card">
+          <h3 class="requirements-country">China</h3>
+          <p class="requirements-standard">GB/T 8685</p>
+          <p class="requirements-text">China follows GB/T 8685 standard for textile care labeling. The standard is based on ISO 3758 with Chinese adaptations. Labels must include fiber content, care symbols, and manufacturer information. Care symbols must be clearly displayed and permanently attached to garments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="wash-section wash-section--no-border">
+    <div class="wash-container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is ISO 3758 and why is it important for care labels?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>ISO 3758 is the international standard for textile care labeling using symbols. It establishes a universal system of graphic symbols that communicate care instructions across language barriers. Compliance with ISO 3758 ensures your garments meet global market requirements and helps consumers properly care for textiles, reducing returns and extending garment life.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How does fabric type affect care symbol selection?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Different fabrics have different tolerance levels to heat, water, and chemicals. Cotton can withstand higher washing temperatures (up to 60°C or 95°C) while silk and wool require lower temperatures (30°C or 40°C) and gentler cycles. Synthetic fibers like polyester may be sensitive to high heat during drying. Our generator automatically selects appropriate symbols based on fabric properties.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Why does fabric construction matter for care instructions?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Fabric construction determines structural stability during washing and drying. Woven fabrics generally maintain shape better and can handle machine washing. Knit fabrics may require gentle cycles to prevent stretching. Non-woven fabrics often need hand washing or dry cleaning to maintain integrity. The generator adjusts washing and drying symbols accordingly.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How does dye type influence bleaching instructions?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Dye types react differently to bleach. Reactive dyes (common on cotton) may be bleach-resistant. Disperse dyes (polyester) generally tolerate bleach. Acid dyes (wool, silk) are often bleach-sensitive. Vat and pigment dyes have varying bleach tolerance. Our generator automatically sets the appropriate bleaching symbol based on dye-fiber compatibility.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What impact do special finishes have on care requirements?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Special finishes require specific care to maintain their effect. Embroidery needs gentle washing to prevent damage. Printed fabrics may require lower temperatures to preserve print quality. Coated fabrics often need special handling. Stone and enzyme washes indicate pre-treated fabrics that may need gentler ongoing care to maintain the achieved effect.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Are care labels legally required for garments?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, care labels are legally required in most major markets. The USA requires them under the FTC Care Labeling Rule (16 CFR Part 423). The EU mandates them under EU Regulation No 1007/2011. Japan, China, Australia, and many other countries have similar requirements. Non-compliance can result in product recalls, fines, and market access barriers.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is the difference between ASTM D5489 and ISO 3758?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>ASTM D5489 is the US standard for care labeling, which requires written instructions in English alongside symbols. ISO 3758 is the international standard used by the EU and many other countries, which relies primarily on symbols. While the symbols are largely similar, ASTM requires additional text explanations. Our generator provides ISO-compliant symbols suitable for global markets.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do I determine the correct washing temperature for my fabric?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Washing temperature depends on fiber type, color fastness, and garment construction. Cotton and linen typically tolerate 40-60°C. Wool and silk require 30°C or cold. Synthetics generally use 30-40°C. Dark or bright colors may need cold water to prevent fading. Our generator selects the maximum safe temperature based on your fabric specifications.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I use this generator for commercial garment production?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>This generator provides ISO 3758 compliant care symbols suitable for commercial use. However, always verify care instructions through lab testing on your actual production samples, especially for new fabric combinations or special finishes. Regulatory compliance may require additional testing and certification depending on your target markets.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How often are care label standards updated?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Care label standards are periodically updated. ISO 3758 was updated in 2023 (Edition 4) with new symbols and clearer terminology. ASTM D5489 is also regularly revised. Always check the latest version of standards for your target market. Our generator is based on current ISO 3758:2023 specifications.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="wash-section wash-section--no-border">
+    <div class="wash-container cta-section">
+      <h2 class="cta-title">Need Professional Garment Manufacturing?</h2>
+      <p class="cta-text">We produce garments with correct care labeling and all regulatory compliance. Get a quote for your production line.</p>
+      <a href="/contact" class="cta-button">Get Free Quote</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ISO 3758 Care Symbol SVGs
+const careSymbols = {
+  washing: {
+    '30': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="10" y="10" width="80" height="80" fill="none" stroke="white" stroke-width="3"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="28" font-weight="bold">30</text></svg>`,
+      name: 'Wash at 30°C',
+      instruction: 'Machine wash cold, gentle cycle'
+    },
+    '40': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="10" y="10" width="80" height="80" fill="none" stroke="white" stroke-width="3"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="28" font-weight="bold">40</text></svg>`,
+      name: 'Wash at 40°C',
+      instruction: 'Machine wash warm, gentle cycle'
+    },
+    '50': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="10" y="10" width="80" height="80" fill="none" stroke="white" stroke-width="3"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="28" font-weight="bold">50</text></svg>`,
+      name: 'Wash at 50°C',
+      instruction: 'Machine wash warm, normal cycle'
+    },
+    '60': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="10" y="10" width="80" height="80" fill="none" stroke="white" stroke-width="3"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="28" font-weight="bold">60</text></svg>`,
+      name: 'Wash at 60°C',
+      instruction: 'Machine wash hot, normal cycle'
+    },
+    'hand': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="10" y="10" width="80" height="80" fill="none" stroke="white" stroke-width="3"/><path d="M35 35 L35 65 M35 50 L50 35 L65 50 L65 65 L50 65 L35 65" fill="none" stroke="white" stroke-width="3"/></svg>`,
+      name: 'Hand Wash',
+      instruction: 'Hand wash only, do not machine wash'
+    },
+    'do-not-wash': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="10" y="10" width="80" height="80" fill="none" stroke="white" stroke-width="3"/><line x1="15" y1="15" x2="85" y2="85" stroke="white" stroke-width="4"/></svg>`,
+      name: 'Do Not Wash',
+      instruction: 'Dry clean only'
+    }
+  },
+  bleaching: {
+    'any': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><polygon points="50,15 85,85 15,85" fill="none" stroke="white" stroke-width="3"/></svg>`,
+      name: 'Any Bleach',
+      instruction: 'Chlorine or non-chlorine bleach as needed'
+    },
+    'non-chlorine': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><polygon points="50,15 85,85 15,85" fill="none" stroke="white" stroke-width="3"/><line x1="35" y1="55" x2="65" y2="55" stroke="white" stroke-width="3"/></svg>`,
+      name: 'Non-Chlorine Bleach',
+      instruction: 'Only non-chlorine bleach when needed'
+    },
+    'do-not-bleach': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><polygon points="50,15 85,85 15,85" fill="none" stroke="white" stroke-width="3"/><line x1="15" y1="15" x2="85" y2="85" stroke="white" stroke-width="4"/></svg>`,
+      name: 'Do Not Bleach',
+      instruction: 'Do not use bleach'
+    }
+  },
+  drying: {
+    'tumble-low': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="3"/><circle cx="50" cy="50" r="3" fill="white"/><text x="50" y="55" text-anchor="middle" fill="white" font-size="20">•</text></svg>`,
+      name: 'Tumble Dry Low',
+      instruction: 'Tumble dry low heat'
+    },
+    'tumble-normal': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="3"/><circle cx="50" cy="50" r="3" fill="white"/><text x="50" y="55" text-anchor="middle" fill="white" font-size="20">••</text></svg>`,
+      name: 'Tumble Dry Normal',
+      instruction: 'Tumble dry normal heat'
+    },
+    'tumble-high': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="3"/><circle cx="50" cy="50" r="3" fill="white"/><text x="50" y="55" text-anchor="middle" fill="white" font-size="20">•••</text></svg>`,
+      name: 'Tumble Dry High',
+      instruction: 'Tumble dry high heat'
+    },
+    'do-not-tumble': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="3"/><circle cx="50" cy="50" r="3" fill="white"/><line x1="20" y1="20" x2="80" y2="80" stroke="white" stroke-width="4"/></svg>`,
+      name: 'Do Not Tumble Dry',
+      instruction: 'Do not tumble dry, line or drip dry'
+    },
+    'line-dry': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="15" y="20" width="70" height="3" fill="white"/><line x1="30" y1="23" x2="30" y2="70" stroke="white" stroke-width="3"/><line x1="50" y1="23" x2="50" y2="75" stroke="white" stroke-width="3"/><line x1="70" y1="23" x2="70" y2="70" stroke="white" stroke-width="3"/></svg>`,
+      name: 'Line Dry',
+      instruction: 'Line dry after removing excess water'
+    },
+    'drip-dry': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="15" y="20" width="70" height="3" fill="white"/><line x1="30" y1="23" x2="30" y2="60" stroke="white" stroke-width="3"/><line x1="50" y1="23" x2="50" y2="65" stroke="white" stroke-width="3"/><line x1="70" y1="23" x2="70" y2="60" stroke="white" stroke-width="3"/><line x1="30" y1="60" x2="25" y2="70" stroke="white" stroke-width="2"/><line x1="50" y1="65" x2="45" y2="75" stroke="white" stroke-width="2"/><line x1="70" y1="60" x2="65" y2="70" stroke="white" stroke-width="2"/></svg>`,
+      name: 'Drip Dry',
+      instruction: 'Drip dry without wringing or twisting'
+    },
+    'dry-flat': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><rect x="20" y="30" width="60" height="40" fill="none" stroke="white" stroke-width="3"/><line x1="25" y1="35" x2="75" y2="35" stroke="white" stroke-width="2"/></svg>`,
+      name: 'Dry Flat',
+      instruction: 'Lay flat to dry, reshape while damp'
+    }
+  },
+  ironing: {
+    'cool': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><polygon points="25,20 75,20 85,35 85,85 15,85 15,35" fill="none" stroke="white" stroke-width="3"/><circle cx="50" cy="55" r="5" fill="white"/></svg>`,
+      name: 'Iron Cool',
+      instruction: 'Iron at maximum 110°C, steam may cause damage'
+    },
+    'warm': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><polygon points="25,20 75,20 85,35 85,85 15,85 15,35" fill="none" stroke="white" stroke-width="3"/><circle cx="50" cy="55" r="5" fill="white"/><circle cx="50" cy="70" r="5" fill="white"/></svg>`,
+      name: 'Iron Warm',
+      instruction: 'Iron at maximum 150°C, steam or dry iron'
+    },
+    'hot': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><polygon points="25,20 75,20 85,35 85,85 15,85 15,35" fill="none" stroke="white" stroke-width="3"/><circle cx="50" cy="55" r="5" fill="white"/><circle cx="50" cy="70" r="5" fill="white"/><circle cx="50" cy="85" r="5" fill="white"/></svg>`,
+      name: 'Iron Hot',
+      instruction: 'Iron at maximum 200°C, steam or dry iron'
+    },
+    'do-not-iron': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><polygon points="25,20 75,20 85,35 85,85 15,85 15,35" fill="none" stroke="white" stroke-width="3"/><line x1="15" y1="20" x2="85" y2="85" stroke="white" stroke-width="4"/></svg>`,
+      name: 'Do Not Iron',
+      instruction: 'Do not iron, steam or dry'
+    }
+  },
+  drycleaning: {
+    'any': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="3"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="24" font-weight="bold">F</text></svg>`,
+      name: 'Dry Clean Any',
+      instruction: 'Dry clean with any solvent'
+    },
+    'petroleum': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="3"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="24" font-weight="bold">P</text></svg>`,
+      name: 'Dry Clean Petroleum',
+      instruction: 'Dry clean with petroleum solvent only'
+    },
+    'do-not-dryclean': {
+      svg: `<svg viewBox="0 0 100 100" class="symbol-svg"><circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="3"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="24" font-weight="bold">F</text><line x1="20" y1="20" x2="80" y2="80" stroke="white" stroke-width="4"/></svg>`,
+      name: 'Do Not Dry Clean',
+      instruction: 'Do not dry clean'
+    }
+  }
+};
+
+// Care symbol logic based on fabric specifications
+function generateCareSymbols() {
+  const fabricType = document.getElementById('fabric-type').value;
+  const fabricConstruction = document.getElementById('fabric-construction').value;
+  const dyeType = document.getElementById('dye-type').value;
+  const specialFinish = document.getElementById('special-finishes').value;
+
+  if (!fabricType || !fabricConstruction || !dyeType || !specialFinish) {
+    alert('Please select all fabric specifications');
+    return;
+  }
+
+  let symbols = {
+    washing: null,
+    bleaching: null,
+    drying: null,
+    ironing: null,
+    drycleaning: null
+  };
+
+  // Washing temperature based on fabric type
+  const tempSensitive = ['silk', 'wool', 'viscose'];
+  const lowTemp = ['spandex', 'cotton-elastane'];
+  
+  if (tempSensitive.includes(fabricType) || specialFinish === 'embroidery') {
+    symbols.washing = careSymbols.washing['30'];
+  } else if (lowTemp.includes(fabricType) || specialFinish === 'print') {
+    symbols.washing = careSymbols.washing['40'];
+  } else if (fabricType === 'cotton' || fabricType === 'linen' || fabricType === 'cotton-poly') {
+    symbols.washing = careSymbols.washing['60'];
+  } else {
+    symbols.washing = careSymbols.washing['50'];
+  }
+
+  // Adjust for special finishes
+  if (specialFinish === 'stone-wash' || specialFinish === 'enzyme-wash') {
+    symbols.washing = careSymbols.washing['40'];
+  }
+  if (fabricConstruction === 'non-woven' || (fabricType === 'silk' && specialFinish === 'coating')) {
+    symbols.washing = careSymbols.washing['hand'];
+  }
+
+  // Bleaching based on dye type
+  if (dyeType === 'acid' || dyeType === 'vat') {
+    symbols.bleaching = careSymbols.bleaching['do-not-bleach'];
+  } else if (dyeType === 'pigment') {
+    symbols.bleaching = careSymbols.bleaching['non-chlorine'];
+  } else {
+    symbols.bleaching = careSymbols.bleaching['any'];
+  }
+
+  // Drying based on fabric type and construction
+  if (tempSensitive.includes(fabricType) || specialFinish === 'embroidery' || specialFinish === 'print') {
+    symbols.drying = careSymbols.drying['do-not-tumble'];
+    if (fabricType === 'wool' || fabricType === 'silk') {
+      symbols.drying = careSymbols.drying['dry-flat'];
+    } else {
+      symbols.drying = careSymbols.drying['line-dry'];
+    }
+  } else if (fabricConstruction === 'knit') {
+    symbols.drying = careSymbols.drying['dry-flat'];
+  } else if (fabricType === 'cotton' || fabricType === 'linen') {
+    symbols.drying = careSymbols.drying['tumble-normal'];
+  } else {
+    symbols.drying = careSymbols.drying['tumble-low'];
+  }
+
+  // Ironing based on fabric type
+  if (tempSensitive.includes(fabricType) || fabricType === 'spandex') {
+    symbols.ironing = careSymbols.ironing['cool'];
+  } else if (fabricType === 'polyester' || fabricType === 'nylon' || fabricType === 'acrylic') {
+    symbols.ironing = careSymbols.ironing['warm'];
+  } else if (fabricType === 'cotton' || fabricType === 'linen') {
+    symbols.ironing = careSymbols.ironing['hot'];
+  } else {
+    symbols.ironing = careSymbols.ironing['warm'];
+  }
+
+  // Adjust for special finishes
+  if (specialFinish === 'coating') {
+    symbols.ironing = careSymbols.ironing['do-not-iron'];
+  }
+
+  // Dry cleaning based on fabric type and construction
+  if (fabricConstruction === 'non-woven' || fabricType === 'silk' || specialFinish === 'coating') {
+    symbols.drycleaning = careSymbols.drycleaning['any'];
+  } else {
+    symbols.drycleaning = careSymbols.drycleaning['do-not-dryclean'];
+  }
+
+  // Display symbols
+  displaySymbols(symbols);
+}
+
+function displaySymbols(symbols) {
+  const symbolsContainer = document.getElementById('symbols-container');
+  const symbolsGrid = document.getElementById('symbols-grid');
+  const labelPreviewContainer = document.getElementById('label-preview-container');
+  const labelSymbolsRow = document.getElementById('label-symbols-row');
+
+  symbolsContainer.classList.add('symbols-container--visible');
+  labelPreviewContainer.classList.add('label-preview-container--visible');
+  
+  symbolsGrid.innerHTML = '';
+  labelSymbolsRow.innerHTML = '';
+
+  const categories = [
+    { key: 'washing', label: 'Washing' },
+    { key: 'bleaching', label: 'Bleaching' },
+    { key: 'drying', label: 'Drying' },
+    { key: 'ironing', label: 'Ironing' },
+    { key: 'drycleaning', label: 'Dry Cleaning' }
+  ];
+
+  categories.forEach(category => {
+    const symbol = symbols[category.key];
+    if (symbol) {
+      // Add to symbols grid
+      const card = document.createElement('div');
+      card.className = 'symbol-card';
+      card.innerHTML = `
+        ${symbol.svg.replace('class="symbol-svg"', 'class="symbol-svg" style="stroke: white; fill: none;"')}
+        <p class="symbol-name">${symbol.name}</p>
+        <p class="symbol-instruction">${symbol.instruction}</p>
+      `;
+      symbolsGrid.appendChild(card);
+
+      // Add to label preview
+      const labelSymbol = document.createElement('div');
+      labelSymbol.className = 'label-symbol';
+      labelSymbol.innerHTML = symbol.svg.replace('class="symbol-svg"', 'class="label-symbol" style="stroke: white; fill: none;"');
+      labelSymbolsRow.appendChild(labelSymbol);
+    }
+  });
+}
+
+function downloadLabelAsPNG() {
+  const labelPreview = document.getElementById('label-preview');
+  
+  // Create a canvas
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const scale = 2; // Higher resolution
+  
+  // Set canvas size
+  canvas.width = labelPreview.offsetWidth * scale;
+  canvas.height = labelPreview.offsetHeight * scale;
+  ctx.scale(scale, scale);
+  
+  // Draw black background
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  // Draw red border
+  ctx.strokeStyle = '#dc2626';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(1, 1, labelPreview.offsetWidth - 2, labelPreview.offsetHeight - 2);
+  
+  // Draw title
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '11px Inter, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('CARE INSTRUCTIONS', labelPreview.offsetWidth / 2, 30);
+  
+  // Draw symbols
+  const symbolsRow = document.getElementById('label-symbols-row');
+  const symbols = symbolsRow.querySelectorAll('svg');
+  const symbolWidth = 60;
+  const symbolHeight = 60;
+  const gap = 16;
+  let xOffset = (labelPreview.offsetWidth - (symbols.length * symbolWidth + (symbols.length - 1) * gap)) / 2;
+  const yOffset = 50;
+  
+  symbols.forEach((svg, index) => {
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const img = new Image();
+    const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+    const url = URL.createObjectURL(svgBlob);
+    
+    img.onload = function() {
+      ctx.drawImage(img, xOffset + index * (symbolWidth + gap), yOffset, symbolWidth, symbolHeight);
+      URL.revokeObjectURL(url);
+      
+      // Download when all symbols are drawn
+      if (index === symbols.length - 1) {
+        setTimeout(() => {
+          const link = document.createElement('a');
+          link.download = 'care-label.png';
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+        }, 100);
+      }
+    };
+    img.src = url;
+  });
+}
+
+// FAQ Toggle
+function toggleFAQ(button) {
+  const answer = button.nextElementSibling;
+  const icon = button.querySelector('.faq-icon');
+  
+  if (answer.classList.contains('faq-answer--visible')) {
+    answer.classList.remove('faq-answer--visible');
+    icon.classList.remove('faq-icon--open');
+    icon.textContent = '+';
+  } else {
+    answer.classList.add('faq-answer--visible');
+    icon.classList.add('faq-icon--open');
+    icon.textContent = '−';
+  }
+}
+
+// Initialize event listeners
+document.addEventListener('DOMContentLoaded', function() {
+  const generateBtn = document.getElementById('generate-btn');
+  const downloadBtn = document.getElementById('download-btn');
+
+  if (generateBtn) {
+    generateBtn.addEventListener('click', generateCareSymbols);
+  }
+
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', downloadLabelAsPNG);
+  }
+
+  // FAQ accordion event listeners
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', function() {
+      const answer = this.nextElementSibling;
+      const icon = this.querySelector('.faq-icon');
+      
+      if (answer.classList.contains('faq-answer--visible')) {
+        answer.classList.remove('faq-answer--visible');
+        icon.classList.remove('faq-icon--open');
+        icon.textContent = '+';
+      } else {
+        answer.classList.add('faq-answer--visible');
+        icon.classList.add('faq-icon--open');
+        icon.textContent = '−';
+      }
+    });
+  });
+});
+</script>
+
+</BaseLayout>

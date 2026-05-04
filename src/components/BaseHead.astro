@@ -1,0 +1,188 @@
+---
+// BaseHead.astro  SEO optimised for "Clothing Manufacturers" keyword
+export interface Props {
+  title: string;
+  description: string;
+  url?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description,
+  url = "https://sdfltd.com/",
+  image = "https://sdfltd.com/og-image.webp"
+} = Astro.props;
+
+const siteName = "SDF Clothing  Clothing Manufacturers Bangladesh";
+---
+
+<!-- Primary -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<link rel="canonical" href={url} />
+
+<!-- Keywords (still used by some search engines) -->
+<meta name="keywords" content="clothing manufacturers Bangladesh, garment manufacturers Bangladesh, clothing manufacturing, OEM clothing manufacturer, private label clothing manufacturer, Bangladesh factory, GOTS certified manufacturer, sustainable clothing manufacturer, bulk clothing manufacturer" />
+
+<!-- Author -->
+<meta name="author" content="SDF Clothing" />
+<meta name="publisher" content="SDF Clothing" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="SDF Clothing  Clothing Manufacturers Bangladesh" />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+<!-- Geo tags (Bangladesh manufacturer) -->
+<meta name="geo.region" content="BD-13" />
+<meta name="geo.placename" content="Dhaka, Bangladesh" />
+<meta name="geo.position" content="23.8103;90.4125" />
+<meta name="ICBM" content="23.8103, 90.4125" />
+
+<!-- Favicon - using logo.webp -->
+<link rel="icon" type="image/webp" href="/logo-small.webp" />
+<link rel="icon" type="image/webp" sizes="32x32" href="/logo-small.webp" />
+
+<!-- Font Optimization - Critical Performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" /></noscript>
+
+<!-- CLS Prevention - Reserve space for hero image -->
+<style>
+  #hero-section { min-height: 90vh; }
+  .hero-image-container { aspect-ratio: 16/9; width: 100%; }
+</style>
+
+<!-- Schema.org: Organisation + LocalBusiness -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization","LocalBusiness"],
+      "@id": "https://sdfltd.com/#organization",
+      "name": "SDF Clothing",
+      "alternateName": ["SDF Ltd", "SDF Garments"],
+      "url": "https://sdfltd.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://sdfltd.com/logo-small.webp",
+        "width": 120,
+        "height": 60
+      },
+      "image": "https://sdfltd.com/og-image.webp",
+      "description": "Full-service clothing manufacturers in Bangladesh. MOQ 300 pieces. GOTS & OEKO-TEX certified. Supplying USA, UK, EU, Australia since 1998.",
+      "foundingDate": "1998",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "House 125, Road 01, Baridhara DOHS",
+        "addressLocality": "Dhaka",
+        "postalCode": "1212",
+        "addressCountry": "BD"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "jimaynewage1@gmail.com",
+          "availableLanguage": ["English"]
+        }
+      ],
+      "sameAs": [],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Clothing Manufacturing Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "T-Shirt & Knitwear Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Woven Apparel Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Activewear & Sportswear Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Private Label Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "OEM Garment Manufacturing" } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://sdfltd.com/#website",
+      "url": "https://sdfltd.com",
+      "name": "SDF Clothing",
+      "description": "Clothing Manufacturers Bangladesh",
+      "publisher": { "@id": "https://sdfltd.com/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": { "@type": "EntryPoint", "urlTemplate": "https://sdfltd.com/?s={search_term_string}" },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is your minimum order quantity (MOQ)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our standard MOQ is 300 pieces per style and colour for most garment categories. For complex items like jackets and outerwear, MOQ starts at 100 pieces."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does production take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sample production takes 7-14 days. Bulk production is 30-45 days depending on the garment type, quantity, and complexity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer private label and OEM manufacturing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We offer full private label services including custom branding, labels, hang tags, and packaging. We also offer OEM manufacturing where you supply the design and we handle production."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Breadcrumb Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://sdfltd.com"
+    }
+  ]
+}
+</script>

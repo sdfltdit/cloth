@@ -1,0 +1,1321 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+
+export const prerender = true;
+
+// Dynamic year calculations
+const foundedYear = 1998;
+const yearsExp = new Date().getFullYear() - foundedYear;
+
+const pageTitle = "SDF Clothing | Clothing Manufacturers in Bangladesh for EU, UK, US and Australian Brands";
+const pageDescription = "Trusted clothing manufacturers in Bangladesh supplying EU, UK, US and Australian brands since 1998. MOQ 300 pcs, GOTS certified. OEM, private label and custom apparel. Get a free quote in 24 hours.";
+
+// FAQ data
+const faqs = [
+	{
+		question: "What is your minimum order quantity?",
+		answer: "Our MOQ is 300 pieces per style with flexible size and color combinations. Perfect for startups and boutique brands."
+	},
+	{
+		question: "How long does production take?",
+		answer: "Standard lead time is 30-45 days for bulk orders up to 50,000 pieces. Sample development takes 7-14 days."
+	},
+	{
+		question: "Do you offer private label and OEM manufacturing?",
+		answer: "Yes. We offer full OEM, ODM, and private label clothing manufacturing services including custom labels, hang tags, and branded packaging."
+	},
+	{
+		question: "Do you manufacture woven and knitwear garments?",
+		answer: "Yes. We manufacture woven (denim, twill, poplin, oxford) and knitwear (jersey, fleece, rib, interlock). Custom GSM matched to your tech pack with sustainable options including GOTS organic cotton and GRS recycled polyester."
+	},
+	{
+		question: "What customization options do you offer?",
+		answer: "In-house embroidery up to 15 colors, screen print, DTF, heat transfer, and sublimation. Trim options include woven labels, hang tags, branded zippers, and custom buttons. All work completed in-house with no outsourcing."
+	},
+	{
+		question: "What is FOB pricing and how does AQL inspection work?",
+		answer: "All quotes are FOB Chittagong or Dhaka, covering fabric, dyeing, finishing, cut and sew, AQL 2.5 inspection, and port delivery. Full cost breakdown with no hidden charges. Use our free price calculator for an instant estimate."
+	},
+	{
+		question: "Do you supply clothing brands in the EU, UK, US and Australia?",
+		answer: "Yes. SDF Clothing supplies fashion brands across the EU, UK, US, Australia, and Canada. EU exports benefit from GSP duty-free terms. We meet UK Modern Slavery Act, US customs, and EU EPR requirements."
+	},
+	{
+		question: "What are your payment terms and sample policies?",
+		answer: "We accept T/T, L/C, and bank transfers. 30% deposit to start production, 70% before shipment. Free samples available for bulk orders. Sample development takes 7-14 days."
+	}
+];
+
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+	<!-- JSON-LD Schema -->
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "Organization",
+				"name": "SDF Clothing",
+				"foundingDate": "1998",
+				"url": "https://sdfclothing.com",
+				"email": "info@sdfclothing.com",
+				"telephone": "+8801234567890",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "House 125, Road 01, Baridhara DOHS",
+					"addressLocality": "Dhaka",
+					"postalCode": "1212",
+					"addressCountry": "BD"
+				},
+				"hasCredential": [
+					{
+						"@type": "Thing",
+						"name": "GOTS",
+						"description": "Global Organic Textile Standard Certification"
+					},
+					{
+						"@type": "Thing", 
+						"name": "OEKO-TEX",
+						"description": "Standard 100 Certification for Textile Safety"
+					},
+					{
+						"@type": "Thing",
+						"name": "ISO 9001",
+						"description": "Quality Management System Certification"
+					},
+					{
+						"@type": "Thing",
+						"name": "BSCI",
+						"description": "Business Social Compliance Initiative"
+					},
+					{
+						"@type": "Thing",
+						"name": "SEDEX",
+						"description": "Supplier Ethical Data Exchange Certification"
+					}
+				],
+				"description": "Leading clothing manufacturers in Bangladesh since 1998. Specializing in OEM, private label, and custom apparel manufacturing with low MOQ of 300 pieces per style.",
+				"areaServed": ["European Union", "United Kingdom", "United States", "Australia", "Canada", "Worldwide"],
+				"knowsLanguage": ["English", "Bengali"],
+				"geo": {
+					"@type": "GeoCoordinates",
+					"latitude": "23.8103",
+					"longitude": "90.4125"
+				},
+				"openingHours": "Mo-Fr 09:00-18:00",
+				"priceRange": "$$",
+				"paymentAccepted": ["Bank Transfer", "L/C", "T/T"],
+				"currenciesAccepted": "USD"
+			},
+			{
+				"@type": "Service",
+				"name": "Clothing Manufacturing Service",
+				"description": "Complete apparel production solutions including OEM, private label, and custom clothing manufacturing for global fashion brands",
+				"provider": {
+					"@type": "Organization",
+					"name": "SDF Clothing"
+				},
+				"serviceType": "Clothing Manufacturing",
+				"areaServed": ["European Union", "United Kingdom", "United States", "Australia", "Canada"],
+				"eligibleRegion": ["EU", "UK", "US", "AU", "CA"],
+				"hasOfferCatalog": {
+					"@type": "OfferCatalog",
+					"name": "Clothing Manufacturing Services",
+					"itemListElement": [
+						{
+							"@type": "Offer",
+							"itemOffered": {
+								"@type": "Service",
+								"name": "OEM Clothing Manufacturing",
+								"description": "Original equipment manufacturing for fashion brands"
+							},
+							"minimumOrderQuantity": "300"
+						},
+						{
+							"@type": "Offer", 
+							"itemOffered": {
+								"@type": "Service",
+								"name": "Private Label Clothing Production",
+								"description": "Custom branded apparel manufacturing"
+							},
+							"minimumOrderQuantity": "300"
+						}
+					]
+				},
+				"offers": {
+					"@type": "Offer",
+					"availability": "https://schema.org/InStock",
+					"minimumOrderQuantity": "300",
+					"priceSpecification": {
+						"@type": "PriceSpecification",
+						"priceCurrency": "USD"
+					}
+				},
+				"slogan": "Low MOQ Clothing Manufacturer - Starting from 300 pieces"
+			},
+			{
+				"@type": "BreadcrumbList",
+				"itemListElement": [
+					{
+						"@type": "ListItem",
+						"position": 1,
+						"name": "Home",
+						"item": "https://sdfclothing.com"
+					}
+				]
+			},
+			{
+				"@type": "SoftwareApplication",
+				"name": "Instant Price Calculator",
+				"description": "Free clothing manufacturing price calculator - Get instant estimates for apparel production costs in Bangladesh",
+				"url": "https://sdfclothing.com/tools/price-calculator",
+				"applicationCategory": "BusinessApplication",
+				"operatingSystem": "Web Browser",
+				"offers": {
+					"@type": "Offer",
+					"price": "0",
+					"priceCurrency": "USD"
+				},
+				"provider": {
+					"@type": "Organization",
+					"name": "SDF Clothing"
+				}
+			},
+			{
+				"@type": "FAQPage",
+				"mainEntity": [
+					{
+						"@type": "Question",
+						"name": "What is your minimum order quantity?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "Our MOQ is 300 pieces per style with flexible size and color combinations. Perfect for startups and boutique brands."
+						}
+					},
+					{
+						"@type": "Question",
+						"name": "How long does production take?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "Standard lead time is 30-45 days for bulk orders up to 50,000 pieces. Sample development takes 7-14 days."
+						}
+					},
+					{
+						"@type": "Question",
+						"name": "Do you offer private label and OEM manufacturing?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "Yes. We offer full OEM, ODM, and private label clothing manufacturing services including custom labels, hang tags, and branded packaging."
+						}
+					},
+					{
+						"@type": "Question",
+						"name": "Do you manufacture woven and knitwear garments?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "Yes. We manufacture woven (denim, twill, poplin, oxford) and knitwear (jersey, fleece, rib, interlock). Custom GSM matched to your tech pack with sustainable options including GOTS organic cotton and GRS recycled polyester."
+						}
+					},
+					{
+						"@type": "Question",
+						"name": "What customization options do you offer?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "In-house embroidery up to 15 colors, screen print, DTF, heat transfer, and sublimation. Trim options include woven labels, hang tags, branded zippers, and custom buttons. All work completed in-house with no outsourcing."
+						}
+					},
+					{
+						"@type": "Question",
+						"name": "What is FOB pricing and how does AQL inspection work?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "All quotes are FOB Chittagong or Dhaka, covering fabric, dyeing, finishing, cut and sew, AQL 2.5 inspection, and port delivery. Full cost breakdown with no hidden charges. Use our free price calculator for an instant estimate."
+						}
+					},
+					{
+						"@type": "Question",
+						"name": "Do you supply clothing brands in the EU, UK, US and Australia?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "Yes. SDF Clothing supplies fashion brands across the EU, UK, US, Australia, and Canada. EU exports benefit from GSP duty-free terms. We meet UK Modern Slavery Act, US customs, and EU EPR requirements."
+						}
+					},
+					{
+						"@type": "Question",
+						"name": "What are your payment terms and sample policies?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "We accept T/T, L/C, and bank transfers. 30% deposit to start production, 70% before shipment. Free samples available for bulk orders. Sample development takes 7-14 days."
+						}
+					}
+				]
+			}
+		]
+	}
+	</script>
+
+	<!-- Hero Section - Optimized for Performance -->
+	<section class="relative h-screen flex items-center justify-center overflow-hidden" style="width: 100%; height: 100vh; min-height: 100vh; overflow: hidden;">
+		<!-- Optimized Responsive Image -->
+		<picture class="absolute inset-0 w-full h-full" style="width: 100%; height: 100%; display: block;">
+			<!-- Mobile: Optimized for small screens -->
+			<source 
+				media="(max-width: 640px)" 
+				srcset="/sdf.webp" 
+				type="image/webp"
+				width="640"
+				height="853"
+			>
+			<!-- Tablet: Medium screens -->
+			<source 
+				media="(max-width: 1024px)" 
+				srcset="/sdf.webp" 
+				type="image/webp"
+				width="1024"
+				height="683"
+			>
+			<!-- Desktop: Large screens -->
+			<source 
+				media="(min-width: 1025px)" 
+				srcset="/sdf.webp" 
+				type="image/webp"
+				width="1920"
+				height="1080"
+			>
+			<!-- Fallback for older browsers -->
+			<img 
+				src="/sdf.webp" 
+				alt="SDF Clothing manufacturing facility in Bangladesh with modern production lines"
+				class="w-full h-full object-cover"
+				style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;"
+				loading="eager"
+				decoding="async"
+				fetchpriority="high"
+				width="1920"
+				height="1080"
+			>
+		</picture>
+		
+		<!-- Dark Overlay -->
+		<div class="absolute inset-0 bg-black/40"></div>
+		
+		<!-- Hero Content -->
+		<div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+			<h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
+				Leading Clothing Manufacturers in Bangladesh
+			</h1>
+			<p class="text-xl md:text-2xl text-gray-300 mb-8">
+				Supplying fashion brands across EU, UK, US and
+				Australia since 1998. OEM, private label and custom
+				clothing manufacturing from 300 pieces per style.
+			</p>
+			<div class="flex flex-col sm:flex-row gap-4 justify-center">
+				<a 
+					href="/contact" 
+					class="inline-block bg-red-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition-all transform hover:scale-105 min-h-[44px] min-w-[44px]"
+				>
+					Start Your Project
+				</a>
+				<a
+					href="/products"
+					class="inline-block border border-red-600 text-red-500 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-600 hover:text-white transition-all min-h-[44px] min-w-[44px]"
+				>
+					Explore Manufacturing Solutions
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Quick Stats Bar -->
+	<section class="py-8 px-4 bg-gray-950">
+		<div class="container mx-auto max-w-6xl">
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+				<div class="snake-card p-6">
+					<div class="text-3xl font-bold text-red-500 mb-2">{yearsExp}+</div>
+					<div class="text-gray-300">Years Experience</div>
+				</div>
+				<div class="snake-card p-6">
+					<div class="text-3xl font-bold text-red-500 mb-2">300</div>
+					<div class="text-gray-300">Pieces MOQ</div>
+				</div>
+				<div class="snake-card p-6">
+					<div class="text-3xl font-bold text-red-500 mb-2">50,000</div>
+					<div class="text-gray-300">Pieces / 45 Days</div>
+				</div>
+				<div class="snake-card p-6">
+					<div class="text-3xl font-bold text-red-500 mb-2">8</div>
+					<div class="text-gray-300">8 International Certifications</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Markets We Serve Strip -->
+	<section class="py-10 px-4 border-y border-gray-800">
+		<div class="container mx-auto max-w-5xl">
+			<p class="text-center text-gray-500 text-xs 
+			   uppercase tracking-widest mb-6">
+				Supplying clothing brands across
+			</p>
+			<div class="grid grid-cols-2 sm:grid-cols-3 
+						md:grid-cols-5 gap-4">
+				<div class="snake-card p-4 text-center">
+					<div class="text-2xl mb-2">🇪🇺</div>
+					<div class="text-white font-semibold 
+								text-sm mb-1">European Union</div>
+					<div class="text-gray-500 text-xs">
+						GSP duty-free exports
+					</div>
+				</div>
+				<div class="snake-card p-4 text-center">
+					<div class="text-2xl mb-2">🇬🇧</div>
+					<div class="text-white font-semibold 
+								text-sm mb-1">United Kingdom</div>
+					<div class="text-gray-500 text-xs">
+						UK GSP trade terms
+					</div>
+				</div>
+				<div class="snake-card p-4 text-center">
+					<div class="text-2xl mb-2">🇺🇸</div>
+					<div class="text-white font-semibold 
+								text-sm mb-1">United States</div>
+					<div class="text-gray-500 text-xs">
+						US customs compliant
+					</div>
+				</div>
+				<div class="snake-card p-4 text-center">
+					<div class="text-2xl mb-2">🇦🇺</div>
+					<div class="text-white font-semibold 
+								text-sm mb-1">Australia</div>
+					<div class="text-gray-500 text-xs">
+						AU standards compliant
+					</div>
+				</div>
+				<div class="snake-card p-4 text-center 
+							col-span-2 sm:col-span-1">
+					<div class="text-2xl mb-2">🌍</div>
+					<div class="text-white font-semibold 
+								text-sm mb-1">Worldwide</div>
+					<div class="text-gray-500 text-xs">
+						FOB global delivery
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Social Proof Section -->
+	<section class="py-12 px-4 bg-gray-950">
+		<div class="container mx-auto max-w-6xl">
+			<div class="grid md:grid-cols-3 gap-6">
+				<div class="snake-card p-6">
+					<div class="text-red-500 mb-3 text-lg 
+								tracking-widest">★★★★★</div>
+					<p class="text-gray-300 text-sm 
+							  leading-relaxed mb-4">
+						"SDF delivered 3,000 units of our organic 
+						cotton hoodie line on time, within budget, 
+						with perfect AQL inspection results. Our 
+						EU compliance audit passed first time."
+					</p>
+					<div class="text-white font-semibold text-sm">
+						Activewear Brand, Netherlands
+					</div>
+				</div>
+				<div class="snake-card p-6">
+					<div class="text-red-500 mb-3 text-lg 
+								tracking-widest">★★★★★</div>
+					<p class="text-gray-300 text-sm 
+							  leading-relaxed mb-4">
+						"From tech pack to final shipment in 38 days.
+						Fabric sourcing, dyeing and finishing quality 
+						exceeded what our previous manufacturer 
+						delivered at 40 percent higher cost."
+					</p>
+					<div class="text-white font-semibold text-sm">
+						Private Label Brand, United Kingdom
+					</div>
+				</div>
+				<div class="snake-card p-6">
+					<div class="text-red-500 mb-3 text-lg 
+								tracking-widest">★★★★★</div>
+					<p class="text-gray-300 text-sm 
+							  leading-relaxed mb-4">
+						"MOQ of 300 pieces worked perfectly for our 
+						startup. Cut and sew quality on our knitwear 
+						range was excellent. Embroidery and screen 
+						print matched our brand guidelines exactly."
+					</p>
+					<div class="text-white font-semibold text-sm">
+						Streetwear Label, United States
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- About SDF Clothing Section -->
+	<section id="about" class="py-20 px-4">
+		<div class="container mx-auto max-w-6xl">
+			<h2 class="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
+				Why SDF Clothing is Bangladesh's Most Trusted Clothing Manufacturer
+			</h2>
+			<div class="grid md:grid-cols-2 gap-12">
+				<div>
+					<p class="text-gray-300 mb-6 leading-relaxed">
+						SDF Clothing manufactures premium apparel for fashion brands, retailers, and startups across the EU, UK, US, and Australia.
+					</p>
+					<p class="text-gray-300 mb-6 leading-relaxed">
+						As a full-package apparel manufacturer, we manage the complete supply chain: fabric sourcing for woven and knitwear constructions, dyeing, finishing, cut and sew production, embroidery, screen printing, AQL inspection, and FOB delivery to your port. Whether you need OEM, private label, or custom apparel, we deliver to your exact specifications.
+					</p>
+					<p class="text-gray-300 mb-6 leading-relaxed">
+						Our garment factory in Baridhara DOHS, Dhaka runs dedicated production lines for woven and knit garments, supplying EU, UK, US, and Australian brands with transparent FOB pricing and no hidden costs.
+					</p>
+				</div>
+				<div>
+					<h3 class="text-xl font-bold text-white mb-6">Our Certifications</h3>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+						<div class="snake-card p-4">
+							<div class="text-lg font-semibold text-red-500 mb-2">GOTS</div>
+							<div class="text-gray-400 text-sm">Global Organic Textile Standard - Certified organic fiber processing</div>
+						</div>
+						<div class="snake-card p-4">
+							<div class="text-lg font-semibold text-red-500 mb-2">OEKO-TEX</div>
+							<div class="text-gray-400 text-sm">Standard 100 - Harmful substance testing certification</div>
+						</div>
+						<div class="snake-card p-4">
+							<div class="text-lg font-semibold text-red-500 mb-2">ISO 9001</div>
+							<div class="text-gray-400 text-sm">Quality Management System certification</div>
+						</div>
+						<div class="snake-card p-4">
+							<div class="text-lg font-semibold text-red-500 mb-2">BSCI</div>
+							<div class="text-gray-400 text-sm">Business Social Compliance Initiative</div>
+						</div>
+						<div class="snake-card p-4">
+							<div class="text-lg font-semibold text-red-500 mb-2">SEDEX</div>
+							<div class="text-gray-400 text-sm">Supplier Ethical Data Exchange certification</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Products We Manufacture Section -->
+	<section id="products" class="py-20 px-4 bg-gray-950">
+		<div class="container mx-auto max-w-6xl">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+					Complete Clothing Manufacturing Solutions
+				</h2>
+				<p class="text-gray-300 text-lg">
+					From basics to complex outerwear, we manufacture 
+					all garment categories for global fashion brands
+				</p>
+			</div>
+
+			<div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+				
+				<a href="/t-shirt-manufacturer" class="snake-card p-6 text-center group 
+				   hover:border-red-500 transition-all duration-300 block">
+					<div class="text-3xl mb-3">👕</div>
+					<div class="text-white font-semibold mb-1 
+					            group-hover:text-red-400 transition-colors">
+						T-Shirt Manufacturer
+					</div>
+					<div class="text-gray-400 text-sm">
+						Custom t-shirts, polo shirts, dress shirts
+					</div>
+				</a>
+
+				<a href="/denim-manufacturer" class="snake-card p-6 text-center group 
+				   hover:border-red-500 transition-all duration-300 block">
+					<div class="text-3xl mb-3">👖</div>
+					<div class="text-white font-semibold mb-1 
+					            group-hover:text-red-400 transition-colors">
+						Denim & Bottoms
+					</div>
+					<div class="text-gray-400 text-sm">
+						Jeans, trousers, shorts, custom denim
+					</div>
+				</a>
+
+				<a href="/hoodie-manufacturer" class="snake-card p-6 text-center group 
+				   hover:border-red-500 transition-all duration-300 block">
+					<div class="text-3xl mb-3">🧥</div>
+					<div class="text-white font-semibold mb-1 
+					            group-hover:text-red-400 transition-colors">
+						Hoodies & Outerwear
+					</div>
+					<div class="text-gray-400 text-sm">
+						Hoodies, jackets, sweatshirts, coats
+					</div>
+				</a>
+
+				<a href="/sportswear-manufacturer" class="snake-card p-6 text-center group 
+				   hover:border-red-500 transition-all duration-300 block">
+					<div class="text-3xl mb-3">🏃</div>
+					<div class="text-white font-semibold mb-1 
+					            group-hover:text-red-400 transition-colors">
+						Sportswear Manufacturer
+					</div>
+					<div class="text-gray-400 text-sm">
+						Gym wear, yoga, athletic apparel
+					</div>
+				</a>
+
+				<a href="/womenswear-manufacturer" class="snake-card p-6 text-center group 
+				   hover:border-red-500 transition-all duration-300 block">
+					<div class="text-3xl mb-3">👗</div>
+					<div class="text-white font-semibold mb-1 
+					            group-hover:text-red-400 transition-colors">
+						Women's Wear
+					</div>
+					<div class="text-gray-400 text-sm">
+						Dresses, skirts, blouses, jumpsuits
+					</div>
+				</a>
+
+				<a href="/uniform-manufacturer" class="snake-card p-6 text-center group 
+				   hover:border-red-500 transition-all duration-300 block">
+					<div class="text-3xl mb-3">🎓</div>
+					<div class="text-white font-semibold mb-1 
+					            group-hover:text-red-400 transition-colors">
+						Uniforms & Specialty
+					</div>
+					<div class="text-gray-400 text-sm">
+						Work uniforms, kids wear, sleepwear
+					</div>
+				</a>
+
+			</div>
+
+			<div class="text-center">
+				<a href="/products" 
+				   class="inline-block border border-red-600 text-red-500 
+				   px-8 py-4 rounded-lg text-lg font-semibold 
+				   hover:bg-red-600 hover:text-white transition-all 
+				   min-h-[44px]">
+					View All 30+ Categories →
+				</a>
+			</div>
+
+		</div>
+	</section>
+
+	<!-- Free Tools Section -->
+	<section id="free-tools" class="py-20 px-4 bg-gray-950">
+		<div class="container mx-auto max-w-6xl">
+			<div class="text-center mb-12">
+				<p class="text-red-500 text-sm font-semibold 
+				   uppercase tracking-widest mb-3">
+					No Signup Required
+				</p>
+				<h2 class="text-3xl md:text-4xl font-bold 
+						   text-white mb-4">
+					Free Planning Tools for Clothing Buyers
+				</h2>
+				<p class="text-gray-300 text-lg max-w-2xl mx-auto">
+					Used by brands across the EU, UK, US and 
+					Australia sourcing from apparel manufacturers 
+					in Bangladesh. Instant answers, no forms.
+				</p>
+			</div>
+			<div class="grid md:grid-cols-3 gap-8">
+				<a href="/tools/price-calculator"
+				   class="snake-card p-8 block group
+						  hover:border-red-500 
+						  transition-all duration-300">
+					<div class="text-4xl mb-5">💰</div>
+					<h3 class="text-xl font-bold text-white mb-3
+							   group-hover:text-red-400 
+							   transition-colors">
+						Instant Price Calculator
+					</h3>
+					<p class="text-gray-400 leading-relaxed mb-6">
+						Select garment category, fabric type, and 
+						quantity. Get a manufacturing price range 
+						per piece in 30 seconds. No contact form.
+					</p>
+					<div class="flex items-center gap-2 
+								text-red-500 font-semibold text-sm
+								group-hover:gap-3 transition-all">
+						Try Calculator
+						<span class="transition-transform 
+									 group-hover:translate-x-1">
+							→
+						</span>
+					</div>
+				</a>
+				<a href="/tools/eu-readiness-checker"
+				   class="snake-card p-8 block group
+						  hover:border-red-500 
+						  transition-all duration-300">
+					<div class="text-4xl mb-5">🇪🇺</div>
+					<h3 class="text-xl font-bold text-white mb-3
+							   group-hover:text-red-400 
+							   transition-colors">
+						EU Compliance Checker
+					</h3>
+					<p class="text-gray-400 leading-relaxed mb-6">
+						Check whether your brand meets EU 2026 
+						clothing regulations. Free supply chain 
+						compliance score in 2 minutes.
+					</p>
+					<div class="flex items-center gap-2 
+								text-red-500 font-semibold text-sm
+								group-hover:gap-3 transition-all">
+						Check Compliance
+						<span class="transition-transform 
+									 group-hover:translate-x-1">
+							→
+						</span>
+					</div>
+				</a>
+				<a href="/tools/lead-time-calculator"
+				   class="snake-card p-8 block group
+						  hover:border-red-500 
+						  transition-all duration-300">
+					<div class="text-4xl mb-5">📦</div>
+					<h3 class="text-xl font-bold text-white mb-3
+							   group-hover:text-red-400 
+							   transition-colors">
+						Lead Time Calculator
+					</h3>
+					<p class="text-gray-400 leading-relaxed mb-6">
+						Enter your order size and destination. 
+						Get an estimated delivery date comparing 
+						sea freight and air freight side by side.
+					</p>
+					<div class="flex items-center gap-2 
+								text-red-500 font-semibold text-sm
+								group-hover:gap-3 transition-all">
+						Calculate Delivery
+						<span class="transition-transform 
+									 group-hover:translate-x-1">
+							→
+						</span>
+					</div>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Why Choose SDF Clothing Section -->
+	<section id="why-choose" class="py-20 px-4">
+		<div class="container mx-auto max-w-6xl">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+					What Makes SDF Clothing Your Ideal Manufacturing Partner
+				</h2>
+			</div>
+			
+			<div class="grid md:grid-cols-2 gap-8">
+				<div class="snake-card p-8">
+					<div class="text-4xl font-bold text-red-500 mb-4">📦</div>
+					<h3 class="text-xl font-semibold text-white mb-4">Low MOQ Clothing Manufacturing</h3>
+					<h4 class="text-lg font-semibold text-red-500 mb-3">Low MOQ - Start from 300 Pieces</h4>
+					<p class="text-gray-300 leading-relaxed">
+						Unlike large garment factories that demand 5,000+ pieces, SDF Clothing offers low minimum order quantities starting at just 300 pieces per style. Perfect for startups, boutique brands, and new product launches. Multiple size and color combinations available within your MOQ.
+					</p>
+				</div>
+				
+				<div class="snake-card p-8">
+					<div class="text-4xl font-bold text-red-500 mb-4">✓</div>
+					<h3 class="text-xl font-semibold text-white mb-4">Certified Quality Manufacturer</h3>
+					<h4 class="text-lg font-semibold text-red-500 mb-3">
+						8 International Certifications
+					</h4>
+					<p class="text-gray-300 leading-relaxed">
+						As a certified apparel manufacturer, we hold GOTS (organic), OEKO-TEX (safety), ISO 9001 (quality management), BSCI (social compliance), and SEDEX (ethical trade) certifications. Our quality control process covers every stage: fabric inspection, inline QC, and final AQL inspection before shipment.
+					</p>
+				</div>
+				
+				<div class="snake-card p-8">
+					<div class="text-4xl font-bold text-red-500 mb-4">🔄</div>
+					<h3 class="text-xl font-semibold text-white mb-4">Full Package Manufacturing</h3>
+					<h4 class="text-lg font-semibold text-red-500 mb-3">Complete OEM & Private Label Service</h4>
+					<p class="text-gray-300 leading-relaxed">
+						From initial concept to finished garments at your 
+						doorstep. SDF Clothing is your single-source 
+						clothing manufacturer. Services include: tech pack development, pattern making, sample approval, bulk production, custom labels & packaging, and global logistics management.
+					</p>
+				</div>
+				
+				<div class="snake-card p-8">
+					<div class="text-4xl font-bold text-red-500 mb-4">⚡</div>
+					<h3 class="text-xl font-semibold text-white mb-4">Fast Production Turnaround</h3>
+					<h4 class="text-lg font-semibold text-red-500 mb-3">50,000 Pieces in 45 Days</h4>
+					<p class="text-gray-300 leading-relaxed">
+						Our high-capacity garment factory delivers up to 50,000 pieces within 45 days production lead time. With streamlined processes, dedicated production lines, and strict deadline management, SDF Clothing meets your delivery deadlines consistently, with production updates provided throughout.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Our Manufacturing Process Section -->
+	<section id="process" class="py-20 px-4 bg-gray-950">
+		<div class="container mx-auto max-w-6xl">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+					How Our Clothing Manufacturing Process Works
+				</h2>
+			</div>
+			
+			<div class="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+				<div class="snake-card p-6 text-center">
+					<div class="text-5xl mb-4">🤝</div>
+					<h4 class="text-white font-semibold mb-2">Inquiry & Consultation</h4>
+					<p class="text-gray-400 text-sm">Discuss your requirements, target market & budget</p>
+				</div>
+				
+				<div class="snake-card p-6 text-center">
+					<div class="text-5xl mb-4">📐</div>
+					<h4 class="text-white font-semibold mb-2">Tech Pack & Design</h4>
+					<p class="text-gray-400 text-sm">Pattern making, fabric selection, trim sourcing</p>
+				</div>
+				
+				<div class="snake-card p-6 text-center">
+					<div class="text-5xl mb-4">🧵</div>
+					<h4 class="text-white font-semibold mb-2">Sample Development</h4>
+					<p class="text-gray-400 text-sm">Proto sample, fit sample, pre-production sample</p>
+				</div>
+				
+				<div class="snake-card p-6 text-center">
+					<div class="text-5xl mb-4">📋</div>
+					<h4 class="text-white font-semibold mb-2">Order Confirmation</h4>
+					<p class="text-gray-400 text-sm">MOQ, pricing, lead time, payment terms agreement</p>
+				</div>
+				
+				<div class="snake-card p-6 text-center">
+					<div class="text-5xl mb-4">🏭</div>
+					<h4 class="text-white font-semibold mb-2">Bulk Production</h4>
+					<p class="text-gray-400 text-sm">Quality inspections at every production stage</p>
+				</div>
+				
+				<div class="snake-card p-6 text-center">
+					<div class="text-5xl mb-4">📦</div>
+					<h4 class="text-white font-semibold mb-2">QC & Shipment</h4>
+					<p class="text-gray-400 text-sm">Final AQL inspection, packaging, global delivery</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- MOQ & Pricing Section -->
+	<section id="moq" class="py-20 px-4">
+		<div class="container mx-auto max-w-6xl">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+					Transparent MOQ & Pricing for All Clothing Categories
+				</h2>
+			</div>
+			
+			<div class="grid md:grid-cols-3 gap-8 mb-12">
+				<div class="snake-card p-8 text-center">
+					<div class="text-4xl font-bold text-red-500 mb-4">300</div>
+					<div class="text-xl font-semibold text-white mb-2">Pieces minimum per style</div>
+					<div class="text-gray-400">with size/color breakdown options</div>
+				</div>
+				
+				<div class="snake-card p-8 text-center">
+					<div class="text-4xl font-bold text-red-500 mb-4">45</div>
+					<div class="text-xl font-semibold text-white mb-2">Days average production</div>
+					<div class="text-gray-400">lead time for bulk orders</div>
+				</div>
+				
+				<div class="snake-card p-8 text-center">
+					<div class="text-4xl font-bold text-red-500 mb-4">✓</div>
+					<div class="text-xl font-semibold text-white mb-2">Free samples available</div>
+					<div class="text-gray-400">for bulk orders</div>
+				</div>
+			</div>
+			
+			<div class="text-center">
+				<p class="text-gray-300 text-lg">
+					Contact us for a custom quote. Pricing varies by fabric, style complexity, quantity, and finishing requirements. We offer competitive wholesale apparel manufacturing rates with no hidden costs.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section id="contact" class="py-20 px-4 bg-gray-950">
+		<div class="container mx-auto max-w-4xl">
+			<div class="snake-card p-12 text-center">
+				<h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+					Ready to Work with a Trusted Apparel Manufacturer in Bangladesh?
+				</h2>
+				<p class="text-gray-300 text-lg mb-8">
+					Join 200+ global fashion brands who trust SDF Clothing for their manufacturing needs. Get a free quote within 24 hours.
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<a 
+						href="/contact" 
+						class="bg-red-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition-all transform hover:scale-105 min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
+					>
+						Request Pricing
+					</a>
+					<a 
+						href="https://wa.me/+16465356343" 
+						target="_blank"
+						rel="noopener noreferrer"
+						class="border border-red-600 text-red-500 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-600 hover:text-white transition-all min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
+					>
+						WhatsApp Us
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- FAQ Section -->
+	<section id="faq" class="py-20 px-4">
+		<div class="container mx-auto max-w-4xl">
+			<h2 class="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
+				Frequently Asked Questions
+			</h2>
+			
+			<FAQAccordion faqs={faqs} />
+		</div>
+	</section>
+
+	<!-- Spacer for footer -->
+	<div class="h-6"></div>
+	
+	<!-- Clean Simple Footer -->
+	<footer class="bg-black border-t border-gray-900 pb-12">
+		<div class="container mx-auto px-4">
+			<!-- Main Footer Content -->
+			<div class="py-12">
+				<!-- 5-Column Grid Layout -->
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+					
+					<!-- Column 1: Logo & Address -->
+					<div class="space-y-6">
+						<a href="/" class="block group">
+							<img 
+								src="/logo.webp" 
+								alt="SDF Clothing - Clothing Manufacturers Bangladesh" 
+								class="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 mb-4 transition-all duration-300 group-hover:scale-105"
+								width="128"
+								height="128"
+								loading="lazy"
+								decoding="async"
+							/>
+							<h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-3">
+								SDF Clothing
+							</h3>
+							<p class="text-gray-400 text-sm leading-relaxed mb-2">
+								Premium garments manufacturer since 1998
+							</p>
+							<div class="space-y-2 text-gray-500 text-sm">
+								<p>
+									<span>House 125, Road 01<br>Baridhara DOHS<br>Dhaka-1212, Bangladesh</span>
+								</p>
+							</div>
+						</a>
+					</div>
+
+					<!-- Column 2: Company -->
+					<div class="space-y-6">
+						<div class="footer-section" data-section="company">
+							<button 
+								class="lg:hidden w-full flex justify-between items-center text-lg font-bold text-white mb-4 cursor-pointer hover:text-red-500 transition-colors duration-200"
+								onclick="toggleFooterSection('company')"
+							>
+								<span>Company</span>
+								<svg class="w-5 h-5 transition-transform duration-200 footer-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+								</svg>
+							</button>
+							<h4 class="hidden lg:block text-lg font-bold text-white mb-4">Company</h4>
+							<ul class="footer-content space-y-3 lg:space-y-3 max-h-0 lg:max-h-none overflow-hidden lg:overflow-visible transition-all duration-300">
+								<li>
+									<a href="/" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Overview
+									</a>
+								</li>
+								<li>
+									<a href="/about" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Our Story
+									</a>
+								</li>
+								<li>
+									<a href="/products" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Offerings
+									</a>
+								</li>
+								<li>
+									<a href="/certifications" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Excellence
+									</a>
+								</li>
+								<li>
+									<a href="/sustainability" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Green Practices
+									</a>
+								</li>
+								<li>
+									<a href="/csr" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Community
+									</a>
+								</li>
+								<li>
+									<a href="/contact" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Reach Out
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Column 3: Resources -->
+					<div class="space-y-6">
+						<div class="footer-section" data-section="resources">
+							<button 
+								class="lg:hidden w-full flex justify-between items-center text-lg font-bold text-white mb-4 cursor-pointer hover:text-red-500 transition-colors duration-200"
+								onclick="toggleFooterSection('resources')"
+							>
+								<span>Resources</span>
+								<svg class="w-5 h-5 transition-transform duration-200 footer-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+								</svg>
+							</button>
+							<h4 class="hidden lg:block text-lg font-bold text-white mb-4">Resources</h4>
+							<ul class="footer-content space-y-3 lg:space-y-3 max-h-0 lg:max-h-none overflow-hidden lg:overflow-visible transition-all duration-300">
+								<li>
+									<a href="/tools/price-calculator" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Price Calculator
+									</a>
+								</li>
+								<li>
+									<a href="/tools/moq-calculator" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										MOQ Calculator
+									</a>
+								</li>
+								<li>
+									<a href="/tools/sample-request" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Sample Request
+									</a>
+								</li>
+							</ul>
+						</div>
+						
+						<!-- Insights Section -->
+						<div class="footer-section" data-section="insights">
+							<button 
+								class="lg:hidden w-full flex justify-between items-center text-lg font-bold text-white mb-4 mt-6 cursor-pointer hover:text-red-500 transition-colors duration-200"
+								onclick="toggleFooterSection('insights')"
+							>
+								<span>Insights</span>
+								<svg class="w-5 h-5 transition-transform duration-200 footer-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+								</svg>
+							</button>
+							<h4 class="hidden lg:block text-lg font-bold text-white mb-4 mt-6">Insights</h4>
+							<ul class="footer-content space-y-3 lg:space-y-3 max-h-0 lg:max-h-none overflow-hidden lg:overflow-visible transition-all duration-300">
+								<li>
+									<a href="/guides/clothing-manufacturing-cost-bangladesh" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Bangladesh Manufacturing Costs
+									</a>
+								</li>
+								<li>
+									<a href="/guides/clothing-manufacturing-lead-time" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Production Lead Times
+									</a>
+								</li>
+								<li>
+									<a href="/guides/eu-clothing-regulations-2026-2028" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										EU Clothing Regulations
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Column 4: Briefing -->
+					<div class="space-y-6">
+						<div class="footer-section" data-section="briefing">
+							<button 
+								class="lg:hidden w-full flex justify-between items-center text-lg font-bold text-white mb-4 cursor-pointer hover:text-red-500 transition-colors duration-200"
+								onclick="toggleFooterSection('briefing')"
+							>
+								<span>Briefing</span>
+								<svg class="w-5 h-5 transition-transform duration-200 footer-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+								</svg>
+							</button>
+							<h4 class="hidden lg:block text-lg font-bold text-white mb-4">Briefing</h4>
+							<ul class="footer-content space-y-3 lg:space-y-3 max-h-0 lg:max-h-none overflow-hidden lg:overflow-visible transition-all duration-300">
+								<li>
+									<a href="/public-notice" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Public Notice
+									</a>
+								</li>
+								<li>
+									<a href="/journal-entry" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Journal Entry
+									</a>
+								</li>
+								<li>
+									<a href="/positions" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Positions
+									</a>
+								</li>
+								<li>
+									<a href="/philanthropy" class="text-gray-400 hover:text-red-500 transition-colors duration-200 text-sm">
+										Philanthropy
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Column 5: Social -->
+					<div class="space-y-6">
+						<h4 class="text-lg font-bold text-white mb-4">Social</h4>
+						<div class="flex flex-wrap gap-3">
+							<!-- LinkedIn -->
+							<a 
+								href="https://linkedin.com/company/sdfclothing" 
+								target="_blank" 
+								rel="noopener noreferrer"
+								class="group relative"
+								aria-label="LinkedIn"
+							>
+								<div class="w-14 h-14 rounded-full bg-black border border-black flex items-center justify-center transition-all duration-300 group-hover:bg-red-600 group-hover:border-red-600 group-hover:scale-110 shadow-lg">
+									<svg class="w-6 h-6 text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+									</svg>
+								</div>
+								<span class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">LinkedIn</span>
+							</a>
+							
+							<!-- X (Twitter) -->
+							<a 
+								href="https://twitter.com/sdfclothing" 
+								target="_blank" 
+								rel="noopener noreferrer"
+								class="group relative"
+								aria-label="X (Twitter)"
+							>
+								<div class="w-14 h-14 rounded-full bg-black border border-black flex items-center justify-center transition-all duration-300 group-hover:bg-red-600 group-hover:border-red-600 group-hover:scale-110 shadow-lg">
+									<svg class="w-6 h-6 text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+									</svg>
+								</div>
+								<span class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">X (Twitter)</span>
+							</a>
+							
+							<!-- Facebook -->
+							<a 
+								href="https://facebook.com/sdfclothing" 
+								target="_blank" 
+								rel="noopener noreferrer"
+								class="group relative"
+								aria-label="Facebook"
+							>
+								<div class="w-14 h-14 rounded-full bg-black border border-black flex items-center justify-center transition-all duration-300 group-hover:bg-red-600 group-hover:border-red-600 group-hover:scale-110 shadow-lg">
+									<svg class="w-6 h-6 text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+									</svg>
+								</div>
+								<span class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Facebook</span>
+							</a>
+							
+							<!-- Reddit -->
+							<a 
+								href="https://reddit.com/rdfclothing" 
+								target="_blank" 
+								rel="noopener noreferrer"
+								class="group relative"
+								aria-label="Reddit"
+							>
+								<div class="w-14 h-14 rounded-full bg-black border border-black flex items-center justify-center transition-all duration-300 group-hover:bg-red-600 group-hover:border-red-600 group-hover:scale-110 shadow-lg">
+									<svg class="w-6 h-6 text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-6.993 4.87-3.864 0-6.994-2.176-6.994-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.884-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.84a1.25 1.25 0 0 0-1.248 1.249c0 .687.561 1.248 1.249 1.248a1.25 1.25 0 1 0-.001-2.497zm5.466 0a1.25 1.25 0 0 0-1.248 1.249c0 .687.561 1.248 1.249 1.248a1.25 1.25 0 1 0-.001-2.497z"/>
+									</svg>
+								</div>
+								<span class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Reddit</span>
+							</a>
+							
+							<!-- Quora -->
+							<a 
+								href="https://quora.com/profile/SDF-Clothing" 
+								target="_blank" 
+								rel="noopener noreferrer"
+								class="group relative"
+								aria-label="Quora"
+							>
+								<div class="w-14 h-14 rounded-full bg-black border border-black flex items-center justify-center transition-all duration-300 group-hover:bg-red-600 group-hover:border-red-600 group-hover:scale-110 shadow-lg">
+									<svg class="w-6 h-6 text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1.81.45 1.61 1.67 1.61 1.16 0 1.6-.64 1.6-1.46 0-.84-.68-1.22-1.88-1.58-1.85-.54-3.45-1.32-3.45-3.33 0-1.67 1.19-2.82 3.03-3.16V5.1h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-.8-.38-1.6-1.53-1.6-1.02 0-1.44.58-1.44 1.34 0 .73.61 1.15 1.88 1.54 1.95.57 3.45 1.33 3.45 3.52 0 1.89-1.34 2.84-3.25 3.15z"/>
+									</svg>
+								</div>
+								<span class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Quora</span>
+							</a>
+							
+							<!-- Pinterest -->
+							<a 
+								href="https://pinterest.com/sdfclothing" 
+								target="_blank" 
+								rel="noopener noreferrer"
+								class="group relative"
+								aria-label="Pinterest"
+							>
+								<div class="w-14 h-14 rounded-full bg-black border border-black flex items-center justify-center transition-all duration-300 group-hover:bg-red-600 group-hover:border-red-600 group-hover:scale-110 shadow-lg">
+									<svg class="w-6 h-6 text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-15.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm5.5 6.5c0 2.21-1.79 4-4 4s-4-1.79-4-4 1.79-4 4-4 4 1.79 4 4zm-4 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+									</svg>
+								</div>
+								<span class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Pinterest</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Bottom Bar -->
+			<div class="border-t border-red-800 pt-8 mt-8">
+				<div class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+					<!-- Copyright Text -->
+					<div class="text-center sm:text-left">
+						<p id="live-counter" class="text-white text-sm mb-1">Loading...</p>
+						<p class="text-white text-sm">&copy; 1998 SDF Clothing. All rights reserved.</p>
+					</div>
+					
+					<!-- Legal Links -->
+					<div class="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6">
+						<a href="/privacy" class="text-white text-sm hover:text-red-500 transition-colors duration-200">Privacy Policy</a>
+						<a href="/terms" class="text-white text-sm hover:text-red-500 transition-colors duration-200">Terms of Service</a>
+						<a href="/sitemap" class="text-white text-sm hover:text-red-500 transition-colors duration-200">Sitemap</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Simple Footer JavaScript -->
+	<script is:inline>
+		function toggleFooterSection(sectionName) {
+			console.log('Toggling section:', sectionName);
+			
+			// Find the section
+			const section = document.querySelector(`[data-section="${sectionName}"]`);
+			if (!section) return;
+			
+			// Find content and arrow
+			const content = section.querySelector('.footer-content');
+			const arrow = section.querySelector('.footer-arrow');
+			
+			if (!content || !arrow) return;
+			
+			// Check if already expanded
+			const isExpanded = content.style.maxHeight && content.style.maxHeight !== '0px';
+			
+			// Close all other sections first
+			document.querySelectorAll('.footer-section').forEach(otherSection => {
+				if (otherSection !== section) {
+					const otherContent = otherSection.querySelector('.footer-content');
+					const otherArrow = otherSection.querySelector('.footer-arrow');
+					if (otherContent) {
+						otherContent.style.maxHeight = '0px';
+						otherContent.style.overflow = 'hidden';
+					}
+					if (otherArrow) {
+						otherArrow.style.transform = 'rotate(0deg)';
+					}
+				}
+			});
+			
+			// Toggle current section
+			if (isExpanded) {
+				// Collapse
+				content.style.maxHeight = '0px';
+				content.style.overflow = 'hidden';
+				arrow.style.transform = 'rotate(0deg)';
+				console.log('Section collapsed:', sectionName);
+			} else {
+				// Expand
+				content.style.display = 'block';
+				content.style.overflow = 'hidden';
+				const height = content.scrollHeight;
+				content.style.maxHeight = height + 'px';
+				
+				setTimeout(() => {
+					content.style.overflow = 'visible';
+				}, 300);
+				
+				arrow.style.transform = 'rotate(180deg)';
+				console.log('Section expanded:', sectionName);
+			}
+		}
+		
+		// Initialize on page load
+		document.addEventListener('DOMContentLoaded', function() {
+			console.log('Footer script loaded');
+		});
+	</script>
+
+	<!-- Live Counter Script -->
+	<script>
+		// Live Counter - Founded date: August 22, 1998
+		const foundedDate = new Date(1998, 7, 22); // Month is 0-indexed (7 = August)
+		
+		function updateLiveCounter() {
+			try {
+				const now = new Date();
+				
+				// Validate dates
+				if (isNaN(foundedDate.getTime()) || isNaN(now.getTime())) {
+					throw new Error('Invalid date');
+				}
+				
+				const diff = now - foundedDate;
+				
+				// Calculate time components
+				const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+				const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+				const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+				
+				// Premium format display
+				let counterText = 'Empowering global fashion brands for ';
+				
+				// Add days with proper pluralization
+				if (days === 1) {
+					counterText += `${days} day`;
+				} else {
+					counterText += `${days.toLocaleString()} days`;
+				}
+				
+				// Add time with elegant formatting
+				counterText += ` • ${hours.toString().padStart(2, '0')}:`;
+				counterText += `${minutes.toString().padStart(2, '0')}:`;
+				counterText += `${seconds.toString().padStart(2, '0')}`;
+				
+				// Update display
+				const counterElement = document.getElementById('live-counter');
+				if (counterElement) {
+					counterElement.textContent = counterText;
+				}
+			} catch (error) {
+				console.error('Live counter error:', error);
+				// Fallback display
+				const counterElement = document.getElementById('live-counter');
+				if (counterElement) {
+					counterElement.textContent = 'Empowering global fashion brands since 1998';
+				}
+			}
+		}
+		
+		// Start the counter immediately
+		updateLiveCounter();
+		setInterval(updateLiveCounter, 1000);
+	</script>
+	
+	</BaseLayout>

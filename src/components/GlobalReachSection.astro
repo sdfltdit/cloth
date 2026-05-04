@@ -1,0 +1,141 @@
+---
+// GlobalSection.astro
+
+const markets = [
+  { code: "US", name: "United States", capital: "Washington D.C.", note: "US customs compliant", flag: "🇺🇸" },
+  { code: "GB", name: "United Kingdom", capital: "London", note: "UK GSP trade terms", flag: "🇬🇧" },
+  { code: "DE", name: "Germany", capital: "Berlin", note: "EU regulations compliant", flag: "🇩🇪" },
+  { code: "FR", name: "France", capital: "Paris", note: "EU quality standards", flag: "🇫🇷" },
+  { code: "IT", name: "Italy", capital: "Rome", note: "Fashion market access", flag: "🇮🇹" },
+  { code: "NL", name: "Netherlands", capital: "Amsterdam", note: "EU distribution hub", flag: "🇳🇱" },
+  { code: "SE", name: "Sweden", capital: "Stockholm", note: "Nordic market leader", flag: "🇸🇪" },
+  { code: "AU", name: "Australia", capital: "Canberra", note: "AU standards compliant", flag: "🇦🇺" },
+  { code: "CA", name: "Canada", capital: "Ottawa", note: "North American reach", flag: "🇨🇦" },
+  { code: "RU", name: "Russia", capital: "Moscow", note: "Eastern European reach", flag: "🇷🇺" },
+  { code: "JP", name: "Japan", capital: "Tokyo", note: "Asia Pacific Hub", flag: "🇯🇵" },
+  { code: "KR", name: "South Korea", capital: "Seoul", note: "Premium Fashion Market", flag: "🇰🇷" },
+  { code: "AE", name: "UAE", capital: "Abu Dhabi", note: "Middle East Distribution", flag: "🇦🇪" },
+  { code: "SG", name: "Singapore", capital: "Singapore", note: "ASEAN Gateway", flag: "🇸🇬" },
+  { code: "BR", name: "Brazil", capital: "Brasília", note: "South American Reach", flag: "🇧🇷" },
+  { code: "ZA", name: "South Africa", capital: "Cape Town", note: "African Markets", flag: "🇿🇦" },
+];
+---
+
+<section id="global" aria-labelledby="global-heading">
+  <div class="container">
+
+    <div style="margin-bottom:3rem;text-align:center;" class="section-header">
+      <div class="section-icon-wrapper" style="margin-bottom:1rem;">
+        <svg class="section-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#cc0000" stroke-width="1.5" style="animation: rotateIn 1s ease-out;">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <h2 id="global-heading" style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:200;color:#fff;margin-bottom:0.5rem;animation: fadeInUp 0.8s ease-out 0.2s both;">Certified Low MOQ Clothing Manufacturer</h2>
+      <p style="margin-top:1rem;max-width:520px;font-size:0.9rem;color:#fff;margin:0 auto;animation: fadeInUp 0.8s ease-out 0.4s both;">
+        Supplying fashion brands across 40+ countries. GSP duty-free access for EU &amp; UK.
+        FOB Chittagong and Dhaka for reliable global logistics.
+      </p>
+    </div>
+
+    <div class="markets-grid">
+      {markets.map((m) => (
+        <div class="market-card" aria-label={`clothing manufacturer shipping to ${m.name}`}>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem;">
+            <div class="market-code">{m.code}</div>
+            <span style="font-size:48px;line-height:1;">{m.flag}</span>
+          </div>
+          <div class="market-name">{m.name}</div>
+          <div class="market-capital">Capital: {m.capital}</div>
+          <div class="market-note">{m.note}</div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .markets-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
+  }
+  .market-card {
+    background: #000;
+    padding: 0.75rem 1rem;
+    transition: background 0.2s;
+    text-align: left;
+  }
+  .market-card:hover { background: #0a0a0a; }
+  .market-card:hover .market-code { color: #666; }
+
+  .market-code {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s;
+    font-weight: 500;
+  }
+  .market-name {
+    font-size: 0.8rem;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.03em;
+  }
+  .market-capital {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.02em;
+  }
+  .market-note {
+    font-size: 0.65rem;
+    color: #fff;
+    line-height: 1.4;
+  }
+
+  /* Section Header Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes rotateIn {
+    from {
+      opacity: 0;
+      transform: rotate(-180deg) scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  .section-icon {
+    display: inline-block;
+  }
+
+  @media (max-width: 1000px) {
+    .markets-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .markets-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 360px) {
+    .markets-grid { grid-template-columns: 1fr; }
+    .market-card { padding: 0.75rem; }
+  }
+</style>

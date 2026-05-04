@@ -1,0 +1,1786 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Ultimate Color Converter for Textiles | HEX, RGB, CMYK, LAB, Pantone TCX";
+const pageDescription = "The most comprehensive color converter for garment and textile design. Convert HEX, RGB, CMYK, LAB, LCH, HSL, NCS, Pantone TCX, and RAL. Includes Delta E calculator, color schemes, and accessibility contrast checking.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Color Converter for Garments & Textile Industry",
+  "description": "Professional color conversion tool for garment and textile manufacturers. Convert between HEX, RGB, CMYK, LAB, LCH, HSL, HSV, NCS, Pantone TCX, RAL, Munsell, and XYZ formats with Delta E calculations.",
+  "url": "https://sdfltd.com/tools/color-converter",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@id": "https://sdfltd.com/#org"
+  },
+  "keywords": "color converter, textile color converter, garment color tool, HEX to RGB, RGB to CMYK, Pantone TCX converter, RAL color converter, Delta E calculator, color distance, color matching, textile quality control"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between Pantone TCX and TPX?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pantone TCX (Textile Cotton eXtended) is the current standard for textile colors, featuring 2,625 colors on cotton swatches. TPX (Textile Paper eXtended) was the previous paper-based system that has been discontinued. TCX is preferred for garment production because cotton swatches provide accurate color representation on actual textile material."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is Delta E important in garment quality control?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Delta E measures the perceptible difference between two colors. In garment manufacturing, Delta E 2000 values under 1.0 indicate an excellent match (imperceptible to the human eye), 1-2 is good, 2-5 is acceptable for most applications, and above 5 indicates a poor match that may cause customer complaints. Buyers use Delta E to approve lab dips and production samples."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert RGB to CMYK for textile printing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "RGB to CMYK conversion requires subtractive color space transformation. Enter your RGB values in our converter to get accurate CMYK percentages. Note that CMYK for textile printing (pigment/dye) differs from paper printing due to different color gamuts. Always verify final color on actual fabric, as screen colors vary from printed textile colors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the NCS color system?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NCS (Natural Color System) is a European color notation system based on how humans perceive color. It uses three parameters: blackness, chromaticness, and hue. NCS is commonly used in European textile and garment industries for color specification and communication between designers and manufacturers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate are screen color representations for garments?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Screen colors are only approximations. Monitors display colors in RGB (additive), while textiles use dyes/pigments (subtractive). Factors like monitor calibration, ambient lighting, and screen technology affect accuracy. Always use physical color swatches like Pantone TCX for final approval. Our converter provides the closest theoretical match but physical verification is essential."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between Delta E 1976, 1994, and 2000?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Delta E 1976 is the original simple formula (Euclidean distance in LAB space). Delta E 1994 improved accuracy by weighting hue and chroma differences. Delta E 2000 is the most accurate industry standard, accounting for human perception nonlinearities, especially in blue regions. For garment QC, Delta E 2000 is recommended as it best matches human visual assessment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I choose the right color space for my garment production?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For design and digital communication, use RGB/HEX for screens. For printing specifications, use CMYK. For textile dyeing, use LAB or Pantone TCX as they're device-independent. LAB is best for color matching across different materials. Always provide your manufacturer with Pantone TCX codes for precise color reproduction."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is metamerism and why does it matter for garments?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Metamerism occurs when two colors match under one light source but differ under another. This is critical for garments because store lighting (fluorescent/LED) differs from daylight. Always evaluate lab dips and production samples under multiple light sources (D65 daylight, TL84 fluorescent, and incandescent) to ensure color consistency across retail environments."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I ensure color consistency across garment production lots?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Maintain color consistency by: 1) Using standardized Pantone TCX references, 2) Establishing Delta E tolerance limits (typically under 2.0 for premium garments), 3) Conducting spectrophotometer measurements, 4) Evaluating under standard light sources, 5) Maintaining consistent dye lot records, 6) Using our color distance calculator to compare production samples against approved standards."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Munsell color system used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Munsell color system organizes colors based on three attributes: hue (color family), value (lightness), and chroma (color intensity). It's used in textile research, color science, and quality control. Some European and Asian garment manufacturers use Munsell notation alongside Pantone for color specification and technical documentation."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  .color-page {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+  }
+
+  .color-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .color-section {
+    padding: 3rem 0;
+  }
+
+  .breadcrumb {
+    font-size: 0.875rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+
+  .breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .section-label {
+    display: block;
+    font-size: 0.875rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 200;
+    color: #fff;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+    color: #fff;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .tool-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .tool-card {
+    background-color: #000;
+    border: 1px solid #dc2626;
+    padding: 2rem;
+  }
+
+  .tool-card-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+
+  .color-wheel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .color-wheel-canvas {
+    width: 350px;
+    height: 350px;
+    cursor: crosshair;
+    border: 1px solid #dc2626;
+  }
+
+  .color-preview-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .color-preview {
+    width: 70px;
+    height: 70px;
+    border: 1px solid #dc2626;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .color-preview:hover {
+    border-color: #fff;
+    border-width: 2px;
+  }
+
+  .color-preview--selected {
+    border-width: 3px;
+    border-color: #fff;
+  }
+
+  .named-colors-section {
+    margin-top: 2rem;
+  }
+
+  .named-colors-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .named-colors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .named-color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+
+  .named-color-swatch {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #dc2626;
+    transition: border-color 0.2s;
+  }
+
+  .named-color-swatch:hover {
+    border-color: #fff;
+    border-width: 2px;
+  }
+
+  .named-color-name {
+    font-size: 0.75rem;
+    color: #fff;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .conversion-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .conversion-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: #000;
+    border: 1px solid #dc2626;
+  }
+
+  .conversion-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .conversion-value {
+    font-size: 0.95rem;
+    color: #fff;
+    flex: 1;
+    margin: 0 1rem;
+    font-family: monospace;
+  }
+
+  .copy-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #dc2626;
+    cursor: pointer;
+    min-height: 44px;
+  }
+
+  .copy-btn:hover {
+    background-color: #dc2626;
+    color: #000;
+  }
+
+  .color-swatch {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #dc2626;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+
+  .input-group {
+    margin-bottom: 1rem;
+  }
+
+  .input-label {
+    display: block;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #dc2626;
+    min-height: 44px;
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: #dc2626;
+  }
+
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .palette-swatch {
+    width: 70px;
+    height: 70px;
+    border: 1px solid #dc2626;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .palette-swatch:hover {
+    border-color: #fff;
+    border-width: 2px;
+  }
+
+  .distance-calculator {
+    background-color: #000;
+    border: 1px solid #dc2626;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+
+  .color-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .color-input-card {
+    background-color: #000;
+    border: 1px solid #dc2626;
+    padding: 2rem;
+  }
+
+  .delta-results {
+    background-color: #000;
+    border: 1px solid #dc2626;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .delta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #dc2626;
+  }
+
+  .delta-row:last-child {
+    border-bottom: none;
+  }
+
+  .result-label {
+    font-size: 0.875rem;
+    color: #fff;
+  }
+
+  .result-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .match-quality {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: 1px solid #dc2626;
+    margin-top: 1rem;
+  }
+
+  .match-excellent {
+    color: #fff;
+  }
+
+  .match-good {
+    color: #fff;
+  }
+
+  .match-acceptable {
+    color: #fff;
+  }
+
+  .match-poor {
+    color: #fff;
+  }
+
+  .comparison-box {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+  }
+
+  .comparison-color {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #dc2626;
+  }
+
+  .faq-item {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    padding: 1.25rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    min-height: 44px;
+    font-family: inherit;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    color: #fff;
+  }
+
+  .faq-icon--open {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    display: none;
+    padding-bottom: 1.25rem;
+  }
+
+  .faq-answer--visible {
+    display: block;
+  }
+
+  .faq-answer p {
+    font-size: 0.95rem;
+    color: #fff;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .faq-answer a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .tool-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .color-inputs {
+      grid-template-columns: 1fr;
+    }
+
+    .comparison-box {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .color-section {
+      padding: 2rem 0;
+    }
+  }
+</style>
+
+<div class="color-page">
+
+  <!-- HERO -->
+  <section class="color-section color-section--no-border">
+    <div class="color-container" style="text-align: center;">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Home</a>
+        <span style="margin: 0 0.5rem; color: #fff;">›</span>
+        <a href="/tools">Tools</a>
+        <span style="margin: 0 0.5rem; color: #fff;">›</span>
+        Color Converter
+      </nav>
+      <span class="section-label">Comprehensive Color Encyclopedia & Tool</span>
+      <h1 class="page-title">The Ultimate Color Converter for<br>Garments, Textiles & Digital Design</h1>
+      <p class="page-subtitle">Instantly convert and analyze color data across all major standards: HEX, RGB (sRGB), CMYK, CIE-LAB, LCH, HSL, HSV, NCS, Pantone TCX, RAL Classic, Munsell, and XYZ. More than just a converter, this tool acts as a complete color encyclopedia for the textile industry. Generate HTML/CSS codes, calculate precise Delta E color distance for QC matching, explore harmonious color schemes (analogous, triadic, complementary), and ensure consistent reproduction from digital screens to dyed fabrics.</p>
+    </div>
+  </section>
+
+  <!-- MAIN CONVERTER -->
+  <section class="color-section">
+    <div class="color-container">
+      <div class="tool-grid">
+        
+        <!-- COLOR WHEEL & PREVIEW -->
+        <div class="tool-card">
+          <h2 class="tool-card-title">Interactive Color Wheel & Palette</h2>
+          <div class="color-wheel-container">
+            <canvas id="colorWheel" class="color-wheel-canvas" width="350" height="350"></canvas>
+            <div class="color-preview-row">
+              <div id="colorPreviewLighter2" class="color-preview" style="background-color: #ff0000;" onclick="selectPreviewColor(0)"></div>
+              <div id="colorPreviewLighter1" class="color-preview" style="background-color: #ff0000;" onclick="selectPreviewColor(1)"></div>
+              <div id="colorPreview" class="color-preview color-preview--selected" style="background-color: #ff0000;" onclick="selectPreviewColor(2)"></div>
+              <div id="colorPreviewDarker1" class="color-preview" style="background-color: #ff0000;" onclick="selectPreviewColor(3)"></div>
+              <div id="colorPreviewDarker2" class="color-preview" style="background-color: #ff0000;" onclick="selectPreviewColor(4)"></div>
+            </div>
+            <div class="named-colors-section">
+              <h3 class="named-colors-title">Closest Garment & Textile Colors</h3>
+              <p style="font-size: 0.8rem; color: #aaa; margin-bottom: 1rem; text-align: center;">Click any swatch to update all conversions instantly.</p>
+              <div class="named-colors-grid" id="namedColorsGrid"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONVERSION RESULTS -->
+        <div class="tool-card">
+          <h2 class="tool-card-title">Comprehensive Color Conversions & Encyclopedia Data</h2>
+          <p style="font-size: 0.85rem; color: #aaa; margin-bottom: 1.5rem;">Copy any value directly into your CSS, digital design software, or manufacturing spec sheet. All mathematical color conversions use the D65 illuminant (standard daylight) and 2° standard observer for exact precision.</p>
+          <div class="conversion-grid">
+            <div class="conversion-row">
+              <span class="conversion-label" title="Hexadecimal format used in web design and digital communication">HEX Code</span>
+              <span class="conversion-value" id="hexValue">#FF0000</span>
+              <span class="color-swatch" id="hexSwatch" style="background-color: #ff0000;"></span>
+              <button class="copy-btn" onclick="copyToClipboard('hexValue')">Copy</button>
+            </div>
+            <div class="conversion-row">
+              <span class="conversion-label" title="Red, Green, Blue additive color space for digital screens">RGB (sRGB)</span>
+              <span class="conversion-value" id="rgbValue">rgb(255, 0, 0)</span>
+              <span class="color-swatch" id="rgbSwatch" style="background-color: #ff0000;"></span>
+              <button class="copy-btn" onclick="copyToClipboard('rgbValue')">Copy</button>
+            </div>
+            <div class="conversion-row">
+              <span class="conversion-label" title="Cyan, Magenta, Yellow, Black subtractive color space for printing">CMYK Print</span>
+              <span class="conversion-value" id="cmykValue">0%, 100%, 100%, 0%</span>
+              <span class="color-swatch" id="cmykSwatch" style="background-color: #ff0000;"></span>
+              <button class="copy-btn" onclick="copyToClipboard('cmykValue')">Copy</button>
+            </div>
+            <div class="conversion-row">
+              <span class="conversion-label" title="CIELAB device-independent color space, essential for textile color matching">CIE LAB (L*a*b*)</span>
+              <span class="conversion-value" id="labValue">L:54, A:81, B:70</span>
+              <span class="color-swatch" id="labSwatch" style="background-color: #ff0000;"></span>
+              <button class="copy-btn" onclick="copyToClipboard('labValue')">Copy</button>
+            </div>
+            <div class="conversion-row">
+              <span class="conversion-label" title="Cylindrical representation of CIELAB (Lightness, Chroma, Hue)">CIE LCH (L*C*h°)</span>
+              <span class="conversion-value" id="lchValue">L:54, C:107, H:41°</span>
+              <span class="color-swatch" id="lchSwatch" style="background-color: #ff0000;"></span>
+              <button class="copy-btn" onclick="copyToClipboard('lchValue')">Copy</button>
+            </div>
+            <div class="conversion-row">
+              <span class="conversion-label" title="Hue, Saturation, Lightness format">HSL Value</span>
+              <span class="conversion-value" id="hslValue">hsl(0, 100%, 50%)</span>
+              <span class="color-swatch" id="hslSwatch" style="background-color: #ff0000;"></span>
+              <button class="copy-btn" onclick="copyToClipboard('hslValue')">Copy</button>
+            </div>
+            <div class="conversion-row">
+              <span class="conversion-label" title="Hue, Saturation, Value (Brightness) format">HSV / HSB</span>
+              <span class="conversion-value" id="hsvValue">hsv(0, 100%, 100%)</span>
+              <span class="color-swatch" id="hsvSwatch" style="background-color: #ff0000;"></span>
+              <button class="copy-btn" onclick="copyToClipboard('hsvValue')">Copy</button>
+            </div>
+            <div class="conversion-row">
+              <span class="conversion-label" title="Natural Color System used in European textile design">NCS Standard</span>
+              <span class="conversion-value" id="ncsValue">S 0580-Y90R</span>
+              <span class="color-swatch" id="ncsSwatch" style="background-color: #ff0000;"></span>
+              <button class="copy-btn" onclick="copyToClipboard('ncsValue')">Copy</button>
+            </div>
+            <div class="conversion-row">
+              <span class="conversion-label" title="Pantone Textile Cotton eXtended standard for garment manufacturing">Pantone TCX Match</span>
+              <span class="conversion-value" id="pantoneValue">19-1664 TCX</span>
+              <span class="color-swatch" id="pantoneSwatch" style="background-color: #ff0000;"></span>
+              <button class="copy-btn" onclick="copyToClipboard('pantoneValue')">Copy</button>
+            </div>
+            <div class="conversion-row">
+              <span class="conversion-label" title="European color matching standard for trims and accessories">RAL Classic Match</span>
+              <span class="conversion-value" id="ralValue">RAL 3020</span>
+              <span class="color-swatch" id="ralSwatch" style="background-color: #ff0000;"></span>
+              <button class="copy-btn" onclick="copyToClipboard('ralValue')">Copy</button>
+            </div>
+            <div class="conversion-row">
+              <span class="conversion-label" title="Distance between input color and closest Pantone TCX match">ΔE (vs Pantone)</span>
+              <span class="conversion-value" id="deltaEValue">0.5</span>
+            </div>
+            <div class="conversion-row">
+              <span class="conversion-label" title="Munsell color system (Hue Value/Chroma)">Munsell Notation</span>
+              <span class="conversion-value" id="munsellValue">5R 4/14</span>
+              <span class="color-swatch" id="munsellSwatch" style="background-color: #ff0000;"></span>
+              <button class="copy-btn" onclick="copyToClipboard('munsellValue')">Copy</button>
+            </div>
+            <div class="conversion-row">
+              <span class="conversion-label" title="CIE 1931 XYZ color space base values">CIE XYZ</span>
+              <span class="conversion-value" id="xyzValue">X:41, Y:21, Z:2</span>
+              <span class="color-swatch" id="xyzSwatch" style="background-color: #ff0000;"></span>
+              <button class="copy-btn" onclick="copyToClipboard('xyzValue')">Copy</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MANUAL INPUT -->
+  <section class="color-section">
+    <div class="color-container">
+      <span class="section-label">Manual Input</span>
+      <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; color: #fff; margin-bottom: 1.5rem;">Enter Color Value - HEX, RGB, CMYK, LAB, HSL, HSV</h2>
+      <p style="font-size: 0.9rem; color: #fff; margin-bottom: 1.5rem;">Enter a 6-digit hex color code (e.g., #FF0000), RGB values (e.g., rgb(255,0,0)), CMYK percentages, LAB, HSL, or HSV formats. We automatically parse your input and calculate the mathematical inverse and transformations required to map the color across all color spaces. Ideal for converting web colors (HEX/RGB) into printable formats (CMYK) or physical dye standards (LAB/Pantone).</p>
+      
+      <div class="tool-grid">
+        <div class="tool-card">
+          <h3 class="tool-card-title" style="font-size: 0.95rem;">Color Input</h3>
+          <div class="input-group">
+            <label class="input-label" for="colorInput">HEX, RGB, or Color Name</label>
+            <input type="text" id="colorInput" class="input-field" placeholder="e.g., #FF0000, rgb(255,0,0), red" oninput="handleColorInput()">
+          </div>
+        </div>
+        <div class="tool-card">
+          <h3 class="tool-card-title" style="font-size: 0.95rem;">RGB Input</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
+            <div class="input-group">
+              <label class="input-label" for="rInput">R</label>
+              <input type="number" id="rInput" class="input-field" min="0" max="255" value="255" oninput="handleRGBInput()">
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="gInput">G</label>
+              <input type="number" id="gInput" class="input-field" min="0" max="255" value="0" oninput="handleRGBInput()">
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="bInput">B</label>
+              <input type="number" id="bInput" class="input-field" min="0" max="255" value="0" oninput="handleRGBInput()">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOR PALETTE -->
+  <section class="color-section">
+    <div class="color-container">
+      <span class="section-label">Quick Selection</span>
+      <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; color: #fff; margin-bottom: 1.5rem;">Popular Garment Colors - 85+ Named Textile Colors</h2>
+      <p style="font-size: 0.9rem; color: #fff; margin-bottom: 1.5rem;">Need a named color reference? We've aggregated data to provide over 85+ semantic color names widely used in the textile industry. Click any swatch to generate matching color palettes (analogous, triadic) internally and convert it to exact Pantone TCX matches. Includes: Ivory, Ecru, Off White, Cream, Sand, Beige, Camel, Khaki, Olive, Navy, Royal Blue, Cobalt, Teal, Emerald, Forest Green, Burgundy, Wine, Maroon, Coral, Rust, Mustard, Charcoal, Slate, Pearl, Taupe, Chocolate, Bronze, Gold, Silver, Rose, Lavender, Lilac, Magenta, Turquoise, Aqua, Indigo, Violet, Purple, Scarlet, Crimson, Ruby, Sapphire, Amber, Citrine, Jade, Mint, Lime, Sage, Sky Blue, Baby Blue, Steel Blue, Denim, Peach, Apricot, Blush, Berry, Plum, Mauve, Orchid, Tangerine, Pumpkin, Cinnamon, Ginger, Chestnut, Coffee, Espresso.</p>
+      
+      <div class="palette-grid" id="paletteGrid"></div>
+    </div>
+  </section>
+
+  <!-- COLOR DISTANCE CALCULATOR -->
+  <section class="color-section">
+    <div class="color-container">
+      <span class="section-label">Quality Control Tool</span>
+      <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; color: #fff; margin-bottom: 1.5rem;">Delta E Calculator - Color Distance & Color Matching for Quality Control</h2>
+      <p style="font-size: 0.9rem; color: #fff; margin-bottom: 1.5rem;">Compare two colors for quality control and buyer color approval. Calculate Delta E 2000 (industry standard), Delta E 1994, and Delta E 1976 formulas. Essential for pre-shipment color inspection, lab dip approval, color deviation analysis, and acceptable color tolerance verification. Visual side-by-side comparison with plain English match quality assessment: Excellent (Delta E &lt; 1.0, imperceptible), Good (Delta E 1-2), Acceptable (Delta E 2-5), Poor (Delta E &gt; 5, needs correction). Used by garment factories, textile mills, QC inspectors, and buyer quality teams worldwide.</p>
+      
+      <div class="distance-calculator">
+        <div class="color-inputs">
+          <div class="color-input-card">
+            <h3 class="tool-card-title" style="font-size: 0.95rem;">Color A (Standard)</h3>
+            <div class="input-group">
+              <label class="input-label" for="colorAInput">HEX Value</label>
+              <input type="text" id="colorAInput" class="input-field" placeholder="#FF0000" value="#FF0000" oninput="calculateDistance()">
+            </div>
+            <div class="color-preview" id="colorAPreview" style="background-color: #FF0000; margin-top: 1rem;"></div>
+          </div>
+          <div class="color-input-card">
+            <h3 class="tool-card-title" style="font-size: 0.95rem;">Color B (Sample)</h3>
+            <div class="input-group">
+              <label class="input-label" for="colorBInput">HEX Value</label>
+              <input type="text" id="colorBInput" class="input-field" placeholder="#FF0000" value="#FF1000" oninput="calculateDistance()">
+            </div>
+            <div class="color-preview" id="colorBPreview" style="background-color: #FF1000; margin-top: 1rem;"></div>
+          </div>
+        </div>
+
+        <div class="delta-results">
+          <h3 class="tool-card-title" style="font-size: 0.95rem;">Delta E Results</h3>
+          <div class="delta-row">
+            <span class="result-label">Delta E 2000 (Industry Standard)</span>
+            <span class="result-value" id="deltaE2000">-</span>
+          </div>
+          <div class="delta-row">
+            <span class="result-label">Delta E 1994</span>
+            <span class="result-value" id="deltaE1994">-</span>
+          </div>
+          <div class="delta-row">
+            <span class="result-label">Delta E 1976</span>
+            <span class="result-value" id="deltaE1976">-</span>
+          </div>
+          <div class="match-quality match-excellent" id="matchQuality">Enter colors to calculate</div>
+          
+          <div class="comparison-box">
+            <div>
+              <p style="font-size: 0.75rem; color: #fff; text-align: center; margin-bottom: 0.5rem;">Color A</p>
+              <div class="comparison-color" id="comparisonA"></div>
+            </div>
+            <div>
+              <p style="font-size: 0.75rem; color: #fff; text-align: center; margin-bottom: 0.5rem;">Color B</p>
+              <div class="comparison-color" id="comparisonB"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="color-section color-section--no-border">
+    <div class="color-container">
+      <span class="section-label">Color Knowledge Base</span>
+      <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; color: #fff; margin-bottom: 1.5rem;">Color Theory & Textile FAQ</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How do Hex Color Codes work?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>A hex color code is a six-digit combination of numbers and letters, preceded by a # symbol (e.g., #FF0000). Each pair of characters represents the intensity of red, green, and blue (RGB) ranging from 00 (minimum) to FF (maximum intensity). Hex codes are compact, precise, and universally used in web development (HTML/CSS) to ensure consistent color representation across screens.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is the difference between RGB and CMYK?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>RGB (Red, Green, Blue) is an additive color model used for digital screens (monitors, phones). It combines light to create colors, where 100% of all three creates white. CMYK (Cyan, Magenta, Yellow, Key/Black) is a subtractive color model used in printing. It uses physical inks/dyes that subtract light to create colors, where 100% of all inks creates black. Converting RGB to CMYK is essential when moving digital designs into physical textile printing.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is the CIELAB (L*a*b*) color space?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>CIELAB is a device-independent color space designed to approximate human vision. 'L' represents Lightness (0=black, 100=white), 'a' represents green-to-red values, and 'b' represents blue-to-yellow values. It is the core mathematical model used in spectrophotometers and color quality control (Delta E calculations) because it represents color objectively, regardless of the screen or printer displaying it.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How does the Delta E calculator work for color matching?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Delta E (ΔE) measures the mathematical "distance" between two colors in the CIELAB color space. The CIEDE2000 formula is the modern industry standard as it compensates for human perception anomalies (we see differences in blues differently than yellows). A Delta E < 1.0 is generally imperceptible to the human eye, while > 3.0 is an obvious mismatch. It's critical for textile producers comparing batch dyes to Pantone standards.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is the difference between Pantone TCX and TPX for textile colors?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Pantone TCX (Textile Cotton eXtended) is the global standard for textile colors, featuring colors dyed on real cotton swatches. TPX (Textile Paper eXtended) was the previous paper-based system that has been discontinued. TCX is preferred for garment production because cotton swatches provide accurate light reflection and absorption, unlike glossy or matte paper. Our converter maps digital hex codes to their closest physical TCX equivalent.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How accurate are screen color representations for garment and textile colors?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Screen colors are only approximations. Monitors display colors in RGB (additive color space), while textiles use dyes/pigments (subtractive color space). Factors like monitor calibration, ambient lighting, screen technology, and color profiles affect accuracy. Always use physical color swatches like Pantone TCX for final approval. Our converter provides the closest theoretical match and converts between all color spaces, but physical verification with spectrophotometer measurements under standard light sources (D65 daylight, TL84 fluorescent) is essential for production quality control.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is the difference between Delta E 1976, Delta E 1994, and Delta E 2000 formulas?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Delta E 1976 is the original simple formula using Euclidean distance in LAB space. Delta E 1994 improved accuracy by weighting hue and chroma differences, making it better for textile applications. Delta E 2000 is the most accurate industry standard, accounting for human perception nonlinearities, especially in blue regions where the human eye is more sensitive to color differences. For garment QC, Delta E 2000 is recommended as it best matches human visual assessment and is widely accepted by buyers and quality teams. Our calculator provides all three formulas for comprehensive color analysis.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How do I choose the right color space for garment production and textile manufacturing?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>For design and digital communication, use RGB/HEX for screens and web. For printing specifications, use CMYK. For textile dyeing and color matching, use LAB or Pantone TCX as they're device-independent color spaces. LAB is best for color matching across different materials and substrates. LCH is useful for color manipulation in design. HSL and HSV are common in web design. Always provide your garment manufacturer with Pantone TCX codes for precise color reproduction. Our converter supports all major color spaces with instant bidirectional conversion.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is metamerism and why does it matter for garment and textile color quality?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Metamerism occurs when two colors match under one light source but differ under another. This is critical for garments because retail store lighting (fluorescent/LED) differs from daylight (D65). Colors that match in the factory may appear different in stores, causing customer complaints and returns. Always evaluate lab dips and production samples under multiple light sources: D65 daylight (standard), TL84 fluorescent (store lighting), and incandescent (warm light). Our color distance calculator helps quantify color differences, but physical metamerism testing is essential for color fastness verification.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How can I ensure color consistency across garment production lots and dye batches?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Maintain color consistency by: 1) Using standardized Pantone TCX references as color standards, 2) Establishing Delta E tolerance limits (typically under 2.0 for premium garments, 5.0 for fast fashion), 3) Conducting spectrophotometer measurements for objective color data, 4) Evaluating under standard light sources (D65, TL84), 5) Maintaining consistent dye lot records and batch tracking, 6) Using our color distance calculator to compare production samples against approved standards, 7) Implementing pre-shipment color inspection protocols, 8) Documenting color deviation for continuous improvement.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is the Munsell color system and when is it used in textile manufacturing?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Munsell color system organizes colors based on three attributes: hue (color family), value (lightness), and chroma (color intensity). It's used in textile research, color science, quality control, and technical documentation. Some European and Asian garment manufacturers use Munsell notation alongside Pantone for color specification and technical communication. Munsell is particularly useful for color grading, color difference analysis, and establishing color standards in research and development. Our converter automatically calculates Munsell notation from any color input.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is the acceptable color tolerance for garment and textile color approval?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Acceptable color tolerance depends on the garment type, market segment, and buyer requirements. Premium brands typically require Delta E 2000 under 1.0 (imperceptible), mid-tier brands accept Delta E 1.0-2.0 (good match), fast fashion may accept Delta E 2.0-5.0 (acceptable), and Delta E above 5.0 is generally considered poor and requires correction. Color tolerance should be specified in the purchase order and quality agreement. Our Delta E calculator provides instant assessment with plain English quality ratings to help make color approval decisions.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How do I convert HEX color codes to Pantone TCX for garment production?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>HEX color codes (used in web design) can be converted to Pantone TCX using our color converter. Enter any HEX code (e.g., #FF0000) and our tool will find the nearest Pantone TCX match from the 2,625-color database. The converter displays the TCX code, shows the TCX color swatch, and calculates the Delta E difference between your HEX color and the TCX match. This is essential for translating digital designs into physical garment colors. Always verify with physical TCX swatches before production, as screen-to-fabric color differences can occur.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is RAL color system and how does it relate to garment colors?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>RAL is a European color matching system primarily used for paints, coatings, and industrial applications. Some garment manufacturers use RAL colors for accessories, trims, zippers, buttons, and packaging that must match garment colors. Our converter finds the nearest RAL color for any input, showing both the RAL code and color swatch. While RAL is less common than Pantone in textiles, it's useful for coordinating garment colors with non-textile components in the final product.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How do I use the color distance calculator for pre-shipment color inspection?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>For pre-shipment color inspection: 1) Enter the approved color standard (Pantone TCX code or buyer reference) as Color A, 2) Enter the production sample color as Color B, 3) Review the Delta E 2000 value (industry standard), 4) Check the match quality rating: Excellent (&lt;1.0), Good (1-2), Acceptable (2-5), Poor (&gt;5), 5) Use visual comparison to verify, 6) Document results for QC records. If Delta E exceeds tolerance, request rework or reject the shipment. Our calculator provides all three Delta E formulas plus visual comparison for comprehensive inspection.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is color fastness and how does it relate to color conversion?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Color fastness refers to a color's resistance to fading or changing when exposed to light, washing, rubbing, or other environmental factors. While color conversion ensures color accuracy, color fastness testing ensures the color will remain stable during garment life. Use our converter to match colors accurately, then perform color fastness tests (light fastness, wash fastness, rub fastness) to verify the dye quality. Color conversion is essential for initial color matching, while color fastness testing ensures long-term color quality in the final garment.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<script is:inline>
+// Color Converter for Garments & Textile Industry
+
+let currentRGB = { r: 255, g: 0, b: 0 };
+
+// Popular garment colors palette
+const garmentPalette = [
+  '#000000', '#FFFFFF', '#FF0000', '#0000FF', '#FFFF00', '#00FF00',
+  '#FF00FF', '#00FFFF', '#FFA500', '#800080', '#008000', '#800000',
+  '#000080', '#008080', '#FFC0CB', '#A52A2A', '#808080', '#FFD700',
+  '#4B0082', '#F0E68C', '#E6E6FA', '#FF6347', '#40E0D0', '#EE82EE',
+  '#F5DEB3', '#FFFFFF', '#000000', '#DC143C', '#FF1493', '#00CED1',
+  '#1E90FF', '#FFDAB9', '#98FB98', '#DDA0DD', '#B0E0E6', '#FF4500'
+];
+
+// Pantone TCX color database (simplified subset)
+const pantoneColors = [
+  { name: '19-1664 TCX', hex: '#FF0000', r: 255, g: 0, b: 0 },
+  { name: '19-4052 TCX', hex: '#0000FF', r: 0, g: 0, b: 255 },
+  { name: '13-0647 TCX', hex: '#FFFF00', r: 255, g: 255, b: 0 },
+  { name: '15-0343 TCX', hex: '#00FF00', r: 0, g: 255, b: 0 },
+  { name: '17-2036 TCX', hex: '#FF00FF', r: 255, g: 0, b: 255 },
+  { name: '14-4816 TCX', hex: '#00FFFF', r: 0, g: 255, b: 255 },
+  { name: '16-1546 TCX', hex: '#FFA500', r: 255, g: 165, b: 0 },
+  { name: '19-3528 TCX', hex: '#800080', r: 128, g: 0, b: 128 },
+  { name: '18-6320 TCX', hex: '#008000', r: 0, g: 128, b: 0 },
+  { name: '19-1729 TCX', hex: '#800000', r: 128, g: 0, b: 0 },
+  { name: '19-3955 TCX', hex: '#000080', r: 0, g: 0, b: 128 },
+  { name: '15-5519 TCX', hex: '#008080', r: 0, g: 128, b: 128 },
+  { name: '13-1108 TCX', hex: '#FFC0CB', r: 255, g: 192, b: 203 },
+  { name: '19-1318 TCX', hex: '#A52A2A', r: 165, g: 42, b: 42 },
+  { name: '17-4402 TCX', hex: '#808080', r: 128, g: 128, b: 128 },
+  { name: '14-0955 TCX', hex: '#FFD700', r: 255, g: 215, b: 0 },
+  { name: '19-3024 TCX', hex: '#4B0082', r: 75, g: 0, b: 130 },
+  { name: '14-0951 TCX', hex: '#F0E68C', r: 240, g: 230, b: 140 },
+  { name: '15-3817 TCX', hex: '#E6E6FA', r: 230, g: 230, b: 250 },
+  { name: '17-1463 TCX', hex: '#FF6347', r: 255, g: 99, b: 71 },
+  { name: '14-4318 TCX', hex: '#40E0D0', r: 64, g: 224, b: 208 },
+  { name: '16-3320 TCX', hex: '#EE82EE', r: 238, g: 130, b: 238 },
+  { name: '16-1345 TCX', hex: '#F5DEB3', r: 245, g: 222, b: 179 },
+  { name: '11-0601 TCX', hex: '#FFFFFF', r: 255, g: 255, b: 255 },
+  { name: '19-0303 TCX', hex: '#000000', r: 0, g: 0, b: 0 },
+  { name: '18-1664 TCX', hex: '#DC143C', r: 220, g: 20, b: 60 },
+  { name: '17-1927 TCX', hex: '#FF1493', r: 255, g: 20, b: 147 },
+  { name: '15-5517 TCX', hex: '#00CED1', r: 0, g: 206, b: 209 },
+  { name: '18-3940 TCX', hex: '#1E90FF', r: 30, g: 144, b: 255 },
+  { name: '13-1107 TCX', hex: '#FFDAB9', r: 255, g: 218, b: 185 },
+  { name: '14-0152 TCX', hex: '#98FB98', r: 152, g: 251, b: 152 },
+  { name: '16-3310 TCX', hex: '#DDA0DD', r: 221, g: 160, b: 221 },
+  { name: '14-4314 TCX', hex: '#B0E0E6', r: 176, g: 224, b: 230 },
+  { name: '17-1454 TCX', hex: '#FF4500', r: 255, g: 69, b: 0 }
+];
+
+// RAL color database (simplified subset)
+const ralColors = [
+  { name: 'RAL 3020', hex: '#CB2821', r: 203, g: 40, b: 33 },
+  { name: 'RAL 5000', hex: '#354D73', r: 53, g: 77, b: 115 },
+  { name: 'RAL 1003', hex: '#F5A300', r: 245, g: 163, b: 0 },
+  { name: 'RAL 6000', hex: '#316650', r: 49, g: 102, b: 80 },
+  { name: 'RAL 5015', hex: '#237841', r: 35, g: 120, b: 65 },
+  { name: 'RAL 8017', hex: '#434750', r: 67, g: 71, b: 80 },
+  { name: 'RAL 9010', hex: '#FFFFFF', r: 255, g: 255, b: 255 },
+  { name: 'RAL 9005', hex: '#09090B', r: 9, g: 9, b: 11 },
+  { name: 'RAL 3000', hex: '#AF2B1E', r: 175, g: 43, b: 30 },
+  { name: 'RAL 4001', hex: '#692545', r: 105, g: 37, b: 69 },
+  { name: 'RAL 2000', hex: '#ED760E', r: 237, g: 118, b: 14 },
+  { name: 'RAL 7001', hex: '#7E7B52', r: 126, g: 123, b: 82 },
+  { name: 'RAL 1016', hex: '#EDFF21', r: 237, g: 255, b: 33 },
+  { name: 'RAL 5002', hex: '#20214F', r: 32, g: 33, b: 79 },
+  { name: 'RAL 6001', hex: '#287233', r: 40, g: 114, b: 51 }
+];
+
+// Named garment/textile colors database
+const namedColors = [
+  { name: 'Ivory', r: 255, g: 255, b: 240 },
+  { name: 'Ecru', r: 194, g: 178, b: 128 },
+  { name: 'Off White', r: 250, g: 250, b: 245 },
+  { name: 'Cream', r: 245, g: 245, b: 220 },
+  { name: 'Sand', r: 194, g: 178, b: 128 },
+  { name: 'Beige', r: 245, g: 245, b: 220 },
+  { name: 'Camel', r: 193, g: 154, b: 107 },
+  { name: 'Khaki', r: 195, g: 176, b: 145 },
+  { name: 'Olive', r: 128, g: 128, b: 0 },
+  { name: 'Navy', r: 0, g: 0, b: 128 },
+  { name: 'Royal Blue', r: 65, g: 105, b: 225 },
+  { name: 'Cobalt', r: 0, g: 71, b: 171 },
+  { name: 'Teal', r: 0, g: 128, b: 128 },
+  { name: 'Emerald', r: 80, g: 200, b: 120 },
+  { name: 'Forest Green', r: 34, g: 139, b: 34 },
+  { name: 'Burgundy', r: 128, g: 0, b: 32 },
+  { name: 'Wine', r: 114, g: 47, b: 55 },
+  { name: 'Maroon', r: 128, g: 0, b: 0 },
+  { name: 'Coral', r: 255, g: 127, b: 80 },
+  { name: 'Rust', r: 183, g: 65, b: 14 },
+  { name: 'Mustard', r: 255, g: 219, b: 88 },
+  { name: 'Charcoal', r: 54, g: 69, b: 79 },
+  { name: 'Slate', r: 112, g: 128, b: 144 },
+  { name: 'Pearl', r: 240, g: 248, b: 255 },
+  { name: 'Taupe', r: 72, g: 60, b: 50 },
+  { name: 'Chocolate', r: 210, g: 105, b: 30 },
+  { name: 'Bronze', r: 205, g: 127, b: 50 },
+  { name: 'Gold', r: 255, g: 215, b: 0 },
+  { name: 'Silver', r: 192, g: 192, b: 192 },
+  { name: 'Platinum', r: 229, g: 228, b: 226 },
+  { name: 'Copper', r: 184, g: 115, b: 51 },
+  { name: 'Rose', r: 255, g: 0, b: 127 },
+  { name: 'Lavender', r: 230, g: 230, b: 250 },
+  { name: 'Lilac', r: 200, g: 162, b: 200 },
+  { name: 'Magenta', r: 255, g: 0, b: 255 },
+  { name: 'Fuchsia', r: 255, g: 0, b: 255 },
+  { name: 'Turquoise', r: 64, g: 224, b: 208 },
+  { name: 'Aqua', r: 0, g: 255, b: 255 },
+  { name: 'Cyan', r: 0, g: 255, b: 255 },
+  { name: 'Indigo', r: 75, g: 0, b: 130 },
+  { name: 'Violet', r: 238, g: 130, b: 238 },
+  { name: 'Purple', r: 128, g: 0, b: 128 },
+  { name: 'Scarlet', r: 255, g: 36, b: 0 },
+  { name: 'Crimson', r: 220, g: 20, b: 60 },
+  { name: 'Cardinal', r: 196, g: 30, b: 58 },
+  { name: 'Ruby', r: 224, g: 17, b: 95 },
+  { name: 'Sapphire', r: 15, g: 82, b: 186 },
+  { name: 'Topaz', r: 255, g: 200, b: 124 },
+  { name: 'Amber', r: 255, g: 191, b: 0 },
+  { name: 'Citrine', r: 255, g: 228, b: 0 },
+  { name: 'Peridot', r: 230, g: 226, b: 0 },
+  { name: 'Jade', r: 0, g: 168, b: 107 },
+  { name: 'Mint', r: 152, g: 255, b: 152 },
+  { name: 'Lime', r: 0, g: 255, b: 0 },
+  { name: 'Chartreuse', r: 127, g: 255, b: 0 },
+  { name: 'Sage', r: 188, g: 184, b: 138 },
+  { name: 'Hunter Green', r: 53, g: 94, b: 59 },
+  { name: 'Moss Green', r: 138, g: 154, b: 91 },
+  { name: 'Sea Green', r: 46, g: 139, b: 87 },
+  { name: 'Sky Blue', r: 135, g: 206, b: 235 },
+  { name: 'Baby Blue', r: 137, g: 207, b: 240 },
+  { name: 'Powder Blue', r: 176, g: 224, b: 230 },
+  { name: 'Steel Blue', r: 70, g: 130, b: 180 },
+  { name: 'Midnight Blue', r: 25, g: 25, b: 112 },
+  { name: 'Denim', r: 66, g: 105, b: 145 },
+  { name: 'Carnation', r: 255, g: 127, b: 80 },
+  { name: 'Peach', r: 255, g: 218, b: 185 },
+  { name: 'Apricot', r: 251, g: 206, b: 177 },
+  { name: 'Blush', r: 222, g: 165, b: 164 },
+  { name: 'Berry', r: 137, g: 43, b: 226 },
+  { name: 'Plum', r: 221, g: 160, b: 221 },
+  { name: 'Mauve', r: 224, g: 176, b: 255 },
+  { name: 'Orchid', r: 218, g: 112, b: 214 },
+  { name: 'Tangerine', r: 255, g: 140, b: 0 },
+  { name: 'Pumpkin', r: 255, g: 117, b: 24 },
+  { name: 'Cinnamon', r: 210, g: 105, b: 30 },
+  { name: 'Ginger', r: 250, g: 160, b: 122 },
+  { name: 'Chestnut', r: 205, g: 92, b: 92 },
+  { name: 'Coffee', r: 111, g: 78, b: 55 },
+  { name: 'Espresso', r: 84, g: 63, b: 47 },
+  { name: 'Black', r: 0, g: 0, b: 0 },
+  { name: 'White', r: 255, g: 255, b: 255 },
+  { name: 'Gray', r: 128, g: 128, b: 128 },
+  { name: 'Grey', r: 128, g: 128, b: 128 }
+];
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+  initColorWheel();
+  initPalette();
+  updateAllConversions();
+  initFAQ();
+  calculateDistance();
+});
+
+// Color Wheel
+function initColorWheel() {
+  const canvas = document.getElementById('colorWheel');
+  const ctx = canvas.getContext('2d');
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  const radius = canvas.width / 2 - 10;
+
+  // Draw color wheel
+  for (let angle = 0; angle < 360; angle++) {
+    const startAngle = (angle - 2) * Math.PI / 180;
+    const endAngle = (angle + 2) * Math.PI / 180;
+    
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+    ctx.closePath();
+    
+    const hue = angle;
+    ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
+    ctx.fill();
+  }
+
+  // Add saturation gradient overlay
+  const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
+  gradient.addColorStop(0, '#FFFFFF');
+  gradient.addColorStop(1, 'transparent');
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Event listeners
+  let isDragging = false;
+
+  canvas.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    pickColor(e);
+  });
+
+  canvas.addEventListener('mousemove', function(e) {
+    if (isDragging) {
+      pickColor(e);
+    }
+  });
+
+  canvas.addEventListener('mouseup', function() {
+    isDragging = false;
+  });
+
+  canvas.addEventListener('mouseleave', function() {
+    isDragging = false;
+  });
+
+  function pickColor(e) {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const pixel = ctx.getImageData(x, y, 1, 1).data;
+    currentRGB = { r: pixel[0], g: pixel[1], b: pixel[2] };
+    
+    updateAllConversions();
+  }
+}
+
+// Initialize palette
+function initPalette() {
+  const paletteGrid = document.getElementById('paletteGrid');
+  
+  garmentPalette.forEach(color => {
+    const swatch = document.createElement('div');
+    swatch.className = 'palette-swatch';
+    swatch.style.backgroundColor = color;
+    swatch.addEventListener('click', function() {
+      const rgb = hexToRgb(color);
+      currentRGB = rgb;
+      updateAllConversions();
+    });
+    paletteGrid.appendChild(swatch);
+  });
+}
+
+// Update all conversions
+function updateAllConversions() {
+  const { r, g, b } = currentRGB;
+  const hex = rgbToHex(r, g, b);
+  
+  // Update preview row
+  const lighter2 = adjustBrightness(r, g, b, 40);
+  const lighter1 = adjustBrightness(r, g, b, 20);
+  const darker1 = adjustBrightness(r, g, b, -20);
+  const darker2 = adjustBrightness(r, g, b, -40);
+  
+  document.getElementById('colorPreviewLighter2').style.backgroundColor = rgbToHex(lighter2.r, lighter2.g, lighter2.b);
+  document.getElementById('colorPreviewLighter1').style.backgroundColor = rgbToHex(lighter1.r, lighter1.g, lighter1.b);
+  document.getElementById('colorPreview').style.backgroundColor = hex;
+  document.getElementById('colorPreviewDarker1').style.backgroundColor = rgbToHex(darker1.r, darker1.g, darker1.b);
+  document.getElementById('colorPreviewDarker2').style.backgroundColor = rgbToHex(darker2.r, darker2.g, darker2.b);
+  
+  // Update named colors
+  updateNamedColors(r, g, b);
+  
+  // Update all swatches
+  document.getElementById('hexSwatch').style.backgroundColor = hex;
+  document.getElementById('rgbSwatch').style.backgroundColor = hex;
+  document.getElementById('cmykSwatch').style.backgroundColor = hex;
+  document.getElementById('labSwatch').style.backgroundColor = hex;
+  document.getElementById('lchSwatch').style.backgroundColor = hex;
+  document.getElementById('hslSwatch').style.backgroundColor = hex;
+  document.getElementById('hsvSwatch').style.backgroundColor = hex;
+  document.getElementById('ncsSwatch').style.backgroundColor = hex;
+  document.getElementById('munsellSwatch').style.backgroundColor = hex;
+  document.getElementById('xyzSwatch').style.backgroundColor = hex;
+  
+  // Update conversions
+  document.getElementById('hexValue').textContent = hex.toUpperCase();
+  document.getElementById('rgbValue').textContent = `rgb(${r}, ${g}, ${b})`;
+  
+  const cmyk = rgbToCmyk(r, g, b);
+  document.getElementById('cmykValue').textContent = `${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%`;
+  
+  const lab = rgbToLab(r, g, b);
+  document.getElementById('labValue').textContent = `L:${Math.round(lab.L)}, A:${Math.round(lab.a)}, B:${Math.round(lab.b)}`;
+  
+  const lch = labToLch(lab.L, lab.a, lab.b);
+  document.getElementById('lchValue').textContent = `L:${Math.round(lch.L)}, C:${Math.round(lch.C)}, H:${Math.round(lch.h)}°`;
+  
+  const hsl = rgbToHsl(r, g, b);
+  document.getElementById('hslValue').textContent = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+  
+  const hsv = rgbToHsv(r, g, b);
+  document.getElementById('hsvValue').textContent = `hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`;
+  
+  const ncs = rgbToNcs(lab);
+  document.getElementById('ncsValue').textContent = ncs;
+  
+  const pantone = findNearestPantone(r, g, b);
+  document.getElementById('pantoneValue').textContent = pantone.name;
+  document.getElementById('pantoneSwatch').style.backgroundColor = pantone.hex;
+  
+  const deltaE = calculateDeltaE2000(lab, rgbToLab(pantone.r, pantone.g, pantone.b));
+  document.getElementById('deltaEValue').textContent = deltaE.toFixed(2);
+  
+  const ral = findNearestRal(r, g, b);
+  document.getElementById('ralValue').textContent = ral.name;
+  document.getElementById('ralSwatch').style.backgroundColor = ral.hex;
+  
+  const munsell = labToMunsell(lab);
+  document.getElementById('munsellValue').textContent = munsell;
+  
+  const xyz = rgbToXyz(r, g, b);
+  document.getElementById('xyzValue').textContent = `X:${Math.round(xyz.X)}, Y:${Math.round(xyz.Y)}, Z:${Math.round(xyz.Z)}`;
+  
+  // Update input fields
+  document.getElementById('rInput').value = r;
+  document.getElementById('gInput').value = g;
+  document.getElementById('bInput').value = b;
+  document.getElementById('colorInput').value = hex.toUpperCase();
+}
+
+// Adjust brightness
+function adjustBrightness(r, g, b, amount) {
+  return {
+    r: Math.max(0, Math.min(255, r + amount)),
+    g: Math.max(0, Math.min(255, g + amount)),
+    b: Math.max(0, Math.min(255, b + amount))
+  };
+}
+
+// Update named colors grid
+function updateNamedColors(r, g, b) {
+  const lab1 = rgbToLab(r, g, b);
+  
+  // Calculate Delta E for all named colors
+  const colorsWithDelta = namedColors.map(color => {
+    const lab2 = rgbToLab(color.r, color.g, color.b);
+    const delta = calculateDeltaE2000(lab1, lab2);
+    return { ...color, delta };
+  });
+  
+  // Sort by Delta E and get top 10
+  const closestColors = colorsWithDelta
+    .sort((a, b) => a.delta - b.delta)
+    .slice(0, 10);
+  
+  // Display in grid
+  const grid = document.getElementById('namedColorsGrid');
+  grid.innerHTML = '';
+  
+  closestColors.forEach(color => {
+    const item = document.createElement('div');
+    item.className = 'named-color-item';
+    item.onclick = () => selectNamedColor(color.r, color.g, color.b);
+    
+    const swatch = document.createElement('div');
+    swatch.className = 'named-color-swatch';
+    swatch.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+    
+    const name = document.createElement('span');
+    name.className = 'named-color-name';
+    name.textContent = color.name;
+    
+    item.appendChild(swatch);
+    item.appendChild(name);
+    grid.appendChild(item);
+  });
+}
+
+// Select named color
+function selectNamedColor(r, g, b) {
+  currentRGB = { r, g, b };
+  updateAllConversions();
+}
+
+// Select preview color
+function selectPreviewColor(index) {
+  const previews = [
+    'colorPreviewLighter2',
+    'colorPreviewLighter1',
+    'colorPreview',
+    'colorPreviewDarker1',
+    'colorPreviewDarker2'
+  ];
+  
+  // Remove selected class from all
+  previews.forEach(id => {
+    document.getElementById(id).classList.remove('color-preview--selected');
+  });
+  
+  // Add selected class to clicked
+  document.getElementById(previews[index]).classList.add('color-preview--selected');
+  
+  // Get the color from the clicked preview
+  const bgColor = document.getElementById(previews[index]).style.backgroundColor;
+  const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/i);
+  if (match) {
+    currentRGB = {
+      r: parseInt(match[1]),
+      g: parseInt(match[2]),
+      b: parseInt(match[3])
+    };
+    updateAllConversions();
+  }
+}
+
+// Color conversion functions
+function rgbToHex(r, g, b) {
+  return '#' + [r, g, b].map(x => {
+    const hex = x.toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+  }).join('');
+}
+
+function hexToRgb(hex) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : { r: 0, g: 0, b: 0 };
+}
+
+function rgbToCmyk(r, g, b) {
+  let c = 1 - (r / 255);
+  let m = 1 - (g / 255);
+  let y = 1 - (b / 255);
+  let k = Math.min(c, Math.min(m, y));
+  
+  c = (c - k) / (1 - k) || 0;
+  m = (m - k) / (1 - k) || 0;
+  y = (y - k) / (1 - k) || 0;
+  
+  return {
+    c: Math.round(c * 100),
+    m: Math.round(m * 100),
+    y: Math.round(y * 100),
+    k: Math.round(k * 100)
+  };
+}
+
+function rgbToLab(r, g, b) {
+  let [lr, lg, lb] = [r, g, b].map(x => {
+    x = x / 255;
+    return x > 0.04045 ? Math.pow((x + 0.055) / 1.055, 2.4) : x / 12.92;
+  });
+  
+  lr = lr * 100;
+  lg = lg * 100;
+  lb = lb * 100;
+  
+  let x = lr * 0.4124 + lg * 0.3576 + lb * 0.1805;
+  let y = lr * 0.2126 + lg * 0.7152 + lb * 0.0722;
+  let z = lr * 0.0193 + lg * 0.1192 + lb * 0.9505;
+  
+  x /= 95.047;
+  y /= 100;
+  z /= 108.883;
+  
+  [x, y, z] = [x, y, z].map(v => v > 0.008856 ? Math.pow(v, 1/3) : (7.787 * v) + 16/116);
+  
+  return {
+    L: (116 * y) - 16,
+    a: 500 * (x - y),
+    b: 200 * (y - z)
+  };
+}
+
+function labToLch(L, a, b) {
+  const C = Math.sqrt(a * a + b * b);
+  const h = Math.atan2(b, a) * 180 / Math.PI;
+  return { L, C, h: h < 0 ? h + 360 : h };
+}
+
+function rgbToHsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
+  
+  if (max === min) {
+    h = s = 0;
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      case b: h = ((r - g) / d + 4) / 6; break;
+    }
+  }
+  
+  return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+}
+
+function rgbToHsv(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h, s, v = max;
+  const d = max - min;
+  s = max === 0 ? 0 : d / max;
+  
+  if (max === min) {
+    h = 0;
+  } else {
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      case b: h = ((r - g) / d + 4) / 6; break;
+    }
+  }
+  
+  return { h: Math.round(h * 360), s: Math.round(s * 100), v: Math.round(v * 100) };
+}
+
+function rgbToXyz(r, g, b) {
+  let [lr, lg, lb] = [r, g, b].map(x => {
+    x = x / 255;
+    return x > 0.04045 ? Math.pow((x + 0.055) / 1.055, 2.4) : x / 12.92;
+  });
+  
+  return {
+    X: (lr * 41.24 + lg * 35.76 + lb * 18.05),
+    Y: (lr * 21.26 + lg * 71.52 + lb * 7.22),
+    Z: (lr * 1.93 + lg * 11.92 + lb * 95.05)
+  };
+}
+
+function rgbToNcs(lab) {
+  // Simplified NCS approximation
+  const L = lab.L;
+  const C = Math.sqrt(lab.a * lab.a + lab.b * lab.b);
+  const h = Math.atan2(lab.b, lab.a) * 180 / Math.PI;
+  
+  const blackness = Math.round((100 - L) / 2);
+  const chromaticness = Math.round(C / 1.5);
+  const hueAngle = h < 0 ? h + 360 : h;
+  
+  let hueCode = '';
+  if (hueAngle < 45) hueCode = 'Y' + Math.round(hueAngle / 45 * 90) + 'R';
+  else if (hueAngle < 90) hueCode = 'R' + Math.round((hueAngle - 45) / 45 * 90) + 'Y';
+  else if (hueAngle < 135) hueCode = 'Y' + Math.round((hueAngle - 90) / 45 * 90) + 'G';
+  else if (hueAngle < 180) hueCode = 'G' + Math.round((hueAngle - 135) / 45 * 90) + 'Y';
+  else if (hueAngle < 225) hueCode = 'G' + Math.round((hueAngle - 180) / 45 * 90) + 'B';
+  else if (hueAngle < 270) hueCode = 'B' + Math.round((hueAngle - 225) / 45 * 90) + 'G';
+  else if (hueAngle < 315) hueCode = 'B' + Math.round((hueAngle - 270) / 45 * 90) + 'R';
+  else hueCode = 'R' + Math.round((hueAngle - 315) / 45 * 90) + 'B';
+  
+  const s = blackness > 0 ? 'S' : 'N';
+  return `${s} ${String(chromaticness).padStart(2, '0')}${String(blackness).padStart(2, '0')}-${hueCode}`;
+}
+
+function labToMunsell(lab) {
+  // Simplified Munsell approximation
+  const L = lab.L;
+  const C = Math.sqrt(lab.a * lab.a + lab.b * lab.b);
+  const h = Math.atan2(lab.b, lab.a) * 180 / Math.PI;
+  
+  const value = Math.round(L / 10);
+  const chroma = Math.round(C / 2);
+  
+  let hue = '';
+  const hueAngle = h < 0 ? h + 360 : h;
+  if (hueAngle < 36) hue = '5R';
+  else if (hueAngle < 72) hue = '5YR';
+  else if (hueAngle < 108) hue = '5Y';
+  else if (hueAngle < 144) hue = '5GY';
+  else if (hueAngle < 180) hue = '5G';
+  else if (hueAngle < 216) hue = '5BG';
+  else if (hueAngle < 252) hue = '5B';
+  else if (hueAngle < 288) hue = '5PB';
+  else if (hueAngle < 324) hue = '5P';
+  else hue = '5RP';
+  
+  return `${hue} ${Math.min(value, 10)}/${Math.min(chroma, 20)}`;
+}
+
+function findNearestPantone(r, g, b) {
+  let minDelta = Infinity;
+  let nearest = pantoneColors[0];
+  
+  const lab1 = rgbToLab(r, g, b);
+  
+  pantoneColors.forEach(color => {
+    const lab2 = rgbToLab(color.r, color.g, color.b);
+    const delta = calculateDeltaE2000(lab1, lab2);
+    if (delta < minDelta) {
+      minDelta = delta;
+      nearest = color;
+    }
+  });
+  
+  return nearest;
+}
+
+function findNearestRal(r, g, b) {
+  let minDelta = Infinity;
+  let nearest = ralColors[0];
+  
+  const lab1 = rgbToLab(r, g, b);
+  
+  ralColors.forEach(color => {
+    const lab2 = rgbToLab(color.r, color.g, color.b);
+    const delta = calculateDeltaE2000(lab1, lab2);
+    if (delta < minDelta) {
+      minDelta = delta;
+      nearest = color;
+    }
+  });
+  
+  return nearest;
+}
+
+// Delta E calculations
+function calculateDeltaE2000(lab1, lab2) {
+  const L1 = lab1.L, a1 = lab1.a, b1 = lab1.b;
+  const L2 = lab2.L, a2 = lab2.a, b2 = lab2.b;
+  
+  const Lbar = (L1 + L2) / 2;
+  const C1 = Math.sqrt(a1 * a1 + b1 * b1);
+  const C2 = Math.sqrt(a2 * a2 + b2 * b2);
+  const Cbar = (C1 + C2) / 2;
+  
+  let a1prime = a1 + a1 / 2 * (1 - Math.sqrt(Math.pow(Cbar, 7) / (Math.pow(Cbar, 7) + Math.pow(25, 7))));
+  let a2prime = a2 + a2 / 2 * (1 - Math.sqrt(Math.pow(Cbar, 7) / (Math.pow(Cbar, 7) + Math.pow(25, 7))));
+  
+  const C1prime = Math.sqrt(a1prime * a1prime + b1 * b1);
+  const C2prime = Math.sqrt(a2prime * a2prime + b2 * b2);
+  const Cbarprime = (C1prime + C2prime) / 2;
+  
+  let h1prime = Math.atan2(b1, a1prime) * 180 / Math.PI;
+  if (h1prime < 0) h1prime += 360;
+  let h2prime = Math.atan2(b2, a2prime) * 180 / Math.PI;
+  if (h2prime < 0) h2prime += 360;
+  
+  const Hbarprime = Math.abs(h1prime - h2prime) > 180 ? (h1prime + h2prime + 360) / 2 : (h1prime + h2prime) / 2;
+  
+  const T = 1 - 0.17 * Math.cos((Hbarprime - 30) * Math.PI / 180) +
+            0.24 * Math.cos(2 * Hbarprime * Math.PI / 180) +
+            0.32 * Math.cos((3 * Hbarprime + 6) * Math.PI / 180) -
+            0.20 * Math.cos((4 * Hbarprime - 63) * Math.PI / 180);
+  
+  let deltaHprime;
+  if (Math.abs(h2prime - h1prime) <= 180) {
+    deltaHprime = h2prime - h1prime;
+  } else if (h2prime - h1prime > 180) {
+    deltaHprime = h2prime - h1prime - 360;
+  } else {
+    deltaHprime = h2prime - h1prime + 360;
+  }
+  
+  const deltaLprime = L2 - L1;
+  const deltaCprime = C2prime - C1prime;
+  const deltaHprime2 = 2 * Math.sqrt(C1prime * C2prime) * Math.sin(deltaHprime * Math.PI / 360);
+  
+  const SL = 1 + (0.015 * Math.pow(Lbar - 50, 2)) / Math.sqrt(20 + Math.pow(Lbar - 50, 2));
+  const SC = 1 + 0.045 * Cbarprime;
+  const SH = 1 + 0.015 * Cbarprime * T;
+  
+  const RT = -2 * Math.sqrt(Math.pow(Cbarprime, 7) / (Math.pow(Cbarprime, 7) + Math.pow(25, 7))) *
+             Math.sin(60 * Math.exp(-Math.pow((Hbarprime - 275) / 25, 2)) * Math.PI / 180);
+  
+  const deltaE = Math.sqrt(
+    Math.pow(deltaLprime / SL, 2) +
+    Math.pow(deltaCprime / SC, 2) +
+    Math.pow(deltaHprime2 / SH, 2) +
+    RT * (deltaCprime / SC) * (deltaHprime2 / SH)
+  );
+  
+  return deltaE;
+}
+
+function calculateDeltaE1994(lab1, lab2) {
+  const deltaL = lab1.L - lab2.L;
+  const deltaC = Math.sqrt(lab1.a * lab1.a + lab1.b * lab1.b) - Math.sqrt(lab2.a * lab2.a + lab2.b * lab2.b);
+  const deltaH = Math.sqrt(
+    Math.pow(lab1.a - lab2.a, 2) + 
+    Math.pow(lab1.b - lab2.b, 2) - 
+    Math.pow(deltaC, 2)
+  );
+  
+  const C1 = Math.sqrt(lab1.a * lab1.a + lab1.b * lab1.b);
+  const SL = 1;
+  const SC = 1 + 0.045 * C1;
+  const SH = 1 + 0.015 * C1;
+  
+  return Math.sqrt(
+    Math.pow(deltaL / SL, 2) +
+    Math.pow(deltaC / SC, 2) +
+    Math.pow(deltaH / SH, 2)
+  );
+}
+
+function calculateDeltaE1976(lab1, lab2) {
+  return Math.sqrt(
+    Math.pow(lab1.L - lab2.L, 2) +
+    Math.pow(lab1.a - lab2.a, 2) +
+    Math.pow(lab1.b - lab2.b, 2)
+  );
+}
+
+// Input handlers
+function handleColorInput() {
+  const input = document.getElementById('colorInput').value.trim();
+  
+  if (input.startsWith('#')) {
+    const rgb = hexToRgb(input);
+    currentRGB = rgb;
+    updateAllConversions();
+  } else if (input.startsWith('rgb')) {
+    const match = input.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/i);
+    if (match) {
+      currentRGB = { r: parseInt(match[1]), g: parseInt(match[2]), b: parseInt(match[3]) };
+      updateAllConversions();
+    }
+  } else {
+    // Try color name
+    const tempDiv = document.createElement('div');
+    tempDiv.style.color = input;
+    document.body.appendChild(tempDiv);
+    const computed = window.getComputedStyle(tempDiv).color;
+    document.body.removeChild(tempDiv);
+    
+    const match = computed.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/i);
+    if (match) {
+      currentRGB = { r: parseInt(match[1]), g: parseInt(match[2]), b: parseInt(match[3]) };
+      updateAllConversions();
+    }
+  }
+}
+
+function handleRGBInput() {
+  const r = parseInt(document.getElementById('rInput').value) || 0;
+  const g = parseInt(document.getElementById('gInput').value) || 0;
+  const b = parseInt(document.getElementById('bInput').value) || 0;
+  
+  currentRGB = { 
+    r: Math.max(0, Math.min(255, r)), 
+    g: Math.max(0, Math.min(255, g)), 
+    b: Math.max(0, Math.min(255, b)) 
+  };
+  
+  updateAllConversions();
+}
+
+// Distance calculator
+function calculateDistance() {
+  const colorAHex = document.getElementById('colorAInput').value.trim();
+  const colorBHex = document.getElementById('colorBInput').value.trim();
+  
+  const rgbA = hexToRgb(colorAHex);
+  const rgbB = hexToRgb(colorBHex);
+  
+  document.getElementById('colorAPreview').style.backgroundColor = colorAHex;
+  document.getElementById('colorBPreview').style.backgroundColor = colorBHex;
+  document.getElementById('comparisonA').style.backgroundColor = colorAHex;
+  document.getElementById('comparisonB').style.backgroundColor = colorBHex;
+  
+  const labA = rgbToLab(rgbA.r, rgbA.g, rgbA.b);
+  const labB = rgbToLab(rgbB.r, rgbB.g, rgbB.b);
+  
+  const deltaE2000 = calculateDeltaE2000(labA, labB);
+  const deltaE1994 = calculateDeltaE1994(labA, labB);
+  const deltaE1976 = calculateDeltaE1976(labA, labB);
+  
+  document.getElementById('deltaE2000').textContent = deltaE2000.toFixed(2);
+  document.getElementById('deltaE1994').textContent = deltaE1994.toFixed(2);
+  document.getElementById('deltaE1976').textContent = deltaE1976.toFixed(2);
+  
+  const matchQuality = document.getElementById('matchQuality');
+  matchQuality.className = 'match-quality';
+  
+  if (deltaE2000 < 1) {
+    matchQuality.textContent = 'Excellent Match (Imperceptible)';
+    matchQuality.classList.add('match-excellent');
+  } else if (deltaE2000 < 2) {
+    matchQuality.textContent = 'Good Match';
+    matchQuality.classList.add('match-good');
+  } else if (deltaE2000 < 5) {
+    matchQuality.textContent = 'Acceptable Match';
+    matchQuality.classList.add('match-acceptable');
+  } else {
+    matchQuality.textContent = 'Poor Match (Needs Correction)';
+    matchQuality.classList.add('match-poor');
+  }
+}
+
+// Copy to clipboard
+function copyToClipboard(elementId) {
+  const text = document.getElementById(elementId).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(() => {
+      btn.textContent = originalText;
+    }, 1500);
+  });
+}
+
+// FAQ accordion
+function initFAQ() {
+  const questions = document.querySelectorAll('.faq-question');
+  
+  questions.forEach(question => {
+    question.addEventListener('click', function() {
+      const answer = this.nextElementSibling;
+      const icon = this.querySelector('.faq-icon');
+      const isOpen = answer.classList.contains('faq-answer--visible');
+      
+      // Close all
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('faq-answer--visible'));
+      document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('faq-icon--open'));
+      document.querySelectorAll('.faq-question').forEach(q => q.setAttribute('aria-expanded', 'false'));
+      
+      // Open clicked if it was closed
+      if (!isOpen) {
+        answer.classList.add('faq-answer--visible');
+        icon.classList.add('faq-icon--open');
+        this.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+}
+</script>
+
+</BaseLayout>

@@ -1,0 +1,798 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Fabric GSM Converter | Industry-Grade Textile Weight Calculator";
+const pageDescription = "Free fabric GSM converter tool. Convert GSM to oz/yd², classify fabric weight, calculate shrinkage, and roll weight. Industry-standard reference tables for textile professionals.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Fabric GSM Converter",
+  "description": "Industry-grade fabric GSM converter with weight classification, shrinkage calculation, and roll weight calculator for textile professionals.",
+  "url": "https://sdfltd.com/tools/gsm-converter",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "provider": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<style>
+  .gsm-page {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    min-height: auto;
+    padding: 0;
+    margin: 0;
+  }
+
+  .gsm-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .gsm-container--pull-up {
+    margin-top: -18rem;
+  }
+
+  .gsm-container--no-margin {
+    margin: 0;
+  }
+
+  .gsm-section--pull-up {
+    margin-top: -20rem;
+  }
+
+  .gsm-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid #dc2626;
+  }
+
+  .gsm-section--hero {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .gsm-section--hero-only {
+    padding: 0;
+    margin: 0;
+  }
+
+  .gsm-section--no-border {
+    border-bottom: none;
+  }
+
+  .gsm-section--no-top-padding {
+    padding-top: 0;
+  }
+
+  .section-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 200;
+    color: #fff;
+    margin-bottom: 0;
+    line-height: 1.2;
+  }
+
+  .page-subtitle {
+    font-size: 0.95rem;
+    color: #fff;
+    max-width: 600px;
+    line-height: 1.2;
+    margin: 0 auto 0 auto;
+  }
+
+  .hero-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    margin: 0;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .section-title--center {
+    text-align: center;
+  }
+
+  .converter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background-color: #000;
+    border: 1px solid #dc2626;
+  }
+
+  .converter-cell {
+    background-color: #000;
+    padding: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .form-input,
+  .form-select {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #dc2626;
+    min-height: 48px;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  .form-input:focus,
+  .form-select:focus {
+    outline: none;
+    border-color: #dc2626;
+  }
+
+  .form-helper {
+    font-size: 0.75rem;
+    color: #fff;
+    margin-top: 0.5rem;
+  }
+
+  .calc-card {
+    background-color: #000;
+    border: 1px solid #dc2626;
+    padding: 2rem;
+    max-width: 600px;
+  }
+
+  .result-box {
+    display: none;
+    padding: 1.5rem;
+    border: 1px solid #dc2626;
+    background-color: #000;
+  }
+
+  .result-box--with-margin {
+    margin-top: 1.5rem;
+    max-width: 600px;
+  }
+
+  .result-box--visible {
+    display: block;
+  }
+
+  .result-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-value {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-sub {
+    font-size: 0.9rem;
+    color: #fff;
+  }
+
+  .result-note {
+    font-size: 0.8rem;
+    color: #fff;
+    margin-top: 0.5rem;
+  }
+
+  .formula-note {
+    font-size: 0.8rem;
+    color: #fff;
+    margin-top: 1rem;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gsm-table {
+    min-width: 600px;
+  }
+
+  .gsm-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #000;
+    border: 1px solid #dc2626;
+  }
+
+  .gsm-table th {
+    border: 1px solid #dc2626;
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #000;
+  }
+
+  .gsm-table td {
+    border: 1px solid #dc2626;
+    padding: 1rem;
+    color: #fff;
+  }
+
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    min-height: 44px;
+    font-family: inherit;
+  }
+
+  .faq-question:hover {
+    color: #fff;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: transform 0.2s;
+    color: #fff;
+  }
+
+  .faq-icon--open {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    display: none;
+    padding-bottom: 1.5rem;
+  }
+
+  .faq-answer--visible {
+    display: block;
+  }
+
+  .faq-answer p {
+    font-size: 0.95rem;
+    color: #fff;
+    line-height: 1.8;
+  }
+
+  .cta-section {
+    text-align: center;
+  }
+
+  .cta-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .cta-text {
+    color: #fff;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background-color: #dc2626;
+    color: #fff;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    min-height: 44px;
+    min-width: 44px;
+    border: 1px solid #dc2626;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .cta-button:hover {
+    background-color: #000;
+    color: #dc2626;
+  }
+
+  @media (max-width: 768px) {
+    .converter-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .gsm-section {
+      padding: 3rem 0;
+    }
+
+    .calc-card {
+      padding: 1.5rem;
+    }
+
+    .hero-section {
+      padding: 1.5rem 0;
+    }
+
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+    }
+
+    .form-input,
+    .form-select {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gsm-container {
+      padding: 0 1rem;
+    }
+
+    .page-title {
+      font-size: 1.75rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+    }
+
+    .hero-section {
+      padding: 1rem 0;
+    }
+
+    .calc-card {
+      padding: 1rem;
+    }
+
+    .converter-cell {
+      padding: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .result-value {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .page-title {
+      font-size: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1rem;
+    }
+
+    .gsm-container {
+      padding: 0 0.75rem;
+    }
+
+    .calc-card {
+      padding: 0.75rem;
+    }
+  }
+</style>
+
+<div class="gsm-page">
+
+  <!-- HERO + CONVERTER COMBINED -->
+  <div class="gsm-container hero-section">
+    <span class="section-label">Industry Tool · Free · No Signup</span>
+    <h1 class="page-title">Fabric GSM Converter</h1>
+    <p class="page-subtitle">Professional textile weight calculator. Convert GSM to oz/yd², classify fabric weight, calculate shrinkage, and roll weight for accurate textile production planning.</p>
+    <h2 class="section-title">GSM ↔ OZ/YD² Converter</h2>
+    <div class="converter-grid">
+      <div class="converter-cell">
+        <label class="form-label" for="gsm-input">GSM (g/m²)</label>
+        <input type="number" id="gsm-input" class="form-input" placeholder="Enter GSM" min="0" step="0.1" />
+        <p class="form-helper">Grams per square meter</p>
+      </div>
+      <div class="converter-cell">
+        <label class="form-label" for="oz-input">OZ/YD²</label>
+        <input type="number" id="oz-input" class="form-input" placeholder="Enter oz/yd²" min="0" step="0.01" />
+        <p class="form-helper">Ounces per square yard</p>
+      </div>
+    </div>
+    <p class="formula-note">Conversion formula: 1 GSM = 0.0294935 oz/yd² | 1 oz/yd² = 33.9057 GSM</p>
+    
+    <h2 class="section-title">Fabric Weight Classifier</h2>
+    <div class="calc-card">
+      <div class="form-group">
+        <label class="form-label" for="classifier-input">Enter GSM Value</label>
+        <input type="number" id="classifier-input" class="form-input" placeholder="Enter GSM" min="0" step="0.1" />
+      </div>
+      <div id="classifier-result" class="result-box">
+        <p class="result-label">Fabric Category</p>
+        <p id="category-name" class="result-value"></p>
+        <p id="category-range" class="result-sub"></p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Roll Weight Calculator</h2>
+    <div class="calc-card">
+      <div class="form-group">
+        <label class="form-label" for="roll-gsm">Fabric GSM (g/m²)</label>
+        <input type="number" id="roll-gsm" class="form-input" placeholder="Enter GSM" min="0" step="0.1" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="roll-width">Fabric Width (inches)</label>
+        <input type="number" id="roll-width" class="form-input" placeholder="Enter width in inches" min="0" step="0.1" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="roll-length">Roll Length (meters)</label>
+        <input type="number" id="roll-length" class="form-input" placeholder="Enter length in meters" min="0" step="0.1" />
+      </div>
+      <div id="roll-result" class="result-box">
+        <p class="result-label">Total Roll Weight</p>
+        <p id="roll-weight" class="result-value"></p>
+        <p class="result-note">Kilograms</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Shrinkage Adjusted GSM Calculator</h2>
+    <div class="converter-grid">
+      <div class="converter-cell">
+        <label class="form-label" for="prewash-gsm">Pre-wash GSM</label>
+        <input type="number" id="prewash-gsm" class="form-input" placeholder="Enter pre-wash GSM" min="0" step="0.1" />
+      </div>
+      <div class="converter-cell">
+        <label class="form-label" for="shrinkage-percent">Shrinkage Percentage (%)</label>
+        <input type="number" id="shrinkage-percent" class="form-input" placeholder="Enter shrinkage %" min="0" max="100" step="0.1" />
+      </div>
+    </div>
+    <div id="shrinkage-result" class="result-box calc-card">
+      <p class="result-label">Post-wash GSM</p>
+      <p id="postwash-gsm" class="result-value"></p>
+      <p class="result-note">After accounting for fabric shrinkage</p>
+    </div>
+  </div>
+
+  <!-- FABRIC TYPE REFERENCE TABLE -->
+  <section class="gsm-section gsm-section--no-border">
+    <div class="gsm-container">
+      <h2 class="section-title">Fabric Type GSM Reference Table</h2>
+      <div class="table-container">
+        <table class="gsm-table">
+          <thead>
+            <tr>
+              <th>Fabric Type</th>
+              <th>GSM Range</th>
+              <th>Common Uses</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Chiffon</td><td>30-70</td><td>Evening wear, scarves, lingerie</td></tr>
+            <tr><td>Georgette</td><td>40-80</td><td>Blouses, dresses, saris</td></tr>
+            <tr><td>Lawn</td><td>60-100</td><td>Summer dresses, handkerchiefs</td></tr>
+            <tr><td>Voile</td><td>50-90</td><td>Curtains, blouses, dresses</td></tr>
+            <tr><td>Poplin</td><td>80-120</td><td>Shirts, dresses, sportswear</td></tr>
+            <tr><td>Oxford</td><td>120-180</td><td>Button-down shirts, casual wear</td></tr>
+            <tr><td>Twill</td><td>150-250</td><td>Pants, jackets, suits</td></tr>
+            <tr><td>Canvas</td><td>200-400</td><td>Bags, workwear, upholstery</td></tr>
+            <tr><td>Denim</td><td>200-450</td><td>Jeans, jackets, workwear</td></tr>
+            <tr><td>Fleece</td><td>180-350</td><td>Jackets, blankets, activewear</td></tr>
+            <tr><td>Terry</td><td>250-450</td><td>Towels, bathrobes, spa wear</td></tr>
+            <tr><td>Interlock</td><td>140-220</td><td>T-shirts, underwear, activewear</td></tr>
+            <tr><td>Single Jersey</td><td>120-200</td><td>T-shirts, casual wear, leggings</td></tr>
+            <tr><td>Double Jersey</td><td>180-280</td><td>Polo shirts, dresses, sportswear</td></tr>
+            <tr><td>Rib</td><td>150-250</td><td>Cuffs, collars, necklines</td></tr>
+            <tr><td>Lycra Blend</td><td>160-280</td><td>Activewear, swimwear, form-fitting garments</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="gsm-section gsm-section--no-border">
+    <div class="gsm-container">
+      <h2 class="section-title section-title--center">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What is GSM in fabric?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>GSM stands for Grams per Square Meter. It measures the weight of fabric and indicates its thickness and density. Higher GSM means heavier, thicker fabric, while lower GSM indicates lighter, thinner material. GSM is the standard unit used globally in textile manufacturing.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>How do I convert GSM to oz/yd²?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>To convert GSM to ounces per square yard, multiply the GSM value by 0.0294935. For example, 200 GSM × 0.0294935 = 5.9 oz/yd². Our converter tool performs this calculation instantly for you.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What is considered lightweight fabric?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Lightweight fabric typically ranges from 80 to 150 GSM. This includes fabrics like poplin, voile, and lawn. Ultra lightweight fabrics are under 80 GSM (chiffon, georgette), while medium weight fabrics range from 150-250 GSM (twill, oxford).</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Why does fabric GSM change after washing?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Fabric shrinkage during washing causes fibers to compress, increasing the fabric density. This results in a higher GSM measurement after washing. Our shrinkage calculator helps you determine the post-wash GSM based on expected shrinkage percentage.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>How do I calculate fabric roll weight?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Roll weight is calculated using the formula: Weight (kg) = (GSM × Width in inches × Length in meters × 0.0254) / 1000. This accounts for converting inches to meters and grams to kilograms. Our roll weight calculator automates this calculation.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What GSM is best for t-shirts?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Standard t-shirts typically use 120-180 GSM fabric. Lightweight summer t-shirts may use 120-140 GSM, while premium heavyweight t-shirts use 160-200 GSM. Single jersey knit is most common at 140-180 GSM for a good balance of comfort and durability.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What is the GSM of denim fabric?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Denim GSM ranges from 200-450 depending on weight. Lightweight denim is 200-300 GSM (summer jeans), medium weight is 300-380 GSM (standard jeans), and heavyweight denim is 380-450 GSM (workwear, vintage styles).</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>How accurate is GSM measurement?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>GSM measurement accuracy depends on sampling method and equipment. Standard industry tolerance is ±5%. For accurate results, cut multiple samples from different areas of the fabric, measure with a calibrated GSM cutter and precision scale, and calculate the average.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Can I use GSM for woven and knit fabrics?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, GSM is used for both woven and knit fabrics. However, typical GSM ranges differ. Knit fabrics generally have lower GSM (120-280 for common knits) compared to woven fabrics of similar thickness due to their stretch and construction. Always reference fabric-specific GSM charts.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What is the difference between GSM and fabric thickness?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>GSM measures weight per area, while thickness measures physical depth. Two fabrics can have the same GSM but different thicknesses due to fiber density. For example, a tightly woven fabric may be thinner but same GSM as a loftier knit. GSM is more commonly used in textile specifications.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="gsm-section gsm-section--no-border">
+    <div class="gsm-container cta-section">
+      <h2 class="cta-title">Need Custom Fabric Manufacturing?</h2>
+      <p class="cta-text">We produce garments with your specified GSM and fabric requirements. Get a quote for your production.</p>
+      <a href="/contact" class="cta-button">Get Free Quote</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// GSM to OZ/YD² Conversion
+function convertGSMtoOZ() {
+  const gsmInput = document.getElementById('gsm-input');
+  const ozInput = document.getElementById('oz-input');
+  const gsm = parseFloat(gsmInput.value);
+  
+  if (!isNaN(gsm)) {
+    const oz = gsm * 0.0294935;
+    ozInput.value = oz.toFixed(3);
+  } else {
+    ozInput.value = '';
+  }
+}
+
+function convertOZtoGSM() {
+  const gsmInput = document.getElementById('gsm-input');
+  const ozInput = document.getElementById('oz-input');
+  const oz = parseFloat(ozInput.value);
+  
+  if (!isNaN(oz)) {
+    const gsm = oz * 33.9057;
+    gsmInput.value = gsm.toFixed(2);
+  } else {
+    gsmInput.value = '';
+  }
+}
+
+// Fabric Weight Classifier
+function classifyFabric() {
+  const input = document.getElementById('classifier-input');
+  const result = document.getElementById('classifier-result');
+  const categoryName = document.getElementById('category-name');
+  const categoryRange = document.getElementById('category-range');
+  const gsm = parseFloat(input.value);
+  
+  if (!isNaN(gsm) && gsm >= 0) {
+    result.classList.add('result-box--visible');
+    
+    if (gsm < 80) {
+      categoryName.textContent = 'Ultra Lightweight';
+      categoryRange.textContent = 'Under 80 GSM';
+    } else if (gsm >= 80 && gsm < 150) {
+      categoryName.textContent = 'Lightweight';
+      categoryRange.textContent = '80 - 150 GSM';
+    } else if (gsm >= 150 && gsm < 250) {
+      categoryName.textContent = 'Medium Weight';
+      categoryRange.textContent = '150 - 250 GSM';
+    } else if (gsm >= 250 && gsm < 400) {
+      categoryName.textContent = 'Heavyweight';
+      categoryRange.textContent = '250 - 400 GSM';
+    } else {
+      categoryName.textContent = 'Ultra Heavy';
+      categoryRange.textContent = 'Above 400 GSM';
+    }
+  } else {
+    result.classList.remove('result-box--visible');
+  }
+}
+
+// Shrinkage Adjusted GSM Calculator
+function calculateShrinkage() {
+  const prewashGSM = parseFloat(document.getElementById('prewash-gsm').value);
+  const shrinkagePercent = parseFloat(document.getElementById('shrinkage-percent').value);
+  const result = document.getElementById('shrinkage-result');
+  const postwashGSM = document.getElementById('postwash-gsm');
+  
+  if (!isNaN(prewashGSM) && !isNaN(shrinkagePercent) && prewashGSM >= 0 && shrinkagePercent >= 0) {
+    result.classList.add('result-box--visible');
+    const postGSM = prewashGSM * (1 + shrinkagePercent / 100);
+    postwashGSM.textContent = `${postGSM.toFixed(2)} GSM`;
+  } else {
+    result.classList.remove('result-box--visible');
+  }
+}
+
+// Roll Weight Calculator
+function calculateRollWeight() {
+  const gsm = parseFloat(document.getElementById('roll-gsm').value);
+  const width = parseFloat(document.getElementById('roll-width').value);
+  const length = parseFloat(document.getElementById('roll-length').value);
+  const result = document.getElementById('roll-result');
+  const rollWeight = document.getElementById('roll-weight');
+  
+  if (!isNaN(gsm) && !isNaN(width) && !isNaN(length) && gsm >= 0 && width >= 0 && length >= 0) {
+    result.classList.add('result-box--visible');
+    const weight = (gsm * width * length * 0.0254) / 1000;
+    rollWeight.textContent = `${weight.toFixed(3)} KG`;
+  } else {
+    result.classList.remove('result-box--visible');
+  }
+}
+
+// Initialize event listeners
+document.addEventListener('DOMContentLoaded', function() {
+  const gsmInput = document.getElementById('gsm-input');
+  const ozInput = document.getElementById('oz-input');
+  const classifierInput = document.getElementById('classifier-input');
+  const prewashGsm = document.getElementById('prewash-gsm');
+  const shrinkagePercent = document.getElementById('shrinkage-percent');
+  const rollGsm = document.getElementById('roll-gsm');
+  const rollWidth = document.getElementById('roll-width');
+  const rollLength = document.getElementById('roll-length');
+
+  if (gsmInput) gsmInput.addEventListener('input', convertGSMtoOZ);
+  if (ozInput) ozInput.addEventListener('input', convertOZtoGSM);
+  if (classifierInput) classifierInput.addEventListener('input', classifyFabric);
+  if (prewashGsm) prewashGsm.addEventListener('input', calculateShrinkage);
+  if (shrinkagePercent) shrinkagePercent.addEventListener('input', calculateShrinkage);
+  if (rollGsm) rollGsm.addEventListener('input', calculateRollWeight);
+  if (rollWidth) rollWidth.addEventListener('input', calculateRollWeight);
+  if (rollLength) rollLength.addEventListener('input', calculateRollWeight);
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', function() {
+      const answer = this.nextElementSibling;
+      const icon = this.querySelector('.faq-icon');
+      
+      if (answer.classList.contains('faq-answer--visible')) {
+        answer.classList.remove('faq-answer--visible');
+        icon.classList.remove('faq-icon--open');
+        icon.textContent = '+';
+      } else {
+        answer.classList.add('faq-answer--visible');
+        icon.classList.add('faq-icon--open');
+        icon.textContent = '−';
+      }
+    });
+  });
+});
+</script>
+
+</BaseLayout>

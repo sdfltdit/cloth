@@ -1,0 +1,275 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAge } from '../utils/companyAge';
+
+export const prerender = true;
+
+// Dynamic calculations
+const yearsSince1998 = getCompanyAge();
+const estimatedMonthlyProduction = 50000;
+const estimatedTreesPlanted = Math.floor((yearsSince1998 * 12 * estimatedMonthlyProduction) / 12);
+
+const pageTitle = "Sustainable Clothing Manufacturer | Green Manufacturing Bangladesh";
+const pageDescription = "SDF Clothing leads sustainable garment manufacturing  1 tree per 12 pieces, 8x water reuse, 100% fabric recycling, GOTS & LEED certified factory in Bangladesh.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+	<!-- JSON-LD Schema -->
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "AboutPage",
+		"name": "Sustainable Clothing Manufacturing",
+		"description": "SDF Clothing leads sustainable garment manufacturing  1 tree per 12 pieces, 8x water reuse, 100% fabric recycling, GOTS & LEED certified factory in Bangladesh.",
+		"url": "https://sdfclothing.com/sustainability",
+		"mainEntity": {
+			"@type": "Organization",
+			"name": "SDF Clothing",
+			"sustainability": "1 tree planted per 12 pieces manufactured, 8x water reuse system, 100% fabric recycling"
+		}
+	}
+	</script>
+
+	<!-- Hero Section -->
+	<section class="py-20 px-4">
+		<div class="container mx-auto max-w-4xl text-center">
+			<h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+				Sustainable Clothing Manufacturing  Our Green Commitment
+			</h1>
+			<p class="text-xl text-white/80 leading-relaxed">
+				SDF Clothing pioneers sustainable garment manufacturing in Bangladesh with science-based environmental programs. From tree plantation to water recycling, every production decision is made with the planet in mind.
+			</p>
+		</div>
+	</section>
+
+	<!-- Tree Plantation Program Section -->
+	<section class="py-20 px-4 bg-black">
+		<div class="container mx-auto max-w-6xl">
+			<div class="text-center mb-12">
+				<div class="text-5xl mb-4">🌳</div>
+				<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+					1 Tree Planted for Every 12 Pieces Manufactured
+				</h2>
+			</div>
+			<div class="grid md:grid-cols-2 gap-12 items-center">
+				<div>
+					<p class="text-white/80 mb-6 leading-relaxed">
+						Our tree plantation program is built on a precise environmental calculation. For every 12 garments we produce, we plant 1 tree  calculated based on the oxygen output required to offset the carbon footprint of manufacturing those pieces. This is not a marketing gimmick. It is a science-based formula that ties every production order directly to environmental restoration.
+					</p>
+					<div class="space-y-4">
+						<div class="flex items-start space-x-3">
+							<span class="text-[#cc0000] text-xl">🧮</span>
+							<div>
+								<h3 class="text-white font-semibold mb-1">Science-based Calculation</h3>
+								<p class="text-white/70 text-sm">Oxygen output vs. production carbon footprint analysis</p>
+							</div>
+						</div>
+						<div class="flex items-start space-x-3">
+							<span class="text-[#cc0000] text-xl">🌍</span>
+							<div>
+								<h3 class="text-white font-semibold mb-1">Local Impact</h3>
+								<p class="text-white/70 text-sm">Trees planted in Bangladesh's deforested regions</p>
+							</div>
+						</div>
+						<div class="flex items-start space-x-3">
+							<span class="text-[#cc0000] text-xl">📊</span>
+							<div>
+								<h3 class="text-white font-semibold mb-1">Transparent Reporting</h3>
+								<p class="text-white/70 text-sm">Every buyer's order contributes to real tree growth</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="snake-card p-8 text-center">
+					<div class="text-5xl font-bold text-[#cc0000] mb-4">{estimatedTreesPlanted.toLocaleString()}+</div>
+					<div class="text-xl text-white mb-2">Trees Planted Since 1998</div>
+					<div class="text-white/70">Based on our 1:12 tree-to-garment ratio</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Water Conservation Technology Section -->
+	<section class="py-20 px-4">
+		<div class="container mx-auto max-w-6xl">
+			<div class="text-center mb-12">
+				<div class="text-5xl mb-4">💧</div>
+				<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+					Every Drop Counts  8x Water Reuse System
+				</h2>
+			</div>
+			<div class="grid md:grid-cols-2 gap-12 items-center">
+				<div>
+					<p class="text-white/80 mb-6 leading-relaxed">
+						Our factory features an advanced water treatment and recycling system that reuses each water molecule up to 8 times before safe discharge. While the global garment industry averages single-use water consumption, SDF Clothing's closed-loop water system reduces our freshwater consumption by up to 87.5% compared to industry standard.
+					</p>
+					<div class="grid grid-cols-2 gap-6">
+						<div class="snake-card p-6 text-center">
+							<div class="text-3xl font-bold text-[#cc0000] mb-2">8x</div>
+							<div class="text-white font-medium">Water Reuse Per Cycle</div>
+						</div>
+						<div class="snake-card p-6 text-center">
+							<div class="text-3xl font-bold text-[#cc0000] mb-2">87.5%</div>
+							<div class="text-white font-medium">Freshwater Reduction</div>
+						</div>
+					</div>
+				</div>
+				<div class="space-y-4">
+					<div class="snake-card p-6">
+						<h3 class="text-lg font-semibold text-white mb-3">Zero Untreated Discharge</h3>
+						<p class="text-white/70">All water treated before environmental release</p>
+					</div>
+					<div class="snake-card p-6">
+						<h3 class="text-lg font-semibold text-white mb-3">On-site Treatment Plant</h3>
+						<p class="text-white/70">Full water treatment facility in our factory</p>
+					</div>
+					<div class="snake-card p-6">
+						<h3 class="text-lg font-semibold text-white mb-3">Industry Leading</h3>
+						<p class="text-white/70">87.5% less water than standard garment factories</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Fabric & Plastic Recycling Section -->
+	<section class="py-20 px-4 bg-black">
+		<div class="container mx-auto max-w-6xl">
+			<div class="text-center mb-12">
+				<div class="text-5xl mb-4">♻️</div>
+				<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+					Zero Waste Manufacturing  100% Material Recycling
+				</h2>
+			</div>
+			<div class="grid md:grid-cols-2 gap-12 items-center">
+				<div>
+					<p class="text-white/80 mb-6 leading-relaxed">
+						At SDF Clothing, no material goes to landfill. Every scrap of fabric waste is either recycled into new materials or repurposed. Plastic waste from packaging, trims, and accessories is collected and sent to certified recycling facilities. We operate a closed-loop manufacturing model where waste from one process becomes input for another.
+					</p>
+					<div class="space-y-4">
+						<div class="flex items-start space-x-3">
+							<span class="text-[#cc0000] text-xl">🧵</span>
+							<div>
+								<h3 class="text-white font-semibold mb-1">100% Fabric Scrap Recycled</h3>
+								<p class="text-white/70 text-sm">Every piece of fabric waste reused or repurposed</p>
+							</div>
+						</div>
+						<div class="flex items-start space-x-3">
+							<span class="text-[#cc0000] text-xl">📦</span>
+							<div>
+								<h3 class="text-white font-semibold mb-1">Plastic Waste Management</h3>
+								<p class="text-white/70 text-sm">Packaging and trim waste fully recycled</p>
+							</div>
+						</div>
+						<div class="flex items-start space-x-3">
+							<span class="text-[#cc0000] text-xl">🔄</span>
+							<div>
+								<h3 class="text-white font-semibold mb-1">Closed-Loop Production</h3>
+								<p class="text-white/70 text-sm">Waste-to-resource thinking at every stage</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="snake-card p-8 text-center">
+					<div class="text-5xl font-bold text-[#cc0000] mb-4">0%</div>
+					<div class="text-xl text-white mb-2">Waste to Landfill</div>
+					<div class="text-white/70">Complete material recycling program</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Certifications for Sustainability Section -->
+	<section class="py-20 px-4">
+		<div class="container mx-auto max-w-6xl">
+			<h2 class="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Certifications for Sustainability</h2>
+			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+				<div class="snake-card p-6 text-center">
+					<div class="text-3xl mb-3">🌿</div>
+					<h3 class="text-lg font-semibold text-white mb-2">GOTS</h3>
+					<p class="text-white/70 text-sm">Global Organic Textile Standard - Certified organic fiber processing from farm to final product</p>
+				</div>
+				<div class="snake-card p-6 text-center">
+					<div class="text-3xl mb-3">🔬</div>
+					<h3 class="text-lg font-semibold text-white mb-2">OEKO-TEX</h3>
+					<p class="text-white/70 text-sm">Standard 100 - Every component tested for harmful substances, safe for all skin types</p>
+				</div>
+				<div class="snake-card p-6 text-center">
+					<div class="text-3xl mb-3">🌱</div>
+					<h3 class="text-lg font-semibold text-white mb-2">LEED</h3>
+					<p class="text-white/70 text-sm">Green Building Certification - Sustainable factory operations and energy efficiency</p>
+				</div>
+				<div class="snake-card p-6 text-center">
+					<div class="text-3xl mb-3">💧</div>
+					<h3 class="text-lg font-semibold text-white mb-2">ZDHC</h3>
+					<p class="text-white/70 text-sm">Zero Discharge of Hazardous Chemicals - No toxic chemicals in production</p>
+				</div>
+				<div class="snake-card p-6 text-center">
+					<div class="text-3xl mb-3">✅</div>
+					<h3 class="text-lg font-semibold text-white mb-2">WRAP</h3>
+					<p class="text-white/70 text-sm">Worldwide Responsible Accredited Production - 12 principles of ethical manufacturing</p>
+				</div>
+				<div class="snake-card p-6 text-center">
+					<div class="text-3xl mb-3">👥</div>
+					<h3 class="text-lg font-semibold text-white mb-2">SA8000</h3>
+					<p class="text-white/70 text-sm">Social Accountability - Worker rights, living wages, ethical workplace standards</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- EU Compliance Ready Section -->
+	<section class="py-20 px-4 bg-black">
+		<div class="container mx-auto max-w-4xl">
+			<div class="snake-card p-8">
+				<h2 class="text-3xl md:text-4xl font-bold text-white mb-6 text-center">
+					Ready for EU 2026 Sustainability Regulations
+				</h2>
+				<p class="text-xl text-white/80 mb-8 text-center">
+					The EU's new Extended Producer Responsibility (EPR) rules and the ban on unsold garment destruction make sustainable manufacturing non-negotiable for European brands. SDF Clothing's practices  water recycling, fabric waste elimination, tree plantation, and certified organic production  mean your brand is already compliant when you source from us.
+				</p>
+				<div class="grid md:grid-cols-2 gap-6">
+					<div class="text-center">
+						<div class="text-3xl mb-3">🇪🇺</div>
+						<h3 class="text-lg font-semibold text-white mb-2">EPR Compliant</h3>
+						<p class="text-white/70 text-sm">Extended Producer Responsibility ready</p>
+					</div>
+					<div class="text-center">
+						<div class="text-3xl mb-3">🚫</div>
+						<h3 class="text-lg font-semibold text-white mb-2">No Destruction Policy</h3>
+						<p class="text-white/70 text-sm">Zero unsold garment destruction</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section class="py-20 px-4">
+		<div class="container mx-auto max-w-4xl text-center">
+			<div class="snake-card p-12">
+				<h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+					Partner with a Truly Sustainable Clothing Manufacturer
+				</h2>
+				<p class="text-xl text-white/80 mb-8">
+					Join brands that choose environmental responsibility without compromising on quality or price.
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<a 
+						href="/contact" 
+						class="bg-[#cc0000] text-white px-8 py-4  text-lg font-semibold hover:bg-[#aa0000] transition-all transform hover:scale-105 min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
+					>
+						Get a Quote
+					</a>
+					<a
+						href="/contact"
+						class="border border-[#cc0000] text-[#cc0000] px-8 py-4  text-lg font-semibold hover:bg-[#cc0000] hover:text-white transition-all min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
+					>
+						Download Our Sustainability Report
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</BaseLayout>

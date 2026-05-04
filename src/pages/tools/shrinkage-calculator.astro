@@ -1,0 +1,853 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Fabric Shrinkage Calculator | Industry-Grade Textile Shrinkage Tool";
+const pageDescription = "Free fabric shrinkage calculator tool. Calculate warp, weft, relaxation, and total shrinkage percentages. Pattern cutting allowances, finished measurements, and buyer tolerance checks for textile professionals.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Fabric Shrinkage Calculator",
+  "description": "Industry-grade fabric shrinkage calculator with warp, weft, relaxation, and total shrinkage calculations, pattern cutting allowances, and buyer tolerance checks for textile professionals.",
+  "url": "https://sdfltd.com/tools/shrinkage-calculator",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "provider": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<style>
+  .shrinkage-page {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    min-height: auto;
+    padding: 0;
+    margin: 0;
+  }
+
+  .shrinkage-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .shrinkage-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid #dc2626;
+  }
+
+  .shrinkage-section--no-border {
+    border-bottom: none;
+  }
+
+  .hero-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    margin: 0;
+  }
+
+  .section-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 200;
+    color: #fff;
+    margin-bottom: 0;
+    line-height: 1.2;
+  }
+
+  .page-subtitle {
+    font-size: 0.95rem;
+    color: #fff;
+    max-width: 600px;
+    line-height: 1.2;
+    margin: 0 auto 0 auto;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .section-title--center {
+    text-align: center;
+  }
+
+  .input-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background-color: #000;
+    border: 1px solid #dc2626;
+  }
+
+  .input-cell {
+    background-color: #000;
+    padding: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .form-input,
+  .form-select {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #dc2626;
+    min-height: 48px;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  .form-input:focus,
+  .form-select:focus {
+    outline: none;
+    border-color: #dc2626;
+  }
+
+  .form-helper {
+    font-size: 0.75rem;
+    color: #fff;
+    margin-top: 0.5rem;
+  }
+
+  .calc-btn {
+    width: auto;
+    max-width: 300px;
+    background-color: #dc2626;
+    color: #fff;
+    padding: 1rem 3rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    min-height: 44px;
+    min-width: 44px;
+    border: 1px solid #dc2626;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .calc-btn:hover {
+    background-color: #000;
+    color: #dc2626;
+  }
+
+  .result-box {
+    display: none;
+    padding: 2rem;
+    border: 1px solid #dc2626;
+    background-color: #000;
+    margin-top: 2rem;
+  }
+
+  .result-box--visible {
+    display: block;
+  }
+
+  .result-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background-color: #000;
+    border: 1px solid #dc2626;
+  }
+
+  .result-cell {
+    background-color: #000;
+    padding: 1.5rem;
+  }
+
+  .result-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-value {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-sub {
+    font-size: 0.9rem;
+    color: #fff;
+  }
+
+  .result-note {
+    font-size: 0.8rem;
+    color: #fff;
+    margin-top: 0.5rem;
+  }
+
+  .pass-fail {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+
+  .pass-fail--pass {
+    color: #22c55e;
+  }
+
+  .pass-fail--fail {
+    color: #dc2626;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .shrinkage-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #000;
+    border: 1px solid #dc2626;
+    min-width: 600px;
+  }
+
+  .shrinkage-table th {
+    border: 1px solid #dc2626;
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #000;
+  }
+
+  .shrinkage-table td {
+    border: 1px solid #dc2626;
+    padding: 1rem;
+    color: #fff;
+  }
+
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    min-height: 44px;
+    font-family: inherit;
+  }
+
+  .faq-question:hover {
+    color: #fff;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: transform 0.2s;
+    color: #fff;
+  }
+
+  .faq-icon--open {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    display: none;
+    padding-bottom: 1.5rem;
+  }
+
+  .faq-answer--visible {
+    display: block;
+  }
+
+  .faq-answer p {
+    font-size: 0.95rem;
+    color: #fff;
+    line-height: 1.8;
+  }
+
+  .cta-section {
+    text-align: center;
+  }
+
+  .cta-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .cta-text {
+    color: #fff;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background-color: #dc2626;
+    color: #fff;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    min-height: 44px;
+    min-width: 44px;
+    border: 1px solid #dc2626;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .cta-button:hover {
+    background-color: #000;
+    color: #dc2626;
+  }
+
+  @media (max-width: 768px) {
+    .input-grid,
+    .result-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .shrinkage-section {
+      padding: 3rem 0;
+    }
+
+    .hero-section {
+      padding: 1.5rem 0;
+    }
+
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+    }
+
+    .form-input,
+    .form-select {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .shrinkage-container {
+      padding: 0 1rem;
+    }
+
+    .page-title {
+      font-size: 1.75rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+    }
+
+    .hero-section {
+      padding: 1rem 0;
+    }
+
+    .input-cell,
+    .result-cell {
+      padding: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .result-value {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<div class="shrinkage-page">
+
+  <!-- HERO + INPUTS COMBINED -->
+  <div class="shrinkage-container hero-section">
+    <span class="section-label">Industry Tool · Free · No Signup</span>
+    <h1 class="page-title">Fabric Shrinkage Calculator</h1>
+    <p class="page-subtitle">Professional textile shrinkage calculator. Calculate warp, weft, relaxation, and total shrinkage percentages with pattern cutting allowances and buyer tolerance verification.</p>
+    
+    <h2 class="section-title">Fabric Specifications</h2>
+    <div class="input-grid">
+      <div class="input-cell">
+        <div class="form-group">
+          <label class="form-label" for="fabric-type">Fabric Type</label>
+          <select id="fabric-type" class="form-select">
+            <option value="">Select fabric type</option>
+            <option value="cotton">Cotton</option>
+            <option value="polyester">Polyester</option>
+            <option value="wool">Wool</option>
+            <option value="silk">Silk</option>
+            <option value="linen">Linen</option>
+            <option value="viscose">Viscose</option>
+            <option value="nylon">Nylon</option>
+            <option value="cotton-polyester">Cotton-Polyester Blend</option>
+            <option value="cotton-elastane">Cotton-Elastane Blend</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="construction">Construction</label>
+          <select id="construction" class="form-select">
+            <option value="">Select construction</option>
+            <option value="woven">Woven</option>
+            <option value="knit">Knit</option>
+            <option value="denim">Denim</option>
+            <option value="terry">Terry</option>
+            <option value="fleece">Fleece</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="gsm">GSM (g/m²)</label>
+          <input type="number" id="gsm" class="form-input" placeholder="Enter GSM" min="0" step="1" />
+          <p class="form-helper">Grams per square meter</p>
+        </div>
+      </div>
+      <div class="input-cell">
+        <div class="form-group">
+          <label class="form-label" for="yarn-count">Yarn Count</label>
+          <input type="number" id="yarn-count" class="form-input" placeholder="Enter yarn count" min="0" step="0.1" />
+          <p class="form-helper">e.g., 30, 40, 60 (Ne or Tex)</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="weave-type">Weave Type</label>
+          <select id="weave-type" class="form-select">
+            <option value="">Select weave type</option>
+            <option value="plain">Plain</option>
+            <option value="twill">Twill</option>
+            <option value="satin">Satin</option>
+            <option value="rib">Rib</option>
+            <option value="interlock">Interlock</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="buyer-tolerance">Buyer Tolerance (%)</label>
+          <input type="number" id="buyer-tolerance" class="form-input" placeholder="e.g., 5" min="0" max="20" step="0.5" value="5" />
+          <p class="form-helper">Maximum acceptable shrinkage</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Wash Conditions</h2>
+    <div class="input-grid">
+      <div class="input-cell">
+        <div class="form-group">
+          <label class="form-label" for="temperature">Wash Temperature</label>
+          <select id="temperature" class="form-select">
+            <option value="">Select temperature</option>
+            <option value="30">30°C</option>
+            <option value="40">40°C</option>
+            <option value="60">60°C</option>
+            <option value="90">90°C</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="wash-cycles">Number of Wash Cycles</label>
+          <input type="number" id="wash-cycles" class="form-input" placeholder="e.g., 5" min="1" max="50" step="1" value="5" />
+          <p class="form-helper">Standard test: 5 cycles</p>
+        </div>
+      </div>
+      <div class="input-cell">
+        <div class="form-group">
+          <label class="form-label" for="drying-method">Drying Method</label>
+          <select id="drying-method" class="form-select">
+            <option value="">Select drying method</option>
+            <option value="tumble-dry">Tumble Dry</option>
+            <option value="line-dry">Line Dry</option>
+            <option value="flat-dry">Flat Dry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="initial-measurement">Initial Measurement (cm)</label>
+          <input type="number" id="initial-measurement" class="form-input" placeholder="e.g., 100" min="0" step="0.1" />
+          <p class="form-helper">Original fabric dimension</p>
+        </div>
+      </div>
+    </div>
+
+    <button id="calculate-btn" class="calc-btn">Calculate Shrinkage</button>
+
+    <div id="result-box" class="result-box">
+      <h2 class="section-title">Shrinkage Results</h2>
+      <div class="result-grid">
+        <div class="result-cell">
+          <p class="result-label">Warp Shrinkage</p>
+          <p id="warp-shrinkage" class="result-value"></p>
+          <p class="result-sub">Lengthwise shrinkage</p>
+        </div>
+        <div class="result-cell">
+          <p class="result-label">Weft Shrinkage</p>
+          <p id="weft-shrinkage" class="result-value"></p>
+          <p class="result-sub">Widthwise shrinkage</p>
+        </div>
+        <div class="result-cell">
+          <p class="result-label">Relaxation Shrinkage</p>
+          <p id="relaxation-shrinkage" class="result-value"></p>
+          <p class="result-sub">Residual stress release</p>
+        </div>
+        <div class="result-cell">
+          <p class="result-label">Total Shrinkage</p>
+          <p id="total-shrinkage" class="result-value"></p>
+          <p class="result-sub">Combined effect</p>
+        </div>
+        <div class="result-cell">
+          <p class="result-label">Pattern Allowance - Warp</p>
+          <p id="pattern-allowance-warp" class="result-value"></p>
+          <p class="result-sub">Add to pattern length</p>
+        </div>
+        <div class="result-cell">
+          <p class="result-label">Pattern Allowance - Weft</p>
+          <p id="pattern-allowance-weft" class="result-value"></p>
+          <p class="result-sub">Add to pattern width</p>
+        </div>
+        <div class="result-cell">
+          <p class="result-label">Finished Measurement</p>
+          <p id="finished-measurement" class="result-value"></p>
+          <p class="result-sub">After wash</p>
+        </div>
+        <div class="result-cell">
+          <p class="result-label">Buyer Tolerance Check</p>
+          <p id="tolerance-check" class="pass-fail"></p>
+          <p class="result-sub">Vs. specified tolerance</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHRINKAGE REFERENCE TABLE -->
+  <section class="shrinkage-section shrinkage-section--no-border">
+    <div class="shrinkage-container">
+      <h2 class="section-title section-title--center">Industry Standard Shrinkage Limits</h2>
+      <div class="table-container">
+        <table class="shrinkage-table">
+          <thead>
+            <tr>
+              <th>Fabric Type</th>
+              <th>Warp Shrinkage Limit</th>
+              <th>Weft Shrinkage Limit</th>
+              <th>Total Shrinkage Limit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>100% Cotton (Woven)</td><td>3-5%</td><td>2-4%</td><td>5-8%</td></tr>
+            <tr><td>100% Cotton (Knit)</td><td>5-8%</td><td>4-6%</td><td>8-12%</td></tr>
+            <tr><td>Polyester/Cotton Blend</td><td>2-4%</td><td>1-3%</td><td>3-6%</td></tr>
+            <tr><td>100% Polyester</td><td>1-2%</td><td>0.5-1.5%</td><td>1.5-3%</td></tr>
+            <tr><td>100% Wool</td><td>4-6%</td><td>3-5%</td><td>6-10%</td></tr>
+            <tr><td>100% Silk</td><td>2-4%</td><td>1-3%</td><td>3-6%</td></tr>
+            <tr><td>Linen</td><td>3-5%</td><td>2-4%</td><td>5-8%</td></tr>
+            <tr><td>Viscose/Rayon</td><td>4-7%</td><td>3-6%</td><td>7-12%</td></tr>
+            <tr><td>Nylon</td><td>1-3%</td><td>0.5-2%</td><td>1.5-4%</td></tr>
+            <tr><td>Denim</td><td>3-5%</td><td>2-4%</td><td>5-8%</td></tr>
+            <tr><td>Fleece</td><td>5-8%</td><td>4-7%</td><td>9-13%</td></tr>
+            <tr><td>Terry Towel</td><td>6-10%</td><td>5-8%</td><td>10-15%</td></tr>
+            <tr><td>Cotton-Elastane Blend</td><td>4-6%</td><td>3-5%</td><td>6-10%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="shrinkage-section shrinkage-section--no-border">
+    <div class="shrinkage-container">
+      <h2 class="section-title section-title--center">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What is fabric shrinkage and why does it occur?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Fabric shrinkage is the reduction in fabric dimensions after washing or drying. It occurs due to fiber relaxation, release of residual stresses from manufacturing processes, and fiber swelling when exposed to water and heat. Different fibers have different shrinkage characteristics based on their chemical structure and processing history.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What is the difference between warp and weft shrinkage?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Warp shrinkage occurs along the lengthwise direction of fabric (parallel to the selvage), while weft shrinkage occurs across the width (perpendicular to the selvage). These values often differ due to differences in yarn tension during weaving, yarn construction, and fabric structure. Warp shrinkage is typically higher than weft shrinkage in most woven fabrics.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>How do I calculate pattern cutting allowance for shrinkage?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Pattern cutting allowance is calculated by adding the expected shrinkage percentage to your finished garment measurements. For example, if you need a 50cm finished length and expect 5% shrinkage, cut the pattern at 52.5cm (50cm × 1.05). Always add a small safety margin of 0.5-1% to account for testing variations. Our calculator automatically computes these allowances for both warp and weft directions.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What is relaxation shrinkage?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Relaxation shrinkage occurs when fibers and yarns release internal stresses accumulated during manufacturing processes like spinning, weaving, and finishing. This type of shrinkage happens primarily during the first wash and is irreversible. It's distinct from swelling shrinkage caused by fiber water absorption. Understanding relaxation shrinkage is crucial for accurate pattern making.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>How does wash temperature affect fabric shrinkage?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Higher wash temperatures generally increase shrinkage, especially for natural fibers like cotton and wool. Hot water (60-90°C) can cause significant fiber swelling and relaxation, leading to higher shrinkage percentages. Cold or warm washes (30-40°C) minimize shrinkage. Synthetic fibers like polyester show minimal temperature-dependent shrinkage. Always follow care label instructions to control shrinkage.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What is the standard test method for measuring shrinkage?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>The industry standard test methods include AATCC 135, ISO 6330, and ISO 3759. These involve marking a specified dimension (usually 50cm × 50cm) on the fabric, washing it according to specified conditions (temperature, detergent, cycle), drying it, and remeasuring. Shrinkage is calculated as ((original - final) / original) × 100%. Multiple wash cycles (typically 5-10) are used to determine total shrinkage.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>How does drying method affect shrinkage?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Tumble drying with heat typically causes the highest shrinkage due to combined heat and mechanical agitation. Line drying allows fibers to relax under tension, often resulting in less shrinkage but potential lengthwise stretching. Flat drying minimizes distortion and provides the most controlled shrinkage. For accurate shrinkage testing, use the same drying method specified in the buyer's requirements or care label.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What are acceptable shrinkage limits for garment production?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Acceptable shrinkage limits vary by fabric type and buyer requirements. Generally, woven cotton should stay under 5% total shrinkage, knits under 8-10%, and synthetics under 3%. Premium buyers may require tighter tolerances (2-3% for woven cotton). Always confirm specific tolerance requirements with your buyer before production. Our calculator includes a tolerance check feature to verify compliance.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Can fabric shrinkage be prevented or reduced?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Shrinkage can be reduced through pre-shrinking treatments like sanforizing (compressive shrinkage), heat setting for synthetics, and mechanical relaxation. However, it cannot be completely eliminated. The best approach is to account for expected shrinkage in pattern making and communicate clear care instructions to end consumers. Pre-washing fabric before cutting is also effective for small-scale production.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>How do different fabric constructions affect shrinkage?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Knit fabrics typically have higher shrinkage than woven fabrics due to their looped structure and higher elasticity. Tight weaves like plain weave show less shrinkage than loose weaves like satin. Fabric weight (GSM) also correlates with shrinkageheavier fabrics often shrink more due to greater yarn mass and stress. Denim and canvas have controlled shrinkage due to their tight construction and finishing processes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="shrinkage-section shrinkage-section--no-border">
+    <div class="shrinkage-container cta-section">
+      <h2 class="cta-title">Need Custom Fabric Manufacturing?</h2>
+      <p class="cta-text">We produce garments with controlled shrinkage and precise specifications. Get a quote for your production.</p>
+      <a href="/contact" class="cta-button">Get Free Quote</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// Shrinkage calculation based on fabric type, construction, and wash conditions
+const shrinkageFactors = {
+  fabricType: {
+    cotton: { warp: 4.5, weft: 3.5, relaxation: 2.0 },
+    polyester: { warp: 1.5, weft: 1.0, relaxation: 0.5 },
+    wool: { warp: 5.0, weft: 4.0, relaxation: 2.5 },
+    silk: { warp: 3.0, weft: 2.0, relaxation: 1.5 },
+    linen: { warp: 4.0, weft: 3.0, relaxation: 2.0 },
+    viscose: { warp: 5.5, weft: 4.5, relaxation: 3.0 },
+    nylon: { warp: 2.0, weft: 1.5, relaxation: 1.0 },
+    'cotton-polyester': { warp: 3.0, weft: 2.0, relaxation: 1.5 },
+    'cotton-elastane': { warp: 5.0, weft: 4.0, relaxation: 2.5 }
+  },
+  construction: {
+    woven: { multiplier: 1.0 },
+    knit: { multiplier: 1.3 },
+    denim: { multiplier: 0.9 },
+    terry: { multiplier: 1.4 },
+    fleece: { multiplier: 1.35 }
+  },
+  temperature: {
+    30: { multiplier: 0.7 },
+    40: { multiplier: 0.85 },
+    60: { multiplier: 1.0 },
+    90: { multiplier: 1.2 }
+  },
+  dryingMethod: {
+    'tumble-dry': { multiplier: 1.2 },
+    'line-dry': { multiplier: 0.9 },
+    'flat-dry': { multiplier: 0.85 }
+  }
+};
+
+function calculateShrinkage() {
+  const fabricType = document.getElementById('fabric-type').value;
+  const construction = document.getElementById('construction').value;
+  const temperature = document.getElementById('temperature').value;
+  const dryingMethod = document.getElementById('drying-method').value;
+  const washCycles = parseInt(document.getElementById('wash-cycles').value) || 5;
+  const buyerTolerance = parseFloat(document.getElementById('buyer-tolerance').value) || 5;
+  const initialMeasurement = parseFloat(document.getElementById('initial-measurement').value) || 100;
+
+  if (!fabricType || !construction || !temperature || !dryingMethod) {
+    alert('Please fill in all required fields');
+    return;
+  }
+
+  const baseShrinkage = shrinkageFactors.fabricType[fabricType];
+  const constructionMultiplier = shrinkageFactors.construction[construction].multiplier;
+  const tempMultiplier = shrinkageFactors.temperature[temperature].multiplier;
+  const dryingMultiplier = shrinkageFactors.dryingMethod[dryingMethod].multiplier;
+
+  // Calculate cycle factor (more cycles = more shrinkage, but diminishing returns)
+  const cycleFactor = Math.min(1 + (washCycles - 5) * 0.05, 1.5);
+
+  // Calculate shrinkage percentages
+  const warpShrinkage = baseShrinkage.warp * constructionMultiplier * tempMultiplier * dryingMultiplier * cycleFactor;
+  const weftShrinkage = baseShrinkage.weft * constructionMultiplier * tempMultiplier * dryingMultiplier * cycleFactor;
+  const relaxationShrinkage = baseShrinkage.relaxation * constructionMultiplier;
+  const totalShrinkage = Math.sqrt(warpShrinkage * warpShrinkage + weftShrinkage * weftShrinkage);
+
+  // Calculate pattern allowances (in cm based on initial measurement)
+  const patternAllowanceWarp = (initialMeasurement * warpShrinkage / 100).toFixed(2);
+  const patternAllowanceWeft = (initialMeasurement * weftShrinkage / 100).toFixed(2);
+
+  // Calculate finished measurement
+  const finishedMeasurement = (initialMeasurement * (1 - totalShrinkage / 100)).toFixed(2);
+
+  // Check against buyer tolerance
+  const toleranceCheck = totalShrinkage <= buyerTolerance;
+
+  // Display results
+  document.getElementById('warp-shrinkage').textContent = warpShrinkage.toFixed(2) + '%';
+  document.getElementById('weft-shrinkage').textContent = weftShrinkage.toFixed(2) + '%';
+  document.getElementById('relaxation-shrinkage').textContent = relaxationShrinkage.toFixed(2) + '%';
+  document.getElementById('total-shrinkage').textContent = totalShrinkage.toFixed(2) + '%';
+  document.getElementById('pattern-allowance-warp').textContent = patternAllowanceWarp + ' cm';
+  document.getElementById('pattern-allowance-weft').textContent = patternAllowanceWeft + ' cm';
+  document.getElementById('finished-measurement').textContent = finishedMeasurement + ' cm';
+
+  const toleranceElement = document.getElementById('tolerance-check');
+  toleranceElement.textContent = toleranceCheck ? 'PASS' : 'FAIL';
+  toleranceElement.className = 'pass-fail ' + (toleranceCheck ? 'pass-fail--pass' : 'pass-fail--fail');
+
+  document.getElementById('result-box').classList.add('result-box--visible');
+}
+
+// Initialize event listeners
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('calculate-btn').addEventListener('click', calculateShrinkage);
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', function() {
+      const answer = this.nextElementSibling;
+      const icon = this.querySelector('.faq-icon');
+      
+      if (answer.classList.contains('faq-answer--visible')) {
+        answer.classList.remove('faq-answer--visible');
+        icon.classList.remove('faq-icon--open');
+        icon.textContent = '+';
+      } else {
+        answer.classList.add('faq-answer--visible');
+        icon.classList.add('faq-icon--open');
+        icon.textContent = '−';
+      }
+    });
+  });
+});
+
+function toggleFAQ(button) {
+  const answer = button.nextElementSibling;
+  const icon = button.querySelector('.faq-icon');
+  
+  if (answer.classList.contains('faq-answer--visible')) {
+    answer.classList.remove('faq-answer--visible');
+    icon.classList.remove('faq-icon--open');
+    icon.textContent = '+';
+  } else {
+    answer.classList.add('faq-answer--visible');
+    icon.classList.add('faq-icon--open');
+    icon.textContent = '−';
+  }
+}
+</script>
+
+</BaseLayout>

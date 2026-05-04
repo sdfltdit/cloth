@@ -1,0 +1,273 @@
+---
+// MOQTable.astro
+
+const rows = [
+  { category: "Basic T-Shirts",          moq: "300 pcs", price: "$3.50 – $7.00",   lead: "14–18 days" },
+  { category: "Premium T-Shirts",        moq: "300 pcs", price: "$5.00 – $12.00",  lead: "16–21 days" },
+  { category: "Hoodies & Sweatshirts",   moq: "200 pcs", price: "$12.00 – $25.00", lead: "18–25 days" },
+  { category: "Polo Shirts",             moq: "300 pcs", price: "$6.00 – $15.00",  lead: "15–20 days" },
+  { category: "Dress Shirts",            moq: "200 pcs", price: "$10.00 – $30.00", lead: "20–28 days" },
+  { category: "Trousers & Pants",        moq: "200 pcs", price: "$12.00 – $35.00", lead: "20–28 days" },
+  { category: "Shorts",                  moq: "300 pcs", price: "$8.00 – $18.00",  lead: "14–18 days" },
+  { category: "Jackets & Outerwear",     moq: "100 pcs", price: "$25.00 – $60.00", lead: "25–35 days" },
+  { category: "Activewear / Sportswear", moq: "300 pcs", price: "$8.00 – $22.00",  lead: "16–22 days" },
+  { category: "Women's Dresses",         moq: "200 pcs", price: "$12.00 – $35.00", lead: "20–28 days" },
+];
+
+const discounts = [
+  { qty: "500+",   pct: "Lower Unit Price" },
+  { qty: "1,000+", pct: "Better Unit Price" },
+  { qty: "5,000+", pct: "Best Unit Price" },
+];
+---
+
+<section id="moq" aria-labelledby="moq-heading">
+  <div class="container">
+
+    <div class="section-header moq-header">
+      <div class="moq-header-icon">
+        <svg class="animated-box" width="48" height="48" viewBox="0 0 40 40" fill="none" stroke="#cc0000" stroke-width="2.5" aria-hidden="true">
+          <rect x="10" y="22" width="20" height="12" rx="1"/>
+          <rect x="13" y="17" width="20" height="12" rx="1"/>
+          <rect x="16" y="12" width="20" height="12" rx="1"/>
+        </svg>
+      </div>
+      <span class="section-label">MOQ &amp; Pricing</span>
+      <h2 id="moq-heading">Minimum Order Quantities</h2>
+      <p>Transparent pricing for all garment categories. All prices FOB Chittagong / Dhaka. Final quote depends on exact specs.</p>
+    </div>
+
+    <!-- Desktop Table -->
+    <div class="moq-table-wrap desktop-table">
+      <table class="moq-table" role="table" aria-label="MOQ and pricing by product category">
+        <thead>
+          <tr>
+            <th scope="col">Product Category</th>
+            <th scope="col">Min. Order</th>
+            <th scope="col">Price Range (USD)</th>
+            <th scope="col">Production Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <td>{r.category}</td>
+              <td>{r.moq}</td>
+              <td class="price-cell">{r.price}</td>
+              <td>{r.lead}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile Cards -->
+    <div class="mobile-cards" aria-label="MOQ and pricing cards">
+      {rows.map((r) => (
+        <div class="moq-card">
+          <div class="moq-card-title">{r.category}</div>
+          <div class="moq-card-details">
+            <div class="moq-card-item">
+              <span class="moq-card-label">Min. Order</span>
+              <span class="moq-card-value">{r.moq}</span>
+            </div>
+            <div class="moq-card-item">
+              <span class="moq-card-label">Price Range</span>
+              <span class="moq-card-value price-cell">{r.price}</span>
+            </div>
+            <div class="moq-card-item">
+              <span class="moq-card-label">Lead Time</span>
+              <span class="moq-card-value">{r.lead}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Volume pricing -->
+    <div class="discount-row" aria-label="Volume pricing tiers">
+      <div class="discount-label">Quantity-Based Pricing</div>
+      <div class="discount-tiers">
+        {discounts.map((d) => (
+          <div class="discount-tier">
+            <span class="tier-qty">{d.qty}</span>
+            <span class="tier-pct">{d.pct}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <p class="moq-note">* Higher quantities result in lower unit production cost. Production times apply when all materials are in-house.</p>
+
+  </div>
+</section>
+
+<style>
+  .moq-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+  }
+  .moq-header .accent-line {
+    display: none;
+  }
+  .moq-header-icon {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    filter: drop-shadow(0 0 12px rgba(204,0,0,0.4));
+  }
+  .animated-box {
+    stroke: #cc0000;
+  }
+
+  /* Desktop table */
+  .moq-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #1a1a1a;
+    margin-bottom: 0;
+  }
+  .moq-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    min-width: 700px;
+  }
+
+  @media (max-width: 639px) {
+    .moq-table {
+      min-width: 550px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .moq-table {
+      min-width: 450px;
+    }
+  }
+
+  @media (max-width: 374px) {
+    .moq-table {
+      min-width: 350px;
+    }
+  }
+  .moq-table th {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #666;
+    font-weight: 500;
+    padding: 1rem 1.25rem;
+    text-align: left;
+    white-space: nowrap;
+    background: #0a0a0a;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .moq-table td {
+    padding: 1rem 1.25rem;
+    color: #fff;
+    border-bottom: 1px solid #111;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .moq-table tr:last-child td { border-bottom: none; }
+  .moq-table tr:hover td { background: #0a0a0a; }
+  .moq-table td:first-child { color: #ddd; font-weight: 500; }
+  .price-cell { color: #fff !important; }
+
+  /* Mobile cards */
+  .mobile-cards { display: none; }
+  .moq-card {
+    border: 1px solid #1a1a1a;
+    border-top: none;
+    padding: 1rem 1.25rem;
+    background: #000;
+  }
+  .moq-card:first-child { border-top: 1px solid #1a1a1a; }
+  .moq-card:hover { background: #0a0a0a; }
+  .moq-card-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .moq-card-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .moq-card-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .moq-card-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #666;
+  }
+  .moq-card-value {
+    font-size: 0.82rem;
+    color: #fff;
+  }
+
+  /* Volume discounts */
+  .discount-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    border: 1px solid #1a1a1a;
+    border-top: none;
+    padding: 1.25rem;
+  }
+  .discount-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .discount-tiers {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .discount-tier {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #1a1a1a;
+    padding: 0.6rem 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .discount-tier:hover { border-color: #333; }
+  .tier-qty {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #666;
+  }
+  .tier-pct {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 0.25rem;
+  }
+  .moq-note {
+    font-size: 0.72rem;
+    color: #888;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .desktop-table { display: none; }
+    .mobile-cards { display: block; }
+    .discount-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .moq-card-details { grid-template-columns: 1fr 1fr; }
+  }
+</style>

@@ -1,0 +1,205 @@
+---
+// ProductsSection.astro
+
+const products = [
+  {
+    title: "Knitwear Manufacturing",
+    desc: "Expert knitwear production with circular knitting machines. T-shirts, hoodies, polo shirts, and performance apparel using premium yarns and sustainable processes.",
+    tags: ["T-Shirts", "Hoodies", "Polo Shirts", "Sweatshirts"],
+    icon: `<svg width="64" height="64" viewBox="0 0 40 40" fill="none" stroke="#FF2020" stroke-width="0.8" aria-hidden="true" class="hover-icon" style="filter: drop-shadow(0 0 6px #ff3333);"><path d="M8 12 L16 6 L20 12 L24 6 L32 12 L30 32 L10 32 Z"/><path d="M16 6 C16 9 18 12 20 12 C22 12 24 9 24 6"/></svg>`,
+  },
+  {
+    title: "Woven Apparel Production",
+    desc: "Precision woven manufacturing for shirts, trousers, jackets, and formal wear. Cutting and sewing expertise ensures consistent quality across large production runs.",
+    tags: ["Dress Shirts", "Trousers", "Jackets", "Formal Wear"],
+    icon: `<svg width="64" height="64" viewBox="0 0 40 40" fill="none" stroke="#FF2020" stroke-width="0.8" aria-hidden="true" class="hover-icon" style="filter: drop-shadow(0 0 6px #ff3333);"><rect x="6" y="12" width="28" height="20" rx="1"/><path d="M6 18 L34 18"/><path d="M14 12 L14 6 L26 6 L26 12"/></svg>`,
+  },
+  {
+    title: "Activewear & Sportswear",
+    desc: "Technical sportswear manufacturing with moisture-wicking fabrics and performance features. Ideal for athletic brands requiring innovative materials and construction techniques.",
+    tags: ["Gym Wear", "Yoga Apparel", "Athletic Wear", "Performance Gear"],
+    icon: `<svg width="64" height="64" viewBox="0 0 40 40" fill="none" stroke="#FF2020" stroke-width="0.8" aria-hidden="true" class="hover-icon" style="filter: drop-shadow(0 0 6px #ff3333);"><circle cx="20" cy="20" r="14"/><path d="M20 6 L20 34"/><path d="M6 20 L34 20"/><path d="M8 12 C12 16 28 16 32 12"/><path d="M8 28 C12 24 28 24 32 28"/></svg>`,
+  },
+];
+
+const categories = [
+  { emoji: "👔", label: "Men's Wear", sub: "Shirts, trousers, suits, jackets" },
+  { emoji: "👗", label: "Women's Wear", sub: "Dresses, skirts, blouses, jumpsuits" },
+  { emoji: "🧒", label: "Kids & Children", sub: "All ages, safe certified fabrics" },
+  { emoji: "🏫", label: "Uniforms & Specialty", sub: "Work uniforms, kids wear, sleepwear" },
+];
+---
+
+<section id="products" aria-labelledby="products-heading">
+  <div class="container">
+
+    <div style="margin-bottom:3.5rem;text-align:center;" class="section-header">
+      <div class="section-icon-wrapper" style="margin-bottom:1rem;">
+        <svg class="section-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#cc0000" stroke-width="1.5" style="animation: drawIn 0.8s ease-out;">
+          <path d="M6 2 L18 2 L18 22 L6 22 Z"/>
+          <path d="M8 6 L16 6"/>
+          <path d="M8 10 L16 10"/>
+          <path d="M8 14 L12 14"/>
+          <circle cx="15" cy="18" r="1" fill="#cc0000"/>
+        </svg>
+      </div>
+      <h2 id="products-heading" style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:200;color:#fff;margin-bottom:0.5rem;animation: fadeInUp 0.8s ease-out 0.2s both;">Private Label &amp; OEM Clothing Manufacturing</h2>
+      <p style="margin-top:1rem;max-width:520px;font-size:0.9rem;color:#fff;margin:0 auto;animation: fadeInUp 0.8s ease-out 0.4s both;">Expert garment manufacturing for fashion brands worldwide. From concept to delivery with quality assurance.</p>
+    </div>
+
+    <!-- 3 Main product cards -->
+    <div class="products-grid">
+      {products.map((p) => (
+        <div class="product-card">
+          <div class="product-icon" set:html={p.icon} />
+          <h3>{p.title}</h3>
+          <p>{p.desc}</p>
+          <div class="product-tags">
+            {p.tags.map((t) => <span class="tag">{t}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Category row -->
+    <div class="categories-row">
+      {categories.map((c) => (
+        <div class="category-item">
+          <span class="cat-emoji" aria-hidden="true">{c.emoji}</span>
+          <div>
+            <div class="cat-title">{c.label}</div>
+            <div class="cat-sub">{c.sub}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div style="text-align:center; padding: 1rem 0;">
+      <a href="/contact" style="display:inline-block; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#fff; background:#cc0000; padding:0.7rem 2rem; transition:background 0.25s; margin: 1.5rem 0;">View All 30+ Categories →</a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    margin-bottom: 1px;
+  }
+  .product-card {
+    background: #000;
+    padding: 1.5rem 1.25rem;
+    transition: background 0.2s;
+  }
+  .product-card:hover { background: #0a0a0a; }
+  .product-icon {
+    margin-bottom: 1.5rem;
+  }
+  .product-card h3 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+  .product-card p {
+    font-size: 0.82rem;
+    color: #fff;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .product-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    border: 1px solid #1a1a1a;
+    padding: 0.3rem 0.6rem;
+  }
+
+  /* Category row */
+  .categories-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    margin-top: 1px;
+  }
+  .category-item {
+    background: #000;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: background 0.2s;
+  }
+  .category-item:hover { background: #0a0a0a; }
+  .cat-emoji { font-size: 1.5rem; flex-shrink: 0; }
+  .cat-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+  }
+  .cat-sub {
+    font-size: 0.72rem;
+    color: #fff;
+    line-height: 1.4;
+  }
+
+  .hover-icon {
+    transition: stroke 0.2s ease;
+  }
+  .product-card:hover .hover-icon {
+    stroke: #666;
+  }
+
+  /* Section Header Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes drawIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .section-icon {
+    display: inline-block;
+  }
+
+  @media (max-width: 900px) {
+    .products-grid { grid-template-columns: 1fr; }
+    .categories-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 500px) {
+    .categories-row { grid-template-columns: 1fr; }
+  }
+</style>
