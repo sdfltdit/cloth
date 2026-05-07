@@ -2,10 +2,13 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   site: 'https://www.sdfltd.com',
-  output: "static",
+  output: "hybrid",
   compressHTML: true,
+
   integrations: [
     tailwind(), 
     sitemap({
@@ -97,10 +100,12 @@ export default defineConfig({
       }
     })
   ],
+
   build: {
     format: "directory",
     inlineStylesheets: 'always',
   },
+
   vite: {
     build: {
       minify: 'terser',
@@ -121,13 +126,17 @@ export default defineConfig({
       }
     }
   },
+
   image: {
     service: { entrypoint: 'astro/assets/services/sharp' },
   },
+
   markdown: {
     shikiConfig: {
       theme: 'github-dark-dimmed',
       wrap: true
     }
-  }
+  },
+
+  adapter: cloudflare()
 });
