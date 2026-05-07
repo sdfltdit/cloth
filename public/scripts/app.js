@@ -7,44 +7,6 @@
   'use strict';
 
   /* ============================================================
-     1. MOBILE MENU
-  ============================================================ */
-  function initMobileMenu() {
-    const toggle = document.getElementById('mobile-toggle');
-    const menu   = document.getElementById('mobile-menu');
-    if (!toggle || !menu) return;
-
-    toggle.addEventListener('click', function () {
-      const isOpen = menu.classList.toggle('open');
-      this.setAttribute('aria-expanded', isOpen);
-      // swap icon lines → X
-      const svg = this.querySelector('svg');
-      if (!svg) return;
-      svg.innerHTML = isOpen
-        ? '<line x1="4" y1="4" x2="18" y2="18" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><line x1="18" y1="4" x2="4" y2="18" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>'
-        : '<line x1="2" y1="6" x2="20" y2="6"/><line x1="2" y1="11" x2="20" y2="11"/><line x1="2" y1="16" x2="20" y2="16"/>';
-    });
-
-    // Close on outside click
-    document.addEventListener('click', function (e) {
-      if (!toggle.contains(e.target) && !menu.contains(e.target)) {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        const svg = toggle.querySelector('svg');
-        if (svg) svg.innerHTML = '<line x1="2" y1="6" x2="20" y2="6"/><line x1="2" y1="11" x2="20" y2="11"/><line x1="2" y1="16" x2="20" y2="16"/>';
-      }
-    });
-
-    // Close on link click
-    menu.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-
-  /* ============================================================
      2. FOOTER ACCORDION (mobile)
   ============================================================ */
   // Called from inline onclick in BaseLayout.astro — also attached via JS below
@@ -228,7 +190,6 @@
      INIT — run after DOM ready
   ============================================================ */
   function init() {
-    initMobileMenu();
     initFooterAccordion();
     initFAQ();
     initSectionAnimations();

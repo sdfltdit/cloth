@@ -40,7 +40,7 @@ export function generateBuyerConfirmationEmail(
   contactEmail: string,
   pdfUrl: string
 ): string {
-  const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://www.sdfltd.com';
+  const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://sdfltd.com';
 
   return `
 <!DOCTYPE html>

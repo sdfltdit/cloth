@@ -27,12 +27,12 @@ document.querySelectorAll('.index__faq-question').forEach(button => {
 let exitShown = false;
 document.addEventListener('mouseout', (e) => {
   if (e.clientY < 10 && !exitShown) {
-    document.getElementById('exit-banner').classList.add('index__exit-banner--visible');
-    exitShown = true;
+    const exitBanner = document.getElementById('exit-banner');
+    if (exitBanner) {
+      exitBanner.classList.add('index__exit-banner--visible');
+      exitShown = true;
+    }
   }
-});
-document.getElementById('exit-banner').querySelector('.index__btn').addEventListener('click', () => {
-  document.getElementById('exit-banner').classList.remove('index__exit-banner--visible');
 });
 
 // Sticky Bottom Bar (Mobile)
@@ -40,8 +40,10 @@ const stickyBar = document.getElementById('sticky-bar');
 let scrollShown = false;
 window.addEventListener('scroll', () => {
   if (window.scrollY > 500 && !scrollShown && window.innerWidth <= 768) {
-    stickyBar.classList.add('index__sticky-bar--visible');
-    scrollShown = true;
+    if (stickyBar) {
+      stickyBar.classList.add('index__sticky-bar--visible');
+      scrollShown = true;
+    }
   }
 });
 

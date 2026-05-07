@@ -329,7 +329,7 @@ fontSize: {
   },
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+16465356343",
+    "telephone": "+8801911733226",
     "contactType": "sales"
   }
 }

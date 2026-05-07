@@ -151,9 +151,6 @@ const pageDescription = "Request free clothing manufacturing samples from SDF Cl
 
 		<script>
 	(function(){
-	  const WEB3 = '6cdc0c73-5cd1-4d25-a4c8-562a46b623ae';
-	  const FCARRY = 'https://formcarry.com/s/46IEwVrAjO_';
-
 	  const pageLoadTime = Date.now();
 
 	  // Country data — inline
@@ -510,6 +507,95 @@ const pageDescription = "Request free clothing manufacturing samples from SDF Cl
 	    document.body.insertAdjacentHTML('beforeend',html);
 	  }
 
+	  async function submitToWorker(data) {
+  // PRIMARY — Web3Forms direct
+  try {
+    const formData = new FormData();
+    formData.append('access_key', '028983eb-bca7-4bbc-be4f-7db2873903aa');
+    formData.append('subject', `[SDF] New Sample Request — ${data.name || 'Unknown'}`);
+    formData.append('from_name', 'SDF Clothing Website');
+    formData.append('name',         data.name       || '');
+    formData.append('email',        data.email      || '');
+    formData.append('phone',        data.phone      || '');
+    formData.append('company',      data.company    || '');
+    formData.append('country',      data.country    || '');
+    formData.append('message',      data.details    || data.message || '');
+    formData.append('product_type', data.sampleType || '');
+    formData.append('quantity',     data.quantity   || '');
+    formData.append('fabric',       data.fabric     || '');
+    formData.append('firstName',    data.firstName  || '');
+    formData.append('lastName',     data.lastName   || '');
+    formData.append('_device',        data._device        || '');
+    formData.append('_location',      data._location      || '');
+    formData.append('_ip',            data._ip            || '');
+    formData.append('_reference_id',  data._reference_id  || '');
+    formData.append('_device_id',     data._device_id     || '');
+    formData.append('_screen',        data._screen        || '');
+    formData.append('_timezone',      data._timezone      || '');
+    formData.append('_language',      data._language      || '');
+
+    const r = await fetch(
+      'https://api.web3forms.com/submit',
+      { method: 'POST', body: formData }
+    );
+    const j = await r.json();
+    if (j.success === true) return true;
+  } catch {}
+
+  // BACKUP 1 — Forminit direct
+  try {
+    const r = await fetch('https://forminit.com/f/cfy9nydyv19', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name:         data.name       || '',
+        email:        data.email      || '',
+        phone:        data.phone      || '',
+        company:      data.company    || '',
+        country:      data.country    || '',
+        message:      data.details    || data.message || '',
+        product_type: data.sampleType || '',
+        _device:      data._device    || '',
+        _location:    data._location  || '',
+        _reference_id: data._reference_id || '',
+      }),
+    });
+    if (r.ok) return true;
+  } catch {}
+
+  // BACKUP 2 — Cloudflare Worker (EmailJS relay)
+  try {
+    const r = await fetch('https://sdf-email.boom3model.workers.dev/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        _form_type:     'sample',
+        name:           data.name       || '',
+        email:          data.email      || '',
+        phone:          data.phone      || '',
+        company:        data.company    || '',
+        country:        data.country    || '',
+        message:        data.details    || data.message || '',
+        product_type:   data.sampleType || '',
+        quantity:       data.quantity   || '',
+        fabric:         data.fabric     || '',
+        _device:        data._device        || '',
+        _location:      data._location      || '',
+        _ip:            data._ip            || '',
+        _reference_id:  data._reference_id  || '',
+        _device_id:     data._device_id     || '',
+        _screen:        data._screen        || '',
+        _timezone:      data._timezone      || '',
+        _language:      data._language      || '',
+      }),
+    });
+    const j = await r.json();
+    if (j.success === true) return true;
+  } catch {}
+
+  return false;
+}
+
 	  const form = document.getElementById('sampleRequest');
 	  if(!form) return;
 
@@ -602,30 +688,12 @@ const pageDescription = "Request free clothing manufacturing samples from SDF Cl
 	    data._language = deviceFingerprint.language;
 	    data.subject = 'New Sample Request — SDF Clothing';
 
-	    // Web3Forms
 	    let ok = false;
-	    try {
-	      const body = new FormData();
-	      body.append('access_key', WEB3);
-	      Object.entries(data).forEach(([k,v])=>body.append(k,v));
-	      const r = await fetch('https://api.web3forms.com/submit',{method:'POST',body});
-	      const j = await r.json();
-	      ok = j.success;
-	    } catch{}
+	    try { ok = await submitToWorker(data); } catch {}
 
-	    // Formcarry backup
-	    if(ok){
-	      fetch(FCARRY,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)}).catch(()=>{});
-	    } else {
-	      try{
-	        const r=await fetch(FCARRY,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
-	        ok=r.ok;
-	      }catch{}
-	    }
-
-	    if(btn){ btn.disabled=false; btn.textContent='Request Sample'; }
-	    if(ok){ form.reset(); showThanks(geo,device,fillDuration,referenceId,deviceId); }
-	    else{ alert('Something went wrong. Please WhatsApp us: wa.me/8801911733226'); }
+	    if (btn) { btn.disabled = false; btn.textContent = 'Request Sample'; }
+	    if (ok) { form.reset(); showThanks(geo, device, fillDuration, referenceId, deviceId); }
+	    else { alert('Something went wrong. Please WhatsApp us: wa.me/8801911733226'); }
 	  });
 	})();
 	</script>

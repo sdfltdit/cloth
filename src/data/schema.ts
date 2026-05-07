@@ -1,4 +1,4 @@
-export const SITE_URL = "https://www.sdfltd.com";
+export const SITE_URL = "https://sdfltd.com";
 
 export const schemaOrganization = {
   "@context": "https://schema.org",
