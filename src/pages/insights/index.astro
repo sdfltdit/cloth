@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+const pageTitle = "Industry Insights | SDF Clothing Manufacturing Blog";
+const pageDescription = "Industry insights on garment manufacturing, sourcing strategy, compliance, and sustainability for fashion brands. Updated regularly by SDF Clothing experts.";
+const canonicalUrl = "https://www.sdfltd.com/insights/";
+
+// Article data - 3 existing + 9 placeholders
+const articles = [
+  // Existing articles
+  {
+    date: "Dec 14, 2025",
+    category: "Manufacturing",
+    title: "Bangladesh Clothing Manufacturing Costs",
+    excerpt: "Real cost breakdown for international fashion brands sourcing from Bangladesh. Understand labor rates, material prices, factory overhead, and FOB pricing to plan your margins accurately.",
+    readTime: "10 min read",
+    slug: "/insights/manufacturing-costs",
+    isPlaceholder: false
+  },
+  {
+    date: "Nov 28, 2025",
+    category: "Compliance",
+    title: "EU Clothing Regulations 2026",
+    excerpt: "Comprehensive guide to EU clothing regulations taking effect in 2025–2026. Essential for fashion brands sourcing from Bangladesh — understand EPR, Ecodesign, and Digital Product Passport requirements.",
+    readTime: "12 min read",
+    slug: "/insights/eu-clothing-regulations-2026",
+    isPlaceholder: false
+  },
+  {
+    date: "Nov 15, 2025",
+    category: "Manufacturing",
+    title: "Bangladesh Production Lead Times",
+    excerpt: "Plan your inventory and product launches with realistic production timelines from Bangladesh's leading clothing manufacturer. Accurate lead times help you meet market windows and manage customer expectations.",
+    readTime: "8 min read",
+    slug: "/insights/clothing-manufacturing-lead-time",
+    isPlaceholder: false
+  },
+  // Placeholder articles
+  {
+    date: "Apr 15, 2026",
+    category: "Compliance",
+    title: "EU ESPR Compliance Timeline — What Brands Need to Know for 2027",
+    excerpt: "The European Sustainable Products Regulation begins enforcement in 2027. This analysis breaks down DPP requirements, manufacturer obligations, and brand preparation timelines for textile-specific implementation acts expected H2 2026.",
+    readTime: "12 min read",
+    slug: "#",
+    isPlaceholder: true
+  },
+  {
+    date: "Mar 28, 2026",
+    category: "Sourcing Strategy",
+    title: "China + 2: Why Smart Brands Are Diversifying Beyond Bangladesh and Vietnam",
+    excerpt: "Multi-region sourcing strategies have evolved beyond simple China-plus-one allocation. This analysis explores 60-30-10 distribution models, near-shoring economics, and how procurement teams build resilient apparel supply chains in 2026.",
+    readTime: "15 min read",
+    slug: "#",
+    isPlaceholder: true
+  },
+  {
+    date: "Mar 12, 2026",
+    category: "Sustainability",
+    title: "GOTS 7.0 vs OEKO-TEX vs GRS — A Practical Certification Guide",
+    excerpt: "Three certifications dominate sustainable textile manufacturing — but they cover different aspects of compliance. This guide explains what each certifies, when to require which, and how to verify authenticity.",
+    readTime: "10 min read",
+    slug: "#",
+    isPlaceholder: true
+  },
+  {
+    date: "Feb 24, 2026",
+    category: "Manufacturing",
+    title: "Understanding SAM, GSD, and Line Efficiency in Garment Production",
+    excerpt: "Standard Allowed Minute (SAM), General Sewing Data (GSD), and line efficiency metrics determine manufacturer capability and pricing. This technical guide explains how these operations metrics affect your sourcing decisions.",
+    readTime: "9 min read",
+    slug: "#",
+    isPlaceholder: true
+  },
+  {
+    date: "Feb 08, 2026",
+    category: "Compliance",
+    title: "UFLPA Cotton Origin Documentation — A Compliance Workflow",
+    excerpt: "The Uyghur Forced Labor Prevention Act has expanded enforcement in 2026. Brands shipping to USA need verifiable cotton origin documentation across the entire supply chain. This guide details the documentation workflow.",
+    readTime: "11 min read",
+    slug: "#",
+    isPlaceholder: true
+  },
+  {
+    date: "Jan 22, 2026",
+    category: "Industry News",
+    title: "Bangladesh LDC Graduation 2026 — What Changes for Apparel Brands",
+    excerpt: "Bangladesh graduates from Least Developed Country status in November 2026. The 3-year EBA transition period and trade implications are significant. Here's what brands need to plan for 2027-2028.",
+    readTime: "13 min read",
+    slug: "#",
+    isPlaceholder: true
+  },
+  {
+    date: "Jan 08, 2026",
+    category: "Manufacturing",
+    title: "AQL Inspection — A Practical Guide for Apparel Buyers",
+    excerpt: "ANSI/ASQ Z1.4 sampling standards govern quality acceptance for apparel production. This guide explains AQL levels, defect classification, and how to set inspection requirements that match your brand quality tier.",
+    readTime: "14 min read",
+    slug: "#",
+    isPlaceholder: true
+  },
+  {
+    date: "Dec 14, 2025",
+    category: "Sourcing Strategy",
+    title: "Negotiating Apparel Manufacturing Contracts — Multi-Year Pricing Strategies",
+    excerpt: "Procurement teams structure multi-year apparel agreements with index-linked pricing, volume commitments, and SLA frameworks. This analysis covers fixed pricing vs cotton-indexed structures and risk allocation.",
+    readTime: "16 min read",
+    slug: "#",
+    isPlaceholder: true
+  },
+  {
+    date: "Nov 30, 2025",
+    category: "Sustainability",
+    title: "Digital Product Passports for Textiles — Implementation Realities",
+    excerpt: "DPP infrastructure becomes mandatory for textiles in 2027. Manufacturers and brands face data architecture, traceability, and disclosure decisions now. Early adopter learnings from 2025-2026 pilots.",
+    readTime: "12 min read",
+    slug: "#",
+    isPlaceholder: true
+  }
+];
+
+// Get unique categories
+const categories = [...new Set(articles.map(a => a.category))];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDescription} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content="https://www.sdfltd.com/hero.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={pageDescription} />
+  <meta name="twitter:image" content="https://www.sdfltd.com/hero.webp" />
+  <link rel="canonical" href={canonicalUrl} />
+
+  <div style="background: #000; min-height: 100vh;">
+
+    <!-- Hero Section -->
+    <header style="padding: 4rem 1.5rem 3rem; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid #e00;">
+      <span style="font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: #e00; font-family: 'Inter', monospace; display: block; margin-bottom: 1rem;">INDUSTRY INSIGHTS</span>
+      <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; color: #fff; line-height: 1.1; margin-bottom: 1.25rem; letter-spacing: 0.01em;">
+        Industry Insights
+      </h1>
+      <p style="font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 760px; margin: 0;">
+        Analysis, technical guides, and industry perspectives on garment manufacturing, sustainability, sourcing strategy, and 2026-2027 regulatory shifts. Updated regularly.
+      </p>
+    </header>
+
+    <!-- Category Filter Bar -->
+    <div style="padding: 2rem 1.5rem; max-width: 1200px; margin: 0 auto;">
+      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;">
+        <button style="font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Inter', monospace; background: #e00; color: #fff; border: 1px solid #e00; padding: 0.5rem 1rem; cursor: pointer; transition: background 0.2s;">
+          All
+        </button>
+        {categories.map(category => (
+          <button style="font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Inter', monospace; background: transparent; color: #e00; border: 1px solid #e00; padding: 0.5rem 1rem; cursor: pointer; transition: background 0.2s, color 0.2s;">
+            {category}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Articles Grid -->
+    <div style="padding: 0 1.5rem 5rem; max-width: 1200px; margin: 0 auto;">
+      <div style="display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(255,255,255,0.1);">
+        {articles.map(article => (
+          <article style="background: #000; padding: 2rem; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.2s;">
+            <div style="margin-bottom: 1rem;">
+              <time style="font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Inter', monospace; color: rgba(255,255,255,0.6); display: block; margin-bottom: 0.5rem;">
+                {article.date}
+              </time>
+              <span style="font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; font-family: 'Inter', monospace; color: #e00; border: 1px solid #e00; padding: 0.25rem 0.75rem; display: inline-block;">
+                {article.category}
+              </span>
+            </div>
+            {article.isPlaceholder ? (
+              <h2 style="font-size: 1.25rem; font-weight: 600; color: #fff; line-height: 1.4; margin-bottom: 0.75rem; letter-spacing: 0.01em;">
+                {article.title}
+              </h2>
+            ) : (
+              <a href={article.slug} style="text-decoration: none;">
+                <h2 style="font-size: 1.25rem; font-weight: 600; color: #fff; line-height: 1.4; margin-bottom: 0.75rem; letter-spacing: 0.01em; transition: color 0.2s;">
+                  {article.title}
+                </h2>
+              </a>
+            )}
+            <p style="font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 1rem;">
+              {article.excerpt}
+            </p>
+            <div style="display: flex; align-items: center; gap: 1rem; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Inter', monospace; color: rgba(255,255,255,0.6);">
+              <span>{article.readTime}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Pagination -->
+      <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <button style="font-size: 0.8rem; color: #e00; background: transparent; border: none; cursor: pointer; padding: 0.5rem 1rem; transition: color 0.2s;" disabled>
+          Previous
+        </button>
+        <span style="font-size: 0.9rem; color: #fff; font-weight: 500;">1</span>
+        <button style="font-size: 0.8rem; color: #e00; background: transparent; border: none; cursor: pointer; padding: 0.5rem 1rem; transition: color 0.2s;" disabled>
+          Next
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Responsive grid -->
+  <style is:inline>
+    @media (min-width: 768px) {
+      .articles-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+    @media (min-width: 1024px) {
+      .articles-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+    }
+  </style>
+
+</BaseLayout>

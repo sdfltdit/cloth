@@ -1,105 +1,52 @@
-// Simple FAQ Accordion - Working Version
-console.log('FAQ accordion script starting...');
-
-// Wait for DOM to be ready
-function initFAQAccordion() {
-    console.log('Initializing FAQ accordion...');
+(function() {
+  'use strict';
+  
+  function initFAQ() {
+    const buttons = document.querySelectorAll('[id^="faq-question-"]');
     
-    // Get all FAQ buttons
-    const faqButtons = document.querySelectorAll('[id^="faq-question-"]');
-    console.log('Found FAQ buttons:', faqButtons.length);
-    
-    if (faqButtons.length === 0) {
-        console.error('No FAQ buttons found with id^="faq-question-"');
-        return;
+    // Silent exit if no FAQ on this page
+    if (buttons.length === 0) {
+      return;
     }
     
-    faqButtons.forEach((button, index) => {
-        console.log(`Setting up FAQ ${index}`);
+    buttons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        const answerId = this.getAttribute('aria-controls');
+        const answer = document.getElementById(answerId);
         
-        // Add click event listener
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            console.log(`FAQ ${index} clicked`);
-            
-            const answer = document.getElementById(`faq-answer-${index}`);
-            const icon = document.getElementById(`faq-icon-${index}`);
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            
-            // Close all other FAQs
-            faqButtons.forEach((otherBtn, i) => {
-                if (i !== index) {
-                    otherBtn.setAttribute('aria-expanded', 'false');
-                    const otherAnswer = document.getElementById(`faq-answer-${i}`);
-                    const otherIcon = document.getElementById(`faq-icon-${i}`);
-                    
-                    if (otherAnswer) {
-                        otherAnswer.classList.add('hidden');
-                        otherAnswer.style.display = 'none';
-                    }
-                    if (otherIcon) {
-                        otherIcon.style.transform = 'rotate(0deg)';
-                    }
-                }
-            });
-            
-            // Toggle current FAQ
-            if (isExpanded) {
-                // Close
-                this.setAttribute('aria-expanded', 'false');
-                if (answer) {
-                    answer.classList.add('hidden');
-                    answer.style.display = 'none';
-                }
-                if (icon) {
-                    icon.style.transform = 'rotate(0deg)';
-                }
-                console.log(`FAQ ${index} closed`);
-            } else {
-                // Open
-                this.setAttribute('aria-expanded', 'true');
-                if (answer) {
-                    answer.classList.remove('hidden');
-                    answer.style.display = 'block';
-                }
-                if (icon) {
-                    icon.style.transform = 'rotate(45deg)';
-                }
-                console.log(`FAQ ${index} opened`);
+        // Close all other FAQ items
+        buttons.forEach(function(otherButton) {
+          if (otherButton !== button) {
+            otherButton.setAttribute('aria-expanded', 'false');
+            const otherAnswerId = otherButton.getAttribute('aria-controls');
+            const otherAnswer = document.getElementById(otherAnswerId);
+            if (otherAnswer) {
+              otherAnswer.style.maxHeight = '0';
+              otherAnswer.setAttribute('aria-hidden', 'true');
             }
+          }
         });
         
-        // Add keyboard support
-        button.addEventListener('keydown', function(e) {
-            switch(e.key) {
-                case 'Enter':
-                case ' ':
-                    e.preventDefault();
-                    this.click();
-                    break;
-            }
-        });
+        // Toggle current FAQ
+        this.setAttribute('aria-expanded', String(!expanded));
+        if (answer) {
+          if (expanded) {
+            answer.style.maxHeight = '0';
+            answer.setAttribute('aria-hidden', 'true');
+          } else {
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            answer.setAttribute('aria-hidden', 'false');
+          }
+        }
+      });
     });
-    
-    console.log('FAQ accordion setup complete');
-}
-
-// Global backup function
-window.toggleFAQ = function(index) {
-    console.log('Global toggleFAQ called with index:', index);
-    const button = document.getElementById(`faq-question-${index}`);
-    if (button) {
-        button.click();
-    } else {
-        console.error('FAQ button not found for index:', index);
-    }
-};
-
-// Initialize immediately if DOM is ready, otherwise wait for DOMContentLoaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initFAQAccordion);
-} else {
-    initFAQAccordion();
-}
+  }
+  
+  // Initialize when DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFAQ);
+  } else {
+    initFAQ();
+  }
+})();

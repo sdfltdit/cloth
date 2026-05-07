@@ -1,0 +1,20 @@
+---
+<div id="fingerprint-collector" aria-hidden="true"></div>
+
+<script>
+  import { collectFingerprintOnLoad, getStoredFingerprint } from '../lib/fingerprint';
+
+  async function initFingerprintCollection() {
+    try {
+      await collectFingerprintOnLoad();
+      const fingerprint = getStoredFingerprint();
+      if (fingerprint) {
+        (window as any).fingerprintData = fingerprint;
+      }
+    } catch (error) {
+      console.error('Fingerprint collection error:', error);
+    }
+  }
+
+  window.addEventListener('load', initFingerprintCollection);
+</script>

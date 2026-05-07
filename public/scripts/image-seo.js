@@ -39,10 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
       "@type": "ImageObject",
       "name": "SDF Clothing Manufacturing Facility",
       "description": "Modern clothing manufacturing facility in Bangladesh with advanced equipment and skilled workforce",
-      "url": "https://sdfltd.com/factory.webp",
+      "url": "https://sdfltd.com/factory.jpg",
       "width": "1200",
       "height": "800",
-      "thumbnailUrl": "https://sdfltd.com/factory.webp",
+      "thumbnailUrl": "https://sdfltd.com/factory.jpg",
       "author": {
         "@type": "Organization",
         "name": "SDF Clothing"

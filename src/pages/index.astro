@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Calculators from '../components/Calculators.astro';
+import { schemaOrganization, schemaPerson, SITE_URL as SITE } from '../data/schema';
 
 export const prerender = true;
 
-const pageTitle = "Clothing Manufacturers in Bangladesh | SDF Clothing Since 1998";
-const pageDescription = "Certified Bangladesh clothing manufacturers since 1998. 300 pcs MOQ, GOTS certified. OEM & private label for EU, UK, USA, Australia. Get free quote.";
+const pageTitle = "Low MOQ Clothing Manufacturer Bangladesh | SDF Clothing";
+const pageDescription = "Low MOQ clothing manufacturers for startup fashion brands. Custom garments and apparel production with 300 piece MOQ and ethical manufacturing mill.";
 
 const faqs = [
   {
@@ -105,6 +106,11 @@ const faqs = [
   },
   {
     category: "Getting Started",
+    question: "What makes SDF Clothing the right Low MOQ clothing manufacturer for startup fashion brands?",
+    answer: "With 300 pieces MOQ, GOTS certification since 1998, and global shipping to EU, UK, USA, Canada, and Australia, we provide full-package manufacturing from fabric sourcing to finished garments specifically designed for first-time fashion brand owners."
+  },
+  {
+    category: "Getting Started",
     question: "How do I get a quote for my fashion line?",
     answer: "Fill out our quote form with your garment type, quantity, and requirements. You can also contact us via WhatsApp for faster response. We provide quotes within 48 hours."
   },
@@ -124,20 +130,103 @@ const faqs = [
     answer: "We need garment type, fabric preference, quantity per style, size breakdown, desired delivery date, and any special requirements like printing or embroidery."
   }
 ];
+
+const schemaWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": SITE + "/#website",
+  "name": "SDF Clothing",
+  "url": SITE,
+  "description": pageDescription,
+  "publisher": { "@id": SITE + "/#organization" },
+  "inLanguage": "en",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": SITE + "/?s={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
+
+const schemaWebPage = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": SITE + "/#webpage",
+  "name": pageTitle,
+  "description": pageDescription,
+  "url": SITE,
+  "isPartOf": { "@id": SITE + "/#website" },
+  "about": { "@id": SITE + "/#organization" },
+  "datePublished": "1998-01-01",
+  "dateModified": new Date().toISOString().split("T")[0],
+  "inLanguage": "en",
+  "author": {
+    "@type": "Person",
+    "name": "Chowdhury Remon",
+    "jobTitle": "Founder & CEO, SDF Clothing"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE }
+    ]
+  }
+};
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+
+const combinedSchema = [
+  schemaOrganization,
+  schemaWebSite,
+  schemaWebPage,
+  schemaFAQ,
+  schemaPerson
+];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={combinedSchema}
+  datePublished="1998-01-01"
+  dateModified={new Date().toISOString().split("T")[0]}
+>
 
 <style>
   :root {
     --color-bg: #000000;
     --color-bg-card: #000000;
-    --color-border: #1a1a1a;
-    --color-border-red: #dc2626;
-    --color-text: #ffffff;
-    --color-text-muted: #e5e5e5;
-    --color-text-subtle: #6b7280;
-    --color-red: #dc2626;
+    --color-bg-light: #000000;
+    --color-bg-secondary: #000000;
+    --color-bg-footer: #000000;
+    --color-bg-input: #000000;
+    --color-bg-modal: #000000;
+    --color-bg-button: #000000;
+    
+    --color-text: #FFFFFF;
+    --color-text-subtle: rgba(255, 255, 255, 0.7);
+    --color-text-placeholder: rgba(255, 255, 255, 0.5);
+    
+    --color-accent: #e00;
+    --color-border: #e00;
+    --color-border-thin: #e00;
+    --color-border-input: #e00;
+    --color-border-focus: #e00;
+    --color-link-hover: #e00;
+    --color-red: #e00;
     --space-xs: 0.5rem;
     --space-sm: 1rem;
     --space-md: 1.5rem;
@@ -183,7 +272,7 @@ const faqs = [
     font-size: 0.65rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: #ffffff;
+    color: var(--color-text);
     margin-bottom: var(--space-sm);
   }
 
@@ -196,7 +285,7 @@ const faqs = [
 
   .index__section-subtitle {
     font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-    color: #ffffff;
+    color: var(--color-text);
     max-width: 600px;
     margin: 0 auto;
   }
@@ -243,13 +332,13 @@ const faqs = [
 
   .index__card-text {
     font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-    color: #ffffff;
+    color: var(--color-text);
     line-height: 1.8;
   }
 
   .index__card-text--small {
     font-size: 0.85rem;
-    color: #ffffff;
+    color: var(--color-text);
   }
 
   .index__btn {
@@ -277,12 +366,12 @@ const faqs = [
 
   .index__btn--primary:hover {
     background-color: var(--color-bg);
-    color: #ffffff;
+    color: var(--color-text);
   }
 
   .index__btn--secondary:hover {
     border-color: var(--color-red);
-    color: #ffffff;
+    color: var(--color-text);
   }
 
   .index__btn-group {
@@ -315,7 +404,8 @@ const faqs = [
   }
 
   .index__input:focus {
-    outline: none;
+    outline: 2px solid #e00;
+    outline-offset: 2px;
     border-color: var(--color-red);
   }
 
@@ -331,7 +421,8 @@ const faqs = [
   }
 
   .index__select:focus {
-    outline: none;
+    outline: 2px solid #e00;
+    outline-offset: 2px;
     border-color: var(--color-red);
   }
 
@@ -344,7 +435,7 @@ const faqs = [
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #ffffff;
+    color: var(--color-text);
     margin-bottom: 0.4rem;
   }
 
@@ -363,7 +454,7 @@ const faqs = [
   .index__stat-value {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 200;
-    color: #ffffff;
+    color: var(--color-text);
     margin-bottom: 0.25rem;
   }
 
@@ -371,7 +462,7 @@ const faqs = [
     font-size: 0.7rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #ffffff;
+    color: var(--color-text);
   }
 
   .index__hero {
@@ -393,7 +484,7 @@ const faqs = [
 
   .index__hero-subtitle {
     font-size: clamp(1rem, 2vw, 1.25rem);
-    color: #ffffff;
+    color: var(--color-text);
     max-width: 700px;
     margin: 0 auto var(--space-lg);
     line-height: 1.8;
@@ -402,7 +493,7 @@ const faqs = [
   .index__hero-trust {
     margin-top: var(--space-lg);
     font-size: 0.8rem;
-    color: #ffffff;
+    color: var(--color-text);
   }
 
   .index__hero-trust span {
@@ -426,7 +517,7 @@ const faqs = [
 
   .index__cta-inline-text {
     font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-    color: #ffffff;
+    color: var(--color-text);
     margin-bottom: var(--space-md);
   }
 
@@ -445,7 +536,7 @@ const faqs = [
   .index__price-range {
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 500;
-    color: #ffffff;
+    color: var(--color-text);
     margin-bottom: var(--space-sm);
   }
 
@@ -492,7 +583,7 @@ const faqs = [
     font-size: 0.7rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #ffffff;
+    color: var(--color-text);
     margin-bottom: var(--space-sm);
   }
 
@@ -519,7 +610,7 @@ const faqs = [
   }
 
   .index__faq-question:hover {
-    color: #ffffff;
+    color: var(--color-text);
   }
 
   .index__faq-icon {
@@ -527,7 +618,7 @@ const faqs = [
     font-size: 1.5rem;
     line-height: 1;
     transition: transform var(--transition);
-    color: #ffffff;
+    color: var(--color-text);
   }
 
   .index__faq-icon--open {
@@ -545,15 +636,15 @@ const faqs = [
 
   .index__faq-answer p {
     font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-    color: #ffffff;
+    color: var(--color-text);
     line-height: 1.8;
   }
 
   .service-matcher__select {
     width: 100%;
-    background: #000;
-    border: 1px solid #6b7280;
-    color: #fff;
+    background: var(--color-bg);
+    border: 1px solid var(--color-text-subtle);
+    color: var(--color-text);
     padding: 0.75rem;
     font-size: 0.9rem;
     min-height: 44px;
@@ -562,15 +653,16 @@ const faqs = [
   }
 
   .service-matcher__select:focus {
-    outline: none;
-    border-color: #dc2626;
+    outline: 2px solid #e00;
+    outline-offset: 2px;
+    border-color: var(--color-red);
   }
 
   .service-matcher__btn {
     width: 100%;
-    background: #000;
-    border: 1px solid #dc2626;
-    color: #dc2626;
+    background: var(--color-bg);
+    border: 1px solid var(--color-red);
+    color: var(--color-red);
     padding: 0.75rem;
     font-size: 0.9rem;
     font-weight: 500;
@@ -581,15 +673,15 @@ const faqs = [
   }
 
   .service-matcher__btn:hover {
-    background: #dc2626;
-    color: #fff;
+    background: var(--color-red);
+    color: var(--color-text);
   }
 
   .dpp-dropdown {
     width: 100%;
-    background: #000;
-    border: 1px solid #6b7280;
-    color: #fff;
+    background: var(--color-bg);
+    border: 1px solid var(--color-text-subtle);
+    color: var(--color-text);
     padding: 0.5rem;
     font-size: 13px;
     height: 40px;
@@ -598,15 +690,16 @@ const faqs = [
   }
 
   .dpp-dropdown:focus {
-    outline: none;
-    border-color: #dc2626;
+    outline: 2px solid #e00;
+    outline-offset: 2px;
+    border-color: var(--color-red);
   }
 
   .dpp-check-btn {
     width: 100%;
-    background: #000;
-    border: 1px solid #dc2626;
-    color: #dc2626;
+    background: var(--color-bg);
+    border: 1px solid var(--color-red);
+    color: var(--color-red);
     padding: 0.5rem;
     font-size: 13px;
     font-weight: 500;
@@ -617,8 +710,8 @@ const faqs = [
   }
 
   .dpp-check-btn:hover {
-    background: #dc2626;
-    color: #fff;
+    background: var(--color-red);
+    color: var(--color-text);
   }
 
   @media (max-width: 768px) {
@@ -726,7 +819,7 @@ const faqs = [
     font-size: 0.65rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: #ffffff;
+    color: var(--color-text);
     margin-bottom: var(--space-sm);
   }
 
@@ -739,7 +832,7 @@ const faqs = [
 
   .timeline-subtitle {
     font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-    color: #ffffff;
+    color: var(--color-text);
     max-width: 700px;
     margin: 0 auto;
   }
@@ -759,15 +852,15 @@ const faqs = [
     top: 1rem;
     bottom: 1rem;
     width: 1px;
-    background-color: #dc2626;
+    background-color: var(--color-red);
     z-index: 0;
   }
 
   .timeline-card {
     position: relative;
-    background-color: #000000;
+    background-color: var(--color-bg);
     border: 1px solid #1a1a1a;
-    border-left: 3px solid #dc2626;
+    border-left: 1px solid var(--color-red);
     border-radius: 6px;
     padding: 1rem 1.25rem;
     display: flex;
@@ -780,7 +873,7 @@ const faqs = [
   }
 
   .timeline-card:hover {
-    border-color: #dc2626;
+    border-color: var(--color-red);
   }
 
   .timeline-card-icon-wrapper {
@@ -793,15 +886,15 @@ const faqs = [
 
   .timeline-card-step-number {
     font-size: 11px;
-    color: #ffffff;
+    color: var(--color-text);
     font-weight: 500;
   }
 
   .timeline-card-icon-container {
     width: 44px;
     height: 44px;
-    background-color: #000000;
-    border: 1px solid #dc2626;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-red);
     border-radius: 6px;
     display: flex;
     align-items: center;
@@ -812,16 +905,16 @@ const faqs = [
   .timeline-card-icon-container svg {
     width: 22px;
     height: 22px;
-    stroke: #dc2626;
+    stroke: var(--color-red);
     transition: stroke var(--transition);
   }
 
   .timeline-card:hover .timeline-card-icon-container {
-    background-color: #dc2626;
+    background-color: var(--color-red);
   }
 
   .timeline-card:hover .timeline-card-icon-container svg {
-    stroke: #ffffff;
+    stroke: var(--color-text);
   }
 
   .timeline-card-content {
@@ -832,24 +925,24 @@ const faqs = [
   .timeline-card-title {
     font-size: 1rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--color-text);
     margin-bottom: 0.25rem;
   }
 
   .timeline-card-time {
     font-size: 0.75rem;
-    color: #dc2626;
+    color: var(--color-red);
     margin-bottom: 0.5rem;
   }
 
   .timeline-card-detail {
     font-size: 13px;
-    color: #ffffff;
+    color: var(--color-text);
     line-height: 1.5;
   }
 
   .timeline-stats-card {
-    background-color: #000000;
+    background-color: var(--color-bg);
     border: 1px solid #1a1a1a;
   border-radius: 6px;
     padding: var(--space-md);
@@ -862,7 +955,7 @@ const faqs = [
 
   .timeline-stat-item {
     font-size: 0.85rem;
-    color: #ffffff;
+    color: var(--color-text);
     padding: 0 var(--space-sm);
   }
 
@@ -893,25 +986,25 @@ const faqs = [
   }
 
   .timeline-cta-btn--primary {
-    background-color: #dc2626;
-    border: 1px solid #dc2626;
-    color: #ffffff;
+    background-color: var(--color-red);
+    border: 1px solid var(--color-red);
+    color: var(--color-text);
   }
 
   .timeline-cta-btn--primary:hover {
-    background-color: #000000;
-    color: #dc2626;
+    background-color: var(--color-bg);
+    color: var(--color-red);
   }
 
   .timeline-cta-btn--secondary {
-    background-color: #000000;
-    border: 1px solid #dc2626;
-    color: #dc2626;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-red);
+    color: var(--color-red);
   }
 
   .timeline-cta-btn--secondary:hover {
-    background-color: #dc2626;
-    color: #ffffff;
+    background-color: var(--color-red);
+    color: var(--color-text);
   }
 
   @media (max-width: 768px) {
@@ -932,7 +1025,7 @@ const faqs = [
 
     .timeline-stat-item:not(:last-child) {
       border-right: none;
-      border-bottom: 1px solid #1a1a1a;
+      border-bottom: 1px solid var(--color-red);
       padding-bottom: var(--space-sm);
     }
 
@@ -960,7 +1053,7 @@ const faqs = [
 
   .capabilities-description {
     font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-    color: #ffffff !important;
+    color: var(--color-text) !important;
     margin-bottom: var(--space-lg);
     line-height: 1.7;
   }
@@ -980,7 +1073,7 @@ const faqs = [
     background: none;
     border: none;
     border-bottom: 2px solid transparent;
-    color: #ffffff;
+    color: var(--color-text);
     cursor: pointer;
     transition: color var(--transition), border-color var(--transition);
     white-space: nowrap;
@@ -988,12 +1081,12 @@ const faqs = [
   }
 
   .capabilities-tab:hover {
-    color: #dc2626;
+    color: var(--color-red);
   }
 
   .capabilities-tab--active {
-    color: #ffffff;
-    border-bottom-color: #dc2626;
+    color: var(--color-text);
+    border-bottom-color: var(--color-red);
   }
 
   .capabilities-content {
@@ -1015,11 +1108,11 @@ const faqs = [
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1px;
-    background-color: #000000;
+    background-color: var(--color-bg);
   }
 
   .capabilities-card {
-    background-color: #000000;
+    background-color: var(--color-bg);
     border: 1px solid #1a1a1a;
     border-radius: 6px;
     padding: 0.75rem;
@@ -1027,25 +1120,25 @@ const faqs = [
   }
 
   .capabilities-card:hover {
-    border-color: #dc2626;
+    border-color: var(--color-red);
   }
 
   .capabilities-card-title {
     font-size: 13px;
     font-weight: 600;
-    color: #ffffff !important;
+    color: var(--color-text) !important;
     margin-bottom: 0.25rem;
   }
 
   .capabilities-card-detail {
     font-size: 12px;
-    color: #ffffff !important;
+    color: var(--color-text) !important;
     line-height: 1.5;
   }
 
   .capabilities-card-seo {
     font-size: 11px;
-    color: #ffffff !important;
+    color: var(--color-text) !important;
     margin-top: 4px;
     font-style: normal;
     line-height: 1.4;
@@ -1054,19 +1147,19 @@ const faqs = [
 
   /* Force white text in all capability tab cards except SEO lines */
   .capabilities-pane *:not([class*="seo"]):not(.capabilities-card-seo) {
-    color: #ffffff !important;
+    color: var(--color-text) !important;
   }
 
   [id="knit"] *:not([class*="seo"]):not(.capabilities-card-seo),
   [id="woven"] *:not([class*="seo"]):not(.capabilities-card-seo),
   [id="accessories"] *:not([class*="seo"]):not(.capabilities-card-seo) {
-    color: #ffffff !important;
+    color: var(--color-text) !important;
   }
 
   .capabilities-note {
     text-align: center;
     font-size: 0.8rem;
-    color: #ffffff;
+    color: var(--color-text);
     margin: var(--space-lg) 0;
   }
 
@@ -1084,24 +1177,24 @@ const faqs = [
 
     .capabilities-tab {
       padding: var(--space-md);
-      border-bottom: 1px solid #1a1a1a;
+      border-bottom: 1px solid var(--color-red);
       border-left: none;
       text-align: left;
       justify-content: space-between;
       display: flex;
       align-items: center;
-      background-color: #000000;
+      background-color: var(--color-bg);
     }
 
     .capabilities-tab--active {
-      border-bottom-color: #1a1a1a;
-      border-left: 3px solid #dc2626;
+      border-bottom-color: var(--color-red);
+      border-left: 1px solid var(--color-red);
     }
 
     .capabilities-tab::after {
       content: '+';
       font-size: 1.2rem;
-      color: #ffffff;
+      color: var(--color-text);
     }
 
     .capabilities-tab--active::after {
@@ -1156,13 +1249,13 @@ const faqs = [
 .item-detail,
 .item-name,
 .item-desc {
-  color: #ffffff !important;
+  color: var(--color-text) !important;
 }
 
 /* Nuclear option: force white text in all tab content */
 #knit *, #woven *, #accessories *,
 .knit-content *, .woven-content *, .accessories-content * {
-  color: #ffffff !important;
+  color: var(--color-text) !important;
 }
 
 /* Preserve SEO line colors */
@@ -1170,20 +1263,20 @@ const faqs = [
 #woven .capabilities-card-seo,
 #accessories .capabilities-card-seo,
 .capabilities-card-seo {
-  color: #ffffff !important;
+  color: var(--color-text) !important;
 }
-.capabilities-card-detail { color: #ffffff !important; }
-.capabilities-card-title { color: #ffffff !important; }
+.capabilities-card-detail { color: var(--color-text) !important; }
+.capabilities-card-title { color: var(--color-text) !important; }
 </style>
 
 <div class="index">
   
   <section class="index__hero index__section--no-border">
     <div class="index__container">
-      <h1 class="index__hero-title">Clothing Manufacturers Bangladesh - SDF Clothing Since 1998</h1>
-      <p class="index__hero-subtitle">As leading clothing manufacturers Bangladesh, we are a garment production unit in Dhaka since 1998. We make garments for your brand with your designs. We make 300 pieces or more per style. We are GOTS certified which means we use organic cotton. We do everything from fabric to finished garments.</p>
+      <h1 class="index__hero-title">Low MOQ Clothing Manufacturers for Startup Fashion Brands</h1>
+      <p class="index__hero-subtitle">Low MOQ clothing manufacturers serving startup fashion brands since 1998. Based in Dhaka, Bangladesh, we make 300 pieces or more per style with GOTS certification. We do everything from fabric sourcing to finished garments — supporting first-time fashion brand owners across EU, UK, USA, Canada, and Australia.</p>
       <div class="index__btn-group">
-        <a href="/contact" class="index__btn index__btn--primary" title="Get a free quote for clothing manufacturing">Get Free Quote</a>
+        <a href="/contact" class="index__btn index__btn--primary" title="Get a free quote from our clothing manufacturers">Get Free Quote</a>
         <a href="https://wa.me/8801911733226?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20apparel%20manufacturing" target="_blank" rel="noopener noreferrer" class="index__btn index__btn--secondary" title="Contact us via WhatsApp for quick response">WhatsApp Us</a>
       </div>
       <div class="index__hero-trust">
@@ -1194,22 +1287,38 @@ const faqs = [
     </div>
   </section>
 
+  <div class="index__container">
+    <div style="display:none;">
+      <img src="/sdf.jpg" alt="Chowdhury Remon — Founder, SDF Clothing" width="28" height="28"
+        style="border-radius:50%;object-fit:cover;filter:grayscale(1);opacity:0.7;" loading="eager" />
+      <span>By <strong style="color:rgba(255,255,255,0.75);">Chowdhury Remon</strong></span>
+      <span style="opacity:0.3;">·</span>
+      <span>Founder &amp; CEO, SDF Clothing</span>
+      <span style="opacity:0.3;">·</span>
+      <span>Garment Manufacturing Expert Since 1998</span>
+      <span style="opacity:0.3;">·</span>
+      <time datetime={new Date().toISOString().split("T")[0]}
+        style="color:rgba(255,255,255,0.45);">
+        Updated: {new Date().toLocaleDateString("en-US", { month:"long", year:"numeric" })}
+      </time>
+    </div>
+  </div>
 
   <section class="index__section">
     <div class="index__container">
       <header class="index__section-header">
         <span class="index__section-label">Capabilities</span>
-        <h2 class="index__section-title">Clothing Manufacturers Bangladesh - OEM, Private Label & CMT Services</h2>
-        <p class="index__section-subtitle">We make clothes with your designs or your brand. We do everything from fabric to finished clothes. We serve fashion brands of all sizes.</p>
+        <h2 class="index__section-title">Why Choose SDF for Low MOQ Clothing Manufacturing</h2>
+        <p class="index__section-subtitle">We're full-service clothing manufacturers — making garments with your designs or your brand. From fabric sourcing to finished apparel, we serve startup fashion brands across multiple categories.</p>
       </header>
       <div class="index__grid index__grid--3" style="margin-bottom: 1px;">
         <div class="index__card">
-          <h3 class="index__card-title">OEM Manufacturing</h3>
+          <h3 class="index__card-title">OEM Clothing Manufacturing</h3>
           <p class="index__card-text">We make clothes with your designs and your brand. We cut and sew your clothes with precision. We work with small brands and new brands. We are an ethical manufacturing facility locally.</p>
         </div>
         <div class="index__card">
-          <h3 class="index__card-title">Private Label</h3>
-          <p class="index__card-text">We help you start your own fashion line. We make tailored labels and tags for you. We include packaging at no extra cost. We work with new brands and small brands. We make 300 pieces per style.</p>
+          <h3 class="index__card-title">Private Label Apparel</h3>
+          <p class="index__card-text">We help you start your own fashion line. We make tailored labels and tags for you. We include packaging at no extra cost. We work with new brands and small brands. We make 300 pieces per style, ideal for startup fashion brands.</p>
         </div>
         <div class="index__card">
           <h3 class="index__card-title">Bespoke Development</h3>
@@ -1218,7 +1327,7 @@ const faqs = [
       </div>
       <div class="index__grid index__grid--3" style="margin-bottom: 1px;">
         <div class="index__card">
-          <h3 class="index__card-title">CMT Services</h3>
+          <h3 class="index__card-title">CMT Garment Services</h3>
           <p class="index__card-text">Have your own fabric? Send it to us. We cut and sew your clothes. We add labels and pack your clothes. No minimum order if you provide fabric. We make woven and knit clothes.</p>
         </div>
         <div class="index__card">
@@ -1245,11 +1354,11 @@ const faqs = [
 
   <div class="index__cta-inline">
     <div class="index__container">
-      <h3 class="index__cta-inline-title">Not sure which service fits your brand?</h3>
+      <h3 class="index__cta-inline-title">Not sure which low MOQ manufacturing service fits your brand?</h3>
       <p class="index__cta-inline-text">Answer 3 quick questions and we will tell you if you need OEM private label or CMT services.</p>
       
-      <div id="service-matcher" style="margin-top: var(--space-lg); background: #000; border: 1px solid #dc2626; padding: 1.5rem;">
-        <p style="font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: #dc2626; margin-bottom: var(--space-md);">FIND YOUR MANUFACTURER MATCH</p>
+      <div id="service-matcher" style="margin-top: var(--space-lg); background: var(--color-bg); border: 1px solid var(--color-red); padding: 1.5rem;">
+        <p style="font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-red); margin-bottom: var(--space-md);">FIND YOUR MANUFACTURER MATCH</p>
         
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-sm); align-items: end;">
           <div>
@@ -1288,12 +1397,12 @@ const faqs = [
         </div>
 
         <div id="service-result" style="margin-top: var(--space-md); display: none;">
-          <p style="font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: #dc2626; margin-bottom: var(--space-xs);">Recommended</p>
-          <h3 id="result-service" style="color: #fff; font-size: 1.2rem; font-weight: 500; margin-bottom: var(--space-xs);"></h3>
-          <p id="result-description" style="color: #ffffff; font-size: 0.9rem; line-height: 1.5; margin-bottom: var(--space-sm);"></p>
+          <p style="font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-red); margin-bottom: var(--space-xs);">Recommended</p>
+          <h3 id="result-service" style="color: var(--color-text); font-size: 1.2rem; font-weight: 500; margin-bottom: var(--space-xs);"></h3>
+          <p id="result-description" style="color: var(--color-text); font-size: 0.9rem; line-height: 1.5; margin-bottom: var(--space-sm);"></p>
           <div style="display: flex; gap: var(--space-md);">
-            <a href="/contact" style="color: #fff; text-decoration: none; font-size: 0.9rem;" title="Request a free manufacturing quote">Get quote →</a>
-            <a href="https://wa.me/+16465356343" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none; font-size: 0.9rem;" title="Contact us on WhatsApp for instant response">WhatsApp →</a>
+            <a href="/contact" style="color: var(--color-text); text-decoration: none; font-size: 0.9rem;" title="Request a free quote from our garment manufacturers">Get quote →</a>
+            <a href="https://wa.me/+8801911733226" target="_blank" rel="noopener noreferrer" style="color: var(--color-text); text-decoration: none; font-size: 0.9rem;" title="Contact us on WhatsApp for instant response">WhatsApp →</a>
           </div>
         </div>
       </div>
@@ -1331,7 +1440,7 @@ const faqs = [
           <h3 class="index__card-title" style="margin-bottom: var(--space-md);">How much could your brand save sourcing from our facility?</h3>
           <div class="index__form-group">
             <label class="index__form-label" for="cost-country">Current manufacturing country</label>
-            <select id="cost-country" class="index__select" aria-label="Select current manufacturing country" style="background: #000; border: 1px solid #fff; color: #fff;">
+            <select id="cost-country" class="index__select" aria-label="Select current manufacturing country" style="background: var(--color-bg); border: 1px solid var(--color-text); color: var(--color-text);">
               <option value="">Select country</option>
               <option value="china">China</option>
               <option value="vietnam">Vietnam</option>
@@ -1343,13 +1452,13 @@ const faqs = [
           </div>
           <div class="index__form-group">
             <label class="index__form-label" for="cost-value">Monthly order value (USD)</label>
-            <input type="number" id="cost-value" class="index__input" aria-label="Enter monthly order value in USD" placeholder="e.g. 10000" style="background: #000; border: 1px solid #fff; color: #fff;">
+            <input type="number" id="cost-value" class="index__input" aria-label="Enter monthly order value in USD" placeholder="e.g. 10000" style="background: var(--color-bg); border: 1px solid var(--color-text); color: var(--color-text);">
           </div>
-          <button id="calculate-cost" class="index__btn" style="background: #000; border: 1px solid var(--color-red); color: #ffffff; width: 100%;">Calculate My Savings</button>
+          <button id="calculate-cost" class="index__btn" style="background: var(--color-bg); border: 1px solid var(--color-red); color: var(--color-text); width: 100%;">Calculate My Savings</button>
           <div id="cost-result" class="index__price-result" style="margin-top: var(--space-md); display: none;">
-            <p id="cost-savings" style="color: #fff; font-size: 1.1rem; font-weight: 500;"></p>
+            <p id="cost-savings" style="color: var(--color-text); font-size: 1.1rem; font-weight: 500;"></p>
           </div>
-          <p class="calculator-disclaimer" style="font-size: 0.75rem; color: #666; margin-top: var(--space-md); font-style: italic;">Results are estimates only. Actual pricing depends on fabric, quantity, and order specifications. Contact us for an accurate quote.</p>
+          <p class="calculator-disclaimer" style="font-size: 0.75rem; color: var(--color-text); margin-top: var(--space-md); font-style: italic;">Results are estimates only. Actual pricing depends on fabric, quantity, and order specifications. Contact us for an accurate quote.</p>
         </div>
 
         <!-- Duty Savings Calculator -->
@@ -1357,7 +1466,7 @@ const faqs = [
           <h3 class="index__card-title" style="margin-bottom: var(--space-md);">Your import duty savings from this production hub</h3>
           <div class="index__form-group">
             <label class="index__form-label" for="duty-country">Destination country</label>
-            <select id="duty-country" class="index__select" aria-label="Select destination country" style="background: #000; border: 1px solid #fff; color: #fff;">
+            <select id="duty-country" class="index__select" aria-label="Select destination country" style="background: var(--color-bg); border: 1px solid var(--color-text); color: var(--color-text);">
               <option value="">Select destination</option>
               <option value="eu">EU</option>
               <option value="uk">UK</option>
@@ -1369,31 +1478,31 @@ const faqs = [
           </div>
           <div class="index__form-group">
             <label class="index__form-label" for="duty-value">Order value (USD)</label>
-            <input type="number" id="duty-value" class="index__input" aria-label="Enter order value in USD" placeholder="e.g. 10000" style="background: #000; border: 1px solid #fff; color: #fff;">
+            <input type="number" id="duty-value" class="index__input" aria-label="Enter order value in USD" placeholder="e.g. 10000" style="background: var(--color-bg); border: 1px solid var(--color-text); color: var(--color-text);">
           </div>
-          <button id="calculate-duty" class="index__btn" style="background: #000; border: 1px solid var(--color-red); color: #ffffff; width: 100%;">Calculate Duty Savings</button>
+          <button id="calculate-duty" class="index__btn" style="background: var(--color-bg); border: 1px solid var(--color-red); color: var(--color-text); width: 100%;">Calculate Duty Savings</button>
           <div id="duty-result" class="index__price-result" style="margin-top: var(--space-md); display: none;">
-            <p id="duty-savings" style="color: #fff; font-size: 1.1rem; font-weight: 500;"></p>
-            <div id="duty-port-info" style="margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-red); display: none; background-color: #000000;">
-              <h4 id="duty-port-heading" style="color: #fff; font-size: 0.9rem; margin-bottom: var(--space-sm);"></h4>
-              <div class="index__grid index__grid--3" style="gap: var(--space-md); background-color: #000000;">
-                <div id="duty-sea-ports" style="font-size: 0.75rem; color: #fff;">
-                  <p style="font-weight: 500; margin-bottom: var(--space-xs); color: #ffffff;">Sea Ports</p>
+            <p id="duty-savings" style="color: var(--color-text); font-size: 1.1rem; font-weight: 500;"></p>
+            <div id="duty-port-info" style="margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-red); display: none; background-color: var(--color-bg);">
+              <h4 id="duty-port-heading" style="color: var(--color-text); font-size: 0.9rem; margin-bottom: var(--space-sm);"></h4>
+              <div class="index__grid index__grid--3" style="gap: var(--space-md); background-color: var(--color-bg);">
+                <div id="duty-sea-ports" style="font-size: 0.75rem; color: var(--color-text);">
+                  <p style="font-weight: 500; margin-bottom: var(--space-xs); color: var(--color-text);">Sea Ports</p>
                   <div id="duty-sea-ports-list"></div>
                 </div>
-                <div id="duty-air-ports" style="font-size: 0.75rem; color: #fff;">
-                  <p style="font-weight: 500; margin-bottom: var(--space-xs); color: #ffffff;">Air Ports</p>
+                <div id="duty-air-ports" style="font-size: 0.75rem; color: var(--color-text);">
+                  <p style="font-weight: 500; margin-bottom: var(--space-xs); color: var(--color-text);">Air Ports</p>
                   <div id="duty-air-ports-list"></div>
                 </div>
-                <div id="duty-customs" style="font-size: 0.75rem; color: #fff;">
-                  <p style="font-weight: 500; margin-bottom: var(--space-xs); color: #ffffff;">Customs Info</p>
+                <div id="duty-customs" style="font-size: 0.75rem; color: var(--color-text);">
+                  <p style="font-weight: 500; margin-bottom: var(--space-xs); color: var(--color-text);">Customs Info</p>
                   <div id="duty-customs-list"></div>
                 </div>
               </div>
-              <p style="font-size: 11px; color: #6b7280; margin-top: 8px; font-style: italic;">Port codes, contact details, and duty rates are provided for reference only and may change without notice. Always verify current information directly with the relevant customs authority or port operator before shipping.</p>
+              <p style="font-size: 11px; color: var(--color-text-subtle); margin-top: 8px; font-style: italic;">Port codes, contact details, and duty rates are provided for reference only and may change without notice. Always verify current information directly with the relevant customs authority or port operator before shipping.</p>
             </div>
           </div>
-          <p class="calculator-disclaimer" style="font-size: 0.75rem; color: #666; margin-top: var(--space-md); font-style: italic;">Results are estimates only. Actual pricing depends on fabric, quantity, and order specifications. Contact us for an accurate quote.</p>
+          <p class="calculator-disclaimer" style="font-size: 0.75rem; color: var(--color-text); margin-top: var(--space-md); font-style: italic;">Results are estimates only. Actual pricing depends on fabric, quantity, and order specifications. Contact us for an accurate quote.</p>
         </div>
 
         <!-- MOQ Feasibility Calculator -->
@@ -1401,22 +1510,22 @@ const faqs = [
           <h3 class="index__card-title" style="margin-bottom: var(--space-md);">Can our facility make your order?</h3>
           <div class="index__form-group">
             <label class="index__form-label" for="moq-styles">Number of styles</label>
-            <input type="number" id="moq-styles" class="index__input" aria-label="Enter number of styles" placeholder="e.g. 5" style="background: #000; border: 1px solid #fff; color: #fff;">
+            <input type="number" id="moq-styles" class="index__input" aria-label="Enter number of styles" placeholder="e.g. 5" style="background: var(--color-bg); border: 1px solid var(--color-text); color: var(--color-text);">
           </div>
           <div class="index__form-group">
             <label class="index__form-label" for="moq-pieces">Pieces per style</label>
-            <input type="number" id="moq-pieces" class="index__input" aria-label="Enter pieces per style" placeholder="e.g. 300" style="background: #000; border: 1px solid #fff; color: #fff;">
+            <input type="number" id="moq-pieces" class="index__input" aria-label="Enter pieces per style" placeholder="e.g. 300" style="background: var(--color-bg); border: 1px solid var(--color-text); color: var(--color-text);">
           </div>
-          <button id="calculate-moq" class="index__btn" style="background: #000; border: 1px solid var(--color-red); color: #ffffff; width: 100%;">Check Feasibility</button>
+          <button id="calculate-moq" class="index__btn" style="background: var(--color-bg); border: 1px solid var(--color-red); color: var(--color-text); width: 100%;">Check Feasibility</button>
           <div id="moq-result" class="index__price-result" style="margin-top: var(--space-md); display: none;">
-            <p id="moq-message" style="color: #fff; font-size: 1.1rem; font-weight: 500; margin-bottom: var(--space-sm);"></p>
+            <p id="moq-message" style="color: var(--color-text); font-size: 1.1rem; font-weight: 500; margin-bottom: var(--space-sm);"></p>
             <div id="moq-cta" class="index__btn-group"></div>
           </div>
-          <p class="calculator-disclaimer" style="font-size: 0.75rem; color: #666; margin-top: var(--space-md); font-style: italic;">Results are estimates only. Actual pricing depends on fabric, quantity, and order specifications. Contact us for an accurate quote.</p>
+          <p class="calculator-disclaimer" style="font-size: 0.75rem; color: var(--color-text); margin-top: var(--space-md); font-style: italic;">Results are estimates only. Actual pricing depends on fabric, quantity, and order specifications. Contact us for an accurate quote.</p>
         </div>
       </div>
 
-      <p style="text-align: center; color: var(--color-text-subtle); font-size: 0.85rem; margin-top: var(--space-lg);">All calculators update instantly. No signup no forms no follow up calls.</p>
+      <p style="text-align: center; color: var(--color-text-subtle); font-size: 0.85rem; margin-top: var(--space-lg);">All calculators update instantly. No registration required. No forms. No follow-up calls.</p>
     </div>
   </section>
 
@@ -1424,15 +1533,15 @@ const faqs = [
     <div class="index__container">
       <header class="timeline-header">
         <span class="timeline-label">HOW YOUR ORDER WORKS</span>
-        <h2 class="timeline-title">From design to shipment your complete journey</h2>
-        <p class="timeline-subtitle">We make clothes in the region with clear timelines and quality checks.</p>
+        <h2 class="timeline-title">From Design to Shipment — Your Complete Garment Manufacturing Journey</h2>
+        <p class="timeline-subtitle">Our complete clothing manufacturing process covers every stage — from initial brief to finished garments ready for shipment to your warehouse.</p>
       </header>
 
       <div class="timeline-grid">
         <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
@@ -1445,7 +1554,7 @@ const faqs = [
         <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
@@ -1458,7 +1567,7 @@ const faqs = [
         <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
@@ -1471,7 +1580,7 @@ const faqs = [
         <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
@@ -1484,7 +1593,7 @@ const faqs = [
         <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
@@ -1497,7 +1606,7 @@ const faqs = [
         <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
@@ -1510,7 +1619,7 @@ const faqs = [
         <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
@@ -1523,7 +1632,7 @@ const faqs = [
         <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16.5" y1="9.4" x2="7.55" y2="4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16.5" y1="9.4" x2="7.55" y2="4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
@@ -1543,8 +1652,8 @@ const faqs = [
       <p class="timeline-note">Standard timeline is 20 days for up to 5000 pieces. Large orders of 20000 pieces take 40 to 60 days. We do all production in our facility.</p>
 
       <div class="timeline-cta">
-        <a href="/contact" class="timeline-cta-btn timeline-cta-btn--primary" title="Get your free manufacturing quote">Get Your Free Quote</a>
-        <a href="https://wa.me/+16465356343" target="_blank" rel="noopener noreferrer" class="timeline-cta-btn timeline-cta-btn--secondary" title="Contact our facility via WhatsApp">WhatsApp Our Facility</a>
+        <a href="/contact" class="timeline-cta-btn timeline-cta-btn--primary" title="Get your free quote from our apparel manufacturers">Get Your Free Quote</a>
+        <a href="https://wa.me/+8801911733226" target="_blank" rel="noopener noreferrer" class="timeline-cta-btn timeline-cta-btn--secondary" title="Contact our facility via WhatsApp">WhatsApp Our Facility</a>
       </div>
     </div>
   </section>
@@ -1553,7 +1662,7 @@ const faqs = [
     <div class="index__container">
       <header class="index__section-header">
         <span class="index__section-label">WHAT WE MAKE</span>
-        <h2 class="index__section-title">Full Production Capabilities</h2>
+        <h2 class="index__section-title">Full Apparel Production Capabilities</h2>
         <p class="index__section-subtitle">Every fabric, print, embroidery, trim, and finish your brand needs  all produced in our facility.</p>
       </header>
 
@@ -1573,67 +1682,67 @@ const faqs = [
           <div class="capabilities-grid">
             <div class="capabilities-card">
               <div class="capabilities-card-title">100% Cotton</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Jersey, fleece, french terry, pique, rib, interlock</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Jersey, fleece, french terry, pique, rib, interlock</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Organic Cotton</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">GOTS certified, OCS verified, available in all constructions</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">GOTS certified, OCS verified, available in all constructions</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Recycled Polyester</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">GRS certified, performance and casual wear</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">GRS certified, performance and casual wear</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Polyester</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Microfibre, satin, chiffon, mesh, oxford</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Microfibre, satin, chiffon, mesh, oxford</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Poly Cotton Blend</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">65/35 and 80/20 blends for durability</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">65/35 and 80/20 blends for durability</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Denim</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">8oz to 14oz, rigid and stretch, various washes</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">8oz to 14oz, rigid and stretch, various washes</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Twill</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Cotton and poly twill for workwear and casual</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Cotton and poly twill for workwear and casual</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Poplin</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Lightweight woven for shirts and blouses</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Lightweight woven for shirts and blouses</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Oxford</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Structured woven for shirts and outerwear</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Structured woven for shirts and outerwear</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Canvas</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Heavy duty for bags, jackets, workwear</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Heavy duty for bags, jackets, workwear</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Linen</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Natural woven for summer and resort wear</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Natural woven for summer and resort wear</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Viscose</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Lightweight drape for dresses and blouses</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Lightweight drape for dresses and blouses</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Modal</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Soft knit for premium basics and underwear</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Soft knit for premium basics and underwear</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Bamboo</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Sustainable soft knit for premium brands</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Sustainable soft knit for premium brands</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Nylon</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Performance and outerwear applications</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Performance and outerwear applications</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Lycra Blend</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Stretch fabrics for activewear and swimwear</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Stretch fabrics for activewear and swimwear</div>
             </div>
           </div>
         </div>
@@ -1644,51 +1753,51 @@ const faqs = [
           <div class="capabilities-grid">
             <div class="capabilities-card">
               <div class="capabilities-card-title">Screen Print</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Up to 8 colors, spot and all-over, water based and plastisol inks</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Up to 8 colors, spot and all-over, water based and plastisol inks</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">DTF</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Direct to film transfer, full color, no minimum, photographic quality</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Direct to film transfer, full color, no minimum, photographic quality</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">DTG</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Direct to garment digital print, full color, best on 100% cotton</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Direct to garment digital print, full color, best on 100% cotton</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Sublimation</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">All-over print, polyester only, photographic quality and color range</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">All-over print, polyester only, photographic quality and color range</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Heat Transfer</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Vinyl and digital transfers, small runs and complex shapes</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Vinyl and digital transfers, small runs and complex shapes</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Discharge Print</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Removes dye for soft hand feel, vintage look, 100% cotton only</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Removes dye for soft hand feel, vintage look, 100% cotton only</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Pigment Print</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Soft hand feel, vintage wash compatible, water based</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Soft hand feel, vintage wash compatible, water based</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Foil Print</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Metallic gold silver and bespoke foil colors, spot application</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Metallic gold silver and bespoke foil colors, spot application</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Puff Print</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Raised 3D effect, spot application on any fabric</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Raised 3D effect, spot application on any fabric</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Emboss and Deboss</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Textured effect on heavier fabrics and accessories</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Textured effect on heavier fabrics and accessories</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Photochromic Print</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Color changes in sunlight, novelty and premium brands</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Color changes in sunlight, novelty and premium brands</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Reflective Print</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Safety and streetwear applications, ANSI compliant available</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Safety and streetwear applications, ANSI compliant available</div>
             </div>
           </div>
         </div>
@@ -1699,51 +1808,51 @@ const faqs = [
           <div class="capabilities-grid">
             <div class="capabilities-card">
               <div class="capabilities-card-title">Flat Embroidery</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Standard thread embroidery, up to 15 colors, any placement</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Standard thread embroidery, up to 15 colors, any placement</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">3D Puff Embroidery</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Raised foam effect under thread, caps and chest logos</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Raised foam effect under thread, caps and chest logos</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Applique</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Fabric cut and sewn onto garment, layered effects</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Fabric cut and sewn onto garment, layered effects</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Woven Badge</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Separate woven label sewn or ironed onto garment</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Separate woven label sewn or ironed onto garment</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Printed Badge</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Sublimation or DTF badge with heat seal or sew-on backing</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Sublimation or DTF badge with heat seal or sew-on backing</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Chain Stitch</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Vintage single thread outline, authentic workwear look</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Vintage single thread outline, authentic workwear look</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Chenille</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Varsity style thick yarn embroidery, college and streetwear</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Varsity style thick yarn embroidery, college and streetwear</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Sequin Embroidery</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Individual sequins stitched by machine, occasion wear</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Individual sequins stitched by machine, occasion wear</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Beading</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Hand applied beads for luxury and occasion wear</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Hand applied beads for luxury and occasion wear</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Patch</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Cut and sew patch applied by machine or hand</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Cut and sew patch applied by machine or hand</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Laser Etching</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Precision design on denim, leather and synthetic materials</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Precision design on denim, leather and synthetic materials</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Rhinestone</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Heat applied crystal decoration, fashion and occasion wear</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Heat applied crystal decoration, fashion and occasion wear</div>
             </div>
           </div>
         </div>
@@ -1754,51 +1863,51 @@ const faqs = [
           <div class="capabilities-grid">
             <div class="capabilities-card">
               <div class="capabilities-card-title">Woven Label</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Neck labels, side seam labels, care labels, all sizes</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Neck labels, side seam labels, care labels, all sizes</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Printed Label</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Heat transfer label, screen printed label, soft feel</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Heat transfer label, screen printed label, soft feel</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Hang Tag</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Single and double sided, string or safety pin attached</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Single and double sided, string or safety pin attached</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Swing Tag</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Premium card stock, tailored shape, embossed or foil finish</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Premium card stock, tailored shape, embossed or foil finish</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Branded Zipper</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">YKK and generic, branded puller, branded tape</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">YKK and generic, branded puller, branded tape</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Specialized Button</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Resin, metal, wood, shell, branded with logo</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Resin, metal, wood, shell, branded with logo</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Rivet</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Copper and specialized plated for denim and workwear</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Copper and specialized plated for denim and workwear</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Eyelet</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Metal and plastic for drawstrings and lacing</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Metal and plastic for drawstrings and lacing</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Cord and Drawstring</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Cotton, polyester, flat and round, matched color</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Cotton, polyester, flat and round, matched color</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Elastic</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Waistband, cuff, branded print on elastic available</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Waistband, cuff, branded print on elastic available</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Velcro</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Hook and loop, branded and unbranded, all widths</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Hook and loop, branded and unbranded, all widths</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Polybag and Packaging</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Branded print polybag, tissue paper, box packaging</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Branded print polybag, tissue paper, box packaging</div>
             </div>
           </div>
         </div>
@@ -1809,51 +1918,51 @@ const faqs = [
           <div class="capabilities-grid">
             <div class="capabilities-card">
               <div class="capabilities-card-title">Enzyme Wash</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Soft hand feel, slight fade, natural worn look</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Soft hand feel, slight fade, natural worn look</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Stone Wash</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Heavier fade and texture, authentic denim and casual look</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Heavier fade and texture, authentic denim and casual look</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Acid Wash</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">High contrast bleach pattern, streetwear and vintage</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">High contrast bleach pattern, streetwear and vintage</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Garment Dye</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Piece dyed after construction for unique tonal effect</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Piece dyed after construction for unique tonal effect</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Sand Blast</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Localized abrasion effect on denim, worn patch appearance</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Localized abrasion effect on denim, worn patch appearance</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Vintage Wash</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Combined process for authentic aged garment look</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Combined process for authentic aged garment look</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Silicon Wash</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Extremely soft hand feel, peach skin surface texture</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Extremely soft hand feel, peach skin surface texture</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Bleach Wash</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Full or partial bleach treatment, punk and streetwear</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Full or partial bleach treatment, punk and streetwear</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Overdye</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Second dye application over existing fabric for tonal shift</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Second dye application over existing fabric for tonal shift</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Distress</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Physical abrasion, holes, fraying at controlled points</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Physical abrasion, holes, fraying at controlled points</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Anti-Pill Treatment</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Prevents fleece and jersey from pilling in wash</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Prevents fleece and jersey from pilling in wash</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Softener Treatment</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Final rinse softener for premium hand feel</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Final rinse softener for premium hand feel</div>
             </div>
           </div>
         </div>
@@ -1864,132 +1973,132 @@ const faqs = [
           <div class="capabilities-grid">
             <div class="capabilities-card">
               <div class="capabilities-card-title">Baseball Cap</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Structured and unstructured, 5, and 6 panel, branded closure</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Structured and unstructured, 5, and 6 panel, branded closure</div>
               <div class="capabilities-card-seo">cap factory Dhaka, custom baseball cap factory, hat factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Bucket Hat</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Cotton and nylon, all sizes, tailored brim width</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Cotton and nylon, all sizes, tailored brim width</div>
               <div class="capabilities-card-seo">bucket hat factory our factory, custom hat factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Beanie</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Knit beanie, fleece lined, tailored length and color</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Knit beanie, fleece lined, tailored length and color</div>
               <div class="capabilities-card-seo">beanie factory Dhaka, custom knit hat factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Beret</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Wool and cotton blend, tailored size and color</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Wool and cotton blend, tailored size and color</div>
               <div class="capabilities-card-seo">beret factory our factory, custom beret factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Trucker Cap</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Foam front, mesh back, snapback closure</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Foam front, mesh back, snapback closure</div>
               <div class="capabilities-card-seo">trucker cap factory Dhaka, custom snapback factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Dad Hat</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Unstructured low profile, curved brim, branded embroidery</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Unstructured low profile, curved brim, branded embroidery</div>
               <div class="capabilities-card-seo">dad hat factory our factory, custom low profile cap factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Tote Bag</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Canvas, and cotton, all sizes, branded print, and color</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Canvas, and cotton, all sizes, branded print, and color</div>
               <div class="capabilities-card-seo">tote bag factory Dhaka, custom canvas bag factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Backpack</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Cotton, and nylon, drawstring, and zip closure</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Cotton, and nylon, drawstring, and zip closure</div>
               <div class="capabilities-card-seo">backpack factory our factory, custom bag factory, drawstring bag</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Crossbody Bag</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Woven and canvas, adjustable strap, zip pocket</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Woven and canvas, adjustable strap, zip pocket</div>
               <div class="capabilities-card-seo">crossbody bag factory Dhaka, custom bag factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Gym Bag</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Durable nylon, wet pocket, tailored size and color</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Durable nylon, wet pocket, tailored size and color</div>
               <div class="capabilities-card-seo">gym bag factory our factory, custom sports bag factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Waist Bag</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Fanny pack style, nylon and canvas, branded print</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Fanny pack style, nylon and canvas, branded print</div>
               <div class="capabilities-card-seo">waist bag factory Dhaka, fanny pack factory, custom belt bag</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Shopping Bag</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Reusable cotton and jute, all sizes</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Reusable cotton and jute, all sizes</div>
               <div class="capabilities-card-seo">reusable bag factory our factory, cotton bag factory, eco bag</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Hand Towel</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">100% cotton terry, tailored size, weight and color</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">100% cotton terry, tailored size, weight and color</div>
               <div class="capabilities-card-seo">hand towel factory Dhaka, custom towel factory, terry towel</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Bath Towel</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">400gsm to 600gsm cotton terry, tailored border</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">400gsm to 600gsm cotton terry, tailored border</div>
               <div class="capabilities-card-seo">bath towel factory our factory, cotton towel factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Beach Towel</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Lightweight cotton, branded print and fringe</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Lightweight cotton, branded print and fringe</div>
               <div class="capabilities-card-seo">beach towel factory Dhaka, custom printed towel factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Blanket</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Fleece, sherpa, and knit blanket, custom size, and weight</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Fleece, sherpa, and knit blanket, custom size, and weight</div>
               <div class="capabilities-card-seo">blanket factory our factory, fleece blanket factory, custom blanket</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Cushion Cover</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Woven, and knit, zip, and envelope closure</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Woven, and knit, zip, and envelope closure</div>
               <div class="capabilities-card-seo">cushion cover factory Dhaka, custom pillow cover factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Apron</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Cotton and canvas, adjustable strap, custom print</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Cotton and canvas, adjustable strap, custom print</div>
               <div class="capabilities-card-seo">apron factory our factory, custom apron factory, kitchen apron</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Dog T-Shirt</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Knit cotton, all sizes XS to XXL, custom print</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Knit cotton, all sizes XS to XXL, custom print</div>
               <div class="capabilities-card-seo">dog clothes factory Dhaka, pet wear factory, custom dog t-shirt</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Dog Hoodie</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">French terry, and fleece, all sizes, custom color</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">French terry, and fleece, all sizes, custom color</div>
               <div class="capabilities-card-seo">dog hoodie factory our factory, pet apparel factory, custom dog hoodie</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Dog Jacket</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Woven shell, fleece lining, all sizes</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Woven shell, fleece lining, all sizes</div>
               <div class="capabilities-card-seo">dog jacket factory Dhaka, custom pet jacket factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Dog Raincoat</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Waterproof nylon, reflective trim, all sizes</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Waterproof nylon, reflective trim, all sizes</div>
               <div class="capabilities-card-seo">dog raincoat factory our factory, waterproof pet wear factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Dog Bandana</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Cotton and woven, tie and snap closure</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Cotton and woven, tie and snap closure</div>
               <div class="capabilities-card-seo">dog bandana factory Dhaka, custom pet accessories factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Cat Sweater</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Fine knit, all sizes, custom color and print</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Fine knit, all sizes, custom color and print</div>
               <div class="capabilities-card-seo">cat sweater factory our factory, custom cat clothes factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Pet Bed Cover</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Removable woven cover, all sizes, machine washable</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Removable woven cover, all sizes, machine washable</div>
               <div class="capabilities-card-seo">pet bed factory Dhaka, custom dog bed factory</div>
             </div>
             <div class="capabilities-card">
               <div class="capabilities-card-title">Pet Blanket</div>
-              <div class="capabilities-card-detail" style="color:#ffffff !important">Fleece and sherpa, custom size, print and color</div>
+              <div class="capabilities-card-detail" style="color:var(--color-text) !important">Fleece and sherpa, custom size, print and color</div>
               <div class="capabilities-card-seo">pet blanket factory our factory, custom fleece pet blanket factory</div>
             </div>
           </div>
@@ -2000,8 +2109,8 @@ const faqs = [
       <p class="capabilities-note">All production is completed in our factory in Dhaka. We do not outsource any process.</p>
 
       <div class="index__btn-group">
-        <a href="/contact" class="index__btn index__btn--primary" title="Request our full capabilities presentation">Request Full Capabilities Deck</a>
-        <a href="https://wa.me/+16465356343" target="_blank" rel="noopener noreferrer" class="index__btn index__btn--secondary" title="Discuss your product requirements on WhatsApp">WhatsApp to Discuss Your Product</a>
+        <a href="/contact" class="index__btn index__btn--primary" title="Request our full clothing manufacturing capabilities deck">Request Full Capabilities Deck</a>
+        <a href="https://wa.me/+8801911733226" target="_blank" rel="noopener noreferrer" class="index__btn index__btn--secondary" title="Discuss your product requirements on WhatsApp">WhatsApp to Discuss Your Product</a>
       </div>
     </div>
   </section>
@@ -2034,37 +2143,37 @@ const faqs = [
           
           <!-- Related Countries -->
           <div style="margin-top: 2rem;">
-            <h3 style="font-size: 0.85rem; font-weight: 600; color: #fff; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase;">Related Countries</h3>
+            <h3 style="font-size: 0.85rem; font-weight: 600; color: var(--color-text); margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase;">Related Countries</h3>
             <div style="display: flex; flex-direction: column; gap: 1rem;">
-              <a href="/clothing-manufacturer-usa" style="background: #0a0a0a; padding: 1rem; text-decoration: none; display: block; border: 1px solid #1a1a1a; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#cc0000'" onmouseout="this.style.borderColor='#1a1a1a'" title="Clothing manufacturing services for USA brands">
-                <h5 style="font-size: 0.8rem; font-weight: 500; color: #fff; margin-bottom: 0.5rem;">United States</h5>
-                <p style="font-size: 0.7rem; color: #fff; line-height: 1.6; margin-bottom: 0.5rem;">Premium apparel manufacturing for US fashion brands with fast shipping and quality assurance.</p>
-                <span style="font-size: 0.65rem; color: #fff; text-transform: uppercase; letter-spacing: 0.1em;">Wholesale Apparel Sourcing for US Brands →</span>
+              <a href="/clothing-manufacturer-usa" style="background: var(--color-bg); padding: 1rem; text-decoration: none; display: block; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.2s;" onmouseover="this.style.borderColor='#e00'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'" title="Clothing manufacturers for USA fashion brands">
+                <h4 style="font-size: 0.8rem; font-weight: 500; color: var(--color-text); margin-bottom: 0.5rem;">United States</h4>
+                <p style="font-size: 0.7rem; color: var(--color-text); line-height: 1.6; margin-bottom: 0.5rem;">Premium apparel manufacturing for US fashion brands with fast shipping and quality assurance.</p>
+                <span style="font-size: 0.65rem; color: var(--color-text); text-transform: uppercase; letter-spacing: 0.1em;">Wholesale Apparel Sourcing for US Brands →</span>
               </a>
-              <a href="/clothing-manufacturer-uk" style="background: #0a0a0a; padding: 1rem; text-decoration: none; display: block; border: 1px solid #1a1a1a; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#cc0000'" onmouseout="this.style.borderColor='#1a1a1a'" title="Clothing manufacturing services for UK brands">
-                <h5 style="font-size: 0.8rem; font-weight: 500; color: #fff; margin-bottom: 0.5rem;">United Kingdom</h5>
-                <p style="font-size: 0.7rem; color: #fff; line-height: 1.6; margin-bottom: 0.5rem;">Serving UK fashion brands with duty-free shipping and BSCI certified manufacturing.</p>
-                <span style="font-size: 0.65rem; color: #fff; text-transform: uppercase; letter-spacing: 0.1em;">Garment Manufacturing for UK Fashion Labels →</span>
+              <a href="/clothing-manufacturer-uk" style="background: var(--color-bg); padding: 1rem; text-decoration: none; display: block; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.2s;" onmouseover="this.style.borderColor='#e00'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'" title="Garment manufacturers for UK fashion brands">
+                <h4 style="font-size: 0.8rem; font-weight: 500; color: var(--color-text); margin-bottom: 0.5rem;">United Kingdom</h4>
+                <p style="font-size: 0.7rem; color: var(--color-text); line-height: 1.6; margin-bottom: 0.5rem;">Serving UK fashion brands with duty-free shipping and BSCI certified manufacturing.</p>
+                <span style="font-size: 0.65rem; color: var(--color-text); text-transform: uppercase; letter-spacing: 0.1em;">Garment Manufacturing for UK Fashion Labels →</span>
               </a>
-              <a href="/clothing-manufacturer-australia" style="background: #0a0a0a; padding: 1rem; text-decoration: none; display: block; border: 1px solid #1a1a1a; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#cc0000'" onmouseout="this.style.borderColor='#1a1a1a'" title="Clothing manufacturing services for Australian brands">
-                <h5 style="font-size: 0.8rem; font-weight: 500; color: #fff; margin-bottom: 0.5rem;">Australia</h5>
-                <p style="font-size: 0.7rem; color: #fff; line-height: 1.6; margin-bottom: 0.5rem;">Australian fashion brands benefit from our direct shipping and competitive pricing.</p>
-                <span style="font-size: 0.65rem; color: #fff; text-transform: uppercase; letter-spacing: 0.1em;">Ethical Garment Production for Australian Brands →</span>
+              <a href="/clothing-manufacturer-australia" style="background: var(--color-bg); padding: 1rem; text-decoration: none; display: block; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.2s;" onmouseover="this.style.borderColor='#e00'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'" title="Apparel manufacturers for Australian fashion brands">
+                <h4 style="font-size: 0.8rem; font-weight: 500; color: var(--color-text); margin-bottom: 0.5rem;">Australia</h4>
+                <p style="font-size: 0.7rem; color: var(--color-text); line-height: 1.6; margin-bottom: 0.5rem;">Australian fashion brands benefit from our direct shipping and competitive pricing.</p>
+                <span style="font-size: 0.65rem; color: var(--color-text); text-transform: uppercase; letter-spacing: 0.1em;">Ethical Garment Production for Australian Brands →</span>
               </a>
-              <a href="/clothing-manufacturer-canada" style="background: #0a0a0a; padding: 1rem; text-decoration: none; display: block; border: 1px solid #1a1a1a; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#cc0000'" onmouseout="this.style.borderColor='#1a1a1a'" title="Clothing manufacturing services for Canadian brands">
-                <h5 style="font-size: 0.8rem; font-weight: 500; color: #fff; margin-bottom: 0.5rem;">Canada</h5>
-                <p style="font-size: 0.7rem; color: #fff; line-height: 1.6; margin-bottom: 0.5rem;">Canadian fashion brands trust our quality manufacturing and reliable delivery times.</p>
-                <span style="font-size: 0.65rem; color: #fff; text-transform: uppercase; letter-spacing: 0.1em;">Custom Apparel Manufacturing for Canadian Retailers →</span>
+              <a href="/clothing-manufacturer-canada" style="background: var(--color-bg); padding: 1rem; text-decoration: none; display: block; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.2s;" onmouseover="this.style.borderColor='#e00'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'" title="Clothing manufacturers for Canadian fashion brands">
+                <h4 style="font-size: 0.8rem; font-weight: 500; color: var(--color-text); margin-bottom: 0.5rem;">Canada</h4>
+                <p style="font-size: 0.7rem; color: var(--color-text); line-height: 1.6; margin-bottom: 0.5rem;">Canadian fashion brands trust our quality manufacturing and reliable delivery times.</p>
+                <span style="font-size: 0.65rem; color: var(--color-text); text-transform: uppercase; letter-spacing: 0.1em;">Custom Apparel Manufacturing for Canadian Retailers →</span>
               </a>
-              <a href="/clothing-manufacturer-germany" style="background: #0a0a0a; padding: 1rem; text-decoration: none; display: block; border: 1px solid #1a1a1a; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#cc0000'" onmouseout="this.style.borderColor='#1a1a1a'" title="Clothing manufacturing services for German brands">
-                <h5 style="font-size: 0.8rem; font-weight: 500; color: #fff; margin-bottom: 0.5rem;">Germany</h5>
-                <p style="font-size: 0.7rem; color: #fff; line-height: 1.6; margin-bottom: 0.5rem;">German quality standards met with precision manufacturing and ISO certification.</p>
-                <span style="font-size: 0.65rem; color: #fff; text-transform: uppercase; letter-spacing: 0.1em;">Sustainable Garment Sourcing for German Brands →</span>
+              <a href="/clothing-manufacturer-germany" style="background: var(--color-bg); padding: 1rem; text-decoration: none; display: block; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.2s;" onmouseover="this.style.borderColor='#e00'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'" title="Garment manufacturers for German fashion brands">
+                <h4 style="font-size: 0.8rem; font-weight: 500; color: var(--color-text); margin-bottom: 0.5rem;">Germany</h4>
+                <p style="font-size: 0.7rem; color: var(--color-text); line-height: 1.6; margin-bottom: 0.5rem;">German quality standards met with precision manufacturing and ISO certification.</p>
+                <span style="font-size: 0.65rem; color: var(--color-text); text-transform: uppercase; letter-spacing: 0.1em;">Sustainable Garment Sourcing for German Brands →</span>
               </a>
-              <a href="/clothing-manufacturer-france" style="background: #0a0a0a; padding: 1rem; text-decoration: none; display: block; border: 1px solid #1a1a1a; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#cc0000'" onmouseout="this.style.borderColor='#1a1a1a'" title="Clothing manufacturing services for French brands">
-                <h5 style="font-size: 0.8rem; font-weight: 500; color: #fff; margin-bottom: 0.5rem;">France</h5>
-                <p style="font-size: 0.7rem; color: #fff; line-height: 1.6; margin-bottom: 0.5rem;">French fashion brands enjoy our premium production and attention to detail.</p>
-                <span style="font-size: 0.65rem; color: #fff; text-transform: uppercase; letter-spacing: 0.1em;">Private Label Apparel for French Fashion Houses →</span>
+              <a href="/clothing-manufacturer-france" style="background: var(--color-bg); padding: 1rem; text-decoration: none; display: block; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.2s;" onmouseover="this.style.borderColor='#e00'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'" title="Apparel manufacturers for French fashion brands">
+                <h4 style="font-size: 0.8rem; font-weight: 500; color: var(--color-text); margin-bottom: 0.5rem;">France</h4>
+                <p style="font-size: 0.7rem; color: var(--color-text); line-height: 1.6; margin-bottom: 0.5rem;">French fashion brands enjoy our premium production and attention to detail.</p>
+                <span style="font-size: 0.65rem; color: var(--color-text); text-transform: uppercase; letter-spacing: 0.1em;">Private Label Apparel for French Fashion Houses →</span>
               </a>
             </div>
           </div>
@@ -2123,20 +2232,31 @@ const faqs = [
     </div>
   </section>
 
+  <div class="index__container" style="padding: 0.5rem 0; border-top: 1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.7rem; color:rgba(255,255,255,0.6); text-align:center; margin:0;">
+      Content verified by 
+      <a href="/about/" style="color:rgba(255,255,255,0.5); text-decoration:none; border-bottom: 1px solid rgba(255,255,255,0.2);">
+        Chowdhury Remon
+      </a>, 
+      Founder &amp; CEO, SDF Clothing — 
+      Garment manufacturing expert since 1998.
+    </p>
+  </div>
+
 </div>
 
 <div id="exit-banner" class="index__exit-banner">
   <div class="index__container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
     <div>
-      <h3 style="font-size:1rem;color:#fff;margin-bottom:0.25rem;">Get Your Free Quote Before You Go</h3>
-      <p style="font-size:0.85rem;color:#ffffff;">48-hour response guarantee. No commitment required.</p>
+      <h3 style="font-size:1rem;color:var(--color-text);margin-bottom:0.25rem;">Get Your Free Quote Before You Go</h3>
+      <p style="font-size:0.85rem;color:var(--color-text);">48-hour response guarantee. Obligation-free consultation.</p>
     </div>
-    <a href="/contact" class="index__btn index__btn--primary" title="Get your free manufacturing quote">Get Quote</a>
+    <a href="/contact" class="index__btn index__btn--primary" title="Get your free apparel manufacturing quote">Get Quote</a>
   </div>
 </div>
 
 <div id="sticky-bar" class="index__sticky-bar">
-  <a href="/contact" class="index__btn index__btn--primary" title="Get your free manufacturing quote">Get Free Quote</a>
+  <a href="/contact" class="index__btn index__btn--primary" title="Get your free clothing manufacturing quote">Get Free Quote</a>
   <a href="https://wa.me/8801911733226" target="_blank" rel="noopener noreferrer" class="index__btn index__btn--secondary" title="Contact us via WhatsApp">WhatsApp</a>
 </div>
 

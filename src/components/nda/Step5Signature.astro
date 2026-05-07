@@ -1,0 +1,149 @@
+---
+<div class="step-content hidden" id="step5">
+  <h2 class="text-2xl font-bold text-white mb-6">Digital Signature</h2>
+  
+  <div class="space-y-6">
+    <div>
+      <label class="block text-sm font-medium text-gray-300 mb-2">
+        Draw Your Signature <span class="text-white">*</span>
+      </label>
+      <p class="text-xs text-gray-500 mb-3">Use your mouse or touch screen to draw your signature in the box below</p>
+      
+      <div class="bg-white rounded-lg overflow-hidden border-2 border-gray-700">
+        <canvas
+          id="signature-canvas"
+          width="600"
+          height="200"
+          class="w-full cursor-crosshair"
+          style="touch-action: none;"
+        ></canvas>
+      </div>
+      
+      <div class="flex gap-4 mt-3">
+        <button
+          type="button"
+          id="clear-signature"
+          class="px-4 py-2 bg-white border border-gray-700 rounded-lg text-black text-sm hover:border-white transition-all min-h-[44px]"
+        >
+          Clear Signature
+        </button>
+        <p id="signature-error" class="text-xs text-white self-center hidden">Please provide your signature before proceeding.</p>
+      </div>
+    </div>
+
+    <div class="bg-gray-900 border border-gray-700 rounded-lg p-4">
+      <p class="text-sm text-gray-300">
+        By signing, I confirm that I am authorized to sign on behalf of <span id="auth-company-name" class="text-white font-semibold">the company</span>.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <label class="flex items-start space-x-3 cursor-pointer">
+        <input
+          type="checkbox"
+          id="agree-terms"
+          name="agree_terms"
+          class="w-5 h-5 mt-0.5 text-black bg-gray-800 border-gray-600 rounded focus:ring-white focus:ring-2"
+        />
+        <span class="text-sm text-gray-300">
+          I have read, understood and agree to all terms of this Non-Disclosure Agreement <span class="text-white">*</span>
+        </span>
+      </label>
+
+      <label class="flex items-start space-x-3 cursor-pointer">
+        <input
+          type="checkbox"
+          id="confirm-accurate"
+          name="confirm_accurate"
+          class="w-5 h-5 mt-0.5 text-black bg-gray-800 border-gray-600 rounded focus:ring-white focus:ring-2"
+        />
+        <span class="text-sm text-gray-300">
+          I confirm all information provided is accurate and truthful <span class="text-white">*</span>
+        </span>
+      </label>
+    </div>
+
+    <p id="checkbox-error" class="text-xs text-white hidden">You must check both checkboxes to proceed.</p>
+
+    <div>
+      <label for="signature-date" class="block text-sm font-medium text-gray-300 mb-2">
+        Signature Date <span class="text-white">*</span>
+      </label>
+      <input
+        type="date"
+        id="signature-date"
+        name="signature_date"
+        required
+        class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
+      />
+    </div>
+  </div>
+
+  <script>
+    import SignaturePad from 'signature_pad';
+
+    let signaturePad: SignaturePad | null = null;
+
+    function initSignaturePad() {
+      const canvas = document.getElementById('signature-canvas') as HTMLCanvasElement;
+      if (!canvas) return;
+
+      requestAnimationFrame(() => {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext('2d')?.scale(ratio, ratio);
+      });
+
+      signaturePad = new SignaturePad(canvas, {
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        penColor: 'rgb(0, 0, 0)',
+      });
+
+      canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+      }, { passive: false });
+
+      canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+      }, { passive: false });
+    }
+
+    function clearSignature() {
+      if (signaturePad) {
+        signaturePad.clear();
+      }
+    }
+
+    function getSignatureData(): string | null {
+      if (!signaturePad) return null;
+      if (signaturePad.isEmpty()) return null;
+      return signaturePad.toDataURL('image/png');
+    }
+
+    function isSignatureEmpty(): boolean {
+      return signaturePad ? signaturePad.isEmpty() : true;
+    }
+
+    window.addEventListener('load', () => {
+      initSignaturePad();
+      
+      const clearBtn = document.getElementById('clear-signature');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', clearSignature);
+      }
+
+      const today = new Date().toISOString().split('T')[0];
+      const dateInput = document.getElementById('signature-date') as HTMLInputElement;
+      if (dateInput) {
+        dateInput.value = today;
+        dateInput.max = today;
+      }
+    });
+
+    (window as any).signaturePad = signaturePad;
+    (window as any).clearSignature = clearSignature;
+    (window as any).getSignatureData = getSignatureData;
+    (window as any).isSignatureEmpty = isSignatureEmpty;
+  </script>
+</div>

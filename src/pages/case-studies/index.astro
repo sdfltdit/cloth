@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+const pageTitle = "Client Case Studies | SDF Clothing Manufacturing Solutions";
+const pageDescription = "Real-world garment manufacturing case studies — how SDF Clothing solved sourcing, compliance, quality, and scaling challenges for fashion brands worldwide.";
+const canonicalUrl = "https://www.sdfltd.com/case-studies/";
+
+// Case study data - 6 placeholder case studies (all anonymized)
+const caseStudies = [
+  {
+    industryTag: "Activewear Brand",
+    problem: "Reducing Sample Lead Time from 14 to 7 Days",
+    context: "European activewear brand needed faster sample iteration cycles to keep pace with seasonal collection releases. Standard 14-day sample lead time was breaking their merchandising calendar.",
+    outcome: "50% LEAD TIME REDUCTION",
+    slug: "#"
+  },
+  {
+    industryTag: "DTC Streetwear",
+    problem: "Solving Color Consistency Across Multiple Production Runs",
+    context: "DTC streetwear startup faced color drift between sample, first production, and re-orders. Customer complaints affected brand reputation. Required unified color management protocol.",
+    outcome: "ZERO COLOR REJECTIONS IN 12 MONTHS",
+    slug: "#"
+  },
+  {
+    industryTag: "EU Boutique Label",
+    problem: "Achieving GOTS 7.0 Compliance for Capsule Collection",
+    context: "Sustainable boutique brand needed full GOTS 7.0 traceability for organic cotton capsule collection. Required certified mill sourcing, segregated production, and chain-of-custody documentation.",
+    outcome: "FULL GOTS 7.0 CERTIFIED PRODUCTION",
+    slug: "#"
+  },
+  {
+    industryTag: "USA Workwear Brand",
+    problem: "UFLPA Compliance Documentation Across Cotton Supply Chain",
+    context: "American workwear brand needed UFLPA-compliant cotton origin documentation for 2026 USA shipments. Required mill-level traceability and third-party verification protocols.",
+    outcome: "100% UFLPA-COMPLIANT SHIPMENTS",
+    slug: "#"
+  },
+  {
+    industryTag: "UK Fashion Label",
+    problem: "Scaling from 500 to 5,000 Pieces Without Quality Drift",
+    context: "Premium UK fashion label scaling from boutique production to mid-volume runs. Maintaining hand-finishing quality at 10x volume without changing manufacturer required production planning innovation.",
+    outcome: "MAINTAINED AQL 1.5 AT 10X SCALE",
+    slug: "#"
+  },
+  {
+    industryTag: "Australian DTC Brand",
+    problem: "Reducing FOB Cost by 18% Through Material Optimization",
+    context: "Australian DTC brand facing margin pressure. Required FOB cost reduction without compromising quality or compliance. Comprehensive material specification review and sourcing optimization.",
+    outcome: "18% FOB COST REDUCTION",
+    slug: "#"
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDescription} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content="https://www.sdfltd.com/hero.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={pageDescription} />
+  <meta name="twitter:image" content="https://www.sdfltd.com/hero.webp" />
+  <link rel="canonical" href={canonicalUrl} />
+
+  <div style="background: #000; min-height: 100vh;">
+
+    <!-- Hero Section -->
+    <header style="padding: 4rem 1.5rem 3rem; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid #e00;">
+      <span style="font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: #e00; font-family: 'Inter', monospace; display: block; margin-bottom: 1rem;">CASE STUDIES</span>
+      <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; color: #fff; line-height: 1.1; margin-bottom: 1.25rem; letter-spacing: 0.01em;">
+        Client Case Studies
+      </h1>
+      <p style="font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 760px; margin: 0;">
+        Real-world manufacturing challenges and the solutions we delivered. Each case study presents the client situation, technical or operational challenge, our approach, and measurable outcomes. Client names anonymized for confidentiality.
+      </p>
+    </header>
+
+    <!-- Case Studies Grid -->
+    <div style="padding: 3rem 1.5rem 5rem; max-width: 1200px; margin: 0 auto;">
+      <div style="display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(255,255,255,0.1);">
+        {caseStudies.map(study => (
+          <article style="background: #000; padding: 2.5rem; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.2s;">
+            <div style="margin-bottom: 1.5rem;">
+              <span style="font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; font-family: 'Inter', monospace; color: #e00; border: 1px solid #e00; padding: 0.25rem 0.75rem; display: inline-block;">
+                {study.industryTag}
+              </span>
+            </div>
+            <h2 style="font-size: 1.4rem; font-weight: 600; color: #fff; line-height: 1.3; margin-bottom: 1rem; letter-spacing: 0.01em;">
+              {study.problem}
+            </h2>
+            <p style="font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 1.5rem;">
+              {study.context}
+            </p>
+            <div style="padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+              <p style="font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; font-family: 'Inter', monospace; color: #e00; margin: 0;">
+                {study.outcome}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Responsive grid -->
+  <style is:inline>
+    @media (min-width: 768px) {
+      .case-studies-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+    @media (min-width: 1024px) {
+      .case-studies-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+    }
+  </style>
+
+</BaseLayout>

@@ -1,0 +1,153 @@
+---
+const countries = [
+  "United States", "United Kingdom", "Canada", "Australia", "Germany", "France", "Italy", "Spain", "Netherlands", "Belgium",
+  "Switzerland", "Austria", "Denmark", "Sweden", "Norway", "Finland", "Poland", "Czech Republic", "Hungary", "Romania",
+  "Bulgaria", "Greece", "Portugal", "Ireland", "Luxembourg", "Estonia", "Latvia", "Lithuania", "Slovakia", "Slovenia",
+  "Croatia", "Cyprus", "Malta", "Iceland", "Turkey", "Russia", "Ukraine", "Belarus", "Moldova", "Georgia",
+  "Armenia", "Azerbaijan", "Kazakhstan", "Uzbekistan", "Turkmenistan", "Kyrgyzstan", "Tajikistan", "Afghanistan", "Pakistan", "India",
+  "Bangladesh", "Sri Lanka", "Nepal", "Bhutan", "Myanmar", "Thailand", "Vietnam", "Cambodia", "Laos", "Malaysia",
+  "Singapore", "Indonesia", "Philippines", "Brunei", "East Timor", "China", "Japan", "South Korea", "North Korea", "Taiwan",
+  "Hong Kong", "Macau", "Mongolia", "Saudi Arabia", "UAE", "Qatar", "Kuwait", "Bahrain", "Oman", "Yemen",
+  "Jordan", "Lebanon", "Syria", "Iraq", "Iran", "Israel", "Palestine", "Egypt", "Libya", "Tunisia",
+  "Algeria", "Morocco", "Western Sahara", "Mauritania", "Mali", "Niger", "Chad", "Sudan", "South Sudan", "Eritrea",
+  "Djibouti", "Ethiopia", "Somalia", "Kenya", "Uganda", "Tanzania", "Rwanda", "Burundi", "Democratic Republic of Congo", "Congo",
+  "Gabon", "Equatorial Guinea", "Cameroon", "Nigeria", "Benin", "Togo", "Ghana", "Ivory Coast", "Liberia", "Sierra Leone",
+  "Guinea", "Guinea-Bissau", "Senegal", "Gambia", "Central African Republic", "Angola", "Zambia", "Zimbabwe", "Botswana", "Namibia",
+  "South Africa", "Lesotho", "Eswatini", "Mozambique", "Madagascar", "Comoros", "Mauritius", "Seychelles", "Brazil", "Argentina",
+  "Chile", "Uruguay", "Paraguay", "Bolivia", "Peru", "Ecuador", "Colombia", "Venezuela", "Guyana", "Suriname",
+  "French Guiana", "Mexico", "Guatemala", "Belize", "El Salvador", "Honduras", "Nicaragua", "Costa Rica", "Panama", "Cuba",
+  "Jamaica", "Haiti", "Dominican Republic", "Puerto Rico", "Bahamas", "Trinidad and Tobago", "Barbados", "Other"
+];
+
+const businessTypes = ["LLC", "Ltd", "Sole Trader", "Partnership", "Corporation", "Other"];
+---
+<div class="step-content" id="step1">
+  <h2 class="text-2xl font-bold text-white mb-6">Company Information</h2>
+  
+  <div class="space-y-6">
+    <div>
+      <label for="company_name" class="block text-sm font-medium text-gray-300 mb-2">
+        Legal Company Name <span class="text-white">*</span>
+      </label>
+      <input
+        type="text"
+        id="company_name"
+        name="company_name"
+        required
+        minlength="2"
+        autocomplete="organization"
+        class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
+        placeholder="Enter your registered company name"
+      />
+      <p class="mt-1 text-xs text-gray-500">Must match your business registration documents</p>
+    </div>
+
+    <div>
+      <label for="company_registration_number" class="block text-sm font-medium text-gray-300 mb-2">
+        Business Registration Number <span class="text-white">*</span>
+      </label>
+      <input
+        type="text"
+        id="company_registration_number"
+        name="company_registration_number"
+        required
+        minlength="3"
+        autocomplete="off"
+        class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
+        placeholder="e.g., 123456789"
+      />
+    </div>
+
+    <div>
+      <label for="company_country" class="block text-sm font-medium text-gray-300 mb-2">
+        Country of Incorporation <span class="text-white">*</span>
+      </label>
+      <select
+        id="company_country"
+        name="company_country"
+        required
+        autocomplete="country"
+        class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
+      >
+        <option value="">Select your country</option>
+        {countries.map((country) => (
+          <option value={country}>{country}</option>
+        ))}
+      </select>
+    </div>
+
+    <div>
+      <label for="company_type" class="block text-sm font-medium text-gray-300 mb-2">
+        Business Type <span class="text-white">*</span>
+      </label>
+      <select
+        id="company_type"
+        name="company_type"
+        required
+        autocomplete="organization"
+        class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
+      >
+        <option value="">Select business type</option>
+        {businessTypes.map((type) => (
+          <option value={type}>{type}</option>
+        ))}
+      </select>
+    </div>
+
+    <div>
+      <label for="business_address" class="block text-sm font-medium text-gray-300 mb-2">
+        Full Business Address <span class="text-white">*</span>
+      </label>
+      <textarea
+        id="business_address"
+        name="business_address"
+        required
+        minlength="10"
+        rows="3"
+        autocomplete="street-address"
+        class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all resize-none"
+        placeholder="Street address, City, State/Province, Postal Code"
+      ></textarea>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="vat_tax_id" class="block text-sm font-medium text-gray-300 mb-2">
+          VAT / Tax ID Number <span class="text-gray-500">(Optional)</span>
+        </label>
+        <input
+          type="text"
+          id="vat_tax_id"
+          name="vat_tax_id"
+          autocomplete="off"
+          class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
+          placeholder="e.g., GB123456789"
+        />
+      </div>
+
+      <div>
+        <label for="trade_license_number" class="block text-sm font-medium text-gray-300 mb-2">
+          Trade License Number <span class="text-gray-500">(Optional)</span>
+        </label>
+        <input
+          type="text"
+          id="trade_license_number"
+          name="trade_license_number"
+          autocomplete="off"
+          class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
+          placeholder="e.g., TL-12345"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Honeypot field for bot detection -->
+  <input
+    type="text"
+    name="website_field"
+    tabindex="-1"
+    autocomplete="off"
+    style="position: absolute; left: -5000px;"
+    aria-hidden="true"
+  />
+</div>

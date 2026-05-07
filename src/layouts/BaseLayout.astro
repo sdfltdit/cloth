@@ -1,30 +1,45 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
 import '../styles/global.css';
+import BaseHead from '../components/BaseHead.astro';
 
 export interface Props {
   title: string;
   description: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  datePublished?: string;
+  dateModified?: string;
+  schema?: object | object[];
 }
 
-const { title, description } = Astro.props;
+const { title, description, canonicalUrl, ogImage, datePublished, dateModified, schema } = Astro.props;
 const currentUrl = Astro.url.href;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} url={currentUrl} />
+    <BaseHead 
+      title={title}
+      description={description}
+      canonicalUrl={canonicalUrl}
+      ogImage={ogImage}
+      datePublished={datePublished}
+      dateModified={dateModified}
+      schema={schema}
+    />
 
-    <link rel="preload" as="image" href="/hero.webp" type="image/webp" fetchpriority="high" imagesizes="(max-width: 768px) 100vw, 50vw" imagesrcset="/hero.webp 1920w, /hero-768.webp 768w" />
-    
     <!-- Hreflang: single URL for all regions  no country-specific pages -->
-    <link rel="alternate" hreflang="x-default" href="https://sdfltd.com/" />
-    <link rel="alternate" hreflang="en-US" href="https://sdfltd.com/clothing-manufacturer-usa" />
-    <link rel="alternate" hreflang="en-GB" href="https://sdfltd.com/clothing-manufacturer-uk" />
-    <link rel="alternate" hreflang="en-CA" href="https://sdfltd.com/clothing-manufacturer-canada" />
-    <link rel="alternate" hreflang="en-AU" href="https://sdfltd.com/clothing-manufacturer-australia" />
-    <link rel="alternate" hreflang="en" href="https://sdfltd.com/clothing-manufacturers" />
+    <link rel="alternate" hreflang="x-default" href="https://www.sdfltd.com/" />
+    <link rel="alternate" hreflang="en-US" href="https://www.sdfltd.com/clothing-manufacturer-usa" />
+    <link rel="alternate" hreflang="en-GB" href="https://www.sdfltd.com/clothing-manufacturer-uk" />
+    <link rel="alternate" hreflang="en-CA" href="https://www.sdfltd.com/clothing-manufacturer-canada" />
+    <link rel="alternate" hreflang="en-AU" href="https://www.sdfltd.com/clothing-manufacturer-australia" />
+    <link rel="alternate" hreflang="en" href="https://www.sdfltd.com/clothing-manufacturers" />
+
+    <!-- Preconnect to third-party origins for faster loading -->
+    <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin>
+    <link rel="dns-prefetch" href="https://static.cloudflareinsights.com">
 
     <!-- Self-Hosted Fonts with font-display: swap -->
     <style is:inline>
@@ -63,23 +78,26 @@ const currentUrl = Astro.url.href;
     </style>
 
     <!-- Critical CSS - Minimal Above-the-Fold Only -->
-<style is:inline> *,*::before,*::after {box-sizing:border-box;margin:0;padding:0}html {scroll-behavior:smooth}body {background:#000;color:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;font-size:17px;line-height:1.7;letter-spacing:0.01em;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100vw}.skip-link {position:absolute;top:-100%;left:0;background:#000;color:#fff;padding:8px 16px;z-index:9999;font-size:14px;text-decoration:none}.skip-link:focus {top:0}#main-nav {position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:0.6px solid #333}.nav-inner {display:flex;align-items:center;justify-content:space-between;height:56px;max-width:1200px;margin:0 auto;padding:0 1.5rem;gap:1rem}.nav-logo {display:flex;align-items:center;gap:8px;text-decoration:none}.nav-logo-text {font-size:1.1rem;font-weight:600;letter-spacing:0.08em;color:#fff}.nav-links {display:flex;align-items:center;gap:0;list-style:none;flex-wrap:nowrap;white-space:nowrap}.nav-links a {font-size:0.72rem;letter-spacing:0.08em;color:#fff;text-transform:uppercase;transition:color 0.2s;padding:0 0.75rem;white-space:nowrap;text-decoration:none}#mobile-toggle {display:none;background:none;border:none;cursor:pointer;padding:4px;align-items:center;justify-content:center;min-width:44px;min-height:44px}@media (max-width:768px) {#mobile-toggle {display:flex}.nav-links {display:none !important}}#mobile-menu {display:none;flex-direction:column;padding:1rem 1.5rem;border-top:1px solid #1a1a1a;gap:0}#mobile-menu.open {display:flex}#mobile-menu a {display:block;padding:0.75rem 0;font-size:0.85rem;letter-spacing:0.1em;color:#fff;text-transform:uppercase;border-bottom:1px solid #111;text-decoration:none}.hero-section {min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center}@media (max-width:768px) {.hero-section {grid-template-columns:1fr;min-height:auto}}.hero-left {padding:60px 40px 40px;max-width:600px}@media (max-width:768px) {.hero-left {padding:48px 1.5rem 32px;max-width:100%}}.hero-left h1 {font-size:clamp(2.5rem,4.5vw,4.2rem);font-weight:200;color:#fff;line-height:1.15;letter-spacing:0.02em;margin-bottom:1rem;contain:layout style paint;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif}.container {width:100%;max-width:1200px;margin:0 auto;padding:0 1.5rem}h1,h2,h3,h4 {font-family:'Inter',sans-serif;font-weight:500;letter-spacing:0.05em;line-height:1.2;color:#fff}a {color:inherit;text-decoration:none}body:not(.loaded) .particles,body:not(.loaded)::before,body:not(.loaded)::after {animation-play-state:paused !important}@media (prefers-reduced-motion:reduce) {* {animation-duration:0.01ms !important;transition-duration:0.01ms !important}}@media (max-width:768px) {button,a,input[type="submit"],input[type="button"],[role="button"] {min-height:44px;min-width:44px}}</style>
+    <style is:inline> *,*::before,*::after {box-sizing:border-box;margin:0;padding:0}html {scroll-behavior:smooth}body {background:#000;color:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;font-size:17px;line-height:1.7;letter-spacing:0.01em;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100vw}.skip-link {position:absolute;top:-100%;left:0;background:#000;color:#fff;padding:8px 16px;z-index:9999;font-size:14px;text-decoration:none}.skip-link:focus {top:0}#main-nav {position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:0.6px solid #000000}.nav-inner {display:flex;align-items:center;justify-content:space-between;height:56px;max-width:1200px;margin:0 auto;padding:0 1.5rem;gap:1rem}.nav-logo {display:flex;align-items:center;gap:8px;text-decoration:none}.nav-logo-text {font-size:1.1rem;font-weight:600;letter-spacing:0.08em;color:#fff}.nav-links {display:flex;align-items:center;gap:0;list-style:none;flex-wrap:nowrap;white-space:nowrap}.nav-links a {font-size:0.72rem;letter-spacing:0.08em;color:#fff;text-transform:uppercase;transition:color 0.2s;padding:0 0.75rem;white-space:nowrap;text-decoration:none}#mobile-toggle {display:none;background:none;border:none;cursor:pointer;padding:4px;align-items:center;justify-content:center;min-width:44px;min-height:44px}@media (max-width:768px) {#mobile-toggle {display:flex}.nav-links {display:none !important}}#mobile-menu {display:none;flex-direction:column;padding:1rem 1.5rem;border-top:1px solid #1a1a1a;gap:0}#mobile-menu.open {display:flex}#mobile-menu a {display:block;padding:0.75rem 0;font-size:0.85rem;letter-spacing:0.1em;color:#fff;text-transform:uppercase;border-bottom:1px solid #111;text-decoration:none}.hero-section {min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center}@media (max-width:768px) {.hero-section {grid-template-columns:1fr;min-height:auto}}.hero-left {padding:60px 40px 40px;max-width:600px}@media (max-width:768px) {.hero-left {padding:48px 1.5rem 32px;max-width:100%}}.hero-left h1 {font-size:clamp(2.5rem,4.5vw,4.2rem);font-weight:200;color:#fff;line-height:1.15;letter-spacing:0.02em;margin-bottom:1rem;contain:layout style paint;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif}.container {width:100%;max-width:1200px;margin:0 auto;padding:0 1.5rem}h1,h2,h3,h4 {font-family:'Inter',sans-serif;font-weight:500;letter-spacing:0.05em;line-height:1.2;color:#fff}a {color:inherit;text-decoration:none}body:not(.loaded) .particles,body:not(.loaded)::before,body:not(.loaded)::after {animation-play-state:paused !important}@media (prefers-reduced-motion:reduce) {* {animation-duration:0.01ms !important;transition-duration:0.01ms !important}}@media (max-width:768px) {button,a,input[type="submit"],input[type="button"],[role="button"] {min-height:44px;min-width:44px}}</style>
 
-    <!-- Font Preload for LCP Optimization -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCo3FwrK3iLTcviYwY.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Cloudflare Rocket Loader Disable -->
+    <meta name="cf-2fa-verify" content="off" />
 
-    <!-- Non-Critical CSS - Loaded normally (no inline JS for CSP compliance) -->
-    <link rel="stylesheet" href="/styles/global.css" />
+    <!-- Font Preload for LCP Optimization - Self-hosted fonts -->
+    <link rel="preload" href="/fonts/inter-v13-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-v13-latin-600.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Hero Image Preload -->
+    <link rel="preload" as="image" href="/hero.webp" type="image/webp" fetchpriority="high" imagesizes="(max-width: 768px) 100vw, 50vw" imagesrcset="/hero.webp 1920w" />
+
+    <!-- Non-Critical CSS - Loaded via Astro import above -->
 
     <!-- Optimized Script Bundles -->
-    
-    
-    <script src="/scripts/app.js" defer></script>
-    <script src="/scripts/faq-accordion-new.js" defer></script>
-    <script src="/scripts/sw-register.js" defer></script>
+    <script src="/scripts/app.js" defer data-cfasync="false"></script>
+    <script src="/scripts/sw-register.js" defer data-cfasync="false"></script>
     
     <!-- Footer Toggle Function -->
-    <script type="module">
+    <script type="module" data-cfasync="false">
       function toggleFooter(section) {
         // Only work on mobile (screen width <= 768px)
         if (window.innerWidth > 768) return;
@@ -140,11 +158,12 @@ const currentUrl = Astro.url.href;
       <div class="nav-inner">
         <a href="/" class="nav-logo" aria-label="SDF Clothing" title="SDF Clothing - Home">
           <img
-            src="/logo-small.webp"
+            src="/logo-small.svg"
             alt="SDF Clothing Logo"
             width="36"
             height="36"
             loading="eager"
+            fetchpriority="high"
             style="display:block;flex-shrink:0;"
           />
           <div>
@@ -190,9 +209,21 @@ const currentUrl = Astro.url.href;
         <div class="footer-grid">
 
           <div>
-            <img src="/logo-small.webp" alt="SDF Clothing" width="72" height="36" loading="lazy" style="margin-bottom:1rem;object-fit:contain;" />
+            <img src="/logo-small.svg" alt="SDF Clothing" width="72" height="36" loading="lazy" style="margin-bottom:1rem;object-fit:contain;" />
             <p style="font-size:0.75rem;color:#fff;line-height:1.7;margin-bottom:1rem;max-width:220px;">Ethical clothing manufacturers in Bangladesh supplying OEM and private label apparel to fashion brands worldwide since 1998.</p>
-            <p style="font-size:0.75rem;color:#fff;line-height:1.7;">House 125, Road 01<br/>Baridhara DOHS, Dhaka 1212<br/>Bangladesh</p>
+            <address itemscope itemtype="https://schema.org/LocalBusiness"
+              style="font-style:normal;font-size:0.78rem;color:rgba(255,255,255,0.65);line-height:1.9;">
+              <span itemprop="name" style="color:rgba(255,255,255,0.7);font-weight:500;">SDF Clothing</span><br/>
+              <span itemprop="streetAddress">House 125, Road 01, Baridhara DOSH</span><br/>
+              <span itemprop="addressLocality">Dhaka</span>,
+              <span itemprop="postalCode">1212</span>,
+              <span itemprop="addressCountry">Bangladesh</span><br/>
+              <a href="tel:+8801911733226" itemprop="telephone"
+                style="color:inherit;text-decoration:none;">+880 1911-733226</a>
+              &nbsp;·&nbsp;
+              <a href="mailto:contact@sdfltd.com" itemprop="email"
+                style="color:inherit;text-decoration:none;">contact@sdfltd.com</a>
+            </address>
           </div>
 
           <div data-section="company">
@@ -203,12 +234,12 @@ const currentUrl = Astro.url.href;
               </svg>
             </button>
             <ul class="footer-links-list" style="list-style:none;">
-              <li style="margin-bottom:0.6rem;"><a href="/" style="font-size:0.8rem;color:#fff;transition:color 0.2s;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Our product offerings">Offerings</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Quality certifications">Excellence</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Proof and testimonials">Proof</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/about" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Our company story">Story</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Manufacturing expertise">Expertise</a></li>
-              <li><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Community initiatives">Community</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/about" style="font-size:0.8rem;color:#fff;transition:color 0.2s;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Our company story">Story</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/products" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Our product offerings">Offerings</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/work-process" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Manufacturing expertise">Expertise</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/certifications" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Quality certifications">Excellence</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/csr" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Community initiatives">Community</a></li>
+              <li><a href="/contact" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Contact us">Reach Out</a></li>
             </ul>
           </div>
 
@@ -220,12 +251,12 @@ const currentUrl = Astro.url.href;
               </svg>
             </button>
             <ul class="footer-links-list" style="list-style:none;">
-              <li style="margin-bottom:0.6rem;"><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Private label manufacturing">Private Label</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="OEM manufacturing services">OEM Manufacturing</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Low minimum order quantity">Low MOQ</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Manufacturing for startups">For Startups</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Cut Make Trim services">CMT Services</a></li>
-              <li><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Boutique production services">Boutique Production</a></li>
+              <li style="margin-bottom:0.6rem;"><span style="font-size:0.8rem;color:#fff;">Tech Pack</span></li>
+              <li style="margin-bottom:0.6rem;"><a href="/full-package-production" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Full package production service">Full Package</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/branding-launch" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Branding launch service">Branding</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/white-label" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="White label manufacturing">White Label</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/sustainability" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Sustainable manufacturing">Sustainability</a></li>
+              <li><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Cut Make Trim services">CMT Services</a></li>
             </ul>
           </div>
 
@@ -240,9 +271,9 @@ const currentUrl = Astro.url.href;
               <li style="margin-bottom:0.6rem;"><a href="/journal" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Read our journal entries">Journal Entry</a></li>
               <li style="margin-bottom:0.6rem;"><a href="/insights" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Industry insights and news">Industry Insight</a></li>
               <li style="margin-bottom:0.6rem;"><a href="/careers" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="View open positions">Open Positions</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Read case studies">Case Studies</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/case-studies" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Read case studies">Case Studies</a></li>
               <li style="margin-bottom:0.6rem;"><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Take a virtual factory tour">Factory Tour</a></li>
-              <li><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="View client success stories">Client Wins</a></li>
+              <li><a href="/" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="View client success stories">NDA</a></li>
             </ul>
           </div>
 
@@ -258,8 +289,8 @@ const currentUrl = Astro.url.href;
               <li style="margin-bottom:0.6rem;"><a href="/tools/gsm-converter" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Convert GSM measurements">GSM Converter</a></li>
               <li style="margin-bottom:0.6rem;"><a href="/tools/color-converter" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Convert color formats">Color Converter</a></li>
               <li style="margin-bottom:0.6rem;"><a href="/tools/aql-calculator" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Calculate AQL sampling">AQL Calculator</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/tools/hs-code" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="HS code reference guide">HS Code Reference</a></li>
-              <li><a href="/tools/shrinkage-calculator" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Calculate fabric shrinkage">Shrinkage Calculator</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="/tools/hs-code" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="HS code reference guide">HS Code</a></li>
+              <li><a href="/tools/shrinkage-calculator" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Calculate fabric shrinkage">Shrinkage</a></li>
             </ul>
           </div>
 
@@ -271,12 +302,12 @@ const currentUrl = Astro.url.href;
               </svg>
             </button>
             <ul class="footer-links-list" style="list-style:none;">
-              <li style="margin-bottom:0.6rem;"><a href="https://linkedin.com/company/sdfclothing" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Follow us on LinkedIn">LinkedIn</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="https://twitter.com/sdfclothing" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Follow us on Twitter">Twitter / X</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="https://reddit.com/r/sdfclothing" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Join us on Reddit">Reddit</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="https://quora.com/profile/SDF-Clothing" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Find us on Quora">Quora</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="https://pinterest.com/sdfclothing" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Follow us on Pinterest">Pinterest</a></li>
-              <li><a href="https://slideshare.net/sdfclothing" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="View our presentations on SlideShare">SlideShare</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="https://au.pinterest.com/sdfltdclothingnsw/" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on Pinterest" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Follow us on Pinterest">Pinterest</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="https://x.com/clothing_makers/" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on X" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Follow us on X">X</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="https://www.linkedin.com/company/clothing-manufacturers" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on LinkedIn" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Follow us on LinkedIn">LinkedIn</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="https://www.reddit.com/user/clothing-mmakers/" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on Reddit" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Join us on Reddit">Reddit</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="https://www.slideshare.net/sdfashion1" target="_blank" rel="noopener noreferrer" aria-label="View SDF Clothing presentations on SlideShare" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="View our presentations on SlideShare">SlideShare</a></li>
+              <li><a href="https://www.quora.com/profile/SDF-Clothing-1" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on Quora" style="font-size:0.8rem;color:#fff;" onmouseover="this.style.color='#ccc'" onmouseout="this.style.color='#fff'" title="Find us on Quora">Quora</a></li>
             </ul>
           </div>
 
@@ -286,7 +317,7 @@ const currentUrl = Astro.url.href;
       <div class="footer-bottom-bar">
         <div class="footer-bottom-inner">
           <p class="footer-copyright">
-            © <span id="copyright-year"></span> SDF Clothing. All rights reserved. <a href="/terms" style="color:#fff;text-decoration:underline;margin-left:0.5rem;" title="Read our Terms of Service">Terms of Service</a>
+            © <span id="copyright-year"></span> SDF Clothing. All rights reserved. <a href="/terms" style="color:#fff;text-decoration:underline;margin-left:0.5rem;" title="Read our Terms of Service">Terms of Service</a> <a href="/editorial-policy" style="color:#fff;text-decoration:underline;margin-left:0.5rem;" title="Read our Editorial Policy">Editorial Policy</a>
           </p>
           <div class="footer-social-links">
             <a href="https://wa.me/8801911733226" target="_blank" rel="noopener noreferrer" title="WhatsApp">WhatsApp</a>
@@ -303,16 +334,16 @@ const currentUrl = Astro.url.href;
     </script>
 
     <!-- Cookie Consent Popup -->
-    <div id="cookie-consent" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #0a0a0a; border-top: 1px solid #1a1a1a; z-index: 1000; padding: 1rem 1.5rem;">
+    <div id="cookie-consent" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #000000; border-top: 1px solid #1a1a1a; z-index: 1000; padding: 1rem 1.5rem;">
       <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
         <p style="font-size: 0.78rem; color: #fff; margin: 0; flex: 1; min-width: 200px;">
-          We use cookies to improve your experience. See our <a href="/privacy" style="color: #ccc; text-decoration: none;" title="Read our Privacy Policy">Privacy Policy</a>.
+          We use cookies to improve your experience. See our <a href="/privacy" style="color: #FFFFFF; text-decoration: none;" title="Read our Privacy Policy">Privacy Policy</a>.
         </p>
         <div style="display: flex; gap: 0.75rem; align-items: center;">
           <button id="accept-cookies" style="background: #666; color: #fff; border: none; padding: 0.5rem 1rem; font-size: 0.78rem; font-weight: 500; border-radius: 4px; cursor: pointer; transition: background 0.2s; min-height: 44px; min-width: 44px;">
             Accept All
           </button>
-          <button id="decline-cookies" style="background: transparent; color: #fff; border: 1px solid #333; padding: 0.5rem 1rem; font-size: 0.78rem; font-weight: 500; border-radius: 4px; cursor: pointer; transition: border-color 0.2s; min-height: 44px; min-width: 44px;">
+          <button id="decline-cookies" style="background: transparent; color: #fff; border: 1px solid #000000; padding: 0.5rem 1rem; font-size: 0.78rem; font-weight: 500; border-radius: 4px; cursor: pointer; transition: border-color 0.2s; min-height: 44px; min-width: 44px;">
             Decline
           </button>
         </div>

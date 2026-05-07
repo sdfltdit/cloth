@@ -71,7 +71,7 @@
       ">
         <div style="
           max-width:480px;width:100%;
-          border:1px solid #cc0000;
+          border:1px solid #e00;
           padding:2.5rem 2rem;
           text-align:center;
           animation:sdfSlideUp 0.45s ease forwards;
@@ -80,31 +80,31 @@
           <h2 style="font-size:1.2rem;font-weight:600;letter-spacing:0.08em;margin-bottom:0.5rem;color:#fff;text-transform:uppercase;">
             Message Received
           </h2>
-          <p style="font-size:0.82rem;color:#ccc;margin-bottom:2rem;line-height:1.7;">
+          <p style="font-size:0.82rem;color:#FFFFFF;margin-bottom:2rem;line-height:1.7;">
             Our team will respond within 24 hours.
           </p>
-          <div style="border-top:1px solid #1a1a1a;padding-top:1.5rem;text-align:left;">
-            <p style="font-size:0.72rem;color:#888;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem;">Session Info</p>
+          <div style="border-top:1px solid #e00;padding-top:1.5rem;text-align:left;">
+            <p style="font-size:0.72rem;color:#FFFFFF;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem;">Session Info</p>
             <div style="display:grid;grid-template-columns:auto 1fr;gap:0.4rem 1rem;font-size:0.8rem;">
-              <span style="color:#666;">Device</span>
+              <span style="color:#FFFFFF;">Device</span>
               <span style="color:#fff;">${device}</span>
-              <span style="color:#666;">Location</span>
+              <span style="color:#FFFFFF;">Location</span>
               <span style="color:#fff;">${location || 'Unknown'}</span>
-              <span style="color:#666;">IP</span>
+              <span style="color:#FFFFFF;">IP</span>
               <span style="color:#fff;">${geo.ip}</span>
-              <span style="color:#666;">Time</span>
+              <span style="color:#FFFFFF;">Time</span>
               <span style="color:#fff;">${time}</span>
             </div>
           </div>
           <button onclick="document.getElementById('sdf-thankyou').remove()" style="
             margin-top:2rem;
-            background:#cc0000;color:#fff;
+            background:#e00;color:#fff;
             border:none;padding:0.7rem 2rem;
             font-size:0.75rem;letter-spacing:0.12em;
             text-transform:uppercase;cursor:pointer;
             transition:background 0.2s;
             min-height:44px;
-          " onmouseover="this.style.background='#aa0000'" onmouseout="this.style.background='#cc0000'">
+          " onmouseover="this.style.background='#aa0000'" onmouseout="this.style.background='#e00'">
             Close
           </button>
         </div>
@@ -182,7 +182,7 @@
       form.reset();
       showThankYou(geo, device, form);
     } else {
-      alert('Something went wrong. Please try WhatsApp: +16465356343');
+      alert('Something went wrong. Please try our WhatsApp contact button.');
     }
   }
 
