@@ -13,6 +13,7 @@ export const schemaOrganization = {
   "legalName": "SDF Clothing Ltd",
   "alternateName": ["SDF Ltd", "SDF Garments"],
   "url": SITE_URL,
+
   "logo": {
     "@type": "ImageObject",
     "@id": SITE_URL + "/#logo",
@@ -27,7 +28,14 @@ export const schemaOrganization = {
     "width": 1200,
     "height": 630
   },
-  "description": "SDF Clothing is a vertically integrated clothing manufacturer based in Dhaka, Bangladesh. Founded in 1998 by Chowdhury Remon, we operate yarn spinning, fabric knitting, weaving, dyeing, cutting, sewing, finishing, and warehousing under one ownership. We serve startup and established fashion brands worldwide with low MOQ from 300 pieces, GOTS certification, and 13 international quality certifications. Exporting to USA, EU, UK, Canada, Australia, Japan, and UAE.",
+
+  "description": "SDF Clothing is a vertically integrated B2B clothing manufacturer based in Dhaka, Bangladesh. Founded in 1998 by Chowdhury Remon, we are a direct factory — not an agent, trader, or buying house. We operate yarn spinning, fabric knitting, weaving, dyeing, cutting, sewing, finishing, and warehousing under one ownership. We serve startup and established fashion brands worldwide with low MOQ from 300 pieces, GOTS certification, and 13 international quality certifications. B2B manufacturing only — no retail, no stock garments. Exporting to USA, EU, UK, Canada, Australia, Japan, and UAE.",
+
+  "additionalType": [
+    "https://schema.org/TextileMill",
+    "https://schema.org/AutomotiveBusiness"
+  ],
+
   "foundingDate": "1998",
   "inLanguage": "en",
   "numberOfLocations": 4,
@@ -275,21 +283,23 @@ export const schemaOrganization = {
 
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Clothing Manufacturing Services",
+    "name": "B2B Clothing Manufacturing Services",
     "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "OEM Clothing Manufacturing", "url": SITE_URL + "/clothing-manufacturers" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Private Label Apparel Production", "url": SITE_URL + "/white-label-manufacturer" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CMT Garment Services", "url": SITE_URL + "/cut-and-sew-service" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tech Pack Development", "url": SITE_URL + "/tech-pack-service" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sustainable Organic Manufacturing", "url": SITE_URL + "/sustainability" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Full Package Production", "description": "End-to-end manufacturing from yarn spinning and fabric production to finished garment delivery" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bespoke Apparel Development", "description": "Custom concept to production with first sample ready in 14 days" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Low MOQ Manufacturing", "description": "Starting from 300 pieces per style, no outsourcing, all production in-house" } }
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "OEM Clothing Manufacturing", "description": "Produce garments from your own designs and tech packs under your brand label. B2B only.", "url": SITE_URL + "/clothing-manufacturers" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ODM Clothing Manufacturing", "description": "Choose from our existing designs and add your own branding. Minimum 300 pieces.", "url": SITE_URL + "/clothing-manufacturers" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Private Label Apparel Production", "description": "Launch your own fashion line with custom labels, tags, and packaging included.", "url": SITE_URL + "/white-label-manufacturer" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CMT Garment Services", "description": "Send your own fabric — we cut, make, and trim to your specifications.", "url": SITE_URL + "/cut-and-sew-service" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tech Pack Development", "description": "Full technical package development from sketch or reference to production-ready spec.", "url": SITE_URL + "/tech-pack-service" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sustainable Organic Manufacturing", "description": "GOTS certified organic cotton and GRS certified recycled fabric production.", "url": SITE_URL + "/sustainability" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Full Package Production", "description": "End-to-end manufacturing from yarn spinning and fabric production to finished garment delivery — no outsourcing." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Low MOQ Manufacturing", "description": "Starting from 300 pieces per style. All production in-house, zero outsourcing. Ideal for startup fashion brands." } }
     ]
   },
 
   "knowsAbout": [
+    "B2B Clothing Manufacturing",
     "OEM Clothing Manufacturing",
+    "ODM Clothing Manufacturing",
     "Private Label Apparel Production",
     "CMT Garment Services",
     "Full Package Production",
@@ -304,11 +314,12 @@ export const schemaOrganization = {
     "Seasonal Collection Development",
     "Rush Order Production",
     "Repeat Order Management",
-    "Confidential Manufacturing",
+    "Confidential NDA Manufacturing",
     "Low MOQ Fashion Manufacturing",
     "Small Batch Apparel Manufacturing",
     "Large Scale Bulk Production",
     "Vertically Integrated Manufacturing",
+    "Factory Direct Apparel Supply",
     "Yarn Spinning",
     "Yarn Procurement",
     "Fabric Knitting",
@@ -541,20 +552,23 @@ export const schemaOrganization = {
     "Dhaka Clothing Manufacturer"
   ],
 
+  // NOTE: "award" array below intentionally lists certification short names as industry recognition signals.
+  // These are not duplicates of the "certification" array — the certification array has full structured objects
+  // with issuedBy data, while award lists the achievement labels for Google's award signal.
   "award": [
-    "GOTS Certified",
-    "OEKO-TEX Standard 100",
-    "ISO 9001",
-    "ISO 14001",
-    "BSCI",
-    "SEDEX",
-    "GRS",
-    "OCS",
-    "RCS",
-    "C-TPAT",
-    "WRAP",
-    "SA8000",
-    "BCI"
+    "GOTS Certified Organic Textile Manufacturer",
+    "OEKO-TEX Standard 100 Certified",
+    "ISO 9001 Quality Management Certified",
+    "ISO 14001 Environmental Management Certified",
+    "BSCI Social Compliance Certified",
+    "SEDEX SMETA Audited Supplier",
+    "GRS Global Recycled Standard Certified",
+    "OCS Organic Content Standard Certified",
+    "RCS Recycled Claim Standard Certified",
+    "C-TPAT Certified Importer",
+    "WRAP Certified Production Facility",
+    "SA8000 Social Accountability Certified",
+    "BCI Better Cotton Certified"
   ],
 
   "subjectOf": [
@@ -586,7 +600,7 @@ export const schemaOrganization = {
   "audience": {
     "@type": "BusinessAudience",
     "name": "Fashion brands and clothing labels worldwide",
-    "audienceType": "Fashion startups, established fashion brands, wholesalers, retailers, private label brands"
+    "audienceType": "Fashion startups, established fashion brands, wholesalers, retailers, private label brands, buying houses"
   },
 
   "potentialAction": [
@@ -639,21 +653,26 @@ export const schemaOrganization = {
       "itemOffered": {
         "@type": "Service",
         "name": "Low MOQ Clothing Manufacturing",
-        "description": "Custom clothing manufacturing from 300 pieces per style"
+        "description": "Custom clothing manufacturing from 300 pieces per style. B2B only — for fashion brands, not individual buyers.",
+        "provider": { "@id": SITE_URL + "/#organization" }
       },
       "priceSpecification": {
         "@type": "PriceSpecification",
         "priceCurrency": "USD",
         "price": "300",
         "description": "Starting MOQ — 300 pieces per style"
-      }
+      },
+      "eligibleCustomerType": "http://schema.org/Business"
     },
     {
       "@type": "Offer",
       "itemOffered": {
         "@type": "Service",
-        "name": "GOTS Certified Organic Cotton Manufacturing"
-      }
+        "name": "GOTS Certified Organic Cotton Manufacturing",
+        "description": "Organic cotton garment production with GOTS chain-of-custody certification for eco-conscious fashion brands.",
+        "provider": { "@id": SITE_URL + "/#organization" }
+      },
+      "eligibleCustomerType": "http://schema.org/Business"
     }
   ]
 };
@@ -701,6 +720,9 @@ export const schemaPerson = {
     "GOTS Certification",
     "Apparel Export",
     "Private Label Manufacturing",
+    "OEM Manufacturing",
+    "ODM Manufacturing",
+    "CMT Services",
     "Tech Pack Development",
     "Fabric Sourcing",
     "Fashion Brand Development",
