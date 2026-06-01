@@ -1,6 +1,5 @@
 ---
-import '../styles/global.css';
-import BaseHead from '../components/BaseHead.astro';
+import { getYearsExperiencePhrase } from '../data/company';
 
 export interface Props {
   title: string;
@@ -12,452 +11,235 @@ export interface Props {
   schema?: object | object[];
 }
 
-const { title, description, canonicalUrl, ogImage, datePublished, dateModified, schema } = Astro.props;
-const currentUrl = Astro.url.href;
+const {
+  title,
+  description,
+  canonicalUrl,
+  ogImage = "/factory.jpg",
+  datePublished,
+  dateModified,
+  schema
+} = Astro.props;
+
+const canonical = canonicalUrl ?? Astro.url.href;
+const siteName = "SDF Clothing";
+const yearsExpPhrase = getYearsExperiencePhrase();
+
+// Base schemas that should be present on all pages
+const baseSchemas = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization","LocalBusiness"],
+      "@id": "https://sdfltd.com/#organization",
+      "name": "SDF Clothing",
+      "alternateName": ["SDF Ltd", "SDF Garments"],
+      "url": "https://sdfltd.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://sdfltd.com/sdf.jpg",
+        "width": 200,
+        "height": 200
+      },
+      "image": "https://sdfltd.com/factory.jpg",
+      "description": "SDF Clothing is a Bangladesh-based clothing manufacturer providing OEM, private label, and CMT services to fashion brands across EU, UK, USA, Canada, and Australia. Established 1998, GOTS certified.",
+      "priceRange": "$$",
+      "foundingDate": "1998-08-22",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "House 125, Road 01, Baridhara DOHS",
+        "addressLocality": "Dhaka",
+        "postalCode": "1212",
+        "addressCountry": "BD"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "telephone": "+8801911733226",
+          "email": "contact@sdfltd.com",
+          "availableLanguage": ["English"]
+        }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/company/clothing-manufacturers",
+        "https://www.facebook.com/ClothingManufacturers/",
+        "https://x.com/clothing_makers",
+        "https://www.wikidata.org/wiki/Q139678386",
+        "https://au.pinterest.com/sdfltdclothingnsw/",
+        "https://www.reddit.com/user/clothing-mmakers/",
+        "https://www.slideshare.net/sdfashion1",
+        "https://www.quora.com/profile/SDF-Clothing-1"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Clothing Manufacturing Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "T-Shirt & Knitwear Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Woven Apparel Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Activewear & Sportswear Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Private Label Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "OEM Garment Manufacturing" } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://sdfltd.com/#website",
+      "url": "https://sdfltd.com",
+      "name": "SDF Clothing",
+      "description": `Clothing manufacturers, garment manufacturers, fashion manufacturers, and apparel manufacturers based in Dhaka, Bangladesh. SDF Clothing serves fashion brands worldwide with low MOQ production, GOTS certification, and ${yearsExpPhrase} of manufacturing expertise.`,
+      "publisher": { "@id": "https://sdfltd.com/#organization" },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": ["h1", "h2", ".index__faq-answer p"],
+        "xpath": [
+          "/html/head/title",
+          "/html/head/meta[@name='description']/@content"
+        ]
+      }
+    }
+  ]
+};
+
+// Merge base schemas with page-specific schemas
+let finalSchema;
+if (schema) {
+  // If page provides schema, merge with base schemas
+  const pageSchemas = Array.isArray(schema) ? schema : [schema];
+  const graph = [...baseSchemas["@graph"]];
+  
+  // Add page-specific schemas to @graph
+  for (const s of pageSchemas) {
+    // Skip if it's Organization or WebSite (already in base)
+    if (s["@type"]) {
+      const types = Array.isArray(s["@type"]) ? s["@type"] : [s["@type"]];
+      if (!types.includes("Organization") && !types.includes("WebSite")) {
+        graph.push(s);
+      }
+    }
+  }
+  
+  finalSchema = {
+    "@context": "https://schema.org",
+    "@graph": graph
+  };
+} else {
+  // No page schema, use base schemas only
+  finalSchema = baseSchemas;
+}
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <BaseHead
-      title={title}
-      description={description}
-      canonicalUrl={canonicalUrl}
-      ogImage={ogImage}
-      datePublished={datePublished}
-      dateModified={dateModified}
-      schema={schema}
-    />
+<!-- CORE -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="googlebot" content="index, follow" />
+<meta name="bingbot" content="index, follow" />
+<meta name="author" content="Chowdhury Remon, SDF Clothing" />
+<meta name="publisher" content="SDF Clothing" />
+<meta name="generator" content={Astro.generator} />
+<meta name="copyright" content={`© ${new Date().getFullYear()} SDF Clothing`} />
 
-    
-    
-    <!-- Hreflang: single URL for all regions  no country-specific pages -->
-    <link rel="alternate" hreflang="x-default" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en-US" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en-GB" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en-AU" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en-CA" href={canonicalUrl ?? currentUrl} />
+<!-- OPEN GRAPH -->
+<meta property="og:type" content={datePublished ? "article" : "website"} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `https://sdfltd.com${ogImage}`} />
+<meta property="og:image:secure_url" content={ogImage.startsWith('http') ? ogImage : `https://sdfltd.com${ogImage}`} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:alt" content={title} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="en_US" />
 
-    <link rel="alternate" type="text/plain" title="SDF Clothing AI Reference" href="/llms.txt" />
-    <link rel="alternate" type="text/plain" title="SDF Clothing AI Reference Full" href="/llms-full.txt" />
+<!-- TWITTER / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@clothing_makers" />
+<meta name="twitter:creator" content="@clothing_makers" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `https://sdfltd.com${ogImage}`} />
+<meta name="twitter:image:alt" content={title} />
 
-    <!-- Self-Hosted Fonts with font-display: swap -->
-    <style is:inline>
-      @font-face {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 300;
-        font-display: swap;
-        src: url('/fonts/inter-v13-latin-300.woff2') format('woff2');
-      }
-      @font-face {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url('/fonts/inter-v13-latin-regular.woff2') format('woff2');
-      }
-      @font-face {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 500;
-        font-display: swap;
-        src: url('/fonts/inter-v13-latin-500.woff2') format('woff2');
-      }
-      @font-face {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 600;
-        font-display: swap;
-        src: url('/fonts/inter-v13-latin-600.woff2') format('woff2');
-      }
-    </style>
+<!-- APPLE -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="SDF Clothing" />
+<meta name="format-detection" content="telephone=no" />
 
-    <!-- Critical CSS - Minimal Above-the-Fold Only -->
-    <style is:inline> *,*::before,*::after {box-sizing:border-box;margin:0;padding:0}html {scroll-behavior:smooth}body {background:#000;color:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;font-size:17px;line-height:1.7;letter-spacing:0.01em;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100vw}.skip-link {position:absolute;top:-100%;left:0;background:#000;color:#fff;padding:8px 16px;z-index:9999;font-size:14px;text-decoration:none}.skip-link:focus {top:0}#main-nav {position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:0.6px solid #000000}.nav-inner {display:flex;align-items:center;justify-content:space-between;height:56px;max-width:1200px;margin:0 auto;padding:0 1.5rem;gap:1rem;position:static}.nav-logo {display:flex;align-items:center;gap:8px;text-decoration:none}.nav-logo-text {font-size:1.1rem;font-weight:600;letter-spacing:0.08em;color:#fff}.nav-links {display:flex;align-items:center;gap:0;list-style:none;flex-wrap:nowrap;white-space:nowrap}.nav-links a {font-size:0.72rem;letter-spacing:0.08em;color:#fff;text-transform:uppercase;transition:color 0.2s;padding:0 0.75rem;white-space:nowrap;text-decoration:none}#mobile-menu-toggle {display:none;background:none;border:none;cursor:pointer;padding:4px;align-items:center;justify-content:center;min-width:44px;min-height:44px}@media (max-width:768px) {#mobile-menu-toggle {display:flex}.nav-links {display:none !important}}.hero-section {min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center}@media (max-width:768px) {.hero-section {grid-template-columns:1fr;min-height:auto}}.hero-left {padding:60px 40px 40px;max-width:600px}@media (max-width:768px) {.hero-left {padding:48px 1.5rem 32px;max-width:100%}}.hero-left h1 {font-size:clamp(2.5rem,4.5vw,4.2rem);font-weight:200;color:#fff;line-height:1.15;letter-spacing:0.02em;margin-bottom:1rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif}.container {width:100%;max-width:1200px;margin:0 auto;padding:0 1.5rem}h1,h2,h3,h4 {font-family:'Inter',sans-serif;font-weight:500;letter-spacing:0.05em;line-height:1.2;color:#fff}a {color:inherit;text-decoration:none}body:not(.loaded) .particles,body:not(.loaded)::before,body:not(.loaded)::after {animation-play-state:paused !important}@media (prefers-reduced-motion:reduce) {* {animation-duration:0.01ms !important;transition-duration:0.01ms !important}}@media (max-width:768px) {button,a,input[type="submit"],input[type="button"],[role="button"] {min-height:44px;min-width:44px}}</style>
+<!-- GEO -->
+<meta name="geo.region" content="BD-C" />
+<meta name="geo.placename" content="Dhaka, Bangladesh" />
+<meta name="geo.position" content="23.7956;90.4203" />
+<meta name="ICBM" content="23.7956, 90.4203" />
 
-    <!-- Cloudflare Rocket Loader Disable -->
-    <meta name="cf-2fa-verify" content="off" />
+<!-- ARTICLE DATES -->
+{datePublished && <meta property="article:published_time" content={datePublished} />}
+{dateModified && <meta property="article:modified_time" content={dateModified} />}
+{datePublished && <meta property="article:author" content="https://sdfltd.com/about/" />}
 
-    <!-- Font Preload for LCP Optimization - Self-hosted fonts -->
+<!-- FONT PRELOAD -->
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-300.woff2" crossorigin fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-500.woff2" crossorigin fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-regular.woff2" crossorigin fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-600.woff2" crossorigin fetchpriority="high" />
 
-    <!-- Non-Critical CSS - Preloaded with media="print" trick to avoid render-blocking -->
-    <!-- Optimized Script Bundles -->
-    <script src="/scripts/app.js" defer data-cfasync="false" type="module"></script>
-    <script src="/scripts/mobile-menu.js" defer data-cfasync="false"></script>
+<!-- FAVICONS -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <!-- Mobile Menu Styles -->
-    <style>
-    #mobile-menu {
-      display: none;
-      flex-direction: column;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.97);
-      z-index: 99999;
-      padding: 70px 1.5rem 2rem !important;
-      opacity: 0;
-      transform: translateY(-8px);
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      overflow-y: auto;
-    }
-    #mobile-menu a {
-      display: block !important;
-      padding: 0.875rem 0 !important;
-      color: rgba(255,255,255,0.85) !important;
-      text-decoration: none !important;
-      font-size: 0.85rem !important;
-      font-weight: 400 !important;
-      letter-spacing: 0.12em !important;
-      text-transform: uppercase !important;
-      border-bottom: 1px solid #1a1a1a !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
-    #mobile-menu a:last-child {
-      border-bottom: none;
-    }
-    #mobile-menu a:hover {
-      color: #fff;
-    }
-    #mobile-menu a.mobile-cta {
-      color: #cc0000 !important;
-      font-weight: 600 !important;
-      margin-top: 0.5rem !important;
-      border-bottom: none !important;
-      font-size: 0.85rem !important;
-    }
+<!-- PWA -->
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="msapplication-TileColor" content="#000000" />
+<meta name="msapplication-TileImage" content="/mstile-144x144.png" />
+<meta name="msapplication-config" content="none" />
 
-    /* Footer Accordion Styles */
-    .footer-links-list {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, opacity 0.3s ease;
-    }
-    .footer-links-list.expanded {
-      max-height: 500px;
-      opacity: 1;
-    }
-    .footer-arrow {
-      transition: transform 0.3s ease;
-    }
-    .footer-arrow.rotated {
-      transform: translateY(-50%) rotate(180deg);
-    }
-    @media (min-width: 769px) {
-      .footer-links-list {
-        max-height: none !important;
-        opacity: 1 !important;
-      }
-      .footer-arrow {
-        display: none;
-      }
-      [data-section] button {
-        cursor: default !important;
-      }
-    }
-    @media (max-width: 768px) {
-      .footer-links-list {
-        max-height: 0;
-        opacity: 0;
-      }
-      .footer-arrow {
-        display: block;
-      }
-    }
+<!-- PRECONNECT -->
+<link rel="dns-prefetch" href="https://api.web3forms.com" />
+<link rel="dns-prefetch" href="https://wa.me" />
+<link rel="dns-prefetch" href="https://ipinfo.io" />
+<link rel="dns-prefetch" href="https://ipapi.co" />
 
-    /* Footer Bottom Bar Styles */
-    .footer-bottom-inner {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .footer-legal-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-    }
-    .footer-legal-links a {
-      font-size: 0.7rem;
-      color: #fff;
-      text-decoration: underline;
-    }
-    .footer-bottom-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-    }
-    .footer-copyright {
-      font-size: 0.72rem;
-      color: #fff;
-      margin: 0;
-    }
-    .footer-social-links {
-      display: flex;
-      gap: 0.75rem;
-    }
-    .footer-social-links a {
-      font-size: 0.72rem;
-      color: #fff;
-      text-decoration: none;
-    }
-    @media (max-width: 480px) {
-      .footer-bottom-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-    </style>
-  </head>
 
-  <body>
-    <!-- Floating Particles Background -->
-    <div class="particles" aria-hidden="true">
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-    </div>
+<!-- llms.txt -->
+<link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt" />
 
-    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <nav id="main-nav" role="navigation" aria-label="Main navigation">
-      <div class="nav-inner">
-        <a href="/" class="nav-logo" aria-label="SDF Clothing" title="SDF Clothing - Home">
-          <img
-            src="/logo-small.svg"
-            alt="SDF Clothing Logo"
-            width="36"
-            height="36"
-            loading="eager"
-            fetchpriority="high"
-            style="display:block;flex-shrink:0;"
-          />
-          <div>
-            <div class="nav-logo-text">SDF Clothing</div>
-            <div class="nav-logo-sub">Since 1998</div>
-          </div>
-        </a>
+<!-- JSON-LD — merged base schemas with page-specific schemas -->
+<script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
 
-        <ul class="nav-links" role="list">
-          <li><a href="/" title="Overview of SDF Clothing">Overview</a></li>
-          <li><a href="/about" title="Our company story and history">Story</a></li>
-          <li><a href="/products" title="Our product offerings">Offerings</a></li>
-          <li><a href="/work-process" title="Our manufacturing expertise">Expertise</a></li>
-          <li><a href="/certifications" title="Our quality certifications">Excellence</a></li>
-          <li><a href="/csr" title="Community and CSR initiatives">Community</a></li>
-          <li><a href="/contact" class="nav-cta" title="Contact us for inquiries">Reach Out</a></li>
-        </ul>
+<!-- SERVICE WORKER -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+</script>
 
-        <button id="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
-            <line x1="2" y1="6" x2="20" y2="6"/>
-            <line x1="2" y1="11" x2="20" y2="11"/>
-            <line x1="2" y1="16" x2="20" y2="16"/>
-          </svg>
-        </button>
-      </div>
-    </nav>
-
-    <main id="main-content"><slot /></main>
-
-    <footer>
-      <div class="footer-top">
-        <div class="footer-grid">
-
-          <div>
-            <img src="/logo-small.svg" alt="SDF Clothing" width="72" height="36" loading="lazy" style="margin-bottom:1rem;object-fit:contain;" />
-            <p style="font-size:0.75rem;color:#fff;line-height:1.7;margin-bottom:1rem;max-width:220px;">A trusted, leading clothing manufacturer serving fashion brands worldwide since 1998. Custom apparel, OEM, ODM, private label, and CMT production. End-to-end garment manufacturing from 300 pieces. GOTS certified. Ships to EU, UK, USA, Canada, and Australia.</p>
-            <address itemscope itemtype="https://schema.org/LocalBusiness"
-              style="font-style:normal;font-size:0.78rem;color:rgba(255,255,255,0.65);line-height:1.9;">
-              <span itemprop="name" style="color:rgba(255,255,255,0.7);font-weight:500;">SDF Clothing</span><br/>
-              <span itemprop="streetAddress">House 125, Road 01, Baridhara DOSH</span><br/>
-              <span itemprop="addressLocality">Dhaka</span>,
-              <span itemprop="postalCode">1212</span>,
-              <span itemprop="addressCountry">Bangladesh</span>
-            </address>
-          </div>
-
-          <div data-section="company">
-            <button id="footer-company" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#fff;font-weight:500;display:block;margin-bottom:1rem;width:100%;text-align:left;border:none;background:none;cursor:pointer;padding:0;position:relative;" aria-expanded="false">
-              <span>Company</span>
-              <svg class="footer-arrow" style="position:absolute;right:0;top:50%;transform:translateY(-50%);transition:transform 0.3s ease;" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <path d="M2 3.5 L5 6.5 L8 3.5"/>
-              </svg>
-            </button>
-            <ul class="footer-links-list" style="list-style:none;">
-              <li style="margin-bottom:0.6rem;"><a href="/about" style="font-size:0.8rem;color:#fff;transition:color 0.2s;"  title="Our company story">Story</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/products" style="font-size:0.8rem;color:#fff;"  title="Our product offerings">Offerings</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/work-process" style="font-size:0.8rem;color:#fff;"  title="Manufacturing expertise">Expertise</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/certifications" style="font-size:0.8rem;color:#fff;"  title="Quality certifications">Excellence</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/csr" style="font-size:0.8rem;color:#fff;"  title="Community initiatives">Community</a></li>
-              <li><a href="/all-services" style="font-size:0.8rem;color:#fff;"  title="All services">All Services</a></li>
-            </ul>
-          </div>
-
-          <div data-section="services">
-            <button id="footer-services" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#fff;font-weight:500;display:block;margin-bottom:1rem;width:100%;text-align:left;border:none;background:none;cursor:pointer;padding:0;position:relative;" aria-expanded="false">
-              <span>Services</span>
-              <svg class="footer-arrow" style="position:absolute;right:0;top:50%;transform:translateY(-50%);transition:transform 0.3s ease;" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <path d="M2 3.5 L5 6.5 L8 3.5"/>
-              </svg>
-            </button>
-            <ul class="footer-links-list" style="list-style:none;">
-              <li style="margin-bottom:0.6rem;"><a href="/tech-pack-service" style="font-size:0.8rem;color:#fff;"  title="Tech pack service">Tech Pack</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/clothing-manufacturers" style="font-size:0.8rem;color:#fff;"  title="Full package production service">Full Package</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/branding-launch" style="font-size:0.8rem;color:#fff;"  title="Branding launch service">Branding</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/white-label-manufacturer" style="font-size:0.8rem;color:#fff;"  title="White Label Clothing Manufacturer — Private Label Garments from 300 Pieces">White Label</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/fabric-sourcing" style="font-size:0.8rem;color:#fff;"  title="Fabric sourcing service">Fabric Sourcing</a></li>
-              <li><a href="/cut-and-sew-service" style="font-size:0.8rem;color:#fff;"  title="Cut Make Trim services">CMT Services</a></li>
-            </ul>
-          </div>
-
-          <div data-section="briefing">
-            <button id="footer-briefing" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#fff;font-weight:500;display:block;margin-bottom:1rem;width:100%;text-align:left;border:none;background:none;cursor:pointer;padding:0;position:relative;" aria-expanded="false">
-              <span>Briefing</span>
-              <svg class="footer-arrow" style="position:absolute;right:0;top:50%;transform:translateY(-50%);transition:transform 0.3s ease;" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <path d="M2 3.5 L5 6.5 L8 3.5"/>
-              </svg>
-            </button>
-            <ul class="footer-links-list" style="list-style:none;">
-              <li style="margin-bottom:0.6rem;"><a href="/journal" style="font-size:0.8rem;color:#fff;"  title="Read our journal entries">Journal Entry</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/insights" style="font-size:0.8rem;color:#fff;"  title="Industry insights and news">Industry Insight</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/careers" style="font-size:0.8rem;color:#fff;"  title="View open positions">Open Positions</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/case-studies" style="font-size:0.8rem;color:#fff;"  title="Read case studies">Case Studies</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/sustainability" style="font-size:0.8rem;color:#fff;"  title="Read our sustainability commitment">Sustainability</a></li>
-              <li><a href="/" style="font-size:0.8rem;color:#fff;" title="View client success stories">NDA</a></li>
-            </ul>
-          </div>
-
-          <div data-section="resources">
-            <button id="footer-resources" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#fff;font-weight:500;display:block;margin-bottom:1rem;width:100%;text-align:left;border:none;background:none;cursor:pointer;padding:0;position:relative;" aria-expanded="false">
-              <span>Resources</span>
-              <svg class="footer-arrow" style="position:absolute;right:0;top:50%;transform:translateY(-50%);transition:transform 0.3s ease;" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <path d="M2 3.5 L5 6.5 L8 3.5"/>
-              </svg>
-            </button>
-            <ul class="footer-links-list" style="list-style:none;">
-              <li style="margin-bottom:0.6rem;"><a href="/tools/wash-care-label-generator" style="font-size:0.8rem;color:#fff;"  title="Generate wash care labels">Label Generator</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/tools/gsm-converter" style="font-size:0.8rem;color:#fff;"  title="Convert GSM measurements">GSM Converter</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/tools/color-converter" style="font-size:0.8rem;color:#fff;"  title="Convert color formats">Color Converter</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/tools/aql-calculator" style="font-size:0.8rem;color:#fff;"  title="Calculate AQL sampling">AQL Calculator</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="/tools/hs-code" style="font-size:0.8rem;color:#fff;"  title="HS code reference guide">HS Code</a></li>
-              <li><a href="/tools/shrinkage-calculator" style="font-size:0.8rem;color:#fff;"  title="Calculate fabric shrinkage">Shrinkage</a></li>
-            </ul>
-          </div>
-
-          <div data-section="social">
-            <button id="footer-social" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#fff;font-weight:500;display:block;margin-bottom:1rem;width:100%;text-align:left;border:none;background:none;cursor:pointer;padding:0;position:relative;" aria-expanded="false">
-              <span>Social</span>
-              <svg class="footer-arrow" style="position:absolute;right:0;top:50%;transform:translateY(-50%);transition:transform 0.3s ease;" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <path d="M2 3.5 L5 6.5 L8 3.5"/>
-              </svg>
-            </button>
-            <ul class="footer-links-list" style="list-style:none;">
-              <li style="margin-bottom:0.6rem;"><a href="https://au.pinterest.com/sdfltdclothingnsw/" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on Pinterest" style="font-size:0.8rem;color:#fff;"  title="Follow us on Pinterest">Pinterest</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="https://x.com/clothing_makers/" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on X" style="font-size:0.8rem;color:#fff;"  title="Follow us on X">X</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="https://www.linkedin.com/company/clothing-manufacturers" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on LinkedIn" style="font-size:0.8rem;color:#fff;"  title="Follow us on LinkedIn">LinkedIn</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="https://www.reddit.com/user/clothing-mmakers/" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on Reddit" style="font-size:0.8rem;color:#fff;"  title="Join us on Reddit">Reddit</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="https://www.slideshare.net/sdfashion1" target="_blank" rel="noopener noreferrer" aria-label="View SDF Clothing presentations on SlideShare" style="font-size:0.8rem;color:#fff;"  title="View our presentations on SlideShare">SlideShare</a></li>
-              <li><a href="https://www.quora.com/profile/SDF-Clothing-1" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on Quora" style="font-size:0.8rem;color:#fff;"  title="Find us on Quora">Quora</a></li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="footer-bottom-bar">
-        <div class="footer-bottom-inner">
-          <div class="footer-legal-links">
-            <a href="/terms" title="Read our Terms & Conditions">Terms & Conditions</a>
-            <a href="/editorial-policy" title="Read our Editorial Policy">Editorial Policy</a>
-            <a href="/privacy" title="Read our Privacy Policy">Privacy Policy</a>
-            <a href="/cookies" title="Read our Cookie Policy">Cookie Policy</a>
-            <a href="/confidentiality" title="Read our Confidentiality & IP Policy">Confidentiality & IP</a>
-            <a href="/sustainability" title="Read our Sustainability Policy">Sustainability</a>
-          </div>
-          <div class="footer-bottom-row">
-            <p class="footer-copyright">
-              © <span>{new Date().getFullYear()}</span> SDF Clothing. All rights reserved.
-            </p>
-            <div class="footer-social-links">
-              <a href="https://wa.me/8801911733226" target="_blank" rel="noopener noreferrer" title="WhatsApp">WhatsApp</a>
-              <a href="https://t.me/sdfclothing" target="_blank" rel="noopener noreferrer" title="Telegram">Telegram</a>
-              <a href="https://signal.me/#p/+8801911733226" target="_blank" rel="noopener noreferrer" title="Signal">Signal</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Cookie Consent Popup -->
-    <div id="cookie-consent" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #000000; border-top: 1px solid #1a1a1a; z-index: 1000; padding: 1rem 1.5rem;">
-      <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
-        <p style="font-size: 0.78rem; color: #fff; margin: 0; flex: 1; min-width: 200px;">
-          We use cookies to improve your experience. See our <a href="/cookies" style="color: #FFFFFF; text-decoration: none;" title="Read our Cookie Policy">Cookie Policy</a> and <a href="/privacy" style="color: #FFFFFF; text-decoration: none;" title="Read our Privacy Policy">Privacy Policy</a>. Accept All | Decline
-        </p>
-        <div style="display: flex; gap: 0.75rem; align-items: center;">
-          <button id="accept-cookies" style="background: #666; color: #fff; border: none; padding: 0.5rem 1rem; font-size: 0.78rem; font-weight: 500; border-radius: 4px; cursor: pointer; transition: background 0.2s; min-height: 44px; min-width: 44px;">
-            Accept All
-          </button>
-          <button id="decline-cookies" style="background: transparent; color: #fff; border: 1px solid #000000; padding: 0.5rem 1rem; font-size: 0.78rem; font-weight: 500; border-radius: 4px; cursor: pointer; transition: border-color 0.2s; min-height: 44px; min-width: 44px;">
-            Decline
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
-      <button id="mobile-menu-close" aria-label="Close menu" style="position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer;line-height:1;z-index:1;">✕</button>
-      <a href="/">Overview</a>
-      <a href="/about">Our Story</a>
-      <a href="/products">Offerings</a>
-      <a href="/work-process">Expertise</a>
-      <a href="/certifications">Excellence</a>
-      <a href="/csr">Community</a>
-      <a href="/contact" class="mobile-cta">Reach Out →</a>
-    </div>
-
-    <!-- Footer Accordion Script -->
-    <script>
-      function toggleFooter(section) {
-        const sectionDiv = document.querySelector(`[data-section="${section}"]`);
-        if (!sectionDiv) return;
-        
-        const button = sectionDiv.querySelector('button');
-        const list = sectionDiv.querySelector('.footer-links-list');
-        const arrow = sectionDiv.querySelector('.footer-arrow');
-        
-        if (!button || !list || !arrow) return;
-        
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        
-        button.setAttribute('aria-expanded', !isExpanded);
-        list.classList.toggle('expanded');
-        arrow.classList.toggle('rotated');
-      }
-
-      document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('footer-company').addEventListener('click', function() { toggleFooter('company'); });
-        document.getElementById('footer-services').addEventListener('click', function() { toggleFooter('services'); });
-        document.getElementById('footer-briefing').addEventListener('click', function() { toggleFooter('briefing'); });
-        document.getElementById('footer-resources').addEventListener('click', function() { toggleFooter('resources'); });
-        document.getElementById('footer-social').addEventListener('click', function() { toggleFooter('social'); });
-      });
-    </script>
-
-  </body>
-</html>
+<!-- CLS Prevention -->
+<style>
+  #hero-section { min-height: 90vh; }
+  .hero-image-container { aspect-ratio: 16/9; width: 100%; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
