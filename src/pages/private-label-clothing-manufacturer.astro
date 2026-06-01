@@ -1,0 +1,929 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Private Label Clothing Manufacturer SDF";
+const pageDescription = "Private label clothing manufacturer in Bangladesh. Custom branded garments from 300 pieces with branding, labeling, and packaging support. Free quote.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Private Label Clothing Manufacturer",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between private label and white label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Private label involves custom product development exclusively for your brand with unique designs, fabrics, and specifications. White label uses pre-existing generic products that are simply branded with your logo. Private label offers product differentiation and exclusivity, while white label provides faster turnaround with lower development costs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What custom branding options do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer woven labels, printed labels, heat transfer labels, custom hang tags, branded packaging, embroidery, and screen printing. All branding elements are customized to your brand specifications and integrated into garment construction. Labeling options include main labels, care labels, size labels, and promotional tags."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is your minimum order for private label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our private label minimum is 300 pieces per style for custom production. White label options may be available at lower minimums using existing styles. Private label development requires full custom development, while white label can use established patterns with brand customization only."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer exclusive product development?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. For private label clients with sufficient volume, we offer exclusive product development where designs are created specifically for your brand and not produced for other clients. Exclusive development requires 1,000+ pieces per style and includes design protection agreements to prevent reproduction for other brands."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What packaging options are available?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer custom poly bags with brand printing, branded boxes, tissue paper with brand patterns, custom hang tags, and complete retail-ready packaging. Packaging can be fully customized with brand colors, logos, and messaging. Sustainable packaging options including recycled materials and biodegradable options are available."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does private label pricing compare to standard production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Private label pricing includes development costs, custom materials, and branding elements, resulting in higher per-piece costs than standard production. However, private label enables premium positioning and higher retail pricing. Volume discounts apply, and development costs amortize across larger orders, making private label increasingly cost-effective at scale."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Private Label Clothing Manufacturing Service",
+      "description": "Custom branded clothing manufacturing from 300 pieces with private label vs white label options, custom branding, labeling, packaging, and exclusive product development",
+      "provider": {
+        "@id": "https://sdfltd.com/#organization"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Private Label Manufacturing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Private Label Production"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "10",
+              "maxPrice": "30"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Develop Private Label with SDF Clothing",
+      "description": "Step-by-step process for developing private label clothing with our Bangladesh manufacturing facility",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Brand Concept Development",
+          "text": "Share your brand vision, target market, pricing strategy, and product requirements for private label development"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Design and Material Selection",
+          "text": "Collaborate on custom designs, fabric selection, and material specifications unique to your brand"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Branding Development",
+          "text": "Develop custom labels, hang tags, packaging, and branding elements aligned with brand identity"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Sample Production",
+          "text": "Create private label samples for design validation, branding approval, and quality verification"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Production and Delivery",
+          "text": "Production with full custom branding implementation and retail-ready packaging delivery"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Private Label Clothing Manufacturer</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Private Label Clothing Manufacturer • Since 1998 • Custom Branding Specialists</div>
+        <h1 class="hero__title">Private Label Clothing Manufacturer • Custom Branding from 300 Pieces</h1>
+        <p class="hero__description">
+          SDF Clothing is a private label clothing manufacturer in Bangladesh producing custom branded garments from 300 pieces. Private label vs white label, custom branding options, labeling, packaging, and exclusive product development for your brand. Explore our <a href="/oem-clothing-manufacturer/" style="color:#e00;text-decoration:none;">OEM clothing manufacturer</a> and <a href="/white-label-manufacturer/" style="color:#e00;text-decoration:none;">white label manufacturer</a>.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20private%20label%20manufacturing`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">300</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Custom</span>
+          <span class="hero__stat-label">Branding</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Exclusive</span>
+          <span class="hero__stat-label">Development</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Custom Branding</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Private Label</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Custom Packaging</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Exclusive Development</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Private vs White Label</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Private Label vs White Label Manufacturing</h2>
+      </div>
+      <div class="section__text">
+        <p>Private label and white label represent two distinct approaches to branded clothing manufacturing, each serving different business models and brand strategies. Understanding the differences helps brands choose the approach that aligns with their positioning, budget, and market goals. The fundamental distinction lies in product development: private label involves creating custom products exclusively for your brand, while white label applies your branding to pre-existing generic products.</p>
+        
+        <p>Private label manufacturing offers complete product differentiation. Every aspect of the garment—design, fabric, construction, fit, and features—is developed specifically for your brand. This exclusivity enables true product uniqueness that competitors cannot replicate. Private label brands can command premium pricing based on distinctive product characteristics that aren't available elsewhere. The investment in custom development pays dividends through brand differentiation and customer loyalty built on unique product offerings.</p>
+        
+        <p>White label manufacturing provides faster market entry with lower development costs. Using established patterns and proven styles, white label brands can launch quickly without the time and expense of custom development. This approach works well for brands focused on marketing and distribution rather than product innovation, or for businesses testing markets before committing to full custom development. White label products can be branded with custom labels and packaging, but the underlying garment remains available to other brands using the same manufacturer.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Aspect</th>
+              <th>Private Label</th>
+              <th>White Label</th>
+              <th>Key Difference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Product Development</td>
+              <td>Custom design and development</td>
+              <td>Pre-existing generic products</td>
+              <td>Exclusivity</td>
+            </tr>
+            <tr>
+              <td>Lead Time</td>
+              <td>45-60 days</td>
+              <td>30-40 days</td>
+              <td>Speed to market</td>
+            </tr>
+            <tr>
+              <td>Development Cost</td>
+              <td>Higher upfront investment</td>
+              <td>Minimal development cost</td>
+              <td>Initial investment</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Product Uniqueness</td>
+              <td>Completely unique products</td>
+              <td>Similar to other brands</td>
+              <td>Differentiation</td>
+            </tr>
+            <tr>
+              <td>Premium Potential</td>
+              <td>High premium positioning</td>
+              <td>Competitive pricing</td>
+              <td>Margin structure</td>
+            </tr>
+          </tbody>
+          <caption>Private label offers exclusivity and differentiation at higher cost and longer lead time. White label provides speed and cost efficiency with less differentiation.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Custom Branding</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Custom Branding Options</h2>
+      </div>
+      <div class="section__text">
+        <p>Custom branding transforms garments into brand ambassadors that communicate identity and quality at every touchpoint. Our comprehensive branding capabilities cover every visible and tactile element of the garment, from labels to packaging. Each branding element is customized to your specifications and integrated seamlessly into garment construction for professional presentation.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Branding Element</th>
+              <th>Description</th>
+              <th>Applications</th>
+              <th>Lead Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Woven Labels</td>
+              <td>Damask or satin woven labels</td>
+              <td>Main labels, size labels</td>
+              <td>10-14 days</td>
+            </tr>
+            <tr>
+              <td>Printed Labels</td>
+              <td>Screen or digitally printed labels</td>
+              <td>Care labels, information labels</td>
+              <td>7-10 days</td>
+            </tr>
+            <tr>
+              <td>Heat Transfer Labels</td>
+              <td>Heat-applied transfers</td>
+              <td>Neck labels, branding applications</td>
+              <td>7-10 days</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Custom Hang Tags</td>
+              <td>Printed card tags</td>
+              <td>Brand identification, pricing</td>
+              <td>10-14 days</td>
+            </tr>
+            <tr>
+              <td>Embroidery</td>
+              <td>Custom stitched logos</td>
+              <td>Brand logos, decorative elements</td>
+              <td>Integrated in production</td>
+            </tr>
+          </tbody>
+          <caption>Branding elements can be combined for comprehensive brand presentation. Custom designs welcome.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Labeling</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Garment Labeling Options</h2>
+      </div>
+      <div class="section__text">
+        <p>Garment labeling serves both functional and branding purposes, providing required information while reinforcing brand identity. Our labeling solutions cover all regulatory requirements for major markets while maintaining brand consistency. Labels are positioned for visibility and comfort, ensuring compliance without compromising garment aesthetics or wearer comfort.</p>
+        
+        <p>Main labels display brand identity and are typically placed at the back neck or waistband. We offer woven main labels for premium presentation, printed labels for cost efficiency, and heat transfer labels for seamless integration. Main labels can include brand logos, brand names, and taglines. Material selection considers garment type and positioning to ensure label comfort and durability through washing and wear.</p>
+        
+        <p>Care labels provide required care instructions and fiber content information. These labels must meet regulatory requirements for target markets, including specific language and format requirements. We ensure care labels comply with FTC regulations for US markets, EU labeling directives for European markets, and requirements for other target countries. Care labels can be customized with brand colors while maintaining regulatory compliance.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Packaging</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Custom Packaging Solutions</h2>
+      </div>
+      <div class="section__text">
+        <p>Custom packaging extends brand presentation beyond the garment itself, creating unboxing experiences that reinforce brand identity and value perception. Packaging options range from basic branded poly bags to complete retail-ready packaging systems. The right packaging choice depends on retail channel, brand positioning, and budget considerations.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Packaging Type</th>
+              <th>Description</th>
+              <th>Best For</th>
+              <th>Cost Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Branded Poly Bags</td>
+              <td>Custom printed poly bags</td>
+              <td>E-commerce, basic retail</td>
+              <td>Low</td>
+            </tr>
+            <tr>
+              <td>Custom Hang Tags</td>
+              <td>Printed card tags</td>
+              <td>All retail channels</td>
+              <td>Low</td>
+            </tr>
+            <tr>
+              <td>Branded Boxes</td>
+              <td>Custom printed boxes</td>
+              <td>Premium retail, gifts</td>
+              <td>Medium</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Tissue Paper</td>
+              <td>Printed tissue paper</td>
+              <td>Premium presentation</td>
+              <td>Medium</td>
+            </tr>
+            <tr>
+              <td>Retail-Ready Sets</td>
+              <td>Complete packaging system</td>
+              <td>Department stores, boutiques</td>
+              <td>High</td>
+            </tr>
+          </tbody>
+          <caption>Sustainable packaging options available including recycled materials and biodegradable alternatives.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Exclusive Development</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Exclusive Product Development</h2>
+      </div>
+      <div class="section__text">
+        <p>Exclusive product development creates garments that are produced only for your brand, not available to competitors or other clients. This exclusivity provides true product differentiation and protects brand investment. Exclusive development is particularly valuable for brands with unique design philosophies or those seeking premium market positioning.</p>
+        
+        <p>Exclusive development agreements specify that designs, patterns, and specifications created for your brand will not be used for other clients. These agreements provide legal protection for your intellectual property and ensure that products remain exclusive to your brand. The agreement scope can cover specific designs, entire collections, or ongoing development relationships depending on brand needs and investment level.</p>
+        
+        <p>Minimum requirements for exclusive development reflect the investment in custom design and the opportunity cost of dedicating production capacity to exclusive products. Typically, exclusive development requires 1,000+ pieces per style per season to justify development costs and capacity allocation. Brands with ongoing seasonal collections can establish exclusive development relationships that span multiple seasons, amortizing development costs across the relationship and building a library of exclusive products.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Private Label Clothing Manufacturer FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between private label and white label?</h3>
+          <p class="faq__answer">Private label involves custom product development exclusively for your brand with unique designs, fabrics, and specifications. White label uses pre-existing generic products that are simply branded with your logo. Private label offers product differentiation and exclusivity, while white label provides faster turnaround with lower development costs.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What custom branding options do you offer?</h3>
+          <p class="faq__answer">We offer woven labels, printed labels, heat transfer labels, custom hang tags, branded packaging, embroidery, and screen printing. All branding elements are customized to your brand specifications and integrated into garment construction. Labeling options include main labels, care labels, size labels, and promotional tags.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is your minimum order for private label?</h3>
+          <p class="faq__answer">Our private label minimum is 300 pieces per style for custom production. White label options may be available at lower minimums using existing styles. Private label development requires full custom development, while white label can use established patterns with brand customization only.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you offer exclusive product development?</h3>
+          <p class="faq__answer">Yes. For private label clients with sufficient volume, we offer exclusive product development where designs are created specifically for your brand and not produced for other clients. Exclusive development requires 1,000+ pieces per style and includes design protection agreements to prevent reproduction for other brands.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What packaging options are available?</h3>
+          <p class="faq__answer">We offer custom poly bags with brand printing, branded boxes, tissue paper with brand patterns, custom hang tags, and complete retail-ready packaging. Packaging can be fully customized with brand colors, logos, and messaging. Sustainable packaging options including recycled materials and biodegradable options are available.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does private label pricing compare to standard production?</h3>
+          <p class="faq__answer">Private label pricing includes development costs, custom materials, and branding elements, resulting in higher per-piece costs than standard production. However, private label enables premium positioning and higher retail pricing. Volume discounts apply, and development costs amortize across larger orders, making private label increasingly cost-effective at scale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Develop Your Private Label?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for private label clothing manufacturing. We provide custom branded production from 300 pieces, private label vs white label options, custom branding, labeling, packaging, and exclusive product development for your brand.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/sampling-service" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/private-label-manufacturer" style="color: var(--color-primary);">private label manufacturer</a>, <a href="/white-label-manufacturer" style="color: var(--color-primary);">white label manufacturer</a>, , <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/clothing-manufacturers-for-startups" style="color: var(--color-primary);">clothing manufacturers for startups</a>, <a href="/small-batch-clothing-manufacturer" style="color: var(--color-primary);">small batch clothing manufacturer</a>, <a href="/wholesale-clothing-supplier" style="color: var(--color-primary);">wholesale clothing manufacturer</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

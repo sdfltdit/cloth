@@ -1,0 +1,389 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { schemaOrganization, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const pageTitle = "Quality Inspection Services — AQL Standards | SDF";
+const pageDescription = "Professional quality inspection for clothing manufacturing. AQL-based pre-production, inline and final inspection. Ensure product quality and brand reputation.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20quality%20inspection%20services`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-25",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle,
+            "item": canonicalUrl.href
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#organization" }
+    },
+    schemaOrganization
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Quality Inspection Services</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">AQL Standards • Since 1998 • Dhaka, Bangladesh</p>
+        <h1 class="hero__title">Quality Inspection Services — Comprehensive AQL-Based Quality Control</h1>
+        <p class="hero__description">
+          SDF Clothing delivers professional quality inspection services for clothing manufacturers and brands worldwide. Our systematic AQL-based inspection process covers pre-production, inline, and final inspection stages to ensure your garments meet the highest quality standards. From fabric verification to final shipment inspection, our qualified inspectors catch defects before they reach your customers, protecting your brand reputation and ensuring customer satisfaction. Explore our <a href="/all-services/" style="color:#e00;text-decoration:none;">all services</a>.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">AQL</span>
+            <span class="hero__stat-label">2.5 Standard</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">3-Stage</span>
+            <span class="hero__stat-label">Inspection Process</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">98%</span>
+            <span class="hero__stat-label">Pass Rate</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">24hr</span>
+            <span class="hero__stat-label">Report Turnaround</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Request Inspection Quote
+          </a>
+          <a href="/contact" class="hero__cta hero__cta--secondary">
+            Contact Our Team
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="Quality inspection in progress at SDF Clothing manufacturing facility" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span class="trust__text">AQL 2.5 Inspection</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span class="trust__text">Pre-Production Check</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span class="trust__text">Inline Monitoring</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span class="trust__text">Final Random Sampling</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span class="trust__text">Third-Party Welcome</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span class="trust__text">Detailed Reports</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Understanding Quality Inspection -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What Is Quality Inspection in Clothing Manufacturing?</h2>
+      <p class="section__text">
+        Quality inspection is a systematic process of examining garments and materials at various stages of production to ensure they meet specified standards and requirements. In the clothing manufacturing industry, quality inspection serves as a critical control point that prevents defective products from reaching customers and protects brand reputation. The inspection process involves trained professionals who examine materials, workmanship, measurements, and overall product quality against approved samples and technical specifications.
+      </p>
+
+      <p class="section__text">
+        Effective quality inspection goes beyond simple visual checks. It encompasses a comprehensive evaluation of fabric quality, construction integrity, dimensional accuracy, color consistency, labeling correctness, and packaging standards. Inspectors use standardized methodologies, primarily AQL (Acceptable Quality Level) sampling, to determine whether production batches meet quality criteria. This statistical approach ensures that inspection results are representative of the entire production lot, providing reliable data for decision-making about shipment acceptance or rejection.
+      </p>
+
+      <p class="section__text">
+        The importance of quality inspection cannot be overstated in today's competitive fashion industry. With social media amplifying customer feedback and returns becoming increasingly costly, brands cannot afford quality failures. Professional quality inspection services help businesses maintain consistency across production runs, build customer trust, and reduce the financial impact of returns and rework. For startups and established brands alike, investing in quality inspection is a strategic decision that pays dividends in brand protection and customer loyalty.
+      </p>
+
+      <h3 class="section__subtitle">Why Quality Inspection Matters for Your Brand</h3>
+      <p class="section__text">
+        Quality inspection directly impacts your bottom line and brand reputation. When defective products reach customers, the consequences extend beyond the immediate cost of returns. Negative reviews, social media complaints, and damaged brand image can have long-lasting effects that are difficult and expensive to repair. Quality inspection acts as your final line of defense, ensuring that only products meeting your standards reach the market. This protection is especially crucial for fashion brands building their reputation or expanding into new markets.
+      </p>
+
+      <p class="section__text">
+        Beyond protection, quality inspection provides valuable data for continuous improvement. Inspection reports reveal recurring defect patterns, supplier performance issues, and areas where production processes need refinement. This data-driven approach enables brands to work collaboratively with manufacturers to address root causes of quality problems, leading to progressively better production quality over time. Brands that leverage quality inspection data effectively often see defect rates decrease significantly across subsequent production runs.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Types of Quality Inspection -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Types of Quality Inspection Services We Offer</h2>
+      <p class="section__text">
+        Comprehensive quality inspection requires a multi-stage approach that addresses different aspects of production at appropriate times. Each inspection type serves a specific purpose and catches different categories of defects. Understanding these inspection types helps brands implement an effective quality control strategy tailored to their products and risk tolerance.
+      </p>
+
+      <h3 class="section__subtitle">Pre-Production Inspection (PPI)</h3>
+      <p class="section__text">
+        Pre-production inspection occurs before manufacturing begins, focusing on raw materials and production readiness. Inspectors verify fabric quality, color matching against approved lab dips, material composition, and the condition of trims including buttons, zippers, labels, and threads. This stage is critical for preventing mass defects that would result from using substandard materials. PPI is especially important for first-time production with new suppliers, complex garments, or orders using new materials. By catching material issues before cutting begins, brands avoid the substantial costs of scrapping defective production and restarting manufacturing.
+      </p>
+
+      <p class="section__text">
+        During pre-production inspection, inspectors also verify that the factory has understood and can execute technical specifications correctly. They review production samples, check pattern accuracy, and assess the factory's capability to meet quality standards. This proactive inspection helps identify potential production problems before they affect the entire order, allowing for corrections and process adjustments before bulk production commences.
+      </p>
+
+      <h3 class="section__subtitle">During Production Inspection (DUPRO/Inline)</h3>
+      <p class="section__text">
+        Inline inspection takes place during active production, typically when 20-30% of the order is complete. This timing allows inspectors to catch production-related defects early enough to implement corrections without significant disruption to the production schedule. Inspectors evaluate sewing quality, construction accuracy, measurements against specifications, and overall workmanship. Common issues detected during inline inspection include incorrect stitching patterns, wrong seam allowances, measurement deviations, and construction errors.
+      </p>
+
+      <p class="section__text">
+        The value of inline inspection lies in its ability to prevent mass defects. When issues are detected at 20-30% completion, the factory can correct the problem for the remaining 70-80% of production, minimizing waste and avoiding complete rework. Inline inspection also provides feedback to production operators, enabling training and process improvements that enhance quality throughout the production run. For complex garments or new styles, multiple inline inspections at different completion percentages may be warranted to ensure ongoing quality compliance.
+      </p>
+
+      <h3 class="section__subtitle">Final Random Inspection (FRI)</h3>
+      <p class="section__text">
+        Final inspection occurs after production is complete but before shipment, serving as the gatekeeper for order acceptance. Using AQL sampling tables, inspectors randomly select a statistically significant number of pieces from the completed lot and evaluate them against approved samples and specifications. Final inspection checks for all defect categories including sewing, fabric, measurements, color, labeling, and packaging. This comprehensive evaluation determines whether the shipment meets quality standards and can proceed to shipping.
+      </p>
+
+      <p class="section__text">
+        Final inspection is the most critical quality checkpoint because it represents the last opportunity to catch defects before products reach customers. A failed final inspection triggers rework or replacement of defective pieces, followed by re-inspection to verify corrections. While this stage may seem costly if failures occur, the cost is minimal compared to the expense of returns, reputational damage, and lost customers from shipping defective products. Final inspection provides the quality assurance that what ships matches what was approved, giving brands confidence in their inventory.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Comparison of quality inspection types">
+          <caption>Quality Inspection Type Comparison</caption>
+          <thead>
+            <tr>
+              <th>Inspection Type</th>
+              <th>Timing</th>
+              <th>Focus Areas</th>
+              <th>Defect Prevention</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Pre-Production (PPI)</strong></td>
+              <td>Before production starts</td>
+              <td>Materials, trims, factory readiness</td>
+              <td>Prevents material-based defects</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Inline (DUPRO)</strong></td>
+              <td>20-30% production complete</td>
+              <td>Sewing, construction, measurements</td>
+              <td>Prevents mass production defects</td>
+            </tr>
+            <tr>
+              <td><strong>Final Random (FRI)</strong></td>
+              <td>After production, before shipment</td>
+              <td>Finished garments, packaging, labeling</td>
+              <td>Final shipment quality gate</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: AQL Standards -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">AQL Standards — The Foundation of Quality Inspection</h2>
+      <p class="section__text">
+        AQL (Acceptable Quality Level) is the internationally recognized standard for statistical quality control in manufacturing. AQL defines the maximum number of defective items considered acceptable in a production batch, providing a quantifiable framework for quality decisions. This statistical approach ensures that inspection results are scientifically valid and representative of the entire production lot, rather than relying on subjective judgment or inadequate sampling.
+      </p>
+
+      <h3 class="section__subtitle">Understanding AQL Levels</h3>
+      <p class="section__text">
+        AQL levels are expressed as numbers representing the percentage of defects acceptable in a batch. AQL 1.5 is the strictest standard, used for premium products where quality is critical such as luxury fashion, baby clothing, and medical textiles. This level allows fewer defects and requires larger sample sizes for inspection. AQL 2.5 is the industry standard for general apparel including t-shirts, casual wear, and standard fashion items, balancing quality requirements with practical production realities. AQL 4.0 applies to basic items where minor defects are more tolerable, such as workwear, promotional products, and budget fashion.
+      </p>
+
+      <p class="section__text">
+        The choice of AQL level should align with your brand positioning, product category, and customer expectations. Premium brands typically use AQL 1.5 or 2.5 to maintain their quality reputation, while value-oriented brands may accept AQL 4.0 for certain product lines. It's important to communicate your AQL requirements clearly to manufacturers and ensure they understand the implications for production processes and quality control. Consistent AQL standards across production runs help maintain quality predictability and set clear expectations for all stakeholders.
+      </p>
+
+      <h3 class="section__subtitle">AQL Sampling Methodology</h3>
+      <p class="section__text">
+        AQL inspection uses statistical sampling tables to determine how many pieces to inspect based on lot size. These tables, standardized internationally, ensure that sample sizes provide statistically valid results. For example, a lot of 501-1,200 pieces at AQL 2.5 requires inspecting 80 pieces. From these 80 pieces, the acceptance criteria might be 5 major defects—if 5 or fewer major defects are found, the lot passes. If 6 or more are found, the lot fails and requires rework or rejection.
+      </p>
+
+      <p class="section__text">
+        The sampling methodology accounts for the statistical probability that defects are distributed throughout the lot. By inspecting a representative sample, inspectors can make reliable inferences about the entire lot's quality. Larger lots require proportionally larger samples to maintain the same confidence level. This scientific approach to quality inspection provides defensible quality decisions and reduces the subjectivity that can lead to disputes between brands and manufacturers about whether products meet standards.
+      </p>
+
+      <h3 class="section__subtitle">Defect Classification System</h3>
+      <p class="section__text">
+        AQL inspection classifies defects into three categories based on severity. Critical defects are safety hazards or issues that render the product unusable, such as sharp objects, hazardous materials, or missing safety features. Any critical defect causes automatic rejection regardless of count. Major defects affect function, appearance, or saleability, including wrong fabric, construction errors, measurement deviations, and color mismatches. Major defects are counted against AQL limits. Minor defects don't affect function but represent imperfections such as loose threads, minor stitching issues, or slight color variation. Minor defects have separate, more lenient AQL limits.
+      </p>
+
+      <p class="section__text">
+        This classification system ensures that inspection resources focus on the most serious quality issues while still tracking minor defects that may affect customer perception. Understanding defect classification helps brands set appropriate quality standards and interpret inspection reports meaningfully. It also provides a framework for working with manufacturers to address the most impactful quality issues first.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Our Quality Inspection Process -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Our Quality Inspection Process at SDF Clothing</h2>
+      <p class="section__text">
+        SDF Clothing implements a comprehensive, systematic quality inspection process that covers every stage of production. Our approach combines international standards with decades of manufacturing experience to deliver consistent quality results. We understand that quality inspection is not just about catching defects—it's about building quality into the production process through proactive monitoring and continuous improvement.
+      </p>
+
+      <h3 class="section__subtitle">Stage 1: Material Verification and Pre-Production Checks</h3>
+      <p class="section__text">
+        Before production begins, our quality team conducts thorough material verification. Fabric is inspected for defects, color consistency against approved lab dips, GSM verification, and composition testing. We verify that all materials meet the specifications outlined in technical documents. Trims including buttons, zippers, labels, and threads are examined for quality and compliance. This stage prevents defective materials from entering production, which would inevitably result in defective finished products. We also verify that the factory has the capability and understanding to execute the production according to specifications.
+      </p>
+
+      <h3 class="section__subtitle">Stage 2: First Sample Approval and Pattern Verification</h3>
+      <p class="section__text">
+        We produce first samples and subject them to rigorous verification against technical pack specifications. Measurements are checked point-by-point against tolerance limits, construction details are verified for accuracy, and fit evaluation ensures the garment matches intended sizing. First sample approval is a critical milestone—no bulk production proceeds until the first sample meets all quality criteria. This stage catches interpretation errors and ensures that the factory understands the design intent before committing to full-scale production.
+      </p>
+
+      <h3 class="section__subtitle">Stage 3: Inline Quality Monitoring</h3>
+      <p class="section__text">
+        During production, our quality team conducts inline inspections at multiple checkpoints—typically at 20%, 50%, and 80% completion. At each checkpoint, we randomly sample pieces from the production line and evaluate sewing quality, construction accuracy, and measurement consistency. Issues detected early trigger immediate corrections, preventing the same defect from affecting subsequent pieces. Production operators receive feedback and training based on inline inspection findings, fostering a culture of quality awareness on the factory floor. This proactive approach maintains quality throughout the production run rather than discovering problems only at the end.
+      </p>
+
+      <h3 class="section__subtitle">Stage 4: Final AQL Inspection and Reporting</h3>
+      <p class="section__text">
+        After production completion, we conduct final AQL 2.5 inspection using statistical sampling tables. Each sampled piece undergoes comprehensive evaluation against approved samples and specifications. We check measurements, construction, fabric quality, color accuracy, labeling, and packaging. Defects are classified as critical, major, or minor according to AQL standards. The shipment passes only if defect counts fall within AQL acceptance limits. You receive a detailed inspection report with photographs documenting findings, providing transparency and supporting informed decision-making about shipment acceptance.
+      </p>
+
+      <h3 class="section__subtitle">What We Specifically Check During Inspection</h3>
+      <p class="section__text">
+        Our inspection protocol covers comprehensive quality parameters. Measurement verification ensures all dimensions match technical pack tolerances, typically ±0.5cm for critical measurements and ±1cm for less critical dimensions. Color matching is performed under D65 standard lighting conditions against approved lab dips or color standards. Fabric GSM and composition are verified through certified laboratory testing when required. Seam strength testing ensures construction integrity. Functional testing verifies zipper operation, button security, and snap functionality. Label accuracy and placement are checked against specifications. Packaging correctness includes folding standards, polybag quality, and carton integrity. This comprehensive checklist ensures that no quality aspect is overlooked.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Benefits of Professional Quality Inspection -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Benefits of Professional Quality Inspection Services</h2>
+      <p class="section__text">
+        Partnering with professional quality inspection service providers delivers significant value beyond simple defect detection. Professional inspection brings expertise, objectivity, and systematic processes that enhance overall quality management. For brands working with overseas manufacturers, professional inspection provides essential on-the-ground quality oversight that would be costly and impractical to maintain internally.
+      </p>
+
+      <h3 class="section__subtitle">Cost Savings Through Defect Prevention</h3>
+      <p class="section__text">
+        While quality inspection represents an upfront cost, it delivers substantial cost savings by preventing expensive problems downstream. The cost of inspecting a production lot is typically a fraction of the cost of returns, rework, or scrapping defective production. When quality issues are caught early through pre-production and inline inspection, corrections are relatively inexpensive. When the same issues are discovered after products reach customers, the costs multiply through returns processing, shipping, customer service, reputational damage, and lost sales. Professional inspection is an investment that pays dividends through reduced quality-related costs.
+      </p>
+
+      <h3 class="section__subtitle">Brand Reputation Protection</h3>
+      <p class="section__text">
+        In the age of social media and online reviews, a single quality failure can damage brand reputation significantly. Customers share negative experiences widely, and poor reviews influence potential buyers. Professional quality inspection acts as a reputation safeguard, ensuring that products reaching customers meet quality expectations. Consistent quality builds customer trust and loyalty, leading to repeat purchases and positive word-of-mouth recommendations. For brands building their reputation or entering competitive markets, quality inspection provides the quality assurance needed to establish credibility.
+      </p>
+
+      <h3 class="section__subtitle">Objective Quality Assessment</h3>
+      <p class="section__text">
+        Professional inspection provides objective, unbiased quality assessment free from the conflicts of interest that can affect in-house or factory self-inspection. Third-party inspectors follow standardized protocols and have no incentive to pass or fail shipments based on factors other than actual quality. This objectivity is particularly valuable when resolving quality disputes or when brands need independent verification of factory claims. Objective inspection data provides a reliable basis for quality decisions and supplier performance evaluations.
+      </p>
+
+      <h3 class="section__subtitle">Data-Driven Continuous Improvement</h3>
+      <p class="section__text">
+        Professional inspection generates detailed data about quality performance over time. This data reveals patterns in defect types, supplier performance trends, and areas where production processes need improvement. Brands that leverage this data can work collaboratively with manufacturers to address root causes of quality problems, leading to progressively better quality across production runs. Data-driven quality management transforms inspection from a reactive activity into a proactive tool for continuous improvement.
+      </p>
+
+      <h3 class="section__subtitle">Regulatory Compliance Verification</h3>
+      <p class="section__text">
+        Professional inspection verifies compliance with regulatory requirements including labeling standards, safety regulations, and country-specific import requirements. Inspectors check that garments include required care labels, fiber content disclosures, country of origin markings, and safety certifications as applicable to the destination market. This compliance verification prevents customs delays, regulatory penalties, and market access issues that can result from non-compliant products.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Getting Started -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Getting Started with Quality Inspection Services</h2>
+      <p class="section__text">
+        Implementing professional quality inspection for your clothing production is straightforward. SDF Clothing offers integrated inspection services as part of our full-package manufacturing, or we can provide standalone inspection services for brands working with other manufacturers. Our team works with you to understand your quality requirements, establish appropriate AQL standards, and implement an inspection schedule tailored to your production needs.
+      </p>
+
+      <h3 class="section__subtitle">Define Your Quality Standards</h3>
+      <p class="section__text">
+        The first step is establishing clear quality standards for your products. This includes specifying acceptable AQL levels, defining tolerance limits for measurements, identifying critical quality attributes, and providing approved samples for reference. Clear specifications enable inspectors to make consistent quality decisions and help manufacturers understand quality expectations. If you need assistance defining quality standards, our team can provide guidance based on industry best practices and your product category.
+      </p>
+
+      <h3 class="section__subtitle">Choose Inspection Types and Timing</h3>
+      <p class="section__text">
+        Based on your product complexity, order size, and risk tolerance, determine which inspection types to implement. For most brands, a combination of pre-production, inline, and final inspection provides comprehensive quality coverage. High-risk products or new supplier relationships may warrant additional inspection checkpoints. We work with you to design an inspection schedule that provides appropriate quality oversight without unnecessary cost.
+      </p>
+
+      <h3 class="section__subtitle">Review Inspection Reports and Take Action</h3>
+      <p class="section__text">
+        After each inspection, you receive a detailed report with findings, photographs, and pass/fail determination. Review reports promptly to understand quality performance and take any necessary corrective action. Failed inspections trigger rework or replacement before re-inspection. Successful inspections authorize shipment. Over time, track inspection results to identify trends and work with manufacturers on continuous quality improvement.
+      </p>
+
+      <div class="hero__ctas" style="margin-top: 2rem;">
+        <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+          Request Quality Inspection Quote
+        </a>
+        <a href="/contact" class="hero__cta hero__cta--secondary">
+          Contact Our Quality Team
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</BaseLayout>

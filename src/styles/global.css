@@ -1,6 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@source "../**/*.{astro,html,js,ts}";
+
+@theme {
+  --color-neutral-900: #171717;
+  --color-neutral-800: #262626;
+  --color-neutral-700: #404040;
+  --color-neutral-100: #f5f5f5;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-500: #ef4444;
+  --color-gray-900: #111827;
+  --color-gray-800: #1f2937;
+  --color-gray-700: #374151;
+  --color-gray-600: #4b5563;
+  --color-gray-400: #9ca3af;
+  --color-gray-300: #d1d5db;
+  --color-gray-100: #f3f4f6;
+  --color-white: #ffffff;
+  --color-black: #000000;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 /* ============================================
    SDF CLOTHING — GLOBAL STYLES
@@ -263,12 +299,11 @@ footer {
     grid-column: 1 / -1;
     padding: 1.5rem 0;
     border-bottom: 1px solid #e00;
-  }and arrws o
-  /* Show accordion b {
+  }
+  .footer-grid button {
     display: block;
   }
-  .footer-arrowuttons on mobile */
-  .footer-grid button {
+  .footer-arrow {
     display: block;
   }
   /* Collapse links by default on mobile */
@@ -418,4 +453,11 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.5); }
 ::-webkit-scrollbar-thumb { background: #e00; border-radius: 2px; }
 
 /* === SELECTION === */
-::selection { background: #e00; color: #fff; }
+::selection {
+  background-color: var(--color-accent, #e00);
+  color: #ffffff;
+}
+::-moz-selection {
+  background-color: var(--color-accent, #e00);
+  color: #ffffff;
+}

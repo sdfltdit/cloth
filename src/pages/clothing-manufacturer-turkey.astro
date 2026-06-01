@@ -1,0 +1,455 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Clothing Manufacturer Turkey | Sourcing Guide | SDF Clothing";
+const pageDescription = "Considering a clothing manufacturer in Turkey? Compare costs, MOQ and lead times | then see why Bangladesh offers better value for startup brands. Free guide."
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com",
+        "name": "SDF Clothing"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "description": "Clothing manufacturer providing apparel production services with focus on quality craftsmanship and EU proximity to fashion brands worldwide since 1998."
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing for Turkish Market Brands",
+      "provider": { "@id": "https://sdfltd.com/#org" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "TR"],
+      "description": "Considering a clothing manufacturer in Turkey? Compare costs, MOQ and lead times | then see why Bangladesh offers better value for startup brands. Free guide."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Switch from Turkey to Bangladesh Manufacturing",
+      "step": [
+        { "@type": "HowToStep", "name": "Compare Costs and MOQ", "text": "Evaluate Turkey vs Bangladesh pricing and minimum order requirements" },
+        { "@type": "HowToStep", "name": "Review Duty Rates", "text": "Check EU duty rates for Turkey vs Bangladesh (0% until November 2026)" },
+        { "@type": "HowToStep", "name": "Request Bangladesh Quote", "text": "Submit your designs to SDF Bangladesh for competitive pricing" },
+        { "@type": "HowToStep", "name": "Approve Sample Transition", "text": "Review Bangladesh sample quality against Turkey standards" },
+        { "@type": "HowToStep", "name": "Begin Production", "text": "Start bulk production with lower MOQ and competitive pricing" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for Turkey clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Turkey factories typically require 500-1,000 pieces per style minimum. SDF Clothing in Bangladesh offers 300 pieces minimum with comparable quality, making us ideal for smaller orders. Turkey production is better suited for brands needing EU proximity and can justify higher MOQs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why choose Turkey for clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Turkey offers EU proximity with short shipping times, skilled craftsmanship, strong textile heritage, duty-free access to EU through customs union, and quality-focused production. Ideal for premium and mid-market brands."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the production capacity in Turkey?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Production capacity varies by factory. Typical mid-size Turkey factories produce 20,000-40,000 pieces per month. Smaller boutique factories handle 5,000-15,000 pieces monthly with higher attention to detail."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications do Turkey manufacturers have?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Turkey manufacturers commonly hold OEKO-TEX, GOTS (organic), BSCI, SEDEX, ISO 9001, and REACH compliance. EU standards are strictly followed due to Turkey's customs union with European Union."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does Turkey clothing production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard production timeline: 35-45 days from fabric receipt. 40-55 days for custom fabric development. 7-14 days for sampling. Shipping to EU takes 5-10 days by truck, significantly faster than Asia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the cost difference between Turkey and Bangladesh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Turkey production costs are 30-50% higher than Bangladesh due to higher labor costs and EU proximity. However, savings on shipping, faster turnaround, and duty-free EU access can offset the higher FOB price for EU buyers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the MOQ for Turkey clothing manufacturers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Turkey manufacturers typically require 500-1000 piece MOQ, higher than Bangladesh's 300-piece minimum. Higher MOQ reflects higher labor costs and focus on mid-to-high volume production. Some manufacturers offer lower MOQ for premium orders at higher per-piece pricing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Turkey good for fashion-forward clothing production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Turkey excels at fashion-forward and trend-driven clothing production due to proximity to European fashion markets and quick turnaround capabilities. Turkish manufacturers adapt quickly to changing trends and offer flexible production for seasonal collections. Ideal for brands prioritizing speed and trend relevance over lowest cost."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sdfltd.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Clothing Manufacturer Turkey",
+          "item": canonicalUrl.href
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href}>
+
+<script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+
+<meta name="keywords" content="clothing manufacturer Turkey, Turkey apparel production, Turkey garment factory, EU clothing manufacturer, Turkey textile manufacturer" />
+
+<!-- Hero Section -->
+<section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+      <p style="font-size:0.72rem;color:#FFFFFF;">
+        <a href="/" style="color:#FFFFFF;text-decoration:none;">Home</a>
+        <span style="margin:0 0.5rem;color:#333;">/</span>
+        Clothing Manufacturer Turkey
+      </p>
+    </nav>
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Clothing Manufacturer Turkey | EU Proximity | Quality Craftsmanship</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1rem;line-height:1.2;">
+      Clothing Manufacturer in Turkey for Premium Apparel
+    </h1>
+    <p style="color:#FFFFFF;max-width:640px;line-height:1.8;font-size:0.92rem;">
+      Turkey's clothing manufacturing industry combines skilled craftsmanship with EU proximity, offering fast turnaround and duty-free access to European markets. Turkish manufacturers excel in premium denim, knitwear, and tailored garments. Note: Turkey factories typically require 500+ pieces MOQ. For lower MOQ (300 pieces), SDF Bangladesh offers comparable quality with duty-free EU access (until November 2026). Explore our <a href="/clothing-manufacturers/" style="color:#e00;text-decoration:none;">clothing manufacturers</a> and <a href="/clothing-manufacturer-bangladesh/" style="color:#e00;text-decoration:none;">Bangladesh clothing manufacturer</a>.
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <a href="/contact" class="cta-button">Get Free Quote</a>
+      <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20clothing-manufacturer-turkey`} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WhatsApp Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Stats Section -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#000000;">
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">500+</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Turkey MOQ</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">5-10</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Days to EU</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">35-45</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Days Production</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">Duty</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Free EU</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Overview Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Overview</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Turkey Clothing Manufacturing Overview</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Turkey has established itself as a premium clothing manufacturing hub, particularly known for denim production, knitwear, and tailored garments. The country's textile industry benefits from a centuries-old weaving tradition, skilled workforce, and strategic location bridging Europe and Asia.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Turkey's customs union with the European Union provides duty-free access to EU markets, making it an attractive sourcing destination for European brands. Short shipping times to EU countries (5-10 days by truck) enable faster replenishment and reduced inventory holding costs compared to Asian sourcing.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Major Turkish manufacturing centers include Istanbul, Bursa, Izmir, and Denizli. These cities host thousands of garment factories ranging from small boutique workshops to large-scale industrial facilities. Turkey is particularly strong in premium denim production, supplying major global denim brands.
+    </p>
+  </div>
+</section>
+
+<!-- Advantages Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Advantages</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Advantages of Turkey Manufacturing</h2>
+    </div>
+    
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">EU Proximity</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Turkey's geographic location provides short shipping times to European markets. Truck shipments reach major EU cities in 5-10 days, compared to 30-40 days from Asia. This proximity enables faster replenishment, reduced lead times, and lower inventory holding costs for EU buyers.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Duty-Free EU Access</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Turkey's customs union with the European Union provides duty-free access for most textile and apparel products. This eliminates import duties that would apply to goods from China, Bangladesh, or other non-EU countries, providing significant cost savings for EU buyers.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Skilled Craftsmanship</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Turkey has a strong textile heritage with skilled artisans specializing in complex garment construction. Turkish workers excel at denim finishing, intricate knitwear, and tailored garments. This craftsmanship makes Turkey ideal for premium and mid-market brands requiring high-quality construction.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Strong Textile Infrastructure</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Turkey has vertically integrated textile production including cotton farming, yarn spinning, fabric weaving, dyeing, and garment manufacturing. This integration reduces lead times, improves quality control, and enables rapid prototyping and sample development.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Quality Standards</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;">
+      Turkish manufacturers adhere to strict EU quality and safety standards. Common certifications include OEKO-TEX, GOTS (organic), REACH compliance, and ISO 9001. This compliance ensures products meet European regulatory requirements without additional testing or certification.
+    </p>
+  </div>
+</section>
+
+<!-- Product Specializations Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Specializations</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Turkey Product Specializations</h2>
+    </div>
+    
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Premium Denim</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Turkey is a global leader in premium denim production. Turkish denim mills produce high-quality fabrics used by major denim brands worldwide. Factories specialize in denim washing, finishing, and distressing techniques. Ideal for premium jeans, jackets, and denim apparel.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Knitwear</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Turkish manufacturers excel at knitwear including sweaters, cardigans, and knit tops. The country has strong capabilities in both flat knitting and circular knitting. Turkish cotton is particularly prized for its quality and softness.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Tailored Garments</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Turkey has skilled tailors capable of producing complex tailored garments including suits, blazers, and structured dresses. This capability makes Turkey suitable for premium and bridge-to-luxury brands requiring sophisticated construction.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Activewear</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;">
+      Growing segment in Turkish manufacturing. Factories produce performance fabrics and technical apparel for athletic and leisure wear. Turkey's proximity to EU markets makes it attractive for European activewear brands requiring fast replenishment.
+    </p>
+  </div>
+</section>
+
+<!-- MOQ and Pricing Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Pricing Guide</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">MOQ and Pricing</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      <strong>Turkey MOQ:</strong> 500-1,000 pieces per style minimum. Higher than Bangladesh due to higher labor costs and smaller production scale. <strong>SDF Bangladesh offers 300 pieces minimum</strong> with comparable quality for brands that need lower quantities.
+    </p>
+    
+    <div style="margin-top:2rem;">
+      <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+        FOB Turkey pricing for 500-piece orders:
+      </p>
+      <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Basic t-shirt (cotton): $6-12 per piece
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Premium denim jeans: $18-35 per piece
+        </li>
+        <li style="padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Knitwear sweater: $15-30 per piece
+        </li>
+      </ul>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Turkey production costs are 30-50% higher than Bangladesh. However, duty-free EU access and faster shipping can offset the higher FOB price for European buyers. Pricing includes fabric, cut, sew, basic finishing, and standard packaging.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      SDF Bangladesh offers comparable quality at significantly lower costs. Our 300-piece minimum, 30-50% lower FOB pricing, and duty-free EU access (until November 2026) make us a compelling alternative for brands evaluating Turkey manufacturing. We invite brands to request comparative quotes to see the cost difference firsthand.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Sample development costs are credited against bulk orders. We provide competitive pricing on prototype samples, with these costs deducted from the final production invoice when the order is placed. This encourages thorough sampling without financial penalty for committed brands seeking quality manufacturing with excellent service and support for their sourcing needs.
+    </p>
+  </div>
+</section>
+
+<!-- Timeline Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Production Timeline</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Turkey Production Timeline</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Standard Turkey production timeline from order confirmation to shipment:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Fabric sourcing: 7-14 days (local fabric readily available)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Sampling: 7-14 days
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Bulk production: 35-45 days
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Quality inspection: 2-3 days
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Shipping to EU: 5-10 days (truck)
+      </li>
+    </ul>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Total timeline: 55-85 days from order to EU delivery. Significantly faster than Asian sourcing due to short shipping times. Custom fabric development adds 5-10 days.
+    </p>
+  </div>
+</section>
+
+<!-- Comparison Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Comparison</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Turkey vs Other Hubs</h2>
+    </div>
+    
+    <div style="max-width:800px;overflow-x:auto;">
+      </BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-header {
+    text-align: center;
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .accent-line {
+    width: 60px;
+    height: 2px;
+    background: #e00;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .cta-button {
+    background: #e00;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .cta-button:hover {
+    background: #cc0000;
+  }
+  
+  .whatsapp-cta {
+    background: #25D366;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .whatsapp-cta:hover {
+    background: #128C7E;
+  }
+</style>
+
+

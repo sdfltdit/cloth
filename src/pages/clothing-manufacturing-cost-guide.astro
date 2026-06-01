@@ -1,0 +1,1049 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Clothing Manufacturing Cost Guide 2026 — Pricing | SDF";
+const pageDescription = "Complete clothing manufacturing cost guide for 2026. Covers cost per unit by product, what affects pricing, total landed cost, payment terms and timelines.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Clothing Manufacturing Cost Guide",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the average cost to manufacture a t-shirt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Average t-shirt manufacturing cost ranges from $3-8 FOB for 300 pieces, $2-6 for 500 pieces, and $1-5 for 1000 pieces. Basic cotton t-shirts fall at the lower end, while premium organic cotton or custom prints increase cost. Bangladesh offers competitive pricing with 300-piece minimums."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does MOQ affect manufacturing cost per unit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Higher MOQ reduces cost per unit through production efficiency and fabric purchasing power. 1000-piece orders typically cost 30-50% less per unit than 300-piece orders. However, higher MOQ increases inventory risk. Brands must balance per-unit savings against cash flow and storage costs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between FOB and landed cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "FOB (Free On Board) is the factory price including production and delivery to the port. Landed cost includes FOB plus freight, insurance, customs duty, and any other charges to get goods to your warehouse. Landed cost is typically 20-40% higher than FOB depending on destination and shipping method."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are standard payment terms for clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard payment terms are 30% deposit upon order confirmation, 70% balance before shipment. Letter of Credit offers security for larger orders. Western Union or PayPal may be accepted for small orders but carry higher fees. Always verify payment security before transferring funds."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does clothing manufacturing take from order to delivery?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Production timeline typically 30-45 days from fabric receipt. Sampling 7-14 days before bulk. Ocean freight to US/Europe 25-35 days. Air freight 5-7 days but significantly more expensive. Total order-to-delivery timeline 60-90 days for ocean freight, 40-55 days for air freight."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What hidden costs should I budget for in clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hidden costs include sample fees ($50-200 per style), shipping samples, tech pack development ($200-1000), quality inspection ($200-500), bank fees for international transfers, customs broker fees, warehousing costs, and potential duty on imports. Budget 10-15% above quoted FOB for these items."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which country offers the lowest clothing manufacturing costs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh offers the lowest costs for basic garments (t-shirts, hoodies, pants) with 300-1000 piece MOQs. Vietnam offers competitive pricing for technical garments. China offers speed and flexibility but at higher costs. Bangladesh combines low cost, duty advantages (GSP for EU), and established textile infrastructure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I get an accurate manufacturing quote?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Provide detailed tech pack with measurements, fabric specifications, quantities per size/color, and delivery timeline. Specify any special requirements (certifications, labels, packaging). Request quotes from multiple manufacturers and compare not just price but communication, sample quality, and terms. Always request samples before bulk."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications increase manufacturing costs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GOTS organic certification adds 15-25% to fabric costs. OEKO-TEX Standard 100 adds 5-10%. BSCI social compliance adds minimal cost but required for many retailers. ISO 9001 quality certification indicates process control. Certifications enable access to premium markets and justify higher retail pricing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does fabric choice affect manufacturing cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fabric is typically 50-70% of garment cost. Basic cotton polyester blends are most cost-effective. Organic cotton costs 20-30% more. Recycled polyester adds 15-20%. Technical fabrics (Gore-Tex, specialized performance) can double costs. Fabric selection is the primary lever for controlling manufacturing costs."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com"
+      },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "NL"],
+      "description": "Custom clothing manufacturing from Bangladesh with low MOQ from 300 pieces."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Clothing from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Brief",
+          "text": "Share your design, quantity, fabric requirements and timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Quote",
+          "text": "Get a detailed FOB quote within 48 hours."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample",
+          "text": "Review and approve a pre-production sample."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Full production with inline quality checks."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipment",
+          "text": "FOB Dhaka shipment with full export documentation."
+        }
+      ]
+    }
+]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Clothing Manufacturing Cost Guide</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Cost Guide | 2026 Edition | {companyAge} Years Experience</div>
+        <h1 class="hero__title">Clothing Manufacturing Cost Guide | What It Really Costs to Manufacture Clothing in 2026</h1>
+        <p class="hero__description">
+          Complete clothing manufacturing cost guide covering cost per unit by product type, factors affecting pricing, total landed cost calculation, payment terms, production timeline, and how to get accurate manufacturing quotes. Includes cost comparison between Bangladesh, China, and Vietnam.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href="/tools/price-calculator" class="hero__cta hero__cta--secondary">Price Calculator</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">What Determines Clothing Manufacturing Cost</h2>
+      </div>
+      <div class="section__text">
+        <p>Clothing manufacturing cost depends on multiple factors beyond just labor rates. Fabric cost typically represents 50-70% of total garment cost, making fabric selection the primary cost driver. Construction complexity affects labor time and cost. Order quantity determines production efficiency and fabric purchasing power. Geographic location impacts labor rates, duty rates, and shipping costs. Certifications and compliance requirements add costs but enable access to premium markets. Payment terms and logistics affect cash flow and total landed cost.</p>
+        
+        <p>Understanding these cost components enables brands to make informed decisions about product development, pricing strategy, and manufacturer selection. This guide breaks down each cost factor, provides benchmarks for different product categories, and explains how to calculate total landed cost to understand the true cost of importing manufactured clothing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Cost Per Unit by Product Type</h2>
+      </div>
+      <div class="section__text">
+        <p>The table below shows FOB (Free On Board) manufacturing costs for common garment categories at different order quantities. FOB represents the factory price including production and delivery to the port. These are benchmark ranges for Bangladesh manufacturing, which offers competitive pricing with 300-piece minimums. Actual costs vary based on fabric quality, construction complexity, and specific requirements.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>300 pcs FOB</th>
+              <th>500 pcs FOB</th>
+              <th>1000 pcs FOB</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>T-shirt (basic cotton)</td>
+              <td>$3-8</td>
+              <td>$2-6</td>
+              <td>$1-5</td>
+            </tr>
+            <tr>
+              <td>Hoodie (cotton fleece)</td>
+              <td>$8-15</td>
+              <td>$7-12</td>
+              <td>$6-10</td>
+            </tr>
+            <tr>
+              <td>Polo shirt (pique knit)</td>
+              <td>$6-12</td>
+              <td>$5-10</td>
+              <td>$4-8</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Jacket (lightweight)</td>
+              <td>$12-22</td>
+              <td>$10-18</td>
+              <td>$8-15</td>
+            </tr>
+            <tr>
+              <td>Dress (woven)</td>
+              <td>$10-20</td>
+              <td>$8-16</td>
+              <td>$6-14</td>
+            </tr>
+            <tr>
+              <td>Trousers (casual)</td>
+              <td>$8-16</td>
+              <td>$7-14</td>
+              <td>$6-12</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Activewear set (2-piece)</td>
+              <td>$15-28</td>
+              <td>$13-24</td>
+              <td>$11-20</td>
+            </tr>
+            <tr>
+              <td>Swimwear (bikini set)</td>
+              <td>$8-18</td>
+              <td>$7-15</td>
+              <td>$6-12</td>
+            </tr>
+          </tbody>
+          <caption>FOB Bangladesh pricing. Actual costs vary based on fabric, construction, and specifications. Custom development may incur additional fees.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Factors Affecting Manufacturing Cost</h2>
+      </div>
+      <div class="section__text">
+        <p>Multiple factors influence manufacturing cost beyond the base garment price. Understanding these factors helps brands optimize their cost structure and make informed trade-offs between quality, price, and positioning. The table below compares lower-cost and higher-cost options across key cost factors.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Lower Cost</th>
+              <th>Higher Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Fabric</td>
+              <td>Basic cotton-polyester blends, standard weights</td>
+              <td>Organic cotton, recycled materials, technical fabrics</td>
+            </tr>
+            <tr>
+              <td>MOQ</td>
+              <td>High volume (1000+ pieces) reduces per-unit cost</td>
+              <td>Low volume (300 pieces) increases per-unit cost</td>
+            </tr>
+            <tr>
+              <td>Embellishments</td>
+              <td>Basic screen printing, simple embroidery</td>
+              <td>Complex prints, embroidery, specialty treatments</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Certifications</td>
+              <td>Basic compliance, no premium certifications</td>
+              <td>GOTS organic, OEKO-TEX, BSCI, ISO standards</td>
+            </tr>
+            <tr>
+              <td>Lead time</td>
+              <td>Standard production timeline (30-45 days)</td>
+              <td>Rush production (20-30 days) at 20-30% premium</td>
+            </tr>
+            <tr>
+              <td>Packaging</td>
+              <td>Standard poly bags, basic labels</td>
+              <td>Custom packaging, branded hang tags, boxes</td>
+            </tr>
+          </tbody>
+          <caption>Cost trade-offs depend on brand positioning and target market. Premium positioning justifies higher costs through higher retail pricing.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">What Is Landed Cost? Calculating Your True Cost Per Unit</h2>
+      </div>
+      <div class="section__text">
+        <p>FOB (Free On Board) price is not your final cost. Many brands focus only on the factory FOB price and get shocked when freight, duties, insurance, and other charges add 25-35% to their total cost. Landed cost includes FOB plus ocean freight, marine insurance, customs duty, customs broker fees, inland freight to your warehouse, quality inspection costs, and bank charges or foreign exchange fees. These additional costs significantly impact your final profitability and must be factored into pricing decisions from the start.</p>
+        
+        <p>Understanding landed cost is critical for accurate pricing, cash flow planning, and profit margin calculation. If you budget based on FOB alone, you'll likely find your margins squeezed when all import costs are factored in. Smart brands calculate landed cost before placing orders to ensure retail pricing covers all expenses while maintaining target margins. This proactive approach prevents cash flow surprises and ensures sustainable business operations. The difference between FOB and landed cost can make or break a product line's profitability, especially for startups with limited capital.</p>
+        
+        <p>Ocean freight costs vary significantly based on shipment volume, destination port, and seasonal demand. A full container load (FCL) typically costs $1,500-4,000 depending on route, while less than container load (LCL) shipments cost more per cubic meter. Marine insurance typically costs 0.3-0.5% of shipment value and protects against loss or damage during transit. Customs broker fees range from $100-500 per shipment depending on complexity and documentation requirements. Inland freight from port to warehouse adds $0.50-2 per garment depending on distance and volume.</p>
+        
+        <p>Quality inspection costs $200-500 per shipment when using third-party inspection services, though many brands skip this step at their peril. A single inspection can prevent thousands of dollars in defective goods reaching customers. Bank charges for international wire transfers typically cost $25-50 per transaction, and foreign exchange fluctuations can add 1-3% to costs if not hedged properly. All these components must be tracked and managed to understand your true cost structure.</p>
+        
+        <p>Use our <a href="/tools/price-calculator">price calculator</a> to estimate your landed cost based on product type, quantity, and destination market. This tool helps you understand the true cost per unit before committing to production. By modeling different scenarios, you can optimize order quantities, shipping methods, and sourcing decisions to maximize profitability while meeting customer expectations for quality and delivery timelines.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Cost Component</th>
+              <th>Example (Hoodie)</th>
+              <th>% of Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>FOB price</td>
+              <td>$13.00</td>
+              <td>62%</td>
+            </tr>
+            <tr>
+              <td>Ocean freight per unit</td>
+              <td>$1.20</td>
+              <td>6%</td>
+            </tr>
+            <tr>
+              <td>Marine insurance</td>
+              <td>$0.15</td>
+              <td>1%</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Customs duty (16.5% MFN USA)</td>
+              <td>$2.15</td>
+              <td>10%</td>
+            </tr>
+            <tr>
+              <td>Customs broker fee</td>
+              <td>$0.35</td>
+              <td>2%</td>
+            </tr>
+            <tr>
+              <td>Inland freight to warehouse</td>
+              <td>$0.45</td>
+              <td>2%</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Quality inspection</td>
+              <td>$0.25</td>
+              <td>1%</td>
+            </tr>
+            <tr>
+              <td>Bank charges / FX</td>
+              <td>$0.30</td>
+              <td>1%</td>
+            </tr>
+            <tr>
+              <td><strong>TOTAL LANDED COST</strong></td>
+              <td><strong>$17.85</strong></td>
+              <td><strong>85%</strong></td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Your margin buffer</td>
+              <td>$2.65</td>
+              <td>15%</td>
+            </tr>
+          </tbody>
+          <caption>Landed cost is always 25-35% higher than FOB. Budget accordingly to protect your margins. Example based on 1,000 hoodies shipped to USA via ocean freight.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Tariff Impact on Manufacturing Cost | USA, UK, EU, AU</h2>
+      </div>
+      <div class="section__text">
+        <p>Tariffs (customs duties) significantly impact total landed cost depending on your manufacturing location and target market. Bangladesh enjoys duty-free access to EU markets through EBA (Everything But Arms) preferential trade status for Least Developed Countries. This provides a 12% cost advantage over Chinese competitors in the European market. For the US market, Bangladesh faces standard MFN (Most Favored Nation) duty rates of 16.5% for most garments, while China faces Section 301 additional tariffs of 25% on top of standard duties.</p>
+        
+        <p>The UK post-Brexit maintains similar duty structures to the EU for most garments. Australia applies a flat 10% GST on most imported garments regardless of origin. Understanding these tariff differences enables brands to optimize sourcing decisions by total landed cost, not just factory FOB price. A slightly higher FOB from Bangladesh can result in lower total landed cost to the EU due to duty savings. This tariff advantage is particularly significant for high-volume orders where even small percentage differences translate to substantial dollar amounts.</p>
+        
+        <p>Section 301 tariffs on Chinese goods were implemented as part of US trade policy and remain in effect as of 2026. These tariffs apply to most apparel categories and represent a permanent cost disadvantage for Chinese manufacturing relative to countries like Bangladesh, Vietnam, and India. Brands targeting the US market must factor this 25% premium into their sourcing calculations or consider alternative manufacturing locations to remain competitive on price.</p>
+        
+        <p>EU duty-free access for Bangladesh through EBA status is not permanent and could change as Bangladesh's economy develops. However, this preferential treatment is expected to continue through at least 2027, providing brands with a predictable cost advantage for near-term planning. Smart brands monitor trade policy developments and maintain contingency sourcing relationships to adapt quickly if tariff structures change.</p>
+        
+        <p>Check specific HS codes for your products using our <a href="/tools/hs-code">HS code tool</a> and understand Incoterms with our <a href="/insights/incoterms-explained">Incoterms guide</a>. These tools help you calculate accurate duty costs and shipping responsibilities. Proper classification of your products ensures you pay the correct duty rate and avoid customs delays or penalties for misclassification.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Market</th>
+              <th>Bangladesh Rate</th>
+              <th>China Rate</th>
+              <th>China S301 Extra</th>
+              <th>Difference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>USA (knitwear)</td>
+              <td>16.5% MFN</td>
+              <td>16.5% + 25% S301</td>
+              <td>Yes</td>
+              <td>25% extra</td>
+            </tr>
+            <tr>
+              <td>USA (outerwear)</td>
+              <td>16.5% MFN</td>
+              <td>16.5% + 25% S301</td>
+              <td>Yes</td>
+              <td>25% extra</td>
+            </tr>
+            <tr>
+              <td>UK (all garments)</td>
+              <td>~12% standard</td>
+              <td>~12%</td>
+              <td>No</td>
+              <td>Same rate</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>EU (garments)</td>
+              <td>0% EBA/LDC</td>
+              <td>12%</td>
+              <td>No</td>
+              <td>12% saving</td>
+            </tr>
+            <tr>
+              <td>Australia</td>
+              <td>10%</td>
+              <td>10%</td>
+              <td>No</td>
+              <td>Same rate</td>
+            </tr>
+          </tbody>
+          <caption>Tariff rates are subject to change based on trade agreements and policy updates. Verify current rates with customs brokers or official sources before placing orders.</caption>
+        </table>
+      </div>
+      <div class="section__text">
+        <p><strong>Concrete Tariff Saving Example:</strong> A brand orders 1,000 hoodies at $13 FOB ($13,000 total). From China to USA: $13,000 | 41.5% = $5,395 duty. From Bangladesh to USA: $13,000 | 16.5% = $2,145 duty. The Bangladesh sourcing saves $3,250 in duty on this single order. With four such orders annually, that's $13,000 in duty savings alone?enough to fund an entire additional production run.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Sample Costs | What to Budget Before Bulk Production</h2>
+      </div>
+      <div class="section__text">
+        <p>Sampling is an essential investment before bulk production, but costs add up quickly. Proto samples typically cost $50-150 per style depending on complexity. These initial samples help verify design feasibility and fit before investing in full development. Fit samples cost $100-250 and focus on sizing, proportion, and construction accuracy. Pre-production samples cost $150-350 and represent the final approved version that bulk production will replicate. Shipping samples internationally adds $30-80 per shipment depending on speed and destination.</p>
+        
+        <p>Most projects require 2-3 rounds of sampling to achieve the desired result. This means budgeting $300-800 per style for samples alone across the development process. Many reputable manufacturers credit sample costs against your bulk order if you proceed with production, effectively making samples free for committed customers. Always clarify sample credit policies before starting development. Some manufacturers charge full sample fees with no credit, while others offer partial credits or waive fees entirely for larger orders.</p>
+        
+        <p>Rush sampling incurs additional costs of 20-50% for expedited production and shipping. While tempting when deadlines are tight, rush samples often sacrifice quality for speed and may not accurately represent bulk production quality. Plan your development timeline with adequate buffer time to avoid rush charges and ensure sample quality matches your expectations. The sample stage is not the place to cut corners?investing time and resources here prevents expensive mistakes in bulk production.</p>
+        
+        <p>Sample costs also include tech pack development if you don't have in-house design capabilities. Professional tech pack services cost $200-1000 per style depending on complexity and revisions. A well-prepared tech pack reduces sampling rounds and overall development costs by providing clear specifications from the start. Poor tech packs lead to multiple revision rounds as manufacturers guess at your intentions, driving up sample costs and extending development timelines.</p>
+        
+        <p>Learn more about our <a href="/sampling-service">sampling service</a> and read our detailed guide on <a href="/insights/sample-cost-explained">sample costs explained</a> to budget accurately for development. Proper sampling prevents expensive mistakes in bulk production that could cost thousands more than sample fees. View sample costs as an investment in product quality, not an expense to be minimized at the expense of your final product.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Payment Terms and How They Affect Cash Flow</h2>
+      </div>
+      <div class="section__text">
+        <p>Standard payment terms in clothing manufacturing are 30% deposit upon order confirmation and 70% balance before shipment. This structure provides manufacturers security to purchase materials and begin production while protecting buyers by requiring final payment only after production is complete and before goods leave the factory. For orders over $50,000, Letters of Credit (LC) are common?banks guarantee payment upon presentation of shipping documents, providing security for both parties. LCs add 0.5-2% in bank fees but eliminate payment risk for large transactions.</p>
+        
+        <p>Be wary of manufacturers demanding 100% upfront payment. This is a major red flag indicating potential fraud or financial instability. Legitimate manufacturers have sufficient working capital to fund production with standard 30% deposits. Cash flow example: For a $10,000 order, you pay $3,000 deposit, then $7,000 before shipment. This 60-day payment window (from deposit to shipment) requires working capital management but protects your investment. Manufacturers requesting 100% upfront often cannot secure materials or lack the financial stability to complete your order.</p>
+        
+        <p>Alternative payment structures exist for established relationships. Net 30 or Net 60 terms (payment after delivery) may be available after 3-5 successful orders with the same manufacturer, demonstrating reliability and payment history. These terms significantly improve cash flow by allowing you to sell goods before paying for them, but are rarely offered to new customers. Building this trust takes time but provides substantial cash flow benefits for growing brands.</p>
+        
+        <p>Payment method choice affects costs as well. Telegraphic Transfer (TT) via bank wire typically costs $25-50 per transaction. PayPal or Western Union offer convenience but charge 3-5% fees, making them expensive for large orders. These methods are acceptable for sample orders under $500 but impractical for bulk production. Always verify manufacturer bank details through independent sources before making large wire transfers to prevent fraud.</p>
+        
+        <p>Read our detailed comparison of <a href="/insights/payment-terms-LC-vs-TT">payment terms: LC vs TT</a> to understand which option best fits your order size and risk tolerance. Proper payment term negotiation protects your cash flow while securing manufacturer commitment. For guidance on <a href="/insights/how-to-negotiate-with-clothing-manufacturers">how to negotiate with clothing manufacturers</a>, review our negotiation guide. Consider your working capital availability when negotiating termsmanufacturers may accept lower deposits for established customers but will generally require 30% upfront for new relationships.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Cost Comparison | Manufacturing Destinations in 2026</h2>
+      </div>
+      <div class="section__text">
+        <p>Manufacturing costs vary significantly by country due to labor rates, infrastructure efficiency, and trade agreements. China offers the fastest turnaround and highest technical capability but at higher labor costs of $400-600 monthly and 25% additional Section 301 tariffs for the US market. China's infrastructure is world-class, with excellent port facilities and logistics networks that reduce shipping delays. However, rising labor costs and trade tensions have eroded China's cost advantage for basic garments over the past decade.</p>
+        
+        <p>Vietnam provides competitive pricing at $180-220 monthly labor with strong technical garment capabilities, particularly for woven and technical apparel. Vietnam has invested heavily in textile infrastructure and benefits from numerous free trade agreements that reduce duty rates in key markets. The country's government actively supports the garment industry with favorable policies and infrastructure development. Vietnam's skilled workforce produces high-quality technical garments, making it a preferred destination for performance apparel and activewear brands.</p>
+        
+        <p>India excels in embroidery and cotton garments with labor costs of $150-200 monthly, though infrastructure can be less consistent than China or Vietnam. India's textile heritage spans centuries, with exceptional capabilities in hand embroidery, traditional prints, and specialty cotton fabrics. However, logistics challenges, bureaucratic complexity, and inconsistent power supply can impact production timelines. India works best for brands seeking unique embellishments or cotton-based products where these capabilities justify potential delays.</p>
+        
+        <p>Turkey serves EU markets effectively with $300-400 monthly labor costs and 12% EU duty rates, ideal for fast fashion requiring quick European delivery. Turkey's geographic proximity to Europe enables 5-10 day delivery by truck, significantly faster than ocean freight from Asia. This proximity supports rapid replenishment and smaller batch production aligned with fast fashion business models. Turkey's cotton production and textile integration provide vertical supply chain advantages for cotton-based garments.</p>
+        
+        <p>Bangladesh offers the lowest labor costs at $110-130 monthly with 0% duty to EU markets and 16.5% to the US, making it the most cost-effective option for basic knitwear with low MOQ requirements. Bangladesh has specialized in basic t-shirts, hoodies, and pants, achieving exceptional efficiency in these categories through decades of focused development. The country's duty-free access to EU markets through EBA status provides substantial cost advantages for European brands. While Bangladesh trails China in technical capabilities, it excels in cost-efficient production of standard knitwear items.</p>
+        
+        <p>The right choice depends on your product category, target market, order volume, and priority between cost and speed. For basic garments targeting the EU, Bangladesh's duty-free access provides unbeatable total landed cost. For technical garments or urgent US orders, Vietnam may justify slightly higher costs through better capabilities. China remains the choice for complex, time-sensitive projects despite higher costs. Consider total landed cost including duty, shipping time, and MOQ requirements when evaluating destinations?lowest FOB doesn't always mean lowest total cost.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Labour/Month</th>
+              <th>T-shirt FOB</th>
+              <th>US Tariff</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>China</td>
+              <td>$400-600</td>
+              <td>$4-7</td>
+              <td>41.5% (inc S301)</td>
+              <td>Very high volume</td>
+            </tr>
+            <tr>
+              <td>Vietnam</td>
+              <td>$180-220</td>
+              <td>$4-6</td>
+              <td>16.5% MFN</td>
+              <td>Woven, technical</td>
+            </tr>
+            <tr>
+              <td>India</td>
+              <td>$150-200</td>
+              <td>$4-6</td>
+              <td>16.5% MFN</td>
+              <td>Embroidery, cotton</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Turkey</td>
+              <td>$300-400</td>
+              <td>$6-10</td>
+              <td>12% EU</td>
+              <td>EU fast fashion</td>
+            </tr>
+            <tr>
+              <td>Bangladesh</td>
+              <td>$110-130</td>
+              <td>$3.50-6</td>
+              <td>0% EU, 16.5% US</td>
+              <td>Knitwear, low MOQ</td>
+            </tr>
+          </tbody>
+          <caption>FOB prices are approximate ranges for basic t-shirts at 500-1000 piece MOQ. Actual costs vary based on fabric, construction, and specific requirements. Consider total landed cost including duty when comparing destinations.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">How to Reduce Manufacturing Costs Without Cutting Quality</h2>
+      </div>
+      <div class="section__text">
+        <p>Reducing manufacturing costs doesn't require sacrificing quality. Strategic decisions about order quantity, design simplification, and supplier relationships can deliver 15-30% cost savings while maintaining or even improving product quality. The key is understanding which cost levers to pull and which trade-offs make sense for your brand positioning.</p>
+        
+        <p><strong>Increase MOQ gradually:</strong> Scaling from 300 to 500 pieces typically reduces per-unit cost by 10-15%. Moving from 500 to 1,000 pieces delivers another 10-15% savings. However, don't jump to high MOQs without sales confidence. Gradually increase quantities as you validate demand, using cost savings to fund growth rather than risking inventory on unproven designs.</p>
+        
+        <p><strong>Consolidate styles:</strong> Using fewer fabric types across your collection increases your purchasing power and reduces fabric minimums. A brand using 3 fabric types across 10 styles gets better pricing than a brand using 10 different fabrics. Consolidation also simplifies production planning and reduces error potential.</p>
+        
+        <p><strong>Simplify embellishments:</strong> Screen printing costs $0.50-2 per placement versus $1-5 for embroidery. Consider whether complex embellishments drive sufficient perceived value to justify the cost. Many successful brands use minimal, strategic embellishments that create impact without excessive cost.</p>
+        
+        <p><strong>Order seasonally, not reactively:</strong> Planning production 3-4 months ahead avoids 15-25% rush premiums. Reactive ordering when you're out of stock is expensive. Build a production calendar aligned with sales forecasts to secure standard pricing and reliable delivery timelines.</p>
+        
+        <p><strong>Build long-term factory relationships:</strong> Manufacturers reward loyalty with better pricing, priority scheduling, and more flexibility on problem resolution. A factory that knows your standards and trusts your payment reliability becomes a partner invested in your success, often passing efficiency gains back to you as cost savings.</p>
+        
+        <p><strong>Use full package production:</strong> Full package (FP) manufacturers handle fabric sourcing, production, and finishing as one service. This is typically more cost-effective than CMT (Cut, Make, Trim) where you source fabric separately and pay only for labor. FP manufacturers have fabric purchasing power you lack as an individual brand.</p>
+        
+        <p>Learn more about <a href="/full-package-production">full package production</a> and how it can reduce your total costs while simplifying your supply chain. The right production model depends on your volume, expertise, and strategic priorities.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Clothing Manufacturing Cost FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the average cost to manufacture a t-shirt?</h3>
+          <p class="faq__answer">Average t-shirt manufacturing cost ranges from $3-8 FOB for 300 pieces, $2-6 for 500 pieces, and $1-5 for 1000 pieces. Basic cotton t-shirts fall at the lower end, while premium organic cotton or custom prints increase cost. Bangladesh offers competitive pricing with 300-piece minimums.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does MOQ affect manufacturing cost per unit?</h3>
+          <p class="faq__answer">Higher MOQ reduces cost per unit through production efficiency and fabric purchasing power. 1000-piece orders typically cost 30-50% less per unit than 300-piece orders. However, higher MOQ increases inventory risk. Brands must balance per-unit savings against cash flow and storage costs.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between FOB and landed cost?</h3>
+          <p class="faq__answer">FOB (Free On Board) is the factory price including production and delivery to the port. Landed cost includes FOB plus freight, insurance, customs duty, and any other charges to get goods to your warehouse. Landed cost is typically 20-40% higher than FOB depending on destination and shipping method.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are standard payment terms for clothing manufacturing?</h3>
+          <p class="faq__answer">Standard payment terms are 30% deposit upon order confirmation, 70% balance before shipment. Letter of Credit offers security for larger orders. Western Union or PayPal may be accepted for small orders but carry higher fees. Always verify payment security before transferring funds.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does clothing manufacturing take from order to delivery?</h3>
+          <p class="faq__answer">Production timeline typically 30-45 days from fabric receipt. Sampling 7-14 days before bulk. Ocean freight to US/Europe 25-35 days. Air freight 5-7 days but significantly more expensive. Total order-to-delivery timeline 60-90 days for ocean freight, 40-55 days for air freight.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What hidden costs should I budget for in clothing manufacturing?</h3>
+          <p class="faq__answer">Hidden costs include sample fees ($50-200 per style), shipping samples, tech pack development ($200-1000), quality inspection ($200-500), bank fees for international transfers, customs broker fees, warehousing costs, and potential duty on imports. Budget 10-15% above quoted FOB for these items.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Which country offers the lowest clothing manufacturing costs?</h3>
+          <p class="faq__answer">Bangladesh offers the lowest costs for basic garments (t-shirts, hoodies, pants) with 300-1000 piece MOQs. Vietnam offers competitive pricing for technical garments. China offers speed and flexibility but at higher costs. Bangladesh combines low cost, duty advantages (GSP for EU), and established textile infrastructure.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do I get an accurate manufacturing quote?</h3>
+          <p class="faq__answer">Provide detailed tech pack with measurements, fabric specifications, quantities per size/color, and delivery timeline. Specify any special requirements (certifications, labels, packaging). Request quotes from multiple manufacturers and compare not just price but communication, sample quality, and terms. Always request samples before bulk.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What certifications increase manufacturing costs?</h3>
+          <p class="faq__answer">GOTS organic certification adds 15-25% to fabric costs. OEKO-TEX Standard 100 adds 5-10%. BSCI social compliance adds minimal cost but required for many retailers. ISO 9001 quality certification indicates process control. Certifications enable access to premium markets and justify higher retail pricing.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does fabric choice affect manufacturing cost?</h3>
+          <p class="faq__answer">Fabric is typically 50-70% of garment cost. Basic cotton polyester blends are most cost-effective. Organic cotton costs 20-30% more. Recycled polyester adds 15-20%. Technical fabrics (Gore-Tex, specialized performance) can double costs. Fabric selection is the primary lever for controlling manufacturing costs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Get Accurate Manufacturing Quotes?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for detailed manufacturing quotes. We provide transparent pricing with detailed cost breakdowns. Our MOQ starts from 300 pieces with competitive Bangladesh pricing. Use our price calculator for estimates or request a custom quote for your specific requirements.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/tools/price-calculator" class="section__cta section__cta--secondary">Price Calculator</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/tools/price-calculator" style="color: var(--color-primary);">price calculator</a>, <a href="/tools/lead-time-calculator" style="color: var(--color-primary);">lead time calculator</a>, <a href="/tools/moq-calculator" style="color: var(--color-primary);">MOQ calculator</a>, <a href="/low-moq-clothing-manufacturers" style="color: var(--color-primary);">low MOQ clothing manufacturers</a>, <a href="/insights/incoterms-explained" style="color: var(--color-primary);">incoterms explained</a>, <a href="/insights/payment-terms-LC-vs-TT" style="color: var(--color-primary);">payment terms LC vs TT</a>, <a href="/insights/manufacturing-costs" style="color: var(--color-primary);">manufacturing costs</a>, <a href="/insights/sample-cost-explained" style="color: var(--color-primary);">sample cost explained</a>, <a href="/guides/clothing-manufacturing-cost-bangladesh" style="color: var(--color-primary);">clothing manufacturing cost Bangladesh</a>, <a href="/oem-clothing-manufacturer" style="color: var(--color-primary);">OEM clothing manufacturer</a>, <a href="/private-label-manufacturer" style="color: var(--color-primary);">private label manufacturer</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/contact" style="color: var(--color-primary);">contact</a>, <a href="/tools/sample-request" style="color: var(--color-primary);">sample request</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+

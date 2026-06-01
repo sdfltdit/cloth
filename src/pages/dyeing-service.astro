@@ -1,0 +1,623 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Garment Dyeing Service Bangladesh | Fabric & Garment Dyeing";
+const pageDescription = "Professional dyeing service from Bangladesh. Reactive, pigment and disperse dyeing for fabric and garments. Pantone color matching, GOTS and OEKO-TEX certified."
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href}>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com",
+        "name": "SDF Clothing"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "description": "Dyeing service from Bangladesh providing reactive, pigment, and disperse dyeing for fabric and garments with Pantone color matching, GOTS and OEKO-TEX certification to fashion brands worldwide since 1998."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I send my own fabric or garments for dyeing only?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Our dyeing service is available as a standalone service. You can ship undyed fabric or finished garments to us, we dye them to your specification, and we ship them back or to your chosen destination."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is your Pantone color matching?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our standard color matching tolerance is Delta E &lt; 1.0 | visually imperceptible to the human eye. For repeat orders, we maintain color records and match within Delta E &lt; 1.5 across batches."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for custom-color dyeing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "200-500 kg for fabric dyeing or 300-500 pieces for garment dyeing in custom colors. Stock colors have lower minimums of 50-100 kg or 100-200 pieces."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are your dyes safe and certified?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We use only OEKO-TEX approved dyes free from harmful azo compounds, heavy metals, and formaldehyde. For organic garments we use GOTS-approved low-impact dyes. ZDHC compliance ensures no hazardous chemical discharge."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does dyeing take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lab dip development: 5-7 days. Bulk fabric dyeing: 1-3 days. Bulk garment dyeing: 2-5 days. Specialty wash effects: 3-7 days. Total time from brief to delivered bulk: typically 15-25 days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you dye samples for color approval before bulk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Sample dyeing is included in standard dyeing service. We provide lab dips and production samples for color approval at no extra charge for confirmed bulk orders."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sdfltd.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Dyeing Service",
+          "item": canonicalUrl.href
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<meta name="keywords" content="garment dyeing service Bangladesh, fabric dyeing service, reactive dyeing, pigment dyeing, disperse dyeing, pantone color matching, GOTS dyeing service, OEKO-TEX dyeing, low MOQ dyeing, custom color dyeing, piece dyeing service, yarn dyeing Bangladesh" />
+
+<!-- Hero Section -->
+<section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+      <p style="font-size:0.72rem;color:#FFFFFF;">
+        <a href="/" style="color:#FFFFFF;text-decoration:none;">Home</a>
+        <span style="margin:0 0.5rem;color:#333;">/</span>
+        Dyeing Service
+      </p>
+    </nav>
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Dyeing Service | Since 1998 | GOTS & OEKO-TEX Certified</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1rem;line-height:1.2;">
+      Fabric and Garment Dyeing Service for Fashion Brands
+    </h1>
+    <p style="color:#FFFFFF;max-width:640px;line-height:1.8;font-size:0.92rem;">
+      Color is what makes a garment recognizable, desirable, and on-brand. Getting color right across every piece in a production run is one of the most technical challenges in garment manufacturing. SDF Clothing's dyeing service delivers consistent, certified color across fabric, yarn, and finished garments | from single-color production runs to complex multi-shade collections.
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <a href="/contact" class="cta-button">Get Free Quote</a>
+      <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20dyeing-service`} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WhatsApp Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Stats Section -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#000000;">
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">?E</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">< 1.0 Accuracy</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">GOTS</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Organic Certified</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">ZDHC</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Zero Discharge</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">100%</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Color Consistent</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Dyeing Quality Matters Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Quality Overview</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Why Dyeing Quality Matters</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Color consistency is what separates premium brands from cheap manufacturers. A small color variation between pieces in the same order is visible to customers and leads to returns. A shade that does not match across reorders breaks brand consistency over time.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Bangladesh has invested heavily in modern dyeing infrastructure since 2015. Today our dyeing facilities use computerized color matching, automated chemical dosing, and energy-efficient machinery | meeting both quality and sustainability standards required by EU and UK retailers.
+    </p>
+  </div>
+</section>
+
+<!-- Dyeing Services Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Service Categories</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Types of Dyeing Services We Offer</h2>
+    </div>
+    
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Fabric Dyeing (Piece Dyeing)</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Dyeing finished fabric before it is cut and sewn into garments:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0 0 2.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Reactive dyeing for cotton and natural fibers
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Disperse dyeing for polyester and synthetics
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Vat dyeing for the most colorfast results
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Pigment dyeing for vintage and washed-out looks
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Solid colors and tone-on-tone effects
+      </li>
+    </ul>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Yarn Dyeing</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Dyeing yarn before knitting or weaving | produces deeper, more uniform color that survives many wash cycles:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0 0 2.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Hank dyeing for premium yarn coloring
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Package dyeing for standard production
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Space dyeing for multi-color yarn effects
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Melange yarn dyeing for heathered fabrics
+      </li>
+    </ul>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Garment Dyeing</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Dyeing finished garments after construction | gives a soft, lived-in look popular for premium streetwear and casualwear:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0 0 2.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Cold pigment dyeing for distressed effects
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Reactive garment dyeing for solid soft shades
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Overdyeing existing colored garments
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Tie-dye and acid wash effects
+      </li>
+    </ul>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Specialty Dyeing Effects</h3>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Wash effects (stone wash, enzyme wash, sand wash)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Dip-dye and ombre gradient effects
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Acid wash for vintage denim and tees
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Mineral wash for soft worn-in handle
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Reverse dyeing and discharge printing
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Burnout effects on blended fabrics
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Color Matching Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Technical Guide</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">How Color Matching Works</h2>
+    </div>
+    
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Pantone Color Matching</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      You provide a Pantone TCX or TPG color reference. Our color lab uses computerized spectrophotometers to match the exact color values. We produce a lab dip (small sample) for your approval before bulk dyeing.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;">
+      Standard color matching tolerance is Delta E &lt; 1.0 | meaning the visual difference between target and produced color is imperceptible to the human eye in normal viewing conditions.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;margin-top:2.5rem;">Custom Color Development</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      If you have a specific color in mind that does not match any standard Pantone reference, we develop custom colors:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0 0 2.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Send us a physical color sample (yarn, fabric, paint chip, or photograph in natural light)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Our color lab develops 3-5 lab dips approximating your target
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        You select the closest match and request refinements
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Final approved lab dip becomes the bulk standard
+      </li>
+    </ul>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Color Consistency Across Batches</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;">
+      For repeat orders, we maintain color records in our lab system. Reorder the exact same color months or years later | we match the original within Delta E &lt; 1.5 (industry standard for batch-to-batch consistency).
+    </p>
+  </div>
+</section>
+
+<!-- Dyeing Certifications Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Quality Assurance</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Dyeing Certifications We Hold</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      GOTS-certified dyeing | uses only approved low-impact dyes from the GOTS approved chemical list. Required for any GOTS-certified organic garment claim.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      OEKO-TEX Standard 100 | guarantees the dyed fabric or garment is free from harmful chemicals, including azo dyes, formaldehyde, and heavy metals. Required for EU REACH compliance.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      ZDHC (Zero Discharge of Hazardous Chemicals) compliance | ensures no hazardous chemicals are discharged into wastewater. Required by major brands for sustainability commitments.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      ISO 14001 environmental management | covers wastewater treatment, energy use, and chemical handling protocols at the dyeing facility level.
+    </p>
+  </div>
+</section>
+
+<!-- Dyeing Process Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">How It Works</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Our Dyeing Process</h2>
+    </div>
+    
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#000000;">
+      <div style="background:#000;padding:2rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Step 1</p>
+        <h3 style="font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:1rem;">Color brief</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.7;">You send Pantone reference, fabric/yarn/garment sample, or color description. We confirm the target color and certifications required.</p>
+      </div>
+      <div style="background:#000;padding:2rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Step 2</p>
+        <h3 style="font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:1rem;">Lab dip development</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.7;">Our color lab produces 2-3 lab dip samples matching your target color. Lab dips take 5-7 days. You receive samples by courier for evaluation.</p>
+      </div>
+      <div style="background:#000;padding:2rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Step 3</p>
+        <h3 style="font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:1rem;">Lab dip approval</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.7;">You approve one lab dip as the bulk production standard. If none of the initial samples match exactly, we produce refined samples until you approve.</p>
+      </div>
+      <div style="background:#000;padding:2rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Step 4</p>
+        <h3 style="font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:1rem;">Bulk dyeing production</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.7;">Approved color is applied to your bulk order. Single-color batches take 1-2 days for fabric dyeing or 2-3 days for garment dyeing.</p>
+      </div>
+      <div style="background:#000;padding:2rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Step 5</p>
+        <h3 style="font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:1rem;">Color verification and approval</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.7;">Production samples are verified against the approved lab dip using spectrophotometer measurement. You receive a production sample for final visual approval before delivery.</p>
+      </div>
+      <div style="background:#000;padding:2rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Step 6</p>
+        <h3 style="font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:1rem;">Delivery</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.7;">Approved bulk-dyed fabric or garments are delivered to your next production stage or warehouse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dyeing MOQ Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Order Requirements</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Dyeing MOQ | Minimum Order Quantities</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Stock colors (mill standard colors like white, black, navy, grey): 50-100 kg minimum for fabric dyeing. 100-200 pieces minimum for garment dyeing.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Custom colors (your specific shade): 200-500 kg minimum for fabric dyeing. 300-500 pieces minimum for garment dyeing.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Specialty effects (wash effects, dip dye, ombre): 300-500 pieces minimum. Some effects require 1,000+ pieces for consistency.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      For smaller orders below stock minimums, we sometimes consolidate dyeing batches across multiple buyers using the same color.
+    </p>
+  </div>
+</section>
+
+<!-- Dyeing Pricing Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Pricing Guide</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Dyeing Pricing in Bangladesh</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Dyeing service is priced per kilogram for fabric dyeing and per piece for garment dyeing.
+    </p>
+    
+    <div style="margin-top:2rem;">
+      <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+        Typical FOB Bangladesh dyeing service prices:
+      </p>
+      <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Solid color reactive dyeing on cotton: $0.80-1.40 per kg fabric
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Disperse dyeing on polyester: $1.00-1.60 per kg fabric
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Garment dyeing (cold pigment): $0.30-0.80 per piece
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Garment dyeing (reactive): $0.50-1.20 per piece
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Specialty wash effects (stone wash, enzyme): $0.40-1.00 per piece
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Premium effects (acid wash, dip dye, ombre): $0.80-2.50 per piece
+        </li>
+        <li style="padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Lab dip development cost: $15-30 per lab dip (typically 2-3 dips needed)
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Common Questions</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Frequently Asked Questions</h2>
+    </div>
+    
+    <div style="max-width:800px;">
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can I send my own fabric or garments for dyeing only?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. Our dyeing service is available as a standalone service. You can ship undyed fabric or finished garments to us, we dye them to your specification, and we ship them back or to your chosen destination.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How accurate is your Pantone color matching?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Our standard color matching tolerance is Delta E &lt; 1.0 | visually imperceptible to the human eye. For repeat orders, we maintain color records and match within Delta E &lt; 1.5 across batches.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What is the minimum order for custom-color dyeing?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">200-500 kg for fabric dyeing or 300-500 pieces for garment dyeing in custom colors. Stock colors have lower minimums of 50-100 kg or 100-200 pieces.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Are your dyes safe and certified?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. We use only OEKO-TEX approved dyes free from harmful azo compounds, heavy metals, and formaldehyde. For organic garments we use GOTS-approved low-impact dyes. ZDHC compliance ensures no hazardous chemical discharge.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How long does dyeing take?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Lab dip development: 5-7 days. Bulk fabric dyeing: 1-3 days. Bulk garment dyeing: 2-5 days. Specialty wash effects: 3-7 days. Total time from brief to delivered bulk: typically 15-25 days.</p>
+      </div>
+      <div style="padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can you dye samples for color approval before bulk?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. Sample dyeing is included in standard dyeing service. We provide lab dips and production samples for color approval at no extra charge for confirmed bulk orders.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Need consistent, certified color for your fashion brand? <a href="/contact" style="color:#e00;text-decoration:underline;">Contact SDF Clothing here</a> with your color requirements | Pantone references, sample swatches, or color descriptions. We will send pricing, lab dip schedule, and certification details within 48 hours. Free consultation.
+    </p>
+  </div>
+</section>
+
+<!-- Internal Link Section -->
+<section style="padding:5rem 0;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      For complete production strategy, read our <a href="/clothing-manufacturers" style="color:#e00;text-decoration:underline;">complete clothing manufacturers guide</a>.
+    </p>
+  </div>
+</section>
+
+
+    
+    <section style="padding:2rem 0;border-top:1px solid var(--color-border);margin-top:2rem"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:1.1rem;font-weight:600;color:var(--color-text);margin-bottom:1rem">Related Services</h2><nav aria-label="Related pages"><ul style="display:flex;flex-wrap:wrap;gap:0.75rem;list-style:none;padding:0"><li><a href="/low-moq-clothing-manufacturers" style="color:var(--color-primary)">Low MOQ Manufacturers</a></li><li><a href="/private-label-manufacturer" style="color:var(--color-primary)">Private Label</a></li><li><a href="/clothing-manufacturers-for-startups" style="color:var(--color-primary)">Startup Manufacturers</a></li><li><a href="/oem-clothing-manufacturer" style="color:var(--color-primary)">OEM Manufacturing</a></li><li><a href="/sustainable-clothing-manufacturers" style="color:var(--color-primary)">Sustainable Manufacturing</a></li><li><a href="/certifications" style="color:var(--color-primary)">Certifications</a></li><li><a href="/quality-inspection-service" style="color:var(--color-primary)">Quality Inspection</a></li><li><a href="/tech-pack-service" style="color:var(--color-primary)">Tech Pack Service</a></li><li><a href="/sampling-service" style="color:var(--color-primary)">Sampling Service</a></li><li><a href="/full-package-production" style="color:var(--color-primary)">Full Package Production</a></li><li><a href="/tools/price-calculator" style="color:var(--color-primary)">Price Calculator</a></li><li><a href="/contact" style="color:var(--color-primary)">Get a Quote</a></li></ul></nav></div></section>
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">SDF Clothing is a direct-access garment factory in Bangladesh — not a trading company or buying house. When you work with us, you communicate directly with our production team, receive transparent pricing without agent markup, and maintain full control over your supply chain. Our factory holds GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certifications.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Bangladesh is the world's second-largest garment exporter, shipping over $47 billion in apparel annually to USA, UK, EU and Australian markets. Our minimum order of 300 pieces reflects our commitment to supporting brands at every stage of growth — from first collections to established seasonal production runs. We offer full package production covering tech pack development, fabric sourcing, sampling, bulk manufacturing, quality inspection, and export documentation under one roof.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">For US brands, sourcing from Bangladesh avoids the Section 301 tariffs that add 25% or more to Chinese imports. For EU brands, Bangladesh's GSP duty-free access delivers lower landed costs compared to most other sourcing destinations. These trade advantages combine with competitive FOB pricing to deliver strong margins for our clients.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/tools/sample-request" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-header {
+    text-align: center;
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .accent-line {
+    width: 60px;
+    height: 2px;
+    background: #e00;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .cta-button {
+    background: #e00;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .cta-button:hover {
+    background: #cc0000;
+  }
+  
+  .whatsapp-cta {
+    background: #25D366;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .whatsapp-cta:hover {
+    background: #128C7E;
+  }
+</style>
+
+
+
+
+
+
+
+
+

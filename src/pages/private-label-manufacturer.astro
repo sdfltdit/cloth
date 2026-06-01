@@ -1,0 +1,608 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Private Label Clothing Manufacturer for Fashion Brands";
+const pageDescription = "Private label clothing manufacturer from Bangladesh. Custom branded apparel production with full customization. Your brand, our manufacturing. From 300 pieces.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com",
+        "name": "SDF Clothing"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "description": "Private label clothing manufacturer from Bangladesh providing custom branded apparel production with full customization to fashion brands worldwide since 1998."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for private label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "300 pieces per style minimum. This applies per design, colorway, and size range. Lower quantities possible at higher per-piece cost for sampling or prototype runs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is private label vs white label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Private label is custom-designed clothing with your brand identity, full customization of design, fabric, and branding. White label uses pre-designed products that you rebrand. Private label offers more control and differentiation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What customization scope do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer full customization including design development, fabric selection, color matching, custom labels and tags, embroidery and printing, and packaging. Your brand identity integrated throughout the product."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you handle brand identity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We integrate your brand identity through custom labels, hang tags, packaging, and consistent design language. We maintain brand consistency across all products and ensure your brand is properly represented."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the pricing for private label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Private label pricing is typically 10-20% higher than white label due to customization and development. However, the premium is justified by brand control and market differentiation. FOB Bangladesh pricing from $8-25 per piece depending on complexity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does private label production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard production timeline: 35-45 days from design approval for basic private label. 45-60 days for full custom development. 10-14 days for sampling before bulk. Design development adds 10-15 days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you help with brand identity development?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer brand identity consultation including logo design, color palette development, and brand guidelines. Our team helps emerging brands establish professional identity before production begins. This service ensures your private label products align with your brand vision."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What industries do you serve with private label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We serve fashion brands across streetwear, athleisure, casual wear, corporate apparel, hospitality uniforms, and retail sectors. Our private label capabilities span t-shirts, hoodies, polos, pants, blazers, and full collections. We adapt to your industry's specific requirements."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Private Label Clothing Manufacturing Service",
+      "description": "Complete private label clothing production with custom branding, full customization, and brand identity integration from 300 pieces",
+      "provider": {
+        "@id": "https://sdfltd.com/#org"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Private Label Manufacturing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom Private Label Production"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "8",
+              "maxPrice": "25"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Start Private Label Clothing Production with SDF Clothing",
+      "description": "Step-by-step process for launching your private label clothing line",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Share Your Brand Vision",
+          "text": "Provide your brand identity, target market, and design inspiration. If you need brand development, we offer consultation services"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Custom Designs",
+          "text": "Our team helps create or refine your designs with technical specifications and material selection"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Create Brand Assets",
+          "text": "Design custom labels, hang tags, and packaging that reflect your brand identity"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Samples",
+          "text": "Review production samples to ensure quality and brand alignment before bulk production"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Production begins with 300-piece minimum, 35-45 day turnaround for standard private label"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Control & Shipping",
+          "text": "Final inspection, brand verification, and shipping to your location with full documentation"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sdfltd.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Private Label Manufacturer",
+          "item": canonicalUrl.href
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href}>
+
+<script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+
+<meta name="keywords" content="private label manufacturer, private label clothing manufacturer, custom branded apparel, private label production, fashion brand manufacturer, custom clothing brand" />
+
+<!-- Hero Section -->
+<section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+      <p style="font-size:0.72rem;color:#FFFFFF;">
+        <a href="/" style="color:#FFFFFF;text-decoration:none;">Home</a>
+        <span style="margin:0 0.5rem;color:#333;">/</span>
+        Private Label Manufacturer
+      </p>
+    </nav>
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Private Label Manufacturer | Since 1998 | Your Brand, Our Manufacturing</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1rem;line-height:1.2;">
+      Private Label Clothing Manufacturer for Fashion Brands
+    </h1>
+    <p style="color:#FFFFFF;max-width:640px;line-height:1.8;font-size:0.92rem;">
+      Private label manufacturing gives you complete control over your clothing line. Your brand identity, your designs, your specifications - all manufactured to your standards. SDF Clothing provides private label production in Bangladesh with full customization from 300 pieces per style. From design development to final product, we build your brand.
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <a href="/contact" class="cta-button">Get Free Quote</a>
+      <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20private-label-manufacturer`} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WhatsApp Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Stats Section -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#000000;">
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">300</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Pieces Minimum</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">Full</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Customization</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">35-45</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Days Production</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">Brand</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Identity</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Private Label vs White Label Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Business Model</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Private Label vs White Label</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Private label is custom-designed clothing with your brand identity, full customization of design, fabric, and branding. White label uses pre-designed products that you rebrand. Private label offers more control and differentiation in the market. For another business model comparison, see our guide on <a href="/print-on-demand-vs-private-label">print on demand vs private label</a>.
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Private label: Custom design, your brand identity, full control
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        White label: Pre-designed products, faster launch, lower customization
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Private label: Higher investment, stronger brand differentiation
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Customization Scope Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Customization</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Customization Scope</h2>
+    </div>
+    
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Design development (from concept to technical specs)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Fabric selection (custom sourcing from certified mills)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Color matching (Pantone, brand guidelines, custom colors)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Custom labels and tags (woven, printed, hang tags)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Embroidery and printing (brand logos, custom graphics)
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Packaging (custom bags, boxes, poly bags with branding)
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Brand Identity Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Brand Identity</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Brand Identity Integration</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      We integrate your brand identity through custom labels, hang tags, packaging, and consistent design language. We maintain brand consistency across all products and ensure your brand is properly represented in every detail.
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Custom woven labels (brand logo, care instructions)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Hang tags (brand information, pricing, product details)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Packaging (custom bags, boxes, branded poly bags)
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Consistent design language (brand guidelines applied)
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- MOQ and Pricing Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Pricing Guide</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">MOQ and Pricing</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      <strong>MOQ:</strong> 300 pieces per style minimum. Applies per design, colorway, and size range.
+    </p>
+    
+    <div style="margin-top:2rem;">
+      <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+        Private label pricing is typically 10-20% higher than white label due to customization and development. However, the premium is justified by brand control and market differentiation.
+      </p>
+      <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+        FOB Bangladesh pricing for 500-piece orders:
+      </p>
+      <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Basic t-shirt (custom design): $8-15 per piece
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Hoodie (custom design): $12-22 per piece
+        </li>
+        <li style="padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Complex garment (custom design): $15-25 per piece
+        </li>
+      </ul>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Pricing includes fabric, cut, sew, basic branding, and standard packaging. Design development, custom labels, hang tags, and premium packaging are additional.
+    </p>
+
+    <table style="width:100%;max-width:800px;margin-top:2rem;border-collapse:collapse;background:#0a0a0a;">
+      <thead>
+        <tr style="background:#e00;">
+          <th style="padding:1rem;text-align:left;color:#fff;font-size:0.85rem;font-weight:500;border-bottom:1px solid #333;">Product Type</th>
+          <th style="padding:1rem;text-align:left;color:#fff;font-size:0.85rem;font-weight:500;border-bottom:1px solid #333;">Price Range (500 pcs)</th>
+          <th style="padding:1rem;text-align:left;color:#fff;font-size:0.85rem;font-weight:500;border-bottom:1px solid #333;">Production Time</th>
+          <th style="padding:1rem;text-align:left;color:#fff;font-size:0.85rem;font-weight:500;border-bottom:1px solid #333;">Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #1a1a1a;">
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">T-Shirts</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">$8-15 per piece</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">35-45 days</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Streetwear, casual brands</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1a1a1a;">
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Hoodies</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">$12-22 per piece</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">40-50 days</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Premium streetwear, athleisure</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1a1a1a;">
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Polo Shirts</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">$10-18 per piece</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">35-45 days</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Corporate, golf, casual</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1a1a1a;">
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Pants</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">$15-25 per piece</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">45-55 days</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Fashion, casual, workwear</td>
+        </tr>
+        <tr>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Blazers</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">$20-35 per piece</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">50-60 days</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Formal, business, premium</td>
+        </tr>
+      </tbody>
+    </table>
+
+    
+  </div>
+</section>
+
+<!-- Timeline Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Production Timeline</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Private Label Production Timeline</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Standard private label production timeline from order confirmation to shipment:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Design development: 10-15 days (concept to technical specs)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Fabric sourcing: 7-14 days (custom fabrics)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Sampling: 10-14 days (with custom branding)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Bulk production: 35-45 days
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Quality inspection: 2-3 days
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Packing and shipping: 3-5 days
+      </li>
+    </ul>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Total timeline: 70-95 days from order to delivery. Design development and custom fabric sourcing add 15-25 days compared to standard production.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Common Questions</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Frequently Asked Questions</h2>
+    </div>
+    
+    <div style="max-width:800px;">
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What is the minimum order for private label?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">300 pieces per style minimum. This applies per design, colorway, and size range. Lower quantities possible at higher per-piece cost for sampling or prototype runs.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What is private label vs white label?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Private label is custom-designed clothing with your brand identity, full customization of design, fabric, and branding. White label uses pre-designed products that you rebrand. Private label offers more control and differentiation.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What customization scope do you offer?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We offer full customization including design development, fabric selection, color matching, custom labels and tags, embroidery and printing, and packaging. Your brand identity integrated throughout the product.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How do you handle brand identity?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We integrate your brand identity through custom labels, hang tags, packaging, and consistent design language. We maintain brand consistency across all products and ensure your brand is properly represented.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What is the pricing for private label?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Private label pricing is typically 10-20% higher than white label due to customization and development. However, the premium is justified by brand control and market differentiation. FOB Bangladesh pricing from $8-25 per piece depending on complexity.</p>
+      </div>
+      <div style="padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How long does private label production take?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Standard production timeline: 35-45 days from design approval for basic private label. 45-60 days for full custom development. 10-14 days for sampling before bulk. Design development adds 10-15 days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Need private label manufacturing for your fashion brand? <a href="/contact" style="color:#e00;text-decoration:underline;">Contact SDF Clothing here</a> with your design requirements, brand guidelines, and quantity. We will quote pricing, lead time, and development timeline within 48 hours. From 300 pieces minimum.
+    </p>
+  </div>
+</section>
+
+<!-- Internal Link Section -->
+<section style="padding:5rem 0;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      For complete production strategy, read our <a href="/clothing-manufacturers" style="color:#e00;text-decoration:underline;">complete clothing manufacturers guide</a>. For detailed insights, see our <a href="/insights/private-label-clothing-manufacturer">private label clothing manufacturer guide</a>.
+    </p>
+  </div>
+</section>
+
+<section style="padding:2rem 0;border-top:1px solid var(--color-border);margin-top:2rem"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:1.1rem;font-weight:600;color:var(--color-text);margin-bottom:1rem">Related Services</h2><nav aria-label="Related pages"><ul style="display:flex;flex-wrap:wrap;gap:0.75rem;list-style:none;padding:0"><li><a href="/low-moq-clothing-manufacturers" style="color:var(--color-primary)">Low MOQ Manufacturers</a></li><li><a href="/private-label-manufacturer" style="color:var(--color-primary)">Private Label</a></li><li><a href="/clothing-manufacturers-for-startups" style="color:var(--color-primary)">Startup Manufacturers</a></li><li><a href="/oem-clothing-manufacturer" style="color:var(--color-primary)">OEM Manufacturing</a></li><li><a href="/sustainable-clothing-manufacturers" style="color:var(--color-primary)">Sustainable Manufacturing</a></li><li><a href="/certifications" style="color:var(--color-primary)">Certifications</a></li><li><a href="/quality-inspection-service" style="color:var(--color-primary)">Quality Inspection</a></li><li><a href="/tech-pack-service" style="color:var(--color-primary)">Tech Pack Service</a></li><li><a href="/sampling-service" style="color:var(--color-primary)">Sampling Service</a></li><li><a href="/full-package-production" style="color:var(--color-primary)">Full Package Production</a></li><li><a href="/tools/price-calculator" style="color:var(--color-primary)">Price Calculator</a></li><li><a href="/contact" style="color:var(--color-primary)">Get a Quote</a></li></ul></nav></div></section>
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">SDF Clothing is a direct-access garment factory in Bangladesh — not a trading company or buying house. When you work with us, you communicate directly with our production team, receive transparent pricing without agent markup, and maintain full control over your supply chain. Our factory holds GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certifications.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Bangladesh is the world's second-largest garment exporter, shipping over $47 billion in apparel annually to USA, UK, EU and Australian markets. Our minimum order of 300 pieces reflects our commitment to supporting brands at every stage of growth — from first collections to established seasonal production runs. We offer full package production covering tech pack development, fabric sourcing, sampling, bulk manufacturing, quality inspection, and export documentation under one roof.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">For US brands, sourcing from Bangladesh avoids the Section 301 tariffs that add 25% or more to Chinese imports. For EU brands, Bangladesh's GSP duty-free access delivers lower landed costs compared to most other sourcing destinations. These trade advantages combine with competitive FOB pricing to deliver strong margins for our clients.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/tools/sample-request" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-header {
+    text-align: center;
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .accent-line {
+    width: 60px;
+    height: 2px;
+    background: #e00;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .cta-button {
+    background: #e00;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .cta-button:hover {
+    background: #cc0000;
+  }
+  
+  .whatsapp-cta {
+    background: #25D366;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .whatsapp-cta:hover {
+    background: #128C7E;
+  }
+</style>
+
+
+
+

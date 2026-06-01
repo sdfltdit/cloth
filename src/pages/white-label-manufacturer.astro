@@ -1,0 +1,541 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "White Label Clothing Manufacturer for Quick Brand Launch";
+const pageDescription = "White label clothing manufacturer from Bangladesh. Ready-to-rebrand apparel for fast market entry. Quick launch, lower customization. From 300 pieces."
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com",
+        "name": "SDF Clothing"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "description": "White label clothing manufacturer from Bangladesh providing ready-to-rebrand apparel for fast market entry to fashion brands worldwide since 1998."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for white label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "300 pieces per style minimum. This applies per design, colorway, and size range. Lower quantities possible at higher per-piece cost for sampling or prototype runs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What white label products do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer ready-to-rebrand products including t-shirts, hoodies, joggers, dresses, and basic apparel. Pre-designed styles with your branding applied. Faster launch than custom private label."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How fast is white label launch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "White label launch is significantly faster than private label. Production timeline: 20-30 days from order confirmation. No design development phase. Pre-designed styles ready for your branding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What customization is available?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "White label offers limited customization: your brand labels and tags, your brand colors on existing designs, custom packaging. No custom design development. Ideal for fast market entry with basic customization."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does white label compare to private label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "White label is faster and lower cost but offers less customization. Private label is custom-designed with full control. White label ideal for market testing and fast launch. Private label for brand differentiation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the pricing for white label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "White label pricing is typically 10-20% lower than private label due to pre-designed products and no design development. FOB Bangladesh pricing from $6-18 per piece depending on garment type and complexity."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sdfltd.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "White Label Manufacturer",
+          "item": canonicalUrl.href
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SDF Clothing accepts orders from 300 pieces per style. This low MOQ makes us ideal for startup brands and small businesses testing new designs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard production takes 30-45 days after sample approval. Rush orders may be possible depending on factory capacity. Total lead time including shipping is typically 10-16 weeks."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com"
+      },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "NL"],
+      "description": "Custom clothing manufacturing from Bangladesh with low MOQ from 300 pieces."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Clothing from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Brief",
+          "text": "Share your design, quantity, fabric requirements and timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Quote",
+          "text": "Get a detailed FOB quote within 48 hours."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample",
+          "text": "Review and approve a pre-production sample."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Full production with inline quality checks."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipment",
+          "text": "FOB Dhaka shipment with full export documentation."
+        }
+      ]
+    }
+]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href}>
+
+<script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+
+<meta name="keywords" content="white label manufacturer, white label clothing manufacturer, ready to rebrand apparel, fast market entry, white label production, quick brand launch" />
+
+<!-- Hero Section -->
+<section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+      <p style="font-size:0.72rem;color:#FFFFFF;">
+        <a href="/" style="color:#FFFFFF;text-decoration:none;">Home</a>
+        <span style="margin:0 0.5rem;color:#333;">/</span>
+        White Label Manufacturer
+      </p>
+    </nav>
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">White Label Manufacturer | Since 1998 | Ready-to-Rebrand</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1rem;line-height:1.2;">
+      White Label Clothing Manufacturer for Quick Brand Launch
+    </h1>
+    <p style="color:#FFFFFF;max-width:640px;line-height:1.8;font-size:0.92rem;">
+      White label manufacturing offers the fastest route to market. Pre-designed apparel ready for your branding - no design development, faster production, lower cost. For more information on <a href="/white-label">white label manufacturing</a>, review our comprehensive guide. SDF Clothing provides white label production in Bangladesh with ready-to-rebrand styles from 300 pieces per style. Quick launch for market testing and brand entry. Explore our <a href="/oem-clothing-manufacturer/" style="color:#e00;text-decoration:none;">OEM clothing manufacturer</a> and <a href="/private-label-clothing-manufacturer/" style="color:#e00;text-decoration:none;">private label clothing manufacturer</a>.
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <a href="/contact" class="cta-button">Get Free Quote</a>
+      <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20white-label-manufacturer`} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WhatsApp Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Stats Section -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#000000;">
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">300</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Pieces Minimum</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">20-30</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Days Launch</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">Ready</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Designs</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">Lower</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Cost</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- White Label Products Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Product Range</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">White Label Products Available</h2>
+    </div>
+    
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        T-shirts and tops (basic styles ready for branding)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Hoodies and sweatshirts (pre-designed styles)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Joggers and pants (basic activewear)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Dresses (casual and basic styles)
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Basic apparel (essentials ready for rebranding)
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Faster Launch Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Speed to Market</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Faster Launch</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      White label launch is significantly faster than private label. Production timeline: 20-30 days from order confirmation. No design development phase. Pre-designed styles ready for your branding. Ideal for market testing, seasonal collections, and quick brand entry.
+    </p>
+  </div>
+</section>
+
+<!-- Customization Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Customization</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Lower Customization</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      White label offers limited customization: your brand labels and tags, your brand colors on existing designs, custom packaging. No custom design development. Ideal for fast market entry with basic customization.
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Your brand labels and tags (woven, printed, hang tags)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Your brand colors on existing designs (color matching)
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Custom packaging (bags, boxes, branded poly bags)
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Comparison Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Comparison</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">White Label vs Private Label</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      White label is faster and lower cost but offers less customization. Private label is custom-designed with full control. White label ideal for market testing and fast launch. Private label for brand differentiation and long-term brand building.
+    </p>
+  </div>
+</section>
+
+<!-- MOQ and Pricing Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Pricing Guide</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">MOQ and Pricing</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      <strong>MOQ:</strong> 300 pieces per style minimum. Applies per design, colorway, and size range.
+    </p>
+    
+    <div style="margin-top:2rem;">
+      <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+        White label pricing is typically 10-20% lower than private label due to pre-designed products and no design development.
+      </p>
+      <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+        FOB Bangladesh pricing for 500-piece orders:
+      </p>
+      <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Basic t-shirt (white label): $6-12 per piece
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Hoodie (white label): $10-18 per piece
+        </li>
+        <li style="padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Basic garment (white label): $8-15 per piece
+        </li>
+      </ul>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Pricing includes fabric, cut, sew, basic branding, and standard packaging. Custom labels, hang tags, and premium packaging are additional.
+    </p>
+  </div>
+</section>
+
+<!-- Timeline Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Production Timeline</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">White Label Production Timeline</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Standard white label production timeline from order confirmation to shipment:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Style selection: 1-2 days (from catalog)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Fabric sourcing: 5-10 days (in-stock fabrics)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Sampling: 5-7 days (with your branding)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Bulk production: 20-30 days
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Quality inspection: 2-3 days
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Packing and shipping: 3-5 days
+      </li>
+    </ul>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Total timeline: 35-60 days from order to delivery. No design development phase. Significantly faster than private label production.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Common Questions</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Frequently Asked Questions</h2>
+    </div>
+    
+    <div style="max-width:800px;">
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What is the minimum order for white label?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">300 pieces per style minimum. This applies per design, colorway, and size range. Lower quantities possible at higher per-piece cost for sampling or prototype runs.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What white label products do you offer?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We offer ready-to-rebrand products including t-shirts, hoodies, joggers, dresses, and basic apparel. Pre-designed styles with your branding applied. Faster launch than custom private label.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How fast is white label launch?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">White label launch is significantly faster than private label. Production timeline: 20-30 days from order confirmation. No design development phase. Pre-designed styles ready for your branding.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What customization is available?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">White label offers limited customization: your brand labels and tags, your brand colors on existing designs, custom packaging. No custom design development. Ideal for fast market entry with basic customization.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How does white label compare to private label?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">White label is faster and lower cost but offers less customization. Private label is custom-designed with full control. White label ideal for market testing and fast launch. Private label for brand differentiation.</p>
+      </div>
+      <div style="padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What is the pricing for white label?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">White label pricing is typically 10-20% lower than private label due to pre-designed products and no design development. FOB Bangladesh pricing from $6-18 per piece depending on garment type and complexity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Need white label manufacturing for fast market entry? <a href="/contact" style="color:#e00;text-decoration:underline;">Contact SDF Clothing here</a> with your style selection, branding requirements, and quantity. We will quote pricing, lead time, and availability within 48 hours. From 300 pieces minimum.
+    </p>
+  </div>
+</section>
+
+<!-- Internal Link Section -->
+<section style="padding:5rem 0;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      For complete production strategy, read our <a href="/clothing-manufacturers" style="color:#e00;text-decoration:underline;">complete clothing manufacturers guide</a>.
+    </p>
+  </div>
+</section>
+
+
+    
+    <section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">SDF Clothing is a direct-access garment factory in Bangladesh — not a trading company or buying house. When you work with us, you communicate directly with our production team, receive transparent pricing without agent markup, and maintain full control over your supply chain. Our factory holds GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certifications.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Bangladesh is the world's second-largest garment exporter, shipping over $47 billion in apparel annually to USA, UK, EU and Australian markets. Our minimum order of 300 pieces reflects our commitment to supporting brands at every stage of growth — from first collections to established seasonal production runs. We offer full package production covering tech pack development, fabric sourcing, sampling, bulk manufacturing, quality inspection, and export documentation under one roof.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">For US brands, sourcing from Bangladesh avoids the Section 301 tariffs that add 25% or more to Chinese imports. For EU brands, Bangladesh's GSP duty-free access delivers lower landed costs compared to most other sourcing destinations. These trade advantages combine with competitive FOB pricing to deliver strong margins for our clients.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/tools/sample-request" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-header {
+    text-align: center;
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .accent-line {
+    width: 60px;
+    height: 2px;
+    background: #e00;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .cta-button {
+    background: #e00;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .cta-button:hover {
+    background: #cc0000;
+  }
+  
+  .whatsapp-cta {
+    background: #25D366;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .whatsapp-cta:hover {
+    background: #128C7E;
+  }
+</style>
+
+
+
+
+
+

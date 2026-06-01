@@ -1,0 +1,465 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, schemaPerson, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Clothing Manufacturer Sri Lanka | Ethical Hub Since 1998";
+const pageDescription = "Leading clothing manufacturer in Sri Lanka since 1998. 300 piece MOQ, GOTS certified, 13 certifications. Get free FOB quote for your fashion brand today.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20clothing%20manufacturing%20from%20Sri%20Lanka`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-20",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle,
+            "item": canonicalUrl.href
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#organization" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for clothing manufacturers in Sri Lanka?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most Sri Lanka garment factories have MOQs ranging from 300 to 1,000 pieces per style. At SDF Clothing, we offer 300 piece minimums per style with flexible size and color combinations, making us ideal for startup brands and boutique labels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why choose Sri Lanka for clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sri Lanka is renowned for ethical manufacturing, strong labor standards, and expertise in lingerie and activewear. The country enjoys GSP Plus duty-free access to EU markets, has a skilled workforce, and is known for sustainable practices. Sri Lanka's garment industry contributes 40% to export earnings with $5 billion in annual exports."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does clothing production take in Sri Lanka?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard lead time for bulk production is 35-45 days from fabric sourcing to shipment. Sample development takes 7-14 days. We provide clear timeline commitments and track production closely to ensure on-time delivery for your fashion brand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications should I look for in a Sri Lanka clothing manufacturer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Key certifications include GOTS (organic cotton), OEKO-TEX (chemical safety), BSCI (social compliance), WRAP (ethical manufacturing), ISO 9001 (quality management), and LEED for sustainable facilities. Sri Lanka's ethical reputation is backed by strong labor laws and monitoring. SDF Clothing holds 13 international certifications covering quality, social compliance, and environmental standards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the payment terms for Sri Lanka clothing manufacturers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard payment terms are 30% deposit to start production and 70% before shipment. We accept T/T (wire transfer), Letter of Credit (L/C), and bank transfers. For established clients, we offer flexible payment arrangements based on order volume and relationship history."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What makes Sri Lanka's textile industry unique?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sri Lanka is Asia's first ethical apparel sourcing destination, known for strong labor rights and environmental standards. The country excels in intimate apparel (lingerie), activewear, and technical sportswear. Sri Lanka's 'Garments without Guilt' initiative promotes ethical manufacturing. The industry has high compliance with international labor standards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What services do Sri Lanka clothing manufacturers offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Full-service manufacturers offer OEM (original equipment manufacturing), private label production, CMT (cut-make-trim), fabric sourcing, tech pack development, sampling, quality control, and logistics coordination. SDF provides end-to-end solutions from design to delivery."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find a reliable clothing manufacturer in Sri Lanka?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Look for Sri Lanka Apparel Exporters Association membership, verify certifications with issuing bodies, request factory audits, check client references, and start with sample orders. Reliable manufacturers are transparent about capabilities, pricing, and lead times. Sri Lanka's ethical reputation means most factories maintain high standards. Contact us for a factory tour or video consultation."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": { "@id": SITE + "/#organization" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "300",
+          "description": "Starting MOQ | 300 pieces per style"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Work with a Sri Lanka Clothing Manufacturer",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Prepare Your Tech Pack",
+          "text": "Create detailed technical specifications including measurements, materials, colors, and construction details. Well-prepared tech packs reduce sampling time and ensure accurate production."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Request Quote and MOQ Confirmation",
+          "text": "Submit your requirements for pricing. Confirm MOQ requirements, lead times, and payment terms. Get a written quote with all costs including fabric, production, and shipping."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Samples",
+          "text": "Produce pre-production samples for approval. This step typically takes 7-14 days. Approve samples before bulk production to ensure quality standards are met."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Place Bulk Order",
+          "text": "Pay deposit (typically 30%) to start production. Monitor production through regular updates and quality checks. Production time is usually 35-45 days."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Inspection and Shipment",
+          "text": "Final inspection before shipping. Pay balance (70%) before shipment. Arrange shipping (FOB, CIF, or DDP terms). Receive goods and provide feedback for future orders."
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Clothing Manufacturer Sri Lanka</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Established 1998 | Ethical Manufacturing Excellence</p>
+        <h1 class="hero__title">Clothing Manufacturer Sri Lanka</h1>
+        <p class="hero__description">
+          SDF Clothing serves global fashion brands through Sri Lanka's ethical textile ecosystem. As a clothing manufacturer with deep expertise in Sri Lanka's renowned garment industry, we offer 300 piece minimum orders, GOTS organic certification, and 13 international quality standards. From startup brands to established labels, we deliver premium garments leveraging Sri Lanka's reputation for ethical manufacturing and sustainable practices. Explore our <a href="/clothing-manufacturers/" style="color:#e00;text-decoration:none;">complete manufacturing services</a> and <a href="/clothing-manufacturer-bangladesh/" style="color:#e00;text-decoration:none;">Bangladesh operations</a>.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">300+</span>
+            <span class="hero__stat-label">Pieces MOQ</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">25+</span>
+            <span class="hero__stat-label">Years Experience</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">13</span>
+            <span class="hero__stat-label">Certifications</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">98%</span>
+            <span class="hero__stat-label">On-Time Delivery</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get a Free Factory Quote
+          </a>
+          <a href="/contact" class="hero__cta hero__cta--secondary">
+            Download Capability Deck
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="SDF Clothing ethical textile manufacturing facility" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">GOTS Certified Organic</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">BSCI Social Compliance</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">WRAP Ethical Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">C-TPAT Supply Chain Security</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">ISO 9001 Quality Management</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Overview -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What is a Clothing Manufacturer in Sri Lanka?</h2>
+      <p class="section__text">
+        A clothing manufacturer in Sri Lanka operates within Asia's first ethical apparel sourcing destination. Sri Lanka's garment industry is renowned for strong labor standards, environmental practices, and expertise in intimate apparel and activewear. The country's textile sector contributes 40% to export earnings, employing over 500,000 workers across approximately 400 factories. Major manufacturing zones include Colombo, Katunayake, and Biyagama, each specializing in different product categories from lingerie to sportswear.
+      </p>
+      <p class="section__text">
+        Sri Lanka clothing manufacturers excel in intimate apparel (lingerie) and activewear. The country's advantage lies in its ethical reputation - Sri Lanka promotes "Garments without Guilt" through strong labor laws, no child labor, and environmental sustainability initiatives. Many manufacturers, including SDF Clothing's Sri Lanka partnerships, offer full-package production services covering fabric sourcing, design development, sampling, manufacturing, quality control, and export logistics. The industry benefits from Sri Lanka's GSP Plus status with the EU, providing duty-free access to European markets.
+      </p>
+      <p class="section__text">
+        According to the <a href="https://www.srilankaapparel.com/" target="_blank" rel="noopener noreferrer">Sri Lanka Apparel Exporters Association</a>, the country exports to over 60 countries with annual garment exports exceeding $5 billion. Major buyers include Victoria's Secret, Nike, Adidas, Marks & Spencer, and thousands of emerging fashion brands. Sri Lanka manufacturers produce everything from intimate apparel to complex technical sportswear. For brands seeking <a href="/low-moq-clothing-manufacturers">low MOQ clothing manufacturers</a> or <a href="/clothing-manufacturers-for-startups">clothing manufacturers for startups</a>, Sri Lanka offers competitive advantages through its skilled workforce and sustainability focus.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Why Sri Lanka -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Why Choose Sri Lanka for Clothing Manufacturing?</h2>
+      <p class="section__text">
+        Fashion brands worldwide source from Sri Lanka for compelling ethical and quality reasons. The country offers manufacturing backed by strong labor standards, environmental sustainability, and expertise in specialized product categories. This advantage stems from ethical labor practices, skilled workforce specialization, government support for sustainable manufacturing, and duty-free trade access to major markets.
+      </p>
+      
+      <h3 class="section__subtitle">Ethical Manufacturing Reputation</h3>
+      <p class="section__text">
+        Sri Lanka is Asia's first country to promote ethical apparel sourcing through the "Garments without Guilt" initiative. The country has strong labor laws prohibiting child labor, forced labor, and discrimination. Minimum wages are regularly reviewed, and working conditions exceed ILO standards. This ethical reputation makes Sri Lanka attractive for brands prioritizing supply chain transparency and worker welfare. SDF Clothing upholds these ethical standards through our Sri Lanka operations, ensuring your garments are produced responsibly.
+      </p>
+      
+      <h3 class="section__subtitle">Expertise in Intimate Apparel and Activewear</h3>
+      <p class="section__text">
+        Sri Lanka has developed deep expertise in intimate apparel (lingerie) and activewear over 30 years. The country is a global leader in bra manufacturing, producing for major international brands. This specialization extends to activewear and technical sportswear, where Sri Lanka manufacturers excel in performance fabrics, moisture-wicking technologies, and seamless construction. Workers specialize in the precise stitching and finishing required for intimate apparel, ensuring quality that meets global brand standards.
+      </p>
+      
+      <h3 class="section__subtitle">Sustainable Practices</h3>
+      <p class="section__text">
+        Sri Lanka's garment industry leads in sustainable manufacturing. Many factories have LEED-certified facilities, use renewable energy, implement water recycling systems, and use eco-friendly packaging. The country promotes "Green Garments" through initiatives like the Sri Lanka Sustainable Apparel Association. For brands prioritizing sustainability, Sri Lanka offers manufacturers with verified environmental practices. SDF supports <a href="/sustainable-clothing-manufacturers">sustainable clothing manufacturing</a> through our Sri Lanka partnerships.
+      </p>
+      
+      <h3 class="section__subtitle">GSP Plus Trade Preferences</h3>
+      <p class="section__text">
+        Sri Lanka enjoys duty-free access to European Union markets under the GSP Plus arrangement for developing countries. This preferential treatment provides significant duty advantages over competitors like China and India for EU-bound shipments. The EU is Sri Lanka's largest export market for garments, accounting for approximately 50% of total garment exports. This trade preference makes Sri Lanka particularly attractive for brands targeting European markets seeking ethical sourcing.
+      </p>
+      
+      <h3 class="section__subtitle">Skilled Workforce</h3>
+      <p class="section__text">
+        Sri Lanka's garment workforce is known for high literacy rates (92%), English proficiency, and technical skills. Workers receive comprehensive training in garment construction, quality control, and machinery operation. The country's education system produces technically skilled graduates who enter the textile industry. This skilled workforce ensures consistent quality, especially for complex garments requiring precise construction like intimate apparel and technical sportswear.
+      </p>
+      
+      <h3 class="section__subtitle">Government Support</h3>
+      <p class="section__text">
+        The Sri Lankan government actively supports the garment industry through tax incentives, infrastructure development in export zones, and investment in worker training. Export Processing Zones like Katunayake offer additional benefits including streamlined customs procedures and reliable utilities. This supportive environment reduces operational costs and improves efficiency for manufacturers serving international markets. The government also supports sustainable manufacturing initiatives through various programs.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: SDF's Approach -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">How SDF Clothing Leverages Sri Lanka Manufacturing</h2>
+      <p class="section__text">
+        SDF Clothing leverages Sri Lanka's ethical textile ecosystem to deliver exceptional value to fashion brands. Founded in 1998, we built our business to serve startup and emerging fashion brands that most large manufacturers overlook. While many factories require 1,000+ piece minimums, we offer 300 piece orders per style with flexible size and color combinations, utilizing Sri Lanka's ethical manufacturing advantages to pass benefits to our clients.
+      </p>
+      
+      <h3 class="section__subtitle">Ethical Production Focus</h3>
+      <p class="section__text">
+        Through our Sri Lanka operations, we ensure your garments are produced ethically with no child labor, fair wages, and safe working conditions. Sri Lanka's strong labor laws and monitoring systems provide assurance that ethical standards are maintained. We can provide documentation on labor practices, factory certifications, and worker welfare for brands requiring supply chain transparency. Our ethical production aligns with values-driven brands seeking responsible manufacturing.
+      </p>
+      
+      <h3 class="section__subtitle">Low MOQ Specialization</h3>
+      <p class="section__text">
+        Our 300 piece minimum makes us accessible to brands testing new designs, launching capsule collections, or scaling gradually. We understand that not every brand can commit to large orders initially. This flexibility has made us a preferred partner for over 500 startup brands across 40+ countries since our founding. Sri Lanka's skilled workforce enables us to handle low MOQs without compromising on quality or ethical standards.
+      </p>
+      
+      <h3 class="section__subtitle">Certified Quality</h3>
+      <p class="section__text">
+        We hold 13 international certifications covering quality, social compliance, and environmental standards. These include GOTS (organic cotton), OEKO-TEX (chemical safety), BSCI (social compliance), WRAP (ethical manufacturing), ISO 9001 (quality management), and C-TPAT (supply chain security). Each certification is verified by third-party auditors and available for client review. Learn more about our <a href="/certifications">complete certification portfolio</a> and what each standard means for your brand. If you need help with designs, our <a href="/tech-pack-service">tech pack service</a> can assist.
+      </p>
+      
+      <h3 class="section__subtitle">Transparent Pricing</h3>
+      <p class="section__text">
+        Our quotes are FOB (Free On Board) Colombo, clearly itemizing fabric costs, labor, finishing, quality inspection, and port delivery. We never add hidden charges. Sri Lanka's ethical manufacturing costs are competitive when considering the value of responsible production. You'll know exactly what you're paying for before production begins. This transparency builds trust and helps you make informed sourcing decisions.
+      </p>
+      
+      <h3 class="section__subtitle">Dedicated Support</h3>
+      <p class="section__text">
+        Each client works with a dedicated account manager who speaks fluent English and understands international fashion markets. Sri Lanka's high English proficiency ensures clear communication throughout production. We provide regular production updates, photos of samples, and proactively communicate about any potential delays. Our 98% on-time delivery rate reflects our commitment to reliability. Whether you need <a href="/private-label-manufacturer">private label manufacturing</a> or full OEM production, we adapt to your brand's specific requirements. Our <a href="/quality-inspection-service">quality inspection service</a> ensures every garment meets standards, and our <a href="/sampling-service">sampling service</a> helps perfect designs before production.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Step-by-Step Process -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">How to Work with a Sri Lanka Clothing Manufacturer</h2>
+      <p class="section__text">
+        Working with a Sri Lanka manufacturer follows a structured process similar to other manufacturing hubs. Understanding each step helps you manage expectations and ensure smooth production. Here's the complete workflow from initial contact to final delivery, leveraging Sri Lanka's ethical textile ecosystem.
+      </p>
+      
+      <div class="process">
+        <div class="process__step">
+          <div class="process__number">1</div>
+          <h3 class="process__title">Prepare Your Tech Pack</h3>
+          <p class="process__text">
+            A tech pack is your blueprint. It should include detailed technical specifications: measurements (size charts), materials (fabric type, weight, composition), colors (Pantone or color references), construction details (stitch types, seam allowances), and any special requirements. For intimate apparel, specify elastic types, hook-and-eye details, and lining requirements. Well-prepared tech packs reduce sampling time and ensure accurate production. If you don't have a tech pack, we can help develop one for a fee.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">2</div>
+          <h3 class="process__title">Request Quote and MOQ Confirmation</h3>
+          <p class="process__text">
+            Submit your tech pack and requirements for pricing. Specify order quantity per style, size breakdown, color variations, and delivery timeline. We'll provide a written quote including fabric costs, labor, finishing, quality inspection, and FOB shipping to Colombo port. Confirm MOQ requirements - our minimum is 300 pieces per style with flexible size/color combinations. The quote process typically takes 2-3 business days. Sri Lanka's ethical production costs are competitive when considering quality and compliance.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">3</div>
+          <h3 class="process__title">Develop Samples</h3>
+          <p class="process__text">
+            Before bulk production, we develop pre-production samples for your approval. This step typically takes 7-14 days depending on complexity. For intimate apparel, we can develop fit samples to ensure proper sizing and comfort. You'll receive photos first, then physical samples via courier for final approval. Review samples carefully for fit, fabric quality, construction, and overall finish. Approve samples in writing before bulk production begins. Sample costs are typically credited against bulk orders.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">4</div>
+          <h3 class="process__title">Place Bulk Order</h3>
+          <p class="process__text">
+            Once samples are approved, pay the deposit (typically 30%) to start production. We'll provide a production schedule with key milestones: fabric sourcing, cutting, sewing, finishing, and quality inspection. Production time is usually 35-45 days from deposit to shipment. Sri Lanka's skilled workforce ensures efficient production. We send regular updates including photos of production progress. You can request a third-party inspection before final payment.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">5</div>
+          <h3 class="process__title">Quality Inspection and Shipment</h3>
+          <p class="process__text">
+            Before shipment, we conduct AQL 2.5 quality inspection based on international standards. You can request your own inspector or use third-party services like SGS, Bureau Veritas, or Intertek (all present in Sri Lanka). Once inspection passes, pay the balance (70%) and we release shipment from Colombo port. We handle export documentation, customs clearance, and coordinate with your freight forwarder. Shipping time varies: 25-30 days to US East Coast, 20-25 days to Europe, depending on route and carrier. Colombo's port infrastructure handles container traffic efficiently.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: What to Look For -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What to Look for in a Sri Lanka Clothing Manufacturer</h2>
+      <p class="section__text">
+        Sri Lanka has approximately 400 garment factories, ranging from small workshops to large-scale facilities. While the country's ethical reputation is strong, not all factories are equal. Here's what to evaluate when selecting a manufacturing partner in Sri Lanka's textile ecosystem.
+      </p>
+      
+      <h3 class="section__subtitle">Sri Lanka Apparel Exporters Association Membership</h3>
+      <p class="section__text">
+        Legitimate manufacturers are members of the Sri Lanka Apparel Exporters Association. Membership indicates compliance with industry standards and ethical practices. Verify membership on the official SLAEA website. SDF Clothing maintains active membership in relevant textile associations, demonstrating our commitment to industry standards and ethical practices.
+      </p>
+      
+      <h3 class="section__subtitle">Ethical Certifications</h3>
+      <p class="section__text">
+        Sri Lanka's ethical reputation is backed by certifications. Look for WRAP (ethical manufacturing), BSCI (social compliance), SEDEX, and Fair Trade certifications. These verify labor practices and working conditions. Sri Lanka also has strong national labor laws. Verify certifications with issuing organizations. SDF holds verified certifications across ethical, quality, and environmental categories.
+      </p>
+      
+      <h3 class="section__subtitle">Experience with Your Product Type</h3>
+      <p class="section__text">
+        Sri Lanka specializes in intimate apparel and activewear. If you're producing bras, panties, or lingerie, choose a factory with expertise in this category. For activewear, look for experience with performance fabrics and moisture-wicking technologies. Request photos of similar past production. A factory that understands your product category will deliver better quality. SDF specializes in cotton-based knitted garments and can connect you with Sri Lanka specialists for intimate apparel.
+      </p>
+      
+      <h3 class="section__subtitle">Sustainability Initiatives</h3>
+      <p class="section__text">
+        Sri Lanka leads in sustainable manufacturing. Look for LEED-certified facilities, renewable energy use, water recycling systems, and eco-friendly packaging. Ask about their waste management and carbon footprint. The Sri Lanka Sustainable Apparel Association promotes green manufacturing. SDF supports sustainability through our operations and can connect you with Sri Lanka's green factories.
+      </p>
+      
+      <h3 class="section__subtitle">Production Capacity</h3>
+      <p class="section__text">
+        Ensure the factory can handle your order volume within your timeline. Ask about monthly production capacity, current utilization, and lead times. Sri Lanka factories range from small 50-machine units to large facilities with 1,000+ machines. A factory at 100% capacity may delay your order. SDF has capacity for 50,000+ pieces monthly through our Sri Lanka operations, ensuring we can scale with your brand's growth.
+      </p>
+      
+      <h3 class="section__subtitle">Communication Quality</h3>
+      <p class="section__text">
+        Sri Lanka has excellent English proficiency, one of the highest in Asia. Evaluate response time, clarity, and technical understanding during initial inquiries. Are they transparent about pricing and lead times? Do they ask relevant questions about your requirements? Sri Lanka's English advantage should translate to smooth communication. SDF prides itself on responsive, clear communication with dedicated account managers.
+      </p>
+      
+      <h3 class="section__subtitle">Client References</h3>
+      <p class="section__text">
+        Ask for references from current or past clients, especially brands similar to yours. Sri Lanka serves major international brands - references can include well-known companies. Contact references to ask about quality, reliability, communication, and ethical practices. SDF can provide references from brands who have worked with our Sri Lanka operations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Comparison Table -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Sri Lanka vs Other Manufacturing Hubs</h2>
+      <p class="section__text">
+        Fashion brands have multiple sourcing options. Understanding how Sri Lanka compares to other major manufacturing hubs helps you make informed decisions. This comparison covers key factors affecting your choice, particularly for ethical manufacturing and specialized products.
+      </p>
+      
+      <div class="comparison-wrapper">
+        </BaseLayout>
+

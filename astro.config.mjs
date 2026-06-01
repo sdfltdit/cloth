@@ -1,13 +1,23 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://www.sdfltd.com',
-  output: "static",
+  site: 'https://sdfltd.com',
+  output: 'static',
   compressHTML: true,
+
+  prefetch: {
+    prefetchAll: false,
+    defaultStrategy: 'hover'
+  },
+
+  script: {
+    defer: true
+  },
+
   integrations: [
-    tailwind(), 
+     
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
@@ -19,7 +29,7 @@ export default defineConfig({
         item.lastmod = today;
 
         // Homepage
-        if (url === 'https://www.sdfltd.com/') {
+        if (url === 'https://sdfltd.com/') {
           item.priority = 1.0;
           item.changefreq = 'weekly';
           return item;
@@ -97,33 +107,40 @@ export default defineConfig({
       }
     })
   ],
+
   build: {
     format: "directory",
     inlineStylesheets: 'always',
+    split: false,
+    assets: '_astro',
+    assetsPrefix: undefined
   },
+
   vite: {
+    plugins: [tailwindcss()],
     build: {
-      minify: 'terser',
       cssCodeSplit: true,
-      cssMinify: true,
+      cssMinify: 'esbuild',
+      minify: 'esbuild',
+      cssTarget: 'esnext',
+      chunkSizeWarningLimit: 500,
       rollupOptions: {
         output: {
           manualChunks: undefined,
-        },
+          inlineDynamicImports: false
+        }
       },
+      assetsInlineLimit: 8192
     },
     css: {
       devSourcemap: false,
     },
-    server: {
-      fs: {
-        allow: ['..']
-      }
-    }
   },
+
   image: {
-    service: { entrypoint: 'astro/assets/services/sharp' },
+    service: { entrypoint: 'astro/assets/services/noop' },
   },
+
   markdown: {
     shikiConfig: {
       theme: 'github-dark-dimmed',

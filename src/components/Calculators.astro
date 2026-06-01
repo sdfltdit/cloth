@@ -33,7 +33,7 @@
       <option value="q4">3000 to 5000 pieces</option>
       <option value="q5">5000 plus pieces</option>
     </select>
-    <button class="cb2" onclick="p1()">Get Price Estimate</button>
+    <button class="cb2" id="btn-price">Get Price Estimate</button>
     <div id="c1r" class="cr"></div>
   </div>
 
@@ -51,7 +51,7 @@
       <option value="woven">Dress Shirt, Dress</option>
       <option value="jacket">Jacket</option>
     </select>
-    <button class="cb2" onclick="p2()">See Sample Timeline</button>
+    <button class="cb2" id="btn-sample">See Sample Timeline</button>
     <div id="c2r" class="cr"></div>
   </div>
 
@@ -65,7 +65,7 @@
     <input type="number" id="c3s" class="ci" placeholder="e.g. 3" min="1" aria-label="Number of styles">
     <label class="cl" for="c3p">Pieces per style</label>
     <input type="number" id="c3p" class="ci" placeholder="e.g. 300" min="1" aria-label="Pieces per style">
-    <button class="cb2" onclick="p3()">Check My Order</button>
+    <button class="cb2" id="btn-moq">Check My Order</button>
     <div id="c3r" class="cr"></div>
   </div>
 
@@ -94,7 +94,7 @@
       <option value="s3">5000 to 20000 pieces</option>
       <option value="s4">20000 plus pieces</option>
     </select>
-    <button class="cb2" onclick="p4()">Estimate Freight</button>
+    <button class="cb2" id="btn-shipping">Estimate Freight</button>
     <div id="c4r" class="cr"></div>
   </div>
 
@@ -131,7 +131,7 @@
       <option value="ca">Canada</option>
       <option value="jp">Japan</option>
     </select>
-    <button class="cb3" onclick="p5()">Calculate Total Cost</button>
+    <button class="cb3" id="btn-cost">Calculate Total Cost</button>
     <div id="c5r" class="cr"></div>
   </div>
 
@@ -159,7 +159,7 @@
 .clk:hover{text-decoration:none}
 </style>
 
-<script defer>
+<script>
 var PR={tshirt:{q1:[4,7],q2:[3.5,6],q3:[3,5],q4:[2.5,4.5],q5:[2,4]},polo:{q1:[6,10],q2:[5.5,9],q3:[5,8],q4:[4.5,7],q5:[4,6.5]},hoodie:{q1:[14,22],q2:[13,20],q3:[12,18],q4:[11,16],q5:[10,15]},sweatshirt:{q1:[10,16],q2:[9,15],q3:[8,13],q4:[7.5,12],q5:[7,11]},jogger:{q1:[9,14],q2:[8,13],q3:[7.5,12],q4:[7,11],q5:[6.5,10]},shorts:{q1:[7,12],q2:[6.5,11],q3:[6,10],q4:[5.5,9],q5:[5,8]},dressshirt:{q1:[12,20],q2:[11,18],q3:[10,16],q4:[9,14],q5:[8,13]},jacket:{q1:[28,45],q2:[25,40],q3:[22,36],q4:[20,32],q5:[18,28]},dress:{q1:[14,24],q2:[13,22],q3:[12,20],q4:[11,18],q5:[10,16]},leggings:{q1:[8,14],q2:[7.5,13],q3:[7,12],q4:[6.5,11],q5:[6,10]},activewear:{q1:[10,18],q2:[9,16],q3:[8,14],q4:[7.5,13],q5:[7,12]}};
 var QM={q1:400,q2:750,q3:2000,q4:4000,q5:7500};
 var TL={basic:{s:'7 to 10',b:'14 to 20'},mid:{s:'10 to 14',b:'18 to 25'},woven:{s:'12 to 16',b:'20 to 28'},jacket:{s:'14 to 21',b:'25 to 35'}};
@@ -222,4 +222,12 @@ function p5(){
   var dp=Math.round(dt*100);
   show('c5r',row('Production cost (FOB)','$'+plo.toLocaleString()+' to $'+phi.toLocaleString())+row('Est. sea freight','$'+f[sk][0]+' to $'+f[sk][1])+row('Est. import duty ('+dp+'%)','$'+dlo.toLocaleString()+' to $'+dhi.toLocaleString())+'<div style="border-top:1px solid #1a1a1a;margin:0.5rem 0;padding-top:0.5rem">'+row('<span style="color:#fff;font-weight:700">Total landed cost</span>','<span style="font-size:14px;font-weight:700">$'+tlo.toLocaleString()+' to $'+thi.toLocaleString()+'</span>')+'</div><p class="cn">'+DN[d]+'</p><p class="cn">This estimate is for planning only. Always verify with your supplier, freight forwarder, and customs broker.</p><a href="/contact" class="clk">Get a formal quote</a>')
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('btn-price').addEventListener('click', p1);
+  document.getElementById('btn-sample').addEventListener('click', p2);
+  document.getElementById('btn-moq').addEventListener('click', p3);
+  document.getElementById('btn-shipping').addEventListener('click', p4);
+  document.getElementById('btn-cost').addEventListener('click', p5);
+});
 </script>

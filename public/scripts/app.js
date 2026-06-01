@@ -146,7 +146,11 @@
   function initCookieConsent() {
     const banner = document.getElementById('cookie-consent');
     if (!banner) return;
-    if (localStorage.getItem('cookie-consent')) return;
+    try {
+      if (localStorage.getItem('cookie-consent')) return;
+    } catch (e) {
+      // localStorage unavailable (private/incognito mode)
+    }
 
     setTimeout(function () { banner.style.display = 'block'; }, 1500);
 
@@ -154,29 +158,24 @@
     const decline = document.getElementById('decline-cookies');
 
     if (accept) accept.addEventListener('click', function () {
-      localStorage.setItem('cookie-consent', 'accepted');
+      try {
+        localStorage.setItem('cookie-consent', 'accepted');
+      } catch (e) {
+        // localStorage unavailable (private/incognito mode)
+      }
       banner.style.display = 'none';
     });
     if (decline) decline.addEventListener('click', function () {
-      localStorage.setItem('cookie-consent', 'declined');
+      try {
+        localStorage.setItem('cookie-consent', 'declined');
+      } catch (e) {
+        // localStorage unavailable (private/incognito mode)
+      }
       banner.style.display = 'none';
     });
   }
 
-  /* ============================================================
-     7. FOOTER LIVE COUNTER + COPYRIGHT YEAR
-  ============================================================ */
-  function initFooterMeta() {
-    const yearEl = document.getElementById('copyright-year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-    const counter = document.getElementById('live-counter');
-    if (!counter) return;
-    // Fake live visitor count (realistic range for a B2B site)
-    const count = Math.floor(Math.random() * 12) + 18;
-    counter.textContent = count + ' online';
-  }
-
+  
   /* ============================================================
      8. BODY LOADED CLASS (for animation unlock)
   ============================================================ */
@@ -189,20 +188,25 @@
   /* ============================================================
      INIT — run after DOM ready
   ============================================================ */
-  function init() {
-    initFooterAccordion();
-    initFAQ();
-    initSectionAnimations();
-    initLazyImages();
-    initCookieConsent();
-    initFooterMeta();
+  document.addEventListener('DOMContentLoaded', function() {
     initBodyLoaded();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(function() {
+        initFooterAccordion();
+        initFAQ();
+        initSectionAnimations();
+        initLazyImages();
+        initCookieConsent();
+      });
+    } else {
+      setTimeout(function() {
+        initFooterAccordion();
+        initFAQ();
+        initSectionAnimations();
+        initLazyImages();
+        initCookieConsent();
+      }, 1);
+    }
+  });
 
 })();

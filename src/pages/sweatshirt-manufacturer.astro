@@ -1,0 +1,1140 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Sweatshirt Manufacturer — Custom Crewnecks | SDF Clothing";
+const pageDescription = "Custom sweatshirt manufacturer in Bangladesh. Crewneck sweatshirts and sweat sets from 300 pieces. All weights and fabrics. Private label. Get a free quote.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": PHONE,
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Sweatshirt Manufacturer",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between sweatshirt and hoodie?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sweatshirts have crewneck neckbands without hoods. Hoodies have attached hoods with drawstrings. Sweatshirts are simpler in construction, making them ideal for screen printing and embroidery. They offer a clean neckline suitable for layering under jackets."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What sweatshirt styles do you manufacture?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We manufacture crewneck sweatshirts (standard, oversized, fitted), half-zip sweatshirts with chest zippers, quarter-zip sweatshirts with collar necklines, and raglan sweatshirts with contrast sleeve panels. All styles available from 300 pieces minimum."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What fabric weights do you offer for sweatshirts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer 240 GSM lightweight sweatshirts for spring/summer, 280 GSM midweight for standard year-round wear, 320 GSM heavyweight for winter and premium positioning, and 380 GSM extra-heavyweight for maximum warmth and premium streetwear."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is your minimum order for sweatshirts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our sweatshirt minimum is 300 pieces per style. This applies to crewneck, half-zip, quarter-zip, and raglan styles. Minimum can be split across sizes within a single colorway. Lower quantities available at higher per-piece cost for sampling."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you produce sweat sets with matching sweatpants?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We produce matching sweat sets with crewneck sweatshirts and sweatpants in the same fabric and color. Sweat sets are popular for loungewear, athleisure, and brand collections. Minimum 300 pieces per set style (tops and bottoms combined)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What customization options do you offer for sweatshirts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Customization includes screen printing, DTG printing, embroidery, custom neckband colors, ribbed cuffs in contrast colors, custom labels and hang tags, and packaging. The clean crewneck area provides excellent space for chest branding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What fabrics do you use for sweatshirt production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We use cotton fleece, French terry, poly-cotton blends for durability and shrinkage resistance, organic cotton fleece for sustainable options, and recycled polyester blends. All fabrics pre-shrunk to minimize garment shrinkage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does sweatshirt production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard production timeline: 30-40 days from fabric receipt for basic sweatshirts. 35-50 days for custom fabric development or heavyweight options. 7-14 days for sampling before bulk. Rush production available at 20-30% premium."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com"
+      },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "NL"],
+      "description": "Custom clothing manufacturing from Bangladesh with low MOQ from 300 pieces."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Clothing from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Brief",
+          "text": "Share your design, quantity, fabric requirements and timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Quote",
+          "text": "Get a detailed FOB quote within 48 hours."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample",
+          "text": "Review and approve a pre-production sample."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Full production with inline quality checks."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipment",
+          "text": "FOB Dhaka shipment with full export documentation."
+        }
+      ]
+    }
+]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Sweatshirt Manufacturer</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Sweatshirt Manufacturer | Since 1998 | Crewneck Specialists</div>
+        <h1 class="hero__title">Sweatshirt Manufacturer | Custom Crewneck Sweatshirts and Sweat Sets from 300 Pieces</h1>
+        <p class="hero__description">
+          SDF Clothing is a custom sweatshirt manufacturer in Bangladesh specializing in crewneck sweatshirts without hoods. We produce crewneck, half-zip, quarter-zip, and raglan sweatshirts from 300 pieces minimum. All fabric weights from 240-380 GSM, private label ready, with full customization options for screen printing and embroidery. Explore our <a href="/clothing-manufacturers/" style="color:#e00;text-decoration:none;">clothing manufacturers</a> and <a href="/clothing-manufacturer-bangladesh/" style="color:#e00;text-decoration:none;">Bangladesh clothing manufacturer</a>.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20sweatshirt-manufacturer`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">300</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">240-380</span>
+          <span class="hero__stat-label">GSM Range</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">30-40</span>
+          <span class="hero__stat-label">Days Production</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>GOTS Organic Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>ISO 9001 Quality</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>BSCI Social Compliance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Sweatshirt vs Hoodie</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sweatshirt vs Hoodie | The Crewneck Advantage</h2>
+      </div>
+      <div class="section__text">
+        <p>Sweatshirts differ from hoodies in their fundamental construction: sweatshirts feature crewneck neckbands without attached hoods, while hoodies include hoods with drawstrings. This distinction makes sweatshirts simpler in construction and more suitable for certain applications. The absence of a hood reduces production complexity and cost, while the clean crewneck area provides excellent space for screen printing, embroidery, and branding without hood interference.</p>
+        
+        <p>Sweatshirts offer a clean neckline ideal for layering under jackets, coats, and blazers. The crewneck design works seamlessly with outerwear, avoiding the bulk that hoods create when layered. This makes sweatshirts preferred for transitional weather wear, office-casual environments, and fashion-forward layering combinations. The ribbed neckband provides structure and maintains shape through wear, ensuring the neckline stays clean and professional.</p>
+        
+        <p>From a manufacturing perspective, sweatshirts allow for faster production times and lower minimums compared to hoodies. The simplified construction reduces sewing operations, quality checkpoints, and potential defect points. This efficiency translates to competitive pricing for brands while maintaining the same fabric quality and construction standards as our hoodie production. Sweatshirts are particularly well-suited for brands focusing on screen printing, as the flat chest area provides optimal surface area for large format prints without hood drawstring interference.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Sweatshirt Styles</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sweatshirt Styles We Manufacture</h2>
+      </div>
+      <div class="section__text">
+        <p>We manufacture four primary sweatshirt styles, each serving different market segments and design aesthetics. Crewneck sweatshirts form the foundation of our production, offering the classic clean neckline that defines the category. Half-zip and quarter-zip variations add functionality with chest zippers and collar necklines, while raglan sweatshirts provide contrast sleeve panel options for visual interest. All styles maintain the same quality standards and are available from 300 pieces minimum.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Style</th>
+              <th>Neckline</th>
+              <th>Key Features</th>
+              <th>Best For</th>
+              <th>Price Tier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Crewneck</td>
+              <td>Ribbed crewneck band</td>
+              <td>Clean neckline, no hood, ribbed cuffs and hem</td>
+              <td>Screen printing, layering, basic wear</td>
+              <td>$</td>
+            </tr>
+            <tr>
+              <td>Half-Zip</td>
+              <td>Standing collar with chest zipper</td>
+              <td>Ventilation, adjustable neck, sport aesthetic</td>
+              <td>Athleisure, golf, outdoor brands</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>Quarter-Zip</td>
+              <td>Mock collar with partial zipper</td>
+              <td>Subtle zipper, collar structure, modern look</td>
+              <td>Fashion brands, casual wear</td>
+              <td>$$</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Raglan</td>
+              <td>Crewneck with raglan sleeves</td>
+              <td>Contrast sleeve panels, athletic silhouette</td>
+              <td>Sports teams, vintage aesthetics</td>
+              <td>$$</td>
+            </tr>
+          </tbody>
+          <caption>All styles available from 300 pieces minimum. Custom combinations possible with higher minimums.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Fabric Weight Guide</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sweatshirt Fabric Weight Guide | Choosing the Right GSM</h2>
+      </div>
+      <div class="section__text">
+        <p>Fabric weight determines sweatshirt warmth, drape, and positioning in the market. GSM (grams per square meter) is the standard measurement for fabric weight, with higher numbers indicating heavier, warmer fabrics. We offer sweatshirts across four weight categories to serve different seasons, price points, and brand positioning requirements.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Weight</th>
+              <th>GSM</th>
+              <th>Season</th>
+              <th>Characteristics</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Lightweight</td>
+              <td>240 GSM</td>
+              <td>Spring/Summer</td>
+              <td>Breathable, light drape, quick drying</td>
+              <td>Lightweight basics, layering pieces</td>
+            </tr>
+            <tr>
+              <td>Midweight</td>
+              <td>280 GSM</td>
+              <td>Year-round</td>
+              <td>Balanced warmth and weight, standard feel</td>
+              <td>Everyday wear, retail standard</td>
+            </tr>
+            <tr>
+              <td>Heavyweight</td>
+              <td>320 GSM</td>
+              <td>Winter/Fall</td>
+              <td>Warm, substantial, premium feel</td>
+              <td>Premium positioning, winter wear</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Extra-Heavyweight</td>
+              <td>380 GSM</td>
+              <td>Extreme Cold</td>
+              <td>Maximum warmth, substantial weight</td>
+              <td>Premium streetwear, heavy duty</td>
+            </tr>
+          </tbody>
+          <caption>Weight tolerance guaranteed within ?5%. Pre-shrunk fabrics minimize garment shrinkage.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Customization by MOQ</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sweatshirt Customization Options by MOQ Tier</h2>
+      </div>
+      <div class="section__text">
+        <p>Customization options vary by order quantity, with higher volumes enabling more complex customization. Our tiered approach ensures brands at all stages can access customization appropriate to their scale. Standard customization is available from 300 pieces, while advanced options require higher minimums due to setup costs and production efficiency requirements.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>MOQ Tier</th>
+              <th>Quantity</th>
+              <th>Screen Printing</th>
+              <th>Embroidery</th>
+              <th>Custom Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Standard</td>
+              <td>300+ pieces</td>
+              <td>Up to 4 colors, standard placement</td>
+              <td>Basic logo embroidery</td>
+              <td>Standard neckband, ribbed cuffs</td>
+            </tr>
+            <tr>
+              <td>Intermediate</td>
+              <td>500+ pieces</td>
+              <td>Up to 8 colors, all-over print</td>
+              <td>3D puff, multi-location</td>
+              <td>Contrast neckband, custom labels</td>
+            </tr>
+            <tr>
+              <td>Advanced</td>
+              <td>1000+ pieces</td>
+              <td>Unlimited colors, specialty inks</td>
+              <td>Complex designs, large scale</td>
+              <td>Custom neckband, special finishes</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Premium</td>
+              <td>2000+ pieces</td>
+              <td>Custom development, proprietary</td>
+              <td>Full custom development</td>
+              <td>Fully custom construction</td>
+            </tr>
+          </tbody>
+          <caption>MOQ applies per style and colorway. Customization costs additional to base garment price.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Size Chart</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sweatshirt Size Chart | Measurements for Fit Consistency</h2>
+      </div>
+      <div class="section__text">
+        <p>Our size chart provides measurements for consistent fit across production runs. All measurements are taken from finished garments after washing and drying. We recommend ordering samples to verify fit before bulk production, as fit preferences vary by brand and target market.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Chest (in)</th>
+              <th>Length (in)</th>
+              <th>Sleeve Length (in)</th>
+              <th>Shoulder Width (in)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>XS</td>
+              <td>34-36</td>
+              <td>26-27</td>
+              <td>32-33</td>
+              <td>16-17</td>
+            </tr>
+            <tr>
+              <td>S</td>
+              <td>36-38</td>
+              <td>27-28</td>
+              <td>33-34</td>
+              <td>17-18</td>
+            </tr>
+            <tr>
+              <td>M</td>
+              <td>38-40</td>
+              <td>28-29</td>
+              <td>34-35</td>
+              <td>18-19</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>L</td>
+              <td>40-42</td>
+              <td>29-30</td>
+              <td>35-36</td>
+              <td>19-20</td>
+            </tr>
+            <tr>
+              <td>XL</td>
+              <td>42-44</td>
+              <td>30-31</td>
+              <td>36-37</td>
+              <td>20-21</td>
+            </tr>
+            <tr>
+              <td>2XL</td>
+              <td>44-46</td>
+              <td>31-32</td>
+              <td>37-38</td>
+              <td>21-22</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>3XL</td>
+              <td>46-48</td>
+              <td>32-33</td>
+              <td>38-39</td>
+              <td>22-23</td>
+            </tr>
+            <tr>
+              <td>4XL</td>
+              <td>48-50</td>
+              <td>33-34</td>
+              <td>39-40</td>
+              <td>23-24</td>
+            </tr>
+          </tbody>
+          <caption>Measurements are approximate. Custom sizing available with tech pack development. Tolerance ?0.5 inches.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Price Range</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sweatshirt Price Range by Style and MOQ</h2>
+      </div>
+      <div class="section__text">
+        <p>Pricing varies by style complexity, fabric weight, and order quantity. FOB Bangladesh pricing for standard production runs. Customization, premium fabrics, and special finishes are additional. Volume discounts available for orders exceeding 1,000 pieces.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Style</th>
+              <th>300-500 pcs</th>
+              <th>500-1000 pcs</th>
+              <th>1000-2000 pcs</th>
+              <th>2000+ pcs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Crewneck (280 GSM)</td>
+              <td>$8-12</td>
+              <td>$7-10</td>
+              <td>$6-9</td>
+              <td>$5-8</td>
+            </tr>
+            <tr>
+              <td>Half-Zip (280 GSM)</td>
+              <td>$10-15</td>
+              <td>$9-13</td>
+              <td>$8-11</td>
+              <td>$7-10</td>
+            </tr>
+            <tr>
+              <td>Quarter-Zip (280 GSM)</td>
+              <td>$10-15</td>
+              <td>$9-13</td>
+              <td>$8-11</td>
+              <td>$7-10</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Raglan (280 GSM)</td>
+              <td>$10-15</td>
+              <td>$9-13</td>
+              <td>$8-11</td>
+              <td>$7-10</td>
+            </tr>
+            <tr>
+              <td>Heavyweight Crewneck (320 GSM)</td>
+              <td>$12-18</td>
+              <td>$11-16</td>
+              <td>$10-14</td>
+              <td>$9-12</td>
+            </tr>
+            <tr>
+              <td>Organic Cotton Crewneck (GOTS)</td>
+              <td>$14-22</td>
+              <td>$13-20</td>
+              <td>$12-18</td>
+              <td>$11-16</td>
+            </tr>
+          </tbody>
+          <caption>FOB Bangladesh pricing. Includes fabric, cut, sew, basic branding. Customization additional.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Sweat Sets</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Matching Sweat Sets | Crewneck Sweatshirts and Sweatpants</h2>
+      </div>
+      <div class="section__text">
+        <p>Sweat sets featuring matching crewneck sweatshirts and sweatpants are increasingly popular for loungewear, athleisure, and brand collections. The coordinated look provides visual consistency and brand recognition. We produce sweat sets in the same fabric weight and color, ensuring perfect matching between tops and bottoms.</p>
+        
+        <p>Sweat set production requires coordinated manufacturing to ensure color consistency across both garment types. Our integrated production capability ensures that sweatshirts and sweatpants from the same order match perfectly in fabric, color, and construction details. This coordination eliminates the risk of mismatched sets that can occur when sourcing tops and bottoms from different suppliers.</p>
+        
+        <p>Minimum order for sweat sets is 300 pieces per set style, with the quantity representing the combined total of tops and bottoms. For example, a 300-piece sweat set order could be 150 sweatshirts and 150 sweatpants, or any other combination totaling 300 pieces. This flexibility allows brands to balance their inventory based on expected sales ratios while meeting the production minimum.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sweatshirt Manufacturer FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between sweatshirt and hoodie?</h3>
+          <p class="faq__answer">Sweatshirts have crewneck neckbands without hoods. Hoodies have attached hoods with drawstrings. Sweatshirts are simpler in construction, making them ideal for screen printing and embroidery. They offer a clean neckline suitable for layering under jackets.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What sweatshirt styles do you manufacture?</h3>
+          <p class="faq__answer">We manufacture crewneck sweatshirts (standard, oversized, fitted), half-zip sweatshirts with chest zippers, quarter-zip sweatshirts with collar necklines, and raglan sweatshirts with contrast sleeve panels. All styles available from 300 pieces minimum.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What fabric weights do you offer for sweatshirts?</h3>
+          <p class="faq__answer">We offer 240 GSM lightweight sweatshirts for spring/summer, 280 GSM midweight for standard year-round wear, 320 GSM heavyweight for winter and premium positioning, and 380 GSM extra-heavyweight for maximum warmth and premium streetwear.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is your minimum order for sweatshirts?</h3>
+          <p class="faq__answer">Our sweatshirt minimum is 300 pieces per style. This applies to crewneck, half-zip, quarter-zip, and raglan styles. Minimum can be split across sizes within a single colorway. Lower quantities available at higher per-piece cost for sampling.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you produce sweat sets with matching sweatpants?</h3>
+          <p class="faq__answer">Yes. We produce matching sweat sets with crewneck sweatshirts and sweatpants in the same fabric and color. Sweat sets are popular for loungewear, athleisure, and brand collections. Minimum 300 pieces per set style (tops and bottoms combined).</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What customization options do you offer for sweatshirts?</h3>
+          <p class="faq__answer">Customization includes screen printing, DTG printing, embroidery, custom neckband colors, ribbed cuffs in contrast colors, custom labels and hang tags, and packaging. The clean crewneck area provides excellent space for chest branding.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What fabrics do you use for sweatshirt production?</h3>
+          <p class="faq__answer">We use cotton fleece, French terry, poly-cotton blends for durability and shrinkage resistance, organic cotton fleece for sustainable options, and recycled polyester blends. All fabrics pre-shrunk to minimize garment shrinkage.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does sweatshirt production take?</h3>
+          <p class="faq__answer">Standard production timeline: 30-40 days from fabric receipt for basic sweatshirts. 35-50 days for custom fabric development or heavyweight options. 7-14 days for sampling before bulk. Rush production available at 20-30% premium.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Order Custom Sweatshirts?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for custom sweatshirt manufacturing. We provide detailed quotes, production timelines, and sample development. Crewneck, half-zip, quarter-zip, and raglan styles available from 300 pieces minimum. Private label ready with full customization.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/tools/sample-request" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/hoodie-manufacturer" style="color: var(--color-primary);">hoodie manufacturer</a>, <a href="/pants-manufacturer" style="color: var(--color-primary);">pants manufacturer</a>, <a href="/loungewear-manufacturer" style="color: var(--color-primary);">loungewear manufacturer</a>, <a href="/small-batch-hoodie-manufacturer" style="color: var(--color-primary);">small batch hoodie manufacturer</a>, <a href="/wholesale-hoodie-supplier" style="color: var(--color-primary);">wholesale hoodie supplier</a>, <a href="/low-moq-clothing-manufacturers" style="color: var(--color-primary);">low MOQ clothing manufacturers</a>, <a href="/private-label-manufacturer" style="color: var(--color-primary);">private label manufacturer</a>, <a href="/embroidery-service" style="color: var(--color-primary);">embroidery service</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>.
+      </p>
+    </div>
+  </section>
+
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)">
+<div style="max-width:900px;margin:0 auto;padding:0 1.5rem">
+<h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">
+Why Work with a Bangladesh Clothing Manufacturer?
+</h2>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+Bangladesh is the world's second-largest garment exporter, shipping over $47 billion
+in apparel annually to markets in the USA, UK, EU, and Australia. The country's
+manufacturing sector has spent four decades building infrastructure, expertise, and
+compliance systems that rival any other sourcing destination.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+For startup brands and established labels alike, Bangladesh offers a combination
+that's difficult to match: low minimum order quantities, competitive FOB pricing,
+world-class certifications including GOTS and OEKO-TEX, and duty-free access to
+EU markets through the GSP scheme. SDF Clothing brings all of these advantages
+under one roof, with a minimum order quantity of just 300 pieces per style.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+Working with a Bangladesh manufacturer means access to one of the deepest pools
+of garment-making expertise on the planet. Factories here specialize in knitwear,
+woven garments, denim, activewear, and technical apparel. Lead times are
+competitive | 30 to 45 days for bulk production | and the export infrastructure
+connecting Dhaka and Chittagong to global ports is mature and reliable.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+For brands targeting the US market, Bangladesh avoids the Section 301 tariffs
+that add 25% or more to Chinese imports. For EU brands, GSP duty-free access
+means lower landed costs compared to sourcing from countries without preferential
+trade agreements. These trade advantages translate directly into better margins
+or more competitive retail pricing.
+</p>
+<h3 style="font-size:1.25rem;font-weight:600;color:var(--color-text);margin:2rem 0 1rem">
+SDF Clothing | Your Direct Manufacturing Partner
+</h3>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+SDF Clothing is a direct-access factory | not a trading company or buying house.
+When you work with us, you communicate directly with our production team, receive
+transparent pricing without agent markup, and maintain full control over your
+supply chain. Our certifications include GOTS, OEKO-TEX Standard 100, BSCI,
+WRAP, and ISO 9001, giving you and your customers confidence in every order.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+We work with brands at every stage | from first-time founders ordering 300 pieces
+to established labels running tens of thousands of units per season. Our in-house
+services cover tech pack development, fabric sourcing, sampling, bulk production,
+quality inspection, and export documentation. One team, one point of contact,
+from your first enquiry to shipment confirmation.
+</p>
+</div>
+</section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+
+

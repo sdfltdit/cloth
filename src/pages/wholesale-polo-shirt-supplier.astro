@@ -1,0 +1,921 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Wholesale Polo Shirt Supplier — Corporate | SDF Clothing";
+const pageDescription = "Wholesale polo shirt supplier in Bangladesh. Bulk corporate and branded polos for distributors. Pantone matching and embroidery available. FOB from 500 pieces.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Wholesale Polo Shirt Supplier",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for wholesale polo shirts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our wholesale minimum is 500 pieces per style, per colorway. This applies across all fabric types and corporate polo programs. For established corporate buyers with annual commitments, we can negotiate lower minimums based on total volume."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer Pantone color matching for corporate polos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer Pantone color matching for corporate polos at wholesale quantities. Lab dip approval required before bulk production. Color matching guaranteed within ?E 2.0 tolerance. Color lab dips retained for re-order consistency. Pantone matching included in wholesale pricing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What embroidery options are available for wholesale polo shirts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Embroidery available from 500 pieces with up to 6,000 stitches per logo. Left chest, sleeve, and back embroidery options. Woven labels and hang tags included. Embroidery digitization included. We maintain embroidery quality consistency through standardized processes and retained samples."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What corporate polo programs do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer tiered corporate polo programs for companies of all sizes: small business program (500-999 pieces, quarterly ordering), mid-size program (1,000-4,999 pieces, monthly ordering), enterprise program (5,000+ pieces, capacity allocation). Each program includes dedicated account management and priority production."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What fabric options are available for wholesale polo shirts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer piqu? cotton, interlock cotton, performance polyester blends, organic cotton (GOTS), and recycled polyester (GRS). All weights from 180-240 GSM available. Fabric sourcing included in wholesale pricing. GSM consistency guaranteed within ?5%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you handle re-orders for corporate polo shirts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Re-orders processed with retained production samples ensuring color, fabric, and embroidery consistency. Lead time reduced to 20-25 days for re-orders. We maintain fabric stock and embroidery files for established corporate buyers to accelerate processing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is your production capacity for wholesale polo shirts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our production capacity is 80,000 polo shirts per month across multiple production lines. We allocate capacity for established corporate buyers and can scale during peak seasons with advance planning. Capacity allocation requires 3-month notice for large volume increases."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications do you hold for polo shirt production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We hold GOTS for organic cotton, OEKO-TEX Standard 100 for chemical safety, ISO 9001 for quality management, BSCI for social compliance, GRS for recycled materials, and additional certifications. Full certification documentation provided with every shipment."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com"
+      },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "NL"],
+      "description": "Custom clothing manufacturing from Bangladesh with low MOQ from 300 pieces."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Clothing from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Brief",
+          "text": "Share your design, quantity, fabric requirements and timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Quote",
+          "text": "Get a detailed FOB quote within 48 hours."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample",
+          "text": "Review and approve a pre-production sample."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Full production with inline quality checks."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipment",
+          "text": "FOB Dhaka shipment with full export documentation."
+        }
+      ]
+    }
+]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Wholesale Polo Shirt Supplier</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Wholesale Supply | Since 1998 | Bangladesh Export</div>
+        <h1 class="hero__title">Wholesale Polo Shirt Supplier | Bulk Corporate Polos for Companies, Retailers and Distributors</h1>
+        <p class="hero__description">
+          SDF Clothing is a wholesale polo shirt supplier in Bangladesh providing bulk corporate and branded polos for companies, retailers, distributors, and buying houses in USA, UK, Australia, Canada, and EU markets. FOB Dhaka pricing from 500 pieces minimum with Pantone color matching, embroidery services, and tiered corporate programs for businesses of all sizes. Piqué cotton, performance blends, and organic cotton options available with guaranteed consistency across re-orders. As a <a href="/wholesale-clothing-manufacturer/" style="color:#e00;text-decoration:none;">wholesale clothing manufacturer</a>, we deliver quality and consistency.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Request Wholesale Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20wholesale%20polo%20shirt%20quote`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">500</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">80K</span>
+          <span class="hero__stat-label">Monthly Capacity</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Export</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">98%</span>
+          <span class="hero__stat-label">On-Time Delivery</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>GOTS Organic Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>ISO 9001 Quality</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>BSCI Social Compliance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Corporate Programs</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Corporate Polo Shirt Programs | Tailored for Company Size</h2>
+      </div>
+      <div class="section__text">
+        <p>Corporate polo shirt buyers require different service levels based on company size and ordering frequency. Small businesses need flexible ordering with lower minimums, mid-size companies need consistent supply with priority production, and enterprises require capacity allocation and dedicated account management. SDF offers tiered corporate polo programs designed for each company segment, ensuring appropriate service levels regardless of order volume.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Company Size</th>
+              <th>Staff Range</th>
+              <th>Order Frequency</th>
+              <th>MOQ</th>
+              <th>Lead Time</th>
+              <th>Program Benefits</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Small Business</td>
+              <td>10-99 employees</td>
+              <td>Quarterly</td>
+              <td>500 pieces</td>
+              <td>25-30 days</td>
+              <td>Flexible ordering, Pantone matching, embroidery included</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Mid-Size</td>
+              <td>100-999 employees</td>
+              <td>Monthly</td>
+              <td>1,000 pieces</td>
+              <td>20-25 days</td>
+              <td>Priority production, account manager, fabric stock retention</td>
+            </tr>
+            <tr>
+              <td>Enterprise</td>
+              <td>1,000+ employees</td>
+              <td>Weekly/Bi-weekly</td>
+              <td>5,000 pieces</td>
+              <td>15-20 days</td>
+              <td>Capacity allocation, dedicated team, customized logistics</td>
+            </tr>
+          </tbody>
+          <caption>Programs can be customized based on specific requirements. Annual commitment enables program tier upgrades with enhanced benefits.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Color Services</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Pantone Color Matching for Corporate Branding</h2>
+      </div>
+      <div class="section__text">
+        <p>Corporate polo shirt buyers require precise color matching to maintain brand consistency across all branded apparel. SDF offers Pantone color matching services for wholesale polo shirt orders, ensuring that fabric color matches corporate brand guidelines exactly. The color matching process involves lab dip development, spectrophotometer measurement, and customer approval before bulk production. We guarantee color accuracy within ?E 2.0 tolerance, which is imperceptible to the human eye under normal viewing conditions.</p>
+        
+        <p>Color lab dips are physical fabric samples showing the exact color achieved in dyeing. We retain lab dips for every corporate polo shirt order and use them as reference when re-dyeing fabric for re-orders. This ensures that color on re-orders matches color on initial orders within acceptable tolerances. For buyers requiring precise color documentation, we provide spectrophotometer measurements with ?E values, enabling objective color evaluation and acceptance criteria. Color matching is included in wholesale pricing at no additional cost for orders above 500 pieces.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Fabric Options</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Fabric Options for Wholesale Polo Shirts</h2>
+      </div>
+      <div class="section__text">
+        <p>Fabric selection determines polo shirt positioning, comfort, and suitability for end use. SDF offers comprehensive fabric options at wholesale minimums, enabling corporate buyers and retailers to select appropriate materials for their brand positioning and price point. Piqu? cotton is the traditional polo fabric with textured surface, interlock offers smoother hand feel, performance blends provide moisture management for athletic use, and organic cotton appeals to sustainability-focused brands. All fabrics are tested for colorfastness, shrinkage control, and durability.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Fabric Type</th>
+              <th>GSM Range</th>
+              <th>Hand Feel</th>
+              <th>Best For</th>
+              <th>Wholesale Available</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Piqu? Cotton</td>
+              <td>180-220 GSM</td>
+              <td>Textured, traditional</td>
+              <td>Classic corporate polos</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Interlock Cotton</td>
+              <td>180-220 GSM</td>
+              <td>Smooth, soft</td>
+              <td>Premium corporate polos</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Performance Blend</td>
+              <td>180-200 GSM</td>
+              <td>Lightweight, wicking</td>
+              <td>Athletic, golf polos</td>
+              <td>Yes</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Organic Cotton (GOTS)</td>
+              <td>180-220 GSM</td>
+              <td>Soft, sustainable</td>
+              <td>Eco-friendly brands</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Recycled Polyester (GRS)</td>
+              <td>180-200 GSM</td>
+              <td>Performance, sustainable</td>
+              <td>Sportswear, eco brands</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+          <caption>All fabrics available at 500-piece minimum. Fabric sourcing included in wholesale pricing. GSM consistency guaranteed within ?5%.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Wholesale Pricing</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wholesale Polo Shirt Pricing | Volume Tiers</h2>
+      </div>
+      <div class="section__text">
+        <p>Wholesale polo shirt pricing follows volume-based tier structures with FOB Bangladesh pricing. Unit costs decrease as order volume increases due to fabric sourcing efficiency, production setup optimization, and embroidery economies of scale. Pricing below reflects piqu? cotton polo shirts (200 GSM) with basic left chest embroidery. Pricing varies by fabric type, embroidery complexity, and order volume. We provide detailed quotes with itemized pricing for all wholesale inquiries.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Volume</th>
+              <th>Price/Unit</th>
+              <th>Total FOB (1000 pcs)</th>
+              <th>Discount vs Standard</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>500-999 pieces</td>
+              <td>$4.50 - $6.50</td>
+              <td>-</td>
+              <td>Standard pricing</td>
+              <td>New corporate buyers, test orders</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>1,000-4,999 pieces</td>
+              <td>$3.80 - $5.80</td>
+              <td>$3,800 - $5,800</td>
+              <td>5-8% discount</td>
+              <td>Mid-size companies, regular orders</td>
+            </tr>
+            <tr>
+              <td>5,000-9,999 pieces</td>
+              <td>$3.20 - $5.20</td>
+              <td>$16,000 - $26,000</td>
+              <td>10-12% discount</td>
+              <td>Large companies, corporate programs</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>10,000+ pieces</td>
+              <td>$2.80 - $4.80</td>
+              <td>$28,000+</td>
+              <td>15%+ discount</td>
+              <td>Enterprise, capacity allocation</td>
+            </tr>
+          </tbody>
+          <caption>Prices are FOB Bangladesh for piqu? cotton polo shirts (200 GSM) with basic left chest embroidery. Actual pricing depends on fabric, embroidery, and order specifications.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wholesale Polo Shirt FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order for wholesale polo shirts?</h3>
+          <p class="faq__answer">Our wholesale minimum is 500 pieces per style, per colorway. This applies across all fabric types and corporate polo programs. For established corporate buyers with annual commitments, we can negotiate lower minimums based on total volume across polo shirts and other categories.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you offer Pantone color matching for corporate polos?</h3>
+          <p class="faq__answer">Yes. We offer Pantone color matching for corporate polos at wholesale quantities. Lab dip approval required before bulk production. Color matching guaranteed within ?E 2.0 tolerance. Color lab dips retained for re-order consistency. Pantone matching included in wholesale pricing at no additional cost for orders above 500 pieces.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What embroidery options are available for wholesale polo shirts?</h3>
+          <p class="faq__answer">Embroidery available from 500 pieces with up to 6,000 stitches per logo. Left chest, sleeve, and back embroidery options. Woven labels and hang tags included. Embroidery digitization included. We maintain embroidery quality consistency through standardized processes and retained samples for re-order matching.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What corporate polo programs do you offer?</h3>
+          <p class="faq__answer">We offer tiered corporate polo programs: small business program (500-999 pieces, quarterly ordering), mid-size program (1,000-4,999 pieces, monthly ordering), enterprise program (5,000+ pieces, capacity allocation). Each program includes dedicated account management, priority production, and enhanced service levels.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What fabric options are available for wholesale polo shirts?</h3>
+          <p class="faq__answer">We offer piqu? cotton, interlock cotton, performance polyester blends, organic cotton (GOTS certified), and recycled polyester (GRS certified). All weights from 180-240 GSM available. Fabric sourcing included in wholesale pricing. GSM consistency guaranteed within ?5% tolerance.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do you handle re-orders for corporate polo shirts?</h3>
+          <p class="faq__answer">Re-orders processed with retained production samples ensuring color, fabric, and embroidery consistency. Lead time reduced to 20-25 days for re-orders (vs 25-30 days for new orders). We maintain fabric stock and embroidery files for established corporate buyers to accelerate processing.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is your production capacity for wholesale polo shirts?</h3>
+          <p class="faq__answer">Our production capacity is 80,000 polo shirts per month across multiple production lines. We allocate capacity for established corporate buyers and can scale during peak seasons with advance planning. Capacity allocation requires 3-month notice for large volume increases to ensure timely delivery.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What certifications do you hold for polo shirt production?</h3>
+          <p class="faq__answer">We hold GOTS for organic cotton, OEKO-TEX Standard 100 for chemical safety, ISO 9001 for quality management, BSCI for social compliance, GRS for recycled materials, OCS for organic content, and additional certifications. Full certification documentation provided with every shipment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Establish Wholesale Polo Shirt Supply Partnership?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for wholesale polo shirt pricing, corporate program details, and reference checks. We provide detailed quotes with itemized pricing, fabric specifications, and sample arrangements. No commitment required for initial consultation.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Request Wholesale Quote</a>
+        <a href="/tools/sample-request" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/polo-shirt-manufacturer" style="color: var(--color-primary);">polo shirt manufacturer</a>, <a href="/wholesale-clothing-supplier" style="color: var(--color-primary);">wholesale clothing supplier</a>, <a href="/uniform-manufacturer" style="color: var(--color-primary);">uniform manufacturer</a>, <a href="/embroidery-service" style="color: var(--color-primary);">embroidery service</a>, <a href="/bulk-clothing-manufacturer" style="color: var(--color-primary);">bulk clothing manufacturer</a>, <a href="/wholesale-t-shirt-supplier" style="color: var(--color-primary);">wholesale t-shirt supplier</a>, <a href="/quality-inspection-service" style="color: var(--color-primary);">quality inspection service</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">SDF Clothing is a direct-access garment factory in Bangladesh | not a trading company or buying house. When you work with us, you communicate directly with our production team, receive transparent pricing without agent markup, and maintain full control over your supply chain. Our factory holds GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certifications.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Bangladesh is the world's second-largest garment exporter, shipping over $47 billion in apparel annually to USA, UK, EU and Australian markets. Our minimum order of 300 pieces reflects our commitment to supporting brands at every stage of growth | from first collections to established seasonal production runs. We offer full package production covering tech pack development, fabric sourcing, sampling, bulk manufacturing, quality inspection, and export documentation under one roof.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">For US brands, sourcing from Bangladesh avoids the Section 301 tariffs that add 25% or more to Chinese imports. For EU brands, Bangladesh's GSP duty-free access delivers lower landed costs compared to most other sourcing destinations. These trade advantages combine with competitive FOB pricing to deliver strong margins for our clients.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/tools/sample-request" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+
+
+
+

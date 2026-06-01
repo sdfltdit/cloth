@@ -1,0 +1,1145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Coat Manufacturer | Custom Outerwear & Winter Coats | SDF";
+const pageDescription = "Custom coat manufacturer in Bangladesh. Trench, overcoat, parka and puffer coats from 300 pieces. Outerwear for brands and corporate. Get a free quote.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20custom%20coat%20manufacturing`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-21",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle,
+            "item": canonicalUrl.href
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#organization" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for custom coats?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SDF Clothing manufactures custom coats with a minimum order of 300 pieces per style. This low MOQ makes outerwear manufacturing accessible to startup brands, boutique labels, and businesses launching new coat lines. We offer flexible size and color breakdowns within the 300 piece minimum, allowing you to test designs and scale gradually. Our 300 piece MOQ is significantly lower than many outerwear manufacturers who require 500-1,000 pieces for winter coats and parkas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the warmest coat material?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Down insulation provides the highest warmth-to-weight ratio for coats. High-quality down (600-800 fill power) offers exceptional insulation while remaining lightweight. Wool is the warmest natural fabric option, providing excellent insulation even when wet. Technical synthetic materials like Primaloft and Thinsulate offer down-like warmth with better performance in wet conditions. The warmest coat combines an outer shell (waterproof or water-resistant), insulation layer (down or synthetic), and lining. For extreme cold, parkas with down insulation and windproof shells provide maximum protection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you manufacture coats with custom insulation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SDF manufactures coats with custom insulation options. We source down insulation from certified suppliers (RDS certified for responsible down sourcing) in various fill powers from 550 to 800+. Synthetic insulation options include polyester, recycled polyester, and branded alternatives like Thinsulate. We can customize insulation weight by body zone - heavier insulation in torso and back, lighter in sleeves - for optimized warmth and mobility. Custom lining options include thermal fleece, quilted lining, and breathable mesh for performance applications. We help you select insulation based on your target climate, price point, and sustainability goals."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between trench coat and overcoat?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Trench coats are lightweight, typically waterproof or water-resistant outerwear originally designed for military use. They feature double-breasted fronts, belted waists, epaulets, and often reach mid-thigh. Trench coats work well for rain protection and transitional seasons. Overcoats are heavy, warm coats designed for winter wear, typically made from wool or wool blends. Overcoats are longer (often knee-length or longer), simpler in design, and focus on warmth rather than weather protection. Trench coats are fashion-forward rainwear, while overcoats are functional winter garments. Both styles serve different markets and seasonal needs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does coat manufacturing take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Coat manufacturing typically takes 50-70 days from sample approval to shipment, depending on complexity. The timeline includes: pattern making and grading (7-10 days), sample development with all construction details (14-21 days), sample approval and any revisions (5-7 days), cutting and sewing bulk production (30-45 days), final quality inspection and finishing (5-7 days), and packing for shipment (3-5 days). Complex styles with multiple layers, special insulation, waterproof treatments, or intricate details may add 10-15 days. Rush orders may be possible at higher cost for time-critical launches."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you make waterproof coats?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SDF manufactures waterproof coats using specialized fabrics and treatments. We offer waterproof shell fabrics including PU-coated polyester, PVC-coated materials, and breathable waterproof membranes like TPU. Waterproofing treatments include DWR (durable water repellent) coatings, seam sealing, and waterproof zippers. We can achieve various waterproof ratings from 5,000mm to 20,000mm water column depending on your requirements. Waterproof coats are essential for trench coats, raincoats, and performance outerwear. Our <a href='/technical-outerwear-manufacturer'>technical outerwear manufacturing</a> capabilities include comprehensive weather protection solutions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications do your coat materials have?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SDF Clothing's coat materials hold multiple international certifications including OEKO-TEX Standard 100 for chemical safety, RDS (Responsible Down Standard) for down insulation, GRS (Global Recycled Standard) for recycled materials, and REACH compliance for EU markets. Our manufacturing facilities are BSCI certified for social compliance and WRAP certified for ethical manufacturing. These certifications ensure your coats meet retailer requirements and consumer expectations for safety, sustainability, and responsibility. We provide transaction certificates for certified materials to support your sustainability claims. View our complete <a href='/certifications'>certifications portfolio</a> for detailed information."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you make plus-size coats?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SDF Clothing manufactures coats in plus sizes. We offer inclusive sizing from XS to 5XL, with custom grading services available for brands requiring extended size ranges. Our pattern making and grading capabilities ensure consistent fit across all size categories. We understand that plus-size customers represent a significant market segment, and we help brands serve this audience with properly fitted coats that don't compromise on style or warmth. Our <a href='/plus-size-clothing-manufacturer'>plus-size clothing manufacturing</a> services include specialized pattern adjustments for larger sizes in outerwear."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Coat Manufacturing",
+      "provider": { "@id": SITE + "/#organization" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "300",
+          "description": "Starting MOQ | 300 pieces per style"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Coats from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Design or Tech Pack",
+          "text": "Provide detailed specifications including coat type, fabric requirements, insulation needs, measurements, construction details, and styling elements. If you don't have a tech pack, our design team can help develop one for a fee."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Confirm Fabric and Insulation",
+          "text": "Select from our fabric library or provide your own fabric. We source wool, technical shells, cotton, and specialty fabrics. Confirm insulation type (down, synthetic), lining materials, and all trim components."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Pre-Production Sample",
+          "text": "We create a detailed sample incorporating all your specifications. Review the sample for fit, construction, fabric quality, insulation, and styling. Request revisions until satisfied."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample and Place Bulk Order",
+          "text": "Approve the final sample in writing. Pay 30% deposit to start production. We provide a production schedule with key milestones and delivery timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Production, Quality Control, and Shipment",
+          "text": "Bulk production takes 30-45 days. We conduct AQL 2.5 quality inspection including water resistance testing for waterproof coats. Pay 70% balance before shipment. We handle export documentation and coordinate shipping."
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Coat Types Manufactured by SDF",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trench Coats"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Overcoats"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Parkas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Puffer Coats"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Duffle Coats"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Coat Manufacturer</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Established 1998 | Dhaka, Bangladesh</p>
+        <h1 class="hero__title">Coat Manufacturer | Custom Outerwear and Winter Coats from 300 Pieces</h1>
+        <p class="hero__description">
+          SDF Clothing manufactures custom coats for fashion brands, corporate clients, and outerwear companies since 1998. We produce trench coats, overcoats, parkas, puffer coats, duffle coats, and peacoats with a 300 piece minimum order. Our expertise in outerwear manufacturing, combined with Bangladesh's skilled workforce and competitive pricing, delivers premium coats at accessible costs. From classic wool overcoats to contemporary technical puffers, we provide end-to-end manufacturing from pattern making to final shipment.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">300</span>
+            <span class="hero__stat-label">Pieces MOQ</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">25+</span>
+            <span class="hero__stat-label">Years Experience</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">XS-5XL</span>
+            <span class="hero__stat-label">Size Range</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">50-70</span>
+            <span class="hero__stat-label">Days Lead Time</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get a Free Factory Quote
+          </a>
+          <a href="/contact" class="hero__cta hero__cta--secondary">
+            Contact Our Team
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="Custom coat manufacturing at SDF Clothing Bangladesh" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Types of Coats -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Types of Coats SDF Manufactures | A Complete Guide</h2>
+      <p class="section__text">
+        Understanding coat types helps you select the right style for your brand and target market. SDF manufactures all major coat categories, from classic overcoats to contemporary technical puffers. Each type serves different purposes, seasons, and customer segments.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Types of coats manufactured by SDF Clothing">
+          <caption>Coat types with construction, fabric, and target market information</caption>
+          <thead>
+            <tr>
+              <th>Coat Type</th>
+              <th>Primary Use</th>
+              <th>Best Fabric</th>
+              <th>Target Market</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Trench Coat</strong></td>
+              <td>Rain protection, transitional seasons</td>
+              <td>Waterproof cotton/polyester, gabardine</td>
+              <td>Fashion, rainwear, smart casual</td>
+            </tr>
+            <tr>
+              <td><strong>Overcoat</strong></td>
+              <td>Winter warmth, formal wear</td>
+              <td>Wool, wool-poly blend, cashmere blend</td>
+              <td>Formal, business, luxury</td>
+            </tr>
+            <tr>
+              <td><strong>Parka</strong></td>
+              <td>Cold weather, outdoor activity</td>
+              <td>Technical shell, down/synthetic insulation</td>
+              <td>Outdoor, sportswear, casual</td>
+            </tr>
+            <tr>
+              <td><strong>Puffer Coat</strong></td>
+              <td>Cold weather, fashion warmth</td>
+              <td>Down or synthetic insulation, nylon shell</td>
+              <td>Fashion, streetwear, casual</td>
+            </tr>
+            <tr>
+              <td><strong>Duffle Coat</strong></td>
+              <td>Cold weather, casual wear</td>
+              <td>Wool, wool blend, melton cloth</td>
+              <td>Heritage fashion, casual, youth</td>
+            </tr>
+            <tr>
+              <td><strong>Peacoat</strong></td>
+              <td>Cold weather, naval-inspired style</td>
+              <td>Wool, wool blend, heavy melton</td>
+              <td>Heritage fashion, classic style</td>
+            </tr>
+            <tr>
+              <td><strong>Raincoat</strong></td>
+              <td>Rain protection, all seasons</td>
+              <td>PVC, PU-coated polyester, TPU membrane</td>
+              <td>Rainwear, utility, functional</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <h3 class="section__subtitle">Trench Coats: Classic Rainwear with Military Heritage</h3>
+      <p class="section__text">
+        Trench coats originated as military rainwear and evolved into fashion staples. Characterized by double-breasted fronts, belted waists, epaulets, storm flaps, and typically reaching mid-thigh, trench coats balance function and style. Our trench coat manufacturing uses waterproof or water-resistant fabrics including gabardine, cotton-polyester blends, and technical membranes with DWR coatings. Trench coats appeal to fashion brands seeking classic outerwear, rainwear specialists, and companies targeting smart casual markets. The double-breasted design and belt create flattering silhouettes suitable for diverse body types. Our <a href="/technical-outerwear-manufacturer">technical outerwear manufacturing</a> capabilities ensure trench coats provide genuine weather protection while maintaining fashion appeal.
+      </p>
+      
+      <h3 class="section__subtitle">Overcoats: Heavy Winter Coats for Warmth and Style</h3>
+      <p class="section__text">
+        Overcoats are heavy, long coats designed primarily for winter warmth. Typically made from wool or wool blends, overcoats reach knee-length or longer and feature simple, elegant designs. Overcoats suit formal wear, business attire, and luxury fashion markets where warmth and sophistication are priorities. Our overcoat manufacturing uses quality wool fabrics ranging from 400-600 GSM, with options for cashmere blends for premium positioning. Lining options include quilted thermal linings for added warmth and silk or viscose linings for luxury appeal. Overcoats represent the most formal coat category, making them essential for brands targeting professional and luxury segments. For <a href="/low-moq-clothing-manufacturers">low MOQ clothing manufacturers</a>, overcoats provide accessible entry points for emerging brands.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Fabric and Insulation Guide -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Coat Fabric and Insulation Guide | From Wool to Technical Materials</h2>
+      <p class="section__text">
+        Fabric and insulation selection dramatically impacts coat warmth, weather protection, and market positioning. SDF offers comprehensive material sourcing from certified suppliers, or we can work with your provided materials.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Coat fabric comparison guide">
+          <caption>Fabric options for coat manufacturing with weight and characteristics</caption>
+          <thead>
+            <tr>
+              <th>Material</th>
+              <th>Weight (GSM)</th>
+              <th>Characteristics</th>
+              <th>Best Coat Style</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Wool</strong></td>
+              <td>400-600</td>
+              <td>Warm, natural, breathable, premium</td>
+              <td>Overcoats, peacoats, duffle coats</td>
+            </tr>
+            <tr>
+              <td><strong>Wool-Poly Blend</strong></td>
+              <td>420-620</td>
+              <td>Durable, wrinkle-resistant, cost-effective</td>
+              <td>All wool coat styles, versatile</td>
+            </tr>
+            <tr>
+              <td><strong>Technical Shell</strong></td>
+              <td>150-250</td>
+              <td>Waterproof, windproof, lightweight</td>
+              <td>Parkas, raincoats, technical outerwear</td>
+            </tr>
+            <tr>
+              <td><strong>Cotton Gabardine</strong></td>
+              <td>280-350</td>
+              <td>Water-resistant, classic trench feel</td>
+              <td>Trench coats, rainwear</td>
+            </tr>
+            <tr>
+              <td><strong>Down Insulation</strong></td>
+              <td>Fill power 550-800+</td>
+              <td>Highest warmth-to-weight, compressible</td>
+              <td>Puffer coats, parkas</td>
+            </tr>
+            <tr>
+              <td><strong>Synthetic Insulation</strong></td>
+              <td>Fill weight 100-200gsm</td>
+              <td>Warm when wet, affordable, washable</td>
+              <td>Puffer coats, parkas, budget options</td>
+            </tr>
+            <tr>
+              <td><strong>PVC Coated</strong></td>
+              <td>300-400</td>
+              <td>100% waterproof, durable, vinyl feel</td>
+              <td>Raincoats, utility, heavy rainwear</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <h3 class="section__subtitle">Insulation Options: Down vs Synthetic</h3>
+      <p class="section__text">
+        Down insulation offers the highest warmth-to-weight ratio, compressibility, and natural feel. High-quality down (600-800 fill power) provides exceptional insulation while remaining lightweight. Down is ideal for premium puffer coats and parkas where warmth without bulk is essential. We source RDS-certified down from responsible suppliers. Synthetic insulation (polyester, recycled polyester, branded alternatives like Thinsulate) provides down-like warmth with better performance in wet conditions and lower cost. Synthetic insulation is ideal for budget-friendly options, performance applications where moisture resistance matters, and brands prioritizing animal-free materials. We can customize insulation weight by body zone - heavier in torso, lighter in sleeves - for optimized warmth and mobility.
+      </p>
+      
+      <h3 class="section__subtitle">Waterproofing: DWR, PU Coatings, Membrane Laminates</h3>
+      <p class="section__text">
+        Waterproofing is essential for trench coats, raincoats, and performance outerwear. DWR (durable water repellent) coatings cause water to bead and roll off fabric surfaces, providing light water resistance while maintaining breathability. PU (polyurethane) coatings create fully waterproof barriers but reduce breathability, suitable for raincoats where breathability is less critical. Membrane laminates like TPU provide waterproof protection with better breathability than coatings, ideal for technical outerwear. Seam sealing ensures waterproof integrity at stitched areas. We offer waterproof ratings from 5,000mm to 20,000mm water column depending on your requirements. Our <a href="/technical-outerwear-manufacturer">technical outerwear manufacturing</a> expertise includes comprehensive weather protection solutions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Construction Methods -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Coat Construction Methods | Shell, Lining, and Insulation</h2>
+      <p class="section__text">
+        Coat construction determines warmth, durability, and quality. Understanding construction methods helps you position products appropriately and manage customer expectations.
+      </p>
+      
+      <h3 class="section__subtitle">Shell Construction: Single-Layer vs Laminated</h3>
+      <p class="section__text">
+        Single-layer shell construction uses one fabric layer for the outer shell, with waterproofing applied through coatings or DWR treatments. This construction is cost-effective and works well for raincoats and fashion outerwear where extreme weather protection isn't required. Laminated shell construction bonds a waterproof membrane to the outer fabric, creating a fully waterproof barrier with better breathability than coatings alone. Laminated shells are essential for technical outerwear, performance parkas, and premium trench coats requiring genuine waterproof protection. Laminated construction costs more but provides superior weather performance and longer-lasting protection.
+      </p>
+      
+      <h3 class="section__subtitle">Lining Systems: Full Lining vs Partial vs Unlined</h3>
+      <p class="section__text">
+        Full lining covers the entire interior of the coat, providing smooth dressing, added warmth, and hidden construction details. Full lining is standard for overcoats, trench coats, and premium outerwear. Partial lining lines only specific areas - typically upper body and sleeves - reducing weight and cost while maintaining comfort in key areas. Partial lining works well for lighter coats and transitional season garments. Unlined coats have no lining, offering maximum breathability and lightweight construction but less comfort and warmth. Unlined construction is rare in coats but occasionally used in fashion-forward rainwear or spring coats. Lining material selection impacts coat quality - viscose and silk for luxury, polyester for durability, thermal fleece for warmth.
+      </p>
+      
+      <h3 class="section__subtitle">Insulation Construction: Box Baffle vs Sewn-Through</h3>
+      <p class="section__text">
+        Box baffle construction creates three-dimensional chambers that hold insulation in place without compressing it, maximizing loft and warmth. This construction is essential for high-quality down coats and premium puffers. Box baffles prevent cold spots and ensure even insulation distribution. Sewn-through construction stitches shell and lining together directly through insulation, creating channels that hold insulation. This construction is faster and cheaper but compresses insulation at stitch lines, reducing warmth and creating potential cold spots. Sewn-through is acceptable for budget puffers and fashion coats where maximum warmth isn't critical. For premium down coats, box baffle construction is essential for quality and performance.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Corporate Coat Manufacturing -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Corporate Coat Manufacturing | Uniform and Branded Programs</h2>
+      <p class="section__text">
+        Corporate coat programs require durability, weather protection, and brand integration. SDF specializes in manufacturing coats for staff uniforms, corporate branding, and professional wear programs ranging from 50 to 5,000+ staff.
+      </p>
+      
+      <h3 class="section__subtitle">Staff Uniform Coats: Weather Protection for Outdoor Staff</h3>
+      <p class="section__text">
+        Corporate uniform programs for outdoor staff require coats that provide genuine weather protection while maintaining professional appearance. We manufacture trench coats, raincoats, and parkas designed for staff in logistics, transportation, security, and outdoor service roles. These coats prioritize durability, waterproofing, and practical features like multiple pockets and reflective elements. Our production capacity handles orders from 50 pieces for small teams to 5,000+ pieces for enterprise-wide uniform programs with consistent quality and timely delivery. For comprehensive uniform programs, see our <a href="/uniform-manufacturer">uniform manufacturer</a> page for complete staff wardrobe solutions.
+      </p>
+      
+      <h3 class="section__subtitle">Brand Colors in Wool or Technical Fabrics</h3>
+      <p class="section__text">
+        Corporate coats often require specific brand colors. We offer custom dyeing in your exact brand colors for wool, technical shells, and synthetic fabrics. Our color matching capabilities ensure consistency across production runs and reorders. We maintain color libraries for corporate clients, guaranteeing that coats ordered years later match original specifications. Brand color options include solid colors, subtle patterns, and two-tone combinations. We can also incorporate brand colors into lining, zippers, and trim for comprehensive brand integration. Color fastness testing ensures corporate coats maintain appearance through repeated wear and cleaning.
+      </p>
+      
+      <h3 class="section__subtitle">Embroidered Logo Placement Options</h3>
+      <p class="section__text">
+        Logo embroidery is essential for corporate coat branding. We offer multiple placement options including left chest (traditional), right chest, sleeve cuff, back yoke, and interior label. Our <a href="/embroidery-service">embroidery service</a> provides precise logo reproduction in your brand colors with thread options for different fabric types. We can also add woven labels, leather patches, or metal badges for alternative branding approaches. Logo size and placement recommendations consider coat style and corporate guidelines. For discreet branding, interior labels with logo embroidery provide identification without exterior visibility.
+      </p>
+      
+      <h3 class="section__subtitle">Sizing Inclusivity: Plus Size, Petite Options</h3>
+      <p class="section__text">
+        Corporate workforces include diverse body types, and uniform programs must accommodate this diversity. SDF offers plus-size coats up to 5XL and petite sizing for smaller frames. Our <a href="/plus-size-clothing-manufacturer">plus-size clothing manufacturing</a> expertise ensures that larger sizes maintain the same style proportions and quality as standard sizes. We understand that ill-fitting uniforms affect employee comfort and professional presentation, so we prioritize inclusive sizing. Custom grading for corporate programs can create size ranges specifically matched to your workforce demographics, ensuring every employee has properly fitted coats. We also provide <a href="/full-package-production">full package production</a> services for comprehensive uniform program management.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Fashion Coat Manufacturing -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Fashion Coat Manufacturing | Trend and DTC Brands</h2>
+      <p class="section__text">
+        Fashion coats require trend awareness, distinctive styling, and brand differentiation. SDF works with DTC brands, fashion labels, and trend-focused companies to produce coats that capture current aesthetics while maintaining quality standards.
+      </p>
+      
+      <h3 class="section__subtitle">Puffer Coats: Quilted Patterns, Oversized Silhouettes</h3>
+      <p class="section__text">
+        The puffer coat trend emphasizes warmth with fashion-forward styling. Current trends include oversized silhouettes with extended lengths, exaggerated volumes, and relaxed fits through torso and sleeves. Quilted patterns vary from traditional horizontal channels to diamond quilting, chevron patterns, and custom designs. Puffer coats work well in both down and synthetic insulation, with down offering premium positioning and synthetic providing budget-friendly options. Shell fabrics range from technical nylon for performance to matte finishes for fashion appeal. Puffer coats appeal to streetwear, contemporary fashion, and brands targeting younger demographics seeking warmth without sacrificing style. Our <a href="/fit-engineering-service">fit engineering service</a> ensures puffer coats maintain style while providing comfort and warmth.
+      </p>
+      
+      <h3 class="section__subtitle">Trench Coats: Modern Updates, Color Variations</h3>
+      <p class="section__text">
+        Modern trench coat updates include shorter cropped lengths, oversized silhouettes, and non-traditional colors beyond classic beige and tan. Contemporary trench coats feature belted waists, double-breasted fronts, and storm flaps updated with modern proportions and styling details. Color variations include bold colors, pastels, and metallic finishes for fashion-forward positioning. Material innovations include technical fabrics with waterproof membranes while maintaining classic trench aesthetics. Trench coats bridge fashion and function, appealing to brands seeking versatile outerwear that works across multiple seasons and occasions.
+      </p>
+      
+      <h3 class="section__subtitle">Heritage Coats: Duffle, Peacoat, Classic Overcoat</h3>
+      <p class="section__text">
+        Heritage coat styles including duffle coats, peacoats, and classic overcoats continue to appeal to fashion consumers seeking timeless style. Duffle coats feature toggle fastenings, hooded designs, and wool construction, appealing to heritage fashion and youth markets. Peacoats with double-breasted fronts, broad lapels, and naval-inspired aesthetics serve classic style segments. Classic overcoats in wool with simple, elegant designs target luxury and professional markets. Heritage styles rely on quality materials and construction to justify positioning. Our wool fabric sourcing ensures heritage coats have the premium feel and durability expected in this category.
+      </p>
+      
+      <h3 class="section__subtitle">Technical Fashion: Performance Fabrics with Streetwear Aesthetics</h3>
+      <p class="section__text">
+        Technical fashion coats combine performance materials with streetwear aesthetics for contemporary markets. These coats use technical shells with waterproof membranes, DWR coatings, and synthetic insulation while incorporating fashion-forward silhouettes, bold colors, and streetwear details. Technical fashion bridges performance and style, appealing to urban consumers seeking functionality without sacrificing appearance. This category requires expertise in both technical construction and fashion design. Our <a href="/technical-outerwear-manufacturer">technical outerwear manufacturing</a> capabilities ensure technical fashion coats provide genuine weather protection while maintaining fashion appeal.
+      </p>
+      
+      <p class="section__text">
+        For fashion brands seeking complete manufacturing solutions, our <a href="/private-label-manufacturer">private label manufacturing</a> services provide end-to-end production from design to delivery with your brand identity.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Size Guide -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Coat Size Guide | International Sizing Standards</h2>
+      <p class="section__text">
+        Accurate sizing is critical for coat fit and customer satisfaction. SDF manufactures to international sizing standards and offers custom grading for brands requiring specific size charts.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="International coat size conversion chart">
+          <caption>Size conversion chart for coats across international sizing systems</caption>
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>UK</th>
+              <th>US/CA</th>
+              <th>EU</th>
+              <th>IT</th>
+              <th>Chest (in)</th>
+              <th>Chest (cm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>XS</strong></td>
+              <td>34</td>
+              <td>34</td>
+              <td>44</td>
+              <td>44</td>
+              <td>34-36</td>
+              <td>86-91</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>S</strong></td>
+              <td>36</td>
+              <td>36</td>
+              <td>46</td>
+              <td>46</td>
+              <td>36-38</td>
+              <td>91-96</td>
+            </tr>
+            <tr>
+              <td><strong>M</strong></td>
+              <td>38</td>
+              <td>38</td>
+              <td>48</td>
+              <td>48</td>
+              <td>38-40</td>
+              <td>96-101</td>
+            </tr>
+            <tr>
+              <td><strong>L</strong></td>
+              <td>40</td>
+              <td>40</td>
+              <td>50</td>
+              <td>50</td>
+              <td>40-42</td>
+              <td>101-106</td>
+            </tr>
+            <tr>
+              <td><strong>XL</strong></td>
+              <td>42</td>
+              <td>42</td>
+              <td>52</td>
+              <td>52</td>
+              <td>42-44</td>
+              <td>106-111</td>
+            </tr>
+            <tr>
+              <td><strong>XXL</strong></td>
+              <td>44</td>
+              <td>44</td>
+              <td>54</td>
+              <td>54</td>
+              <td>44-46</td>
+              <td>111-116</td>
+            </tr>
+            <tr>
+              <td><strong>XXXL</strong></td>
+              <td>46</td>
+              <td>46</td>
+              <td>56</td>
+              <td>56</td>
+              <td>46-48</td>
+              <td>116-121</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p class="section__text">
+        For brands requiring custom fit development, our <a href="/fit-engineering-service">fit engineering service</a> provides comprehensive fit analysis, size chart development, and fit model testing to ensure optimal fit across your size range. Our <a href="/grading-service">grading service</a> creates size charts specifically optimized for your target demographic and market.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Manufacturing Costs -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Coat Manufacturing Costs | What to Budget</h2>
+      <p class="section__text">
+        Coat costs vary significantly based on fabric, insulation, construction, and order quantity. Understanding cost ranges helps you price products appropriately and manage profit margins.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Coat manufacturing cost ranges by style and MOQ">
+          <caption>Estimated manufacturing costs per coat by style and order quantity</caption>
+          <thead>
+            <tr>
+              <th>Style</th>
+              <th>MOQ 300</th>
+              <th>MOQ 500</th>
+              <th>MOQ 1000+</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Basic Raincoat</strong></td>
+              <td>$15-22</td>
+              <td>$13-20</td>
+              <td>$10-16</td>
+            </tr>
+            <tr>
+              <td><strong>Trench Coat</strong></td>
+              <td>$25-35</td>
+              <td>$22-32</td>
+              <td>$18-28</td>
+            </tr>
+            <tr>
+              <td><strong>Wool Overcoat</strong></td>
+              <td>$35-50</td>
+              <td>$32-45</td>
+              <td>$28-40</td>
+            </tr>
+            <tr>
+              <td><strong>Synthetic Puffer</strong></td>
+              <td>$22-32</td>
+              <td>$20-30</td>
+              <td>$17-26</td>
+            </tr>
+            <tr>
+              <td><strong>Down Puffer</strong></td>
+              <td>$35-50</td>
+              <td>$32-45</td>
+              <td>$28-40</td>
+            </tr>
+            <tr>
+              <td><strong>Parka</strong></td>
+              <td>$30-42</td>
+              <td>$27-38</td>
+              <td>$23-34</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p class="section__text">
+        <em>Prices are FOB Chittagong estimates and vary based on fabric choice, insulation type, construction complexity, and specific requirements. Premium materials, special trims, and complex styling increase costs. Contact us for accurate quotes based on your specifications.</em>
+      </p>
+      
+      <p class="section__text">
+        Use our <a href="/tools/price-calculator">price calculator</a> to estimate costs for your specific requirements, or contact us directly for detailed quotations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: FAQ -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Coat Manufacturer FAQ</h2>
+      
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order for custom coats?</h3>
+          <p class="faq__answer">
+            SDF Clothing manufactures custom coats with a minimum order of 300 pieces per style. This low MOQ makes outerwear manufacturing accessible to startup brands, boutique labels, and businesses launching new coat lines. We offer flexible size and color breakdowns within the 300 piece minimum, allowing you to test designs and scale gradually. Our 300 piece MOQ is significantly lower than many outerwear manufacturers who require 500-1,000 pieces for winter coats and parkas.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the warmest coat material?</h3>
+          <p class="faq__answer">
+            Down insulation provides the highest warmth-to-weight ratio for coats. High-quality down (600-800 fill power) offers exceptional insulation while remaining lightweight. Wool is the warmest natural fabric option, providing excellent insulation even when wet. Technical synthetic materials like Primaloft and Thinsulate offer down-like warmth with better performance in wet conditions. The warmest coat combines an outer shell (waterproof or water-resistant), insulation layer (down or synthetic), and lining. For extreme cold, parkas with down insulation and windproof shells provide maximum protection.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you manufacture coats with custom insulation?</h3>
+          <p class="faq__answer">
+            Yes, SDF manufactures coats with custom insulation options. We source down insulation from certified suppliers (RDS certified for responsible down sourcing) in various fill powers from 550 to 800+. Synthetic insulation options include polyester, recycled polyester, and branded alternatives like Thinsulate. We can customize insulation weight by body zone - heavier insulation in torso and back, lighter in sleeves - for optimized warmth and mobility. Custom lining options include thermal fleece, quilted lining, and breathable mesh for performance applications.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between trench coat and overcoat?</h3>
+          <p class="faq__answer">
+            Trench coats are lightweight, typically waterproof or water-resistant outerwear originally designed for military use. They feature double-breasted fronts, belted waists, epaulets, and often reach mid-thigh. Trench coats work well for rain protection and transitional seasons. Overcoats are heavy, warm coats designed for winter wear, typically made from wool or wool blends. Overcoats are longer (often knee-length or longer), simpler in design, and focus on warmth rather than weather protection. Trench coats are fashion-forward rainwear, while overcoats are functional winter garments.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does coat manufacturing take?</h3>
+          <p class="faq__answer">
+            Coat manufacturing typically takes 50-70 days from sample approval to shipment, depending on complexity. The timeline includes: pattern making and grading (7-10 days), sample development with all construction details (14-21 days), sample approval and any revisions (5-7 days), cutting and sewing bulk production (30-45 days), final quality inspection and finishing (5-7 days), and packing for shipment (3-5 days). Complex styles with multiple layers, special insulation, waterproof treatments, or intricate details may add 10-15 days.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you make waterproof coats?</h3>
+          <p class="faq__answer">
+            Yes, SDF manufactures waterproof coats using specialized fabrics and treatments. We offer waterproof shell fabrics including PU-coated polyester, PVC-coated materials, and breathable waterproof membranes like TPU. Waterproofing treatments include DWR (durable water repellent) coatings, seam sealing, and waterproof zippers. We can achieve various waterproof ratings from 5,000mm to 20,000mm water column depending on your requirements. Waterproof coats are essential for trench coats, raincoats, and performance outerwear.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What certifications do your coat materials have?</h3>
+          <p class="faq__answer">
+            SDF Clothing's coat materials hold multiple international certifications including OEKO-TEX Standard 100 for chemical safety, RDS (Responsible Down Standard) for down insulation, GRS (Global Recycled Standard) for recycled materials, and REACH compliance for EU markets. Our manufacturing facilities are BSCI certified for social compliance and WRAP certified for ethical manufacturing. These certifications ensure your coats meet retailer requirements and consumer expectations for safety, sustainability, and responsibility.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you make plus-size coats?</h3>
+          <p class="faq__answer">
+            Yes, SDF Clothing manufactures coats in plus sizes. We offer inclusive sizing from XS to 5XL, with custom grading services available for brands requiring extended size ranges. Our pattern making and grading capabilities ensure consistent fit across all size categories. We understand that plus-size customers represent a significant market segment, and we help brands serve this audience with properly fitted coats that don't compromise on style or warmth.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 9: CTA -->
+  <section class="section section--cta">
+    <div class="section__container section__container--narrow">
+      <h2 class="section__title">Ready to Manufacture Custom Coats?</h2>
+      <p class="section__text">
+        SDF Clothing has manufactured coats for fashion brands, corporate clients, and outerwear companies since 1998. Our 300 piece minimum makes custom coats accessible to startups and small brands, while our capacity handles large corporate uniform programs. We provide expert guidance on fabric selection, insulation options, and sizing to ensure your coats meet market expectations.
+      </p>
+      <p class="section__text">
+        Get a free FOB quote within 48 hours. We'll provide detailed pricing, lead times, and help you determine the best specifications for your coat line. Request a <a href="/tools/sample-request">sample request</a> to evaluate our quality before committing to bulk production.
+      </p>
+      <div class="section__ctas">
+        <a href={whatsappQuoteUrl} class="section__cta section__cta--primary" target="_blank" rel="noopener noreferrer">
+          Get a Free Factory Quote
+        </a>
+        <a href="/contact" class="section__cta section__cta--secondary">
+          Contact Our Team
+        </a>
+      </div>
+      <p class="section__text section__text--small">
+        Last updated: May 2026 | Average response time: 24 hours
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: var(--spacing-sm) 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__container--narrow {
+    max-width: 700px;
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+
+    .section__container {
+      padding: 0 var(--spacing-sm);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+</BaseLayout>

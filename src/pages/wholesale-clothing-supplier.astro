@@ -1,0 +1,1028 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Wholesale Clothing Supplier | Bangladesh FOB | SDF";
+const pageDescription = "Wholesale clothing supplier in Bangladesh. Bulk apparel manufacturing for retailers and distributors. FOB Dhaka from 500 pieces. Request a wholesale quote today.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Wholesale Clothing Supplier",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for wholesale orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our wholesale minimum is 500 pieces per style. This applies per colorway and size range. For established retailers and distributors with consistent volume, we can negotiate lower minimums based on annual commitment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What payment terms do you offer for wholesale buyers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We accept TT (telegraphic transfer) with 30% deposit, 70% before shipment. For established buyers with credit history, we accept LC (letter of credit) at sight. Payment terms can be negotiated based on order volume and relationship."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you ensure consistency across wholesale orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Consistency is maintained through standardized processes: same fabric suppliers, same production teams, same quality control protocols, and AQL inspection standards. We retain production samples for every order to match future production."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is your on-time delivery rate for wholesale orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our on-time delivery rate is 98% across {companyAge}+ years of export operations. We provide production schedules and milestone updates. Delays are communicated immediately with recovery plans."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you handle seasonal peak volume for wholesale orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Our production capacity is 200,000 pieces per month across multiple facilities. We allocate capacity for established wholesale buyers and can scale production during peak seasons with advance planning."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide samples for wholesale buyers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We provide counter samples for approval before bulk production. Sampling fees are credited against bulk orders. For established wholesale buyers, we maintain sample libraries for easy re-ordering."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications do you hold for wholesale supply?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We hold 13 active certifications including GOTS, OEKO-TEX Standard 100, ISO 9001, BSCI, SEDEX, GRS, OCS, RCS, C-TPAT, WRAP, SA8000, ISO 14001, and BCI. Full documentation provided with every shipment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you handle re-orders for wholesale buyers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Re-orders are processed with retained production samples to ensure consistency. Lead times are typically shorter for re-orders: 20-25 days. We maintain fabric stock for established buyers to accelerate re-order processing."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com"
+      },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "NL"],
+      "description": "Custom clothing manufacturing from Bangladesh with low MOQ from 300 pieces."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Clothing from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Brief",
+          "text": "Share your design, quantity, fabric requirements and timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Quote",
+          "text": "Get a detailed FOB quote within 48 hours."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample",
+          "text": "Review and approve a pre-production sample."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Full production with inline quality checks."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipment",
+          "text": "FOB Dhaka shipment with full export documentation."
+        }
+      ]
+    }
+]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Wholesale Clothing Supplier</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Wholesale Supply | Since 1998 | Bangladesh Export</div>
+        <h1 class="hero__title">Wholesale Clothing Supplier | Bulk Apparel Manufacturing from Bangladesh for Retailers and Distributors</h1>
+        <p class="hero__description">
+          SDF Clothing is a wholesale clothing supplier in Bangladesh providing bulk apparel manufacturing for retailers, distributors, and buying houses in USA, UK, Australia, Canada, and EU markets. FOB Dhaka pricing from 500 pieces minimum with consistent quality, reliable delivery, and full documentation. Established wholesale buyers benefit from volume pricing, priority production, and dedicated account management.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Request Wholesale Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20wholesale%20quote`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">500</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">200K</span>
+          <span class="hero__stat-label">Monthly Capacity</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Export</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">98%</span>
+          <span class="hero__stat-label">On-Time Delivery</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>GOTS Organic Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>ISO 9001 Quality</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>BSCI Social Compliance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Supplier Reliability</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What Makes a Reliable Wholesale Clothing Supplier</h2>
+      </div>
+      <div class="section__text">
+        <p>Reliable wholesale clothing suppliers demonstrate consistency across multiple dimensions: product quality consistency from batch to batch, delivery reliability meeting committed timelines, pricing stability avoiding unexpected cost increases, and communication transparency throughout the production process. For retailers and distributors, supplier reliability directly impacts inventory management, customer satisfaction, and business profitability. A single unreliable shipment can cause stockouts, customer complaints, and lost sales that damage brand reputation.</p>
+        
+        <p>SDF Clothing has maintained wholesale supply relationships for over {companyAge} years with retailers in USA, UK, Australia, Canada, and EU markets. Our reliability is built on standardized production processes, retained production samples for consistency matching, transparent communication about production status, and proactive problem resolution when issues arise. We don't overcommit capacity | we only accept orders we can deliver on schedule. This approach has earned us a 98% on-time delivery rate across thousands of wholesale shipments over decades of operation.</p>
+        
+        <p>Wholesale buyers should evaluate suppliers on track record, not just initial quotes. The lowest FOB price means nothing if shipments arrive late, quality varies between batches, or communication breaks down during production. SDF provides references from existing wholesale buyers in your market, production samples from previous orders, and detailed production schedules before order commitment. We invite thorough due diligence because confident buyers become long-term partners.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Pricing Structure</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wholesale Pricing | FOB Bangladesh Explained</h2>
+      </div>
+      <div class="section__text">
+        <p>FOB (Free On Board) Bangladesh pricing means the seller covers all costs up to loading goods onto the vessel at the port of departure. The buyer pays ocean freight, insurance, customs duties, and inland transportation. FOB pricing provides transparency | you know exactly what you're paying for the product, with shipping costs separated and under your control. For wholesale buyers, FOB enables comparison between suppliers on equal terms and optimization of shipping logistics based on your destination and volume.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Volume</th>
+              <th>Price Tier</th>
+              <th>Payment Terms</th>
+              <th>Lead Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>500-999 pieces</td>
+              <td>Standard FOB</td>
+              <td>30% deposit, 70% before shipment (TT)</td>
+              <td>30-35 days</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>1,000-4,999 pieces</td>
+              <td>Volume FOB (5-8% discount)</td>
+              <td>30% deposit, 70% before shipment (TT)</td>
+              <td>25-30 days</td>
+            </tr>
+            <tr>
+              <td>5,000-9,999 pieces</td>
+              <td>Preferred FOB (10-12% discount)</td>
+              <td>30% deposit, 70% before shipment (TT) or LC at sight</td>
+              <td>20-25 days</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>10,000+ pieces</td>
+              <td>Partner FOB (15%+ discount)</td>
+              <td>LC at sight or negotiated terms</td>
+              <td>15-20 days (capacity allocated)</td>
+            </tr>
+          </tbody>
+          <caption>Pricing tiers apply per style and colorway. Volume discounts calculated on total annual commitment. Payment terms negotiable for established buyers with credit history.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Product Range</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Product Range for Wholesale Buyers</h2>
+      </div>
+      <div class="section__text">
+        <p>SDF Clothing manufactures a comprehensive range of apparel categories for wholesale buyers, enabling single-source supply for retailers with diverse product needs. Our product capabilities span basic apparel to specialized categories, with consistent quality standards across all product types. Wholesale buyers can source multiple categories from a single supplier, reducing vendor management complexity while ensuring consistent branding and quality across their product assortment.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Products</th>
+              <th>Min Order</th>
+              <th>Lead Time</th>
+              <th>Certifications</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Basic Apparel</td>
+              <td>T-shirts, polos, tank tops</td>
+              <td>500 pieces</td>
+              <td>25-30 days</td>
+              <td>OEKO-TEX, GOTS</td>
+            </tr>
+            <tr>
+              <td>Knit Tops</td>
+              <td>Hoodies, sweatshirts, sweaters</td>
+              <td>500 pieces</td>
+              <td>30-35 days</td>
+              <td>OEKO-TEX, GOTS, GRS</td>
+            </tr>
+            <tr>
+              <td>Bottoms</td>
+              <td>Pants, shorts, joggers</td>
+              <td>500 pieces</td>
+              <td>30-35 days</td>
+              <td>OEKO-TEX, GOTS</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Activewear</td>
+              <td>Leggings, sports bras, sets</td>
+              <td>500 pieces</td>
+              <td>30-40 days</td>
+              <td>OEKO-TEX, GRS</td>
+            </tr>
+            <tr>
+              <td>Workwear</td>
+              <td>Uniforms, hi-vis, coveralls</td>
+              <td>500 pieces</td>
+              <td>25-30 days</td>
+              <td>OEKO-TEX, ISO certifications</td>
+            </tr>
+            <tr>
+              <td>Specialized</td>
+              <td>Swimwear, kids clothing, plus size</td>
+              <td>500 pieces</td>
+              <td>30-40 days</td>
+              <td>OEKO-TEX, GOTS, CPSIA</td>
+            </tr>
+          </tbody>
+          <caption>All categories available at wholesale minimums. Mix categories within orders to optimize shipping and reduce vendor complexity.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Quality Standards</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wholesale Quality Assurance | AQL Standards</h2>
+      </div>
+      <div class="section__text">
+        <p>Quality assurance for wholesale orders follows internationally accepted AQL (Acceptable Quality Level) standards. SDF implements AQL 2.5 for major defects and AQL 4.0 for minor defects on all wholesale shipments. This means statistically significant sampling based on order size, with inspection criteria that ensure defective rates remain below acceptable thresholds. AQL inspection is performed at three stages: inline inspection during production, pre-final inspection before packing, and final inspection before shipment. Inspection reports are provided with every shipment.</p>
+        
+        <p>For wholesale buyers, consistent AQL performance across orders is critical for retail operations. Variable quality causes returns, customer complaints, and inventory write-offs. SDF maintains AQL performance records for every wholesale buyer, enabling trend analysis and continuous improvement. We retain production samples from every order for comparison with future production, ensuring that fabric quality, construction standards, and decoration quality remain consistent across batches. This sample retention system has been in place for {companyAge} years and is a key reason for our long-term wholesale relationships.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Supplier Evaluation</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wholesale Supplier Red Flags | What to Avoid</h2>
+      </div>
+      <div class="section__text">
+        <p>Evaluating wholesale clothing suppliers requires identifying red flags that indicate future problems. Many suppliers appear attractive based on initial quotes but fail on delivery, quality consistency, or communication. The table below lists common red flags that wholesale buyers should recognize and avoid. SDF has none of these red flags | we encourage buyers to verify this through due diligence, reference checks, and trial orders before committing to large-scale wholesale partnerships.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Red Flag</th>
+              <th>Why It Matters</th>
+              <th>SDF Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>No physical factory visit allowed</td>
+              <td>Hides production reality, indicates outsourcing</td>
+              <td>Factory visits welcome anytime</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Vague pricing without itemized breakdown</td>
+              <td>Hidden costs, price increases after order commitment</td>
+              <td>Detailed itemized quotes provided</td>
+            </tr>
+            <tr>
+              <td>References only from same region</td>
+              <td>May not handle export logistics for your market</td>
+              <td>References in USA, UK, AU, CA, EU</td>
+            </tr>
+            <tr>
+              <td>Overcommitment on lead times</td>
+              <td>Late shipments, missed retail windows</td>
+              <td>Realistic timelines, 98% on-time</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>No sample retention for consistency matching</td>
+              <td>Quality varies between orders</td>
+              <td>Samples retained for all orders</td>
+            </tr>
+            <tr>
+              <td>Limited or no certification documentation</td>
+              <td>Compliance risk, market access barriers</td>
+              <td>13 active certifications, full docs</td>
+            </tr>
+            <tr>
+              <td>Poor communication during production</td>
+              <td>Surprises at delivery, no problem resolution</td>
+              <td>Weekly updates, proactive communication</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Quality issues blamed on external factors</td>
+              <td>No accountability, recurring problems</td>
+              <td>Ownership of issues, corrective action</td>
+            </tr>
+            <tr>
+              <td>Payment terms inflexible for established buyers</td>
+              <td>No relationship building, transactional only</td>
+              <td>Negotiable terms based on relationship</td>
+            </tr>
+            <tr>
+              <td>No capacity allocation for peak seasons</td>
+              <td>Cannot scale when you need volume</td>
+              <td>Capacity allocation for partners</td>
+            </tr>
+          </tbody>
+          <caption>Red flags indicate supplier risk. SDF has zero red flags | verify through reference checks, factory visits, and trial orders.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Commercial Terms</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Payment and Shipping Terms for Wholesale</h2>
+      </div>
+      <div class="section__text">
+        <p>Payment and shipping terms are critical components of wholesale supply agreements. SDF offers flexible terms based on order volume, relationship history, and buyer creditworthiness. Standard terms include TT (telegraphic transfer) with 30% deposit and 70% before shipment. For established buyers with consistent ordering history, we accept LC (letter of credit) at sight, which provides buyer security while ensuring seller payment. Payment terms can be negotiated based on annual commitment and relationship length.</p>
+        
+        <p>Shipping terms follow Incoterms 2020 standards. FOB (Free On Board) is standard for Bangladesh exports, meaning seller responsibility ends at port of loading. Buyers can also request CIF (Cost, Insurance, Freight) for door-to-door pricing, though this adds margin to the seller. We work with all major freight forwarders and can recommend partners based on your destination market. Shipping documentation includes commercial invoice, packing list, bill of lading, certificate of origin, and all required certification documents for customs clearance in your destination country.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wholesale Clothing FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order quantity for wholesale orders?</h3>
+          <p class="faq__answer">Our wholesale minimum is 500 pieces per style. This applies per colorway and size range. For established retailers and distributors with consistent volume, we can negotiate lower minimums based on annual commitment. The 500-piece minimum ensures production efficiency while remaining accessible to mid-sized wholesale buyers.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What payment terms do you offer for wholesale buyers?</h3>
+          <p class="faq__answer">We accept TT (telegraphic transfer) with 30% deposit, 70% before shipment. For established buyers with credit history, we accept LC (letter of credit) at sight. Payment terms can be negotiated based on order volume, relationship history, and annual commitment. Learn more about payment terms at <a href="/insights/payment-terms-LC-vs-TT" style="color: var(--color-primary);">/insights/payment-terms-LC-vs-TT</a>.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do you ensure consistency across wholesale orders?</h3>
+          <p class="faq__answer">Consistency is maintained through standardized processes: same fabric suppliers, same production teams, same quality control protocols, and AQL inspection standards. We retain production samples for every order to match future production. Sample retention enables exact matching of fabric weight, color, construction, and decoration across re-orders.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is your on-time delivery rate for wholesale orders?</h3>
+          <p class="faq__answer">Our on-time delivery rate is 98% across {companyAge}+ years of export operations. We provide production schedules and milestone updates throughout production. Delays are communicated immediately with recovery plans. We don't overcommit capacity | we only accept orders we can deliver on schedule, which is key to our reliability record.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you handle seasonal peak volume for wholesale orders?</h3>
+          <p class="faq__answer">Yes. Our production capacity is 200,000 pieces per month across multiple facilities. We allocate capacity for established wholesale buyers and can scale production during peak seasons with advance planning. Seasonal capacity allocation requires 3-6 months notice for large volume increases.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you provide samples for wholesale buyers?</h3>
+          <p class="faq__answer">Yes. We provide counter samples for approval before bulk production. Sampling fees are credited against bulk orders. For established wholesale buyers, we maintain sample libraries for easy re-ordering. Sample production takes 7-14 days depending on complexity.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What certifications do you hold for wholesale supply?</h3>
+          <p class="faq__answer">We hold 13 active certifications including GOTS, OEKO-TEX Standard 100, ISO 9001, BSCI, SEDEX, GRS, OCS, RCS, C-TPAT, WRAP, SA8000, ISO 14001, and BCI. Full documentation provided with every shipment. Certifications cover chemical safety, labor standards, environmental compliance, recycled content traceability, and quality management.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do you handle re-orders for wholesale buyers?</h3>
+          <p class="faq__answer">Re-orders are processed with retained production samples to ensure consistency. Lead times are typically shorter for re-orders: 20-25 days. We maintain fabric stock for established buyers to accelerate re-order processing. Re-order consistency is guaranteed through sample matching and same production teams.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Establish Wholesale Supply Partnership?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for wholesale pricing, capacity allocation, and reference checks. We provide detailed quotes with itemized pricing, production schedules, and sample arrangements. No commitment required for initial consultation.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Request Wholesale Quote</a>
+        <a href="/tools/sample-request" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/bulk-clothing-manufacturer" style="color: var(--color-primary);">bulk clothing manufacturer</a>, <a href="/full-package-production" style="color: var(--color-primary);">full package production</a>, <a href="/quality-inspection-service" style="color: var(--color-primary);">quality inspection service</a>, <a href="/certifications" style="color: var(--color-primary);">certifications</a>, <a href="/insights/incoterms-explained" style="color: var(--color-primary);">Incoterms explained</a>, <a href="/insights/payment-terms-LC-vs-TT" style="color: var(--color-primary);">payment terms LC vs TT</a>, <a href="/private-label-manufacturer" style="color: var(--color-primary);">private label manufacturer</a>.
+      </p>
+    </div>
+  </section>
+
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)">
+<div style="max-width:900px;margin:0 auto;padding:0 1.5rem">
+<h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">
+Why Work with a Bangladesh Clothing Manufacturer?
+</h2>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+Bangladesh is the world's second-largest garment exporter, shipping over $47 billion
+in apparel annually to markets in the USA, UK, EU, and Australia. The country's
+manufacturing sector has spent four decades building infrastructure, expertise, and
+compliance systems that rival any other sourcing destination.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+For startup brands and established labels alike, Bangladesh offers a combination
+that's difficult to match: low minimum order quantities, competitive FOB pricing,
+world-class certifications including GOTS and OEKO-TEX, and duty-free access to
+EU markets through the GSP scheme. SDF Clothing brings all of these advantages
+under one roof, with a minimum order quantity of just 300 pieces per style.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+Working with a Bangladesh manufacturer means access to one of the deepest pools
+of garment-making expertise on the planet. Factories here specialize in knitwear,
+woven garments, denim, activewear, and technical apparel. Lead times are
+competitive — 30 to 45 days for bulk production — and the export infrastructure
+connecting Dhaka and Chittagong to global ports is mature and reliable.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+For brands targeting the US market, Bangladesh avoids the Section 301 tariffs
+that add 25% or more to Chinese imports. For EU brands, GSP duty-free access
+means lower landed costs compared to sourcing from countries without preferential
+trade agreements. These trade advantages translate directly into better margins
+or more competitive retail pricing.
+</p>
+<h3 style="font-size:1.25rem;font-weight:600;color:var(--color-text);margin:2rem 0 1rem">
+SDF Clothing — Your Direct Manufacturing Partner
+</h3>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+SDF Clothing is a direct-access factory — not a trading company or buying house.
+When you work with us, you communicate directly with our production team, receive
+transparent pricing without agent markup, and maintain full control over your
+supply chain. Our certifications include GOTS, OEKO-TEX Standard 100, BSCI,
+WRAP, and ISO 9001, giving you and your customers confidence in every order.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+We work with brands at every stage — from first-time founders ordering 300 pieces
+to established labels running tens of thousands of units per season. Our in-house
+services cover tech pack development, fabric sourcing, sampling, bulk production,
+quality inspection, and export documentation. One team, one point of contact,
+from your first enquiry to shipment confirmation.
+</p>
+</div>
+</section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">SDF Clothing is a direct-access garment factory in Bangladesh | not a trading company or buying house. When you work with us, you communicate directly with our production team, receive transparent pricing without agent markup, and maintain full control over your supply chain. Our factory holds GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certifications.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Bangladesh is the world's second-largest garment exporter, shipping over $47 billion in apparel annually to USA, UK, EU and Australian markets. Our minimum order of 300 pieces reflects our commitment to supporting brands at every stage of growth | from first collections to established seasonal production runs. We offer full package production covering tech pack development, fabric sourcing, sampling, bulk manufacturing, quality inspection, and export documentation under one roof.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">For US brands, sourcing from Bangladesh avoids the Section 301 tariffs that add 25% or more to Chinese imports. For EU brands, Bangladesh's GSP duty-free access delivers lower landed costs compared to most other sourcing destinations. These trade advantages combine with competitive FOB pricing to deliver strong margins for our clients.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/tools/sample-request" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+
+
+

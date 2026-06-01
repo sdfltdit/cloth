@@ -1,0 +1,411 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Lab Dip Service | Color Matching Production";
+const pageDescription = "Manufacture lab dip services with SDF's color matching production. We specialize in custom color manufacturing for global fashion brands.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href}>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com",
+        "name": "SDF Clothing"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "description": "Lab dip service from Bangladesh providing Pantone color matching, custom color development, multi-iteration approval, 5-7 day turnaround, and Delta E < 1.0 accuracy for fashion brands worldwide since 1998."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are lab dips?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lab dips are small fabric samples dyed to match a specific color reference. They are used for color approval before bulk dyeing. A lab dip shows how the dye will interact with your specific fabric, allowing you to evaluate color accuracy, depth, and shade before committing to full production."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Pantone color matching work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You provide a Pantone TCX or TPG color reference. Our color lab uses computerized spectrophotometers to measure the target color values. We then develop lab dip samples matching those values. Standard tolerance is Delta E &lt; 1.0 | meaning the visual difference between target and produced color is imperceptible to the human eye."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you develop custom colors from references?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. If you have a color that doesn't match any standard Pantone reference, we can develop custom colors from physical samples | fabric swatches, yarn, paint chips, or photographs taken in natural light. Our color lab creates 3-5 lab dip options approximating your target, and you select the closest match for refinement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many lab dip iterations are included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard lab dip service includes 2-3 iterations at no additional charge for confirmed bulk orders. First iteration: 2-3 lab dip options. Second iteration: refined versions based on your feedback. Third iteration: final adjustments if needed. Additional iterations beyond three are available at extra cost."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Delta E and color tolerance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Delta E is a metric that measures the perceptible difference between two colors. Delta E &lt; 1.0 means the difference is visually imperceptible to the human eye under normal viewing conditions. Delta E 1.0-2.0 is barely noticeable. Delta E > 2.0 is noticeable. Our standard is Delta E &lt; 1.0 for lab dip approval and Delta E &lt; 1.5 for bulk production consistency."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you ensure bulk color consistency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Once a lab dip is approved, we maintain detailed color records in our lab system including dye formulas, process parameters, and spectrophotometer readings. For bulk production, we reference these records and produce production samples for verification. This ensures color consistency across batches and reorders, maintaining Delta E &lt; 1.5 from the approved lab dip."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sdfltd.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Lab Dip Service",
+          "item": canonicalUrl.href
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<meta name="keywords" content="lab dip service Bangladesh, pantone matching service, color matching service, custom color development, lab dip development, color approval service" />
+
+<!-- Hero Section -->
+<section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+      <p style="font-size:0.72rem;color:#FFFFFF;">
+        <a href="/" style="color:#FFFFFF;text-decoration:none;">Home</a>
+        <span style="margin:0 0.5rem;color:#333;">/</span>
+        Lab Dip Service
+      </p>
+    </nav>
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Lab Dip Service | Since 1998 | Delta E &lt; 1.0 Accuracy</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1rem;line-height:1.2;">
+      Lab Dip Service for Pantone Color Matching
+    </h1>
+    <p style="color:#FFFFFF;max-width:640px;line-height:1.8;font-size:0.92rem;">
+      Professional lab dip service from Bangladesh. Pantone color matching, custom color development from references, multi-iteration approval process. 5-7 day turnaround. Delta E &lt; 1.0 accuracy for color-critical fashion brands.
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <a href="/contact" class="cta-button">Start Color Matching</a>
+      <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20lab%20dip%20service`} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WhatsApp Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Stats Section -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#000000;">
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">?E</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">< 1.0 Accuracy</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">5-7</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Day Turnaround</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">2-3</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Iterations Included</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">Pantone</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">TCX/TPG Matching</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What are Lab Dips Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Service Overview</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">What Lab Dips Are</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Lab dips are small fabric samples dyed to match a specific color reference. They are used for color approval before bulk dyeing. A lab dip shows how the dye will interact with your specific fabric, allowing you to evaluate color accuracy, depth, and shade before committing to full production.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Lab dips are essential for color-critical brands. Different fabrics absorb dye differently | the same Pantone color can look different on cotton vs polyester vs rayon. Lab dips account for these material-specific variations, ensuring the final bulk production matches your expectations.
+    </p>
+  </div>
+</section>
+
+<!-- Pantone Color Matching Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Color Matching</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Pantone Color Matching Process</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      You provide a Pantone TCX or TPG color reference. Our color lab uses computerized spectrophotometers to measure the target color values. We then develop lab dip samples matching those values.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Standard tolerance is Delta E &lt; 1.0 | meaning the visual difference between target and produced color is imperceptible to the human eye under normal viewing conditions. This level of accuracy meets the requirements of luxury brands and color-critical applications.
+    </p>
+  </div>
+</section>
+
+<!-- Custom Color Development Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Custom Colors</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Custom Color Development from References</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      If you have a color that doesn't match any standard Pantone reference, we can develop custom colors from physical samples | fabric swatches, yarn, paint chips, or photographs taken in natural light.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Our color lab creates 3-5 lab dip options approximating your target, and you select the closest match for refinement. This iterative process ensures we arrive at the exact color you envision, even when starting from non-standard references.
+    </p>
+  </div>
+</section>
+
+<!-- Lab Dip Iterations Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Approval Process</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Lab Dip Iterations</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Standard lab dip service includes 2-3 iterations at no additional charge for confirmed bulk orders. First iteration: 2-3 lab dip options for you to choose from. Second iteration: refined versions based on your feedback. Third iteration: final adjustments if needed.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Each iteration takes 5-7 days. Additional iterations beyond three are available at extra cost if required. Most clients achieve approval within 2 iterations, but we accommodate as many rounds as needed for color-critical applications.
+    </p>
+  </div>
+</section>
+
+<!-- Color Tolerance Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Technical Standards</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Color Tolerance and Delta E</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Delta E is a metric that measures the perceptible difference between two colors. Delta E &lt; 1.0 means the difference is visually imperceptible to the human eye under normal viewing conditions. Delta E 1.0-2.0 is barely noticeable. Delta E > 2.0 is noticeable.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Our standard is Delta E &lt; 1.0 for lab dip approval and Delta E &lt; 1.5 for bulk production consistency. These tolerances meet or exceed industry standards for color-critical fashion brands. We provide spectrophotometer readings with each lab dip for objective color measurement.
+    </p>
+  </div>
+</section>
+
+<!-- Bulk Color Consistency Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Quality Assurance</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Bulk Color Consistency</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Once a lab dip is approved, we maintain detailed color records in our lab system including dye formulas, process parameters, and spectrophotometer readings. For bulk production, we reference these records and produce production samples for verification.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      This ensures color consistency across batches and reorders, maintaining Delta E &lt; 1.5 from the approved lab dip. You can reorder the same color months or years later and receive consistent results | essential for brand color integrity.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Common Questions</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Frequently Asked Questions</h2>
+    </div>
+    
+    <div style="max-width:800px;">
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What are lab dips?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Lab dips are small fabric samples dyed to match a specific color reference. They are used for color approval before bulk dyeing. A lab dip shows how the dye will interact with your specific fabric, allowing you to evaluate color accuracy, depth, and shade before committing to full production.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How does Pantone color matching work?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">You provide a Pantone TCX or TPG color reference. Our color lab uses computerized spectrophotometers to measure the target color values. We then develop lab dip samples matching those values. Standard tolerance is Delta E &lt; 1.0 | meaning the visual difference between target and produced color is imperceptible to the human eye.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can you develop custom colors from references?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. If you have a color that doesn't match any standard Pantone reference, we can develop custom colors from physical samples | fabric swatches, yarn, paint chips, or photographs taken in natural light. Our color lab creates 3-5 lab dip options approximating your target, and you select the closest match for refinement.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How many lab dip iterations are included?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Standard lab dip service includes 2-3 iterations at no additional charge for confirmed bulk orders. First iteration: 2-3 lab dip options. Second iteration: refined versions based on your feedback. Third iteration: final adjustments if needed. Additional iterations beyond three are available at extra cost.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What is Delta E and color tolerance?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Delta E is a metric that measures the perceptible difference between two colors. Delta E &lt; 1.0 means the difference is visually imperceptible to the human eye under normal viewing conditions. Delta E 1.0-2.0 is barely noticeable. Delta E > 2.0 is noticeable. Our standard is Delta E &lt; 1.0 for lab dip approval and Delta E &lt; 1.5 for bulk production consistency.</p>
+      </div>
+      <div style="padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How do you ensure bulk color consistency?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Once a lab dip is approved, we maintain detailed color records in our lab system including dye formulas, process parameters, and spectrophotometer readings. For bulk production, we reference these records and produce production samples for verification. This ensures color consistency across batches and reorders, maintaining Delta E &lt; 1.5 from the approved lab dip.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Need professional lab dip service for color-critical production? <a href="/contact" style="color:#e00;text-decoration:underline;">Contact SDF Clothing here</a> with your color requirements | Pantone references, physical samples, or color descriptions. We will provide lab dip pricing, timeline, and approval process details within 48 hours. Free consultation.
+    </p>
+  </div>
+</section>
+
+<!-- Internal Link Section -->
+<section style="padding:5rem 0;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      For complete dyeing services including lab dips, read our <a href="/dyeing-service" style="color:#e00;text-decoration:underline;">dyeing service guide</a>.
+    </p>
+  </div>
+</section>
+
+
+    
+    <section style="padding:2rem 0;border-top:1px solid var(--color-border);margin-top:2rem"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:1.1rem;font-weight:600;color:var(--color-text);margin-bottom:1rem">Related Services</h2><nav aria-label="Related pages"><ul style="display:flex;flex-wrap:wrap;gap:0.75rem;list-style:none;padding:0"><li><a href="/low-moq-clothing-manufacturers" style="color:var(--color-primary)">Low MOQ Manufacturers</a></li><li><a href="/private-label-manufacturer" style="color:var(--color-primary)">Private Label</a></li><li><a href="/clothing-manufacturers-for-startups" style="color:var(--color-primary)">Startup Manufacturers</a></li><li><a href="/oem-clothing-manufacturer" style="color:var(--color-primary)">OEM Manufacturing</a></li><li><a href="/sustainable-clothing-manufacturers" style="color:var(--color-primary)">Sustainable Manufacturing</a></li><li><a href="/certifications" style="color:var(--color-primary)">Certifications</a></li><li><a href="/quality-inspection-service" style="color:var(--color-primary)">Quality Inspection</a></li><li><a href="/tech-pack-service" style="color:var(--color-primary)">Tech Pack Service</a></li><li><a href="/sampling-service" style="color:var(--color-primary)">Sampling Service</a></li><li><a href="/full-package-production" style="color:var(--color-primary)">Full Package Production</a></li><li><a href="/tools/price-calculator" style="color:var(--color-primary)">Price Calculator</a></li><li><a href="/contact" style="color:var(--color-primary)">Get a Quote</a></li></ul></nav></div></section>
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">SDF Clothing is a direct-access garment factory in Bangladesh — not a trading company or buying house. When you work with us, you communicate directly with our production team, receive transparent pricing without agent markup, and maintain full control over your supply chain. Our factory holds GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certifications.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Bangladesh is the world's second-largest garment exporter, shipping over $47 billion in apparel annually to USA, UK, EU and Australian markets. Our minimum order of 300 pieces reflects our commitment to supporting brands at every stage of growth — from first collections to established seasonal production runs. We offer full package production covering tech pack development, fabric sourcing, sampling, bulk manufacturing, quality inspection, and export documentation under one roof.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">For US brands, sourcing from Bangladesh avoids the Section 301 tariffs that add 25% or more to Chinese imports. For EU brands, Bangladesh's GSP duty-free access delivers lower landed costs compared to most other sourcing destinations. These trade advantages combine with competitive FOB pricing to deliver strong margins for our clients.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/tools/sample-request" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-header {
+    text-align: center;
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .accent-line {
+    width: 60px;
+    height: 2px;
+    background: #e00;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .cta-button {
+    background: #e00;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .cta-button:hover {
+    background: #cc0000;
+  }
+  
+  .whatsapp-cta {
+    background: #25D366;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .whatsapp-cta:hover {
+    background: #128C7E;
+  }
+</style>
+
+
+
+
+
+
+
+
+

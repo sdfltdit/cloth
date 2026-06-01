@@ -1,0 +1,913 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Garment Washing Service | Denim Finishing SDF";
+const pageDescription = "Garment washing service in Bangladesh. Enzyme wash, stone wash, bleach wash for denim and apparel. Professional finishing from 500 pieces. Free quote.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+          "@id": "https://sdfltd.com/#website",
+          "url": "https://sdfltd.com/",
+          "name": "SDF Clothing",
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://sdfltd.com/#organization",
+            "name": "SDF Clothing",
+            "url": "https://sdfltd.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://sdfltd.com/logo.png"
+            },
+            "sameAs": [
+              "https://www.facebook.com/sdfltd",
+              "https://www.linkedin.com/company/sdf-clothing"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "PHONE",
+              "contactType": "sales",
+              "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+              "availableLanguage": "English"
+            }
+          }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Garment Washing Service",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for garment washing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our minimum order quantity for garment washing service is 500 pieces per style and colorway. This minimum ensures efficient batch processing while providing cost-effective pricing for brands. The 500-piece minimum applies to each wash type and color combination. Lower quantities are available for sampling and prototype development at higher per-piece costs for brands requiring smaller batches for testing or initial collections."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What washing services do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer enzyme wash for softening and bio-polishing, stone wash for vintage denim appearance, bleach wash for color lightening and whitening, acid wash for contrast effects, silicon wash for soft hand feel, and pigment wash for color effects. Each wash type produces distinct aesthetic and hand feel characteristics. We can combine multiple wash techniques for complex effects. Our washing services apply to denim, cotton, and blended fabrics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What garment types can you wash?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We wash denim jeans and jackets, t-shirts and casual wear, shirts and blouses, trousers and pants, dresses and skirts, and workwear and uniforms. Our facility handles both heavy-weight denim items requiring intensive washing and lightweight garments requiring gentle processing. Each garment type requires specific washing parameters to achieve desired effects while maintaining garment integrity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer eco-friendly washing options?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer enzyme wash using biodegradable enzymes that break down naturally, laser finishing as an alternative to chemical treatments, and eco-friendly softeners that are biodegradable and non-toxic. These eco-friendly options reduce environmental impact compared to traditional chemical washing methods. Eco-friendly washing may cost 10-15% more than conventional methods but provides sustainability credentials appealing to environmentally conscious brands and consumers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does garment washing take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard washing timeline is 7-10 days from garment receipt for basic washes like enzyme wash. Complex washes such as stone wash or bleach wash typically require 10-15 days. Custom wash development adds 5-7 days. Sampling takes 5-7 days before bulk processing. Multi-step wash processes combining multiple techniques may require 15-20 days total processing time. We provide detailed timelines with each quotation based on your specific wash requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide quality assurance for washed garments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We conduct quality inspection before and after washing to ensure consistent results. Pre-wash inspection verifies garment condition and identifies any pre-existing issues. Post-wash inspection verifies that wash effects meet specifications, checks for color consistency across the batch, and ensures dimensional stability. We provide detailed inspection reports with photos documenting wash results. Any garments not meeting specifications are reprocessed or replaced before shipment."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Garment Washing Service",
+      "description": "Professional garment washing and finishing service from 500 pieces including enzyme wash, stone wash, bleach wash for denim and apparel",
+      "provider": {
+        "@id": "https://sdfltd.com/#organization"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Garment Washing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Garment Washing and Finishing"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "1",
+              "maxPrice": "5"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Use Our Garment Washing Service",
+      "description": "Step-by-step process for garment washing service from our Bangladesh facility",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Washing Requirements",
+          "text": "Send your garment details, wash type preference, desired effect, quantity, and target timeline via contact form"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Detailed Quote",
+          "text": "Get pricing within 24-48 hours including wash costs, processing, and quality assurance for your washing order"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Wash Samples",
+          "text": "Review washed samples for effect, hand feel, color, and quality within 5-7 days before bulk processing"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Washing Process",
+          "text": "Processing begins after sample approval with 7-10 day turnaround for standard washing types"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Inspection & Delivery",
+          "text": "Final quality check before delivery with inspection report for your washed garments"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Garment Washing Service</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Garment Washing Service | Since 1998 | Finishing Specialists</div>
+        <h1 class="hero__title">Garment Washing Service | Enzyme, Stone & Bleach Wash from 500 Pieces</h1>
+        <p class="hero__description">
+          SDF Clothing provides professional garment washing in Bangladesh. Enzyme wash, stone wash, bleach wash, acid wash, and silicon finishing for denim and apparel. Professional results from 500 pieces minimum. 5-7 day sampling, 7-10 day processing.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20washing-service`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">500</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">6+</span>
+          <span class="hero__stat-label">Wash Types</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">7-10</span>
+          <span class="hero__stat-label">Days Processing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>ISO 9001 Quality</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>BSCI Social Compliance</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>OEKO-TEX Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>Eco-Friendly Options</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Introduction</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Garment Washing Service for Denim and Apparel Finishing</h2>
+      </div>
+      <div class="section__text">
+        <p>As a specialized garment washing service provider based in Bangladesh, SDF Clothing understands that professional washing transforms ordinary garments into premium products with enhanced hand feel, vintage aesthetics, and unique character. The garment washing market encompasses diverse needs from denim finishing to apparel softening, requiring expertise in chemical treatments and processing techniques. Our facility delivers on these requirements with minimum orders of 500 pieces, making professional washing accessible to brands of all sizes.</p>
+        
+        <p>Bangladesh has established itself as a competitive destination for garment washing and finishing, combining cost advantages with developing expertise in denim and apparel processing. Our garment washing service leverages Bangladesh's textile finishing ecosystem, offering international brands access to skilled washing technicians, established chemical supply chains, and comprehensive washing capabilities. The 500-piece minimum enables brands to test different wash effects without committing to large quantities, reducing risk while accessing professional washing at competitive prices.</p>
+        
+        <p>Our garment washing service addresses the specific requirements of professional finishing: consistent wash effects across production batches, color fastness and dimensional stability after washing, appropriate chemical treatment for desired effects without compromising fabric integrity, and quality assurance to ensure results meet specifications. We work with enzyme wash, stone wash, bleach wash, acid wash, silicon wash, and pigment wash to meet various aesthetic and hand feel requirements while maintaining environmental responsibility.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Washing Services</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What We Offer</h2>
+      </div>
+      <div class="section__text">
+        <p>Our garment washing service encompasses multiple wash types designed to achieve different aesthetic and hand feel characteristics. Each wash type produces distinct results, allowing brands to create unique product offerings. We offer all wash types from 500 pieces minimum, with the ability to combine techniques for complex effects.</p>
+        
+        <p>Enzyme wash uses biodegradable enzymes to break down cellulose fibers on fabric surfaces, creating a softer hand feel and vintage appearance. This gentle wash is particularly effective for cotton and denim, bio-polishing the surface to remove hairiness and create smooth texture. Enzyme wash typically takes 7-10 days and is the most common washing treatment for casual wear and denim. The process enhances comfort and gives garments a lived-in appearance without the harsh effects of more intensive washes. Enzyme wash is ideal for brands seeking soft, comfortable garments with subtle vintage character.</p>
+        
+        <p>Stone wash uses pumice stones to abrade fabric surfaces, creating the classic worn-in denim appearance with localized color variations and softened texture. Stones are tumbled with garments in industrial washing machines, fading the surface color while maintaining base fabric integrity. Stone wash intensity can be adjusted from light to heavy depending on desired effect. This wash typically takes 10-15 days due to the abrasive nature of the process. Stone wash is the quintessential denim treatment, creating the vintage look that defines classic denim aesthetics. The process requires careful control to prevent excessive fabric damage.</p>
+        
+        <p>Bleach wash uses chlorine or oxygen-based bleaches to lighten fabric color and create contrast effects. Bleach can be applied overall for uniform lightening or selectively for localized effects like sun-bleaching patterns. The process requires careful control to prevent fabric damage and ensure color fastness after treatment. Bleach wash typically takes 10-15 days including neutralization processes. This wash is popular for creating vintage light-colored denim and for achieving specific color effects on various garments. Bleach wash requires expertise to achieve consistent results without compromising fabric strength.</p>
+        
+        <p>Acid wash uses chlorine and potassium permanganate to create dramatic color contrast effects on denim. The process creates localized bleaching with surrounding darker areas, producing unique patterns and vintage appeal. Acid wash produces more dramatic effects than standard bleach wash, with greater color variation and contrast. This specialized wash typically takes 10-15 days and requires skilled technicians for consistent results. Acid wash is popular for fashion-forward denim seeking bold, distinctive appearances. The process requires strict quality control to ensure fabric integrity despite the aggressive chemical treatment.</p>
+        
+        <p>Silicon wash applies silicone-based softeners to garments, creating a soft, smooth hand feel with enhanced drape. The silicone treatment lubricates fibers, reducing friction and creating luxurious texture. Silicon wash is particularly effective for cotton and blended fabrics, enhancing comfort without altering color significantly. This wash typically takes 7-10 days and is often combined with other wash treatments. Silicon wash is ideal for premium garments where soft hand feel is a priority, such as high-end t-shirts and casual wear. The treatment provides immediate softness that consumers can feel and appreciate.</p>
+        
+        <p>Pigment wash applies pigment dyes to garments after construction, creating color effects and vintage appearance. Pigments sit on fabric surfaces rather than penetrating fibers, creating a washed-in look with excellent color consistency. The process can create solid color effects, tie-dye patterns, or localized color applications. Pigment wash typically takes 10-15 days including curing processes. This wash is popular for creating colored denim, vintage-effect t-shirts, and unique color treatments on various garments. Pigment wash provides excellent color retention through subsequent washing compared to traditional dyeing methods.</p>
+        
+        <p>Combined wash processes integrate multiple techniques to achieve complex effects. For example, garments may undergo enzyme wash followed by stone wash for enhanced vintage appearance, or bleach wash followed by silicon wash for softness in addition to color effects. Combined processes require careful sequencing and additional processing time, typically 15-20 days total. These combinations allow brands to create unique, multi-dimensional effects that differentiate their products in the market. Combined washing requires expertise to ensure each treatment enhances rather than conflicts with previous processes.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Wash Type</th>
+              <th>Processing Time</th>
+              <th>Primary Effect</th>
+              <th>Best For</th>
+              <th>Price Tier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Enzyme Wash</td>
+              <td>7-10 days</td>
+              <td>Softening, bio-polishing, vintage</td>
+              <td>Casual wear, denim softening</td>
+              <td>$</td>
+            </tr>
+            <tr>
+              <td>Stone Wash</td>
+              <td>10-15 days</td>
+              <td>Abrasion, vintage denim, worn look</td>
+              <td>Denim jeans, jackets</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>Bleach Wash</td>
+              <td>10-15 days</td>
+              <td>Color lightening, contrast, white</td>
+              <td>Light denim, color effects</td>
+              <td>$$</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Acid Wash</td>
+              <td>10-15 days</td>
+              <td>Dramatic contrast, patterns, vintage</td>
+              <td>Fashion denim, bold effects</td>
+              <td>$$$</td>
+            </tr>
+            <tr>
+              <td>Silicon Wash</td>
+              <td>7-10 days</td>
+              <td>Softening, smooth hand feel, drape</td>
+              <td>Premium softness, comfort</td>
+              <td>$$</td>
+            </tr>
+          </tbody>
+          <caption>All wash types available from 500 pieces minimum. Custom combinations available.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Process</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Our Washing Process</h2>
+      </div>
+      <div class="section__text">
+        <p>Our garment washing process follows structured procedures designed to ensure consistent results while protecting garment integrity. The process typically spans 12-20 days from garment receipt to delivery for standard washes, with 15-25 days for complex or combined treatments. Garment washing requires particular attention to chemical management and quality control to achieve desired effects without compromising fabric strength.</p>
+        
+        <p>The process begins with garment inspection and preparation, where we receive garments and assess their condition before washing. We inspect for pre-existing defects, verify fabric construction suitability for intended wash type, and document garment condition. This pre-wash inspection typically takes 1-2 days and ensures that only garments suitable for washing proceed to processing, preventing damage to garments that cannot withstand the treatment. For garments we manufacture, this inspection occurs before washing as part of our quality control process.</p>
+        
+        <p>Wash parameter development follows inspection, taking 2-3 days for standard washes and 3-5 days for custom or combined treatments. Our technicians determine optimal chemical concentrations, water temperatures, processing times, and mechanical action levels based on desired effects and fabric specifications. This development ensures consistent results across production batches. For standard wash types like enzyme wash or stone wash, we use proven parameter sets. For custom requirements, we develop new parameters through testing and refinement.</p>
+        
+        <p>Sample washing for approval takes 5-7 days for standard washes and 7-10 days for complex treatments. We process sample garments through the proposed wash treatment and evaluate results against your specifications. Sample evaluation includes visual inspection for effect consistency, hand feel assessment for softness and texture, color measurement for accuracy, and strength testing to ensure fabric integrity. We provide detailed sample reports with photos documenting wash results. You may request multiple sample rounds to perfect the wash parameters.</p>
+        
+        <p>Bulk washing execution spans 7-10 days for standard washes like enzyme wash and silicon wash. Stone wash, bleach wash, and acid wash typically require 10-15 days. Processing occurs in industrial washing machines with capacity for 500-1000 garments per batch depending on garment type and wash intensity. Our washing technicians monitor each batch closely, adjusting parameters as needed to maintain consistency. Throughout processing, we conduct in-line quality checks to ensure wash effects remain within specified tolerances.</p>
+        
+        <p>Rinsing and neutralization follows chemical washing treatments, taking 1-2 days to ensure complete removal of chemicals from garments. This step is critical for bleach wash, acid wash, and other chemical treatments to prevent ongoing chemical action that could damage fabric or affect color. We use multiple rinse cycles with appropriate water temperatures and pH levels to ensure thorough chemical removal. Proper neutralization prevents fabric damage and ensures garments are safe for handling and subsequent use.</p>
+        
+        <p>Drying and finishing completes the washing process, taking 2-3 days. Garments are extracted from washers and dried using appropriate methods for each fabric type to prevent shrinkage or distortion. After drying, garments undergo final inspection to verify wash results, dimensional stability, and overall quality. We provide detailed inspection reports documenting wash outcomes. Garments are then packaged according to your specifications and prepared for shipment or return to production for additional finishing processes.</p>
+        
+        <p>Quality assurance throughout the process includes pre-wash inspection, in-process monitoring, and post-wash verification. We conduct strength testing on washed garments to ensure fabric integrity has not been compromised, color measurement to verify wash effects meet specifications, and dimensional verification to ensure garments maintain their size after washing. This comprehensive quality control ensures that washed garments meet your specifications and maintain their intended performance characteristics.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Eco-Friendly Options</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sustainable Washing Practices</h2>
+      </div>
+      <div class="section__text">
+        <p>We recognize that traditional garment washing can have environmental impacts through chemical use and water consumption. We offer eco-friendly washing alternatives that reduce environmental footprint while maintaining quality results. These options appeal to brands seeking sustainability credentials and consumers increasingly concerned about environmental impact.</p>
+        
+        <p>Biodegradable enzymes used in enzyme wash break down naturally in the environment, reducing chemical impact compared to synthetic treatments. Our enzyme wash processes use enzymes that are specifically designed to degrade rapidly after completing their cleaning function, minimizing environmental persistence. The water from enzyme washing can be treated through standard wastewater treatment without specialized neutralization. Biodegradable enzymes cost approximately 10-15% more than conventional alternatives but provide significant environmental benefits.</p>
+        
+        <p>Water recycling systems reduce fresh water consumption in washing processes. Our facility recycles and treats wash water for multiple uses, reducing overall water consumption by 40-50% compared to single-use washing. The treatment system removes contaminants and adjusts water chemistry for reuse in subsequent batches. Water recycling requires investment in treatment infrastructure but provides both environmental benefits and cost savings on water consumption over time. This system is particularly valuable in water-stressed regions.</p>
+        
+        <p>Laser finishing provides an alternative to chemical treatments for certain effects. Laser technology can create worn-in appearances, distress patterns, and surface modifications without using chemicals or water. This technology is particularly effective for denim, creating vintage effects with precision and consistency. Laser finishing has higher upfront costs but reduces chemical use entirely and provides excellent repeatability. The technology is ideal for brands seeking chemical-free production while maintaining vintage aesthetics.</p>
+        
+        <p>Eco-friendly softeners replace conventional silicone softeners with biodegradable alternatives. These plant-based softeners provide similar softening effects without environmental persistence. Eco-softeners break down naturally in wastewater treatment and do not accumulate in the environment. While eco-softeners may cost 5-10% more than conventional options, they provide sustainability credentials that appeal to environmentally conscious consumers and meet retailer requirements for chemical restrictions.</p>
+        
+        <p>Chemical reduction strategies minimize the use of harsh chemicals in washing processes. We optimize wash parameters to achieve desired effects with lower chemical concentrations, substitute milder alternatives where possible, and eliminate unnecessary chemical treatments. These strategies reduce chemical load in wastewater and lower environmental impact. Chemical reduction often requires more sophisticated process control but provides both environmental benefits and cost savings on chemical procurement.</p>
+        
+        <p>Our facility complies with environmental regulations for wastewater discharge and chemical handling. We maintain proper documentation for all chemical use and disposal, conduct regular environmental audits, and continuously seek opportunities to reduce our environmental footprint. These compliance measures ensure that our washing operations meet local environmental standards and provide assurance to brands concerned about environmental responsibility in their supply chain.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Quality Assurance</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Quality Control & Inspection</h2>
+      </div>
+      <div class="section__text">
+        <p>Quality assurance is fundamental to our garment washing service. Washing transforms garments and must be controlled precisely to achieve desired effects without compromising fabric integrity. We maintain comprehensive quality control processes to ensure consistent results and customer satisfaction.</p>
+        
+        <p>Pre-wash inspection documents garment condition before processing, identifying any pre-existing issues that might affect wash results. We photograph sample garments before washing to provide a baseline for comparison. This inspection also verifies that garments are suitable for the intended wash type, preventing damage to fabrics that cannot withstand the treatment. Pre-wash inspection typically rejects garments with construction defects or fabric damage that would be exacerbated by washing.</p>
+        
+        <p>In-process monitoring during washing ensures that wash parameters remain within specified tolerances. Our technicians monitor chemical concentrations, water temperatures, and mechanical action throughout processing. We conduct periodic checks on wash effect development by examining sample garments from the batch. This in-process monitoring allows real-time adjustments to maintain consistency and prevent over-processing that could damage garments. Monitoring data is recorded for each batch for traceability and process improvement.</p>
+        
+        <p>Post-wash inspection evaluates garments against your specifications for wash effects. We use color measurement devices to verify color accuracy, assess hand feel through tactile evaluation, and examine visual appearance for consistency across the batch. Strength testing verifies that fabric integrity has not been compromised by the washing process. We provide detailed inspection reports with photos documenting wash results. Garments not meeting specifications undergo reprocessing or are identified for replacement.</p>
+        
+        <p>Dimensional stability testing ensures that garments maintain their size after washing. We measure garments before and after washing to verify that shrinkage remains within acceptable tolerances (typically less than 3% in either direction). This testing is particularly important for garments that will undergo washing after retail sale, ensuring that the fit customers experience in unwashed garments is maintained after home laundering. Dimensional stability testing reduces returns due to fit changes after washing.</p>
+        
+        <p>Color fastness testing verifies that wash effects remain stable through subsequent laundering. We subject washed garments to additional wash cycles to ensure that the achieved color and effect will not change dramatically with normal home care. This testing ensures that the vintage appearance or softness achieved through professional washing will persist through the garment's useful life. Color fastness testing is particularly important for bleach wash, acid wash, and pigment wash where color changes are intentional.</p>
+        
+        <p>Batch consistency verification ensures that wash results are uniform across production batches. We compare garments from different batches within the same order to ensure consistent wash effects, hand feel, and color. This consistency is critical for brands that receive garments in multiple production runs and need uniform appearance across shipments. Our quality control team maintains records of wash parameters for each batch, enabling traceability and consistency verification.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Bangladesh Advantage</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Why Choose Our Washing Service in Bangladesh</h2>
+      </div>
+      <div class="section__text">
+        <p>Bangladesh has established itself as a competitive destination for garment washing and finishing, combining cost advantages with developing expertise in denim and apparel processing. The country's textile industry includes numerous washing facilities with specialized equipment for various wash types. This specialization, combined with competitive costs, makes Bangladesh an attractive option for garment washing services.</p>
+        
+        <p>Cost advantages in Bangladesh for garment washing are significant, with processing costs 20-30% lower than in many other manufacturing countries. This cost advantage does not come at the expense of quality. The Bangladeshi garment industry has developed particular expertise in denim washing and finishing, with skilled technicians who understand the nuances of different wash types and fabric behaviors. Our facility conducts regular training programs to ensure technicians remain proficient in the latest washing techniques and quality standards.</p>
+        
+        <p>Bangladesh's garment washing infrastructure includes specialized facilities with industrial washing machines, stone washing equipment, chemical treatment facilities, and drying infrastructure. The country has invested in washing capacity to serve its large garment manufacturing industry, reducing dependence on imported washing services. This local availability of washing infrastructure reduces logistics costs and lead times compared to sending garments to other countries for finishing.</p>
+        
+        <p>Chemical supply chains for garment washing are well-established in Bangladesh, ensuring consistent access to enzymes, bleaches, softeners, and other washing chemicals at competitive prices. Local chemical suppliers understand the specific requirements of garment washing and can provide technical support. This established supply chain reduces chemical procurement costs and ensures consistent chemical quality for washing processes.</p>
+        
+        <p>Environmental compliance for garment washing has improved significantly in Bangladesh with stricter regulations on wastewater discharge and chemical handling. Our facility complies with all environmental regulations and maintains proper wastewater treatment systems. This compliance reduces environmental impact and provides assurance to brands concerned about environmental responsibility in their supply chain. The improved regulatory environment makes Bangladesh washing services increasingly attractive to international brands.</p>
+        
+        <p>Integration with garment manufacturing provides logistical advantages when washing garments we produce. For garments manufactured by SDF Clothing, we can coordinate washing seamlessly with production, reducing handling and shipping between processes. This integration reduces lead times and costs compared to using separate manufacturing and washing providers. The coordination between our manufacturing and washing teams ensures that garments are optimized for the intended wash treatment from the outset.</p>
+        
+        <p>The Bangladesh garment industry has developed particular expertise in denim washing, which directly translates to general garment washing expertise. The country's large denim production sector has driven development of specialized washing facilities and skilled technicians for denim finishing. This expertise applies to other garment types, with our facility capable of washing t-shirts, casual wear, and various apparel types with the same level of professionalism applied to denim.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Getting Started</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How to Get Started</h2>
+      </div>
+      <div class="section__text">
+        <p>Starting your garment washing service with SDF Clothing follows a structured process designed to ensure your wash requirements are understood and results meet expectations. The process begins with providing detailed specifications, after which we guide you through sample development and bulk processing.</p>
+        
+        <p>Step one is to submit your washing requirements through our contact form or email. Essential information includes: garment type and fabric composition, wash type preference (enzyme, stone, bleach, acid, silicon, pigment), desired effect description, target quantity per style and color, and desired timeline. If you have reference samples showing desired wash effects, include them for clarity. For garments we manufacture, washing specifications are coordinated with our production team.</p>
+        
+        <p>Step two involves our technical review and quotation. Within 24-48 hours of receiving your requirements, we provide a detailed quotation including washing costs, processing time, quality assurance, and any additional services. The quotation specifies lead times for sampling and bulk processing, minimum order quantities, and payment terms. For complex or custom wash requirements, we may request sample garments for parameter development. You may request revisions to the quotation to adjust specifications to meet budget targets.</p>
+        
+        <p>Step three is sample washing and approval. After quotation acceptance, we proceed with sample development, typically taking 5-7 days for standard washes and 7-10 days for complex treatments. Samples are shipped to you for review, and we provide detailed inspection reports documenting wash results. You may approve samples as-is, request parameter adjustments, or proceed with additional sample rounds. Each sample round adds 3-5 days but ensures the final wash effect meets your expectations. We recommend thorough sample approval before bulk processing.</p>
+        
+        <p>Step four is bulk washing confirmation. Once wash parameters are approved, we require a deposit to confirm processing and schedule production. Standard terms are 30% deposit with order confirmation and 70% before shipment. Processing begins after deposit receipt and garment receipt. We provide a processing schedule with key milestones including washing completion, drying and finishing, and expected delivery date. Throughout processing, we provide status updates on batch progress.</p>
+        
+        <p>Step five is final inspection and delivery. Before shipment, we conduct final quality inspection using our standard protocols with additional verification that wash effects meet specifications. We provide an inspection report for your review. Once inspection is approved, we finalize packaging and prepare shipping documentation. Balance payment is required before release of washed garments. We provide all necessary documentation for your records and any regulatory requirements.</p>
+        
+        <p>Throughout the process, our team provides technical guidance on wash selection, parameter optimization, and effect achievement. We understand that washing is both an art and a science, requiring expertise to achieve consistent results. Clear communication about your desired effects and quality expectations helps us deliver washed garments that meet your specifications and enhance your product offerings.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Garment Washing Service FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order quantity for garment washing?</h3>
+          <p class="faq__answer">Our minimum order quantity for garment washing service is 500 pieces per style and colorway. This minimum ensures efficient batch processing while providing cost-effective pricing for brands. The 500-piece minimum applies to each wash type and color combination. Lower quantities are available for sampling and prototype development at higher per-piece costs for brands requiring smaller batches for testing or initial collections.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What washing services do you offer?</h3>
+          <p class="faq__answer">We offer enzyme wash for softening and bio-polishing, stone wash for vintage denim appearance, bleach wash for color lightening and whitening, acid wash for contrast effects, silicon wash for soft hand feel, and pigment wash for color effects. Each wash type produces distinct aesthetic and hand feel characteristics. We can combine multiple wash techniques for complex effects. Our washing services apply to denim, cotton, and blended fabrics.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What garment types can you wash?</h3>
+          <p class="faq__answer">We wash denim jeans and jackets, t-shirts and casual wear, shirts and blouses, trousers and pants, dresses and skirts, and workwear and uniforms. Our facility handles both heavy-weight denim items requiring intensive washing and lightweight garments requiring gentle processing. Each garment type requires specific washing parameters to achieve desired effects while maintaining garment integrity.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you offer eco-friendly washing options?</h3>
+          <p class="faq__answer">Yes. We offer enzyme wash using biodegradable enzymes that break down naturally, laser finishing as an alternative to chemical treatments, and eco-friendly softeners that are biodegradable and non-toxic. These eco-friendly options reduce environmental impact compared to traditional chemical washing methods. Eco-friendly washing may cost 10-15% more than conventional methods but provides sustainability credentials appealing to environmentally conscious brands and consumers.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does garment washing take?</h3>
+          <p class="faq__answer">Standard washing timeline is 7-10 days from garment receipt for basic washes like enzyme wash. Complex washes such as stone wash or bleach wash typically require 10-15 days. Custom wash development adds 5-7 days. Sampling takes 5-7 days before bulk processing. Multi-step wash processes combining multiple techniques may require 15-20 days total processing time. We provide detailed timelines with each quotation based on your specific wash requirements.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you provide quality assurance for washed garments?</h3>
+          <p class="faq__answer">Yes. We conduct quality inspection before and after washing to ensure consistent results. Pre-wash inspection verifies garment condition and identifies any pre-existing issues. Post-wash inspection verifies that wash effects meet specifications, checks for color consistency across the batch, and ensures dimensional stability. We provide detailed inspection reports with photos documenting wash results. Any garments not meeting specifications are reprocessed or replaced before shipment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Use Our Garment Washing Service?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for professional garment washing and finishing. We provide detailed quotes, processing timelines, and sample development. Enzyme wash, stone wash, bleach wash available from 500 pieces minimum with quality assurance and eco-friendly options.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/sampling-service" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/finishing-service" style="color: var(--color-primary);">finishing service</a>, <a href="/denim-manufacturer" style="color: var(--color-primary);">denim manufacturer</a>, , <a href="/sustainable-clothing-manufacturer" style="color: var(--color-primary);">sustainable clothing manufacturer</a>, .
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .hero__description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
+  .hero__cta--primary:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-alt);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .hero__stat-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    font-size: 1.25rem;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background-color: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background-color: var(--color-bg-alt);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .section__label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text p {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__ctas {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
+  .section__cta--primary:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-lg) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background-color: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison td {
+    color: var(--color-text-muted);
+  }
+
+  .comparison__row--highlight {
+    background-color: var(--color-bg-alt);
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    padding: var(--spacing-sm) 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .faq {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .faq__item {
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-alt);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .faq__answer {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__stats {
+      order: -1;
+    }
+
+    .trust__items {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+</style>

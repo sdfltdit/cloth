@@ -1,0 +1,890 @@
+---
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../../../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../../../data/schema';
+export const prerender = true;
+
+const pageTitle = "Dog Hoodie Manufacturer | Custom Pet SDF";
+const pageDescription = "Dog hoodie manufacturer for custom pet clothing brands. Custom sizing, branding, safety-compliant materials, and wholesale dog hoodie production.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Pet Clothing Manufacturer",
+            "item": "https://sdfltd.com/pet-clothing-manufacturer/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Dog Hoodie Manufacturer",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What dog hoodie manufacturing services do you provide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide custom dog hoodie manufacturing including design development, pattern making, fabric sourcing, production, and custom branding. Our services cover all dog sizes from XS to XXL with breed-specific sizing options. We offer low MOQ starting from 300 pieces, making dog hoodie production accessible to pet brands of all sizes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does pet clothing sizing work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pet clothing sizing accounts for breed variations and body proportions. We offer size ranges from XS to XXL with measurements based on neck circumference, chest girth, and back length. Breed-specific patterns accommodate different body shapes—bulldogs need different proportions than greyhounds. Custom sizing available for unique breeds or specific requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What custom branding options are available?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Custom branding includes woven labels, embroidered logos, screen printing, heat transfer labels, custom hang tags, and branded packaging. All branding elements use pet-safe materials and construction. Labels are positioned to avoid pet irritation, typically placed on the back or hem rather than neck areas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What pet safety standards do you follow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We follow pet safety standards including ASTM F963 for children's products as a baseline, CPSIA compliance for materials, and pet-specific safety guidelines. Safety considerations include no small parts that could be chewed off, secure closures, breathable materials, and non-toxic dyes. All materials are tested for harmful substances."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is your minimum order for dog hoodies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our minimum order for dog hoodies is 300 pieces per style. This can be split across multiple sizes within the same style. Lower minimums may be available for simple designs using existing patterns. Custom designs with unique patterns require higher minimums to justify pattern development costs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What materials are suitable for dog hoodies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Suitable materials include cotton blends for breathability, fleece for warmth, polyester blends for durability, and stretch fabrics for comfort. All materials are pet-safe, machine washable, and tested for colorfastness. We recommend avoiding materials that could cause overheating or irritation. Sustainable options including organic cotton and recycled polyester are available."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Dog Hoodie Manufacturing Service",
+      "description": "Custom dog hoodie manufacturing with design development, pet-specific sizing, custom branding, and safety compliance",
+      "provider": {
+        "@id": "https://sdfltd.com/#organization"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Dog Hoodie Manufacturing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Dog Hoodie Production"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "8",
+              "maxPrice": "15"
+            }
+          }
+        ]
+      }
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/pet-clothing-manufacturer/index">Pet Clothing Manufacturer</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Dog Hoodie Manufacturer</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Dog Hoodie Manufacturer • Since 1998 • Pet Apparel Specialists</div>
+        <h1 class="hero__title">Dog Hoodie Manufacturer • Custom Pet Clothing Production</h1>
+        <p class="hero__description">
+          SDF Clothing is a dog hoodie manufacturer providing custom pet clothing production. Dog hoodie manufacturing, pet apparel sizing, custom branding, pet safety standards, and wholesale dog hoodie manufacturing for pet brands.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20dog%20hoodie%20manufacturing`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">300</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">XS-XXL</span>
+          <span class="hero__stat-label">Pet Sizes</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Pet Safe</span>
+          <span class="hero__stat-label">Materials</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Custom Design</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Pet Sizing</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Safety Standards</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Custom Branding</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Dog Hoodie Manufacturing</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Custom Dog Hoodie Production Services</h2>
+      </div>
+      <div class="section__text">
+        <p>Dog hoodie manufacturing requires specialized understanding of pet anatomy, safety requirements, and breed-specific sizing needs. Our production process accounts for the unique challenges of pet clothing, including varying body proportions, movement requirements, and safety considerations that don't apply to human apparel.</p>
+        
+        <p>Our dog hoodie manufacturing services encompass the complete production cycle from design development through final delivery. We work with pet brands to create custom dog hoodies that reflect brand identity while meeting functional requirements for pet comfort and safety. Production capabilities include custom patterns, fabric sourcing, manufacturing, and branded packaging.</p>
+        
+        <p>The growing pet apparel market presents significant opportunities for brands entering this space. Dog hoodies represent one of the most popular pet clothing categories, combining functionality with fashion appeal. Our manufacturing expertise helps brands capitalize on this market with quality products that meet both regulatory requirements and consumer expectations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Pet Sizing</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Pet Clothing Sizing System</h2>
+      </div>
+      <div class="section__text">
+        <p>Pet clothing sizing must account for tremendous variation in dog breeds and body types. Unlike human sizing which follows relatively standard proportions, dogs vary dramatically in body shape—from the compact builds of bulldogs to the elongated forms of greyhounds. Our sizing system addresses these variations through breed-specific patterns and flexible sizing options.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Neck</th>
+              <th>Chest</th>
+              <th>Back Length</th>
+              <th>Breed Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>XS</td>
+              <td>8-10"</td>
+              <td>12-14"</td>
+              <td>8-10"</td>
+              <td>Chihuahua, Yorkie</td>
+            </tr>
+            <tr>
+              <td>S</td>
+              <td>10-12"</td>
+              <td>14-18"</td>
+              <td>10-12"</td>
+              <td>Pug, Shih Tzu</td>
+            </tr>
+            <tr>
+              <td>M</td>
+              <td>12-16"</td>
+              <td>18-24"</td>
+              <td>12-16"</td>
+              <td>Beagle, Cocker Spaniel</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>L</td>
+              <td>16-20"</td>
+              <td>24-30"</td>
+              <td>16-20"</td>
+              <td>Boxer, Labrador</td>
+            </tr>
+            <tr>
+              <td>XL</td>
+              <td>20-24"</td>
+              <td>30-36"</td>
+              <td>20-24"</td>
+              <td>Golden Retriever, German Shepherd</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>XXL</td>
+              <td>24-28"</td>
+              <td>36-42"</td>
+              <td>24-28"</td>
+              <td>Great Dane, Mastiff</td>
+            </tr>
+          </tbody>
+          <caption>Measurements are approximate. Custom sizing available for unique breeds or specific requirements.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Custom Branding</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Pet Clothing Branding Options</h2>
+      </div>
+      <div class="section__text">
+        <p>Custom branding transforms dog hoodies into brand ambassadors for pet businesses. Pet clothing branding requires special consideration for pet safety and comfort—labels and embellishments must be positioned to avoid irritation or potential hazards. Our branding solutions prioritize brand visibility while maintaining pet welfare.</p>
+        
+        <p>Woven labels provide professional branding with soft construction that won't irritate pet skin. Labels are typically positioned on the back hem or side seam rather than neck areas to avoid contact with sensitive areas. Embroidered logos offer premium branding with durability that withstands washing and wear. Screen printing provides cost-effective branding for larger designs.</p>
+        
+        <p>Custom hang tags and branded packaging complete the brand presentation for retail environments. Hang tags can include brand logos, care instructions, and sizing information. Packaging options range from simple poly bags with brand printing to complete retail-ready packaging systems. All packaging materials are pet-safe and environmentally responsible where possible.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Safety Standards</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Pet Safety Requirements</h2>
+      </div>
+      <div class="section__text">
+        <p>Pet safety is paramount in dog hoodie manufacturing. Unlike human clothing where minor defects might be acceptable, pet clothing must meet strict safety standards to prevent harm to animals. Our manufacturing process incorporates multiple safety checks and follows established safety guidelines for pet products.</p>
+        
+        <p>Key safety considerations include eliminating small parts that could be chewed off and swallowed, ensuring closures are secure but not restrictive, using breathable materials to prevent overheating, and selecting non-toxic dyes and finishes. All materials are tested for harmful substances including lead, phthalates, and other regulated chemicals.</p>
+        
+        <p>We follow ASTM F963 standards for children's products as a baseline for pet clothing safety, as these standards address similar concerns about small parts and material safety. Additionally, we comply with CPSIA requirements for materials and maintain pet-specific safety protocols developed through industry experience and veterinary consultation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Minimum Orders</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Dog Hoodie Production Minimums</h2>
+      </div>
+      <div class="section__text">
+        <p>Our minimum order quantity for dog hoodies is 300 pieces per style. This minimum can be distributed across multiple sizes within the same style, allowing brands to offer size ranges without exceeding minimum commitments. For example, 300 pieces could be split as 50 pieces each across six sizes from XS to XXL.</p>
+        
+        <p>Lower minimums may be available for simple designs using existing patterns. If your design can be produced using our established dog hoodie patterns with only color or branding changes, we can often accommodate orders as low as 100-200 pieces. This flexibility helps new pet brands test the market without large inventory commitments.</p>
+        
+        <p>Custom designs requiring new pattern development have higher minimum requirements, typically 500+ pieces per style. Pattern development involves significant investment in pattern making, fit testing across sizes, and sample production. These higher minimums justify the development costs and ensure production efficiency.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Materials</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Dog Hoodie Material Options</h2>
+      </div>
+      <div class="section__text">
+        <p>Material selection for dog hoodies balances comfort, durability, washability, and safety. Dogs have different needs than humans—their clothing must withstand outdoor activities, frequent washing, and potential chewing while remaining comfortable and safe. Our material options address these requirements while offering variety for different climates and uses.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Material</th>
+              <th>Properties</th>
+              <th>Best For</th>
+              <th>Climate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Cotton Blend</td>
+              <td>Breathable, soft, washable</td>
+              <td>Daily wear, sensitive skin</td>
+              <td>Mild to warm</td>
+            </tr>
+            <tr>
+              <td>Fleece</td>
+              <td>Warm, lightweight, quick-dry</td>
+              <td>Cold weather, outdoor activities</td>
+              <td>Cold</td>
+            </tr>
+            <tr>
+              <td>Polyester Blend</td>
+              <td>Durable, colorfast, affordable</td>
+              <td>Active dogs, frequent washing</td>
+              <td>All climates</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Stretch Fabric</td>
+              <td>Flexible, comfortable, easy fit</td>
+              <td>Hard-to-fit breeds, comfort</td>
+              <td>All climates</td>
+            </tr>
+            <tr>
+              <td>Organic Cotton</td>
+              <td>Sustainable, chemical-free</td>
+              <td>Eco-conscious brands, sensitive pets</td>
+              <td>Mild to warm</td>
+            </tr>
+          </tbody>
+          <caption>All materials are pet-safe, machine washable, and tested for colorfastness. Sustainable options available.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Dog Hoodie Manufacturer FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What dog hoodie manufacturing services do you provide?</h3>
+          <p class="faq__answer">We provide custom dog hoodie manufacturing including design development, pattern making, fabric sourcing, production, and custom branding. Our services cover all dog sizes from XS to XXL with breed-specific sizing options. We offer low MOQ starting from 300 pieces, making dog hoodie production accessible to pet brands of all sizes.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does pet clothing sizing work?</h3>
+          <p class="faq__answer">Pet clothing sizing accounts for breed variations and body proportions. We offer size ranges from XS to XXL with measurements based on neck circumference, chest girth, and back length. Breed-specific patterns accommodate different body shapes—bulldogs need different proportions than greyhounds. Custom sizing available for unique breeds or specific requirements.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What custom branding options are available?</h3>
+          <p class="faq__answer">Custom branding includes woven labels, embroidered logos, screen printing, heat transfer labels, custom hang tags, and branded packaging. All branding elements use pet-safe materials and construction. Labels are positioned to avoid pet irritation, typically placed on the back or hem rather than neck areas.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What pet safety standards do you follow?</h3>
+          <p class="faq__answer">We follow pet safety standards including ASTM F963 for children's products as a baseline, CPSIA compliance for materials, and pet-specific safety guidelines. Safety considerations include no small parts that could be chewed off, secure closures, breathable materials, and non-toxic dyes. All materials are tested for harmful substances.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is your minimum order for dog hoodies?</h3>
+          <p class="faq__answer">Our minimum order for dog hoodies is 300 pieces per style. This can be split across multiple sizes within the same style. Lower minimums may be available for simple designs using existing patterns. Custom designs with unique patterns require higher minimums to justify pattern development costs.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What materials are suitable for dog hoodies?</h3>
+          <p class="faq__answer">Suitable materials include cotton blends for breathability, fleece for warmth, polyester blends for durability, and stretch fabrics for comfort. All materials are pet-safe, machine washable, and tested for colorfastness. We recommend avoiding materials that could cause overheating or irritation. Sustainable options including organic cotton and recycled polyester are available.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready for Dog Hoodie Production?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for dog hoodie manufacturing. We provide custom pet clothing production with pet-specific sizing, safety standards, custom branding, and wholesale manufacturing for pet brands.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/pet-clothing-manufacturer/index" class="section__cta section__cta--secondary">Pet Clothing</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/pet-clothing-manufacturer/organic-pet-clothing-manufacturer/index" style="color: var(--color-primary);">organic pet clothing manufacturer</a>, <a href="/pet-clothing-manufacturer/private-label-pet-clothing/index" style="color: var(--color-primary);">private label pet clothing</a>, <a href="/pet-clothing-manufacturer/pet-clothing-manufacturing-cost/index" style="color: var(--color-primary);">pet clothing manufacturing cost</a>, <a href="/pet-clothing-manufacturer/how-to-start-pet-clothing-brand/index" style="color: var(--color-primary);">how to start pet clothing brand</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

@@ -1,0 +1,1135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, schemaPerson, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Polyester Clothing Manufacturer | Performance Wear | SDF";
+const pageDescription = "Polyester clothing manufacturer in Bangladesh. Durable, wrinkle-resistant polyester garments. 300 piece MOQ, GOTS certified. Get your free quote today.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20polyester%20clothing%20manufacturing`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-21",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle,
+            "item": canonicalUrl.href
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#organization" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is polyester good for clothing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, polyester is excellent for many clothing applications. It offers durability, wrinkle resistance, color retention, quick-drying properties, and affordability. Polyester is ideal for activewear, outdoor clothing, uniforms, and everyday garments. Modern polyester fabrics have improved breathability and comfort compared to older versions. Blends like polyester-cotton combine polyester's durability with cotton's comfort. SDF produces high-quality polyester garments suitable for various applications."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between polyester and poly-cotton?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Polyester is 100% synthetic, while poly-cotton is a blend combining polyester and cotton fibers. 100% polyester offers maximum durability, wrinkle resistance, and quick-drying properties. Poly-cotton blends (typically 65% polyester, 35% cotton) provide a balance - polyester adds strength and wrinkle resistance, cotton adds comfort and breathability. Poly-cotton is softer and more comfortable than pure polyester but less durable. Choose based on your performance requirements and comfort preferences."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is polyester clothing bad for the environment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Polyester has environmental concerns because it's made from petroleum, a non-renewable resource. Production generates greenhouse gases. Polyester sheds microplastics during washing, which pollute waterways. However, recycled polyester (rPET) made from plastic bottles reduces environmental impact. Polyester's durability means garments last longer, reducing replacement frequency. Our <a href='/sustainability'>sustainability initiatives</a> include recycled polyester options and responsible sourcing. Consider recycled polyester for reduced environmental footprint."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does polyester shrink when washed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Polyester has minimal shrinkage compared to natural fibers like cotton or wool. Polyester typically shrinks less than 3% during washing, which is barely noticeable. However, polyester can shrink slightly if washed in hot water or dried at high temperatures. To minimize any shrinkage, wash polyester in cold or warm water and tumble dry on low heat or air dry. Polyester's low shrinkage is one advantage over natural fibers that require pre-shrinking during manufacturing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What types of polyester fabric are used in clothing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Common polyester fabric types include: Polyester taffeta (lightweight, crisp, used for linings and jackets), polyester crepe (textured surface, used for dresses and blouses), polyester satin (smooth, glossy, used for evening wear), polyester chiffon (sheer, lightweight, used for overlays), polyester jersey (stretchy, used for t-shirts and activewear), and polyester fleece (insulating, used for jackets and blankets). Each type has specific properties suited to different garment applications."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can polyester be blended with other fabrics?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, polyester is commonly blended with other fibers to combine properties. Polyester-cotton blends (65/35 or 50/50) combine durability with comfort. Polyester-spandex blends add stretch for activewear and form-fitting garments. Polyester-rayon blends offer drape and softness. Polyester-wool blends add durability and reduce wool's tendency to felt. Polyester-linen blends reduce wrinkling while maintaining linen's appearance. SDF can source various polyester blends based on your performance and comfort requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long do polyester clothes last?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Polyester clothing is highly durable and typically lasts 5-10 years with regular use if cared for properly. Polyester resists abrasion, pilling, and fading better than many natural fibers. Its strength and color retention mean garments maintain appearance over time. Polyester doesn't biodegrade quickly, which contributes to longevity but also environmental persistence. With proper care (gentle washing, avoiding high heat), polyester garments can last significantly longer than cotton equivalents. This durability makes polyester cost-effective over the garment lifecycle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is recycled polyester (rPET)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Recycled polyester (rPET) is polyester made from recycled plastic bottles, polyester waste, or other polyester materials. The plastic is cleaned, melted, and extruded into new polyester fiber. rPET has the same performance properties as virgin polyester but reduces environmental impact by using recycled materials instead of petroleum. It reduces plastic waste and requires less energy to produce than virgin polyester. SDF offers rPET options for brands seeking sustainable materials. rPET is certified through standards like GRS (Global Recycled Standard)."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Polyester Clothing Manufacturing",
+      "provider": { "@id": SITE + "/#organization" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "300",
+          "description": "Starting MOQ | 300 pieces per style"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "Polyester Clothing Manufacturing Process",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Fabric Selection and Sourcing",
+          "text": "Select appropriate polyester fabric type based on garment application - taffeta for jackets, jersey for activewear, satin for evening wear. Source from certified mills. Consider recycled polyester (rPET) for sustainability. Verify fabric specifications including GSM, width, and color fastness."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Pattern Making and Cutting",
+          "text": "Develop patterns accounting for polyester's properties - minimal shrinkage, less ease needed for stretch fabrics. Cut polyester fabric using sharp blades to prevent fraying. Use appropriate cutting techniques for different polyester fabric types."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Sewing and Construction",
+          "text": "Sew polyester using appropriate needle sizes and stitch types. Polyester can be slippery, requiring careful handling. Use ballpoint needles for polyester knits to prevent snags. Overlock or coverstitch seams for stretch fabrics. Polyester's heat sensitivity requires careful pressing."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Finishing and Quality Control",
+          "text": "Apply appropriate finishing techniques - serging, binding, or hemming based on garment type. Polyester resists wrinkling but may require heat setting. Conduct AQL inspection for defects. Check seam strength, color consistency, and construction quality."
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Polyester Clothing Products",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Polyester Activewear"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Polyester Uniforms"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Polyester Outdoor Clothing"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Polyester Blends"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Recycled Polyester (rPET)"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Polyester Clothing Manufacturer</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Since 1998 | Dhaka, Bangladesh</p>
+        <h1 class="hero__title">Polyester Clothing Manufacturer | Durable, Wrinkle-Resistant Garments</h1>
+        <p class="hero__description">
+          SDF Clothing manufactures polyester clothing from our Bangladesh factory with 300 piece MOQ. Polyester offers durability, wrinkle resistance, quick-drying properties, and color retention. We produce 100% polyester garments and polyester blends including poly-cotton, polyester-spandex, and recycled polyester (rPET). GOTS certified factory with 13 international certifications. Ideal for activewear, uniforms, outdoor clothing, and everyday wear. Get a free quote today.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">300</span>
+            <span class="hero__stat-label">Piece MOQ</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">100%</span>
+            <span class="hero__stat-label">Polyester</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">rPET</span>
+            <span class="hero__stat-label">Available</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">25+</span>
+            <span class="hero__stat-label">Years</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get a Free Quote
+          </a>
+          <a href="/contact" class="hero__cta hero__cta--secondary">
+            Request Sample
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="SDF Clothing polyester manufacturing facility in Bangladesh" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">100% Polyester</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Polyester Blends</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Recycled rPET</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">300 Piece MOQ</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">GOTS Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">13 Certifications</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: What Is Polyester -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What Is Polyester Fabric? | Properties and Characteristics</h2>
+      <p class="section__text">
+        Polyester is a synthetic polymer fabric made from petroleum-derived chemicals through a process called polymerization. First developed in the 1940s, polyester has become one of the world's most widely used textiles. Polyester fibers are strong, durable, and resistant to many environmental factors that degrade natural fibers. The fabric's molecular structure gives it unique properties including wrinkle resistance, color retention, quick-drying capability, and dimensional stability. These characteristics make polyester ideal for clothing applications where durability and easy care are priorities. Our <a href="/clothing-manufacturer-bangladesh">Bangladesh manufacturing</a> ensures consistent polyester quality.
+      </p>
+      <p class="section__text">
+        Polyester is produced as continuous filaments that can be cut into staple fibers or used as filament yarns. The fibers can be engineered with specific properties - microfibers for softness, textured fibers for bulk, or hollow fibers for insulation. Polyester can be woven or knitted into various fabric structures from lightweight chiffons to heavy-duty canvas. The fabric accepts dye readily and holds color well, resisting fading from sunlight and washing. Polyester's versatility allows it to be used in everything from delicate lingerie to heavy-duty workwear. SDF sources certified polyester fabrics for consistent quality and performance. Our <a href="/fabric-sourcing">fabric sourcing service</a> ensures you receive the exact polyester specification your design requires.
+      </p>
+      <p class="section__text">
+        Modern polyester has evolved significantly from early versions that were criticized for poor breathability and comfort. Today's polyester fabrics include moisture-wicking treatments, antimicrobial finishes, and engineered textures that enhance comfort. Performance polyester used in <a href="/activewear-manufacturer">activewear</a> and <a href="/sportswear-manufacturer">sportswear</a> manages sweat, regulates temperature, and provides stretch for movement. These advances have made polyester the dominant fabric for performance apparel. Understanding polyester's properties helps you select the right fabric type for your specific application.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Benefits -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Benefits of Polyester Clothing | Why Brands Choose Polyester</h2>
+      <p class="section__text">
+        Polyester offers numerous advantages that make it a preferred fabric for many clothing applications. Understanding these benefits helps you decide if polyester is right for your product line. Polyester's unique combination of performance, durability, and cost-effectiveness explains its widespread use across fashion, workwear, and performance apparel categories. Our <a href="/oem-clothing-manufacturer">OEM manufacturing</a> supports polyester production at scale.
+      </p>
+
+      <h3 class="section__subtitle">Durability and Strength</h3>
+      <p class="section__text">
+        Polyester is exceptionally strong and resistant to abrasion, tearing, and pilling. The synthetic fibers have high tensile strength, meaning garments withstand wear and tear better than many natural fibers. Polyester doesn't degrade from exposure to sunlight as quickly as natural fibers, making it suitable for outdoor applications. Garments maintain their shape and structure over time because polyester resists stretching and sagging. This durability means polyester garments have longer lifespans, reducing replacement frequency and offering better value over the garment lifecycle. For workwear, uniforms, and activewear where durability is critical, polyester is often the best choice.
+      </p>
+
+      <h3 class="section__subtitle">Wrinkle Resistance</h3>
+      <p class="section__text">
+        One of polyester's most celebrated properties is its resistance to wrinkling. Polyester fibers have memory - they return to their original shape after being crushed or folded. This means polyester garments require minimal ironing and maintain a neat appearance throughout the day. For business apparel, travel clothing, and uniforms where appearance matters, polyester's wrinkle resistance is a significant advantage. Poly-cotton blends retain some of this wrinkle resistance while adding cotton's comfort. The wrinkle-free nature of polyester also reduces garment care time for consumers, a practical benefit that enhances customer satisfaction.
+      </p>
+
+      <h3 class="section__subtitle">Quick-Drying Properties</h3>
+      <p class="section__text">
+        Polyester absorbs very little moisture compared to natural fibers - it's hydrophobic rather than hydrophilic. This property makes polyester quick-drying, as water evaporates rapidly from the fabric surface. For activewear, swimwear, and outdoor clothing, quick drying is essential for comfort and performance. Polyester doesn't become heavy when wet like cotton, which is advantageous for rainwear and water sports applications. The quick-drying nature also means polyester garments are ready to wear sooner after washing. Performance polyester used in <a href="/activewear-manufacturer">activewear</a> is engineered to wick moisture away from the skin, enhancing the quick-drying benefit.
+      </p>
+
+      <h3 class="section__subtitle">Color Retention</h3>
+      <p class="section__text">
+        Polyester accepts dye readily and holds color exceptionally well. The synthetic fiber structure bonds with dye molecules effectively, resulting in vibrant, long-lasting colors. Polyester resists fading from sunlight exposure and repeated washing better than many natural fibers. This color retention means garments maintain their appearance over time, extending their usable life. For brands concerned with brand consistency and customer satisfaction, polyester's color fastness is a significant advantage. Bold, bright colors that might fade in cotton can remain vibrant in polyester. This property makes polyester ideal for branded uniforms, sports apparel, and fashion items where color impact is important.
+      </p>
+
+      <h3 class="section__subtitle">Affordability</h3>
+      <p class="section__text">
+        Polyester is generally more affordable than natural fibers like cotton, wool, or silk. The production process is efficient and scalable, and raw materials (petroleum) are relatively abundant. This cost advantage makes polyester attractive for brands targeting price-sensitive markets or producing large volumes. Even when blended with more expensive natural fibers, polyester reduces overall fabric cost compared to 100% natural alternatives. For startup brands and companies producing at scale, polyester's affordability enables competitive pricing while maintaining quality. The combination of durability and affordability makes polyester cost-effective over the garment lifecycle - lower initial cost plus longer lifespan equals better value.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Polyester Types -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Types of Polyester Fabric | Choosing the Right Polyester</h2>
+      <p class="section__text">
+        Polyester is not a single fabric type but a category encompassing various weaves, finishes, and constructions. Different polyester fabric types serve different applications. Understanding these types helps you select the optimal polyester for your specific garment requirements. Our <a href="/quality-inspection-service">quality inspection service</a> ensures polyester fabric meets specifications.
+      </p>
+
+      <h3 class="section__subtitle">Polyester Taffeta</h3>
+      <p class="section__text">
+        Polyester taffeta is a lightweight, crisp fabric with a smooth surface and subtle sheen. It has a characteristic rustle when handled. Taffeta is commonly used for linings, lightweight jackets, evening wear, and decorative applications. The crisp hand gives structure to garments while remaining lightweight. Taffeta's smooth surface accepts prints and embossing well. SDF sources polyester taffeta in various weights and finishes for diverse applications.
+      </p>
+
+      <h3 class="section__subtitle">Polyester Crepe</h3>
+      <p class="section__text">
+        Polyester crepe has a textured, crinkled surface created by twisted yarns or special weaving techniques. The texture gives crepe a distinctive appearance and drapes well. Polyester crepe is used for dresses, blouses, and flowing garments where drape and visual interest are desired. The textured surface hides minor wrinkles and adds depth to solid colors. Crepe is available in various weights from lightweight chiffon crepe to heavier dress crepe.
+      </p>
+
+      <h3 class="section__subtitle">Polyester Satin</h3>
+      <p class="section__text">
+        Polyester satin has a smooth, glossy surface on one side created by a satin weave structure where warp floats dominate the fabric face. Satin drapes luxuriously and reflects light, creating an elegant appearance. Polyester satin is used for evening wear, lingerie, linings, and decorative applications. The smooth surface can be slippery to sew, requiring appropriate techniques. Polyester satin offers the luxurious appearance of silk satin with greater durability and lower cost.
+      </p>
+
+      <h3 class="section__subtitle">Polyester Chiffon</h3>
+      <p class="section__text">
+        Polyester chiffon is a sheer, lightweight fabric with a slightly rough texture. It's made from finely twisted yarns in a plain weave. Chiffon drapes beautifully and adds ethereal quality to garments. Used for overlays, evening wear, scarves, and decorative applications. Polyester chiffon is more durable and easier to care for than silk chiffon while maintaining similar aesthetic properties. The sheer nature requires appropriate lining for most garment applications.
+      </p>
+
+      <h3 class="section__subtitle">Polyester Jersey</h3>
+      <p class="section__text">
+        Polyester jersey is a knit fabric with a smooth face and textured back, created by weft knitting. Jersey has stretch and recovery, making it comfortable for form-fitting garments. Used for t-shirts, activewear, leggings, and casual wear. Polyester jersey can be engineered with moisture-wicking properties for performance applications. The knit structure provides breathability and comfort. Polyester-spandex jersey blends add stretch for enhanced fit and movement. Our <a href="/t-shirt-manufacturer">t-shirt manufacturing</a> uses polyester jersey for performance tees.
+      </p>
+
+      <h3 class="section__subtitle">Polyester Fleece</h3>
+      <p class="section__text">
+        Polyester fleece is a soft, insulating fabric created by brushing or napping polyester knit fabric to create a fuzzy surface. Fleece provides warmth without weight and wicks moisture away from the skin. Used for jackets, hoodies, blankets, and activewear. Fleece is lightweight, breathable, and quick-drying. Polyester fleece is available in various weights from lightweight microfleece to heavy polar fleece. It's a popular alternative to wool for its performance and ease of care. Fleece can be made from recycled polyester for environmental benefits.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Polyester fabric types comparison with properties and applications">
+          <caption>Polyester Fabric Type Comparison</caption>
+          <thead>
+            <tr>
+              <th>Fabric Type</th>
+              <th>Properties</th>
+              <th>Weight</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Taffeta</strong></td>
+              <td>Crisp, smooth, sheen, rustles</td>
+              <td>Lightweight</td>
+              <td>Linings, jackets, evening wear</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Crepe</strong></td>
+              <td>Textured, drapes well, hides wrinkles</td>
+              <td>Light-Medium</td>
+              <td>Dresses, blouses, flowing garments</td>
+            </tr>
+            <tr>
+              <td><strong>Satin</strong></td>
+              <td>Smooth, glossy, drapes luxuriously</td>
+              <td>Light-Medium</td>
+              <td>Evening wear, lingerie, linings</td>
+            </tr>
+            <tr>
+              <td><strong>Chiffon</strong></td>
+              <td>Sheer, lightweight, drapes</td>
+              <td>Very Light</td>
+              <td>Overlays, evening wear, scarves</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Jersey</strong></td>
+              <td>Stretchy, smooth face, comfortable</td>
+              <td>Light-Medium</td>
+              <td>T-shirts, activewear, leggings</td>
+            </tr>
+            <tr>
+              <td><strong>Fleece</strong></td>
+              <td>Soft, insulating, wicks moisture</td>
+              <td>Medium-Heavy</td>
+              <td>Jackets, hoodies, blankets</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Polyester vs Cotton -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Polyester vs Cotton | Which Fabric Is Better for Your Brand?</h2>
+      <p class="section__text">
+        Polyester and cotton are the world's two most widely used clothing fibers, each with distinct advantages. Choosing between them depends on your brand positioning, target market, performance requirements, and sustainability goals. Understanding the differences helps you make informed fabric decisions.
+      </p>
+
+      <h3 class="section__subtitle">Durability Comparison</h3>
+      <p class="section__text">
+        Polyester significantly outperforms cotton in durability. Polyester fibers are stronger and more resistant to abrasion, tearing, and pilling. Polyester garments maintain their shape and structure longer, while cotton can stretch, sag, and wear out more quickly. Polyester doesn't degrade from sunlight exposure as rapidly as cotton. For workwear, uniforms, activewear, and children's clothing where durability matters, polyester is superior. Cotton is softer initially but shows wear faster. If your brand emphasizes longevity and value, polyester's durability is advantageous. Our <a href="/cotton-clothing-manufacturer">cotton clothing manufacturing</a> offers natural alternatives for brands prioritizing natural fibers.
+      </p>
+
+      <h3 class="section__subtitle">Comfort and Breathability</h3>
+      <p class="section__text">
+        Cotton has traditionally been superior in comfort and breathability. Cotton fibers are natural, absorbent, and feel soft against the skin. Cotton absorbs moisture, keeping skin dry in warm conditions. Polyester can feel less breathable and may trap heat, though modern performance polyester with moisture-wicking properties has narrowed this gap. For everyday casual wear, undergarments, and warm-weather clothing, cotton's comfort is often preferred. For activewear and performance applications, engineered polyester can provide better moisture management. Poly-cotton blends offer a compromise, combining cotton's comfort with polyester's durability.
+      </p>
+
+      <h3 class="section__subtitle">Care and Maintenance</h3>
+      <p class="section__text">
+        Polyester wins significantly on ease of care. Polyester resists wrinkling, shrinks minimally, dries quickly, and generally requires no ironing. Cotton wrinkles easily, shrinks more (especially if not pre-shrunk), takes longer to dry, and often requires ironing for a neat appearance. For consumers who value convenience and low-maintenance garments, polyester is advantageous. For uniforms, travel clothing, and busy professionals, polyester's easy-care properties are significant benefits. Cotton requires more care but can be more forgiving of washing mistakes.
+      </p>
+
+      <h3 class="section__subtitle">Environmental Impact</h3>
+      <p class="section__text">
+        Cotton is generally considered more environmentally friendly than virgin polyester. Cotton is a renewable natural fiber that biodegrades. Organic cotton grown without pesticides is even more sustainable. However, cotton requires significant water and land to cultivate. Virgin polyester is made from petroleum, a non-renewable resource, and production generates greenhouse gases. Polyester sheds microplastics during washing, polluting waterways. However, recycled polyester (rPET) made from plastic bottles reduces environmental impact. Polyester's durability means garments last longer, potentially reducing consumption. For brands prioritizing sustainability, organic cotton or recycled polyester are better choices than virgin polyester. Learn about our <a href="/sustainability">sustainability initiatives</a>.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Comparison of polyester and cotton fabrics across key factors">
+          <caption>Polyester vs Cotton Comparison</caption>
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Polyester</th>
+              <th>Cotton</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Durability</strong></td>
+              <td>Excellent - strong, abrasion-resistant</td>
+              <td>Good - wears faster than polyester</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Comfort</strong></td>
+              <td>Good - improved with modern treatments</td>
+              <td>Excellent - natural, soft, breathable</td>
+            </tr>
+            <tr>
+              <td><strong>Breathability</strong></td>
+              <td>Moderate - performance versions wick moisture</td>
+              <td>Excellent - absorbent natural fiber</td>
+            </tr>
+            <tr>
+              <td><strong>Wrinkle Resistance</strong></td>
+              <td>Excellent - minimal wrinkling</td>
+              <td>Poor - wrinkles easily</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Care</strong></td>
+              <td>Easy - quick-drying, minimal shrinkage</td>
+              <td>Moderate - requires ironing, shrinks more</td>
+            </tr>
+            <tr>
+              <td><strong>Environmental Impact</strong></td>
+              <td>Higher - petroleum-based, microplastics</td>
+              <td>Lower - renewable, biodegradable</td>
+            </tr>
+            <tr>
+              <td><strong>Cost</strong></td>
+              <td>Lower - synthetic production is efficient</td>
+              <td>Higher - natural cultivation is resource-intensive</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Best For</strong></td>
+              <td>Activewear, uniforms, performance, durability</td>
+              <td>Casual wear, comfort, natural preference</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Polyester Blends -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Polyester Blends | Combining Polyester with Other Fibers</h2>
+      <p class="section__text">
+        Polyester is frequently blended with other fibers to combine the advantages of multiple materials. Blends offer performance characteristics that neither fiber provides alone. Understanding common polyester blends helps you select fabrics optimized for your specific requirements.
+      </p>
+
+      <h3 class="section__subtitle">Polyester-Cotton Blends</h3>
+      <p class="section__text">
+        Polyester-cotton blends are the most common polyester blend, typically combining 65% polyester with 35% cotton, though ratios vary. The blend combines polyester's durability, wrinkle resistance, and color retention with cotton's comfort, breathability, and natural feel. Poly-cotton is softer and more comfortable than pure polyester while more durable and easier to care for than pure cotton. This blend is widely used for casual shirts, uniforms, workwear, and everyday garments. The 65/35 ratio provides a balanced performance, but other ratios like 50/50 offer different characteristics. SDF sources poly-cotton fabrics in various weights and constructions.
+      </p>
+
+      <h3 class="section__subtitle">Polyester-Spandex Blends</h3>
+      <p class="section__text">
+        Polyester-spandex blends (also called elastane or Lycra) add stretch and recovery to polyester. Spandex content typically ranges from 5-20% depending on the desired stretch level. These blends are essential for activewear, leggings, swimwear, and form-fitting garments where movement and fit are critical. Polyester provides durability and moisture-wicking properties while spandex adds four-way stretch and shape retention. The combination creates performance fabrics comfortable for active use. Our <a href="/activewear-manufacturer">activewear manufacturing</a> extensively uses polyester-spandex blends for optimal performance.
+      </p>
+
+      <h3 class="section__subtitle">Polyester-Rayon Blends</h3>
+      <p class="section__text">
+        Polyester-rayon blends combine polyester's strength with rayon's drape and softness. Rayon is a semi-synthetic fiber made from regenerated cellulose, offering a luxurious feel similar to silk. The blend creates fabrics that drape beautifully while maintaining durability. Used for dresses, blouses, and flowing garments where drape and appearance are priorities. Polyester-rayon blends are more affordable than pure rayon while offering similar aesthetic properties with better durability.
+      </p>
+
+      <h3 class="section__subtitle">Polyester-Wool Blends</h3>
+      <p class="section__text">
+        Polyester-wool blends add durability and reduce wool's tendency to felt and shrink. Wool provides warmth and natural luxury feel while polyester adds strength and easy care. These blends are used for suits, jackets, and winter wear where wool's warmth is desired but pure wool's care requirements are impractical. The blend maintains wool's appearance while improving garment longevity and reducing maintenance. Polyester content typically ranges from 20-50% depending on the desired balance of properties.
+      </p>
+
+      <h3 class="section__subtitle">Polyester-Linen Blends</h3>
+      <p class="section__text">
+        Polyester-linen blends reduce linen's characteristic wrinkling while maintaining its natural appearance and breathability. Linen provides crisp texture and natural aesthetic while polyester adds wrinkle resistance and durability. These blends are used for summer clothing, casual shirts, and warm-weather garments where linen's appearance is desired without its high-maintenance nature. The blend retains linen's casual, natural look while improving garment care and longevity.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Polyester blend types and their characteristics">
+          <caption>Polyester Blend Types and Applications</caption>
+          <thead>
+            <tr>
+              <th>Blend Type</th>
+              <th>Typical Ratio</th>
+              <th>Benefits</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Polyester-Cotton</strong></td>
+              <td>65/35 or 50/50</td>
+              <td>Durability + comfort, wrinkle resistance</td>
+              <td>Shirts, uniforms, workwear</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Polyester-Spandex</strong></td>
+              <td>95/5 to 80/20</td>
+              <td>Stretch, recovery, performance</td>
+              <td>Activewear, leggings, swimwear</td>
+            </tr>
+            <tr>
+              <td><strong>Polyester-Rayon</strong></td>
+              <td>65/35 or 50/50</td>
+              <td>Drape + durability, softness</td>
+              <td>Dresses, blouses, flowing garments</td>
+            </tr>
+            <tr>
+              <td><strong>Polyester-Wool</strong></td>
+              <td>80/20 to 50/50</td>
+              <td>Warmth + durability, reduced felting</td>
+              <td>Suits, jackets, winter wear</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Polyester-Linen</strong></td>
+              <td>65/35 or 50/50</td>
+              <td>Natural look + wrinkle resistance</td>
+              <td>Summer clothing, casual shirts</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Recycled Polyester -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Recycled Polyester (rPET) | Sustainable Polyester Option</h2>
+      <p class="section__text">
+        Recycled polyester, commonly abbreviated rPET, is polyester made from recycled materials rather than virgin petroleum. rPET addresses environmental concerns associated with virgin polyester while maintaining performance properties. For brands prioritizing sustainability, rPET offers a way to use polyester with reduced environmental impact.
+      </p>
+
+      <h3 class="section__subtitle">How rPET Is Made</h3>
+      <p class="section__text">
+        rPET is primarily made from recycled plastic bottles (PET bottles). The bottles are collected, cleaned, sorted, and shredded into flakes. The flakes are melted and extruded into polyester fiber. The resulting rPET fiber has identical chemical properties to virgin polyester and can be used in the same applications. rPET can also be made from post-industrial polyester waste or recycled polyester garments. The recycling process diverts plastic waste from landfills and reduces demand for virgin petroleum. GRS (Global Recycled Standard) certification verifies recycled content and responsible production practices.
+      </p>
+
+      <h3 class="section__subtitle">Environmental Benefits of rPET</h3>
+      <p class="section__text">
+        rPET offers significant environmental advantages over virgin polyester. Production requires approximately 50% less energy than virgin polyester, reducing greenhouse gas emissions. rPET uses recycled materials instead of petroleum, conserving non-renewable resources. The process diverts plastic bottles from landfills and oceans, addressing plastic waste problems. rPET maintains polyester's performance properties - durability, wrinkle resistance, color retention - so sustainability doesn't require sacrificing quality. For brands with sustainability commitments, rPET enables polyester use with reduced environmental footprint. Learn more about our <a href="/sustainability">sustainability initiatives</a> and recycled material options.
+      </p>
+
+      <h3 class="section__subtitle">rPET Certifications</h3>
+      <p class="section__text">
+        When sourcing rPET, verify certifications to ensure recycled content claims are legitimate. GRS (Global Recycled Standard) is the leading certification, verifying recycled content, chain of custody, and environmental/social practices. RCS (Recycled Claim Standard) is a simpler certification verifying recycled content without the full GRS requirements. OEKO-TEX certification ensures rPET fabrics are free from harmful chemicals. SDF provides GRS-certified rPET options for brands requiring verified sustainable materials. Our <a href="/certifications">certifications</a> include GRS for recycled polyester.
+      </p>
+
+      <h3 class="section__subtitle">rPET vs Virgin Polyester</h3>
+      <p class="section__text">
+        rPET has identical performance properties to virgin polyester - same durability, wrinkle resistance, color retention, and care requirements. The difference is environmental, not functional. rPET may have slightly higher cost due to recycling processes, but the gap is narrowing as recycling scales. rPET can be recycled again, though quality degrades with each recycling cycle. For most applications, rPET is a direct substitute for virgin polyester with sustainability benefits. Brands can transition to rPET without changing garment specifications or performance expectations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: FAQ -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Polyester Clothing Manufacturing FAQ</h2>
+
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">Is polyester good for clothing?</h3>
+          <p class="faq__answer">
+            Yes, polyester is excellent for many clothing applications. It offers durability, wrinkle resistance, color retention, quick-drying properties, and affordability. Polyester is ideal for activewear, outdoor clothing, uniforms, and everyday garments where performance and easy care matter. Modern polyester fabrics have improved breathability and comfort compared to older versions through moisture-wicking treatments and engineered textures. Blends like polyester-cotton combine polyester's durability with cotton's comfort for balanced performance. SDF produces high-quality polyester garments suitable for diverse applications from performance apparel to casual wear.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between polyester and poly-cotton?</h3>
+          <p class="faq__answer">
+            Polyester is 100% synthetic made from petroleum-derived chemicals, while poly-cotton is a blend combining polyester and cotton fibers, typically in 65/35 or 50/50 ratios. 100% polyester offers maximum durability, wrinkle resistance, and quick-drying properties but can feel less breathable. Poly-cotton blends provide a balance - polyester adds strength and wrinkle resistance, cotton adds comfort and breathability. Poly-cotton is softer and more comfortable against the skin than pure polyester but slightly less durable. Poly-cotton also requires more care than pure polyester (more wrinkling, more shrinkage). Choose pure polyester for maximum performance and durability, poly-cotton for balanced comfort and performance.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">Is polyester clothing bad for the environment?</h3>
+          <p class="faq__answer">
+            Polyester has legitimate environmental concerns. It's made from petroleum, a non-renewable resource, and production generates greenhouse gases. Polyester sheds microplastics during washing - tiny synthetic fibers that pollute waterways and marine ecosystems. Polyester doesn't biodegrade quickly, contributing to long-term waste. However, polyester's durability means garments last longer, potentially reducing consumption frequency. Recycled polyester (rPET) made from plastic bottles significantly reduces environmental impact by using recycled materials instead of virgin petroleum. rPET production requires approximately 50% less energy than virgin polyester. Our <a href="/sustainability">sustainability initiatives</a> include rPET options and responsible sourcing to mitigate environmental impact.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">Does polyester shrink when washed?</h3>
+          <p class="faq__answer">
+            Polyester has minimal shrinkage compared to natural fibers like cotton or wool. Polyester typically shrinks less than 3% during washing, which is barely noticeable and often within normal fit tolerance. This low shrinkage is one of polyester's advantages - garments maintain size and shape over many washes. However, polyester can shrink slightly if washed in hot water or dried at high temperatures. To minimize any potential shrinkage, wash polyester in cold or warm water (not hot) and tumble dry on low heat or air dry. Polyester's low shrinkage means pre-shrinking during manufacturing is rarely necessary, unlike cotton which often requires pre-shrinking processes.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What types of polyester fabric are used in clothing?</h3>
+          <p class="faq__answer">
+            Common polyester fabric types include: Polyester taffeta (lightweight, crisp, used for linings and lightweight jackets), polyester crepe (textured surface, drapes well, used for dresses and blouses), polyester satin (smooth, glossy surface, used for evening wear and linings), polyester chiffon (sheer, lightweight, used for overlays and decorative applications), polyester jersey (knit fabric with stretch, used for t-shirts and activewear), and polyester fleece (soft, insulating, used for jackets and hoodies). Each type has specific properties suited to different applications - taffeta for structure, crepe for drape, satin for luxury, chiffon for ethereal quality, jersey for comfort and stretch, fleece for warmth.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">Can polyester be blended with other fabrics?</h3>
+          <p class="faq__answer">
+            Yes, polyester is commonly blended with other fibers to combine properties from multiple materials. Polyester-cotton blends (65/35 or 50/50) combine durability with comfort. Polyester-spandex blends (95/5 to 80/20) add stretch for activewear and form-fitting garments. Polyester-rayon blends offer drape and softness while maintaining durability. Polyester-wool blends add durability and reduce wool's tendency to felt and shrink. Polyester-linen blends reduce wrinkling while maintaining linen's natural appearance. SDF can source various polyester blends based on your specific performance and comfort requirements. Blends allow you to tailor fabric properties to your exact needs.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">How long do polyester clothes last?</h3>
+          <p class="faq__answer">
+            Polyester clothing is highly durable and typically lasts 5-10 years with regular use if cared for properly. Polyester resists abrasion, tearing, pilling, and fading better than many natural fibers including cotton and wool. The synthetic fibers have high tensile strength and maintain shape over time. Polyester's color retention means garments maintain appearance without fading from sunlight or washing. Polyester doesn't biodegrade quickly, which contributes to longevity but also environmental persistence. With proper care - gentle washing in cold or warm water, avoiding high heat drying - polyester garments can last significantly longer than cotton equivalents. This durability makes polyester cost-effective over the garment lifecycle despite potentially higher initial cost for some applications.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What is recycled polyester (rPET)?</h3>
+          <p class="faq__answer">
+            Recycled polyester (rPET) is polyester made from recycled materials rather than virgin petroleum. The primary source is recycled plastic bottles (PET bottles). Bottles are collected, cleaned, shredded into flakes, melted, and extruded into new polyester fiber. rPET has identical chemical properties and performance characteristics to virgin polyester - same durability, wrinkle resistance, color retention, and care requirements. The environmental benefit comes from using recycled materials instead of virgin petroleum, reducing energy consumption by approximately 50% and diverting plastic waste from landfills. rPET can be certified through GRS (Global Recycled Standard) to verify recycled content. SDF offers rPET options for brands seeking sustainable materials. rPET is increasingly used in activewear, outdoor clothing, and sustainable fashion lines.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: CTA -->
+  <section class="section section--cta">
+    <div class="section__container section__container--narrow">
+      <h2 class="section__title">Ready to Manufacture Polyester Clothing?</h2>
+      <p class="section__text">
+        SDF Clothing manufactures polyester clothing from our Bangladesh factory with 25+ years of experience. We produce 100% polyester garments, polyester blends, and recycled polyester (rPET) options. 300 piece MOQ makes us accessible to startup brands while our capacity supports established labels. GOTS certified with 13 international certifications.
+      </p>
+      <p class="section__text">
+        Get a free FOB quote within 48 hours. We provide detailed pricing for 100% polyester, poly-cotton, polyester-spandex, and rPET options. No commitment required.
+      </p>
+      <div class="section__ctas">
+        <a href={whatsappQuoteUrl} class="section__cta section__cta--primary" target="_blank" rel="noopener noreferrer">
+          Get a Free Quote
+        </a>
+        <a href="/contact" class="section__cta section__cta--secondary">
+          Contact Our Team
+        </a>
+        <a href="/tools/sample-request" class="section__cta section__cta--secondary">
+          Request Sample
+        </a>
+      </div>
+      <p class="section__text section__text--small">
+        Last updated: May 2026 | Average response time: 24 hours
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: var(--spacing-sm) 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__container--narrow {
+    max-width: 700px;
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+</BaseLayout>

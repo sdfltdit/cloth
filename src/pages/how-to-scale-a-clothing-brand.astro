@@ -1,0 +1,1215 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "How to Scale a Clothing Brand | Production Guide 2026";
+const pageDescription = "How to scale a clothing brand from 300 to 10,000 pieces. Covers MOQ increases, pricing, wholesale entry and international expansion with real numbers.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20help%20scaling%20my%20clothing%20brand`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-23",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle,
+            "item": canonicalUrl.href
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#organization" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "When is the right time to scale a clothing brand?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Scale your clothing brand when you have consistent sell-through rates above 70%, repeat customer rates above 20%, are running out of stock before season end, getting wholesale enquiries, and monthly revenue consistently above $10,000. These signals indicate product-market fit and demand that justifies increased production volume. Scale gradually - increase MOQ from 300 to 500 pieces first, then to 1,000 pieces as you validate demand at each level."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I negotiate lower manufacturing prices as I grow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Negotiate better prices by offering volume commitment - promise annual production volume in exchange for lower unit prices. Consolidate fabrics across styles to reduce sourcing costs. Improve payment terms from 30/70 to 20/80 after establishing a track record. Request annual pricing agreements instead of order-by-order pricing. Place orders early to qualify for early payment discounts. Simplify designs to reduce labor costs. Negotiate tactically without damaging relationships - manufacturers respond to data-driven discussions about volume and consistency."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What MOQ should I aim for when scaling?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Target MOQ progression: start at 300 pieces per style, scale to 500 pieces for 10-15% cost reduction, then 1,000 pieces for additional 8-12% reduction. Only increase MOQ after validating demand at each level. For wholesale expansion, aim for 1,000-2,000 pieces per style to meet boutique order requirements. For international markets, 2,000-5,000 pieces per style justifies specialized labeling and certification investments. Scale MOQ gradually - don't jump from 300 to 5,000 without intermediate validation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I handle cash flow when increasing production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Manage cash flow by timing production with sales cycles - produce SS collections in Q4 for Q2 delivery, AW collections in Q2 for Q4 delivery. Negotiate payment terms that preserve working capital | 30/70 is standard, request 20/80 after establishing track record. Secure pre-orders or wholesale commitments before increasing production volume. Use factoring or inventory financing if needed. Maintain cash reserves equivalent to 2-3 months of production costs. Plan for seasonal cash flow fluctuations - peak production requires more working capital than peak sales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I enter wholesale as a clothing brand?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter wholesale when you have consistent production quality, sufficient inventory to meet wholesale timelines (60-90 day payment terms), and brand recognition that attracts boutique interest. Minimum wholesale orders are typically 12-24 pieces per style, requiring inventory investment of 50-100 units per style. Plan production 4-6 months before trade show season - SS collections in Q4 for MAGIC in February, AW collections in Q2 for Texworld in September. SDF Clothing's wholesale manufacturing services support boutique order fulfillment with consistent quality across large orders."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many products should a scaling clothing brand have?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A scaling clothing brand should manage 8-15 SKUs per season initially. Fewer SKUs (3-5) limit revenue potential, while too many SKUs (20+) increase complexity and cash flow strain. Focus on core products that sell well - expand within your niche before diversifying. Carry-over 40-60% of successful styles from previous seasons to reduce development costs. Add 4-6 new styles each season to keep the line fresh without overwhelming operations. SKU proliferation kills cash flow - prioritize depth over breadth."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I stay with one manufacturer or diversify?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most growing brands work with 1-2 manufacturers only. Deep relationships with one manufacturer yield better pricing, priority service, and consistent quality. Diversify only when you need category expansion (e.g., adding knitwear to a woven manufacturer) or risk mitigation. Factory dependency has benefits - priority service, better pricing, process alignment. Consider a second manufacturer when your current factory cannot meet capacity, category needs, or geographic requirements. SDF Clothing handles multiple product categories, reducing the need for manufacturer diversification."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I expand my clothing brand internationally?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Expand internationally by understanding market-specific requirements: US requires duty rate awareness and FCC labeling, EU requires REACH compliance and care label regulations, UK post-Brexit requires separate customs from EU and UKCA marking, Australia has straightforward US-like standards. Start with one market, validate demand, then expand. Use localized sizing and marketing. SDF Clothing provides international manufacturing support with documentation for US, EU, UK, and Australian markets."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What production timeline should I plan for seasonal collections?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Plan production timelines 4-6 months before season launch: SS collections produce in Q4 (Oct-Dec) for February delivery, AW collections produce in Q2 (Apr-Jun) for August delivery. Wholesale requires earlier production - SS in Q3 for February trade shows, AW in Q1 for September trade shows. Factor in 40-45 days production plus 30-45 days shipping. Pre-book fabrics 2-3 months before production to secure availability. Build in buffer time for sampling and revisions. SDF Clothing provides clear timeline commitments with track record of on-time delivery."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I manage quality consistency as order volume increases?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Maintain quality consistency by establishing clear quality standards in your tech pack, implementing AQL inspection at appropriate levels (typically 2.5 for garments), using the same manufacturer for consistent processes, conducting pre-production inspections, and maintaining clear communication. As volume increases, invest in third-party inspection services. Document quality issues and track trends. Train factory QC teams on your specific requirements. SDF Clothing's quality inspection service ensures consistent quality across production volumes with detailed QC reports and defect tracking."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": pageTitle,
+      "description": pageDescription,
+      "author": { "@id": SITE + "/#organization" },
+      "publisher": { "@id": SITE + "/#organization" },
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-23"
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Scale a Clothing Brand",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Evaluate Readiness",
+          "text": "Check sell-through rates, repeat customers, stock timing, wholesale enquiries, revenue, and profit margins."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Scale MOQ Gradually",
+          "text": "Increase from 300 to 500 pieces, then 1,000 pieces as you validate demand at each level."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Negotiate Better Pricing",
+          "text": "Use volume commitment, fabric consolidation, better payment terms, and annual agreements."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Enter Wholesale",
+          "text": "Plan production 4-6 months before trade shows with sufficient inventory for boutique orders."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Expand Internationally",
+          "text": "Understand market-specific labeling and certification requirements for US, EU, UK, Australia."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Manage Multiple Collections",
+          "text": "Run SS and AW simultaneously with carry-over styles and seasonal planning."
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">How to Scale a Clothing Brand</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Production Scaling Guide | From 300 to 10,000 Pieces</p>
+        <h1 class="hero__title">How to Scale a Clothing Brand | From 300 Pieces to Wholesale and International Markets</h1>
+        <p class="hero__description">
+          Learn how to scale your clothing brand from startup production to wholesale and international expansion. Covers when to increase MOQ, negotiate better pricing, enter wholesale, expand globally, and manage cash flow. Real numbers, timelines, and actionable strategies for brands selling 50-200 units per month.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">300</span>
+            <span class="hero__stat-label">to 10k Pieces</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">10-25%</span>
+            <span class="hero__stat-label">Cost Reduction</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">4-6</span>
+            <span class="hero__stat-label">Month Timeline</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">10</span>
+            <span class="hero__stat-label">FAQ Questions</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get Scaling Quote
+          </a>
+          <a href="/how-to-start-a-clothing-brand" class="hero__cta hero__cta--secondary">
+            Starting Guide
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.webp" alt="SDF Clothing manufacturing facility for scaling clothing brands" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">300 Piece MOQ</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Volume Pricing</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Wholesale Ready</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Since 1998</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Signs Your Brand Is Ready to Scale -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Signs Your Clothing Brand Is Ready to Scale</h2>
+      <p class="section__text">
+        Scaling your clothing brand requires timing - scale too early and you burn cash on inventory that doesn't sell. Scale too late and you miss revenue opportunities while competitors capture your market. This section outlines the specific signals that indicate your brand is ready to scale production volume. These signals indicate product-market fit and demand that justifies increased production investment.
+      </p>
+      <p class="section__text">
+        Consistent sell-through rate above 70% per season indicates strong demand. Sell-through rate measures how much inventory you sell relative to what you produce. If you're selling 70% or more of your inventory before season end, demand exceeds supply and scaling production will capture additional revenue. Sell-through below 50% indicates overproduction - scale down before increasing volume. Track sell-through by style and category to identify which products justify scaling.
+      </p>
+      <p class="section__text">
+        Repeat customer rate above 20% indicates brand loyalty and product fit. Customers who return to buy again validate your product quality and brand positioning. High repeat rates reduce customer acquisition costs and increase lifetime value, providing the cash flow needed to fund scaling. If repeat rates are below 10%, focus on product and brand before scaling volume. SDF Clothing's <a href="/clothing-manufacturing-cost-guide">cost guide</a> helps calculate customer acquisition costs and lifetime value.
+      </p>
+      <p class="section__text">
+        Running out of stock before end of season indicates unmet demand. If you're selling through inventory before season end, you're leaving revenue on the table. This is a clear signal to increase production volume. However, ensure stockouts are due to demand, not underproduction from conservative ordering. Analyze sell-through timing - if you sell through in the first month, scale significantly. If you sell through in the final month, scale modestly.
+      </p>
+      <p class="section__text">
+        Getting wholesale enquiries from boutiques indicates market validation beyond direct-to-consumer sales. Boutiques only carry brands with proven sales potential and consistent quality. Wholesale enquiries signal that your brand has reached a level where retailers see commercial viability. However, wholesale requires inventory investment and longer payment terms (60-90 days). Ensure you have cash flow to support wholesale expansion before accepting boutique orders.
+      </p>
+      <p class="section__text">
+        Monthly revenue consistently above $10,000 indicates sufficient scale to justify increased production investment. At this revenue level, you have enough data to forecast demand accurately and enough cash flow to fund scaling. Revenue below $5,000 indicates early-stage - focus on validating product-market fit before increasing volume. Revenue between $5,000-10,000 is the transition zone - scale cautiously and monitor cash flow closely.
+      </p>
+
+      <h3 class="section__subtitle">Scaling Readiness Checklist</h3>
+      <p class="section__text">
+        Use this checklist to assess whether your brand is ready to scale production volume. Meet at least 4 of 6 criteria before increasing MOQ.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Signal</th>
+              <th>Metric</th>
+              <th>Ready When</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sell-through rate</strong></td>
+              <td>Percentage of inventory sold per season</td>
+              <td>Above 70%</td>
+            </tr>
+            <tr>
+              <td><strong>Repeat customers</strong></td>
+              <td>Percentage of customers who buy again</td>
+              <td>Above 20%</td>
+            </tr>
+            <tr>
+              <td><strong>Stock timing</strong></td>
+              <td>When inventory sells out</td>
+              <td>Before season end</td>
+            </tr>
+            <tr>
+              <td><strong>Wholesale enquiries</strong></td>
+              <td>Inquiries from boutiques and retailers</td>
+              <td>Consistent, multiple per month</td>
+            </tr>
+            <tr>
+              <td><strong>Monthly revenue</strong></td>
+              <td>Consistent monthly sales revenue</td>
+              <td>Above $10,000</td>
+            </tr>
+            <tr>
+              <td><strong>Profit margin</strong></td>
+              <td>Gross margin on sales</td>
+              <td>Above 40%</td>
+            </tr>
+          </tbody>
+        </table>
+        <caption>Table: Scaling readiness checklist with metrics and thresholds. Meet at least 4 of 6 criteria before increasing production volume.</caption>
+      </div>
+
+      <p class="section__text" style="margin-top: 2rem;">
+        SDF Clothing supports brands at all scaling stages. Our <a href="/low-moq-clothing-manufacturers">low MOQ manufacturing</a> starts at 300 pieces, perfect for validation. As you scale, our volume pricing reduces unit costs by 10-25% across MOQ tiers. Our <a href="/clothing-manufacturers-for-startups">startup manufacturing services</a> provide the foundation for growth, with clear pathways to wholesale and international expansion.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Scaling Your MOQ -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Scaling Your MOQ | From 300 to 1,000+ Pieces</h2>
+      <p class="section__text">
+        Scaling minimum order quantity (MOQ) is the primary mechanism for reducing unit costs as your brand grows. Moving from 300 to 500 pieces typically yields 10-15% cost reduction per unit. Moving from 500 to 1,000 pieces yields an additional 8-12% reduction. These cost reductions come from fabric sourcing efficiencies, labor optimization, and fixed cost amortization across larger production runs. However, scale MOQ only after validating demand at each level to avoid inventory risk.
+      </p>
+      <p class="section__text">
+        The 300 to 500 piece transition is the first scaling milestone. At this level, fabric sourcing becomes more efficient - you can order fabric in larger quantities, reducing fabric unit costs by 5-8%. Labor costs decrease slightly as workers gain efficiency on repeated production. Setup costs (pattern making, sampling) amortize across more units, reducing per-unit fixed costs. However, 500 pieces still represents moderate inventory investment - ensure you have demand signals before increasing from 300.
+      </p>
+      <p class="section__text">
+        The 500 to 1,000 piece transition delivers significant economies of scale. Fabric costs drop 8-12% as mill minimums are met. Labor costs decrease 5-10% as production lines optimize for higher volume. Shipping costs per unit decrease as container space is utilized more efficiently. Total unit cost reduction of 8-12% at this level significantly improves gross margin, enabling either lower retail prices or higher profit margins. However, 1,000 pieces represents substantial inventory investment - scale only after validating 500-piece demand.
+      </p>
+      <p class="section__text">
+        Manage cash flow through MOQ transitions. Increasing from 300 to 500 pieces requires 67% more inventory investment. Increasing from 500 to 1,000 pieces requires 100% more inventory investment. Ensure you have sufficient working capital or pre-orders to fund the increased inventory. Negotiate payment terms that preserve cash flow - request 20/80 instead of 30/70 after establishing track record. Time production with sales cycles to minimize cash tied up in inventory. Our <a href="/tools/moq-calculator">MOQ calculator</a> helps plan inventory investment at different MOQ levels.
+      </p>
+      <p class="section__text">
+        Negotiate MOQ increases with your existing factory. Most manufacturers are willing to lower MOQ requirements for established clients with consistent order history. Request a gradual MOQ increase tied to volume commitments - promise 1,000 pieces across 2-3 styles rather than 1,000 pieces of one style. This spreads inventory risk while still achieving economies of scale. SDF Clothing offers flexible MOQ scaling for growing brands, with clear pricing tiers and volume commitments.
+      </p>
+
+      <h3 class="section__subtitle">MOQ Scaling Cost Reduction</h3>
+      <p class="section__text">
+        This table shows typical cost reductions and cash requirements at different MOQ levels. Use this to plan your scaling strategy and cash flow needs.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Order Size</th>
+              <th>Typical Cost Reduction</th>
+              <th>Cash Required</th>
+              <th>Risk Level</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>300 pcs</strong></td>
+              <td>Baseline</td>
+              <td>Low</td>
+              <td>Low</td>
+            </tr>
+            <tr>
+              <td><strong>500 pcs</strong></td>
+              <td>10-15%</td>
+              <td>Moderate</td>
+              <td>Low-Moderate</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>1,000 pcs</strong></td>
+              <td>18-25%</td>
+              <td>High</td>
+              <td>Moderate</td>
+            </tr>
+            <tr>
+              <td><strong>2,000 pcs</strong></td>
+              <td>25-35%</td>
+              <td>Very High</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td><strong>5,000+ pcs</strong></td>
+              <td>35-45%</td>
+              <td>Very High</td>
+              <td>Very High</td>
+            </tr>
+          </tbody>
+        </table>
+        <caption>Table: MOQ scaling cost reduction and risk assessment. Cost reductions are cumulative from baseline 300-piece level.</caption>
+      </div>
+
+      <p class="section__text" style="margin-top: 2rem;">
+        SDF Clothing provides transparent pricing across MOQ tiers. Our <a href="/tools/price-calculator">price calculator</a> shows exact costs at 300, 500, 1,000, 2,000, and 5,000 piece levels. We support gradual scaling with flexible volume commitments - scale one style to 500 pieces while keeping others at 300, then scale the full line to 1,000 pieces as demand validates. Our <a href="/ecommerce-clothing-manufacturer">ecommerce manufacturing</a> services are designed for brands scaling from startup to established.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Negotiating Better Manufacturing Prices -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Negotiating Better Manufacturing Prices as You Grow</h2>
+      <p class="section__text">
+        Negotiating better manufacturing prices requires data, leverage, and relationship building. As your order volume increases, you gain negotiating power. However, approach negotiations strategically - manufacturers respond to data-driven discussions about volume and consistency, not demands for lower prices. Build relationships first, negotiate second. The following tactics have proven effective for brands scaling from 300 to 1,000+ pieces per style.
+      </p>
+      <p class="section__text">
+        Volume commitment is the most powerful negotiation tactic. Promise annual production volume in exchange for lower unit prices. For example, commit to 3,000 pieces per year across 3 styles at 1,000 pieces each, in exchange for 15% lower unit pricing. Manufacturers value predictable volume and will discount prices to secure it. Ensure you can meet the commitment - broken volume commitments damage relationships. Start with conservative commitments and increase as you validate demand.
+      </p>
+      <p class="section__text">
+        Fabric consolidation reduces sourcing costs. If you use the same fabric across multiple styles, manufacturers can source in larger quantities, achieving mill discounts of 5-10%. Consolidate fabrics within a collection - use the same cotton for t-shirts, hoodies, and sweatpants. Consolidate across seasons - carry over successful fabrics from previous collections. Fewer fabrics across more styles equals savings. Request fabric consolidation pricing from your manufacturer and compare against sourcing fabrics separately.
+      </p>
+      <p class="section__text">
+        Payment term improvement reduces working capital costs. Standard payment terms are 30% deposit to start production and 70% before shipment. After establishing a track record of reliable payments, negotiate to 20% deposit and 80% before shipment. This preserves working capital by reducing upfront cash requirements. Some manufacturers offer 10/90 for long-term clients with excellent payment history. Better payment terms effectively reduce your cost of capital, even if unit pricing remains unchanged.
+      </p>
+      <p class="section__text">
+        Annual pricing agreements lock in rates for 12 months. Instead of negotiating price on each order, negotiate an annual agreement with fixed pricing for committed volume. This protects you from price increases and provides budget certainty. Manufacturers benefit from predictable production planning. Annual agreements typically offer 5-10% lower pricing than order-by-order pricing. Include volume commitments and payment terms in the agreement. Review annually and renegotiate as volume increases.
+      </p>
+      <p class="section__text">
+        Early order placement qualifies for early payment discounts. Manufacturers offer 2-3% discounts for orders placed 3-4 months in advance and paid within 30 days. Early orders help manufacturers plan production and secure fabric availability. If you have cash flow and demand certainty, take advantage of early order discounts. This effectively reduces unit costs without requiring increased volume. Coordinate early orders with your sales cycles - produce SS collections in Q4 for February delivery.
+      </p>
+      <p class="section__text">
+        Simplified designs reduce labor costs. Complex designs with many components require more labor and skill, increasing production costs. Simplify designs where possible without compromising brand identity - reduce trim count, eliminate complex construction, use fewer fabric colors. Simpler designs cost 10-20% less to produce. Use the savings to either improve margins or lower retail prices. Balance design complexity with cost considerations as you scale.
+      </p>
+
+      <h3 class="section__subtitle">Negotiation Tactics and Savings</h3>
+      <p class="section__text">
+        This table outlines negotiation tactics, typical savings, and when to use each tactic. Combine multiple tactics for maximum cost reduction.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Tactic</th>
+              <th>Typical Saving</th>
+              <th>When to Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Volume commitment</strong></td>
+              <td>10-15%</td>
+              <td>After validating demand at current MOQ</td>
+            </tr>
+            <tr>
+              <td><strong>Fabric consolidation</strong></td>
+              <td>5-10%</td>
+              <td>When using same fabric across 3+ styles</td>
+            </tr>
+            <tr>
+              <td><strong>Better payment terms</strong></td>
+              <td>2-5% (working capital)</td>
+              <td>After 6+ months of reliable payments</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Annual agreements</strong></td>
+              <td>5-10%</td>
+              <td>When committing to annual volume</td>
+            </tr>
+            <tr>
+              <td><strong>Early order placement</strong></td>
+              <td>2-3%</td>
+              <td>When cash flow allows early payment</td>
+            </tr>
+            <tr>
+              <td><strong>Simplified designs</strong></td>
+              <td>10-20%</td>
+              <td>When reducing design complexity</td>
+            </tr>
+          </tbody>
+        </table>
+        <caption>Table: Negotiation tactics with typical savings and usage timing. Combine tactics for maximum cost reduction.</caption>
+      </div>
+
+      <p class="section__text" style="margin-top: 2rem;">
+        SDF Clothing offers transparent pricing with clear volume discounts. Our <a href="/private-label-manufacturer">private label manufacturing</a> and <a href="/oem-clothing-manufacturer">OEM manufacturing</a> services both include volume pricing tiers. We negotiate fairly based on volume and relationship - we don't require annual commitments for volume pricing, and we offer flexible payment terms as your track record grows. Our <a href="/wholesale-clothing-supplier">wholesale services</a> provide boutique-level pricing for brands expanding into retail.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: When to Expand Your Product Line -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">When to Expand Your Product Line</h2>
+      <p class="section__text">
+        Expanding your product line increases revenue potential but also increases complexity and cash flow strain. The right time to expand depends on your current performance and market position. Expand within your niche first - if t-shirts work, try hoodies and sweatpants before adding dresses or jackets. Validate new styles with small runs before full production. This section provides strategic guidance on product line expansion for scaling brands.
+      </p>
+      <p class="section__text">
+        Expand within your niche before diversifying. If your brand is known for t-shirts, add related categories like hoodies, sweatpants, and long-sleeve tops before expanding to dresses or jackets. Customers who buy your t-shirts are likely to buy hoodies, but may not be interested in dresses. Niche expansion leverages your existing customer base and brand positioning. Diversifying too early confuses customers and dilutes brand identity. SDF Clothing supports category expansion with our full product range manufacturing capabilities.
+      </p>
+      <p class="section__text">
+        Validate new styles with small runs before full production. Instead of ordering 500 pieces of a new style, order 100-200 pieces to test market response. Small test runs reduce inventory risk and provide real customer feedback. If the test style sells through quickly and generates positive reviews, scale to full production volume. If test performance is weak, discontinue without significant loss. Small test runs cost more per unit but save money overall by avoiding failed product investments.
+      </p>
+      <p class="section__text">
+        Manage SKU count to avoid proliferation that kills cash flow. A scaling clothing brand should manage 8-15 SKUs per season initially. Fewer SKUs limit revenue potential, while too many SKUs increase complexity and cash flow strain. Each SKU requires inventory investment, marketing spend, and operational management. Focus on core products that sell well - expand depth (more units of successful styles) before expanding breadth (more styles). Carry-over 40-60% of successful styles from previous seasons to reduce development costs.
+      </p>
+      <p class="section__text">
+        Add 4-6 new styles each season to keep the line fresh without overwhelming operations. This provides newness for returning customers while maintaining operational manageability. Replace bottom-performing styles with new designs rather than continuously adding to the line. Analyze sales data by style - identify top performers and bottom performers. Discontinue bottom performers after 2 seasons of poor performance. Focus resources on styles that generate the most revenue and profit.
+      </p>
+      <p class="section__text">
+        Consider production complexity when expanding. Adding simple products like t-shirts to a line of jackets is operationally manageable. Adding complex products like jackets to a line of t-shirts increases production complexity significantly. Complex products require longer lead times, more skilled labor, and higher quality control. Ensure your manufacturer can handle the complexity of expanded product lines. SDF Clothing manufactures both simple and complex products, enabling product line expansion without manufacturer changes.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Entering Wholesale -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Entering Wholesale | Manufacturing Requirements</h2>
+      <p class="section__text">
+        Wholesale expansion changes manufacturing requirements significantly. Retail buyers expect consistent quality across large orders, reliable delivery timelines, and sufficient inventory to meet order minimums. Wholesale orders typically require 12-24 pieces per style per boutique, with payment terms of 60-90 days. This section outlines the manufacturing considerations for wholesale expansion and how to prepare your production for retail buyers.
+      </p>
+      <p class="section__text">
+        Retail buyers need consistent quality across large orders. A boutique ordering 24 pieces per style expects all 24 pieces to meet the same quality standard. Variability that might be acceptable in direct-to-consumer sales is unacceptable in wholesale. One defective piece can damage your relationship with a retailer. Implement AQL inspection at appropriate levels (typically 2.5 for garments) and use third-party inspection services for wholesale orders. SDF Clothing's <a href="/quality-inspection-service">quality inspection service</a> ensures consistent quality across production volumes.
+      </p>
+      <p class="section__text">
+        Minimum wholesale orders for boutiques range from 12-24 pieces per style. To support wholesale, you need inventory of 50-100 units per style to meet multiple boutique orders. This requires significant inventory investment - calculate your cash flow needs before accepting wholesale orders. Plan production 4-6 months before wholesale delivery to account for longer lead times. Coordinate wholesale production with your direct-to-consumer production to optimize efficiency.
+      </p>
+      <p class="section__text">
+        Line sheets and lookbooks are essential for wholesale. Line sheets show product photos, pricing, and wholesale terms. Lookbooks show lifestyle images and brand positioning. While these are marketing materials, they affect manufacturing by setting expectations for product delivery. Ensure your line sheet accurately reflects what you can produce and deliver. Don't promise products in your line sheet that you cannot manufacture at scale. SDF Clothing provides production samples for line sheet photography.
+      </p>
+      <p class="section__text">
+        Trade show production timelines require early planning. Major trade shows like MAGIC (Las Vegas, February and August) and Texworld (New York, January and July) require collections to be ready 4-6 months in advance. SS collections must be produced in Q4 (October-December) for February trade shows. AW collections must be produced in Q2 (April-June) for September trade shows. Plan your production calendar around trade show schedules to maximize wholesale opportunities.
+      </p>
+
+      <h3 class="section__subtitle">Wholesale Production Timeline</h3>
+      <p class="section__text">
+        This table shows the production calendar for trade show seasons. Plan your production 4-6 months before trade show delivery.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Season</th>
+              <th>Trade Show</th>
+              <th>Order Deadline</th>
+              <th>Production</th>
+              <th>Delivery</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>SS collection</strong></td>
+              <td>MAGIC (February)</td>
+              <td>November-December</td>
+              <td>October-December</td>
+              <td>January-February</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>SS collection</strong></td>
+              <td>Texworld (January)</td>
+              <td>October-November</td>
+              <td>October-November</td>
+              <td>December-January</td>
+            </tr>
+            <tr>
+              <td><strong>AW collection</strong></td>
+              <td>MAGIC (August)</td>
+              <td>May-June</td>
+              <td>April-June</td>
+              <td>July-August</td>
+            </tr>
+            <tr>
+              <td><strong>AW collection</strong></td>
+              <td>Texworld (September)</td>
+              <td>June-July</td>
+              <td>May-July</td>
+              <td>August-September</td>
+            </tr>
+          </tbody>
+        </table>
+        <caption>Table: Wholesale production timeline for trade show seasons. Plan production 4-6 months before trade show delivery.</caption>
+      </div>
+
+      <p class="section__text" style="margin-top: 2rem;">
+        Wholesale requires longer payment terms | 60-90 days instead of immediate payment for direct-to-consumer sales. This affects cash flow significantly. Plan for working capital to cover production costs while waiting for wholesale payment. Negotiate shorter payment terms where possible - some boutiques pay 30 days after delivery. Use factoring or inventory financing if needed. SDF Clothing offers flexible payment terms for wholesale orders, supporting brands through the cash flow challenges of retail expansion.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: International Expansion -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">International Expansion | New Markets, New Logistics</h2>
+      <p class="section__text">
+        International expansion opens new revenue opportunities but introduces complexity in labeling, certification, and logistics. Each market has specific requirements - US requires duty rate awareness and FCC labeling, EU requires REACH compliance and care label regulations, UK post-Brexit requires separate customs from EU and UKCA marking, Australia has straightforward US-like standards. This section outlines market-specific requirements and how to prepare your manufacturing for international sales.
+      </p>
+      <p class="section__text">
+        US expansion requires understanding duty rates and labeling requirements. Duty rates vary by fiber content - cotton garments typically have lower duty rates than synthetic garments. Calculate landed cost including duty when pricing for the US market. Labeling requires fiber content, country of origin, and care instructions in English. FCC labeling applies to electronic components in smart textiles. SDF Clothing provides US-compliant labeling for all shipments and can advise on duty optimization through fiber selection.
+      </p>
+      <p class="section__text">
+        EU expansion requires REACH compliance and care label regulations. REACH restricts certain chemicals in textiles - ensure your fabrics and dyes meet REACH standards. Care labels must follow EU standards with fiber content percentages and care symbols in multiple languages. VAT registration is required for EU sales above specific thresholds. SDF Clothing's <a href="/insights/eu-clothing-regulations-2026">EU clothing regulations guide</a> provides detailed compliance information. We manufacture REACH-compliant garments and provide EU-compliant labeling.
+      </p>
+      <p class="section__text">
+        UK post-Brexit requires separate customs from EU and UKCA marking. The UK is no longer part of the EU customs union, requiring separate import procedures. UKCA marking replaces CE marking for many products. Care label requirements differ from EU - UK labeling must be in English only. Plan logistics separately for UK and EU markets. SDF Clothing provides both UK-compliant and EU-compliant labeling, supporting expansion into both markets.
+      </p>
+      <p class="section__text">
+        Australia has relatively straightforward requirements similar to US standards. Duty rates are moderate, and labeling requirements are simple - fiber content, country of origin, and care instructions in English. No complex chemical restrictions like REACH. Australia is often the easiest international market for first-time expansion. SDF Clothing ships to Australia regularly and provides Australia-compliant labeling.
+      </p>
+      <p class="section__text">
+        Start with one international market, validate demand, then expand. Don't try to enter US, EU, UK, and Australia simultaneously. Choose one market based on your customer demographics and competitive landscape. Validate demand through small test orders or local partnerships before committing to full inventory investment. Each market has different sizing, preferences, and competitive dynamics - learn these before scaling. SDF Clothing provides international manufacturing support with documentation for all major markets.
+      </p>
+
+      <h3 class="section__subtitle">International Market Requirements</h3>
+      <p class="section__text">
+        This table outlines key requirements for major international markets. Use this to plan your international expansion strategy.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Market</th>
+              <th>Key Requirement</th>
+              <th>Labeling</th>
+              <th>Duty Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>USA</strong></td>
+              <td>Duty rate awareness</td>
+              <td>FCC labeling for electronics</td>
+              <td>Varies by fiber (5-20%)</td>
+            </tr>
+            <tr>
+              <td><strong>UK</strong></td>
+              <td>UKCA marking</td>
+              <td>English only</td>
+              <td>Varies by fiber (8-12%)</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>EU</strong></td>
+              <td>REACH compliance</td>
+              <td>Multi-language care symbols</td>
+              <td>Varies by fiber (8-12%)</td>
+            </tr>
+            <tr>
+              <td><strong>Australia</strong></td>
+              <td>Minimal restrictions</td>
+              <td>English fiber content</td>
+              <td>5-10%</td>
+            </tr>
+            <tr>
+              <td><strong>Canada</strong></td>
+              <td>Textile labeling act</td>
+              <td>Bilingual (English/French)</td>
+              <td>Varies by fiber (8-18%)</td>
+            </tr>
+          </tbody>
+        </table>
+        <caption>Table: International market requirements for clothing manufacturers. Plan compliance before entering new markets.</caption>
+      </div>
+
+      <p class="section__text" style="margin-top: 2rem;">
+        International shipping adds 30-60 days to delivery timelines. Factor this into your production planning and inventory management. Air freight is faster (7-14 days) but expensive ($5-15/kg). Sea freight is slower (30-60 days) but cost-effective ($1-3/kg). Choose shipping method based on product value and urgency. High-value, time-sensitive products use air freight. Low-value, non-urgent products use sea freight. SDF Clothing provides both air and sea freight options with competitive shipping rates.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Managing Multiple Collections -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Managing Multiple Collections While Scaling</h2>
+      <p class="section__text">
+        Production planning gets complex when managing multiple collections simultaneously. Most fashion brands operate on SS (spring-summer) and AW (autumn-winter) cycles, requiring production planning 6-12 months ahead. Running both cycles simultaneously requires coordination, resource allocation, and cash flow management. This section outlines strategies for managing multiple collections without overwhelming operations.
+      </p>
+      <p class="section__text">
+        Running SS and AW simultaneously requires staggered production schedules. Produce SS collections in Q4 (October-December) for February delivery. Produce AW collections in Q2 (April-June) for August delivery. This staggered schedule ensures continuous production and avoids capacity bottlenecks. Coordinate with your manufacturer to ensure they can handle both production cycles simultaneously. SDF Clothing handles multiple concurrent production cycles with dedicated production lines for each season.
+      </p>
+      <p class="section__text">
+        Carry-over styles reduce development costs and production complexity. Carry-over 40-60% of successful styles from previous seasons - these styles require minimal development, no new sampling, and faster production. Focus new development on 40-60% of the line. Carry-over styles provide reliable revenue while new styles drive growth. Analyze sales data to identify which styles to carry over - prioritize top performers with consistent sales across seasons.
+      </p>
+      <p class="section__text">
+        Fabric pre-booking improves pricing and availability. Book fabrics 2-3 months before production to secure availability and lock in pricing. Fabric prices fluctuate based on cotton prices and demand - pre-booking protects against price increases. Pre-booking also ensures fabric availability during peak production seasons. Coordinate fabric pre-booking across both SS and AW collections to maximize volume discounts. SDF Clothing pre-books fabrics for clients, securing both availability and pricing.
+      </p>
+      <p class="section__text">
+        Work with your factory on seasonal planning. Share your production calendar 6-12 months in advance so the factory can allocate resources and schedule production. Provide style forecasts with estimated quantities for both seasons. This enables the factory to plan fabric sourcing, labor allocation, and production capacity. Good seasonal planning ensures on-time delivery and avoids rush fees. SDF Clothing provides production calendar planning as part of our full package production service.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: Scaling From 1 Factory to Multiple Factories -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Scaling From 1 Factory to Multiple Factories</h2>
+      <p class="section__text">
+        When brands scale, they often consider diversifying manufacturing across multiple factories. However, most growing brands work with 1-2 factories only. Deep relationships with one manufacturer yield better pricing, priority service, and consistent quality. This section explains when to consider a second factory and the trade-offs between factory dependency and diversification.
+      </p>
+      <p class="section__text">
+        Why most growing brands work with 1-2 factories only: deep relationships yield benefits that outweigh diversification benefits. A manufacturer who knows your brand provides priority service during peak seasons, better pricing through volume discounts, consistent quality through process familiarity, and faster turnaround through efficient communication. Splitting production across multiple factories dilutes these benefits. Each factory must learn your standards, increasing sampling and quality control complexity.
+      </p>
+      <p class="section__text">
+        Consider a second factory when you need category expansion. If your current manufacturer specializes in knits but you want to add woven jackets, a second factory with woven expertise may be necessary. However, first ask if your current manufacturer can expand their capabilities - many manufacturers handle both knits and wovens. SDF Clothing manufactures both knits and wovens, reducing the need for manufacturer diversification for category expansion.
+      </p>
+      <p class="section__text">
+        Risk of factory dependency is often overstated. While dependency on one factory creates risk, deep relationships mitigate this risk through priority service and problem-solving. A manufacturer invested in your success will work through challenges rather than drop you during difficult times. Diversification increases complexity without necessarily reducing risk - multiple factories with shallow relationships may all drop you during industry downturns. Build depth before breadth in manufacturing relationships.
+      </p>
+      <p class="section__text">
+        Geographic diversification may be necessary for international expansion. If you're expanding into EU markets and want to reduce shipping time and duty costs, a EU-based factory may be beneficial. However, this adds complexity - different time zones, communication challenges, and quality control across locations. Consider geographic diversification only when scale justifies the complexity. SDF Clothing has manufacturing capabilities that support international expansion without requiring multiple factory relationships.
+      </p>
+      <p class="section__text">
+        How to evaluate if current factory can scale with you: assess their capacity for increased volume, their capability for new product categories, their financial stability, and their willingness to invest in your growth. Most manufacturers want to grow with their clients - ask about capacity expansion plans, equipment investments, and staffing. If your current factory can scale with you, diversification is unnecessary. SDF Clothing scales with our clients, investing in capacity and capabilities to support growth.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: FAQ -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">How to Scale a Clothing Brand FAQ</h2>
+      
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">When is the right time to scale a clothing brand?</h3>
+          <p class="faq__answer">
+            Scale your clothing brand when you have consistent sell-through rates above 70%, repeat customer rates above 20%, are running out of stock before season end, getting wholesale enquiries, and monthly revenue consistently above $10,000. These signals indicate product-market fit and demand that justifies increased production volume. Scale gradually - increase MOQ from 300 to 500 pieces first, then to 1,000 pieces as you validate demand at each level.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do I negotiate lower manufacturing prices as I grow?</h3>
+          <p class="faq__answer">
+            Negotiate better prices by offering volume commitment - promise annual production volume in exchange for lower unit prices. Consolidate fabrics across styles to reduce sourcing costs. Improve payment terms from 30/70 to 20/80 after establishing a track record. Request annual pricing agreements instead of order-by-order pricing. Place orders early to qualify for early payment discounts. Simplify designs to reduce labor costs. Negotiate tactically without damaging relationships - manufacturers respond to data-driven discussions about volume and consistency.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What MOQ should I aim for when scaling?</h3>
+          <p class="faq__answer">
+            Target MOQ progression: start at 300 pieces per style, scale to 500 pieces for 10-15% cost reduction, then 1,000 pieces for additional 8-12% reduction. Only increase MOQ after validating demand at each level. For wholesale expansion, aim for 1,000-2,000 pieces per style to meet boutique order requirements. For international markets, 2,000-5,000 pieces per style justifies specialized labeling and certification investments. Scale MOQ gradually - don't jump from 300 to 5,000 without intermediate validation.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do I handle cash flow when increasing production?</h3>
+          <p class="faq__answer">
+            Manage cash flow by timing production with sales cycles - produce SS collections in Q4 for Q2 delivery, AW collections in Q2 for Q4 delivery. Negotiate payment terms that preserve working capital | 30/70 is standard, request 20/80 after establishing track record. Secure pre-orders or wholesale commitments before increasing production volume. Use factoring or inventory financing if needed. Maintain cash reserves equivalent to 2-3 months of production costs. Plan for seasonal cash flow fluctuations - peak production requires more working capital than peak sales.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">When should I enter wholesale as a clothing brand?</h3>
+          <p class="faq__answer">
+            Enter wholesale when you have consistent production quality, sufficient inventory to meet wholesale timelines (60-90 day payment terms), and brand recognition that attracts boutique interest. Minimum wholesale orders are typically 12-24 pieces per style, requiring inventory investment of 50-100 units per style. Plan production 4-6 months before trade show season - SS collections in Q4 for MAGIC in February, AW collections in Q2 for Texworld in September. SDF Clothing's wholesale manufacturing services support boutique order fulfillment with consistent quality across large orders.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How many products should a scaling clothing brand have?</h3>
+          <p class="faq__answer">
+            A scaling clothing brand should manage 8-15 SKUs per season initially. Fewer SKUs (3-5) limit revenue potential, while too many SKUs (20+) increase complexity and cash flow strain. Focus on core products that sell well - expand within your niche before diversifying. Carry-over 40-60% of successful styles from previous seasons to reduce development costs. Add 4-6 new styles each season to keep the line fresh without overwhelming operations. SKU proliferation kills cash flow - prioritize depth over breadth.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Should I stay with one manufacturer or diversify?</h3>
+          <p class="faq__answer">
+            Most growing brands work with 1-2 manufacturers only. Deep relationships with one manufacturer yield better pricing, priority service, and consistent quality. Diversify only when you need category expansion (e.g., adding knitwear to a woven manufacturer) or risk mitigation. Factory dependency has benefits - priority service, better pricing, process alignment. Consider a second manufacturer when your current factory cannot meet capacity, category needs, or geographic requirements. SDF Clothing handles multiple product categories, reducing the need for manufacturer diversification.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do I expand my clothing brand internationally?</h3>
+          <p class="faq__answer">
+            Expand internationally by understanding market-specific requirements: US requires duty rate awareness and FCC labeling, EU requires REACH compliance and care label regulations, UK post-Brexit requires separate customs from EU and UKCA marking, Australia has straightforward US-like standards. Start with one market, validate demand, then expand. Use localized sizing and marketing. SDF Clothing provides international manufacturing support with documentation for US, EU, UK, and Australian markets.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What production timeline should I plan for seasonal collections?</h3>
+          <p class="faq__answer">
+            Plan production timelines 4-6 months before season launch: SS collections produce in Q4 (Oct-Dec) for February delivery, AW collections produce in Q2 (Apr-Jun) for August delivery. Wholesale requires earlier production - SS in Q3 for February trade shows, AW in Q1 for September trade shows. Factor in 40-45 days production plus 30-45 days shipping. Pre-book fabrics 2-3 months before production to secure availability. Build in buffer time for sampling and revisions. SDF Clothing provides clear timeline commitments with track record of on-time delivery.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do I manage quality consistency as order volume increases?</h3>
+          <p class="faq__answer">
+            Maintain quality consistency by establishing clear quality standards in your tech pack, implementing AQL inspection at appropriate levels (typically 2.5 for garments), using the same manufacturer for consistent processes, conducting pre-production inspections, and maintaining clear communication. As volume increases, invest in third-party inspection services. Document quality issues and track trends. Train factory QC teams on your specific requirements. SDF Clothing's quality inspection service ensures consistent quality across production volumes with detailed QC reports and defect tracking.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10: CTA -->
+  <section class="section section--cta">
+    <div class="section__container section__container--narrow">
+      <h2 class="section__title">Ready to Scale Your Clothing Brand?</h2>
+      <p class="section__text">
+        SDF Clothing supports brands at every scaling stage - from 300-piece validation runs to 10,000-piece international production. We offer volume pricing, flexible MOQ scaling, wholesale support, and international manufacturing capabilities. We've helped 500+ brands scale from startup to established since 1998.
+      </p>
+      <p class="section__text">
+        Get a free scaling consultation and production quote within 48 hours. We'll assess your current scale, recommend a scaling strategy, and provide pricing for increased volume.
+      </p>
+      <div class="section__ctas">
+        <a href={whatsappQuoteUrl} class="section__cta section__cta--primary" target="_blank" rel="noopener noreferrer">
+          Get Scaling Consultation
+        </a>
+        <a href="/how-to-start-a-clothing-brand" class="section__cta section__cta--secondary">
+          Starting Guide
+        </a>
+        <a href="/tools/sample-request" class="section__cta section__cta--secondary">
+          Request Samples
+        </a>
+      </div>
+      <p class="section__text section__text--small">
+        Last updated: May 2026 | Average response time: 24 hours
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related: <a href="/clothing-manufacturing-cost-guide" style="color: var(--color-primary);">cost guide</a>, <a href="/low-moq-clothing-manufacturers" style="color: var(--color-primary);">low MOQ manufacturing</a>, <a href="/wholesale-clothing-supplier" style="color: var(--color-primary);">wholesale supplier</a>.
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-md) 0;
+    font-size: 0.9rem;
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 0.5rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, var(--color-bg) 0%, #1a0505 100%);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .hero__label {
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9rem;
+  }
+
+  .hero__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text);
+  }
+
+  @media (max-width: 768px) {
+    .hero__title {
+      font-size: 2rem;
+    }
+  }
+
+  .hero__description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  @media (max-width: 600px) {
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid var(--color-primary);
+  }
+
+  .hero__cta--secondary:hover {
+    background: var(--color-primary);
+  }
+
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .trust {
+    background: var(--color-bg-alt);
+    padding: var(--spacing-md) 0;
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    justify-content: center;
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+    font-size: 0.9rem;
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: bold;
+  }
+
+  .section {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, #1a0505 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__container--narrow {
+    max-width: 700px;
+  }
+
+  .section__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text);
+  }
+
+  .section__subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    color: var(--color-text);
+  }
+
+  .section__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid var(--color-primary);
+  }
+
+  .section__cta--secondary:hover {
+    background: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+</style>
+
+</BaseLayout>

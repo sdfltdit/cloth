@@ -1,0 +1,747 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Fulfillment Service | Order Fulfillment SDF";
+const pageDescription = "Order fulfillment service for clothing brands. Warehouse management, inventory tracking, pick and pack, shipping, and returns processing. 3PL solutions.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Fulfillment Service",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What fulfillment services do you provide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide comprehensive fulfillment services including warehouse storage, inventory management, pick and pack operations, shipping carrier integration, order processing, returns processing, and real-time inventory tracking. Our fulfillment solutions integrate with major e-commerce platforms for seamless order management and automated fulfillment workflows."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does inventory management work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our inventory management system tracks all SKUs in real-time with barcode scanning for accuracy. The system monitors sales velocity, sends low stock alerts, and provides visibility across multiple warehouse locations. Inventory is allocated to orders automatically, with backorder management for out-of-stock items. Integration with e-commerce platforms ensures inventory syncs across all sales channels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the pick and pack process?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pick and pack involves retrieving items from warehouse locations based on order requirements, verifying product accuracy, and packaging for shipment. Our process uses optimized pick paths for efficiency, quality checks at multiple stages, and branded packaging options. Pick and pack accuracy rates exceed 99.5%, ensuring customers receive correct orders."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does shipping integration work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Shipping integration connects our fulfillment system with major carriers including DHL, FedEx, UPS, and postal services. The system automatically selects optimal carriers based on cost, speed, and destination. Real-time rate shopping ensures competitive shipping costs. Tracking information is automatically uploaded to e-commerce platforms and communicated to customers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you handle returns?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Returns processing includes receiving returned items, inspection and quality assessment, inventory restocking for resale items, and refund processing. We track return reasons to provide insights for product improvement. Returns can be processed according to brand-specific policies, with options for return to inventory, refurbishment, or disposal based on condition."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the minimum requirements for fulfillment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our fulfillment minimum starts at 500 orders per month for dedicated fulfillment services. Lower volume brands can use shared fulfillment options with higher per-order costs. We require integration with supported e-commerce platforms and standardized product data for efficient processing. Onboarding typically takes 2-4 weeks for system integration and inventory setup."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Order Fulfillment Service",
+      "description": "Comprehensive order fulfillment for clothing brands including warehouse management, inventory tracking, pick and pack, shipping integration, and returns processing",
+      "provider": {
+        "@id": "https://sdfltd.com/#organization"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Fulfillment Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Order Fulfillment"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "2",
+              "maxPrice": "5"
+            }
+          }
+        ]
+      }
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Fulfillment Service</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Fulfillment Service • Since 1998 • Order Processing Specialists</div>
+        <h1 class="hero__title">Order Fulfillment Service for Clothing Brands</h1>
+        <p class="hero__description">
+          SDF Clothing provides order fulfillment service for clothing brands. Warehouse management, inventory tracking, pick and pack operations, shipping integration, returns processing, and 3PL fulfillment solutions for fashion brands.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20fulfillment%20services`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">99.5%</span>
+          <span class="hero__stat-label">Accuracy Rate</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Real-Time</span>
+          <span class="hero__stat-label">Inventory</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Global</span>
+          <span class="hero__stat-label">Shipping</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Warehouse Management</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Inventory Tracking</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Pick and Pack</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Returns Processing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Fulfillment Services</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Comprehensive Fulfillment Solutions</h2>
+      </div>
+      <div class="section__text">
+        <p>Order fulfillment encompasses the complete process from receiving inventory to delivering orders to customers. Our fulfillment services handle every aspect of logistics, allowing clothing brands to focus on design, marketing, and growth rather than operational logistics. We provide end-to-end fulfillment that scales with your business, from startup volumes to enterprise-scale operations.</p>
+        
+        <p>Our fulfillment infrastructure includes strategically located warehouses, advanced inventory management systems, and integration with major e-commerce platforms. Orders received through your online store automatically flow to our fulfillment system, where they are processed, picked, packed, and shipped with tracking information automatically communicated to customers. This automation reduces manual work and ensures fast, accurate order fulfillment.</p>
+        
+        <p>Fulfillment services extend beyond basic shipping to include inventory planning, seasonal storage management, and returns processing. We understand the unique challenges of clothing fulfillment including seasonal demand fluctuations, size and color complexity, and the importance of presentation in branded packaging. Our specialized apparel fulfillment expertise addresses these industry-specific requirements.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Inventory Management</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Warehouse Inventory Management</h2>
+      </div>
+      <div class="section__text">
+        <p>Inventory management provides real-time visibility into stock levels across all locations and sales channels. Our system tracks every SKU with barcode scanning accuracy, ensuring inventory records match actual physical stock. Real-time synchronization between warehouse inventory and e-commerce platforms prevents overselling and stockouts that damage customer experience.</p>
+        
+        <p>The inventory system monitors sales velocity for each SKU, automatically generating low stock alerts when inventory reaches reorder points. This proactive inventory management prevents stockouts that result in lost sales. For clothing brands with multiple size and color variants, our system tracks each combination separately, ensuring accurate availability at the variant level.</p>
+        
+        <p>Multi-location inventory management enables strategic inventory placement across warehouses. Orders are automatically routed to the optimal fulfillment location based on inventory availability, shipping costs, and delivery speed requirements. This optimization reduces shipping costs while maintaining fast delivery times for customers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Pick and Pack</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Pick and Pack Operations</h2>
+      </div>
+      <div class="section__text">
+        <p>Pick and pack operations transform warehouse inventory into shipped orders. Our optimized pick paths minimize travel time within the warehouse, increasing efficiency and reducing processing time. Pickers use handheld devices that guide them to exact locations, verify product accuracy through barcode scanning, and track picking performance for continuous improvement.</p>
+        
+        <p>Quality checks occur at multiple stages during pick and pack. Products are verified against order requirements at picking, during packing, and before final shipment. This multi-stage verification ensures accuracy rates exceeding 99.5%, significantly reducing errors that result in returns and customer dissatisfaction.</p>
+        
+        <p>Packaging options range from standard shipping materials to fully branded packaging with custom boxes, tissue paper, and branded inserts. Branded packaging reinforces brand identity and creates unboxing experiences that delight customers. Packaging selection considers product protection, shipping costs, and brand presentation requirements.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Shipping Integration</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Carrier Shipping Integration</h2>
+      </div>
+      <div class="section__text">
+        <p>Shipping integration connects our fulfillment system with major global carriers including DHL, FedEx, UPS, and national postal services. This integration enables automated shipping label generation, real-time rate shopping, and tracking information upload. The system automatically selects the optimal carrier for each order based on cost, speed, and destination requirements.</p>
+        
+        <p>Real-time rate shopping compares shipping costs across carriers for each order, selecting the most cost-effective option that meets delivery time requirements. This optimization reduces shipping costs while maintaining service levels. International shipping integration handles customs documentation, duties calculation, and destination-specific requirements for seamless cross-border delivery.</p>
+        
+        <p>Tracking information is automatically uploaded to e-commerce platforms and communicated to customers through automated shipping notifications. Customers receive tracking numbers via email and can monitor shipment progress. Integration with carrier APIs provides real-time tracking updates, allowing proactive communication about delivery delays or issues.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Returns Processing</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Returns Management</h2>
+      </div>
+      <div class="section__text">
+        <p>Returns processing handles the complete reverse logistics workflow from receiving returned items to final disposition. Our system tracks returns through each stage, providing visibility into return reasons, processing status, and inventory recovery. Efficient returns processing improves customer satisfaction and recovers inventory value.</p>
+        
+        <p>Returned items undergo inspection and quality assessment to determine disposition. Resaleable items are inspected, cleaned if necessary, and returned to available inventory. Items requiring refurbishment are processed for repair or restyling. Damaged items are evaluated for potential recovery or environmentally responsible disposal. This systematic approach maximizes inventory recovery while maintaining quality standards.</p>
+        
+        <p>Return data analysis provides insights into product quality, sizing issues, and customer preferences. Tracking return reasons by SKU identifies products with high return rates, enabling design or quality improvements. This data-driven approach reduces future returns and improves overall product quality.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Requirements</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Fulfillment Service Requirements</h2>
+      </div>
+      <div class="section__text">
+        <p>Our fulfillment service requirements balance accessibility with operational efficiency. Minimum order volumes ensure dedicated resources and cost-effective operations. Integration requirements enable seamless automation and real-time data sync. Standardized product data ensures efficient processing and accurate inventory management.</p>
+        
+        <p>Dedicated fulfillment services require minimum 500 orders per month. Brands below this threshold can use shared fulfillment options with higher per-order costs but lower minimum commitments. This tiered structure makes fulfillment accessible to startups while providing efficiency for established brands.</p>
+        
+        <p>E-commerce platform integration is required for automated order processing. We support major platforms including Shopify, WooCommerce, Magento, and BigCommerce. Integration typically takes 2-4 weeks for system setup, testing, and go-live. Standardized product data including SKU, barcodes, weights, and dimensions must be provided for accurate inventory management and shipping calculation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Fulfillment Service FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What fulfillment services do you provide?</h3>
+          <p class="faq__answer">We provide comprehensive fulfillment services including warehouse storage, inventory management, pick and pack operations, shipping carrier integration, order processing, returns processing, and real-time inventory tracking. Our fulfillment solutions integrate with major e-commerce platforms for seamless order management and automated fulfillment workflows.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does inventory management work?</h3>
+          <p class="faq__answer">Our inventory management system tracks all SKUs in real-time with barcode scanning for accuracy. The system monitors sales velocity, sends low stock alerts, and provides visibility across multiple warehouse locations. Inventory is allocated to orders automatically, with backorder management for out-of-stock items. Integration with e-commerce platforms ensures inventory syncs across all sales channels.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the pick and pack process?</h3>
+          <p class="faq__answer">Pick and pack involves retrieving items from warehouse locations based on order requirements, verifying product accuracy, and packaging for shipment. Our process uses optimized pick paths for efficiency, quality checks at multiple stages, and branded packaging options. Pick and pack accuracy rates exceed 99.5%, ensuring customers receive correct orders.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does shipping integration work?</h3>
+          <p class="faq__answer">Shipping integration connects our fulfillment system with major carriers including DHL, FedEx, UPS, and postal services. The system automatically selects optimal carriers based on cost, speed, and destination. Real-time rate shopping ensures competitive shipping costs. Tracking information is automatically uploaded to e-commerce platforms and communicated to customers.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do you handle returns?</h3>
+          <p class="faq__answer">Returns processing includes receiving returned items, inspection and quality assessment, inventory restocking for resale items, and refund processing. We track return reasons to provide insights for product improvement. Returns can be processed according to brand-specific policies, with options for return to inventory, refurbishment, or disposal based on condition.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are the minimum requirements for fulfillment?</h3>
+          <p class="faq__answer">Our fulfillment minimum starts at 500 orders per month for dedicated fulfillment services. Lower volume brands can use shared fulfillment options with higher per-order costs. We require integration with supported e-commerce platforms and standardized product data for efficient processing. Onboarding typically takes 2-4 weeks for system integration and inventory setup.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready for Fulfillment Services?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for order fulfillment services. We provide warehouse management, inventory tracking, pick and pack operations, shipping integration, and returns processing for clothing brands.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/dropshipping-service" class="section__cta section__cta--secondary">Dropshipping Service</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/dropshipping-service" style="color: var(--color-primary);">dropshipping service</a>, <a href="/sample-service" style="color: var(--color-primary);">sample service</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/clothing-manufacturers-for-startups" style="color: var(--color-primary);">clothing manufacturers for startups</a>, <a href="/private-label-manufacturer" style="color: var(--color-primary);">private label clothing manufacturer</a>, <a href="/wholesale-clothing-supplier" style="color: var(--color-primary);">wholesale clothing manufacturer</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

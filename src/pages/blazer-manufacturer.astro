@@ -1,0 +1,1193 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Blazer Manufacturer | Custom & Corporate Blazers | SDF";
+const pageDescription = "Custom blazer manufacturer in Bangladesh. Structured, unstructured and fashion blazers from 300 pieces. Corporate and brand collections. Request a free quote.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20custom%20blazer%20manufacturing`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-21",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle,
+            "item": canonicalUrl.href
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#organization" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for custom blazers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SDF Clothing offers custom blazer manufacturing with a minimum order of 300 pieces per style. This low MOQ makes our services accessible to startup brands, boutique labels, and businesses launching new blazer lines. We offer flexible size and color breakdowns within the 300 piece minimum, allowing you to test designs and scale gradually. Our 300 piece MOQ is significantly lower than many manufacturers who require 500-1,000 pieces for tailored garments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the most popular blazer fabric for fashion brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wool and wool-polyester blends are the most popular blazer fabrics for fashion brands. Wool offers natural drape, breathability, and a premium hand feel that elevates garment quality. Wool-polyester blends (typically 70% wool, 30% polyester) provide wool's aesthetic benefits with added durability, wrinkle resistance, and cost efficiency. For summer collections, linen and cotton blends are popular for their lightweight, breathable properties. Velvet and tweed serve specific fashion segments - velvet for evening and occasion wear, tweed for heritage and autumn collections."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between fused and canvas blazer construction?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fused construction uses adhesive to fuse interlining to the fabric, creating structure at lower cost. Fused blazers are affordable and maintain shape well but have less drape and breathability. Half-canvas construction uses a canvas interlining that floats from the chest to the button area, providing better drape and a more natural silhouette. Full-canvas construction uses canvas throughout the jacket front, offering the highest quality drape and longevity but at premium cost. Fused is ideal for budget-friendly fashion, half-canvas for mid-range quality, and full-canvas for bespoke-level garments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you make blazers in plus sizes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SDF Clothing manufactures blazers in plus sizes. We offer inclusive sizing from XS to 5XL, with custom grading services available for brands requiring extended size ranges. Our pattern making and grading capabilities ensure consistent fit across all size categories. We understand that plus-size customers represent a significant market segment, and we help brands serve this audience with properly fitted blazers that don't compromise on style or proportion. Our <a href='/plus-size-clothing-manufacturer'>plus-size clothing manufacturing</a> services include specialized pattern adjustments for larger sizes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does blazer manufacturing take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Blazer manufacturing typically takes 45-60 days from sample approval to shipment. The timeline includes: pattern making and grading (5-7 days), sample development with all construction details (10-14 days), sample approval and any revisions (3-5 days), cutting and sewing bulk production (25-35 days), final quality inspection and finishing (3-5 days), and packing for shipment (2-3 days). Complex styles with multiple linings, special fabrics, or intricate details may add 5-10 days. Rush orders may be possible at higher cost for time-critical launches."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you make matching blazer and trouser sets?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SDF Clothing manufactures matching blazer and trouser sets as coordinated suits. We ensure fabric and color consistency across both garments by cutting from the same fabric batch and using identical dye lots. Our pattern making capabilities guarantee matching proportions and styling elements between blazer and trousers. Coordinating sets are popular for corporate uniforms, formal wear collections, and fashion brands offering complete outfit solutions. We also manufacture matching waistcoats for three-piece suit sets. See our <a href='/pants-manufacturer'>pants manufacturer</a> page for trouser manufacturing details."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications do your blazer fabrics have?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SDF Clothing's blazer fabrics hold multiple international certifications including OEKO-TEX Standard 100 for chemical safety, GOTS for organic cotton options, and REACH compliance for EU markets. Our manufacturing facilities are BSCI certified for social compliance and WRAP certified for ethical manufacturing. These certifications ensure your blazers meet retailer requirements and consumer expectations for safety and responsibility. We provide transaction certificates for certified materials to support your sustainability claims. View our complete <a href='/certifications'>certifications portfolio</a> for detailed information."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you add custom lining with brand print?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we offer custom lining with brand prints, logos, or patterns. Custom lining is an excellent way to add brand identity to blazers, visible when the garment is worn open. We can print your logo, brand pattern, or custom design on lining fabric using sublimation or screen printing methods. Custom lining works particularly well for corporate blazers, fashion statement pieces, and limited edition collections. We also offer contrasting solid linings in brand colors as a more subtle branding option. Our <a href='/embroidery-service'>embroidery service</a> can add logos to exterior blazer areas as well."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Blazer Manufacturing",
+      "provider": { "@id": SITE + "/#organization" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "300",
+          "description": "Starting MOQ | 300 pieces per style"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Blazers from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Design or Tech Pack",
+          "text": "Provide detailed specifications including blazer type, fabric requirements, measurements, construction details, and styling elements. If you don't have a tech pack, our design team can help develop one for a fee."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Confirm Fabric and Materials",
+          "text": "Select from our fabric library or provide your own fabric. We source wool, blends, linen, cotton, and specialty fabrics. Confirm lining, buttons, interlining, and all trim materials."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Pre-Production Sample",
+          "text": "We create a detailed sample incorporating all your specifications. Review the sample for fit, construction, fabric quality, and styling. Request revisions until satisfied."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample and Place Bulk Order",
+          "text": "Approve the final sample in writing. Pay 30% deposit to start production. We provide a production schedule with key milestones and delivery timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Production, Quality Control, and Shipment",
+          "text": "Bulk production takes 25-35 days. We conduct AQL 2.5 quality inspection. Pay 70% balance before shipment. We handle export documentation and coordinate shipping."
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Blazer Types Manufactured by SDF",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Structured Blazers"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Unstructured Blazers"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Suit Jackets"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Oversized Fashion Blazers"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Corporate Uniform Blazers"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Blazer Manufacturer</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Established 1998 | Dhaka, Bangladesh</p>
+        <h1 class="hero__title">Blazer Manufacturer | Custom Structured, Unstructured and Fashion Blazers from 300 Pieces</h1>
+        <p class="hero__description">
+          SDF Clothing manufactures custom blazers for fashion brands, corporate clients, and boutique labels since 1998. We produce structured formal blazers, unstructured soft blazers, suit jackets, oversized fashion blazers, and corporate uniform blazers with a 300 piece minimum order. Our expertise in tailored garment manufacturing, combined with Bangladesh's skilled workforce and competitive pricing, delivers premium blazers at accessible costs. From classic wool blazers to contemporary fashion statements, we provide end-to-end manufacturing from pattern making to final shipment.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">300</span>
+            <span class="hero__stat-label">Pieces MOQ</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">25+</span>
+            <span class="hero__stat-label">Years Experience</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">XS-5XL</span>
+            <span class="hero__stat-label">Size Range</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">45-60</span>
+            <span class="hero__stat-label">Days Lead Time</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get a Free Factory Quote
+          </a>
+          <a href="/contact" class="hero__cta hero__cta--secondary">
+            Contact Our Team
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="Custom blazer manufacturing at SDF Clothing Bangladesh" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Types of Blazers -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Types of Blazers SDF Manufactures | A Complete Guide</h2>
+      <p class="section__text">
+        Understanding blazer types helps you select the right style for your brand and target market. SDF manufactures all major blazer categories, from traditional structured blazers to contemporary fashion silhouettes. Each type serves different purposes and customer segments.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Types of blazers manufactured by SDF Clothing">
+          <caption>Blazer types with construction, fabric, and target market information</caption>
+          <thead>
+            <tr>
+              <th>Blazer Type</th>
+              <th>Construction</th>
+              <th>Best Fabric</th>
+              <th>Target Market</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Structured/Formal</strong></td>
+              <td>Fused or half-canvas</td>
+              <td>Wool, wool-poly blend</td>
+              <td>Corporate, formal wear, professional</td>
+            </tr>
+            <tr>
+              <td><strong>Unstructured/Soft</strong></td>
+              <td>No canvas, minimal interlining</td>
+              <td>Cotton, linen, lightweight wool</td>
+              <td>Casual, smart casual, summer wear</td>
+            </tr>
+            <tr>
+              <td><strong>Suit Jacket</strong></td>
+              <td>Half-canvas or full-canvas</td>
+              <td>Wool, wool-poly, tropical wool</td>
+              <td>Formal suits, business attire</td>
+            </tr>
+            <tr>
+              <td><strong>Oversized Fashion</strong></td>
+              <td>Fused with reinforced shoulders</td>
+              <td>Wool blends, technical fabrics</td>
+              <td>Streetwear, contemporary fashion</td>
+            </tr>
+            <tr>
+              <td><strong>Double-Breasted</strong></td>
+              <td>Fused or half-canvas</td>
+              <td>Wool, wool-poly, tweed</td>
+              <td>Formal, heritage fashion, power dressing</td>
+            </tr>
+            <tr>
+              <td><strong>Cropped Blazer</strong></td>
+              <td>Fused</td>
+              <td>Cotton, linen, structured blends</td>
+              <td>Women's fashion, contemporary</td>
+            </tr>
+            <tr>
+              <td><strong>Tweed/Textured</strong></td>
+              <td>Fused or half-canvas</td>
+              <td>Tweed, wool blends, textured fabrics</td>
+              <td>Heritage fashion, autumn collections</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <h3 class="section__subtitle">Structured/Formal Blazers</h3>
+      <p class="section__text">
+        Structured blazers feature defined shoulders, shaped silhouette, and firm body created through interlining and canvas construction. These blazers maintain their shape and provide a polished, professional appearance ideal for corporate wear, formal occasions, and business attire. Structured blazers typically use fused or half-canvas construction with padding in shoulders and chest. The structured look communicates authority and professionalism, making them popular for corporate uniforms, executive wear, and formal fashion collections. Our <a href="/fit-engineering-service">fit engineering service</a> ensures structured blazers maintain shape while providing comfort. As a leading <a href="/clothing-manufacturer-bangladesh">clothing manufacturer Bangladesh</a>, we have extensive experience with structured tailored garments.
+      </p>
+      
+      <h3 class="section__subtitle">Unstructured/Soft Blazers</h3>
+      <p class="section__text">
+        Unstructured blazers, also called soft blazers or deconstructed blazers, minimize internal construction for a relaxed, casual drape. These blazers have little to no canvas interlining, unpadded shoulders, and often feature unlined or partially lined bodies. The result is a lightweight, comfortable garment that drapes naturally on the body. Unstructured blazers work well for smart casual settings, summer wear, and contemporary fashion seeking relaxed sophistication. They're particularly popular in linen and cotton for warm weather, and lightweight wool for transitional seasons. For <a href="/low-moq-clothing-manufacturers">low MOQ clothing manufacturers</a>, unstructured blazers offer accessible entry points for emerging brands.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Fabric Guide -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Blazer Fabric Guide | From Wool to Technical Materials</h2>
+      <p class="section__text">
+        Fabric selection dramatically impacts blazer quality, drape, and market positioning. SDF offers comprehensive fabric sourcing from our network of certified suppliers, or we can work with your provided fabrics. Understanding fabric characteristics helps you make informed decisions for your brand.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Blazer fabric comparison guide">
+          <caption>Fabric options for blazer manufacturing with weight and characteristics</caption>
+          <thead>
+            <tr>
+              <th>Fabric</th>
+              <th>Weight (GSM)</th>
+              <th>Characteristics</th>
+              <th>Best Blazer Style</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Wool</strong></td>
+              <td>250-300</td>
+              <td>Natural drape, breathable, premium feel</td>
+              <td>Structured, suit jackets, formal</td>
+            </tr>
+            <tr>
+              <td><strong>Wool-Poly Blend</strong></td>
+              <td>260-310</td>
+              <td>Durable, wrinkle-resistant, cost-effective</td>
+              <td>All styles, versatile</td>
+            </tr>
+            <tr>
+              <td><strong>Cotton</strong></td>
+              <td>200-250</td>
+              <td>Breathable, casual, easy care</td>
+              <td>Unstructured, casual, summer</td>
+            </tr>
+            <tr>
+              <td><strong>Linen</strong></td>
+              <td>180-220</td>
+              <td>Lightweight, breathable, natural texture</td>
+              <td>Unstructured, summer, casual</td>
+            </tr>
+            <tr>
+              <td><strong>Polyester</strong></td>
+              <td>200-250</td>
+              <td>Durable, affordable, easy care</td>
+              <td>Budget fashion, corporate</td>
+            </tr>
+            <tr>
+              <td><strong>Velvet</strong></td>
+              <td>280-320</td>
+              <td>Luxurious, soft, evening wear appeal</td>
+              <td>Fashion, occasion, evening</td>
+            </tr>
+            <tr>
+              <td><strong>Tweed</strong></td>
+              <td>300-350</td>
+              <td>Textured, heritage, warm</td>
+              <td>Heritage fashion, autumn</td>
+            </tr>
+            <tr>
+              <td><strong>Technical Stretch</strong></td>
+              <td>220-260</td>
+              <td>Stretch, performance, modern</td>
+              <td>Contemporary, activewear-inspired</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <h3 class="section__subtitle">Lining Fabrics: Viscose, Polyester | When to Line</h3>
+      <p class="section__text">
+        Lining serves multiple purposes in blazers: smooth interior for easy dressing, hidden construction details, additional warmth, and opportunity for branding. Viscose lining offers luxurious feel and good breathability, ideal for premium blazers. Polyester lining provides durability and cost efficiency, suitable for mid-range and corporate blazers. Unstructured blazers may skip lining entirely or use partial lining for breathability. Custom lining with brand prints or logos adds identity visible when the blazer is worn open. We recommend lining for structured blazers and suit jackets, while unstructured styles may benefit from reduced or no lining.
+      </p>
+      
+      <h3 class="section__subtitle">Interlining: Fused vs Floating Canvas Construction</h3>
+      <p class="section__text">
+        Interlining provides structure and shape to blazers. Fused interlining uses adhesive to bond interlining to fabric, creating stable structure at lower cost. Fused construction works well for fashion blazers, corporate uniforms, and price-sensitive markets. Floating canvas interlining, used in half-canvas and full-canvas construction, allows the interlining to move independently from the fabric, creating superior drape and a more natural silhouette. Canvas construction is essential for premium blazers and suit jackets where quality and longevity justify higher cost. The choice between fused and canvas depends on your target market, price point, and quality positioning.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Construction Methods -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Blazer Construction Methods | Fused vs Canvas</h2>
+      <p class="section__text">
+        Construction method is a primary determinant of blazer quality, drape, and cost. Understanding the differences helps you position your products appropriately and manage customer expectations.
+      </p>
+      
+      <h3 class="section__subtitle">Fully Fused (Most Affordable, Maintains Shape)</h3>
+      <p class="section__text">
+        Fully fused construction bonds interlining to the fabric using heat-activated adhesive across the entire jacket front. This method provides consistent structure and shape retention at the lowest cost. Fused blazers maintain their form well through wear and are easier to care for than canvas constructions. The primary trade-off is reduced drape and breathability compared to canvas methods. Fused construction is ideal for fashion blazers, corporate uniforms, and entry-level tailored garments where cost and ease of care are priorities. Modern fusing technology has improved significantly, and quality fused blazers perform well for most applications.
+      </p>
+      
+      <h3 class="section__subtitle">Half-Canvas (Premium, Better Drape, More Expensive)</h3>
+      <p class="section__text">
+        Half-canvas construction uses a canvas interlining that floats from the chest area down to the buttoning point, while the lower portion uses fused interlining. This hybrid approach provides the superior drape of canvas in the most visible upper body while controlling cost through fused construction below. Half-canvas blazers drape naturally, conform to the body over time, and offer a premium feel closer to full-canvas at moderate cost increase over fused. This construction is the sweet spot for mid-range to premium blazers seeking quality without bespoke-level pricing. Half-canvas is our recommendation for most fashion brands targeting quality-conscious consumers.
+      </p>
+      
+      <h3 class="section__subtitle">Full Canvas (Bespoke Quality, Highest Cost)</h3>
+      <p class="section__text">
+        Full-canvas construction uses canvas interlining throughout the entire jacket front, from shoulder to hem. The canvas floats freely, allowing the garment to drape naturally and mold to the wearer's body over time. Full-canvas represents the highest quality construction method, offering superior drape, breathability, and longevity. These blazers improve with wear, developing character and fit unique to the owner. The trade-off is significantly higher cost and longer production time. Full-canvas is appropriate for luxury brands, bespoke-level garments, and premium suit jackets where quality justifies investment. Our <a href="/fit-engineering-service">fit engineering service</a> optimizes canvas construction for consistent fit across sizes.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Blazer construction methods comparison">
+          <caption>Comparison of fused, half-canvas, and full-canvas construction methods</caption>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Cost</th>
+              <th>Drape</th>
+              <th>Durability</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Fused</strong></td>
+              <td>Low</td>
+              <td>Stiff</td>
+              <td>Good</td>
+              <td>Fashion, corporate, budget</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Half-Canvas</strong></td>
+              <td>Medium</td>
+              <td>Good</td>
+              <td>Very Good</td>
+              <td>Mid-range to premium</td>
+            </tr>
+            <tr>
+              <td><strong>Full Canvas</strong></td>
+              <td>High</td>
+              <td>Excellent</td>
+              <td>Excellent</td>
+              <td>Luxury, bespoke, premium</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Corporate Blazer Manufacturing -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Corporate Blazer Manufacturing | Uniform and Branded Programs</h2>
+      <p class="section__text">
+        Corporate blazer programs require consistency, durability, and brand integration. SDF specializes in manufacturing blazers for staff uniforms, corporate branding, and professional wear programs ranging from 50 to 5,000+ staff.
+      </p>
+      
+      <h3 class="section__subtitle">Staff Uniform Blazers: Consistent Sizing Across 50-500 Staff</h3>
+      <p class="section__text">
+        Corporate uniform programs demand consistent fit and appearance across all staff members. Our grading capabilities ensure that blazers maintain consistent proportions from XS to 5XL, so all employees present a unified professional image. We understand that corporate programs often include diverse body types, and our sizing accommodates this diversity without compromising style. For large corporate orders, we can create custom size charts tailored to your workforce demographics. Our production capacity handles orders from 50 pieces for small teams to 5,000+ pieces for enterprise-wide uniform programs with consistent quality and timely delivery.
+      </p>
+      
+      <h3 class="section__subtitle">Brand Colors in Wool or Polyester</h3>
+      <p class="section__text">
+        Corporate blazers often require specific brand colors. We offer custom dyeing in your exact brand colors for wool, polyester, and blend fabrics. Our color matching capabilities ensure consistency across production runs and reorders. We maintain color libraries for corporate clients, guaranteeing that blazers ordered years later match original specifications. Brand color options include solid colors, subtle patterns, and two-tone combinations. We can also incorporate brand colors into lining, buttons, and thread for comprehensive brand integration. Color fastness testing ensures corporate blazers maintain appearance through repeated wear and cleaning.
+      </p>
+      
+      <h3 class="section__subtitle">Embroidered Logo Placement Options</h3>
+      <p class="section__text">
+        Logo embroidery is essential for corporate blazer branding. We offer multiple placement options including left chest (traditional), right chest, sleeve cuff, collar stand, and interior label. Our <a href="/embroidery-service">embroidery service</a> provides precise logo reproduction in your brand colors with thread options for different fabric types. We can also add woven labels, leather patches, or metal badges for alternative branding approaches. Logo size and placement recommendations consider blazer style and corporate guidelines. For discreet branding, interior labels with logo embroidery provide identification without exterior visibility.
+      </p>
+      
+      <h3 class="section__subtitle">Sizing Inclusivity: Plus Size, Petite Options</h3>
+      <p class="section__text">
+        Corporate workforces include diverse body types, and uniform programs must accommodate this diversity. SDF offers plus-size blazers up to 5XL and petite sizing for smaller frames. Our <a href="/plus-size-clothing-manufacturer">plus-size clothing manufacturing</a> expertise ensures that larger sizes maintain the same style proportions and quality as standard sizes. We understand that ill-fitting uniforms affect employee comfort and professional presentation, so we prioritize inclusive sizing. Custom grading for corporate programs can create size ranges specifically matched to your workforce demographics, ensuring every employee has properly fitted blazers.
+      </p>
+      
+      <p class="section__text">
+        For comprehensive uniform programs beyond blazers, see our <a href="/uniform-manufacturer">uniform manufacturer</a> page for complete staff wardrobe solutions including shirts, trousers, and accessories. We also provide <a href="/full-package-production">full package production</a> services covering fabric sourcing through final delivery.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Fashion Blazer Manufacturing -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Fashion Blazer Manufacturing | Trend and DTC Brands</h2>
+      <p class="section__text">
+        Fashion blazers require trend awareness, distinctive styling, and brand differentiation. SDF works with DTC brands, fashion labels, and trend-focused companies to produce blazers that capture current aesthetics while maintaining quality standards.
+      </p>
+      
+      <h3 class="section__subtitle">Oversized Blazer: Proportions, Shoulder Construction</h3>
+      <p class="section__text">
+        The oversized blazer trend features exaggerated proportions: extended shoulders, longer body length, and relaxed fit through torso and sleeves. Manufacturing oversized blazers requires specialized pattern making to achieve intentional volume without sloppy appearance. Shoulder construction uses reinforced padding to maintain exaggerated silhouette while ensuring comfort. Sleeve proportions balance exaggerated body length - often slightly longer than standard with wider cuffs. Oversized blazers work well in wool blends and technical fabrics that hold shape. This style appeals to streetwear, contemporary fashion, and brands targeting younger demographics seeking modern silhouettes.
+      </p>
+      
+      <h3 class="section__subtitle">Power Blazer: Structured Shoulder, Nipped Waist</h3>
+      <p class="section__text">
+        Power blazers emphasize authoritative, confident silhouettes through structured shoulders and defined waistlines. This style features strong shoulder padding, often extended beyond natural shoulder line for exaggerated authority. The waist is nipped through darting and seam placement, creating an hourglass or V-shaped silhouette. Power blazers typically use structured construction - fused or half-canvas - to maintain crisp lines. This style appeals to professional fashion, power dressing trends, and brands targeting career-focused consumers. Power blazers work well in wool and wool-poly blends that provide necessary structure while maintaining drape.
+      </p>
+      
+      <h3 class="section__subtitle">Unstructured Blazer: Casual, Relaxed, Shirt-Weight Fabrics</h3>
+      <p class="section__text">
+        Unstructured blazers represent the casualization of tailored wear, offering blazer aesthetics with comfort approaching that of shirts. These blazers minimize internal construction - no canvas, minimal padding, lightweight fabrics. Shirt-weight materials including cotton, linen, and lightweight wool create garments that layer comfortably over t-shirts or lightweight tops. Unstructured blazers feature relaxed shoulders, natural drape, and often unlined or partially lined bodies. This style bridges smart casual and casual wear, appealing to consumers seeking polish without formality. Unstructured blazers are particularly successful in summer collections and contemporary fashion markets.
+      </p>
+      
+      <h3 class="section__subtitle">Coordinating Sets: Blazer + Trousers</h3>
+      <p class="section__text">
+        Coordinating blazer and trouser sets offer complete outfit solutions popular with fashion brands and consumers. Manufacturing matching sets requires fabric consistency, color matching, and proportion coordination across both garments. We cut blazers and trousers from the same fabric batch to guarantee color and texture matching. Pattern making ensures complementary proportions - blazer length relative to trouser rise, sleeve length to trouser length, and overall silhouette harmony. Coordinating sets work well for corporate wear, formal collections, and fashion brands offering complete looks. Our <a href="/pants-manufacturer">pants manufacturer</a> capabilities ensure trousers match blazer quality and styling. We also produce matching waistcoats for three-piece suit sets.
+      </p>
+      
+      <p class="section__text">
+        For fashion brands seeking complete manufacturing solutions, our <a href="/private-label-manufacturer">private label manufacturing</a> services provide end-to-end production from design to delivery with your brand identity.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Size Guide -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Blazer Size Guide | International Sizing Standards</h2>
+      <p class="section__text">
+        Accurate sizing is critical for blazer fit and customer satisfaction. SDF manufactures to international sizing standards and offers custom grading for brands requiring specific size charts. Understanding size conversions helps you serve global markets effectively.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="International blazer size conversion chart">
+          <caption>Size conversion chart for blazers across international sizing systems</caption>
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>UK</th>
+              <th>US/CA</th>
+              <th>EU</th>
+              <th>IT</th>
+              <th>Chest (in)</th>
+              <th>Chest (cm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>XS</strong></td>
+              <td>34</td>
+              <td>34</td>
+              <td>44</td>
+              <td>44</td>
+              <td>34-36</td>
+              <td>86-91</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>S</strong></td>
+              <td>36</td>
+              <td>36</td>
+              <td>46</td>
+              <td>46</td>
+              <td>36-38</td>
+              <td>91-96</td>
+            </tr>
+            <tr>
+              <td><strong>M</strong></td>
+              <td>38</td>
+              <td>38</td>
+              <td>48</td>
+              <td>48</td>
+              <td>38-40</td>
+              <td>96-101</td>
+            </tr>
+            <tr>
+              <td><strong>L</strong></td>
+              <td>40</td>
+              <td>40</td>
+              <td>50</td>
+              <td>50</td>
+              <td>40-42</td>
+              <td>101-106</td>
+            </tr>
+            <tr>
+              <td><strong>XL</strong></td>
+              <td>42</td>
+              <td>42</td>
+              <td>52</td>
+              <td>52</td>
+              <td>42-44</td>
+              <td>106-111</td>
+            </tr>
+            <tr>
+              <td><strong>XXL</strong></td>
+              <td>44</td>
+              <td>44</td>
+              <td>54</td>
+              <td>54</td>
+              <td>44-46</td>
+              <td>111-116</td>
+            </tr>
+            <tr>
+              <td><strong>XXXL</strong></td>
+              <td>46</td>
+              <td>46</td>
+              <td>56</td>
+              <td>56</td>
+              <td>46-48</td>
+              <td>116-121</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <h3 class="section__subtitle">Women's vs Men's Sizing Differences</h3>
+      <p class="section__text">
+        Men's blazer sizing typically follows chest measurements, while women's blazer sizing may use numeric sizes (2, 4, 6, etc.) or letter sizes (XS, S, M, L) based on bust measurements. Women's blazers also require consideration of bust, waist, and hip proportions, with different fit silhouettes including regular, petite, and plus-size categories. Our <a href="/grading-service">grading service</a> creates size charts specifically optimized for your target demographic and market. We manufacture both men's and women's blazers with appropriate sizing systems and fit considerations for each gender.
+      </p>
+      
+      <p class="section__text">
+        For brands requiring custom fit development, our <a href="/fit-engineering-service">fit engineering service</a> provides comprehensive fit analysis, size chart development, and fit model testing to ensure optimal fit across your size range.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Manufacturing Costs -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Blazer Manufacturing Costs | What to Budget</h2>
+      <p class="section__text">
+        Blazer costs vary significantly based on fabric, construction, complexity, and order quantity. Understanding cost ranges helps you price products appropriately and manage profit margins. The following ranges are market estimates for Bangladesh manufacturing at FOB Chittagong.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Blazer manufacturing cost ranges by style and MOQ">
+          <caption>Estimated manufacturing costs per blazer by style and order quantity</caption>
+          <thead>
+            <tr>
+              <th>Style</th>
+              <th>MOQ 300</th>
+              <th>MOQ 500</th>
+              <th>MOQ 1000+</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Basic Fused Blazer</strong></td>
+              <td>$18-25</td>
+              <td>$15-22</td>
+              <td>$12-18</td>
+            </tr>
+            <tr>
+              <td><strong>Unstructured Blazer</strong></td>
+              <td>$16-22</td>
+              <td>$14-20</td>
+              <td>$11-16</td>
+            </tr>
+            <tr>
+              <td><strong>Premium Wool Blazer</strong></td>
+              <td>$28-38</td>
+              <td>$25-35</td>
+              <td>$22-30</td>
+            </tr>
+            <tr>
+              <td><strong>Fashion Oversized</strong></td>
+              <td>$22-30</td>
+              <td>$20-28</td>
+              <td>$17-25</td>
+            </tr>
+            <tr>
+              <td><strong>Corporate Uniform</strong></td>
+              <td>$20-28</td>
+              <td>$18-25</td>
+              <td>$15-22</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p class="section__text">
+        <em>Prices are FOB Chittagong estimates and vary based on fabric choice, construction complexity, and specific requirements. Premium fabrics, special trims, and complex styling increase costs. Contact us for accurate quotes based on your specifications.</em>
+      </p>
+      
+      <p class="section__text">
+        Use our <a href="/tools/price-calculator">price calculator</a> to estimate costs for your specific requirements, or contact us directly for detailed quotations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: FAQ -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Blazer Manufacturer FAQ</h2>
+      
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order for custom blazers?</h3>
+          <p class="faq__answer">
+            SDF Clothing offers custom blazer manufacturing with a minimum order of 300 pieces per style. This low MOQ makes our services accessible to startup brands, boutique labels, and businesses launching new blazer lines. We offer flexible size and color breakdowns within the 300 piece minimum, allowing you to test designs and scale gradually. Our 300 piece MOQ is significantly lower than many manufacturers who require 500-1,000 pieces for tailored garments.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the most popular blazer fabric for fashion brands?</h3>
+          <p class="faq__answer">
+            Wool and wool-polyester blends are the most popular blazer fabrics for fashion brands. Wool offers natural drape, breathability, and a premium hand feel that elevates garment quality. Wool-polyester blends (typically 70% wool, 30% polyester) provide wool's aesthetic benefits with added durability, wrinkle resistance, and cost efficiency. For summer collections, linen and cotton blends are popular for their lightweight, breathable properties. Velvet and tweed serve specific fashion segments - velvet for evening and occasion wear, tweed for heritage and autumn collections.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between fused and canvas blazer construction?</h3>
+          <p class="faq__answer">
+            Fused construction uses adhesive to fuse interlining to the fabric, creating structure at lower cost. Fused blazers are affordable and maintain shape well but have less drape and breathability. Half-canvas construction uses a canvas interlining that floats from the chest to the button area, providing better drape and a more natural silhouette. Full-canvas construction uses canvas throughout the jacket front, offering the highest quality drape and longevity but at premium cost. Fused is ideal for budget-friendly fashion, half-canvas for mid-range quality, and full-canvas for bespoke-level garments.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you make blazers in plus sizes?</h3>
+          <p class="faq__answer">
+            Yes, SDF Clothing manufactures blazers in plus sizes. We offer inclusive sizing from XS to 5XL, with custom grading services available for brands requiring extended size ranges. Our pattern making and grading capabilities ensure consistent fit across all size categories. We understand that plus-size customers represent a significant market segment, and we help brands serve this audience with properly fitted blazers that don't compromise on style or proportion. Our plus-size clothing manufacturing services include specialized pattern adjustments for larger sizes.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does blazer manufacturing take?</h3>
+          <p class="faq__answer">
+            Blazer manufacturing typically takes 45-60 days from sample approval to shipment. The timeline includes: pattern making and grading (5-7 days), sample development with all construction details (10-14 days), sample approval and any revisions (3-5 days), cutting and sewing bulk production (25-35 days), final quality inspection and finishing (3-5 days), and packing for shipment (2-3 days). Complex styles with multiple linings, special fabrics, or intricate details may add 5-10 days. Rush orders may be possible at higher cost for time-critical launches.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you make matching blazer and trouser sets?</h3>
+          <p class="faq__answer">
+            Yes, SDF Clothing manufactures matching blazer and trouser sets as coordinated suits. We ensure fabric and color consistency across both garments by cutting from the same fabric batch and using identical dye lots. Our pattern making capabilities guarantee matching proportions and styling elements between blazer and trousers. Coordinating sets are popular for corporate uniforms, formal wear collections, and fashion brands offering complete outfit solutions. We also manufacture matching waistcoats for three-piece suit sets.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What certifications do your blazer fabrics have?</h3>
+          <p class="faq__answer">
+            SDF Clothing's blazer fabrics hold multiple international certifications including OEKO-TEX Standard 100 for chemical safety, GOTS for organic cotton options, and REACH compliance for EU markets. Our manufacturing facilities are BSCI certified for social compliance and WRAP certified for ethical manufacturing. These certifications ensure your blazers meet retailer requirements and consumer expectations for safety and responsibility. We provide transaction certificates for certified materials to support your sustainability claims.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you add custom lining with brand print?</h3>
+          <p class="faq__answer">
+            Yes, we offer custom lining with brand prints, logos, or patterns. Custom lining is an excellent way to add brand identity to blazers, visible when the garment is worn open. We can print your logo, brand pattern, or custom design on lining fabric using sublimation or screen printing methods. Custom lining works particularly well for corporate blazers, fashion statement pieces, and limited edition collections. We also offer contrasting solid linings in brand colors as a more subtle branding option.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 9: CTA -->
+  <section class="section section--cta">
+    <div class="section__container section__container--narrow">
+      <h2 class="section__title">Ready to Manufacture Custom Blazers?</h2>
+      <p class="section__text">
+        SDF Clothing has manufactured blazers for fashion brands, corporate clients, and boutique labels since 1998. Our 300 piece minimum makes custom blazers accessible to startups and small brands, while our capacity handles large corporate uniform programs. We provide expert guidance on fabric selection, construction methods, and sizing to ensure your blazers meet market expectations.
+      </p>
+      <p class="section__text">
+        Get a free FOB quote within 48 hours. We'll provide detailed pricing, lead times, and help you determine the best specifications for your blazer line. Request a <a href="/tools/sample-request">sample request</a> to evaluate our quality before committing to bulk production.
+      </p>
+      <div class="section__ctas">
+        <a href={whatsappQuoteUrl} class="section__cta section__cta--primary" target="_blank" rel="noopener noreferrer">
+          Get a Free Factory Quote
+        </a>
+        <a href="/contact" class="section__cta section__cta--secondary">
+          Contact Our Team
+        </a>
+      </div>
+      <p class="section__text section__text--small">
+        Last updated: May 2026 | Average response time: 24 hours
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: var(--spacing-sm) 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__container--narrow {
+    max-width: 700px;
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+
+    .section__container {
+      padding: 0 var(--spacing-sm);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+</BaseLayout>
+

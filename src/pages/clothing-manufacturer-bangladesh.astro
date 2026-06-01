@@ -1,0 +1,1224 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, schemaPerson, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Clothing Manufacturer Bangladesh | SDF Clothing Since 1998";
+const pageDescription = "Leading clothing manufacturer in Bangladesh since 1998. 300 piece MOQ, GOTS certified, 13 international certifications. Get free FOB quote for fashion brands.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20clothing%20manufacturing%20from%20Bangladesh`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-20",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle,
+            "item": canonicalUrl.href
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#organization" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for clothing manufacturers in Bangladesh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most Bangladesh garment factories have MOQs ranging from 300 to 1,000 pieces per style. At SDF Clothing, we offer 300 piece minimums per style with flexible size and color combinations, making us ideal for startup brands and boutique labels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why choose Bangladesh for clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh offers competitive labor costs, skilled workforce, government incentives for exports, duty-free access to EU markets through EBA (until November 2026), and established infrastructure. The country is the world's second-largest garment exporter with $47 billion in annual exports."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does clothing production take in Bangladesh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard lead time for bulk production is 40-45 days from fabric sourcing to shipment. Sample development takes 7-14 days. We provide clear timeline commitments and track production closely to ensure on-time delivery for your fashion brand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications should I look for in a Bangladesh clothing manufacturer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Key certifications include GOTS (organic cotton), OEKO-TEX (chemical safety), BSCI (social compliance), WRAP (ethical manufacturing), ISO 9001 (quality management), and C-TPAT (supply chain security). SDF Clothing holds 13 international certifications covering quality, social compliance, and environmental standards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the payment terms for Bangladesh clothing manufacturers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard payment terms are 30% deposit to start production and 70% before shipment. We accept T/T (wire transfer), Letter of Credit (L/C), and bank transfers. For established clients, we offer flexible payment arrangements based on order volume and relationship history."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Bangladesh LDC graduation affect clothing manufacturing in 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh graduates from Least Developed Country status in November 2026, which will remove EU duty-free access under EBA. However, Bangladesh is negotiating new trade agreements and many manufacturers are preparing for this transition. Working with certified manufacturers like SDF ensures compliance readiness."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What services do Bangladesh clothing manufacturers offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Full-service manufacturers offer OEM (original equipment manufacturing), private label production, CMT (cut-make-trim), fabric sourcing, tech pack development, sampling, quality control, and logistics coordination. SDF provides end-to-end solutions from design to delivery."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find a reliable clothing manufacturer in Bangladesh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Look for BGMEA or BKMEA membership, verify certifications with issuing bodies, request factory audits, check client references, and start with sample orders. Reliable manufacturers transparent about capabilities, pricing, and lead times. Contact us for a factory tour or video consultation."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": { "@id": SITE + "/#organization" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "300",
+          "description": "Starting MOQ | 300 pieces per style"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Work with a Bangladesh Clothing Manufacturer",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Prepare Your Tech Pack",
+          "text": "Create detailed technical specifications including measurements, materials, colors, and construction details. Well-prepared tech packs reduce sampling time and ensure accurate production."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Request Quote and MOQ Confirmation",
+          "text": "Submit your requirements for pricing. Confirm MOQ requirements, lead times, and payment terms. Get a written quote with all costs including fabric, production, and shipping."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Samples",
+          "text": "Produce pre-production samples for approval. This step typically takes 7-14 days. Approve samples before bulk production to ensure quality standards are met."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Place Bulk Order",
+          "text": "Pay deposit (typically 30%) to start production. Monitor production through regular updates and quality checks. Production time is usually 40-45 days."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Inspection and Shipment",
+          "text": "Final inspection before shipping. Pay balance (70%) before shipment. Arrange shipping (FOB, CIF, or DDP terms). Receive goods and provide feedback for future orders."
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Clothing Manufacturer Bangladesh</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Established 1998 | Dhaka, Bangladesh</p>
+        <h1 class="hero__title">Clothing Manufacturer Bangladesh</h1>
+        <p class="hero__description">
+          SDF Clothing has served global fashion brands from our Dhaka factory for over 25 years. As a leading clothing manufacturer in Bangladesh, we offer 300 piece minimum orders, GOTS organic certification, and 13 international quality standards. From startup brands to established labels, we deliver premium garments with transparent pricing and reliable lead times.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">300+</span>
+            <span class="hero__stat-label">Pieces MOQ</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">25+</span>
+            <span class="hero__stat-label">Years Experience</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">13</span>
+            <span class="hero__stat-label">Certifications</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">98%</span>
+            <span class="hero__stat-label">On-Time Delivery</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get a Free Factory Quote
+          </a>
+          <a href="/contact" class="hero__cta hero__cta--secondary">
+            Download Capability Deck
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="SDF Clothing factory in Bangladesh manufacturing garments" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">GOTS Certified Organic</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">BSCI Social Compliance</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">WRAP Ethical Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">C-TPAT Supply Chain Security</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">ISO 9001 Quality Management</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Overview -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What is a Clothing Manufacturer in Bangladesh?</h2>
+      <p class="section__text">
+        A clothing manufacturer in Bangladesh is a garment factory that produces apparel for international fashion brands. Bangladesh has become the world's second-largest garment exporter, shipping $47 billion worth of clothing annually to markets in Europe, North America, and beyond. The country's Ready-Made Garment (RMG) industry employs over 4 million workers and operates thousands of factories ranging from small workshops to large-scale industrial complexes.
+      </p>
+      <p class="section__text">
+        Bangladesh clothing manufacturers specialize in both knitwear (t-shirts, hoodies, activewear) and woven garments (shirts, pants, dresses). Many factories, including SDF Clothing, offer full-package production services covering fabric sourcing, design development, sampling, manufacturing, quality control, and export logistics. The industry's growth stems from competitive labor costs, skilled workforce, government export incentives, and duty-free trade access to major markets.
+      </p>
+      <p class="section__text">
+        According to the <a href="https://www.bgmea.com.bd/" target="_blank" rel="noopener noreferrer">Bangladesh Garment Manufacturers and Exporters Association (BGMEA)</a>, the country exports to over 150 countries. Major buyers include H&M, Zara, Walmart, Target, and thousands of emerging fashion brands. Bangladesh manufacturers produce everything from basic t-shirts to complex technical apparel, serving both fast fashion and premium segments. For brands seeking <a href="/low-moq-clothing-manufacturers">low MOQ clothing manufacturers</a>, Bangladesh offers some of the most flexible minimum order quantities in the industry.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Why Bangladesh -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Why Choose Bangladesh for Clothing Manufacturing?</h2>
+      <p class="section__text">
+        Fashion brands worldwide source from Bangladesh for compelling economic and strategic reasons. The country offers manufacturing costs 20-30% lower than China while maintaining comparable quality standards. For detailed analysis of <a href="/guides/clothing-manufacturing-cost-bangladesh">clothing manufacturing cost in Bangladesh</a>, review our cost guide. This cost advantage stems from lower labor costs, government subsidies for export-oriented factories, and economies of scale from concentrated industrial zones.
+      </p>
+      
+      <h3 class="section__subtitle">Competitive Labor Costs</h3>
+      <p class="section__text">
+        Bangladesh's minimum wage for garment workers is approximately $95 per month (as of 2023), significantly lower than China's $300-400 monthly wage. This labor cost advantage translates to lower FOB prices for buyers without compromising quality. The workforce is highly productive, with average output per worker among the highest in South Asia.
+      </p>
+      
+      <h3 class="section__subtitle">Skilled Workforce</h3>
+      <p class="section__text">
+        The Bangladesh RMG industry has developed deep expertise over 40 years. Workers specialize in specific operations - sewing, finishing, quality control - developing high skill levels through repetition. Technical staff including pattern makers, sample makers, and production managers have decades of collective experience. This expertise ensures consistent quality even on complex garments.
+      </p>
+      
+      <h3 class="section__subtitle">Government Support</h3>
+      <p class="section__text">
+        The Bangladesh government actively supports the garment industry through tax incentives, subsidized electricity for export factories, and investment in infrastructure. Export Processing Zones (EPZs) offer additional benefits including streamlined customs procedures. This supportive environment reduces operational costs and improves efficiency for manufacturers.
+      </p>
+      
+      <h3 class="section__subtitle">Trade Preferences</h3>
+      <p class="section__text">
+        Bangladesh currently enjoys duty-free access to European Union markets under the Everything But Arms (EBA) arrangement for least developed countries. This preferential treatment provides a 0-12% duty advantage over competitors like China and Vietnam. Note: Bangladesh graduates from LDC status in November 2026, which will change this arrangement, but new trade agreements are being negotiated.
+      </p>
+      
+      <h3 class="section__subtitle">Vertical Integration</h3>
+      <p class="section__text">
+        Many Bangladesh manufacturers have vertically integrated operations covering knitting, dyeing, finishing, and garment production under one roof. This integration reduces lead times, improves quality control, and lowers costs. SDF Clothing works with vertically integrated partners to ensure end-to-end quality and efficiency.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: SDF's Approach -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">How SDF Clothing Handles Bangladesh Manufacturing</h2>
+      <p class="section__text">
+        SDF Clothing operates differently from typical Bangladesh garment factories. Founded in 1998 by Chowdhury Remon, we built our business specifically to serve startup and emerging fashion brands that most large factories overlook. While many manufacturers require 1,000+ piece minimums, we offer 300 piece orders per style with flexible size and color combinations.
+      </p>
+      
+      <h3 class="section__subtitle">Low MOQ Specialization</h3>
+      <p class="section__text">
+        Our 300 piece minimum makes us accessible to brands testing new designs, launching capsule collections, or scaling gradually. We understand that not every brand can commit to large orders initially. This flexibility has made us a preferred partner for over 500 startup brands across 40+ countries since our founding.
+      </p>
+      
+      <h3 class="section__subtitle">Certified Quality</h3>
+      <p class="section__text">
+        We hold 13 international certifications covering quality, social compliance, and environmental standards. These include GOTS (organic cotton), OEKO-TEX (chemical safety), BSCI (social compliance), WRAP (ethical manufacturing), ISO 9001 (quality management), and C-TPAT (supply chain security). Each certification is verified by third-party auditors and available for client review. Learn more about our <a href="/certifications">complete certification portfolio</a> and what each standard means for your brand.
+      </p>
+      
+      <h3 class="section__subtitle">Transparent Pricing</h3>
+      <p class="section__text">
+        Our quotes are FOB (Free On Board) Chittagong or Dhaka, clearly itemizing fabric costs, labor, finishing, quality inspection, and port delivery. We never add hidden charges. You'll know exactly what you're paying for before production begins. This transparency builds trust and helps you make informed sourcing decisions.
+      </p>
+      
+      <h3 class="section__subtitle">Dedicated Support</h3>
+      <p class="section__text">
+        Each client works with a dedicated account manager who speaks fluent English and understands international fashion markets. We provide regular production updates, photos of samples, and proactively communicate about any potential delays. Our 98% on-time delivery rate reflects our commitment to reliability. Whether you need <a href="/private-label-manufacturer">private label manufacturing</a> or full OEM production, we adapt to your brand's specific requirements.
+      </p>
+      
+      <h3 class="section__subtitle">Sustainable Options</h3>
+      <p class="section__text">
+        For brands prioritizing sustainability, we offer GOTS-certified organic cotton, recycled polyester, and other eco-friendly materials. Our facilities follow sustainable practices including water recycling, energy efficiency, and waste reduction. We provide transaction certificates for organic materials to support your sustainability claims. Explore our <a href="/sustainable-clothing-manufacturers">sustainable clothing manufacturing</a> capabilities for eco-conscious brands.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Step-by-Step Process -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">How to Work with a Bangladesh Clothing Manufacturer</h2>
+      <p class="section__text">
+        Working with a Bangladesh manufacturer follows a structured process. Understanding each step helps you manage expectations and ensure smooth production. Here's the complete workflow from initial contact to final delivery.
+      </p>
+      
+      <div class="process">
+        <div class="process__step">
+          <div class="process__number">1</div>
+          <h3 class="process__title">Prepare Your Tech Pack</h3>
+          <p class="process__text">
+            A tech pack is your blueprint. It should include detailed technical specifications: measurements (size charts), materials (fabric type, weight, composition), colors (Pantone or color references), construction details (stitch types, seam allowances), and any special requirements. Well-prepared tech packs reduce sampling time and ensure accurate production. If you don't have a tech pack, we can help develop one for a fee.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">2</div>
+          <h3 class="process__title">Request Quote and MOQ Confirmation</h3>
+          <p class="process__text">
+            Submit your tech pack and requirements for pricing. Specify order quantity per style, size breakdown, color variations, and delivery timeline. We'll provide a written quote including fabric costs, labor, finishing, quality inspection, and FOB shipping to port. Confirm MOQ requirements - our minimum is 300 pieces per style with flexible size/color combinations. The quote process typically takes 2-3 business days.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">3</div>
+          <h3 class="process__title">Develop Samples</h3>
+          <p class="process__text">
+            Before bulk production, we develop pre-production samples for your approval. This step typically takes 7-14 days depending on complexity. You'll receive photos first, then physical samples via courier for final approval. Review samples carefully for fit, fabric quality, construction, and overall finish. Approve samples in writing before bulk production begins. Sample costs are typically credited against bulk orders.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">4</div>
+          <h3 class="process__title">Place Bulk Order</h3>
+          <p class="process__text">
+            Once samples are approved, pay the deposit (typically 30%) to start production. We'll provide a production schedule with key milestones: fabric sourcing, cutting, sewing, finishing, and quality inspection. Production time is usually 40-45 days from deposit to shipment. We send regular updates including photos of production progress. You can request a third-party inspection before final payment.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">5</div>
+          <h3 class="process__title">Quality Inspection and Shipment</h3>
+          <p class="process__text">
+            Before shipment, we conduct AQL 2.5 quality inspection based on international standards. You can request your own inspector or use third-party services like SGS, Bureau Veritas, or Intertek. Once inspection passes, pay the balance (70%) and we release shipment. We handle export documentation, customs clearance, and coordinate with your freight forwarder. Shipping time varies: 20-30 days to US West Coast, 30-40 days to Europe, depending on route and carrier.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: What to Look For -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What to Look for in a Bangladesh Clothing Manufacturer</h2>
+      <p class="section__text">
+        Choosing the right manufacturer is critical for your brand's success. Not all Bangladesh factories are created equal. Here's what to evaluate when selecting a manufacturing partner.
+      </p>
+      
+      <h3 class="section__subtitle">BGMEA or BKMEA Membership</h3>
+      <p class="section__text">
+        Legitimate manufacturers are members of the Bangladesh Garment Manufacturers and Exporters Association (BGMEA) for knitwear or Bangladesh Knitwear Manufacturers and Exporters Association (BKMEA) for woven garments. Membership indicates compliance with basic regulations and industry standards. Verify membership on the official BGMEA or BKMEA websites. SDF Clothing is a registered BGMEA member in good standing.
+      </p>
+      
+      <h3 class="section__subtitle">Certifications</h3>
+      <p class="section__text">
+        Certifications demonstrate commitment to quality, social compliance, and environmental standards. Key certifications include GOTS (organic), OEKO-TEX (chemical safety), BSCI (social compliance), WRAP (ethical), ISO 9001 (quality), and C-TPAT (supply chain security). Verify certifications with the issuing organizations - certificates can be forged. SDF holds 13 verifiable certifications across all categories.
+      </p>
+      
+      <h3 class="section__subtitle">Experience with Your Product Type</h3>
+      <p class="section__text">
+        Different factories specialize in different products. Some excel at basic t-shirts, others at complex technical outerwear. Ask about experience with garments similar to yours. Request photos of similar past production. A factory that understands your product category will deliver better quality and fewer issues. SDF specializes in knitted garments including t-shirts, hoodies, activewear, and casual wear.
+      </p>
+      
+      <h3 class="section__subtitle">Production Capacity</h3>
+      <p class="section__text">
+            Ensure the factory can handle your order volume within your timeline. Ask about monthly production capacity, current utilization, and lead times. A factory at 100% capacity may delay your order. SDF has 75,000 sq ft of production space with capacity for 50,000+ pieces monthly, ensuring we can scale with your brand's growth.
+      </p>
+      
+      <h3 class="section__subtitle">Communication Quality</h3>
+      <p class="section__text">
+        Good communication prevents misunderstandings. Evaluate response time, English proficiency, and clarity during initial inquiries. Are they transparent about pricing and lead times? Do they ask relevant questions about your requirements? Poor communication during sales often indicates worse communication during production. SDF prides itself on responsive, clear communication with dedicated account managers.
+      </p>
+      
+      <h3 class="section__subtitle">Client References</h3>
+      <p class="section__text">
+        Ask for references from current or past clients, especially brands similar to yours. Contact references to ask about quality, reliability, communication, and problem resolution. While no factory is perfect, patterns in feedback reveal strengths and weaknesses. SDF can provide references from brands in your market segment.
+      </p>
+      
+      <h3 class="section__subtitle">Factory Audit Reports</h3>
+      <p class="section__text">
+        Request recent audit reports from third-party organizations like BSCI, WRAP, or client-commissioned audits. These reports reveal working conditions, safety standards, and compliance issues. Be wary of factories that refuse to share audit reports. SDF undergoes regular third-party audits and shares reports with qualified clients.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Comparison Table -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Bangladesh vs Other Manufacturing Hubs</h2>
+      <p class="section__text">
+        Fashion brands have multiple sourcing options. Understanding how Bangladesh compares to other major manufacturing hubs helps you make informed decisions. This comparison covers key factors affecting your choice.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Comparison of Bangladesh with other manufacturing hubs">
+          <caption>Bangladesh Manufacturing Hub Comparison</caption>
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Bangladesh</th>
+              <th>China</th>
+              <th>Vietnam</th>
+              <th>India</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Labor Cost (monthly)</strong></td>
+              <td>$95</td>
+              <td>$300-400</td>
+              <td>$200-250</td>
+              <td>$150-200</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>MOQ Typical</strong></td>
+              <td>300-1,000 pieces</td>
+              <td>500-2,000 pieces</td>
+              <td>500-1,500 pieces</td>
+              <td>300-1,000 pieces</td>
+            </tr>
+            <tr>
+              <td><strong>Lead Time (days)</strong></td>
+              <td>40-45</td>
+              <td>30-35</td>
+              <td>35-40</td>
+              <td>45-50</td>
+            </tr>
+            <tr>
+              <td><strong>EU Duty (current)</strong></td>
+              <td>0% (EBA until Nov 2026)</td>
+              <td>12%</td>
+              <td>9.6%</td>
+              <td>9.6%</td>
+            </tr>
+            <tr>
+              <td><strong>US Duty</strong></td>
+              <td>15-32%</td>
+              <td>15-32%</td>
+              <td>15-32%</td>
+              <td>15-32%</td>
+            </tr>
+            <tr>
+              <td><strong>Workforce Skill</strong></td>
+              <td>High (specialized)</td>
+              <td>Very High</td>
+              <td>High</td>
+              <td>High</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Vertical Integration</strong></td>
+              <td>Strong</td>
+              <td>Very Strong</td>
+              <td>Moderate</td>
+              <td>Strong</td>
+            </tr>
+            <tr>
+              <td><strong>English Proficiency</strong></td>
+              <td>Moderate</td>
+              <td>High</td>
+              <td>Moderate</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td><strong>Infrastructure</strong></td>
+              <td>Improving</td>
+              <td>Excellent</td>
+              <td>Good</td>
+              <td>Moderate</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top: 3rem;">
+        <table style="width:100%;max-width:800px;border-collapse:collapse;background:#0a0a0a;">
+          <thead>
+            <tr style="background:#e00;">
+              <th style="padding:1rem;text-align:left;color:#fff;font-size:0.85rem;font-weight:500;border-bottom:1px solid #333;">Service</th>
+              <th style="padding:1rem;text-align:left;color:#fff;font-size:0.85rem;font-weight:500;border-bottom:1px solid #333;">Description</th>
+              <th style="padding:1rem;text-align:left;color:#fff;font-size:0.85rem;font-weight:500;border-bottom:1px solid #333;">MOQ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #1a1a1a;">
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">OEM Manufacturing</td>
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">Full production from your designs</td>
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">300 pieces</td>
+            </tr>
+            <tr style="border-bottom:1px solid #1a1a1a;">
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">Private Label</td>
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">Custom branded apparel production</td>
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">300 pieces</td>
+            </tr>
+            <tr style="border-bottom:1px solid #1a1a1a;">
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">CMT Service</td>
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">Cut, make, trim with your fabric</td>
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">300 pieces</td>
+            </tr>
+            <tr style="border-bottom:1px solid #1a1a1a;">
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">Sample Development</td>
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">Prototype and fit sample creation</td>
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">1-5 pieces</td>
+            </tr>
+            <tr>
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">Fabric Sourcing</td>
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">Material procurement and certification</td>
+              <td style="padding:1rem;color:#fff;font-size:0.82rem;">500 meters</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p class="section__text">
+        <em>Data sources: World Bank, ILO, WTO, industry reports. Duty rates are approximate and vary by product category. Bangladesh EBA duty-free access expires November 2026 upon LDC graduation.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Case Study -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Success Story: Los Angeles Startup Scales with SDF</h2>
+      <p class="section__text">
+        A Los Angeles-based activewear brand approached SDF Clothing in 2022 with their first production run. The brand had designed a premium yoga collection but struggled to find a US manufacturer willing to handle their 500-piece order at viable pricing.
+      </p>
+      
+      <h3 class="section__subtitle">The Challenge</h3>
+      <p class="section__text">
+        The brand needed GOTS-certified organic cotton fabric, four-way stretch performance material, and complex construction including flatlock seams and reinforced stitching. Their timeline was tight - launch scheduled for Q4 2022 holiday season. US manufacturers quoted prices 3x above their target, with 8-12 week lead times.
+      </p>
+      
+      <h3 class="section__subtitle">The Solution</h3>
+      <p class="section__text">
+        SDF Clothing provided FOB pricing 40% below US quotes with a 6-week lead time. We sourced GOTS-certified organic cotton from certified suppliers, developed samples in 10 days, and accommodated their 500-piece MOQ across 4 styles with 5 sizes each. Our team communicated daily via WhatsApp, sending production photos and addressing concerns immediately.
+      </p>
+      
+      <h3 class="section__subtitle">The Result</h3>
+      <p class="section__text">
+        The brand launched on schedule in October 2022. Initial quality inspection showed 99.2% pass rate - exceptional for a first production run. Customer feedback praised fabric quality and construction. The brand placed a second order in January 2023 for 2,000 pieces, scaling up 4x. By 2024, they were ordering 10,000 pieces quarterly, with SDF as their primary manufacturing partner.
+      </p>
+      
+      <h3 class="section__subtitle">Key Takeaways</h3>
+      <p class="section__text">
+        This case demonstrates how Bangladesh manufacturing can support brand growth. Starting with manageable MOQs, scaling as volume increases, maintaining quality consistency, and building a long-term partnership. The brand saved approximately $150,000 annually on production costs versus US manufacturing while maintaining premium quality.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: Common Mistakes -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Common Mistakes Brands Make with Bangladesh Manufacturers</h2>
+      <p class="section__text">
+        Working with overseas manufacturers presents challenges. Many brands make avoidable mistakes that cost time, money, and quality. Learn from these common pitfalls to ensure smooth production.
+      </p>
+      
+      <h3 class="section__subtitle">Insufficient Tech Pack Detail</h3>
+      <p class="section__text">
+        Vague tech packs lead to samples that don't match your vision. Include every detail: measurements, materials, colors, construction, labeling, packaging. Ambiguity forces manufacturers to guess, and guesses are often wrong. Invest time in detailed tech packs - it saves money and time in sampling. If you lack technical design expertise, hire a professional tech pack designer.
+      </p>
+      
+      <h3 class="section__subtitle">Skipping Sample Approval</h3>
+      <p class="section__text">
+        Some brands rush production without properly approving samples, assuming "close enough" will be fixed in bulk. This is a mistake. Bulk production follows approved samples. If samples have issues, bulk production will have the same issues multiplied. Never approve samples you're not completely satisfied with. Request revisions until samples meet your standards.
+      </p>
+      
+      <h3 class="section__subtitle">Ignoring Payment Terms</h3>
+      <p class="section__text">
+        Standard terms are 30% deposit, 70% before shipment. Some brands negotiate unfavorable terms like 50% deposit or full payment before production starts. This increases your risk. Stick to standard terms unless you have compelling reason and trust established. Never pay 100% upfront - this eliminates your leverage if problems arise.
+      </p>
+      
+      <h3 class="section__subtitle">Overlooking Certification Verification</h3>
+      <p class="section__text">
+        Many brands accept manufacturer claims about certifications without verification. Fake certificates exist. Verify each certification with the issuing organization using certificate numbers. This is especially important for organic claims - GOTS certification can be verified online. SDF provides verification links for all our certifications.
+      </p>
+      
+      <h3 class="section__subtitle">Underestimating Shipping Time</h3>
+      <p class="section__text">
+        Production time is 40-45 days, but shipping adds 20-40 days depending on destination and customs clearance. Brands often plan based on production time only, missing launch dates. Factor in shipping, customs, and inland transportation when planning timelines. Use air freight for urgent shipments at higher cost. For first-time manufacturers, our guide on <a href="/clothing-manufacturers-for-startups">clothing manufacturers for startups</a> covers timeline planning in detail.
+      </p>
+      
+      <h3 class="section__subtitle">Not Understanding Incoterms</h3>
+      <p class="section__text">
+        FOB, CIF, DDP - these incoterms define responsibility and costs. Many brands don't understand what's included. FOB means you pay shipping from port. CIF includes shipping to your port but not duties. DDP includes everything. Clarify incoterms in your contract to avoid surprise charges. SDF quotes FOB by default but can arrange CIF or DDP.
+      </p>
+      
+      <h3 class="section__subtitle">Neglecting Quality Inspection</h3>
+      <p class="section__text">
+        Relying solely on the manufacturer's quality inspection is risky. Manufacturers have incentive to pass shipments to get paid. Hire a third-party inspection company or inspect personally before final payment. The cost of inspection ($200-500) is negligible compared to the cost of receiving defective goods. SDF welcomes third-party inspections.
+      </p>
+      
+      <h3 class="section__subtitle">Building Single-Source Dependency</h3>
+      <p class="section__text">
+        Relying on one manufacturer for all production creates risk. If that factory has problems (fire, labor dispute, capacity issues), your entire supply chain stops. Develop relationships with 2-3 manufacturers as backup. Start with one primary, but qualify alternatives. SDF can recommend partner factories for backup production.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: FAQ -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Frequently Asked Questions About Bangladesh Clothing Manufacturers</h2>
+      
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order quantity for clothing manufacturers in Bangladesh?</h3>
+          <p class="faq__answer">
+            Most Bangladesh garment factories have MOQs ranging from 300 to 1,000 pieces per style. At SDF Clothing, we offer 300 piece minimums per style with flexible size and color combinations, making us ideal for startup brands and boutique labels. Some large manufacturers require 2,000+ pieces, but many mid-sized factories accommodate smaller orders for the right partnership.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Why choose Bangladesh for clothing manufacturing?</h3>
+          <p class="faq__answer">
+            Bangladesh offers competitive labor costs, skilled workforce, government incentives for exports, duty-free access to EU markets through EBA (until November 2026), and established infrastructure. The country is the world's second-largest garment exporter with $47 billion in annual exports. The combination of cost advantage, quality capability, and trade preferences makes Bangladesh attractive for fashion brands globally.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does clothing production take in Bangladesh?</h3>
+          <p class="faq__answer">
+            Standard lead time for bulk production is 40-45 days from fabric sourcing to shipment. Sample development takes 7-14 days. Shipping adds 20-40 days depending on destination. We provide clear timeline commitments and track production closely to ensure on-time delivery for your fashion brand. Rush orders may be possible at higher cost.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What certifications should I look for in a Bangladesh clothing manufacturer?</h3>
+          <p class="faq__answer">
+            Key certifications include GOTS (organic cotton), OEKO-TEX (chemical safety), BSCI (social compliance), WRAP (ethical manufacturing), ISO 9001 (quality management), and C-TPAT (supply chain security). SDF Clothing holds 13 international certifications covering quality, social compliance, and environmental standards. Always verify certifications with issuing organizations.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are the payment terms for Bangladesh clothing manufacturers?</h3>
+          <p class="faq__answer">
+            Standard payment terms are 30% deposit to start production and 70% before shipment. We accept T/T (wire transfer), Letter of Credit (L/C), and bank transfers. For established clients, we offer flexible payment arrangements based on order volume and relationship history. Never pay 100% upfront - this eliminates your quality leverage.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does Bangladesh LDC graduation affect clothing manufacturing in 2026?</h3>
+          <p class="faq__answer">
+            Bangladesh graduates from Least Developed Country status in November 2026, which will remove EU duty-free access under EBA. However, Bangladesh is negotiating new trade agreements and many manufacturers are preparing for this transition. Working with certified manufacturers like SDF ensures compliance readiness. The impact will vary by product category and specific trade agreements negotiated.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What services do Bangladesh clothing manufacturers offer?</h3>
+          <p class="faq__answer">
+            Full-service manufacturers offer OEM (original equipment manufacturing), private label production, CMT (cut-make-trim), fabric sourcing, tech pack development, sampling, quality control, and logistics coordination. SDF provides end-to-end solutions from design to delivery. Some manufacturers specialize in specific services - clarify what's included in your quote.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do I find a reliable clothing manufacturer in Bangladesh?</h3>
+          <p class="faq__answer">
+            Look for BGMEA or BKMEA membership, verify certifications with issuing bodies, request factory audits, check client references, and start with sample orders. Reliable manufacturers are transparent about capabilities, pricing, and lead times. Visit the factory if possible or request a video tour. SDF welcomes factory visits and video consultations for qualified clients.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10: CTA -->
+  <section class="section section--cta">
+    <div class="section__container section__container--narrow">
+      <h2 class="section__title">Ready to Manufacture in Bangladesh?</h2>
+      <p class="section__text">
+        SDF Clothing has helped 500+ brands launch and scale their clothing lines since 1998. Whether you're producing your first 300 pieces or scaling to 50,000+ monthly, we provide the expertise, certifications, and reliability your brand needs.
+      </p>
+      <p class="section__text">
+        Get a free FOB quote within 48 hours. No commitment required. We'll provide detailed pricing, lead times, and answer all your questions about Bangladesh manufacturing.
+      </p>
+      <div class="section__ctas">
+        <a href={whatsappQuoteUrl} class="section__cta section__cta--primary" target="_blank" rel="noopener noreferrer">
+          Get a Free Factory Quote
+        </a>
+        <a href="/contact" class="section__cta section__cta--secondary">
+          Contact Our Team
+        </a>
+      </div>
+      <p class="section__text section__text--small">
+        Last updated: May 2026 | Average response time: 24 hours
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related: <a href="/clothing-manufacturer-china" style="color: var(--color-primary);">clothing manufacturer China</a>, <a href="/clothing-manufacturer-turkey" style="color: var(--color-primary);">clothing manufacturer Turkey</a>, <a href="/clothing-manufacturer-pakistan" style="color: var(--color-primary);">clothing manufacturer Pakistan</a>, <a href="/clothing-manufacturer-sri-lanka" style="color: var(--color-primary);">clothing manufacturer Sri Lanka</a>, <a href="/clothing-manufacturer-cambodia" style="color: var(--color-primary);">clothing manufacturer Cambodia</a>, <a href="/clothing-manufacturer-vietnam" style="color: var(--color-primary);">clothing manufacturer Vietnam</a>, <a href="/clothing-manufacturer-india" style="color: var(--color-primary);">clothing manufacturer India</a>, <a href="/clothing-manufacturer-morocco" style="color: var(--color-primary);">clothing manufacturer Morocco</a>, <a href="/clothing-manufacturer-egypt" style="color: var(--color-primary);">clothing manufacturer Egypt</a>, <a href="/clothing-manufacturer-taiwan" style="color: var(--color-primary);">clothing manufacturer Taiwan</a>.
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: var(--spacing-sm) 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__container--narrow {
+    max-width: 700px;
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .process {
+    margin-top: var(--spacing-md);
+  }
+
+  .process__step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .process__step:last-child {
+    border-bottom: none;
+  }
+
+  .process__number {
+    width: 50px;
+    height: 50px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .process__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .process__text {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+
+    .process__step {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+    }
+
+    .process__number {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+</BaseLayout>
+

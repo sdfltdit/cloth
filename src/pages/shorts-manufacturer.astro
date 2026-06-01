@@ -1,0 +1,1137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Shorts Manufacturer | Custom Athletic & Casual Shorts | SDF";
+const pageDescription = "Custom shorts manufacturer in Bangladesh. Athletic, denim and casual shorts from 300 pieces. Performance, streetwear and uniform styles. Get a free quote.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20custom%20shorts%20manufacturing`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-21",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle,
+            "item": canonicalUrl.href
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#organization" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for custom shorts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SDF Clothing manufactures custom shorts with a minimum order of 300 pieces per style. This low MOQ makes shorts manufacturing accessible to startup brands, boutique labels, and businesses launching new shorts lines. We offer flexible size and color breakdowns within the 300 piece minimum, allowing you to test designs and scale gradually. Our 300 piece MOQ is significantly lower than many manufacturers who require 500-1,000 pieces for athletic and casual shorts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What fabrics are best for athletic shorts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Athletic shorts require performance fabrics that wick moisture, provide stretch, and withstand frequent washing. Polyester and polyester-spandex blends (typically 85-95% polyester, 5-15% spandex) are the most popular athletic short fabrics due to moisture-wicking properties, durability, and four-way stretch. Performance mesh fabrics offer enhanced breathability for high-intensity activities. Nylon blends provide superior strength and abrasion resistance for demanding sports. For eco-conscious brands, recycled polyester (rPET) made from post-consumer plastic bottles offers identical performance with environmental benefits. All our athletic fabrics are OEKO-TEX certified for chemical safety."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you manufacture denim shorts with custom washes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SDF manufactures denim shorts with custom washes and finishes. We offer a full range of denim washes including light wash, medium wash, dark wash, vintage wash, stone wash, acid wash, and enzyme wash. Distressing options include rips, tears, fraying, whiskering, and abrasion effects. Our denim shorts manufacturing includes both new denim construction and upcycled denim shorts made from repurposed jeans. We can achieve vintage, distressed, or clean aesthetics based on your brand positioning. Custom wash development requires sample approval before bulk production to ensure the exact look you want."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer moisture-wicking fabrics for activewear shorts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, all our athletic shorts use moisture-wicking fabrics designed to keep wearers dry during physical activity. We source performance polyester fabrics with moisture-wicking technology that pulls sweat away from the skin and allows it to evaporate quickly. These fabrics also offer quick-dry properties, making them ideal for sports, gym wear, and activewear. We can incorporate mesh paneling in strategic areas for enhanced breathability. Our <a href='/activewear-manufacturer'>activewear manufacturing</a> capabilities include comprehensive performance fabric solutions for athletic apparel."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does shorts manufacturing take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Shorts manufacturing typically takes 30-45 days from sample approval to shipment. The timeline includes: pattern making and grading (3-5 days), sample development with all construction details (7-10 days), sample approval and any revisions (3-5 days), cutting and sewing bulk production (15-25 days), final quality inspection and finishing (2-3 days), and packing for shipment (2-3 days). Complex styles with multiple prints, special washes, or intricate details may add 5-10 days. Simple basic styles can be faster, sometimes as quick as 25-30 days total."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you make board shorts for swimwear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SDF manufactures board shorts for swimwear using quick-dry, water-resistant fabrics. We source polyester and nylon fabrics specifically designed for swimwear, including options with UPF sun protection ratings. Board shorts feature longer inseams (typically 9-11 inches), lace-up or drawstring waistbands, and side pockets with drain holes. We can add branded waistbands, sublimated prints, and custom logos. Our swimwear shorts meet chlorine resistance and color fastness standards for pool and beach use. For complete swimwear collections, our <a href='/swimwear-manufacturer'>swimwear manufacturing</a> services cover board shorts, swim trunks, and rash guards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications do your short fabrics have?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SDF Clothing's short fabrics hold multiple international certifications including OEKO-TEX Standard 100 for chemical safety, GRS (Global Recycled Standard) for recycled materials, GOTS for organic cotton options, and REACH compliance for EU markets. Our manufacturing facilities are BSCI certified for social compliance and WRAP certified for ethical manufacturing. These certifications ensure your shorts meet retailer requirements and consumer expectations for safety, sustainability, and responsibility. We provide transaction certificates for certified materials to support your sustainability claims. View our complete <a href='/certifications'>certifications portfolio</a> for detailed information."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you make plus-size shorts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SDF Clothing manufactures shorts in plus sizes. We offer inclusive sizing from XS to 5XL, with custom grading services available for brands requiring extended size ranges. Our pattern making and grading capabilities ensure consistent fit across all size categories. We understand that plus-size customers represent a significant market segment, and we help brands serve this audience with properly fitted shorts that don't compromise on style or comfort. Our <a href='/plus-size-clothing-manufacturer'>plus-size clothing manufacturing</a> services include specialized pattern adjustments for larger sizes in bottomwear."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Shorts Manufacturing",
+      "provider": { "@id": SITE + "/#organization" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "300",
+          "description": "Starting MOQ | 300 pieces per style"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Shorts from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Design or Tech Pack",
+          "text": "Provide detailed specifications including short type, fabric requirements, measurements, construction details, and styling elements. If you don't have a tech pack, our design team can help develop one for a fee."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Confirm Fabric and Materials",
+          "text": "Select from our fabric library or provide your own fabric. We source athletic fabrics, denim, cotton, and specialty materials. Confirm waistband type, closure method, and all trim components."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Pre-Production Sample",
+          "text": "We create a detailed sample incorporating all your specifications. Review the sample for fit, construction, fabric quality, and styling. Request revisions until satisfied."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample and Place Bulk Order",
+          "text": "Approve the final sample in writing. Pay 30% deposit to start production. We provide a production schedule with key milestones and delivery timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Production, Quality Control, and Shipment",
+          "text": "Bulk production takes 15-25 days. We conduct AQL 2.5 quality inspection. Pay 70% balance before shipment. We handle export documentation and coordinate shipping."
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Shorts Types Manufactured by SDF",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Athletic Shorts"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Denim Shorts"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Casual Shorts"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Board Shorts"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Chino Shorts"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Shorts Manufacturer</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Established 1998 | Dhaka, Bangladesh</p>
+        <h1 class="hero__title">Shorts Manufacturer | Custom Athletic and Casual Shorts from 300 Pieces</h1>
+        <p class="hero__description">
+          SDF Clothing manufactures custom shorts for fashion brands, activewear companies, and corporate clients since 1998. We produce athletic shorts, denim shorts, casual shorts, board shorts, and chino shorts with a 300 piece minimum order. Our expertise in bottomwear manufacturing, combined with Bangladesh's skilled workforce and competitive pricing, delivers premium shorts at accessible costs. From performance athletic shorts to vintage denim and casual chino styles, we provide end-to-end manufacturing from pattern making to final shipment.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">300</span>
+            <span class="hero__stat-label">Pieces MOQ</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">25+</span>
+            <span class="hero__stat-label">Years Experience</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">XS-5XL</span>
+            <span class="hero__stat-label">Size Range</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">30-45</span>
+            <span class="hero__stat-label">Days Lead Time</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get a Free Factory Quote
+          </a>
+          <a href="/contact" class="hero__cta hero__cta--secondary">
+            Contact Our Team
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="Custom shorts manufacturing at SDF Clothing Bangladesh" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Types of Shorts -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Types of Shorts SDF Manufactures | A Complete Guide</h2>
+      <p class="section__text">
+        Understanding short types helps you select the right style for your brand and target market. SDF manufactures all major short categories, from performance athletic shorts to casual denim styles. Each type serves different purposes, activities, and customer segments.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Types of shorts manufactured by SDF Clothing">
+          <caption>Shorts types with construction, fabric, and target market information</caption>
+          <thead>
+            <tr>
+              <th>Short Type</th>
+              <th>Inseam</th>
+              <th>Best Fabric</th>
+              <th>Target Market</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Athletic Shorts</strong></td>
+              <td>5-9 inches</td>
+              <td>Polyester-spandex, performance mesh</td>
+              <td>Gym, sports, activewear</td>
+            </tr>
+            <tr>
+              <td><strong>Denim Shorts</strong></td>
+              <td>2-7 inches</td>
+              <td>Denim (various washes)</td>
+              <td>Fashion, casual, streetwear</td>
+            </tr>
+            <tr>
+              <td><strong>Chino Shorts</strong></td>
+              <td>7-11 inches</td>
+              <td>Cotton twill, cotton-poly blend</td>
+              <td>Smart casual, preppy, summer</td>
+            </tr>
+            <tr>
+              <td><strong>Board Shorts</strong></td>
+              <td>9-11 inches</td>
+              <td>Quick-dry polyester, nylon</td>
+              <td>Swimwear, beach, surf</td>
+            </tr>
+            <tr>
+              <td><strong>Casual Shorts</strong></td>
+              <td>5-9 inches</td>
+              <td>Cotton, cotton-poly, jersey</td>
+              <td>Everyday casual, lounge</td>
+            </tr>
+            <tr>
+              <td><strong>Running Shorts</strong></td>
+              <td>2-5 inches</td>
+              <td>Lightweight polyester, mesh</td>
+              <td>Running, track, training</td>
+            </tr>
+            <tr>
+              <td><strong>Cycling Shorts</strong></td>
+              <td>7-10 inches</td>
+              <td>Performance lycra, elastane</td>
+              <td>Cycling, performance sports</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <h3 class="section__subtitle">Athletic Shorts: Performance Fabrics for Sports and Fitness</h3>
+      <p class="section__text">
+        Athletic shorts require performance fabrics that wick moisture, provide stretch, and withstand frequent washing and intense activity. Our athletic shorts manufacturing uses polyester-spandex blends (typically 85-95% polyester, 5-15% spandex) that offer four-way stretch, moisture-wicking properties, and quick-dry performance. We incorporate mesh paneling in strategic areas for enhanced breathability during high-intensity activities. Athletic shorts feature elastic waistbands, drawstring closures, and often include pockets designed for phones or keys. These shorts serve gym-goers, runners, athletes, and activewear brands prioritizing performance. Our <a href="/activewear-manufacturer">activewear manufacturing</a> expertise ensures athletic shorts meet the demands of serious athletes. As a leading <a href="/clothing-manufacturer-bangladesh">clothing manufacturer Bangladesh</a>, we have extensive experience with performance bottomwear.
+      </p>
+      
+      <h3 class="section__subtitle">Denim Shorts: Custom Washes and Distressing</h3>
+      <p class="section__text">
+        Denim shorts represent a fashion staple that bridges casual and streetwear markets. Our denim shorts manufacturing offers custom washes including light, medium, dark, vintage, stone, acid, and enzyme washes to achieve specific aesthetics. Distressing options include rips, tears, fraying, whiskering, and abrasion effects for vintage and worn-in looks. We produce both new denim construction and upcycled denim shorts made from repurposed jeans for sustainability-focused brands. Denim shorts typically feature 5-pocket styling, button or zip fly closures, and varying inseams from 2-inch micro shorts to 7-inch Bermuda lengths. Denim shorts appeal to fashion brands, streetwear labels, and consumers seeking timeless casual style. For <a href="/low-moq-clothing-manufacturers">low MOQ clothing manufacturers</a>, denim shorts offer accessible entry points for emerging brands.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Fabric Guide -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Shorts Fabric Guide | Performance, Denim, and Casual Materials</h2>
+      <p class="section__text">
+        Fabric selection dramatically impacts short performance, comfort, and market positioning. SDF offers comprehensive material sourcing from certified suppliers, or we can work with your provided fabrics.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Shorts fabric comparison guide">
+          <caption>Fabric options for shorts manufacturing with weight and characteristics</caption>
+          <thead>
+            <tr>
+              <th>Material</th>
+              <th>Weight (GSM)</th>
+              <th>Characteristics</th>
+              <th>Best Short Style</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Polyester-Spandex</strong></td>
+              <td>180-220</td>
+              <td>Moisture-wicking, stretch, durable</td>
+              <td>Athletic, gym shorts</td>
+            </tr>
+            <tr>
+              <td><strong>Performance Mesh</strong></td>
+              <td>120-160</td>
+              <td>Breathable, lightweight, airy</td>
+              <td>Running, basketball</td>
+            </tr>
+            <tr>
+              <td><strong>Denim</strong></td>
+              <td>280-350</td>
+              <td>Durable, classic, customizable washes</td>
+              <td>Denim shorts, fashion</td>
+            </tr>
+            <tr>
+              <td><strong>Cotton Twill</strong></td>
+              <td>220-280</td>
+              <td>Soft, structured, classic chino feel</td>
+              <td>Chino shorts, smart casual</td>
+            </tr>
+            <tr>
+              <td><strong>Cotton Jersey</strong></td>
+              <td>160-200</td>
+              <td>Soft, comfortable, casual</td>
+              <td>Everyday casual, lounge</td>
+            </tr>
+            <tr>
+              <td><strong>Quick-Dry Polyester</strong></td>
+              <td>150-190</td>
+              <td>Water-resistant, fast drying</td>
+              <td>Board shorts, swimwear</td>
+            </tr>
+            <tr>
+              <td><strong>Performance Lycra</strong></td>
+              <td>200-240</td>
+              <td>Compressive, stretch, aerodynamic</td>
+              <td>Cycling, performance sports</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <h3 class="section__subtitle">Performance Fabrics: Moisture-Wicking and Quick-Dry</h3>
+      <p class="section__text">
+        Performance fabrics for athletic shorts prioritize moisture management, breathability, and stretch. Polyester-spandex blends provide the foundation for most athletic shorts, offering moisture-wicking technology that pulls sweat away from the skin and allows rapid evaporation. These fabrics also provide four-way stretch for unrestricted movement during exercise. Mesh fabrics enhance breathability through open-weave construction that promotes airflow. Quick-dry properties ensure shorts don't become heavy with sweat and can be washed and dried efficiently. For eco-conscious brands, recycled polyester (rPET) made from post-consumer plastic bottles offers identical performance with reduced environmental impact. All our performance fabrics are OEKO-TEX certified for chemical safety.
+      </p>
+      
+      <h3 class="section__subtitle">Denim Fabrics: Weights and Washes</h3>
+      <p class="section__text">
+        Denim fabric weight determines shorts structure and durability. Lightweight denim (8-10 oz) creates soft, comfortable shorts ideal for warm weather and casual wear. Medium-weight denim (10-12 oz) provides structure while maintaining comfort, suitable for most denim short applications. Heavyweight denim (12-14 oz) produces durable shorts that hold shape well but may be less comfortable in hot weather. Custom washes transform raw denim into specific aesthetics - light washes for casual, vintage vibes; dark washes for dressier, modern looks; distressed washes for edgy, worn-in character. We can develop custom washes to match your brand aesthetic, requiring sample approval before bulk production to ensure exact results.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Construction Methods -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Shorts Construction Methods | Waistbands, Pockets, and Finishing</h2>
+      <p class="section__text">
+        Construction details determine short quality, functionality, and comfort. Understanding construction options helps you position products appropriately and meet customer expectations.
+      </p>
+      
+      <h3 class="section__subtitle">Waistband Options: Elastic, Drawstring, Button Fly</h3>
+      <p class="section__text">
+        Waistband construction varies by short type and target market. Elastic waistbands with drawstring closures are standard for athletic shorts, providing comfort and adjustability during activity. Elastic waistbands typically range from 1-2 inches wide, with wider bands offering better support. Drawstrings allow personalized fit adjustments. Chino shorts often feature button or zip fly closures with belt loops for a more tailored, dressier appearance suitable for smart casual settings. Board shorts typically use lace-up or drawstring waistbands designed for swimwear functionality. The waistband choice should align with your target market - athletic for sports, tailored for fashion, swim-appropriate for beachwear.
+      </p>
+      
+      <h3 class="section__subtitle">Pocket Configurations: Side, Back, and Utility</h3>
+      <p class="section__text">
+        Pocket design varies significantly by short type and intended use. Athletic shorts often include side pockets with zipper or velcro closures to secure phones and keys during workouts. Some athletic styles feature internal phone pockets positioned to prevent bouncing during running. Denim shorts typically feature traditional 5-pocket styling with front slash pockets, back patch pockets, and a coin pocket. Chino shorts may include slash pockets and welt pockets for a cleaner, dressier look. Board shorts often include side pockets with drain holes for water drainage. Utility or cargo shorts feature multiple additional pockets for functional storage. Pocket construction should balance functionality with aesthetics - too many pockets can create bulk, while insufficient pockets reduce utility.
+      </p>
+      
+      <h3 class="section__subtitle">Hem Finishes: Clean Hem vs Frayed vs Rolled</h3>
+      <p class="section__text">
+        Hem finishing impacts short aesthetics and perceived quality. Clean hems with double-needle stitching provide a polished, finished appearance suitable for chino shorts and tailored styles. This finish creates durability and clean lines appropriate for dressier markets. Frayed hems create a casual, vintage aesthetic popular in denim shorts and fashion-forward styles. Fraying can be controlled for consistent appearance or left raw for a more distressed look. Rolled hems create a casual, beach-inspired vibe suitable for board shorts and summer casual styles. The hem choice should align with your brand positioning - clean for tailored markets, frayed for vintage aesthetics, rolled for beach vibes.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Athletic Shorts Manufacturing -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Athletic Shorts Manufacturing | Performance and Activewear</h2>
+      <p class="section__text">
+        Athletic shorts require specialized construction to meet performance demands. SDF manufactures gym shorts, running shorts, basketball shorts, and performance shorts for activewear brands and sports companies.
+      </p>
+      
+      <h3 class="section__subtitle">Gym Shorts: Versatile Fitness and Training</h3>
+      <p class="section__text">
+        Gym shorts serve as the foundation of athletic wear, designed for versatility across various fitness activities. Our gym shorts manufacturing uses performance polyester-spandex blends with moisture-wicking technology and four-way stretch for unrestricted movement. Typical inseams range from 7-9 inches, balancing coverage and mobility. Features include elastic waistbands with drawstrings, side pockets with secure closures, and mesh paneling for breathability. Gym shorts appeal to fitness enthusiasts, gym-goers, and activewear brands seeking versatile performance wear. These shorts work well for weight training, cardio, and general fitness activities. Our <a href="/activewear-manufacturer">activewear manufacturing</a> capabilities ensure gym shorts meet the rigorous demands of fitness enthusiasts.
+      </p>
+      
+      <h3 class="section__subtitle">Running Shorts: Lightweight and Aerodynamic</h3>
+      <p class="section__text">
+        Running shorts prioritize lightweight construction and aerodynamic design for optimal performance. Our running shorts manufacturing uses ultra-lightweight polyester and mesh fabrics (120-160 GSM) to minimize weight and maximize breathability. Inseams are typically shorter (2-5 inches) to prevent fabric interference with leg movement. Features include built-in liners for support, reflective elements for visibility, and waistband pockets for small essentials. Some running shorts feature split-leg designs for enhanced range of motion. Running shorts serve serious runners, track athletes, and performance brands where every gram matters. The focus is on function over fashion, with clean, minimal designs that don't compromise performance.
+      </p>
+      
+      <h3 class="section__subtitle">Basketball Shorts: Longer Inseams and Team Branding</h3>
+      <p class="section__text">
+        Basketball shorts feature longer inseams (typically 9-11 inches) and loose-fitting designs for on-court performance and team branding. Our basketball shorts manufacturing uses durable polyester fabrics that withstand frequent washing and intense play. Team branding options include sublimated prints, embroidered logos, and tackle twill numbers for authentic team aesthetics. These shorts serve basketball teams, sports organizations, and brands targeting the sports market. Beyond basketball, this style has crossover appeal in streetwear and fashion markets where longer, loose shorts are trendy. The longer inseam and loose fit provide comfort and coverage both on and off the court.
+      </p>
+      
+      <h3 class="section__subtitle">Compression Shorts: Performance Base Layer</h3>
+      <p class="section__text">
+        Compression shorts provide muscle support and moisture management as base layer garments. Our compression shorts manufacturing uses performance lycra and elastane blends with high spandex content (15-25%) for compressive fit. These shorts feature flatlock seams to prevent chafing and moisture-wicking technology for dry comfort. Compression shorts serve as base layers for running, cycling, and other sports, providing muscle support and reducing fatigue. They're also popular as standalone athletic wear in fitness and gym settings. Compression shorts require precise fit and sizing to achieve proper compression without restricting circulation or comfort.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Fashion Shorts Manufacturing -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Fashion Shorts Manufacturing | Denim, Chino, and Casual Styles</h2>
+      <p class="section__text">
+        Fashion shorts emphasize style, trends, and brand aesthetics. SDF manufactures denim shorts, chino shorts, casual shorts, and fashion-forward styles for DTC brands, fashion labels, and trend-focused companies.
+      </p>
+      
+      <h3 class="section__subtitle">Denim Shorts: Vintage Washes and Distressing</h3>
+      <p class="section__text">
+        Denim shorts remain a fashion staple with enduring appeal across multiple market segments. Our denim shorts manufacturing offers comprehensive customization including custom washes, distressing, and styling details. Wash options range from light vintage washes for retro appeal to dark clean washes for modern sophistication. Distressing includes controlled rips, tears, fraying, and abrasion effects for worn-in character. Inseams vary from 2-inch micro shorts for fashion-forward markets to 7-inch Bermuda lengths for conservative segments. Denim shorts serve fashion brands, streetwear labels, and consumers seeking timeless casual style. The versatility of denim shorts allows them to work across seasons and style contexts from beach days to casual outings.
+      </p>
+      
+      <h3 class="section__subtitle">Chino Shorts: Smart Casual and Preppy Aesthetic</h3>
+      <p class="section__text">
+        Chino shorts offer a dressier alternative to denim, suitable for smart casual settings and preppy aesthetics. Our chino shorts manufacturing uses cotton twill and cotton-polyester blend fabrics that provide structure while maintaining comfort. Features include slash pockets, welt back pockets, belt loops, and button or zip fly closures for tailored appearance. Inseams typically range from 7-11 inches, balancing coverage and style. Chino shorts serve preppy brands, smart casual markets, and consumers seeking polished casual wear. These shorts work well for summer events, casual workplaces, and social settings where jeans might feel too casual but full pants feel too formal.
+      </p>
+      
+      <h3 class="section__subtitle">Casual Shorts: Everyday Comfort and Lounge</h3>
+      <p class="section__text">
+        Casual shorts prioritize comfort and versatility for everyday wear. Our casual shorts manufacturing uses soft cotton, cotton-polyester blends, and jersey fabrics that provide comfort for all-day wear. Features include elastic waistbands, drawstrings, and simple pocket configurations for ease of use. Inseams typically range from 5-9 inches for balanced coverage and comfort. Casual shorts serve everyday brands, loungewear labels, and consumers seeking comfortable, practical shorts for daily activities. These shorts work well for lounging, errands, casual outings, and any situation where comfort is the priority over fashion or performance.
+      </p>
+      
+      <h3 class="section__subtitle">Board Shorts: Swimwear and Beach Style</h3>
+      <p class="section__text">
+        Board shorts serve dual purposes as functional swimwear and beach-inspired fashion. Our board shorts manufacturing uses quick-dry polyester and nylon fabrics with water-resistant properties and UPF sun protection. Features include lace-up or drawstring waistbands, side pockets with drain holes, and longer inseams (9-11 inches) for coverage. Board shorts serve swimwear brands, beach lifestyle companies, and consumers seeking versatile beach-to-street shorts. Custom branding options include sublimated prints, embroidered logos, and branded waistbands. For complete swimwear collections, our <a href="/swimwear-manufacturer">swimwear manufacturing</a> services cover board shorts, swim trunks, rash guards, and swimwear accessories.
+      </p>
+      
+      <p class="section__text">
+        For fashion brands seeking complete manufacturing solutions, our <a href="/private-label-manufacturer">private label manufacturing</a> services provide end-to-end production from design to delivery with your brand identity.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Size Guide -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Shorts Size Guide | International Sizing Standards</h2>
+      <p class="section__text">
+        Accurate sizing is critical for short fit and customer satisfaction. SDF manufactures to international sizing standards and offers custom grading for brands requiring specific size charts.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="International shorts size conversion chart">
+          <caption>Size conversion chart for shorts across international sizing systems</caption>
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>UK</th>
+              <th>US/CA</th>
+              <th>EU</th>
+              <th>Waist (in)</th>
+              <th>Waist (cm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>XS</strong></td>
+              <td>28-30</td>
+              <td>28-30</td>
+              <td>38-40</td>
+              <td>28-30</td>
+              <td>71-76</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>S</strong></td>
+              <td>30-32</td>
+              <td>30-32</td>
+              <td>40-42</td>
+              <td>30-32</td>
+              <td>76-81</td>
+            </tr>
+            <tr>
+              <td><strong>M</strong></td>
+              <td>32-34</td>
+              <td>32-34</td>
+              <td>42-44</td>
+              <td>32-34</td>
+              <td>81-86</td>
+            </tr>
+            <tr>
+              <td><strong>L</strong></td>
+              <td>34-36</td>
+              <td>34-36</td>
+              <td>44-46</td>
+              <td>34-36</td>
+              <td>86-91</td>
+            </tr>
+            <tr>
+              <td><strong>XL</strong></td>
+              <td>36-38</td>
+              <td>36-38</td>
+              <td>46-48</td>
+              <td>36-38</td>
+              <td>91-96</td>
+            </tr>
+            <tr>
+              <td><strong>XXL</strong></td>
+              <td>38-40</td>
+              <td>38-40</td>
+              <td>48-50</td>
+              <td>38-40</td>
+              <td>96-101</td>
+            </tr>
+            <tr>
+              <td><strong>XXXL</strong></td>
+              <td>40-42</td>
+              <td>40-42</td>
+              <td>50-52</td>
+              <td>40-42</td>
+              <td>101-106</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p class="section__text">
+        For brands requiring custom fit development, our <a href="/fit-engineering-service">fit engineering service</a> provides comprehensive fit analysis, size chart development, and fit model testing to ensure optimal fit across your size range. Our <a href="/grading-service">grading service</a> creates size charts specifically optimized for your target demographic and market.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Manufacturing Costs -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Shorts Manufacturing Costs | What to Budget</h2>
+      <p class="section__text">
+        Shorts costs vary significantly based on fabric, construction, and order quantity. Understanding cost ranges helps you price products appropriately and manage profit margins.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Shorts manufacturing cost ranges by style and MOQ">
+          <caption>Estimated manufacturing costs per short by style and order quantity</caption>
+          <thead>
+            <tr>
+              <th>Style</th>
+              <th>MOQ 300</th>
+              <th>MOQ 500</th>
+              <th>MOQ 1000+</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Basic Athletic Shorts</strong></td>
+              <td>$3.50-5.50</td>
+              <td>$3.00-5.00</td>
+              <td>$2.50-4.00</td>
+            </tr>
+            <tr>
+              <td><strong>Casual Shorts</strong></td>
+              <td>$4.00-6.00</td>
+              <td>$3.50-5.50</td>
+              <td>$3.00-4.50</td>
+            </tr>
+            <tr>
+              <td><strong>Denim Shorts</strong></td>
+              <td>$6.00-9.00</td>
+              <td>$5.50-8.00</td>
+              <td>$4.50-7.00</td>
+            </tr>
+            <tr>
+              <td><strong>Chino Shorts</strong></td>
+              <td>$5.50-8.00</td>
+              <td>$5.00-7.00</td>
+              <td>$4.00-6.00</td>
+            </tr>
+            <tr>
+              <td><strong>Performance Shorts</strong></td>
+              <td>$5.00-7.50</td>
+              <td>$4.50-6.50</td>
+              <td>$3.50-5.50</td>
+            </tr>
+            <tr>
+              <td><strong>Board Shorts</strong></td>
+              <td>$5.50-8.00</td>
+              <td>$5.00-7.00</td>
+              <td>$4.00-6.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p class="section__text">
+        <em>Prices are FOB Chittagong estimates and vary based on fabric choice, construction complexity, and specific requirements. Premium fabrics, special washes, and complex styling increase costs. Contact us for accurate quotes based on your specifications.</em>
+      </p>
+      
+      <p class="section__text">
+        Use our <a href="/tools/price-calculator">price calculator</a> to estimate costs for your specific requirements, or contact us directly for detailed quotations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: FAQ -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Shorts Manufacturer FAQ</h2>
+      
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order for custom shorts?</h3>
+          <p class="faq__answer">
+            SDF Clothing manufactures custom shorts with a minimum order of 300 pieces per style. This low MOQ makes shorts manufacturing accessible to startup brands, boutique labels, and businesses launching new shorts lines. We offer flexible size and color breakdowns within the 300 piece minimum, allowing you to test designs and scale gradually. Our 300 piece MOQ is significantly lower than many manufacturers who require 500-1,000 pieces for athletic and casual shorts.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What fabrics are best for athletic shorts?</h3>
+          <p class="faq__answer">
+            Athletic shorts require performance fabrics that wick moisture, provide stretch, and withstand frequent washing. Polyester and polyester-spandex blends (typically 85-95% polyester, 5-15% spandex) are the most popular athletic short fabrics due to moisture-wicking properties, durability, and four-way stretch. Performance mesh fabrics offer enhanced breathability for high-intensity activities. Nylon blends provide superior strength and abrasion resistance for demanding sports. For eco-conscious brands, recycled polyester (rPET) made from post-consumer plastic bottles offers identical performance with environmental benefits.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you manufacture denim shorts with custom washes?</h3>
+          <p class="faq__answer">
+            Yes, SDF manufactures denim shorts with custom washes and finishes. We offer a full range of denim washes including light wash, medium wash, dark wash, vintage wash, stone wash, acid wash, and enzyme wash. Distressing options include rips, tears, fraying, whiskering, and abrasion effects. Our denim shorts manufacturing includes both new denim construction and upcycled denim shorts made from repurposed jeans. We can achieve vintage, distressed, or clean aesthetics based on your brand positioning. Custom wash development requires sample approval before bulk production.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you offer moisture-wicking fabrics for activewear shorts?</h3>
+          <p class="faq__answer">
+            Yes, all our athletic shorts use moisture-wicking fabrics designed to keep wearers dry during physical activity. We source performance polyester fabrics with moisture-wicking technology that pulls sweat away from the skin and allows it to evaporate quickly. These fabrics also offer quick-dry properties, making them ideal for sports, gym wear, and activewear. We can incorporate mesh paneling in strategic areas for enhanced breathability.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does shorts manufacturing take?</h3>
+          <p class="faq__answer">
+            Shorts manufacturing typically takes 30-45 days from sample approval to shipment. The timeline includes: pattern making and grading (3-5 days), sample development with all construction details (7-10 days), sample approval and any revisions (3-5 days), cutting and sewing bulk production (15-25 days), final quality inspection and finishing (2-3 days), and packing for shipment (2-3 days). Complex styles with multiple prints, special washes, or intricate details may add 5-10 days.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you make board shorts for swimwear?</h3>
+          <p class="faq__answer">
+            Yes, SDF manufactures board shorts for swimwear using quick-dry, water-resistant fabrics. We source polyester and nylon fabrics specifically designed for swimwear, including options with UPF sun protection ratings. Board shorts feature longer inseams (typically 9-11 inches), lace-up or drawstring waistbands, and side pockets with drain holes. We can add branded waistbands, sublimated prints, and custom logos. Our swimwear shorts meet chlorine resistance and color fastness standards.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What certifications do your short fabrics have?</h3>
+          <p class="faq__answer">
+            SDF Clothing's short fabrics hold multiple international certifications including OEKO-TEX Standard 100 for chemical safety, GRS (Global Recycled Standard) for recycled materials, GOTS for organic cotton options, and REACH compliance for EU markets. Our manufacturing facilities are BSCI certified for social compliance and WRAP certified for ethical manufacturing. These certifications ensure your shorts meet retailer requirements and consumer expectations for safety, sustainability, and responsibility.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you make plus-size shorts?</h3>
+          <p class="faq__answer">
+            Yes, SDF Clothing manufactures shorts in plus sizes. We offer inclusive sizing from XS to 5XL, with custom grading services available for brands requiring extended size ranges. Our pattern making and grading capabilities ensure consistent fit across all size categories. We understand that plus-size customers represent a significant market segment, and we help brands serve this audience with properly fitted shorts that don't compromise on style or comfort.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 9: CTA -->
+  <section class="section section--cta">
+    <div class="section__container section__container--narrow">
+      <h2 class="section__title">Ready to Manufacture Custom Shorts?</h2>
+      <p class="section__text">
+        SDF Clothing has manufactured shorts for fashion brands, activewear companies, and corporate clients since 1998. Our 300 piece minimum makes custom shorts accessible to startups and small brands, while our capacity handles large production runs. We provide expert guidance on fabric selection, construction methods, and sizing to ensure your shorts meet market expectations.
+      </p>
+      <p class="section__text">
+        Get a free FOB quote within 48 hours. We'll provide detailed pricing, lead times, and help you determine the best specifications for your shorts line. Request a <a href="/tools/sample-request">sample request</a> to evaluate our quality before committing to bulk production.
+      </p>
+      <div class="section__ctas">
+        <a href={whatsappQuoteUrl} class="section__cta section__cta--primary" target="_blank" rel="noopener noreferrer">
+          Get a Free Factory Quote
+        </a>
+        <a href="/contact" class="section__cta section__cta--secondary">
+          Contact Our Team
+        </a>
+      </div>
+      <p class="section__text section__text--small">
+        Last updated: May 2026 | Average response time: 24 hours
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: var(--spacing-sm) 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__container--narrow {
+    max-width: 700px;
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+
+    .section__container {
+      padding: 0 var(--spacing-sm);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+</BaseLayout>

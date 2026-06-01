@@ -1,0 +1,859 @@
+---
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../../../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../../../data/schema';
+export const prerender = true;
+
+const pageTitle = "Equestrian Clothing Manufacturer | Riding SDF";
+const pageDescription = "Equestrian clothing manufacturer for horse riding apparel. Custom breeches, show jackets, and competition shirts for equestrian brands from low MOQ. Free quote.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Pet Clothing Manufacturer",
+            "item": "https://sdfltd.com/pet-clothing-manufacturer/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Equestrian Clothing Manufacturer",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What equestrian clothing do you manufacture?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We manufacture equestrian clothing including riding breeches, show jackets, competition shirts, riding tights, base layers, and training wear. Our production covers competition and training apparel for all equestrian disciplines including dressage, show jumping, and eventing. Custom designs available from 300 pieces per style."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What fabrics are used for riding apparel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Equestrian fabrics include technical stretch materials for breeches, breathable performance fabrics for shirts, water-resistant materials for outerwear, and moisture-wicking base layers. All fabrics selected for durability, stretch, comfort, and performance during riding activities. Technical features include four-way stretch, moisture management, and abrasion resistance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between breeches and jodhpurs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Breeches are knee-length riding pants designed for adults with stirrup straps, featuring reinforced knee patches for grip. Jodhpurs are full-length pants typically for children, without stirrup straps, and may not have knee patches. Breeches are the standard for adult riders in most disciplines, while jodhpurs are used primarily in pony club and junior riding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you manufacture competition and training wear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we manufacture both competition and training equestrian wear. Competition apparel includes show jackets, competition shirts, and formal breeches meeting discipline-specific requirements. Training wear includes everyday breeches, base layers, and casual riding apparel designed for regular use and practice sessions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are your minimum orders for equestrian clothing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our minimum order for equestrian clothing is 300 pieces per style. This can be split across multiple sizes. Simple training wear may have lower minimums using existing patterns. Complex competition garments with custom technical features require higher minimums to justify development costs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you create custom equestrian designs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer custom equestrian design development including pattern making, technical fabric selection, and prototype creation. Our team understands equestrian requirements including fit for riding position, functional features for competition, and discipline-specific regulations. Custom branding and colorways available."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Equestrian Clothing Manufacturing Service",
+      "description": "Horse riding apparel manufacturing including breeches, show jackets, competition shirts, and custom equestrian wear",
+      "provider": {
+        "@id": "https://sdfltd.com/#organization"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Equestrian Clothing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Equestrian Apparel Production"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "15",
+              "maxPrice": "35"
+            }
+          }
+        ]
+      }
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/pet-clothing-manufacturer/index">Pet Clothing Manufacturer</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Equestrian Clothing Manufacturer</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Equestrian Clothing • Since 1998 • Riding Apparel Specialists</div>
+        <h1 class="hero__title">Equestrian Clothing Manufacturer • Horse Riding Apparel Production</h1>
+        <p class="hero__description">
+          SDF Clothing is an equestrian clothing manufacturer providing horse riding apparel production. Breeches, show jackets, competition shirts, riding wear manufacturing, and custom equestrian apparel for riding brands.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20equestrian%20clothing`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">300</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Technical</span>
+          <span class="hero__stat-label">Fabrics</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Custom</span>
+          <span class="hero__stat-label">Design</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Breeches & Jodhpurs</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Show Jackets</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Competition Shirts</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Training Wear</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Equestrian Manufacturing</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Horse Riding Apparel Production</h2>
+      </div>
+      <div class="section__text">
+        <p>Equestrian clothing manufacturing requires specialized understanding of riding requirements, technical fabric performance, and discipline-specific regulations. Our production capabilities encompass the complete range of equestrian apparel from training wear to competition garments for dressage, show jumping, and eventing.</p>
+        
+        <p>Our equestrian clothing manufacturing services include design development, pattern making, technical fabric sourcing, production, and custom branding. We understand the unique demands of riding apparel—garments must provide freedom of movement, durability during regular use, comfort in various weather conditions, and meet competition regulations where applicable.</p>
+        
+        <p>The equestrian market values both performance and tradition. Our manufacturing balances technical innovation with classic equestrian aesthetics, creating garments that perform at the highest levels while maintaining the refined appearance expected in the equestrian community.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Product Range</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Equestrian Clothing Categories</h2>
+      </div>
+      <div class="section__text">
+        <p>Equestrian clothing encompasses specialized garments designed for riding and competition. Each category serves specific purposes and requires different technical features. Our production covers all major equestrian clothing categories with custom options for each.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Key Features</th>
+              <th>Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Riding Breeches</td>
+              <td>Knee-length riding pants</td>
+              <td>Stretch fabric, knee patches, stirrup straps</td>
+              <td>Daily riding, competition</td>
+            </tr>
+            <tr>
+              <td>Show Jackets</td>
+              <td>Formal competition jackets</td>
+              <td>Structured fit, breathable, discipline-specific</td>
+              <td>Competition, dressage</td>
+            </tr>
+            <tr>
+              <td>Competition Shirts</td>
+              <td>Formal riding shirts</td>
+              <td>Breathable, collar options, stock tie loops</td>
+              <td>Competition, shows</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Training Wear</td>
+              <td>Casual riding apparel</td>
+              <td>Durable, comfortable, easy care</td>
+              <td>Practice, daily riding</td>
+            </tr>
+            <tr>
+              <td>Base Layers</td>
+              <td>Moisture-wicking underlayers</td>
+              <td>Technical fabric, seamless construction</td>
+              <td>All seasons, layering</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Outerwear</td>
+              <td>Water-resistant jackets</td>
+              <td>Weather protection, breathability</td>
+              <td>Cold weather, outdoor</td>
+            </tr>
+          </tbody>
+          <caption>All categories available in men's, women's, and children's sizing with custom options.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Technical Fabrics</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Equestrian Fabric Selection</h2>
+      </div>
+      <div class="section__text">
+        <p>Equestrian fabrics must meet demanding performance requirements. Riders need garments that stretch for freedom of movement, provide grip through knee patches, manage moisture during intense activity, and withstand regular washing and wear. Our fabric selection addresses these technical requirements.</p>
+        
+        <p>Breeches fabrics typically feature four-way stretch materials with elastane or spandex for unrestricted movement. These fabrics maintain shape while providing the flexibility needed for riding. Knee patch materials include synthetic suede, silicone grip, or leather alternatives that provide secure grip without compromising comfort.</p>
+        
+        <p>Show jacket fabrics balance structure with breathability. Technical wool blends provide traditional appearance with modern performance. Competition shirt fabrics prioritize moisture management and breathability, often using technical synthetic blends or performance cotton with moisture-wicking properties.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Breeches vs Jodhpurs</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Riding Pants: Breeches and Jodhpurs</h2>
+      </div>
+      <div class="section__text">
+        <p>Understanding the difference between breeches and jodhpurs is essential for equestrian apparel selection. While both are riding pants, they serve different purposes and are designed for different riders. The distinction affects design features, intended use, and target customer segments.</p>
+        
+        <p>Breeches are knee-length pants designed primarily for adult riders. They feature reinforced knee patches for grip in the saddle and typically include stirrup straps that loop under the boot heel to prevent the pants from riding up. Breeches are the standard for adult riders across most disciplines and are required for competition in many equestrian sports.</p>
+        
+        <p>Jodhpurs are full-length pants typically designed for children and young riders. They extend to the ankle without stirrup straps and may or may not include knee patches. Jodhpurs are commonly used in pony club, junior riding programs, and for everyday children's riding. They provide full-length coverage for younger riders whose proportions differ from adults.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Competition vs Training</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Competition and Training Wear</h2>
+      </div>
+      <div class="section__text">
+        <p>Equestrian apparel divides into competition wear and training wear, each serving different purposes with different requirements. Competition wear must meet discipline-specific regulations regarding appearance, materials, and design. Training wear prioritizes comfort, durability, and ease of care for regular use.</p>
+        
+        <p>Competition apparel includes show jackets for formal competition, competition shirts with appropriate collars and detailing, and breeches meeting discipline requirements. Dressage competition often requires specific jacket colors and formal shirt styles. Show jumping may allow more color options but still maintains traditional appearance. Competition garments must present a polished, professional appearance.</p>
+        
+        <p>Training wear includes everyday breeches, casual riding shirts, base layers, and outerwear designed for practice and regular riding. These garments prioritize comfort and durability over formal appearance. Training wear often uses more durable fabrics and construction to withstand frequent washing and regular use. Casual styling makes training wear appropriate for barn work and everyday riding activities.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Custom Design</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Custom Equestrian Development</h2>
+      </div>
+      <div class="section__text">
+        <p>Custom equestrian design development creates unique riding apparel that reflects brand identity while meeting technical requirements. Our design process understands equestrian-specific considerations including fit in the riding position, functional features for saddle interaction, and discipline-specific regulations.</p>
+        
+        <p>Pattern development for equestrian clothing requires expertise in riding body position. Garments must fit correctly when the rider is mounted, with appropriate length in the riding position and adequate stretch for movement. Our pattern makers understand these requirements and create patterns optimized for riding performance.</p>
+        
+        <p>Custom branding options for equestrian apparel include embroidered logos, woven labels, custom buttons and hardware, and unique colorways. Branding placement considers both visibility and rider comfort—logos positioned on jackets or shirts must not interfere with movement or cause irritation during riding.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Minimum Orders</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Equestrian Production Minimums</h2>
+      </div>
+      <div class="section__text">
+        <p>Our minimum order for equestrian clothing is 300 pieces per style. This minimum can be distributed across multiple sizes within the same style, allowing brands to offer complete size ranges. Simple training wear using existing patterns may have lower minimums available.</p>
+        
+        <p>Complex competition garments with custom technical features require higher minimums, typically 500+ pieces per style. Show jackets with custom construction, competition shirts with special detailing, and breeches with unique technical features all require development investment that justifies higher production volumes.</p>
+        
+        <p>Size set production is available for equestrian clothing, allowing brands to verify fit across the size range before committing to full production. Size sets are particularly valuable for new equestrian brands establishing their sizing standards.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Equestrian Clothing Manufacturer FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What equestrian clothing do you manufacture?</h3>
+          <p class="faq__answer">We manufacture equestrian clothing including riding breeches, show jackets, competition shirts, riding tights, base layers, and training wear. Our production covers competition and training apparel for all equestrian disciplines including dressage, show jumping, and eventing. Custom designs available from 300 pieces per style.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What fabrics are used for riding apparel?</h3>
+          <p class="faq__answer">Equestrian fabrics include technical stretch materials for breeches, breathable performance fabrics for shirts, water-resistant materials for outerwear, and moisture-wicking base layers. All fabrics selected for durability, stretch, comfort, and performance during riding activities. Technical features include four-way stretch, moisture management, and abrasion resistance.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between breeches and jodhpurs?</h3>
+          <p class="faq__answer">Breeches are knee-length riding pants designed for adults with stirrup straps, featuring reinforced knee patches for grip. Jodhpurs are full-length pants typically for children, without stirrup straps, and may not have knee patches. Breeches are the standard for adult riders in most disciplines, while jodhpurs are used primarily in pony club and junior riding.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you manufacture competition and training wear?</h3>
+          <p class="faq__answer">Yes, we manufacture both competition and training equestrian wear. Competition apparel includes show jackets, competition shirts, and formal breeches meeting discipline-specific requirements. Training wear includes everyday breeches, base layers, and casual riding apparel designed for regular use and practice sessions.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are your minimum orders for equestrian clothing?</h3>
+          <p class="faq__answer">Our minimum order for equestrian clothing is 300 pieces per style. This can be split across multiple sizes. Simple training wear may have lower minimums using existing patterns. Complex competition garments with custom technical features require higher minimums to justify development costs.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you create custom equestrian designs?</h3>
+          <p class="faq__answer">We offer custom equestrian design development including pattern making, technical fabric selection, and prototype creation. Our team understands equestrian requirements including fit for riding position, functional features for competition, and discipline-specific regulations. Custom branding and colorways available.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready for Equestrian Clothing Production?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for equestrian clothing manufacturing. We provide horse riding apparel production including breeches, show jackets, competition shirts, training wear, and custom equestrian apparel for riding brands.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/pet-clothing-manufacturer/index" class="section__cta section__cta--secondary">Pet Clothing</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/pet-clothing-manufacturer/dog-hoodie-manufacturer/index" style="color: var(--color-primary);">dog hoodie manufacturer</a>, <a href="/pet-clothing-manufacturer/private-label-pet-clothing/index" style="color: var(--color-primary);">private label pet clothing</a>, <a href="/technical-outerwear-manufacturer" style="color: var(--color-primary);">technical outerwear manufacturer</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

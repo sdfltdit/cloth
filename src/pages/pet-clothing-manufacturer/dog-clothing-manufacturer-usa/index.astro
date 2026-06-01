@@ -1,0 +1,837 @@
+---
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../../../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../../../data/schema';
+export const prerender = true;
+
+const pageTitle = "Dog Clothing Manufacturer USA | Pet Apparel SDF";
+const pageDescription = "Dog clothing manufacturer for USA brands. Custom pet apparel, offshore production, import guidance, and full brand support. Low MOQ. Free quote.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Pet Clothing Manufacturer",
+            "item": "https://sdfltd.com/pet-clothing-manufacturer/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Dog Clothing Manufacturer USA",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you manufacture dog clothing for USA brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we manufacture dog clothing for USA brands and ship directly to the United States. Our Bangladesh manufacturing facility provides cost-effective production while maintaining quality standards that meet USA market requirements. We handle all export documentation, customs clearance, and shipping logistics for seamless delivery to US destinations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does offshore manufacturing benefit USA brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Offshore manufacturing in Bangladesh offers USA brands significant cost savings of 30-50% compared to domestic production. Bangladesh has established textile infrastructure, skilled workforce, and competitive labor costs. We provide the same quality as US manufacturers at significantly lower costs, enabling better margins or competitive pricing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the import considerations for USA brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Import considerations include customs duties (typically 0-20% depending on fabric type), shipping costs ($0.50-2.00 per piece), lead times (45-60 days including shipping), and compliance with US regulations including CPSIA requirements. We handle all import documentation and customs procedures to simplify the process for USA brands."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does your pricing compare to USA manufacturers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our pricing is typically 30-50% lower than USA-based pet clothing manufacturers. For example, a dog hoodie that costs $15-20 to manufacture in the USA costs $8-12 with us. Even after adding shipping and import costs, total delivered cost remains significantly lower than domestic production, providing substantial margin advantages."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What quality standards do you maintain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We maintain quality standards that meet or exceed USA market requirements. Our facility follows quality control processes including inline inspections, final quality checks, and measurement verification. We comply with CPSIA requirements for children's products as a baseline for pet clothing safety. Quality samples are provided for approval before production."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does shipping to the USA take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Shipping to the USA typically takes 5-7 days by air freight or 30-40 days by sea freight. Air freight is faster but more expensive, suitable for rush orders. Sea freight is cost-effective for larger orders. Total lead time including production is 45-60 days by sea or 25-30 days by air. We provide tracking and delivery confirmation."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/pet-clothing-manufacturer/index">Pet Clothing Manufacturer</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Dog Clothing Manufacturer USA</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Dog Clothing USA • Since 1998 • USA Brand Specialists</div>
+        <h1 class="hero__title">Dog Clothing Manufacturer USA • American Pet Apparel Production</h1>
+        <p class="hero__description">
+          SDF Clothing provides dog clothing manufacturing for USA brands. Dog apparel manufacturing, USA pet clothing sourcing, domestic vs offshore production, import considerations, and American pet brand manufacturing support.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20USA%20dog%20clothing`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">30-50%</span>
+          <span class="hero__stat-label">Cost Savings</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Direct</span>
+          <span class="hero__stat-label">USA Shipping</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Full</span>
+          <span class="hero__stat-label">Support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>USA Shipping</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Cost Effective</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Quality Assured</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Import Support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">USA Manufacturing</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Dog Clothing for USA Brands</h2>
+      </div>
+      <div class="section__text">
+        <p>We manufacture dog clothing for USA brands and ship directly to the United States. Our Bangladesh manufacturing facility provides cost-effective production while maintaining quality standards that meet USA market requirements. We serve pet brands across the United States, from boutique startups to established national brands.</p>
+        
+        <p>Our manufacturing partnership with USA brands combines the cost advantages of Bangladesh production with the convenience of direct shipping to US destinations. We handle all export documentation, customs clearance, and shipping logistics, simplifying international trade for brands without previous import experience. Products ship to US warehouses, fulfillment centers, or directly to customers.</p>
+        
+        <p>The USA pet clothing market is the largest in the world, representing significant opportunity for pet brands. Our manufacturing enables USA brands to compete effectively with quality products at competitive prices. We understand USA market requirements including sizing preferences, safety standards, and consumer expectations for pet apparel quality and presentation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Offshore Benefits</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Offshore Manufacturing for USA Brands</h2>
+      </div>
+      <div class="section__text">
+        <p>Offshore manufacturing in Bangladesh offers USA brands significant cost advantages compared to domestic production. Bangladesh has established textile infrastructure, skilled workforce, and competitive labor costs developed over decades of garment manufacturing expertise. This infrastructure enables efficient production at costs significantly lower than USA manufacturing.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Offshore (Bangladesh)</th>
+              <th>Domestic (USA)</th>
+              <th>Savings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Labor Costs</td>
+              <td>$0.50-1.00/hour</td>
+              <td>$12-20/hour</td>
+              <td>85-95%</td>
+            </tr>
+            <tr>
+              <td>Fabric Costs</td>
+              <td>$3-6/yard</td>
+              <td>$6-12/yard</td>
+              <td>40-50%</td>
+            </tr>
+            <tr>
+              <td>Overhead Costs</td>
+              <td>Low</td>
+              <td>High</td>
+              <td>60-70%</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Total Production</td>
+              <td>$8-12/piece</td>
+              <td>$15-25/piece</td>
+              <td>30-50%</td>
+            </tr>
+          </tbody>
+          <caption>Even after adding shipping and import costs, offshore manufacturing typically saves 30-50% total cost.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Import Considerations</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Importing Pet Clothing to the USA</h2>
+      </div>
+      <div class="section__text">
+        <p>Importing pet clothing to the USA requires understanding customs duties, shipping logistics, and regulatory compliance. We simplify this process by handling documentation and procedures, but brands should understand the key considerations for importing pet apparel into the United States market.</p>
+        
+        <p>Customs duties for pet clothing imported into the USA vary based on fabric type and country of origin. Most pet clothing falls under HTS codes with duties ranging from 0-20%. Cotton garments typically have lower duties than synthetic materials. Bangladesh benefits from preferential trade agreements in some cases, reducing duties further. We provide accurate duty estimates as part of our pricing.</p>
+        
+        <p>Shipping costs depend on volume and method. Sea freight costs $0.50-1.00 per piece for larger orders and takes 30-40 days transit time. Air freight costs $1.50-2.00 per piece and takes 5-7 days. We recommend sea freight for routine production and air freight for rush orders or initial samples. We provide tracking and insurance on all shipments.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Pricing Comparison</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Offshore vs Domestic Pricing</h2>
+      </div>
+      <div class="section__text">
+        <p>Pricing comparison between offshore and domestic manufacturing reveals significant cost advantages for offshore production. While domestic production offers shorter lead times and simpler logistics, the cost difference is substantial. USA brands can choose the approach that best balances cost, speed, and complexity for their business model.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>USA Domestic</th>
+              <th>Offshore (Incl. Shipping)</th>
+              <td>Savings</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Basic Dog T-Shirt</td>
+              <td>$12-15</td>
+              <td>$6-9</td>
+              <td>40-50%</td>
+            </tr>
+            <tr>
+              <td>Dog Hoodie</td>
+              <td>$18-25</td>
+              <td>$10-14</td>
+              <td>35-45%</td>
+            </tr>
+            <tr>
+              <td>Dog Jacket</td>
+              <td>$22-30</td>
+              <td>$13-18</td>
+              <td>35-40%</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Complex Equestrian</td>
+              <td>$30-40</td>
+              <td>$18-25</td>
+              <td>30-40%</td>
+            </tr>
+          </tbody>
+          <caption>Pricing includes shipping and basic import costs. Volume production increases savings. All prices USD.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Quality Standards</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Quality Standards for USA Market</h2>
+      </div>
+      <div class="section__text">
+        <p>We maintain quality standards that meet or exceed USA market requirements. USA consumers have high expectations for product quality, safety, and presentation. Our manufacturing processes ensure products meet these expectations while maintaining competitive pricing advantages over domestic production.</p>
+        
+        <p>Quality control processes include inline inspections during production, final quality checks before packaging, and measurement verification against specifications. We follow CPSIA (Consumer Product Safety Improvement Act) requirements for children's products as a baseline for pet clothing safety, ensuring materials are tested for harmful substances and products meet safety standards.</p>
+        
+        <p>Quality samples are provided for approval before production commitment. This allows USA brands to verify quality firsthand and ensure products meet expectations before committing to full production. Samples represent final production quality, enabling confident purchasing decisions and reducing risk for new business relationships.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Shipping & Logistics</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Shipping to the USA</h2>
+      </div>
+      <div class="section__text">
+        <p>Shipping to the USA is streamlined through our experience with international trade and established logistics partnerships. We handle all aspects of shipping including documentation, customs clearance, and final delivery, simplifying the process for USA brands without import experience.</p>
+        
+        <p>Shipping method selection depends on timeline and budget requirements. Air freight provides fastest delivery with 5-7 day transit times but higher costs. Sea freight offers cost-effective shipping for larger orders with 30-40 day transit times. We recommend air freight for initial samples or rush orders, and sea freight for routine production orders.</p>
+        
+        <p>We provide comprehensive tracking information for all shipments, enabling USA brands to monitor shipment progress from our factory through delivery. Tracking updates are available through online systems, and delivery confirmation is provided when shipments arrive at destination addresses. This transparency ensures brands know exactly where their inventory is at all times.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Dog Clothing Manufacturer USA FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">Do you manufacture dog clothing for USA brands?</h3>
+          <p class="faq__answer">Yes, we manufacture dog clothing for USA brands and ship directly to the United States. Our Bangladesh manufacturing facility provides cost-effective production while maintaining quality standards that meet USA market requirements. We handle all export documentation, customs clearance, and shipping logistics for seamless delivery to US destinations.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does offshore manufacturing benefit USA brands?</h3>
+          <p class="faq__answer">Offshore manufacturing in Bangladesh offers USA brands significant cost savings of 30-50% compared to domestic production. Bangladesh has established textile infrastructure, skilled workforce, and competitive labor costs. We provide the same quality as US manufacturers at significantly lower costs, enabling better margins or competitive pricing.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are the import considerations for USA brands?</h3>
+          <p class="faq__answer">Import considerations include customs duties (typically 0-20% depending on fabric type), shipping costs ($0.50-2.00 per piece), lead times (45-60 days including shipping), and compliance with US regulations including CPSIA requirements. We handle all import documentation and customs procedures to simplify the process for USA brands.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does your pricing compare to USA manufacturers?</h3>
+          <p class="faq__answer">Our pricing is typically 30-50% lower than USA-based pet clothing manufacturers. For example, a dog hoodie that costs $15-20 to manufacture in the USA costs $8-12 with us. Even after adding shipping and import costs, total delivered cost remains significantly lower than domestic production, providing substantial margin advantages.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What quality standards do you maintain?</h3>
+          <p class="faq__answer">We maintain quality standards that meet or exceed USA market requirements. Our facility follows quality control processes including inline inspections, final quality checks, and measurement verification. We comply with CPSIA requirements for children's products as a baseline for pet clothing safety. Quality samples are provided for approval before production.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does shipping to the USA take?</h3>
+          <p class="faq__answer">Shipping to the USA typically takes 5-7 days by air freight or 30-40 days by sea freight. Air freight is faster but more expensive, suitable for rush orders. Sea freight is cost-effective for larger orders. Total lead time including production is 45-60 days by sea or 25-30 days by air. We provide tracking and delivery confirmation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready for USA Dog Clothing Manufacturing?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for dog clothing manufacturing for USA brands. We provide cost-effective production, USA shipping, import support, and quality assurance for American pet brands.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/pet-clothing-manufacturer/index" class="section__cta section__cta--secondary">Pet Clothing</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/pet-clothing-manufacturer/dog-hoodie-manufacturer/index" style="color: var(--color-primary);">dog hoodie manufacturer</a>, <a href="/pet-clothing-manufacturer/private-label-pet-clothing/index" style="color: var(--color-primary);">private label pet clothing</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/clothing-manufacturers-for-startups" style="color: var(--color-primary);">clothing manufacturers for startups</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

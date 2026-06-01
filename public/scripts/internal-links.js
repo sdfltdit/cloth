@@ -153,7 +153,4 @@
       }
     });
   });
-  
-  console.log('Internal linking enhancement completed');
-});
 })();

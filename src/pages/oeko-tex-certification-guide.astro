@@ -1,0 +1,1198 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { schemaOrganization, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const pageTitle = "OEKO-TEX Certification Guide for Clothing Brands | SDF";
+const pageDescription = "Complete OEKO-TEX certification guide for clothing brands. Covers Standard 100, MADE IN GREEN, costs and how to verify manufacturer certificates. Free guide.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20information%20about%20OEKO-TEX%20certification`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-21",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle,
+            "item": canonicalUrl.href
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#organization" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does OEKO-TEX certified mean on clothing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "OEKO-TEX certified means the clothing has been tested for harmful substances and verified to be safe for human health. The certification tests for over 300 regulated and non-regulated substances including heavy metals, pesticides, formaldehyde, and carcinogenic dyes. Every component of the garment - from fabric and thread to buttons and zippers - must meet strict safety criteria. The label provides assurance that the product is free from chemicals that could harm the wearer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is OEKO-TEX certification required for EU clothing sales?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "OEKO-TEX certification is not legally required for EU clothing sales, but it is strongly recommended and increasingly demanded by EU retailers and consumers. The EU has REACH regulations restricting certain chemicals in textiles, and OEKO-TEX certification provides verification that products comply with these and additional stricter requirements. Many EU retail chains require OEKO-TEX certification as a condition for suppliers. For brands targeting the EU market, OEKO-TEX certification is essentially a business necessity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does OEKO-TEX certification take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The OEKO-TEX Standard 100 certification process typically takes 4-8 weeks from application to certificate issuance. The timeline includes: initial application and document review (1-2 weeks), sample submission and laboratory testing (2-4 weeks), results review and any required corrective actions (1 week), and certificate issuance (1 week). MADE IN GREEN certification takes longer, typically 8-12 weeks, as it includes additional social and environmental audits. Renewal of existing certificates is faster, usually 2-4 weeks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does OEKO-TEX certification cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "OEKO-TEX certification costs vary based on product range, number of certification classes, and testing requirements. Standard 100 certification typically costs $500-$2,000 for initial certification, depending on the number of product groups and materials tested. Annual renewal fees are approximately 30-50% of the initial certification cost. MADE IN GREEN certification costs more due to additional audits, typically $2,000-$5,000. Costs also vary by OEKO-TEX member institute and region. Brands should budget for annual renewal costs and potential re-testing fees."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between OEKO-TEX Standard 100 and MADE IN GREEN?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "OEKO-TEX Standard 100 focuses exclusively on product safety, testing finished textiles for harmful substances. MADE IN GREEN is a more comprehensive certification that combines Standard 100 testing with verification of sustainable production conditions and socially responsible working practices. MADE IN GREEN requires additional audits of manufacturing facilities to ensure environmental compliance and worker safety. MADE IN GREEN products carry a unique product ID that consumers can trace to the production facility. Standard 100 is ideal for brands focusing on chemical safety, while MADE IN GREEN suits brands emphasizing comprehensive sustainability."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a small clothing brand get OEKO-TEX certified?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, small clothing brands can get OEKO-TEX certified. The certification is product-based, not company-based, so even small brands can certify specific products or product lines. The cost is manageable for most small businesses, starting around $500 for Standard 100. Many small brands work with certified manufacturers rather than seeking certification directly, as the manufacturer's certification can cover the brand's products if the manufacturer holds the certificate for the relevant materials and processes. This is a common and cost-effective approach for small brands."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need OEKO-TEX if my fabric supplier is certified?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If your fabric supplier is OEKO-TEX certified, the fabric itself is certified, but you still need certification for the finished garment if you want to use the OEKO-TEX label. The certification applies to the complete product, including all components (fabric, thread, buttons, zippers, labels, etc.). However, using certified materials simplifies your certification process, as those materials won't need re-testing. You'll need to certify the additional components and the assembly process. Working with a fully certified manufacturer is often the simplest approach, as their certification can cover your complete product."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I verify an OEKO-TEX certificate is genuine?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Verify OEKO-TEX certificates using the official OEKO-TEX label check tool at oeko-tex.com. Enter the certificate number from the label or scan the QR code if available. The tool will display the certificate validity, scope, and expiry date. Check that the certificate covers the specific product type and materials you're sourcing. Be wary of certificates that are expired, have scope mismatches, or cannot be found in the official database. Some manufacturers present expired or falsified certificates, so verification is essential before placing orders."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": pageTitle,
+      "description": pageDescription,
+      "author": {
+        "@type": "Organization",
+        "name": "SDF Clothing"
+      },
+      "publisher": { "@id": SITE + "/#organization" },
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-21"
+    },
+    {
+      "@type": "Service",
+      "name": "OEKO-TEX Certification Guide Service",
+      "description": "Comprehensive guide to OEKO-TEX certification for clothing manufacturers including testing requirements and standards",
+      "provider": {
+        "@id": SITE + "/#organization"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Get OEKO-TEX Certified for Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Choose the Right OEKO-TEX Standard",
+          "text": "Select which OEKO-TEX certification fits your needs: Standard 100 for product safety, MADE IN GREEN for comprehensive sustainability, LEATHER STANDARD for leather products, or ECO PASSPORT for chemicals. Most clothing brands choose Standard 100 or MADE IN GREEN."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Contact an OEKO-TEX Member Institute",
+          "text": "Identify and contact the OEKO-TEX member institute serving your region. Submit an application with product information, material specifications, and intended use. The institute will provide a quote and testing requirements."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Submit Product Samples for Testing",
+          "text": "Prepare and submit product samples according to the institute's specifications. Samples must represent all materials, colors, and components to be certified. The laboratory tests for over 300 harmful substances."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Review Test Results and Address Failures",
+          "text": "Receive the laboratory test report within 2-4 weeks. Review results for any substance limit exceedances. If failures occur, identify the source, substitute materials or processes, and re-test. Your institute provides guidance on corrective actions."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Certificate and Use Label",
+          "text": "Upon passing all tests, receive your OEKO-TEX certificate valid for 12 months. You can now use the OEKO-TEX label on certified products. Schedule annual renewal testing to maintain certification. Display certificate numbers for customer verification."
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "OEKO-TEX Standards Overview",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "OEKO-TEX Standard 100"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "OEKO-TEX MADE IN GREEN"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "OEKO-TEX LEATHER STANDARD"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "OEKO-TEX ECO PASSPORT"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">OEKO-TEX Certification Guide</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Certification Guide for Fashion Brands</p>
+        <h1 class="hero__title">OEKO-TEX Certification Guide | What Every Clothing Brand Needs to Know</h1>
+        <p class="hero__description">
+          OEKO-TEX is the world's most trusted textile certification system, with over 21,000 certified companies and 100,000+ certified products globally. Founded in 1992 by the International Association for Research and Testing in the Field of Textile Ecology, OEKO-TEX provides independent verification that textiles are free from harmful substances. For clothing brands, OEKO-TEX certification is essential for accessing EU and UK markets, meeting retailer requirements, and building consumer trust. This comprehensive guide covers the four OEKO-TEX standards, certification classes, testing requirements, costs, and how to verify manufacturer certificates.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">21,000+</span>
+            <span class="hero__stat-label">Certified Companies</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">100+</span>
+            <span class="hero__stat-label">Substances Tested</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">1992</span>
+            <span class="hero__stat-label">Founded</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">12</span>
+            <span class="hero__stat-label">Months Valid</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Ask About Certification
+          </a>
+          <a href="/contact" class="hero__cta hero__cta--secondary">
+            View SDF Certifications
+          </a>
+          <a href="/tools/sample-request" class="hero__cta hero__cta--secondary" style="margin-top: var(--spacing-sm);">
+            Request Sample
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="OEKO-TEX certified textile testing laboratory" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: What Is OEKO-TEX -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What Is OEKO-TEX? | The World's Most Trusted Textile Label</h2>
+      <p class="section__text">
+        OEKO-TEX is an independent certification system for textiles and leather products, developed to ensure consumer safety and environmental responsibility. The system was founded in 1992 by the International Association for Research and Testing in the Field of Textile Ecology, which now comprises 20+ member institutes worldwide. These independent test institutes develop and update certification criteria based on scientific research and regulatory requirements.
+      </p>
+      <p class="section__text">
+        Consumers and retailers increasingly demand OEKO-TEX certification because it provides verifiable assurance that products are free from harmful chemicals. The label is recognized globally and serves as a mark of quality and safety. According to OEKO-TEX, over 21,000 companies in 80+ countries hold OEKO-TEX certifications, covering more than 100,000 products. This widespread adoption reflects the certification'bsite</a>, which provides comprehensive details on standards, testing requirements, and certified companies.
+      </p>
+      <p class="section__text">
+        OEKO-TEX certification is particularly valuable for clothing brands targeting EU and UK markets, where consumers are highly conscious of chemical safety and environmental impact. Many major retailers including H&M, Zara, and C&A require OEKO-TEX certification from their suppliers. The certification also helps brands comply with regulations like EU REACH, which restricts certain chemicals in consumer products. For brands using <a href="/organic-cotton-clothing-manufacturer">organic cotton</a>, OEKO-TEX provides additional verification of chemical safety beyond organic certification. See our <a href="/certifications">certifications page</a> for information about all certifications held by SDF Clothing. We also work as an <a href="/eco-friendly-clothing-manufacturer">eco-friendly clothing manufacturer</a> for brands prioritizing sustainability.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: The 4 OEKO-TEX Standards -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">The 4 OEKO-TEX Standards Explained</h2>
+      <p class="section__text">
+        OEKO-TEX offers multiple certification standards, each addressing different aspects of textile production and safety. Understanding which standard applies to your needs is essential for selecting the right certification path.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Comparison of the 4 OEKO-TEX certification standards">
+          <caption>The four main OEKO-TEX certification standards and their applications</caption>
+          <thead>
+            <tr>
+              <th>Standard</th>
+              <th>Who It Certifies</th>
+              <th>What It Tests</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>OEKO-TEX Standard 100</strong></td>
+              <td>Finished textile products</td>
+              <td>Harmful substances in all components (100+ substances)</td>
+              <td>Apparel brands, baby products, general textiles</td>
+            </tr>
+            <tr>
+              <td><strong>OEKO-TEX MADE IN GREEN</strong></td>
+              <td>Products + production facilities</td>
+              <td>Standard 100 + sustainable production + social responsibility</td>
+              <td>Sustainability-focused brands, transparent supply chains</td>
+            </tr>
+            <tr>
+              <td><strong>OEKO-TEX LEATHER STANDARD</strong></td>
+              <td>Leather and leather products</td>
+              <td>Harmful substances specific to leather processing</td>
+              <td>Footwear, leather goods, leather apparel</td>
+            </tr>
+            <tr>
+              <td><strong>OEKO-TEX ECO PASSPORT</strong></td>
+              <td>Chemicals and dyes</td>
+              <td>Chemical safety for textile and leather production</td>
+              <td>Chemical suppliers, dye manufacturers, textile producers</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <h3 class="section__subtitle">STANDARD 100: Most Common | Tests Finished Products</h3>
+      <p class="section__text">
+        OEKO-TEX Standard 100 is the most widely used OEKO-TEX certification, testing finished textile products for harmful substances. The certification covers every component of a product: fabric, thread, buttons, zippers, labels, prints, and accessories. Testing includes over 100 regulated and non-regulated substances that could harm human health. Standard 100 is the certification most commonly required by EU and UK retailers and is essential for brands selling baby products, intimate apparel, and any clothing in direct contact with skin. The certificate is valid for 12 months and requires annual renewal with re-testing.
+      </p>
+      
+      <h3 class="section__subtitle">MADE IN GREEN: Product + Production Facility Certified</h3>
+      <p class="section__text">
+        OEKO-TEX MADE IN GREEN is a comprehensive label that combines Standard 100 product safety testing with verification of sustainable production conditions and socially responsible working practices. MADE IN GREEN requires additional audits of manufacturing facilities to ensure environmental compliance, resource efficiency, and worker safety. Products certified under MADE IN GREEN carry a unique product ID that consumers can use to trace the product's production journey. This certification is ideal for brands emphasizing transparency and comprehensive sustainability. MADE IN GREEN certification typically costs more and takes longer due to the additional audit requirements.
+      </p>
+      
+      <h3 class="section__subtitle">ECO PASSPORT: Chemicals and Dyes Certified</h3>
+      <p class="section__text">
+        OEKO-TEX ECO PASSPORT certifies chemical products, dyes, and auxiliaries used in textile and leather production. The standard ensures that these chemicals meet stringent environmental and safety requirements throughout their lifecycle. ECO PASSPORT is relevant for chemical suppliers, dye manufacturers, and textile manufacturers who produce their own chemicals. While most clothing brands don't seek ECO PASSPORT certification directly, they benefit when their suppliers hold this certification, as it ensures the chemicals used in production are safe. ECO PASSPORT certification helps brands verify that their supply chain uses responsible chemical management practices.
+      </p>
+      
+      <p class="section__text">
+        EU and UK buyers most commonly require Standard 100 certification for apparel. MADE IN GREEN is increasingly demanded by sustainability-focused retailers and consumers. LEATHER STANDARD is essential for brands using leather in footwear or accessories. ECO PASSPORT is typically sought by chemical suppliers rather than clothing brands directly.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Standard 100 Classes -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">OEKO-TEX Standard 100 | Certification Classes</h2>
+      <p class="section__text">
+        OEKO-TEX Standard 100 classifies products into four categories based on their intended use and level of skin contact. Each class has different limit values for restricted substances, with stricter requirements for products with greater skin contact or for vulnerable users like babies.
+      </p>
+      
+      <h3 class="section__subtitle">Product Class I: Baby Articles (Strictest)</h3>
+      <p class="section__text">
+        Product Class I covers textiles for babies and toddlers up to 36 months. This class has the strictest substance limit values because babies have more sensitive skin and are more vulnerable to chemical exposure. Products in this class include baby clothing, blankets, toys, and accessories. The limit values for heavy metals, formaldehyde, and other harmful substances are significantly lower than for other classes. Brands producing baby products must certify under Class I, which requires the most rigorous testing. Many retailers require Class I certification even for products marketed beyond the baby category when they could potentially be used by infants.
+      </p>
+      
+      <h3 class="section__subtitle">Product Class II: Next-to-Skin Articles</h3>
+      <p class="section__text">
+        Product Class II covers products with significant direct skin contact. This includes underwear, shirts, blouses, t-shirts, leggings, bedding, and towels. The limit values are stricter than Class III but less strict than Class I. Most everyday apparel falls into this category, making it the most common certification class for clothing brands. Class II certification is required for garments worn directly against the skin for extended periods. This is the class most fashion brands certify under for their main product lines.
+      </p>
+      
+      <h3 class="section__subtitle">Product Class III: Not Next-to-Skin</h3>
+      <p class="section__text">
+        Product Class III covers products with little to no skin contact. This includes jackets, coats, vests, belts, and outerwear worn over other clothing. Since these products don't have prolonged skin contact, the limit values for some substances are less strict than Classes I and II. However, all products must still meet comprehensive safety standards. Class III is appropriate for outerwear, accessories, and garments worn as layers. Many brands certify their outerwear lines under Class III while certifying base layers under Class II.
+      </p>
+      
+      <h3 class="section__subtitle">Product Class IV: Decoration Materials</h3>
+      <p class="section__text">
+        Product Class IV covers decoration materials and home textiles. This includes curtains, tablecloths, upholstery fabrics, and other furnishing textiles. These products typically have minimal skin contact, so the limit values are the least strict among the four classes. However, they must still meet safety requirements, particularly for substances that could off-gas or transfer through contact. Class IV is relevant for brands producing home textiles or decorative accessories alongside apparel.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="OEKO-TEX Standard 100 product classes comparison">
+          <caption>Product classes with test stringency and typical brand applications</caption>
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Products</th>
+              <th>Test Stringency</th>
+              <th>Typical Brands</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Class I</strong></td>
+              <td>Baby clothing, blankets, toys</td>
+              <td>Strictest (lowest limits)</td>
+              <td>Baby brands, children's wear</td>
+            </tr>
+            <tr>
+              <td><strong>Class II</strong></td>
+              <td>Underwear, shirts, t-shirts, bedding</td>
+              <td>Very strict</td>
+              <td>Most apparel brands</td>
+            </tr>
+            <tr>
+              <td><strong>Class III</strong></td>
+              <td>Jackets, coats, outerwear, belts</td>
+              <td>Strict</td>
+              <td>Outerwear brands, accessories</td>
+            </tr>
+            <tr>
+              <td><strong>Class IV</strong></td>
+              <td>Curtains, tablecloths, upholstery</td>
+              <td>Standard</td>
+              <td>Home textile brands</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: What OEKO-TEX Tests For -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">What Does OEKO-TEX Test For?</h2>
+      <p class="section__text">
+        OEKO-TEX Standard 100 tests for over 100 regulated and non-regulated substances that could harm human health. The testing criteria are updated annually based on new scientific findings and regulatory changes. The comprehensive testing ensures products are safe from known and emerging chemical risks.
+      </p>
+      
+      <h3 class="section__subtitle">Heavy Metals: Lead, Cadmium, Mercury</h3>
+      <p class="section__text">
+        Heavy metals are toxic substances that can accumulate in the body and cause serious health problems. OEKO-TEX tests for lead, cadmium, mercury, arsenic, chromium, and other heavy metals. These metals can be present in dyes, pigments, metal components like zippers and buttons, and as contaminants from processing. Lead exposure is particularly dangerous for children, affecting neurological development. Cadmium is a carcinogen that can damage kidneys and bones. The strict limits for heavy metals are lowest in Class I (baby products) and progressively increase for classes with less skin contact.
+      </p>
+      
+      <h3 class="section__subtitle">Pesticides: From Cotton Farming</h3>
+      <p class="section__text">
+        Pesticides used in conventional cotton farming can remain as residues in finished textiles. OEKO-TEX tests for a comprehensive list of pesticides including organochlorines, organophosphates, and synthetic pyrethroids. These substances are known to be harmful to human health, with potential effects ranging from skin irritation to neurological damage and cancer. The pesticide testing is particularly relevant for cotton products. Brands using organic cotton can still benefit from OEKO-TEX certification, as it verifies that organic products are free from pesticide contamination from other sources in the supply chain.
+      </p>
+      
+      <h3 class="section__subtitle">Formaldehyde: From Wrinkle-Resistant Finishes</h3>
+      <p class="section__text">
+        Formaldehyde is used in textile processing to provide wrinkle resistance, shrink resistance, and color fastness. However, formaldehyde is a known carcinogen and can cause skin irritation, allergic reactions, and respiratory problems. OEKO-TEX tests for free and released formaldehyde, setting strict limits well below regulatory requirements. The trend toward formaldehyde-free processing has accelerated as brands seek OEKO-TEX certification. Many OEKO-TEX certified products now use alternative finishing agents that achieve performance without formaldehyde.
+      </p>
+      
+      <h3 class="section__subtitle">pH Value: Skin Irritation Prevention</h3>
+      <p class="section__text">
+        The pH value of textiles affects skin comfort and health. Textiles that are too acidic or too alkaline can cause skin irritation, especially for sensitive skin or prolonged wear. OEKO-TEX tests pH values to ensure they fall within a skin-neutral range (typically pH 4.0-7.5, depending on product class). This testing is particularly important for products in Class I and II that have direct skin contact. Proper pH control also indicates good quality in textile processing and finishing.
+      </p>
+      
+      <h3 class="section__subtitle">Colour Fastness: Dyes Not Running</h3>
+      <p class="section__text">
+        Colour fastness testing ensures that dyes don't transfer to skin or other textiles through rubbing, washing, or perspiration. Poor colour fastness can cause skin staining and indicate the presence of unfixable dyes that could be harmful. OEKO-TEX tests colour fastness to rubbing, washing, water, perspiration, and light. While colour fastness is primarily a quality issue, it also relates to chemical safety because poorly fixed dyes are more likely to transfer to skin. High colour fastness is a hallmark of well-processed, OEKO-TEX certified textiles.
+      </p>
+      
+      <h3 class="section__subtitle">Azo Dyes: Carcinogenic Dyes Banned</h3>
+      <p class="section__text">
+        Azo dyes are a large class of synthetic dyes, some of which can break down into carcinogenic aromatic amines. OEKO-TEX bans all azo dyes that can release these harmful amines. This prohibition covers hundreds of specific dye substances. The azo dye ban is one of OEKO-TEX's most important chemical safety requirements, as these dyes were historically widely used in textile coloring. Brands sourcing OEKO-TEX certified products can be confident that no carcinogenic azo dyes are present in their textiles.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Substance categories tested by OEKO-TEX">
+          <caption>Key substance categories tested with their health implications</caption>
+          <thead>
+            <tr>
+              <th>Substance Category</th>
+              <th>Why It's Tested</th>
+              <th>Limit Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Heavy metals</strong></td>
+              <td>Toxic, accumulate in body, neurological damage</td>
+              <td>Strictest in Class I, progressive by class</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Pesticides</strong></td>
+              <td>Carcinogenic, neurological harm, from cotton farming</td>
+              <td>Zero tolerance for many pesticides</td>
+            </tr>
+            <tr>
+              <td><strong>Formaldehyde</strong></td>
+              <td>Carcinogen, skin irritation, respiratory issues</td>
+              <td>75 mg/kg (Class I), 300 mg/kg (Class II-IV)</td>
+            </tr>
+            <tr>
+              <td><strong>pH value</strong></td>
+              <td>Skin irritation prevention, comfort</td>
+              <td>4.0-7.5 depending on class</td>
+            </tr>
+            <tr>
+              <td><strong>Colour fastness</strong></td>
+              <td>Dye transfer prevention, quality indicator</td>
+              <td>Minimum 3-4 on standard scales</td>
+            </tr>
+            <tr>
+              <td><strong>Azo dyes</strong></td>
+              <td>Carcinogenic amines release, banned substances</td>
+              <td>Zero tolerance for prohibited dyes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: How to Get Certified -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">How to Get OEKO-TEX Certified | Process and Timeline</h2>
+      <p class="section__text">
+        The OEKO-TEX certification process follows a structured path from application to certificate issuance. Understanding the steps helps brands plan effectively and budget appropriate time and resources.
+      </p>
+      
+      <div class="process">
+        <div class="process__step">
+          <div class="process__number">1</div>
+          <h3 class="process__title">Choose the Right OEKO-TEX Standard for Your Product</h3>
+          <p class="process__text">
+            Determine which OEKO-TEX certification fits your needs. Most clothing brands choose Standard 100 for product safety certification. If you emphasize sustainability and transparency, consider MADE IN GREEN for comprehensive certification including production conditions. Leather products require LEATHER STANDARD. Chemical suppliers seek ECO PASSPORT. You'll also need to determine which product class applies based on your product's intended use and skin contact level. Your chosen OEKO-TEX member institute can provide guidance on standard and class selection.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">2</div>
+          <h3 class="process__title">Contact an OEKO-TEX Member Institute</h3>
+          <p class="process__text">
+            Identify the OEKO-TEX member institute serving your region. There are 20+ institutes worldwide including Hohenstein (Germany), TESTEX (Switzerland), and others across Europe, Asia, and the Americas. Submit an application with detailed product information: material composition, color range, accessories, intended use, and manufacturing processes. The institute will review your application, provide a quote for certification costs, and specify sampling requirements. The quote varies based on product complexity, number of colors and materials, and testing scope.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">3</div>
+          <h3 class="process__title">Submit Product Samples for Laboratory Testing</h3>
+          <p class="process__text">
+            Prepare and submit product samples according to the institute's specifications. Samples must represent all materials, colors, and components to be certified. For example, if you certify a t-shirt in 5 colors with 3 different fabric compositions, you may need samples of each color and material combination. The laboratory tests samples for over 100 harmful substances using advanced analytical techniques including GC-MS, HPLC, and ICP-MS. Testing typically takes 2-4 weeks depending on sample volume and institute workload. The institute may request additional samples if initial testing is inconclusive.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">4</div>
+          <h3 class="process__title">Review Test Results and Address Any Failures</h3>
+          <p class="process__text">
+            Receive the laboratory test report within 2-4 weeks of sample submission. Review results carefully for any substance limit exceedances. If your products fail any tests, identify the source - often a specific dye, chemical, or material component. Work with your suppliers to substitute problematic materials or adjust processes. The institute provides guidance on acceptable alternatives. Re-testing is required for any failed components. This corrective action phase can add 1-4 weeks depending on the number and severity of failures. Many brands pass on the first attempt when using reputable suppliers.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">5</div>
+          <h3 class="process__title">Receive Certificate (Valid 12 Months, Annual Renewal)</h3>
+          <p class="process__text">
+            Upon passing all tests, receive your OEKO-TEX certificate valid for 12 months from issuance. The certificate specifies the certified products, materials, and scope. You can now use the OEKO-TEX label on certified products and in marketing materials. Each certified product carries a unique certificate number for verification. Plan for annual renewal: submit samples for re-testing approximately 2 months before expiry to ensure continuous certification. Renewal typically costs 30-50% of the initial certification fee and takes 2-4 weeks. Maintain records of material suppliers and processes to streamline renewal.
+          </p>
+        </div>
+      </div>
+      
+      <p class="section__text">
+        <em>Timeline: Standard 100 certification typically takes 4-8 weeks total. MADE IN GREEN takes 8-12 weeks due to additional facility audits. Cost: Standard 100 costs $500-$2,000 depending on product range. MADE IN GREEN costs $2,000-$5,000. Annual renewal is 30-50% of initial cost.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Verify Certificates -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">How to Verify an OEKO-TEX Certificate Is Genuine</h2>
+      <p class="section__text">
+        Certificate verification is essential when working with manufacturers or suppliers claiming OEKO-TEX certification. Fake or expired certificates are not uncommon in the textile industry. Verification protects your brand from partnering with non-compliant suppliers and ensures your products truly meet safety standards.
+      </p>
+      
+      <h3 class="section__subtitle">Use OEKO-TEX Certificate Checker Tool</h3>
+      <p class="section__text">
+        The official OEKO-TEX label check tool at <a href="https://www.oeko-tex.com/en/label-check" target="_blank" rel="noopener noreferrer">oeko-tex.com/certificate-check</a> is the authoritative source for certificate verification. Enter the certificate number from the product label or supplier documentation. The tool displays the certificate status, validity period, certified products, and scope. Many OEKO-TEX labels now include QR codes that can be scanned for instant verification. Always use the official OEKO-TEX website - third-party verification sites may not have current data.
+      </p>
+      
+      <h3 class="section__subtitle">What to Look For: Certificate Number, Expiry Date, Scope</h3>
+      <p class="section__text">
+        When verifying certificates, check three critical elements. First, confirm the certificate is current and not expired. OEKO-TEX certificates are valid for 12 months and require annual renewal. Second, verify that the certificate scope matches the products you're sourcing. A certificate for Class II products doesn't cover Class I baby products. Third, ensure the certificate holder is your actual supplier or manufacturer, not a different company. Some suppliers present certificates from other companies, which is not valid for your products.
+      </p>
+      
+      <h3 class="section__subtitle">Common Fraud: Expired Certificates, Wrong Product Scope</h3>
+      <p class="section__text">
+        The most common certificate issues are expired certificates and scope mismatches. Suppliers may present certificates that expired months or years ago, hoping buyers won't verify. Others show certificates for different product types than what they're supplying. For example, a supplier might show a Class III certificate for outerwear when you're ordering Class II underwear. More serious fraud includes completely fabricated certificates that don't exist in the OEKO-TEX database. Always verify certificates independently through the official OEKO-TEX tool before placing orders or making payments.
+      </p>
+      
+      <h3 class="section__subtitle">Why Buyers Must Verify | Don't Just Accept a PDF</h3>
+      <p class="section__text">
+        Accepting a PDF certificate without verification is risky practice. PDFs can be easily altered, falsified, or copied from legitimate certificates. Verification through the official OEKO-TEX database takes minutes and provides assurance that the certificate is genuine and current. For significant orders, consider requesting the certificate directly from the OEKO-TEX institute rather than accepting it from the supplier. Some brands make certificate verification a standard part of their supplier onboarding process. This practice protects your brand from legal and reputational risk if products turn out to be non-compliant.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: SDF and OEKO-TEX -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">SDF Clothing and OEKO-TEX | Our Certified Status</h2>
+      <p class="section__text">
+        SDF Clothing holds OEKO-TEX Standard 100 certification for our textile products, demonstrating our commitment to chemical safety and consumer protection. Our certification covers the fabrics and materials we use in garment production, ensuring that every component meets strict safety requirements. This certification is part of our broader portfolio of 13 international certifications covering quality, social compliance, and environmental standards.
+      </p>
+      
+      <h3 class="section__subtitle">What This Means for Brands Sourcing from SDF</h3>
+      <p class="section__text">
+        When you source from SDF Clothing, you benefit from our OEKO-TEX certification without needing to pursue certification separately for your products. Our certification covers the materials and processes we use, allowing your finished garments to carry the OEKO-TEX label when appropriate. This simplifies your compliance requirements and reduces certification costs. We provide documentation of our certifications to all clients, including certificate numbers for verification. Our OEKO-TEX status is particularly valuable for brands targeting EU and UK markets where the certification is widely recognized and demanded.
+      </p>
+      
+      <h3 class="section__subtitle">How Certification Helps Brands Enter EU and UK Retail</h3>
+      <p class="section__text">
+        EU and UK retailers increasingly require OEKO-TEX certification from suppliers as a condition of doing business. The certification demonstrates compliance with chemical safety regulations and provides assurance to consumers. Brands sourcing from OEKO-TEX certified manufacturers like SDF have a competitive advantage when approaching retailers. Our certification helps your products meet retailer RSL (Restricted Substances List) requirements and streamlines the supplier approval process. Many major retailers accept OEKO-TEX certification as equivalent to their own testing requirements, reducing time to market.
+      </p>
+      
+      <p class="section__text">
+        For complete information about all certifications held by SDF Clothing, including GOTS, BSCI, WRAP, ISO 9001, and others, visit our <a href="/certifications">certifications page</a>. We also offer <a href="/sustainable-clothing-manufacturers">sustainable clothing manufacturing</a> services for brands prioritizing environmental and social responsibility. As a leading <a href="/clothing-manufacturer-bangladesh">clothing manufacturer Bangladesh</a>, we provide certified production with full transparency.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: OEKO-TEX vs GOTS -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">OEKO-TEX vs GOTS | Which Certification Do You Need?</h2>
+      <p class="section__text">
+        OEKO-TEX and GOTS (Global Organic Textile Standard) serve different purposes, and many brands benefit from holding both certifications. Understanding the differences helps you determine which certification - or combination - meets your brand's needs.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Comparison of OEKO-TEX Standard 100 and GOTS certifications">
+          <caption>Key differences between OEKO-TEX and GOTS certification systems</caption>
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>OEKO-TEX Standard 100</th>
+              <th>GOTS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>What it certifies</strong></td>
+              <td>Chemical safety of finished products</td>
+              <td>Organic fiber content + processing</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Organic requirement</strong></td>
+              <td>None (works with conventional fibers)</td>
+              <td>Minimum 70% organic fibers required</td>
+            </tr>
+            <tr>
+              <td><strong>Processing</strong></td>
+              <td>Tests final product, doesn't audit process</td>
+              <td>Audits entire supply chain and processing</td>
+            </tr>
+            <tr>
+              <td><strong>Consumer recognition</strong></td>
+              <td>High (widely recognized safety label)</td>
+              <td>High (recognized organic standard)</td>
+            </tr>
+            <tr>
+              <td><strong>Retailer demand</strong></td>
+              <td>Very high for chemical safety</td>
+              <td>High for organic products</td>
+            </tr>
+            <tr>
+              <td><strong>Cost</strong></td>
+              <td>$500-$2,000 annually</td>
+              <td>$1,000-$5,000 annually</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <h3 class="section__subtitle">Different Purposes | Brands Often Need Both</h3>
+      <p class="section__text">
+        OEKO-TEX and GOTS address different aspects of textile sustainability. OEKO-TEX focuses exclusively on chemical safety, ensuring products are free from harmful substances regardless of fiber type. GOTS certifies organic content and ensures that organic fibers are processed sustainably throughout the supply chain. Brands using organic cotton typically pursue GOTS certification to verify organic claims, while also seeking OEKO-TEX to demonstrate chemical safety. The two certifications are complementary rather than competing. Many retailers require both for organic products - GOTS to verify organic content and OEKO-TEX to verify chemical safety beyond GOTS requirements. For <a href="/private-label-manufacturer">private label manufacturing</a>, having both certifications provides comprehensive assurance to retailers and consumers.
+      </p>
+      
+      <p class="section__text">
+        For detailed information about GOTS certification, see our guide on <a href="/insights/gots-certification-explained">GOTS certification explained</a>. SDF Clothing offers both OEKO-TEX and GOTS certified options for brands seeking comprehensive certification coverage.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: FAQ -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">OEKO-TEX Certification FAQ</h2>
+      
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What does OEKO-TEX certified mean on clothing?</h3>
+          <p class="faq__answer">
+            OEKO-TEX certified means the clothing has been tested for harmful substances and verified to be safe for human health. The certification tests for over 300 regulated and non-regulated substances including heavy metals, pesticides, formaldehyde, and carcinogenic dyes. Every component of the garment - from fabric and thread to buttons and zippers - must meet strict safety criteria. The label provides assurance that the product is free from chemicals that could harm the wearer.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Is OEKO-TEX certification required for EU clothing sales?</h3>
+          <p class="faq__answer">
+            OEKO-TEX certification is not legally required for EU clothing sales, but it is strongly recommended and increasingly demanded by EU retailers and consumers. The EU has REACH regulations restricting certain chemicals in textiles, and OEKO-TEX certification provides verification that products comply with these and additional stricter requirements. Many EU retail chains require OEKO-TEX certification as a condition for suppliers. For brands targeting the EU market, OEKO-TEX certification is essentially a business necessity.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does OEKO-TEX certification take?</h3>
+          <p class="faq__answer">
+            The OEKO-TEX Standard 100 certification process typically takes 4-8 weeks from application to certificate issuance. The timeline includes: initial application and document review (1-2 weeks), sample submission and laboratory testing (2-4 weeks), results review and any required corrective actions (1 week), and certificate issuance (1 week). MADE IN GREEN certification takes longer, typically 8-12 weeks, as it includes additional social and environmental audits. Renewal of existing certificates is faster, usually 2-4 weeks.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How much does OEKO-TEX certification cost?</h3>
+          <p class="faq__answer">
+            OEKO-TEX certification costs vary based on product range, number of certification classes, and testing requirements. Standard 100 certification typically costs $500-$2,000 for initial certification, depending on the number of product groups and materials tested. Annual renewal fees are approximately 30-50% of the initial certification cost. MADE IN GREEN certification costs more due to additional audits, typically $2,000-$5,000. Costs also vary by OEKO-TEX member institute and region. Brands should budget for annual renewal costs and potential re-testing fees.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between OEKO-TEX Standard 100 and MADE IN GREEN?</h3>
+          <p class="faq__answer">
+            OEKO-TEX Standard 100 focuses exclusively on product safety, testing finished textiles for harmful substances. MADE IN GREEN is a more comprehensive certification that combines Standard 100 testing with verification of sustainable production conditions and socially responsible working practices. MADE IN GREEN requires additional audits of manufacturing facilities to ensure environmental compliance and worker safety. MADE IN GREEN products carry a unique product ID that consumers can trace to the production facility. Standard 100 is ideal for brands focusing on chemical safety, while MADE IN GREEN suits brands emphasizing comprehensive sustainability.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can a small clothing brand get OEKO-TEX certified?</h3>
+          <p class="faq__answer">
+            Yes, small clothing brands can get OEKO-TEX certified. The certification is product-based, not company-based, so even small brands can certify specific products or product lines. The cost is manageable for most small businesses, starting around $500 for Standard 100. Many small brands work with certified manufacturers rather than seeking certification directly, as the manufacturer's certification can cover the brand's products if the manufacturer holds the certificate for the relevant materials and processes. This is a common and cost-effective approach for small brands.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do I need OEKO-TEX if my fabric supplier is certified?</h3>
+          <p class="faq__answer">
+            If your fabric supplier is OEKO-TEX certified, the fabric itself is certified, but you still need certification for the finished garment if you want to use the OEKO-TEX label. The certification applies to the complete product, including all components (fabric, thread, buttons, zippers, labels, etc.). However, using certified materials simplifies your certification process, as those materials won't need re-testing. You'll need to certify the additional components and the assembly process. Working with a fully certified manufacturer is often the simplest approach, as their certification can cover your complete product.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do I verify an OEKO-TEX certificate is genuine?</h3>
+          <p class="faq__answer">
+            Verify OEKO-TEX certificates using the official OEKO-TEX label check tool at oeko-tex.com. Enter the certificate number from the label or scan the QR code if available. The tool will display the certificate validity, scope, and expiry date. Check that the certificate covers the specific product type and materials you're sourcing. Be wary of certificates that are expired, have scope mismatches, or cannot be found in the official database. Some manufacturers present expired or falsified certificates, so verification is essential before placing orders.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10: CTA -->
+  <section class="section section--cta">
+    <div class="section__container section__container--narrow">
+      <h2 class="section__title">Ready to Work with an OEKO-TEX Certified Manufacturer?</h2>
+      <p class="section__text">
+        SDF Clothing holds OEKO-TEX Standard 100 certification along with 12 other international certifications. We help brands navigate certification requirements and provide compliant, high-quality gad. Request a <a href="/tools/sample-request">sample request</a> to evaluate our quality, or use our <a href="/tools/moq-calculator">MOQ calculator</a> to estimate orrer requirementsments. Whether you need OEKO-TEX certified products for EU retail, GOTS organic certification, or other standards, we have the expertise and certifications to support your brand.
+      </p>
+      <p class="section__text">
+        Contact us to discuss your certification needs. We'll provide documentation of our certifications, explain how they apply to your products, and help you determine the best approach for your brand.
+      </p>
+      <div class="section__ctas">
+        <a href={whatsappQuoteUrl} class="section__cta section__cta--primary" target="_blank" rel="noopener noreferrer">
+          Ask About Certification
+        </a>
+        <a href="/contact" class="section__cta section__cta--secondary">
+          Contact Our Team
+        </a>
+      </div>
+      <p class="section__text section__text--small">
+        Last updated: May 2026 | Average response time: 24 hours
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: var(--spacing-sm) 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__container--narrow {
+    max-width: 700px;
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .process {
+    margin-top: var(--spacing-md);
+  }
+
+  .process__step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .process__step:last-child {
+    border-bottom: none;
+  }
+
+  .process__number {
+    width: 50px;
+    height: 50px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .process__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .process__text {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+
+    .process__step {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+    }
+
+    .process__number {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+</BaseLayout>

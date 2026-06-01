@@ -1,0 +1,755 @@
+---
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../../../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../../../data/schema';
+export const prerender = true;
+
+const pageTitle = "Organic Pet Clothing Manufacturer | SDF";
+const pageDescription = "Organic pet clothing manufacturer. GOTS certified organic cotton, eco-friendly materials, and sustainable dog apparel from low MOQ. Free quote today.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Pet Clothing Manufacturer",
+            "item": "https://sdfltd.com/pet-clothing-manufacturer/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Organic Pet Clothing Manufacturer",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What organic materials do you use for pet clothing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We use GOTS certified organic cotton for pet clothing, ensuring fibers are grown without synthetic pesticides or fertilizers. Additional sustainable materials include recycled polyester from post-consumer plastic, hemp blends for durability, and bamboo viscose for softness. All materials meet strict environmental and safety standards for pet use."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is GOTS certification?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GOTS (Global Organic Textile Standard) certification ensures organic fibers are processed according to strict environmental and social criteria throughout the supply chain. GOTS certified pet clothing guarantees organic fiber content, no harmful chemicals, and environmentally responsible production. Certification is verified through third-party audits."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why choose organic pet clothing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Organic pet clothing eliminates exposure to synthetic chemicals and pesticides that could irritate pet skin or be ingested through grooming. Organic materials are softer and more breathable, enhancing pet comfort. Sustainable production reduces environmental impact. Organic certification provides consumer trust and meets growing demand for eco-friendly pet products."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What sustainable practices do you follow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our sustainable practices include organic fiber sourcing, low-impact dyeing processes, water conservation in production, waste reduction through efficient cutting, and recycled packaging. We maintain GOTS certification for organic cotton and source recycled materials from certified suppliers. Production facilities implement energy efficiency measures."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is organic pet clothing more expensive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Organic pet clothing has higher production costs due to certified organic materials and sustainable processing methods. However, organic materials often have better quality and durability, providing value over time. Premium positioning allows higher retail prices that reflect the organic certification and environmental benefits."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is your minimum order for organic pet clothing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our minimum order for organic pet clothing is 300 pieces per style. Organic materials may have slightly higher minimums due to sourcing requirements. We can accommodate lower minimums for simple designs using stock organic fabrics. Custom organic fabric development requires higher minimums to justify material production costs."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Organic Pet Clothing Manufacturing Service",
+      "description": "Sustainable pet clothing manufacturing with GOTS certified organic cotton, eco-friendly materials, and environmentally responsible production",
+      "provider": {
+        "@id": "https://sdfltd.com/#organization"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Organic Pet Clothing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Organic Pet Clothing Production"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "10",
+              "maxPrice": "18"
+            }
+          }
+        ]
+      }
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/pet-clothing-manufacturer/index">Pet Clothing Manufacturer</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Organic Pet Clothing Manufacturer</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Organic Pet Clothing • Since 1998 • Sustainable Specialists</div>
+        <h1 class="hero__title">Organic Pet Clothing Manufacturer • Sustainable Dog Apparel</h1>
+        <p class="hero__description">
+          SDF Clothing is an organic pet clothing manufacturer providing sustainable dog apparel production. GOTS certified organic cotton, eco-friendly materials, sustainable pet clothing manufacturing, and organic pet apparel for eco-conscious brands.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20organic%20pet%20clothing`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">GOTS</span>
+          <span class="hero__stat-label">Certified</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Organic</span>
+          <span class="hero__stat-label">Cotton</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Eco</span>
+          <span class="hero__stat-label">Friendly</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>GOTS Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Organic Materials</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Sustainable Production</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Pet Safe</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Organic Materials</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sustainable Pet Clothing Materials</h2>
+      </div>
+      <div class="section__text">
+        <p>Organic pet clothing materials prioritize environmental responsibility and pet safety. Our primary material is GOTS certified organic cotton, grown without synthetic pesticides, fertilizers, or genetically modified organisms. This certification ensures fibers meet strict organic standards throughout cultivation and processing.</p>
+        
+        <p>Beyond organic cotton, we offer additional sustainable materials including recycled polyester from post-consumer plastic bottles, hemp blends for enhanced durability, and bamboo viscose for exceptional softness. Each material is selected based on environmental impact, pet safety, and performance characteristics appropriate for pet clothing applications.</p>
+        
+        <p>All materials undergo testing for harmful substances to ensure pet safety. This includes testing for heavy metals, formaldehyde, and other regulated chemicals. Materials are chosen for breathability, comfort, and washability—essential qualities for pet clothing that will be subjected to outdoor activities and frequent laundering.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">GOTS Certification</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">GOTS Certification for Pet Clothing</h2>
+      </div>
+      <div class="section__text">
+        <p>GOTS (Global Organic Textile Standard) certification provides assurance that organic pet clothing meets comprehensive environmental and social criteria throughout the supply chain. While GOTS was developed for human textiles, the same standards apply to pet clothing, ensuring organic integrity from fiber cultivation through finished product.</p>
+        
+        <p>GOTS certification requires minimum 70% certified organic fibers for the 'made with organic' label grade, and 95% for the 'organic' label grade. All non-organic fibers must meet strict ecological criteria. The standard prohibits toxic chemicals, requires environmentally responsible processing, mandates fair labor practices, and ensures traceability throughout production.</p>
+        
+        <p>Our GOTS certification is maintained through annual third-party audits that verify compliance with all standard requirements. Certification documentation is available for brands seeking to make organic claims and provide transparency to consumers. GOTS certification is the most comprehensive organic textile certification available globally.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Benefits</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Why Choose Organic Pet Clothing</h2>
+      </div>
+      <div class="section__text">
+        <p>Organic pet clothing offers multiple benefits for pets, pet owners, and the environment. The primary benefit is eliminating pet exposure to synthetic chemicals and pesticides that conventional cotton may contain. Pets groom themselves regularly, potentially ingesting residues from clothing. Organic materials eliminate this concern.</p>
+        
+        <p>Organic cotton is softer and more breathable than conventional cotton, enhancing pet comfort. The absence of harsh chemical treatments preserves natural fiber softness, making organic clothing gentler on pet skin. This is particularly important for pets with skin sensitivities or allergies.</p>
+        
+        <p>Environmental benefits include reduced pesticide use, water conservation through organic farming practices, and lower carbon footprint compared to conventional cotton production. Sustainable production methods protect ecosystems and reduce pollution. For eco-conscious pet owners, organic pet clothing aligns with values of environmental responsibility.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Sustainable Practices</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sustainable Manufacturing Practices</h2>
+      </div>
+      <div class="section__text">
+        <p>Our sustainable manufacturing practices extend beyond material selection to encompass the entire production process. Low-impact dyeing methods reduce water consumption and chemical use compared to conventional dyeing. Natural and low-impact dyes are preferred, and dye houses must meet wastewater treatment standards.</p>
+        
+        <p>Water conservation measures include efficient washing processes, water recycling where feasible, and selection of low-water-impact materials. Energy efficiency is addressed through modern machinery, optimized production scheduling, and facility improvements that reduce energy consumption per unit produced.</p>
+        
+        <p>Waste reduction strategies include optimized pattern making to minimize fabric waste, recycling of production scraps, and use of deadstock fabrics where appropriate. Packaging uses recycled materials or biodegradable options to reduce environmental impact. All practices are documented and verified through certification requirements.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Pricing</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Organic Pet Clothing Pricing</h2>
+      </div>
+      <div class="section__text">
+        <p>Organic pet clothing has higher production costs than conventional alternatives. Certified organic materials cost more due to organic farming practices and certification costs. Sustainable processing methods also add expense compared to conventional production. These higher costs are reflected in pricing but deliver value through quality, safety, and environmental benefits.</p>
+        
+        <p>Despite higher costs, organic pet clothing can command premium pricing in the market. Growing consumer awareness of environmental issues and pet health concerns creates demand for organic pet products. Brands can position organic pet clothing as premium offerings that justify higher prices through certification and sustainability messaging.</p>
+        
+        <p>Volume production reduces per-unit costs for organic pet clothing, making larger orders more cost-effective. Brands planning significant organic collections can achieve competitive pricing through volume. We provide transparent pricing breakdowns showing organic material costs, certification costs, and production costs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Minimum Orders</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Organic Production Minimums</h2>
+      </div>
+      <div class="section__text">
+        <p>Our minimum order for organic pet clothing is 300 pieces per style, similar to conventional production. This minimum can be distributed across multiple sizes within the same style. Organic materials may require slightly higher minimums for custom fabric development due to mill minimums for organic fabric production.</p>
+        
+        <p>Stock organic fabrics are available in popular colors, allowing lower minimums for simple designs using these materials. If your design can be produced using available organic cotton fabrics in stock colors, we can often accommodate orders as low as 100-200 pieces. This flexibility helps brands test organic products without large commitments.</p>
+        
+        <p>Custom organic fabric development requires higher minimums, typically 500-1,000 pieces per style depending on fabric complexity. Organic fabric mills have minimum production quantities that must be met to justify setting up production for custom colors or fabric constructions. These higher minimums ensure economic viability of custom organic fabric production.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Organic Pet Clothing Manufacturer FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What organic materials do you use for pet clothing?</h3>
+          <p class="faq__answer">We use GOTS certified organic cotton for pet clothing, ensuring fibers are grown without synthetic pesticides or fertilizers. Additional sustainable materials include recycled polyester from post-consumer plastic, hemp blends for durability, and bamboo viscose for softness. All materials meet strict environmental and safety standards for pet use.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is GOTS certification?</h3>
+          <p class="faq__answer">GOTS (Global Organic Textile Standard) certification ensures organic fibers are processed according to strict environmental and social criteria throughout the supply chain. GOTS certified pet clothing guarantees organic fiber content, no harmful chemicals, and environmentally responsible production. Certification is verified through third-party audits.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Why choose organic pet clothing?</h3>
+          <p class="faq__answer">Organic pet clothing eliminates exposure to synthetic chemicals and pesticides that could irritate pet skin or be ingested through grooming. Organic materials are softer and more breathable, enhancing pet comfort. Sustainable production reduces environmental impact. Organic certification provides consumer trust and meets growing demand for eco-friendly pet products.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What sustainable practices do you follow?</h3>
+          <p class="faq__answer">Our sustainable practices include organic fiber sourcing, low-impact dyeing processes, water conservation in production, waste reduction through efficient cutting, and recycled packaging. We maintain GOTS certification for organic cotton and source recycled materials from certified suppliers. Production facilities implement energy efficiency measures.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Is organic pet clothing more expensive?</h3>
+          <p class="faq__answer">Organic pet clothing has higher production costs due to certified organic materials and sustainable processing methods. However, organic materials often have better quality and durability, providing value over time. Premium positioning allows higher retail prices that reflect the organic certification and environmental benefits.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is your minimum order for organic pet clothing?</h3>
+          <p class="faq__answer">Our minimum order for organic pet clothing is 300 pieces per style. Organic materials may have slightly higher minimums due to sourcing requirements. We can accommodate lower minimums for simple designs using stock organic fabrics. Custom organic fabric development requires higher minimums to justify material production costs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready for Organic Pet Clothing Production?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for organic pet clothing manufacturing. We provide sustainable dog apparel production with GOTS certified organic cotton, eco-friendly materials, and environmentally responsible manufacturing for eco-conscious pet brands.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/insights/gots-label-guide" class="section__cta section__cta--secondary">GOTS Guide</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/pet-clothing-manufacturer/dog-hoodie-manufacturer/index" style="color: var(--color-primary);">dog hoodie manufacturer</a>, <a href="/pet-clothing-manufacturer/private-label-pet-clothing/index" style="color: var(--color-primary);">private label pet clothing</a>, <a href="/organic-cotton-clothing-manufacturer" style="color: var(--color-primary);">organic cotton clothing manufacturer</a>, <a href="/sustainable-clothing-manufacturer" style="color: var(--color-primary);">sustainable clothing manufacturer</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

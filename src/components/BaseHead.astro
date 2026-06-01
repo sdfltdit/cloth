@@ -1,4 +1,6 @@
 ---
+import { getYearsExperiencePhrase } from '../data/company';
+
 export interface Props {
   title: string;
   description: string;
@@ -13,7 +15,7 @@ const {
   title,
   description,
   canonicalUrl,
-  ogImage = "https://sdfltd.com/factory.jpg",
+  ogImage = "/factory.jpg",
   datePublished,
   dateModified,
   schema
@@ -21,11 +23,118 @@ const {
 
 const canonical = canonicalUrl ?? Astro.url.href;
 const siteName = "SDF Clothing";
+const yearsExpPhrase = getYearsExperiencePhrase();
+
+// Base schemas that should be present on all pages
+const baseSchemas = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization","LocalBusiness"],
+      "@id": "https://sdfltd.com/#organization",
+      "name": "SDF Clothing",
+      "alternateName": ["SDF Ltd", "SDF Garments"],
+      "url": "https://sdfltd.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://sdfltd.com/sdf.jpg",
+        "width": 200,
+        "height": 200
+      },
+      "image": "https://sdfltd.com/factory.jpg",
+      "description": "SDF Clothing is a Bangladesh-based clothing manufacturer providing OEM, private label, and CMT services to fashion brands across EU, UK, USA, Canada, and Australia. Established 1998, GOTS certified.",
+      "priceRange": "$$",
+      "foundingDate": "1998-08-22",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "House 125, Road 01, Baridhara DOHS",
+        "addressLocality": "Dhaka",
+        "postalCode": "1212",
+        "addressCountry": "BD"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "telephone": "+8801911733226",
+          "email": "contact@sdfltd.com",
+          "availableLanguage": ["English"]
+        }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/company/clothing-manufacturers",
+        "https://www.facebook.com/ClothingManufacturers/",
+        "https://x.com/clothing_makers",
+        "https://www.wikidata.org/wiki/Q139678386",
+        "https://au.pinterest.com/sdfltdclothingnsw/",
+        "https://www.reddit.com/user/clothing-mmakers/",
+        "https://www.slideshare.net/sdfashion1",
+        "https://www.quora.com/profile/SDF-Clothing-1"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Clothing Manufacturing Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "T-Shirt & Knitwear Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Woven Apparel Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Activewear & Sportswear Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Private Label Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "OEM Garment Manufacturing" } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://sdfltd.com/#website",
+      "url": "https://sdfltd.com",
+      "name": "SDF Clothing",
+      "description": `Clothing manufacturers, garment manufacturers, fashion manufacturers, and apparel manufacturers based in Dhaka, Bangladesh. SDF Clothing serves fashion brands worldwide with low MOQ production, GOTS certification, and ${yearsExpPhrase} of manufacturing expertise.`,
+      "publisher": { "@id": "https://sdfltd.com/#organization" },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": ["h1", "h2", ".index__faq-answer p"],
+        "xpath": [
+          "/html/head/title",
+          "/html/head/meta[@name='description']/@content"
+        ]
+      }
+    }
+  ]
+};
+
+// Merge base schemas with page-specific schemas
+let finalSchema;
+if (schema) {
+  // If page provides schema, merge with base schemas
+  const pageSchemas = Array.isArray(schema) ? schema : [schema];
+  const graph = [...baseSchemas["@graph"]];
+  
+  // Add page-specific schemas to @graph
+  for (const s of pageSchemas) {
+    // Skip if it's Organization or WebSite (already in base)
+    if (s["@type"]) {
+      const types = Array.isArray(s["@type"]) ? s["@type"] : [s["@type"]];
+      if (!types.includes("Organization") && !types.includes("WebSite")) {
+        graph.push(s);
+      }
+    }
+  }
+  
+  finalSchema = {
+    "@context": "https://schema.org",
+    "@graph": graph
+  };
+} else {
+  // No page schema, use base schemas only
+  finalSchema = baseSchemas;
+}
 ---
 
 <!-- CORE -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>{title}</title>
 <meta name="description" content={description} />
@@ -37,19 +146,18 @@ const siteName = "SDF Clothing";
 <meta name="publisher" content="SDF Clothing" />
 <meta name="generator" content={Astro.generator} />
 <meta name="copyright" content={`© ${new Date().getFullYear()} SDF Clothing`} />
-<meta name="keywords" content="low MOQ clothing manufacturer Bangladesh, clothing manufacturers Bangladesh, garment manufacturers Bangladesh, OEM clothing manufacturer, private label clothing manufacturer, GOTS certified manufacturer, sustainable clothing manufacturer, startup fashion brand manufacturer" />
 
 <!-- OPEN GRAPH -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={datePublished ? "article" : "website"} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
-<meta property="og:image" content={ogImage} />
-<meta property="og:image:secure_url" content={ogImage} />
-<meta property="og:image:width" content="680" />
-<meta property="og:image:height" content="453" />
+<meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `https://sdfltd.com${ogImage}`} />
+<meta property="og:image:secure_url" content={ogImage.startsWith('http') ? ogImage : `https://sdfltd.com${ogImage}`} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:image:type" content="image/jpeg" />
-<meta property="og:image:alt" content="SDF Clothing — Low MOQ Clothing Manufacturers Bangladesh" />
+<meta property="og:image:alt" content={title} />
 <meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content="en_US" />
 
@@ -59,8 +167,8 @@ const siteName = "SDF Clothing";
 <meta name="twitter:creator" content="@clothing_makers" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={ogImage} />
-<meta name="twitter:image:alt" content="SDF Clothing — Low MOQ Clothing Manufacturers Bangladesh" />
+<meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `https://sdfltd.com${ogImage}`} />
+<meta name="twitter:image:alt" content={title} />
 
 <!-- APPLE -->
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -80,8 +188,10 @@ const siteName = "SDF Clothing";
 {datePublished && <meta property="article:author" content="https://sdfltd.com/about/" />}
 
 <!-- FONT PRELOAD -->
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-300.woff2" crossorigin="anonymous" fetchpriority="high" />
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-500.woff2" crossorigin="anonymous" fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-300.woff2" crossorigin fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-500.woff2" crossorigin fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-regular.woff2" crossorigin fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-600.woff2" crossorigin fetchpriority="high" />
 
 <!-- FAVICONS -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -100,7 +210,6 @@ const siteName = "SDF Clothing";
 
 <!-- PWA -->
 <link rel="manifest" href="/site.webmanifest" />
-<meta name="theme-color" content="#000000" />
 <meta name="msapplication-TileColor" content="#000000" />
 <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
 <meta name="msapplication-config" content="none" />
@@ -111,100 +220,13 @@ const siteName = "SDF Clothing";
 <link rel="dns-prefetch" href="https://ipinfo.io" />
 <link rel="dns-prefetch" href="https://ipapi.co" />
 
-<!-- LCP PRELOAD -->
-<link rel="preload" as="image" href="/factory.jpg" fetchpriority="high" />
 
 <!-- llms.txt -->
 <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt" />
 
-<!-- HREFLANG -->
-<link rel="alternate" hreflang="en" href={canonical} />
-<link rel="alternate" hreflang="x-default" href="https://sdfltd.com/" />
 
-<!-- JSON-LD — passed from page (index.astro passes combinedSchema) -->
-{schema && (
-  Array.isArray(schema)
-    ? schema.map((s: object) => (
-        <script type="application/ld+json" set:html={JSON.stringify(s)} />
-      ))
-    : <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-)}
-
-<!-- Fallback JSON-LD for pages without schema prop -->
-{!schema && (
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": ["Organization","LocalBusiness"],
-        "@id": "https://sdfltd.com/#organization",
-        "name": "SDF Clothing",
-        "alternateName": ["SDF Ltd", "SDF Garments"],
-        "url": "https://sdfltd.com",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://sdfltd.com/logo-small.svg",
-          "width": 120,
-          "height": 60
-        },
-        "image": "https://sdfltd.com/factory.jpg",
-        "description": "SDF Clothing is a Bangladesh-based clothing manufacturer providing OEM, private label, and CMT services to fashion brands across EU, UK, USA, Canada, and Australia. Established 1998, GOTS certified.",
-        "foundingDate": "1998",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "House 125, Road 01, Baridhara DOHS",
-          "addressLocality": "Dhaka",
-          "postalCode": "1212",
-          "addressCountry": "BD"
-        },
-        "contactPoint": [
-          {
-            "@type": "ContactPoint",
-            "contactType": "sales",
-            "email": "contact@sdfltd.com",
-            "availableLanguage": ["English"]
-          }
-        ],
-        "sameAs": [
-          "https://www.linkedin.com/company/clothing-manufacturers",
-          "https://www.facebook.com/ClothingManufacturers/",
-          "https://x.com/clothing_makers",
-          "https://www.wikidata.org/wiki/Q139678386",
-          "https://au.pinterest.com/sdfltdclothingnsw/",
-          "https://www.reddit.com/user/clothing-mmakers/",
-          "https://www.slideshare.net/sdfashion1",
-          "https://www.quora.com/profile/SDF-Clothing-1"
-        ],
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Clothing Manufacturing Services",
-          "itemListElement": [
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "T-Shirt & Knitwear Manufacturing" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Woven Apparel Manufacturing" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Activewear & Sportswear Manufacturing" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Private Label Manufacturing" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "OEM Garment Manufacturing" } }
-          ]
-        }
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://sdfltd.com/#website",
-        "url": "https://sdfltd.com",
-        "name": "SDF Clothing",
-        "description": "Clothing manufacturers, garment manufacturers, fashion manufacturers, and apparel manufacturers based in Dhaka, Bangladesh. SDF Clothing serves fashion brands worldwide with low MOQ production, GOTS certification, and 28 years of manufacturing expertise.",
-        "publisher": { "@id": "https://sdfltd.com/#organization" },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": { "@type": "EntryPoint", "urlTemplate": "https://sdfltd.com/?s={search_term_string}" },
-          "query-input": "required name=search_term_string"
-        }
-      }
-    ]
-  }
-  </script>
-)}
+<!-- JSON-LD — merged base schemas with page-specific schemas -->
+<script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
 
 <!-- SERVICE WORKER -->
 <script>

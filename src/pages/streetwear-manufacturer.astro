@@ -1,0 +1,820 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Streetwear Manufacturer Bangladesh | 300 Piece MOQ | SDF";
+const pageDescription = "Leading streetwear manufacturer in Bangladesh. 300 piece MOQ, heavyweight tees, oversized hoodies. Custom graphic apparel. Get free quote for streetwear.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com",
+        "name": "SDF Clothing"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "description": "Streetwear manufacturer from Bangladesh providing heavyweight tees, oversized hoodies, joggers, and graphic apparel for streetwear brands worldwide since 1998."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for streetwear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "300 pieces per style minimum. This applies per design, colorway, and size range. Lower quantities possible at higher per-piece cost for sampling or prototype runs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you produce heavyweight streetwear tees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer heavyweight tees from 220-280 GSM for premium streetwear positioning. Heavyweight tees provide substantial weight and durability for premium streetwear brands."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What streetwear categories do you manufacture?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We manufacture heavyweight tees, oversized boxy tees, heavyweight hoodies 380-450 GSM, drop-shoulder hoodies, cargo pants and joggers, coach jackets, workwear-inspired pieces, and graphic prints and embroidery."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you do oversized and drop-shoulder fits?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Oversized and drop-shoulder fits are our specialty for streetwear brands. We use specialized grading and construction techniques to achieve authentic oversized silhouettes with consistent sizing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does streetwear production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard production timeline: 30-40 days from fabric receipt for basic streetwear. 35-50 days for custom fabric development or heavyweight options. 7-14 days for sampling before bulk."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you produce graphic prints and embroidery?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer screen printing (plastisol, water-based), DTG printing, embroidery, patches, and custom branding. Streetwear brands often combine multiple techniques for premium graphic apparel."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What streetwear fabrics do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer heavyweight cotton 240-300 GSM, French terry 280-350 GSM, fleece 300-450 GSM, denim, and performance fabrics. Oversized fits require heavier fabrics for structure and drape. All fabrics available in various weights for different streetwear aesthetics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you manufacture oversized and drop-shoulder streetwear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We specialize in oversized streetwear including drop-shoulder hoodies, boxy fit t-shirts, wide-leg pants, and baggy joggers. Custom measurements and proportions accommodated. Oversized fits require 300-piece minimum per style with specialized pattern development."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sdfltd.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Streetwear Manufacturer",
+          "item": canonicalUrl.href
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Streetwear Manufacturing Service",
+      "description": "Custom streetwear manufacturing from 300 pieces with heavyweight tees, oversized hoodies, and graphic apparel options",
+      "provider": {
+        "@id": "https://sdfltd.com/#org"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Streetwear Manufacturing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Heavyweight Streetwear Production"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "10",
+              "maxPrice": "30"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Streetwear from SDF Clothing",
+      "description": "Step-by-step process for ordering custom streetwear from our Bangladesh manufacturing facility",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Design Requirements",
+          "text": "Send your streetwear design, fabric specifications (GSM preferences), size chart, target quantity, and decoration requirements via contact form"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Detailed Quote",
+          "text": "Get pricing within 24-48 hours including fabric costs, production, decoration, and shipping for your streetwear order"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Samples",
+          "text": "Review streetwear samples for fit, fabric weight, print/embroidery quality within 7-14 days before bulk production"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Production begins after sample approval with 30-40 day turnaround for standard streetwear items"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Inspection & Shipping",
+          "text": "Final quality check before shipment with tracking documentation for your streetwear order"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href}>
+
+<script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+
+<meta name="keywords" content="streetwear manufacturer, custom streetwear manufacturer, heavyweight tee manufacturer, oversized hoodie manufacturer, streetwear brand manufacturer, low MOQ streetwear" />
+
+<!-- Hero Section -->
+<section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+      <p style="font-size:0.72rem;color:#FFFFFF;">
+        <a href="/" style="color:#FFFFFF;text-decoration:none;">Home</a>
+        <span style="margin:0 0.5rem;color:#333;">/</span>
+        Streetwear Manufacturer
+      </p>
+    </nav>
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Streetwear Manufacturer | Since 1998 | Heavyweight Options</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1rem;line-height:1.2;">
+      Custom Streetwear Manufacturer from 300 Pieces | Low MOQ Options
+    </h1>
+    <p style="color:#FFFFFF;max-width:640px;line-height:1.8;font-size:0.92rem;">
+      Streetwear is defined by oversized fits, heavyweight fabrics, and bold graphics. The right streetwear production defines your brand identity and customer loyalty. SDF Clothing manufactures streetwear in Bangladesh from heavyweight tees, oversized hoodies, joggers, and graphic apparel. From 300 pieces per style with specialized construction for authentic streetwear silhouettes.
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <a href="/contact" class="cta-button">Get Free Quote</a>
+      <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20streetwear-manufacturer`} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WhatsApp Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Stats Section -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#000000;">
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">300</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Pieces Minimum</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">450+</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">GSM Heavyweight</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">30-40</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Days Production</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">Oversized</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Fits Available</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Capabilities Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Our Capabilities</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Streetwear Manufacturing Capabilities</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Our streetwear manufacturing covers the full production cycle from fabric sourcing to finished garment. We source heavyweight fabrics from certified mills, cut, sew with specialized construction for oversized fits, apply graphic treatments, and package for shipment.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Production capacity: 40,000-60,000 streetwear pieces per month across multiple production lines. We handle basic streetwear for wholesale, premium heavyweight streetwear for boutique brands, and graphic-heavy collections for fashion-forward lines.
+    </p>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Product Range</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Streetwear Garment Categories</h2>
+    </div>
+    
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Heavyweight Tees (220-280 GSM)</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Premium heavyweight tees for streetwear positioning. 220-240 GSM for premium heavyweight, 250-280 GSM for extra heavyweight category. Substantial weight and durability for premium streetwear brands.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Oversized Boxy Tees</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Authentic oversized boxy tees with drop shoulders and relaxed fit. Specialized grading for consistent oversized silhouette across all sizes. Popular for contemporary streetwear brands.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Heavyweight Hoodies (380-450 GSM)</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Premium heavyweight hoodies for streetwear. 380-400 GSM for standard heavyweight hoodies, 410-450 GSM for extra heavyweight category. Substantial weight for premium streetwear positioning.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Drop-Shoulder Hoodies</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Authentic drop-shoulder hoodies with relaxed fit and oversized silhouette. Specialized construction for authentic streetwear aesthetic. Available in pullover and zip-up styles.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Cargo Pants and Joggers</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Cargo pants with functional pockets and joggers with elastic waistbands. Available in heavyweight cotton and cotton-spandex blends. Oversized and relaxed fits for streetwear aesthetic.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Coach Jackets</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Classic coach jackets with snap-front closures. Available in satin, nylon, and cotton materials. Custom embroidery and patches for branding. Popular for streetwear collections.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Workwear-Inspired Pieces</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Workwear-inspired streetwear including chore coats, work shirts, and utility pants. Authentic workwear details with modern streetwear styling. Heavyweight fabrics and reinforced construction.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Graphic Prints and Embroidery</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;">
+      Full-service graphic apparel production. Screen printing (plastisol, water-based, puff), DTG printing, embroidery, patches, and custom branding. Streetwear brands often combine multiple techniques.
+    </p>
+  </div>
+</section>
+
+<!-- Construction Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Construction</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Streetwear Construction Details</h2>
+    </div>
+    
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Heavyweight fabric specifications (220-450 GSM)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Oversized fits and grading (authentic silhouettes)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Premium trims and details (heavyweight zippers, metal hardware)
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Specialty washes and treatments (enzyme wash, vintage effects)
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Customization Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Customization</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Streetwear Customization</h2>
+    </div>
+    
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Screen printing (plastisol, water-based, puff, discharge)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Embroidery and patches (woven, embroidered, leather)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Custom trims and labels (heavyweight zippers, metal buttons)
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Heavyweight branded packaging (custom boxes, stickers)
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- MOQ and Pricing Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Pricing Guide</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">MOQ and Pricing</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      <strong>MOQ:</strong> 300 pieces per style minimum. Applies per design, colorway, and size range.
+    </p>
+    
+    <div style="margin-top:2rem;">
+      <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+        FOB Bangladesh pricing for 500-piece orders:
+      </p>
+      <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Heavyweight tee (220-280 GSM): $6-12 per piece
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Heavyweight hoodie (380-450 GSM): $10-18 per piece
+        </li>
+        <li style="padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Cargo pants/joggers: $12-20 per piece
+        </li>
+      </ul>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Pricing includes fabric, cut, sew, basic branding, and standard packaging. Custom printing, embroidery, and premium packaging are additional.
+    </p>
+
+    <table style="width:100%;max-width:800px;margin-top:2rem;border-collapse:collapse;background:#0a0a0a;">
+      <thead>
+        <tr style="background:#e00;">
+          <th style="padding:1rem;text-align:left;color:#fff;font-size:0.85rem;font-weight:500;border-bottom:1px solid #333;">Product Type</th>
+          <th style="padding:1rem;text-align:left;color:#fff;font-size:0.85rem;font-weight:500;border-bottom:1px solid #333;">GSM Range</th>
+          <th style="padding:1rem;text-align:left;color:#fff;font-size:0.85rem;font-weight:500;border-bottom:1px solid #333;">MOQ</th>
+          <th style="padding:1rem;text-align:left;color:#fff;font-size:0.85rem;font-weight:500;border-bottom:1px solid #333;">Price (500 pcs)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #1a1a1a;">
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Heavyweight T-Shirts</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">220-280 GSM</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">300 pieces</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">$8-15 per piece</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1a1a1a;">
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Oversized Hoodies</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">380-450 GSM</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">300 pieces</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">$15-25 per piece</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1a1a1a;">
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Cargo Joggers</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">280-340 GSM</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">300 pieces</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">$12-20 per piece</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1a1a1a;">
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Coach Jackets</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">280-320 GSM</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">300 pieces</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">$18-28 per piece</td>
+        </tr>
+        <tr>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">Boxy T-Shirts</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">240-280 GSM</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">300 pieces</td>
+          <td style="padding:1rem;color:#fff;font-size:0.82rem;">$9-16 per piece</td>
+        </tr>
+      </tbody>
+    </table>
+
+    
+  </div>
+</section>
+
+<!-- Timeline Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Production Timeline</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Streetwear Production Timeline</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Standard streetwear production timeline from order confirmation to shipment:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Fabric sourcing: 5-10 days (if not in stock)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Sampling: 7-14 days
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Bulk production: 30-40 days
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Quality inspection: 2-3 days
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Packing and shipping: 3-5 days
+      </li>
+    </ul>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Total timeline: 50-75 days from order to delivery. Heavyweight and custom fabric options add 5-10 days. Rush production available at 20-30% premium.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Common Questions</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Frequently Asked Questions</h2>
+    </div>
+    
+    <div style="max-width:800px;">
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What is the minimum order for streetwear?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">300 pieces per style minimum. This applies per design, colorway, and size range. Lower quantities possible at higher per-piece cost for sampling or prototype runs.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can you produce heavyweight streetwear tees?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. We offer heavyweight tees from 220-280 GSM for premium streetwear positioning. Heavyweight tees provide substantial weight and durability for premium streetwear brands.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What streetwear categories do you manufacture?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We manufacture heavyweight tees, oversized boxy tees, heavyweight hoodies 380-450 GSM, drop-shoulder hoodies, cargo pants and joggers, coach jackets, workwear-inspired pieces, and graphic prints and embroidery.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can you do oversized and drop-shoulder fits?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. Oversized and drop-shoulder fits are our specialty for streetwear brands. We use specialized grading and construction techniques to achieve authentic oversized silhouettes with consistent sizing.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How long does streetwear production take?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Standard production timeline: 30-40 days from fabric receipt for basic streetwear. 35-50 days for custom fabric development or heavyweight options. 7-14 days for sampling before bulk.</p>
+      </div>
+      <div style="padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can you produce graphic prints and embroidery?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. We offer screen printing (plastisol, water-based), DTG printing, embroidery, patches, and custom branding. Streetwear brands often combine multiple techniques for premium graphic apparel.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What streetwear fabrics do you offer?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We offer heavyweight cotton 240-300 GSM, French terry 280-350 GSM, fleece 300-450 GSM, denim, and performance fabrics. Oversized fits require heavier fabrics for structure and drape. All fabrics available in various weights for different streetwear aesthetics.</p>
+      </div>
+      <div style="padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can you manufacture oversized and drop-shoulder streetwear?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. We specialize in oversized streetwear including drop-shoulder hoodies, boxy fit t-shirts, wide-leg pants, and baggy joggers. Custom measurements and proportions accommodated. Oversized fits require 300-piece minimum per style with specialized pattern development.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Need custom streetwear manufacturing for your fashion brand? <a href="/contact" style="color:#e00;text-decoration:underline;">Contact SDF Clothing here</a> with your fabric specifications, style requirements, and quantity. We will quote pricing, lead time, and capacity within 48 hours. From 300 pieces minimum.
+    </p>
+  </div>
+</section>
+
+<!-- Low MOQ Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Low MOQ Production</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Streetwear Manufacturing from 300 Pieces | Low MOQ Options</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      A 300-piece minimum order quantity for streetwear production means you can launch your streetwear brand without the traditional high barriers to entry. This MOQ applies per style, colorway, and size range, allowing you to test different designs and color combinations with manageable inventory. The breakdown typically works as 50 pieces per size across 6 sizes (XS, S, M, L, XL, XXL) for a single colorway, or you can split across multiple colors with smaller quantities per variant. This flexibility is crucial for streetwear brands that often rely on limited drops and exclusive releases to create demand and brand hype.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      For startup streetwear brands, this low MOQ approach significantly reduces financial risk. Instead of committing to 1,000-2,000 pieces per style like traditional manufacturers require, you can invest in 300 pieces to validate market response before scaling production. This is particularly important in the streetwear category where trends move fast and customer preferences can shift quickly. The ability to produce smaller runs means you can iterate designs faster, respond to market feedback, and maintain the exclusivity that streetwear customers value. Many successful streetwear brands started with exactly this approach | testing designs with small batches, building customer loyalty through quality and exclusivity, then scaling production as demand grew.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      The industry average for streetwear manufacturing sits between 500-1,000 pieces minimum order, with many premium manufacturers requiring 1,000+ pieces for heavyweight fabrics and specialized construction. Our 300-piece MOQ is significantly lower, making streetwear production accessible to independent designers, emerging brands, and even established brands looking to test new categories. This competitive advantage means you can bring heavyweight tees, oversized hoodies, and authentic streetwear silhouettes to market with substantially less upfront capital. The lower MOQ doesn't mean lower quality | we maintain the same construction standards, fabric specifications, and quality control processes regardless of order size. Whether you're producing 300 pieces or 3,000 pieces, your streetwear receives the same attention to detail in grading, stitching, and finishing.
+    </p>
+  </div>
+</section>
+
+<!-- Streetwear Fabrics Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Materials</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Streetwear Fabric Options</h2>
+    </div>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Heavyweight cotton is the foundation of authentic streetwear, with weights ranging from 240-300 GSM for premium t-shirts and hoodies. These heavier fabrics provide the structure and drape that streetwear enthusiasts expect, with substantial hand-feel that signals quality. Our heavyweight cotton maintains its shape through repeated wear and washing, resisting the shrinkage and distortion that lighter fabrics experience. The weight also provides an ideal surface for screen printing, with excellent ink penetration and vibrant print reproduction that defines streetwear graphic quality.
+    </p>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      French terry and fleece fabrics are essential for streetwear hoodies and sweatpants. French terry 280-350 GSM offers the classic loop-back texture that streetwear brands value for its visual appeal and comfort. Fleece 300-450 GSM provides the heavyweight warmth and structure that premium streetwear hoodies require. Both fabrics are available in cotton, cotton-polyester blends, and performance variations. Brushed fleece options create the soft interior feel that consumers expect from premium streetwear hoodies, while unbrushed options maintain technical aesthetics for performance-oriented streetwear.
+    </p>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      Denim and twill fabrics expand streetwear capabilities beyond knitwear. We offer denim weights from 10-14 oz for streetwear jackets, jeans, and overshirts. These woven fabrics provide different aesthetics and structure compared to knits, enabling more diverse streetwear collections. Denim can be customized with various washes, distressing, and finishes to achieve specific streetwear looks. Twill fabrics offer structured options for streetwear pants and outerwear with different draping characteristics than knit fabrics.
+    </p>
+  </div>
+</section>
+
+<!-- Quality Control Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Quality Assurance</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Streetwear Quality Control</h2>
+    </div>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Quality control for streetwear begins with fabric inspection before cutting. We verify fabric weight, hand-feel, color consistency, and shrinkage rates. Heavyweight fabrics require special attention to ensure consistent weight and texture across the roll. Any fabric that doesn't meet specifications is rejected and replaced. Our fabric suppliers are OEKO-TEX certified, providing traceability and assurance that materials meet international standards for quality and safety. This pre-production inspection prevents quality issues downstream and ensures your streetwear starts with premium materials.
+    </p>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      During production, we implement inline quality checks at multiple stages specific to streetwear construction. Cutting supervisors verify pattern accuracy and ensure proper grain direction for consistent fit. Sewing line leaders monitor stitching quality, seam consistency, and construction standards including drop-shoulder alignment, cuff attachment, and pocket construction. Our production floor follows ISO 9001 quality management procedures with documented quality checkpoints. Any garment that doesn't meet quality standards during inline inspection is flagged for rework or rejection.
+    </p>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      Final inspection occurs after printing, embroidery, and finishing are complete. Our quality control team conducts AQL (Acceptable Quality Limit) inspections checking print alignment, embroidery quality, stitching defects, sizing accuracy, and overall finish. We measure a statistically significant sample from each production batch to ensure overall quality meets or exceeds your specifications. Defective garments are separated, documented, and either reworked or replaced. We maintain acceptable defect rates below 2.5%, which is below industry standards.
+    </p>
+  </div>
+</section>
+
+<!-- Design Services Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Design Support</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Streetwear Design and Development</h2>
+    </div>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Professional tech packs are essential for accurate streetwear production, serving as the blueprint that manufacturers follow to create your designs. A comprehensive streetwear tech pack includes detailed technical specifications, measurements, construction details, material specifications, and visual references. Streetwear requires specialized technical documentation including oversized grading, drop-shoulder specifications, and graphic placement details. Our tech pack service transforms your design concepts into production-ready specifications that eliminate ambiguity and ensure your vision is realized accurately.
+    </p>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      Our tech pack development process for streetwear begins with understanding your design concept through sketches, photos, or detailed descriptions. We create technical flat drawings showing front, back, and detail views including streetwear-specific features. We specify measurements for each size using industry-standard grading rules adjusted for oversized fits. We detail construction methods including stitch types, seam allowances, and finishing techniques specific to streetwear construction. We specify fabric composition, weight, and performance properties. The result is a comprehensive document that any manufacturer can follow to produce your exact streetwear design.
+    </p>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      Sampling is the critical bridge between design and streetwear production. We produce pre-production samples that verify your design translates correctly from concept to physical garment. Sampling enables you to evaluate fabric quality, fit, sizing, graphic placement, and overall product feel before committing to bulk production. We offer sampling services including fit samples, size sets, photo samples for marketing, and sales samples for pre-orders. Sampling typically takes 7-14 days depending on complexity. Changes identified during sampling are incorporated into the tech pack before bulk production, ensuring final production matches your approved sample.
+    </p>
+  </div>
+</section>
+
+<!-- Shipping and Logistics Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Logistics</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Streetwear Shipping and Logistics</h2>
+    </div>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Bangladesh's strategic location provides efficient shipping options for streetwear exports to global markets. For European Union buyers, sea freight from Chittagong Port takes 22-28 days to major European ports including Rotterdam, Hamburg, and Antwerp. Duty-free access under EBA until November 2026 provides additional 12% savings on import duties compared to other manufacturing destinations. This combination of competitive FOB pricing and duty-free access makes Bangladesh the lowest total landed cost option for EU buyers seeking streetwear production.
+    </p>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      For United States buyers, sea freight to US East Coast ports (New York, Savannah, Charleston) takes 30-40 days, while US West Coast ports (Los Angeles, Long Beach) take 40-50 days. Bangladesh avoids Section 301 tariffs that add 25% to Chinese imports, providing significant duty savings on streetwear imports. Air freight is available for urgent orders, with 5-7 day transit times to major US and European airports, though air freight costs 5-8 times more than sea freight and is typically used only for sample shipments or urgent replenishment orders.
+    </p>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      We handle all export documentation including commercial invoices, packing lists, certificates of origin, and OEKO-TEX certification documentation. Our logistics team coordinates with freight forwarders to ensure smooth customs clearance. We offer EXW (Ex Works), FOB (Free On Board), and CIF (Cost, Insurance, Freight) incoterms based on your preference. FOB is most common, giving you control over freight selection and costs. CIF includes freight and insurance in our pricing, simplifying your procurement but potentially increasing costs.
+    </p>
+  </div>
+</section>
+
+<!-- Why Bangladesh Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Manufacturing Advantage</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Why Bangladesh for Streetwear Manufacturing</h2>
+    </div>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Bangladesh offers the lowest streetwear manufacturing costs globally, with labor costs 30-40% below China. This labor advantage translates directly to lower FOB pricing for streetwear production. Bangladesh's specialization in knitwear and heavyweight fabric production creates optimized production lines and fabric sourcing, resulting in better quality and pricing for streetwear than generalist manufacturers in other countries. The country's textile infrastructure, developed over decades of garment export, ensures reliable fabric supply and production capacity for streetwear manufacturing at scale.
+    </p>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      Bangladesh offers duty-free access to EU markets through EBA until November 2026, providing 12% duty savings for European buyers. For US buyers, Bangladesh avoids Section 301 tariffs that add 25% to Chinese imports. Combined with lower FOB pricing, duty advantages make Bangladesh the lowest total cost option for streetwear manufacturing. Bangladesh's geographic proximity to Europe provides shorter shipping times compared to China | 22-28 days to Europe vs 28-35 days from China. SDF Clothing exemplifies Bangladesh's advantages with 300-piece minimums, competitive pricing, and {companyAge} years of streetwear manufacturing experience.
+    </p>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      English-speaking business culture facilitates clear communication for streetwear production. The garment industry in Bangladesh operates on English as the business language, minimizing translation errors and misunderstandings during tech pack review, sampling, and production communication. Bangladesh's cultural alignment with Western business practices facilitates smoother collaboration for US and EU brands. Our team communicates clearly and responsively throughout the streetwear production process, from initial inquiry through final delivery, ensuring your specifications are understood and implemented accurately.
+    </p>
+  </div>
+</section>
+
+<!-- Streetwear Styles Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Product Range</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Streetwear Styles We Manufacture</h2>
+    </div>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      We manufacture comprehensive streetwear collections covering all categories from t-shirts to outerwear. T-shirts include heavyweight cotton options 240-300 GSM, oversized fits, drop-shoulder designs, and boxy silhouettes. Hoodies encompass pullover and zip-up styles with various fabric weights from French terry to heavyweight fleece. Sweatpants and joggers include elastic waistbands, cuffed hems, and cargo options. All styles can be customized with your branding through labels, hang tags, and packaging.
+    </p>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      Graphic apparel is essential for streetwear brands. We offer screen printing, DTG printing, embroidery, heat transfer, and custom patches. Multi-color prints, all-over prints, and specialty inks including metallic and glow-in-the-dark are available. Graphic placement precision is critical for streetwear aesthetics, and our production ensures accurate positioning and consistent quality across all garments. We can also produce blank streetwear for brands that apply graphics in-house.
+    </p>
+  </div>
+</section>
+
+<!-- Private Label Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Branding</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Streetwear Private Label Services</h2>
+    </div>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Private label streetwear production allows your brand to take complete ownership of the product. We produce streetwear with your custom woven labels, printed care labels, size labels, and hang tags. Your brand identity is applied throughout the garment at every touchpoint. Main labels can be woven or printed with your logo. Care labels include your brand name alongside required care instructions. Hang tags can be custom designed with your branding, pricing, and barcode information. Packaging options include branded poly bags, individual boxes, and custom master cartons with your brand artwork.
+    </p>
+  </div>
+</section>
+
+<!-- Sustainability Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Sustainability</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Sustainable Streetwear Manufacturing</h2>
+    </div>
+
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Bangladesh's garment industry has made significant strides in sustainability, with over 200 LEED-certified green factories implementing energy efficiency, water conservation, and waste reduction initiatives. Our factory implements comprehensive sustainability practices including solar energy installation, water recycling systems, and chemical management protocols that minimize environmental impact throughout streetwear production. These initiatives reduce carbon footprint, water consumption, and chemical usage while maintaining product quality and competitive pricing.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      Recycled polyester streetwear made from post-consumer PET bottles offers circular economy benefits by diverting plastic waste from landfills. GRS (Global Recycled Standard) certification provides traceability and verification of recycled content. Recycled polyester maintains the durability and performance of virgin polyester while significantly reducing environmental impact. We offer recycled polyester options for t-shirts, hoodies, and sweatpants, enabling sustainable choices for environmentally conscious streetwear brands.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1.5rem;">
+      Organic cotton streetwear provides another sustainable option with GOTS certification covering both organic materials and social compliance. Organic cotton eliminates synthetic pesticides and fertilizers from production, reducing environmental impact while providing premium quality and comfort. Our organic cotton options include heavyweight t-shirts, hoodies, and sweatpants that meet streetwear quality standards while supporting sustainable agriculture practices. These sustainable options enable streetwear brands to appeal to environmentally conscious consumers without compromising on quality or style.
+    </p>
+  </div>
+</section>
+
+<!-- Internal Link Section -->
+<section style="padding:5rem 0;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      For complete production strategy, read our <a href="/clothing-manufacturers" style="color:#e00;text-decoration:underline;">complete clothing manufacturers guide</a>, explore <a href="/low-moq-clothing-manufacturers" style="color:#e00;text-decoration:underline;">low MOQ clothing manufacturers</a>, or learn about <a href="/small-batch-clothing-manufacturer" style="color:#e00;text-decoration:underline;">small batch clothing production</a>. Related pages: <a href="/t-shirt-manufacturer" style="color:#e00;text-decoration:underline;">t-shirt manufacturer</a>, <a href="/hoodie-manufacturer" style="color:#e00;text-decoration:underline;">hoodie manufacturer</a>, <a href="/sweatshirt-manufacturer" style="color:#e00;text-decoration:underline;">sweatshirt manufacturer</a>, <a href="/private-label-manufacturer" style="color:#e00;text-decoration:underline;">private label manufacturer</a>, <a href="/clothing-manufacturers-for-startups" style="color:#e00;text-decoration:underline;">clothing manufacturers for startups</a>, <a href="/sampling-service" style="color:#e00;text-decoration:underline;">sampling service</a>, <a href="/tech-pack-service" style="color:#e00;text-decoration:underline;">tech pack service</a>, <a href="/tools/price-calculator" style="color:#e00;text-decoration:underline;">price calculator</a>, <a href="/contact" style="color:#e00;text-decoration:underline;">contact</a>, <a href="/tools/sample-request" style="color:#e00;text-decoration:underline;">sample request</a>.
+    </p>
+  </div>
+</section>
+
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-header {
+    text-align: center;
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .accent-line {
+    width: 60px;
+    height: 2px;
+    background: #e00;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .cta-button {
+    background: #e00;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .cta-button:hover {
+    background: #cc0000;
+  }
+  
+  .whatsapp-cta {
+    background: #25D366;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .whatsapp-cta:hover {
+    background: #128C7E;
+  }
+</style>

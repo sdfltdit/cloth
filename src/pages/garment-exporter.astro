@@ -1,0 +1,1132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Garment Exporter — Bangladesh to USA UK AU | SDF Clothing";
+const pageDescription = "Bangladesh garment exporter shipping to USA, UK, Australia and EU. FOB, CIF and DDP terms available. Full export documentation. Request an export quote today.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Garment Exporter",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What export terms do you offer for garment shipments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer FOB (Free On Board), CIF (Cost, Insurance, Freight), and DDP (Delivered Duty Paid) terms per Incoterms 2020. FOB is standard | seller covers costs to port of loading. CIF includes shipping and insurance. DDP includes all costs to your door. Terms negotiable based on buyer preference and order volume."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What shipping routes do you use for USA, UK, Australia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "USA: Chittagong to New York/New Jersey (East Coast 25-30 days), to Los Angeles/Long Beach (West Coast 35-40 days). UK: Chittagong to Felixstowe (25-30 days). Australia: Chittagong to Sydney (20-25 days). Canada: Chittagong to Vancouver (30-35 days). Germany: Chittagong to Hamburg (25-30 days). Air freight available for urgent shipments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What export documentation do you provide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Full export documentation included: commercial invoice, packing list, bill of lading, certificate of origin, export license, insurance certificate (for CIF/DDP), and all required certification documents (GOTS, OEKO-TEX, etc.). Documents provided in English per destination market requirements. Customs clearance support available."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are import duties for Bangladesh garments vs China?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh garments qualify for duty-free or reduced duty access to EU (GSP), Canada, Australia, and other markets through trade agreements. USA: Most favored nation rate applies (similar to China). EU: Zero duty under EBA scheme. Australia: Zero duty under DFQF scheme. Bangladesh typically offers 5-15% duty savings vs China depending on market."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you ensure export compliance by destination market?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Export compliance through market-specific documentation, HS code classification per destination, compliance with REACH (EU), CPSIA (USA), and other regulations. We maintain knowledge of changing requirements for each market and update documentation accordingly. Compliance verification before shipment prevents customs delays."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What payment terms do you accept for export orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TT (telegraphic transfer) with 30% deposit, 70% before shipment is standard. For established buyers, LC (letter of credit) at sight accepted. Payment terms negotiable based on order volume and relationship history. We provide proforma invoices with detailed cost breakdown for bank documentation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I start importing from Bangladesh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Process: 1) Submit product specifications and quantity, 2) Receive proforma invoice with pricing and terms, 3) Arrange payment or LC, 4) Production and quality control, 5) Shipping and documentation, 6) Customs clearance at destination. We provide guidance at each step for first-time importers. Freight forwarder recommendations available."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What HS codes do you use for Bangladesh garment exports?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Common HS codes: 6109 (T-shirts, singlets), 6110 (T-shirts, knit), 6111 (Track suits), 6120 (Brassieres), 6203 (Suits, ensembles), 6206 (Blouses, shirts), 6211 (Track suits, woven). Accurate HS code classification ensures correct duty calculation. We classify based on fabric, construction, and destination requirements."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Start Importing Garments from Bangladesh",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Product Specifications",
+          "text": "Provide detailed specifications including fabric, style, size range, quantity, and destination market. We'll calculate pricing including FOB, CIF, or DDP terms based on your preferences."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Proforma Invoice",
+          "text": "Get detailed proforma invoice with itemized pricing, payment terms, and delivery schedule. Use this to arrange payment or letter of credit with your bank."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Arrange Payment or Letter of Credit",
+          "text": "TT payment: 30% deposit to start production, 70% before shipment. LC: Open at sight through your bank. We provide all required documentation for bank processing."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Production and Quality Control",
+          "text": "Production takes 25-35 days. Inline quality checks throughout. Final inspection before packing. We provide production status updates throughout the process."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipping and Documentation",
+          "text": "Goods shipped via agreed Incoterm. Full export documentation provided. Tracking information shared throughout transit. Goods arrive at destination port or door depending on terms."
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com"
+      },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "NL"],
+      "description": "Custom clothing manufacturing from Bangladesh with low MOQ from 300 pieces."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Clothing from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Brief",
+          "text": "Share your design, quantity, fabric requirements and timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Quote",
+          "text": "Get a detailed FOB quote within 48 hours."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample",
+          "text": "Review and approve a pre-production sample."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Full production with inline quality checks."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipment",
+          "text": "FOB Dhaka shipment with full export documentation."
+        }
+      ]
+    }
+]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Garment Exporter</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Bangladesh Export | Since 1998 | Global Shipping</div>
+        <h1 class="hero__title">Garment Exporter | Bangladesh Garments Exported to USA, UK, Australia and the EU</h1>
+        <p class="hero__description">
+          SDF Clothing is a Bangladesh garment exporter shipping custom garments to USA, UK, Australia, Canada, and EU markets. FOB, CIF, and DDP terms available per Incoterms 2020. Full export documentation, customs compliance, and logistics coordination included. {companyAge}+ years of export experience with established shipping routes and duty optimization through trade agreements. Explore our <a href="/clothing-manufacturers/" style="color:#e00;text-decoration:none;">clothing manufacturers</a> and <a href="/clothing-manufacturer-bangladesh/" style="color:#e00;text-decoration:none;">Bangladesh clothing manufacturer</a>.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Request Export Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20garment%20export%20quote`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">25+</span>
+          <span class="hero__stat-label">Countries Served</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">20-40</span>
+          <span class="hero__stat-label">Days Transit</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Export</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">5-15%</span>
+          <span class="hero__stat-label">Duty Savings</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>GOTS Organic Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>ISO 9001 Quality</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>BSCI Social Compliance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Export Services</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What Bangladesh Garment Exporters Provide</h2>
+      </div>
+      <div class="section__text">
+        <p>Bangladesh garment exporters provide comprehensive export services including production coordination, quality control, documentation preparation, shipping logistics, and customs compliance. As an exporter, SDF manages the entire process from production to delivery, ensuring garments arrive at your destination market on time and compliant with all regulatory requirements. Export services include FOB, CIF, and DDP shipping terms per Incoterms 2020, full documentation for customs clearance, and support with import procedures for first-time buyers.</p>
+        
+        <p>The exporter role differs from factory-only suppliers by including end-to-end logistics management. While factories focus on production, exporters handle the export process including documentation, shipping coordination, and destination market compliance. SDF operates as both a manufacturer and exporter, providing the efficiency of direct factory access with the convenience of full export management. This integrated approach reduces coordination complexity for buyers while maintaining cost efficiency.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Export Compliance</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Export Compliance by Destination Market</h2>
+      </div>
+      <div class="section__text">
+        <p>Export compliance varies by destination market with different regulatory requirements, documentation standards, and duty structures. SDF maintains compliance knowledge for each major market including USA (CPSIA, FTC labeling), UK/EU (REACH, CE marking, origin rules), Australia (ACCC, import permits), and Canada (CCPSA, import documentation). We ensure all garments meet destination market requirements before shipment, preventing customs delays and rejections.</p>
+        
+        <p>Compliance includes chemical safety (REACH in EU, CPSIA in USA), labeling requirements (fiber content, country of origin, care instructions), flammability standards (USA), and certification documentation (GOTS, OEKO-TEX for sustainable products). We maintain updated knowledge of changing regulations and adjust documentation accordingly. First-time importers receive guidance on customs procedures and documentation requirements specific to their market.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Bangladesh Exports</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Bangladesh Export Statistics | Why Buyers Trust Bangladesh</h2>
+      </div>
+      <div class="section__text">
+        <p>Bangladesh is the world's second-largest garment exporter with $47 billion in annual exports, shipping to over 150 countries. The country's garment export success results from competitive pricing, established infrastructure, skilled labor, and trade agreements providing duty advantages. Bangladesh exports 70% knitwear and 30% woven garments, with major markets including EU (60% of exports), USA (20%), and others including UK, Canada, Australia, and Japan.</p>
+        
+        <p>Key advantages of Bangladesh garment exports: duty-free access to EU under EBA scheme, competitive labor costs maintaining price advantage, integrated supply chain reducing lead times, and decades of export experience ensuring reliable delivery. SDF has been part of Bangladesh's export sector for {companyAge}+ years, shipping consistently to USA, UK, Australia, Canada, and EU markets with on-time delivery rate of 98% and zero customs compliance violations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Shipping Routes</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Shipping Routes and Lead Times</h2>
+      </div>
+      <div class="section__text">
+        <p>Shipping routes and transit times vary by destination. SDF ships from Chittagong Port, Bangladesh's primary seaport, to major ports worldwide. Transit times include ocean freight from Chittagong to destination ports. Air freight available for urgent shipments with 3-5 day transit times. Below are standard sea freight routes and transit times for major markets.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Destination</th>
+              <th>Sea Freight</th>
+              <th>Air Freight</th>
+              <th>Transit</th>
+              <th>Primary Port</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>USA East Coast</td>
+              <td>25-30 days</td>
+              <td>3-5 days</td>
+              <td>Chittagong to New York/New Jersey</td>
+              <td>New York/New Jersey</td>
+            </tr>
+            <tr>
+              <td>USA West Coast</td>
+              <td>35-40 days</td>
+              <td>3-5 days</td>
+              <td>Chittagong to Los Angeles/Long Beach</td>
+              <td>Los Angeles/Long Beach</td>
+            </tr>
+            <tr>
+              <td>UK</td>
+              <td>25-30 days</td>
+              <td>3-5 days</td>
+              <td>Chittagong to Felixstowe</td>
+              <td>Felixstowe</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Germany</td>
+              <td>25-30 days</td>
+              <td>3-5 days</td>
+              <td>Chittagong to Hamburg</td>
+              <td>Hamburg</td>
+            </tr>
+            <tr>
+              <td>Australia</td>
+              <td>20-25 days</td>
+              <td>3-5 days</td>
+              <td>Chittagong to Sydney</td>
+              <td>Sydney</td>
+            </tr>
+            <tr>
+              <td>Canada</td>
+              <td>30-35 days</td>
+              <td>3-5 days</td>
+              <td>Chittagong to Vancouver</td>
+              <td>Vancouver</td>
+            </tr>
+          </tbody>
+          <caption>Transit times are estimates and may vary based on shipping line, season, and weather conditions. Air freight available for urgent shipments at additional cost.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Duty Comparison</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Import Duty by Market | Bangladesh vs China</h2>
+      </div>
+      <div class="section__text">
+        <p>Bangladesh garments often qualify for duty-free or reduced duty access through trade agreements, providing cost advantages over China and other competing countries. Duty savings range from 5-15% depending on market, directly impacting landed cost. Below are typical duty rates by market for garments from Bangladesh vs China, highlighting the Bangladesh advantage.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Market</th>
+              <th>Bangladesh Rate</th>
+              <th>China Rate</th>
+              <th>Saving</th>
+              <th>Trade Agreement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>EU</td>
+              <td>0% (duty-free)</td>
+              <td>12%</td>
+              <td>12%</td>
+              <td>EBA Scheme</td>
+            </tr>
+            <tr>
+              <td>Australia</td>
+              <td>0% (duty-free)</td>
+              <td>10%</td>
+              <td>10%</td>
+              <td>DFQF Scheme</td>
+            </tr>
+            <tr>
+              <td>Canada</td>
+              <td>0% (duty-free)</td>
+              <td>17-20%</td>
+              <td>17-20%</td>
+              <td>Bangladesh-Canada FTA</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>USA</td>
+              <td>16.5% (MFN)</td>
+              <td>16.5%</td>
+              <td>0%</td>
+              <td>MFN Rate</td>
+            </tr>
+            <tr>
+              <td>UK</td>
+              <td>0% (duty-free)</td>
+              <td>12%</td>
+              <td>12%</td>
+              <td>UK Developing Countries Scheme</td>
+            </tr>
+          </tbody>
+          <caption>Duty rates are approximate and vary by specific garment category. Bangladesh duty-free access applies to qualifying products under trade agreements. Verify current rates with customs authorities.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">HS Codes</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">HS Codes for Bangladesh Garment Exports</h2>
+      </div>
+      <div class="section__text">
+        <p>HS (Harmonized System) codes classify goods for customs duty calculation and trade statistics. Accurate HS code classification ensures correct duty payment and compliance with destination market regulations. SDF classifies garments based on fabric type, construction, and destination market requirements. Common HS codes for Bangladesh garment exports are listed below.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>HS Code</th>
+              <th>Description</th>
+              <th>Garment Type</th>
+              <th>Typical Duty (USA)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>6109.1000</td>
+              <td>T-shirts, singlets, tank tops, cotton</td>
+              <td>Basic t-shirts</td>
+              <td>16.5%</td>
+            </tr>
+            <tr>
+              <td>6109.9000</td>
+              <td>T-shirts, singlets, tank tops, other</td>
+              <td>Synthetic t-shirts</td>
+              <td>16.5%</td>
+            </tr>
+            <tr>
+              <td>6110.2000</td>
+              <td>T-shirts, singlets, other knit</td>
+              <td>Knit tops</td>
+              <td>16.5%</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>6111.2000</td>
+              <td>Track suits, knit</td>
+              <td>Activewear sets</td>
+              <td>16.5%</td>
+            </tr>
+            <tr>
+              <td>6120.0000</td>
+              <td>Brassieres, girdles</td>
+              <td>Lingerie, activewear</td>
+              <td>16.5%</td>
+            </tr>
+            <tr>
+              <td>6203.4200</td>
+              <td>Trousers, bib braces, cotton</td>
+              <td>Woven pants</td>
+              <td>16.5%</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>6206.3000</td>
+              <td>Blouses, shirts, cotton</td>
+              <td>Woven tops</td>
+              <td>16.5%</td>
+            </tr>
+          </tbody>
+          <caption>HS codes vary by garment construction and fiber content. We classify accurately based on destination market requirements. Verify HS codes with customs authorities for duty calculation.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Payment Terms</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Export Payment Terms Explained</h2>
+      </div>
+      <div class="section__text">
+        <p>Payment terms for export orders balance buyer security with seller cash flow requirements. SDF offers TT (telegraphic transfer) and LC (letter of credit) terms, negotiable based on order volume and relationship history. TT payment requires 30% deposit to start production and 70% before shipment. LC provides buyer security through bank guarantee of payment upon presentation of shipping documents. For established buyers with consistent ordering history, extended payment terms may be negotiated.</p>
+        
+        <p>Payment security is ensured through documented production milestones. Deposit payment initiates fabric sourcing and production. Balance payment before shipment triggers release of original shipping documents. For LC transactions, documents are presented to the bank according to LC terms, and payment is released upon document compliance. This structured approach protects both buyer and seller interests while ensuring smooth transaction flow.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Import Process</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How to Start Importing from Bangladesh</h2>
+      </div>
+      <div class="process">
+        <div class="process__step">
+          <div class="process__number">1</div>
+          <div class="process__content">
+            <h3 class="process__title">Submit Product Specifications</h3>
+            <p class="process__text">Provide detailed specifications including fabric, style, size range, quantity, and destination market. We'll calculate pricing including FOB, CIF, or DDP terms based on your preferences and provide a proforma invoice with itemized costs.</p>
+          </div>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">2</div>
+          <div class="process__content">
+            <h3 class="process__title">Receive Proforma Invoice</h3>
+            <p class="process__text">Get detailed proforma invoice with itemized pricing, payment terms, and delivery schedule. Use this document to arrange payment or letter of credit with your bank. Proforma invoice includes all required information for import authorization.</p>
+          </div>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">3</div>
+          <div class="process__content">
+            <h3 class="process__title">Arrange Payment or Letter of Credit</h3>
+            <p class="process__text">TT payment: 30% deposit to start production, 70% before shipment. LC: Open at sight through your bank providing seller protection. We provide all required documentation for bank processing including proforma invoice and company certification.</p>
+          </div>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">4</div>
+          <div class="process__content">
+            <h3 class="process__title">Production and Quality Control</h3>
+            <p class="process__text">Production takes 25-35 days. Inline quality checks throughout production at cutting, sewing, and finishing stages. Final inspection before packing according to AQL standards. We provide production status updates throughout the process.</p>
+          </div>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">5</div>
+          <div class="process__content">
+            <h3 class="process__title">Shipping and Documentation</h3>
+            <p class="process__text">Goods shipped via agreed Incoterm (FOB, CIF, DDP). Full export documentation provided including commercial invoice, packing list, bill of lading, certificate of origin, and certifications. Tracking information shared throughout transit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Garment Exporter FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What export terms do you offer for garment shipments?</h3>
+          <p class="faq__answer">We offer FOB (Free On Board), CIF (Cost, Insurance, Freight), and DDP (Delivered Duty Paid) terms per Incoterms 2020. FOB is standard | seller covers costs to port of loading. CIF includes shipping and insurance. DDP includes all costs to your door. Terms negotiable based on buyer preference and order volume.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What shipping routes do you use for USA, UK, Australia?</h3>
+          <p class="faq__answer">USA: Chittagong to New York/New Jersey (East Coast 25-30 days), to Los Angeles/Long Beach (West Coast 35-40 days). UK: Chittagong to Felixstowe (25-30 days). Australia: Chittagong to Sydney (20-25 days). Canada: Chittagong to Vancouver (30-35 days). Germany: Chittagong to Hamburg (25-30 days). Air freight available for urgent shipments.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What export documentation do you provide?</h3>
+          <p class="faq__answer">Full export documentation included: commercial invoice, packing list, bill of lading, certificate of origin, export license, insurance certificate (for CIF/DDP), and all required certification documents (GOTS, OEKO-TEX, etc.). Documents provided in English per destination market requirements. Customs clearance support available.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are import duties for Bangladesh garments vs China?</h3>
+          <p class="faq__answer">Bangladesh garments qualify for duty-free or reduced duty access to EU (GSP), Canada, Australia, and other markets through trade agreements. USA: Most favored nation rate applies (similar to China). EU: Zero duty under EBA scheme. Australia: Zero duty under DFQF scheme. Bangladesh typically offers 5-15% duty savings vs China.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do you ensure export compliance by destination market?</h3>
+          <p class="faq__answer">Export compliance through market-specific documentation, HS code classification per destination, compliance with REACH (EU), CPSIA (USA), and other regulations. We maintain knowledge of changing requirements for each market and update documentation accordingly. Compliance verification before shipment prevents customs delays.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What payment terms do you accept for export orders?</h3>
+          <p class="faq__answer">TT (telegraphic transfer) with 30% deposit, 70% before shipment is standard. For established buyers, LC (letter of credit) at sight accepted. Payment terms negotiable based on order volume and relationship history. We provide proforma invoices with detailed cost breakdown for bank documentation.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do I start importing from Bangladesh?</h3>
+          <p class="faq__answer">Process: 1) Submit product specifications and quantity, 2) Receive proforma invoice with pricing and terms, 3) Arrange payment or LC, 4) Production and quality control, 5) Shipping and documentation, 6) Customs clearance at destination. We provide guidance at each step for first-time importers. Freight forwarder recommendations available.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What HS codes do you use for Bangladesh garment exports?</h3>
+          <p class="faq__answer">Common HS codes: 6109 (T-shirts, singlets), 6110 (T-shirts, knit), 6111 (Track suits), 6120 (Brassieres), 6203 (Suits, ensembles), 6206 (Blouses, shirts), 6211 (Track suits, woven). Accurate HS code classification ensures correct duty calculation. We classify based on fabric, construction, and destination requirements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Import from Bangladesh?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for export pricing, shipping terms, and import guidance. We provide detailed quotes with FOB, CIF, and DDP options, full documentation, and support for first-time importers. No commitment required for initial consultation.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Request Export Quote</a>
+        <a href="/tools/sample-request" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/full-package-production" style="color: var(--color-primary);">full package production</a>, <a href="/insights/incoterms-explained" style="color: var(--color-primary);">Incoterms explained</a>, <a href="/insights/payment-terms-LC-vs-TT" style="color: var(--color-primary);">payment terms LC vs TT</a>, <a href="/tools/hs-code" style="color: var(--color-primary);">HS code tool</a>, <a href="/certifications" style="color: var(--color-primary);">certifications</a>, <a href="/insights/customs-clearance-guide" style="color: var(--color-primary);">customs clearance guide</a>.
+      </p>
+    </div>
+  </section>
+
+<section style="padding:2rem 0;border-top:1px solid var(--color-border);margin-top:2rem"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:1.1rem;font-weight:600;color:var(--color-text);margin-bottom:1rem">Related Services</h2><nav aria-label="Related pages"><ul style="display:flex;flex-wrap:wrap;gap:0.75rem;list-style:none;padding:0"><li><a href="/low-moq-clothing-manufacturers" style="color:var(--color-primary)">Low MOQ Manufacturers</a></li><li><a href="/private-label-manufacturer" style="color:var(--color-primary)">Private Label</a></li><li><a href="/clothing-manufacturers-for-startups" style="color:var(--color-primary)">Startup Manufacturers</a></li><li><a href="/oem-clothing-manufacturer" style="color:var(--color-primary)">OEM Manufacturing</a></li><li><a href="/sustainable-clothing-manufacturers" style="color:var(--color-primary)">Sustainable Manufacturing</a></li><li><a href="/certifications" style="color:var(--color-primary)">Certifications</a></li><li><a href="/quality-inspection-service" style="color:var(--color-primary)">Quality Inspection</a></li><li><a href="/tech-pack-service" style="color:var(--color-primary)">Tech Pack Service</a></li><li><a href="/sampling-service" style="color:var(--color-primary)">Sampling Service</a></li><li><a href="/full-package-production" style="color:var(--color-primary)">Full Package Production</a></li><li><a href="/tools/price-calculator" style="color:var(--color-primary)">Price Calculator</a></li><li><a href="/contact" style="color:var(--color-primary)">Get a Quote</a></li></ul></nav></div></section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .process {
+    margin-top: var(--spacing-md);
+  }
+
+  .process__step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .process__step:last-child {
+    border-bottom: none;
+  }
+
+  .process__number {
+    width: 50px;
+    height: 50px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .process__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .process__text {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+
+    .process__step {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+    }
+
+    .process__number {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">SDF Clothing is a direct-access garment factory in Bangladesh | not a trading company or buying house. When you work with us, you communicate directly with our production team, receive transparent pricing without agent markup, and maintain full control over your supply chain. Our factory holds GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certifications.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Bangladesh is the world's second-largest garment exporter, shipping over $47 billion in apparel annually to USA, UK, EU and Australian markets. Our minimum order of 300 pieces reflects our commitment to supporting brands at every stage of growth | from first collections to established seasonal production runs. We offer full package production covering tech pack development, fabric sourcing, sampling, bulk manufacturing, quality inspection, and export documentation under one roof.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">For US brands, sourcing from Bangladesh avoids the Section 301 tariffs that add 25% or more to Chinese imports. For EU brands, Bangladesh's GSP duty-free access delivers lower landed costs compared to most other sourcing destinations. These trade advantages combine with competitive FOB pricing to deliver strong margins for our clients.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/tools/sample-request" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+
+
+

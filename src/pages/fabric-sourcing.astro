@@ -1,0 +1,602 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Fabric Sourcing Bangladesh | Knit & Woven Fabric Supplier";
+const pageDescription = "Trusted fabric sourcing service from Bangladesh. Knit, woven, organic, recycled and sustainable fabrics for fashion brands. GOTS, GRS and OEKO-TEX certified.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href}>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com",
+        "name": "SDF Clothing"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "description": "Fabric sourcing service from Bangladesh providing knit, woven, organic, and sustainable fabrics to fashion brands worldwide since 1998."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can you source fabric without using SDF for garment production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Our fabric sourcing service is available as a standalone service. You can buy fabric from us and have it delivered to your own garment factory anywhere in the world. This is sometimes called CMT-ready fabric supply."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does fabric sourcing take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From your initial brief to fabric delivery typically takes 25-45 days. Stock fabrics ship in 10-15 days. Custom-dyed fabrics take 25-35 days. Custom-developed fabrics take 45-60 days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide fabric certificates with every order?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every certified fabric order includes the appropriate Transaction Certificate (TC) | GOTS, GRS, OCS, or OEKO-TEX as applicable. The TC is your legal proof for sustainability and organic claims to retailers and regulators."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the minimum fabric order from your network?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Stock fabrics: 100-200 kg for knits or 500-1,000 meters for wovens. Custom-dyed: 300-500 kg or 1,500+ meters. Custom-developed fabrics typically 1,000+ kg minimum."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you match a specific fabric I have used before?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Send us a fabric swatch with weight and composition information. We will match the specification through our mill network and provide a sample for your approval."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What payment terms do you offer for fabric orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard terms are 30% deposit on order confirmation and 70% before shipment. For established buyers we can arrange letter of credit or net 30 payment terms."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sdfltd.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Fabric Sourcing Service",
+          "item": canonicalUrl.href
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<meta name="keywords" content="fabric sourcing Bangladesh, fabric supplier Bangladesh, fabric mill Bangladesh, organic cotton fabric supplier, recycled polyester fabric, GOTS certified fabric, OEKO-TEX fabric supplier, knit fabric supplier, woven fabric supplier, sustainable fabric Bangladesh, GRS certified fabric, jersey fabric supplier" />
+
+<!-- Hero Section -->
+<section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+      <p style="font-size:0.72rem;color:#FFFFFF;">
+        <a href="/" style="color:#FFFFFF;text-decoration:none;">Home</a>
+        <span style="margin:0 0.5rem;color:#333;">/</span>
+        Fabric Sourcing Service
+      </p>
+    </nav>
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Fabric Sourcing | Since 1998 | GOTS & GRS Certified</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1rem;line-height:1.2;">
+      Fabric Sourcing Service for Fashion Brands
+    </h1>
+    <p style="color:#FFFFFF;max-width:640px;line-height:1.8;font-size:0.92rem;">
+      Fabric is the foundation of every garment. The right fabric makes a t-shirt feel premium, a hoodie last for years, and a dress drape beautifully. The wrong fabric ruins the most expensive pattern. SDF Clothing's fabric sourcing service connects fashion brands with verified fabric mills across Bangladesh | for knit, woven, organic, and recycled materials at competitive prices with full traceability. Explore our <a href="/all-services/" style="color:#e00;text-decoration:none;">all services</a>.
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <a href="/contact" class="cta-button">Get Free Quote</a>
+      <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20fabric-sourcing`} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WhatsApp Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Stats Section -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#000000;">
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">500+</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Verified Mills</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">GOTS</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Organic Certified</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">GRS</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Recycled Certified</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">100%</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Traceable Supply</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Source from Bangladesh Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Industry Overview</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Why Source Fabric from Bangladesh?</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Bangladesh has one of the world's largest vertically integrated textile manufacturing ecosystems. The country produces fabric for its own $47 billion garment export industry, plus exports raw fabric globally. This scale gives buyers competitive pricing, wide fabric variety, and short lead times. Our network includes leading <a href="/textile-manufacturers">textile manufacturers</a> ensuring quality fabric supply.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Most international fashion brands sourcing fabric from Bangladesh save 20-40% compared to European or American suppliers. Lead times are also faster because fabric mills are located within 100 km of garment factories, eliminating shipping delays between fabric and production.
+    </p>
+  </div>
+</section>
+
+<!-- Fabric Types Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Fabric Categories</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Fabric Types We Source</h2>
+    </div>
+    
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Knit Fabrics</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      We source the full range of knit fabrics for t-shirts, hoodies, sweatshirts, joggers, polos, and activewear:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0 0 2.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Single jersey (140-220 GSM) for t-shirts and basics
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        French terry (240-380 GSM) for hoodies and sweatshirts
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Fleece (300-400 GSM) for warm winter garments
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Pique (180-240 GSM) for polo shirts
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Interlock (180-220 GSM) for premium tees
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Rib knit (200-260 GSM) for cuffs, collars, and fashion tops
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Performance knits with spandex for activewear
+      </li>
+    </ul>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Woven Fabrics</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      For shirts, trousers, dresses, and structured garments:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0 0 2.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Poplin and broadcloth for dress shirts
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Twill for chinos and casual trousers
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Oxford for casual shirts
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Denim (8oz to 14oz) for jeans and jackets
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Canvas and duck cloth for outerwear
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Linen and cotton-linen blends for summer wear
+      </li>
+    </ul>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Sustainable Fabrics</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      We specialize in certified sustainable fabrics:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0 0 2.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        GOTS-certified organic cotton (jersey and woven)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        GRS-certified recycled polyester from PET bottles
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Recycled cotton blends from pre-consumer waste
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        TENCEL Lyocell from sustainable wood pulp
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        BCI Better Cotton for mass market production
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Hemp and linen blends for natural fiber brands
+      </li>
+    </ul>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Performance and Specialty Fabrics</h3>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Moisture-wicking fabrics for activewear
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Anti-bacterial and odor-resistant blends
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        UV-protective fabrics for outdoor apparel
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Stretch fabrics with spandex (4-8% blends)
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Brushed fabrics for soft-handle premium tees
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Fabric Certifications Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Quality Assurance</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Fabric Certifications We Source</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      GOTS certification means organic fiber from farm to finished fabric, with no toxic chemicals and fair labor across the supply chain. Required for legal organic claims in EU and UK markets.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      OEKO-TEX Standard 100 certifies that finished fabric is free from harmful substances. Required by EU REACH regulations for chemical safety.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      GRS (Global Recycled Standard) certifies recycled material content. Required for credible recycled claims to retailers and consumers.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      OCS (Organic Content Standard) certifies organic fiber percentage in fabric | sometimes used instead of GOTS for less stringent requirements.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      BCI (Better Cotton Initiative) certifies cotton grown with reduced pesticide use and better water management. Not organic but more sustainable than conventional cotton.
+    </p>
+  </div>
+</section>
+
+<!-- Fabric Sourcing Process Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">How It Works</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Our Fabric Sourcing Process</h2>
+    </div>
+    
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#000000;">
+      <div style="background:#000;padding:2rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Step 1</p>
+        <h3 style="font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:1rem;">Brief and requirements</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.7;">You tell us what you need | fabric type, weight, composition, color, certifications, quantity, and budget. We can also work from a sample garment if you have a reference fabric.</p>
+      </div>
+      <div style="background:#000;padding:2rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Step 2</p>
+        <h3 style="font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:1rem;">Mill matching</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.7;">We match your requirements with verified mills from our network. We share 3-5 fabric options that fit your specifications, with pricing, MOQ, and lead time for each.</p>
+      </div>
+      <div style="background:#000;padding:2rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Step 3</p>
+        <h3 style="font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:1rem;">Sample fabric</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.7;">You receive small fabric swatches (10cm x 10cm typical) for evaluation. You check handfeel, color accuracy, and quality before committing to bulk fabric order.</p>
+      </div>
+      <div style="background:#000;padding:2rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Step 4</p>
+        <h3 style="font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:1rem;">Bulk fabric production</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.7;">After your approval, the mill produces the fabric in your required quantity. Lead time is typically 20-30 days for woven fabrics and 15-25 days for knit fabrics.</p>
+      </div>
+      <div style="background:#000;padding:2rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Step 5</p>
+        <h3 style="font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:1rem;">Quality inspection</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.7;">We inspect fabric before delivery to your garment factory | checking weight, shrinkage, color fastness, and visual defects. AQL 2.5 standard is applied.</p>
+      </div>
+      <div style="background:#000;padding:2rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Step 6</p>
+        <h3 style="font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:1rem;">Delivery to your factory</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.7;">Fabric is delivered directly to the garment factory producing your collection. If SDF Clothing is also producing your garments, fabric goes directly to our cutting room.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Fabric MOQ Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Order Requirements</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Fabric MOQ | Minimum Order Quantity</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Mills have different minimum fabric orders depending on fabric type and customization level.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Stock fabrics with standard colors: Knit fabrics: 100-200 kg minimum. Woven fabrics: 500-1,000 meters minimum.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Custom-dyed fabrics with your color specification: Knit fabrics: 300-500 kg minimum. Woven fabrics: 1,500-3,000 meters minimum.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Custom-developed fabrics with unique blend or construction: Typically 1,000+ kg or 5,000+ meters. Requires development time of 30-60 days.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      For small orders that fall below mill MOQ, we sometimes consolidate fabric orders from multiple brands or use stock fabrics already produced by the mill.
+    </p>
+  </div>
+</section>
+
+<!-- Fabric Pricing Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Pricing Guide</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Fabric Pricing in Bangladesh</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Fabric is priced per meter (woven) or per kilogram (knit). Prices vary by fiber, weight, construction, and certification.
+    </p>
+    
+    <div style="margin-top:2rem;">
+      <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+        Typical FOB Bangladesh fabric prices:
+      </p>
+      <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Conventional cotton single jersey 180gsm: $3.50-5.50 per kg
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          GOTS organic cotton single jersey 180gsm: $5.00-8.00 per kg (40-60% premium for organic)
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Conventional polyester woven 80gsm: $1.20-2.00 per meter
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Recycled polyester (GRS) 80gsm: $1.80-2.80 per meter
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Cotton denim 12oz: $3.50-5.00 per meter
+        </li>
+        <li style="padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Linen and cotton-linen blends: $4.00-7.00 per meter
+        </li>
+      </ul>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Organic and certified fabrics typically cost 20-50% more than conventional equivalents. The premium reflects organic farming costs, certification fees, and supply chain traceability documentation.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Common Questions</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Frequently Asked Questions</h2>
+    </div>
+    
+    <div style="max-width:800px;">
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can you source fabric without using SDF for garment production?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. Our fabric sourcing service is available as a standalone service. You can buy fabric from us and have it delivered to your own garment factory anywhere in the world. This is sometimes called CMT-ready fabric supply.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How long does fabric sourcing take?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">From your initial brief to fabric delivery typically takes 25-45 days. Stock fabrics ship in 10-15 days. Custom-dyed fabrics take 25-35 days. Custom-developed fabrics take 45-60 days.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Do you provide fabric certificates with every order?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. Every certified fabric order includes the appropriate Transaction Certificate (TC) | GOTS, GRS, OCS, or OEKO-TEX as applicable. The TC is your legal proof for sustainability and organic claims to retailers and regulators.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What is the minimum fabric order from your network?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Stock fabrics: 100-200 kg for knits or 500-1,000 meters for wovens. Custom-dyed: 300-500 kg or 1,500+ meters. Custom-developed fabrics typically 1,000+ kg minimum.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can you match a specific fabric I have used before?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. Send us a fabric swatch with weight and composition information. We will match the specification through our mill network and provide a sample for your approval.</p>
+      </div>
+      <div style="padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What payment terms do you offer for fabric orders?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Standard terms are 30% deposit on order confirmation and 70% before shipment. For established buyers we can arrange letter of credit or net 30 payment terms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Ready to source quality fabric for your fashion brand? <a href="/contact" style="color:#e00;text-decoration:underline;">Contact SDF Clothing here</a> with your fabric requirements. We will send you 3-5 fabric options with pricing, MOQ, and certification details within 48 hours. Free consultation. No obligation to order.
+    </p>
+  </div>
+</section>
+
+<!-- Internal Link Section -->
+<section style="padding:5rem 0;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      For complete sourcing strategy, read our <a href="/clothing-manufacturers" style="color:#e00;text-decoration:underline;">complete clothing manufacturers guide</a> covering factory types, MOQ ranges, and full production process.
+    </p>
+  </div>
+</section>
+
+
+    
+    <section style="padding:2rem 0;border-top:1px solid var(--color-border);margin-top:2rem"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:1.1rem;font-weight:600;color:var(--color-text);margin-bottom:1rem">Related Services</h2><nav aria-label="Related pages"><ul style="display:flex;flex-wrap:wrap;gap:0.75rem;list-style:none;padding:0"><li><a href="/low-moq-clothing-manufacturers" style="color:var(--color-primary)">Low MOQ Manufacturers</a></li><li><a href="/private-label-manufacturer" style="color:var(--color-primary)">Private Label</a></li><li><a href="/clothing-manufacturers-for-startups" style="color:var(--color-primary)">Startup Manufacturers</a></li><li><a href="/oem-clothing-manufacturer" style="color:var(--color-primary)">OEM Manufacturing</a></li><li><a href="/sustainable-clothing-manufacturers" style="color:var(--color-primary)">Sustainable Manufacturing</a></li><li><a href="/certifications" style="color:var(--color-primary)">Certifications</a></li><li><a href="/quality-inspection-service" style="color:var(--color-primary)">Quality Inspection</a></li><li><a href="/tech-pack-service" style="color:var(--color-primary)">Tech Pack Service</a></li><li><a href="/sampling-service" style="color:var(--color-primary)">Sampling Service</a></li><li><a href="/full-package-production" style="color:var(--color-primary)">Full Package Production</a></li><li><a href="/tools/price-calculator" style="color:var(--color-primary)">Price Calculator</a></li><li><a href="/contact" style="color:var(--color-primary)">Get a Quote</a></li></ul></nav></div></section>
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">SDF Clothing is a direct-access garment factory in Bangladesh — not a trading company or buying house. When you work with us, you communicate directly with our production team, receive transparent pricing without agent markup, and maintain full control over your supply chain. Our factory holds GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certifications.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Bangladesh is the world's second-largest garment exporter, shipping over $47 billion in apparel annually to USA, UK, EU and Australian markets. Our minimum order of 300 pieces reflects our commitment to supporting brands at every stage of growth — from first collections to established seasonal production runs. We offer full package production covering tech pack development, fabric sourcing, sampling, bulk manufacturing, quality inspection, and export documentation under one roof.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">For US brands, sourcing from Bangladesh avoids the Section 301 tariffs that add 25% or more to Chinese imports. For EU brands, Bangladesh's GSP duty-free access delivers lower landed costs compared to most other sourcing destinations. These trade advantages combine with competitive FOB pricing to deliver strong margins for our clients.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/tools/sample-request" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-header {
+    text-align: center;
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .accent-line {
+    width: 60px;
+    height: 2px;
+    background: #e00;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .cta-button {
+    background: #e00;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .cta-button:hover {
+    background: #cc0000;
+  }
+  
+  .whatsapp-cta {
+    background: #25D366;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .whatsapp-cta:hover {
+    background: #128C7E;
+  }
+</style>
+
+
+
+
+
+
+
+
+

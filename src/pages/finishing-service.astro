@@ -1,0 +1,938 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Garment Finishing Service | Packaging SDF";
+const pageDescription = "Garment finishing service in Bangladesh. Labels, tags, packaging, and quality inspection from 500 pieces. Professional finishing. Free quote.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+          "@id": "https://sdfltd.com/#website",
+          "url": "https://sdfltd.com/",
+          "name": "SDF Clothing",
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://sdfltd.com/#organization",
+            "name": "SDF Clothing",
+            "url": "https://sdfltd.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://sdfltd.com/logo.png"
+            },
+            "sameAs": [
+              "https://www.facebook.com/sdfltd",
+              "https://www.linkedin.com/company/sdf-clothing"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "PHONE",
+              "contactType": "sales",
+              "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+              "availableLanguage": "English"
+            }
+          }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Garment Finishing Service",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for garment finishing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our minimum order quantity for garment finishing service is 500 pieces per order. This minimum ensures efficient batch processing while providing cost-effective pricing for brands. The 500-piece minimum can be distributed across multiple styles within a single order. Lower quantities are available for sampling and prototype development at higher per-piece costs for brands requiring smaller batches for testing or initial collections."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What finishing services do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer label attachment including woven labels, printed labels, and hang tags, packaging services including poly bags, boxes, and custom packaging, folding and bagging for retail presentation, quality inspection and defect removal, barcode and price tag application, and steam finishing for wrinkle removal. Each service can be combined for complete finishing solutions. Our services apply to all garment types from t-shirts to suits."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide custom label and tag services?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We provide custom woven labels with your brand name and care instructions, printed labels for size and content information, hang tags with branding and pricing, and hem tags for subtle branding. We can source and apply all label types according to your specifications. Custom label production typically takes 10-15 days before finishing can begin. We provide guidance on label specifications and placement to optimize presentation while controlling costs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What packaging options do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer standard poly bags in various sizes, biodegradable poly bags for eco-friendly packaging, custom-printed poly bags with your branding, boxes for premium presentation, and tissue wrapping for luxury items. Packaging can be customized with barcodes, QR codes, and variable information printing. We recommend appropriate packaging based on garment type, retail requirements, and sustainability goals. Eco-friendly packaging options cost 5-10% more than conventional options."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you include quality inspection in finishing service?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Quality inspection is an integral part of our finishing service. We conduct visual inspection for defects, measurement verification against specifications, stitching quality checks, and labeling accuracy verification. Defective garments are identified, separated, and either reworked or documented for replacement. We provide detailed inspection reports with defect statistics. Quality inspection can be customized to your specific standards and requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does garment finishing take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard finishing timeline is 5-7 days from garment receipt for basic services like label attachment and bagging. Complex finishing including custom packaging and detailed inspection typically requires 7-10 days. Custom label production adds 10-15 days before finishing. Sampling takes 3-5 days for finishing approval. Multi-service finishing combinations may require 10-15 days total processing time. We provide detailed timelines with each quotation based on your specific requirements."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Garment Finishing Service",
+      "description": "Professional garment finishing service from 500 pieces including labels, tags, packaging, folding, quality inspection and steam finishing",
+      "provider": {
+        "@id": "https://sdfltd.com/#organization"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Garment Finishing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Garment Finishing and Packaging"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "0.50",
+              "maxPrice": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Use Our Garment Finishing Service",
+      "description": "Step-by-step process for garment finishing service from our Bangladesh facility",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Finishing Requirements",
+          "text": "Send your garment details, finishing service preferences, label specifications, packaging requirements, quantity, and target timeline via contact form"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Detailed Quote",
+          "text": "Get pricing within 24-48 hours including finishing costs, label production, packaging, and quality inspection for your order"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Finishing Samples",
+          "text": "Review finished samples for label placement, packaging presentation, and quality within 3-5 days before bulk processing"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Finishing Process",
+          "text": "Processing begins after sample approval with 5-7 day turnaround for standard finishing services"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Inspection & Delivery",
+          "text": "Final quality check before delivery with inspection report for your finished garments"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Garment Finishing Service</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Garment Finishing Service | Since 1998 | Apparel Finishing Specialists</div>
+        <h1 class="hero__title">Garment Finishing Service | Labels, Tags & Packaging from 500 Pieces</h1>
+        <p class="hero__description">
+          SDF Clothing provides professional garment finishing in Bangladesh. Labels, tags, packaging, folding, quality inspection, and steam finishing from 500 pieces minimum. Retail-ready presentation with 3-5 day sampling, 5-7 day processing.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20finishing-service`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">500</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">6+</span>
+          <span class="hero__stat-label">Finishing Services</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">5-7</span>
+          <span class="hero__stat-label">Days Processing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>ISO 9001 Quality</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>BSCI Social Compliance</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>Quality Inspection</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>Eco-Friendly Packaging</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Introduction</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Garment Finishing Service for Retail-Ready Apparel</h2>
+      </div>
+      <div class="section__text">
+        <p>As a specialized garment finishing service provider based in Bangladesh, SDF Clothing understands that professional finishing transforms manufactured garments into retail-ready products with enhanced presentation and brand identity. The garment finishing market encompasses diverse needs from label attachment to custom packaging, requiring expertise in presentation standards and quality control. Our facility delivers on these requirements with minimum orders of 500 pieces, making professional finishing accessible to brands of all sizes.</p>
+        
+        <p>Bangladesh has established itself as a competitive destination for garment finishing, combining cost advantages with developing expertise in apparel presentation. Our garment finishing service leverages Bangladesh's textile ecosystem, offering international brands access to skilled finishing technicians, established label and packaging supply chains, and comprehensive finishing capabilities. The 500-piece minimum enables brands to test different finishing options without committing to large quantities, reducing risk while accessing professional finishing at competitive prices.</p>
+        
+        <p>Our garment finishing service addresses the specific requirements of retail-ready presentation: accurate label attachment for regulatory compliance and brand identification, professional packaging for retail presentation, quality inspection to ensure defect-free products, efficient folding and bagging for retail display, and steam finishing for wrinkle-free presentation. We work with woven labels, printed tags, poly bags, custom packaging, and quality inspection to meet various presentation and quality requirements.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Finishing Services</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What We Offer</h2>
+      </div>
+      <div class="section__text">
+        <p>Our garment finishing service encompasses multiple services designed to prepare garments for retail presentation. Each service can be provided individually or combined for complete finishing solutions. We offer all services from 500 pieces minimum, with the ability to customize combinations to meet your specific requirements.</p>
+        
+        <p>Label attachment includes woven labels with brand name and care information, printed labels for size and content details, and hang tags for branding and pricing. We attach labels according to your specifications, ensuring proper placement for regulatory compliance and brand visibility. Woven labels provide premium branding with durability through washing, while printed labels offer cost-effective options for size and content information. Hang tags enhance retail presentation with branding and price information. Label attachment typically takes 5-7 days for standard orders.</p>
+        
+        <p>Packaging services include standard poly bags in various sizes, custom-printed poly bags with your branding, biodegradable poly bags for eco-friendly options, boxes for premium presentation, and tissue wrapping for luxury items. We select appropriate packaging based on garment type, retail requirements, and sustainability goals. Packaging protects garments during shipping and enhances retail presentation. Standard poly bag packaging takes 5-7 days, while custom packaging may require 10-15 days including printing time.</p>
+        
+        <p>Folding and bagging prepares garments for retail display with professional presentation. We fold garments according to retail standards, ensuring consistent folding across the batch for uniform display. Bagging follows folding with appropriate packaging materials. Folding and bagging can be customized to specific retail requirements, such as board folding for shirts or specific folding patterns for display. This service typically takes 5-7 days and is essential for retail-ready presentation.</p>
+        
+        <p>Quality inspection identifies and removes defective garments before packaging. We conduct visual inspection for stitching defects, measurement verification against specifications, label accuracy checks, and overall workmanship assessment. Defective garments are separated and documented for rework or replacement. Quality inspection uses AQL standards with appropriate sampling rates based on order size. This service typically adds 2-3 days to finishing time and is essential for ensuring customer satisfaction.</p>
+        
+        <p>Barcode and price tag application adds retail-specific information to garments. We apply barcode labels for inventory management and point-of-sale scanning, price tags with retail pricing, and variable information printing for size-specific details. Barcodes can be printed on labels or hang tags according to your retail requirements. This service ensures garments are ready for retail systems without additional processing. Barcode application typically takes 5-7 days combined with other finishing services.</p>
+        
+        <p>Steam finishing removes wrinkles and enhances garment presentation before packaging. We use professional steam equipment to remove wrinkles from garments, ensuring they arrive at retail in optimal condition. Steam finishing is particularly important for woven garments like shirts and trousers that wrinkle easily. This service typically takes 5-7 days and is often combined with folding and bagging for complete presentation. Steam finishing enhances the premium appearance of finished garments.</p>
+        
+        <p>Combined finishing services integrate multiple processes for complete retail-ready preparation. For example, garments may undergo quality inspection, label attachment, steam finishing, folding, and packaging in a coordinated process. Combined services typically take 7-10 days depending on complexity. This integrated approach ensures consistent quality and efficient processing while reducing handling between service providers. Combined finishing is ideal for brands seeking end-to-end finishing solutions.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Processing Time</th>
+              <th>Primary Benefit</th>
+              <th>Best For</th>
+              <th>Price Tier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Label Attachment</td>
+              <td>5-7 days</td>
+              <td>Branding, compliance, identification</td>
+              <td>All garments, retail ready</td>
+              <td>$</td>
+            </tr>
+            <tr>
+              <td>Packaging Services</td>
+              <td>5-15 days</td>
+              <td>Protection, presentation, branding</td>
+              <td>Retail, e-commerce</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>Folding & Bagging</td>
+              <td>5-7 days</td>
+              <td>Retail presentation, consistency</td>
+              <td>Retail display, shipping</td>
+              <td>$</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Quality Inspection</td>
+              <td>2-3 days</td>
+              <td>Quality assurance, defect removal</td>
+              <td>Quality control, customer satisfaction</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>Steam Finishing</td>
+              <td>5-7 days</td>
+              <td>Wrinkle removal, presentation</td>
+              <td>Premium garments, woven items</td>
+              <td>$$</td>
+            </tr>
+          </tbody>
+          <caption>All services available from 500 pieces minimum. Custom combinations available.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Process</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Our Finishing Process</h2>
+      </div>
+      <div class="section__text">
+        <p>Our garment finishing process follows structured procedures designed to ensure consistent quality and professional presentation. The process typically spans 7-12 days from garment receipt to delivery for standard finishing services, with 10-15 days for complex or combined services. Garment finishing requires particular attention to quality control and presentation standards.</p>
+        
+        <p>The process begins with garment receipt and pre-inspection, where we receive garments and assess their condition before finishing. We verify garment count, check for pre-existing defects, and document garment condition. This pre-inspection typically takes 1-2 days and ensures that only garments meeting quality standards proceed to finishing. For garments we manufacture, this inspection occurs as part of our production quality control before finishing begins.</p>
+        
+        <p>Specification review follows pre-inspection, taking 1-2 days to confirm finishing requirements. We review label specifications, packaging requirements, folding standards, and quality criteria. This review ensures that all finishing parameters are clearly understood and documented before processing begins. For custom labels or packaging, we verify that production is complete and materials are available before scheduling finishing work.</p>
+        
+        <p>Sample finishing for approval takes 3-5 days for standard services and 5-7 days for complex combinations. We process sample garments through the proposed finishing sequence and evaluate results against your specifications. Sample evaluation includes label placement verification, packaging presentation assessment, folding consistency check, and overall presentation review. We provide detailed sample reports with photos documenting finishing results. You may request multiple sample rounds to perfect finishing parameters.</p>
+        
+        <p>Bulk finishing execution spans 5-7 days for standard services like label attachment and bagging. Complex finishing including custom packaging and detailed inspection typically requires 7-10 days. Processing occurs with appropriate equipment for each service, including label sewing machines, folding tables, packaging stations, and steam equipment. Our finishing technicians monitor each batch closely to maintain consistency. Throughout processing, we conduct in-line quality checks to ensure finishing remains within specified tolerances.</p>
+        
+        <p>Quality inspection during finishing identifies any defects introduced during processing or existing defects not caught earlier. We conduct visual inspection of finished garments, verify label accuracy and placement, check packaging integrity, and assess overall presentation. Quality inspection uses AQL standards with appropriate sampling rates. Defective garments are separated and documented. This quality control ensures that only garments meeting your standards proceed to final packaging and shipment.</p>
+        
+        <p>Final packaging and preparation completes the finishing process, taking 1-2 days. Garments are packaged according to your specifications, with appropriate cartons, labeling, and documentation for shipment. We prepare shipping documentation including packing lists and commercial invoices. Cartons are labeled with handling instructions and destination information. This final preparation ensures garments are ready for shipment to your distribution center or retail locations.</p>
+        
+        <p>Documentation and reporting provides comprehensive records of the finishing process. We provide inspection reports with defect statistics, quality compliance documentation, and shipment documentation. These records enable traceability and provide assurance of quality completion. Documentation is provided in both physical and digital formats for your records and quality management systems.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Labels & Branding</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Custom Label and Tag Services</h2>
+      </div>
+      <div class="section__text">
+        <p>Labels and tags are critical components of garment branding and regulatory compliance. We offer comprehensive label and tag services, from sourcing to application, ensuring your garments carry the right branding and information for retail requirements.</p>
+        
+        <p>Woven labels provide premium branding with durability through repeated washing. We produce woven labels in various sizes with your brand name, logo, and care instructions. Woven labels use high-quality threads that maintain appearance through garment life. Production typically takes 10-15 days before application. Woven labels are ideal for premium positioning and garments requiring durable branding that withstands industrial laundering.</p>
+        
+        <p>Printed labels offer cost-effective options for size and content information. We produce printed labels with size information, fiber content, care instructions, and country of origin. Printed labels use durable inks that resist fading and maintain legibility through washing. Production typically takes 7-10 days before application. Printed labels are ideal for size labels, care labels, and content labels where information clarity is prioritized over premium branding appearance.</p>
+        
+        <p>Hang tags enhance retail presentation with branding and price information. We produce hang tags with your brand logo, product information, pricing, and barcodes. Hang tags can be produced in various materials including cardstock, recycled materials, and specialty papers. Production typically takes 10-15 days before application. Hang tags are ideal for retail presentation where branding and pricing visibility are priorities.</p>
+        
+        <p>Hem tags provide subtle branding for premium positioning. Hem tags are small woven or printed labels sewn into garment hems, providing brand identification without prominent placement. Hem tags are particularly popular in premium denim and casual wear. Production typically takes 10-15 days before application. Hem tags offer a sophisticated branding approach that appeals to premium market segments.</p>
+        
+        <p>Label sourcing and procurement manages the entire label production process. We coordinate with label manufacturers to produce your custom labels according to specifications. This service includes design review, material selection, production coordination, and quality verification of finished labels before application. Label sourcing ensures consistent label quality and timely availability for finishing operations.</p>
+        
+        <p>Label application services attach labels to garments according to your specifications. We use appropriate attachment methods for each label type, including sewing for woven labels, heat sealing for some printed labels, and tag attachment for hang tags. Label application ensures consistent placement across production batches for uniform appearance. Our technicians verify label accuracy and placement during application.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Packaging Options</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sustainable & Custom Packaging</h2>
+      </div>
+      <div class="section__text">
+        <p>Packaging protects garments during shipping and enhances retail presentation. We offer multiple packaging options, including sustainable alternatives, to meet various presentation requirements and environmental goals.</p>
+        
+        <p>Standard poly bags provide cost-effective protection for garments during shipping and storage. We offer poly bags in various sizes to accommodate different garment types. Standard poly bags are clear for visibility of contents and include suffocation warning labels as required by regulations. This packaging option is the most economical choice for basic protection and presentation.</p>
+        
+        <p>Custom-printed poly bags enhance branding with your logo and messaging printed directly on packaging. We produce custom-printed bags with your brand identity, providing enhanced brand visibility from the moment customers receive the garment. Custom printing requires additional lead time of 7-10 days for production. Custom-printed bags are ideal for brands seeking enhanced brand presentation throughout the customer experience.</p>
+        
+        <p>Biodegradable poly bags offer eco-friendly packaging that breaks down naturally in the environment. These bags use materials that degrade more rapidly than conventional plastics, reducing environmental impact. Biodegradable bags cost approximately 10-15% more than standard options but provide sustainability credentials appealing to environmentally conscious consumers. These bags are ideal for brands prioritizing environmental responsibility in packaging.</p>
+        
+        <p>Boxes provide premium packaging for luxury items or special collections. We offer boxes in various sizes and materials, including recycled cardboard options. Boxes can be custom-printed with branding for enhanced presentation. Box packaging costs more than poly bag options but provides premium presentation and enhanced protection. Boxes are ideal for high-end garments, gift sets, and special edition products.</p>
+        
+        <p>Tissue wrapping adds luxury presentation for premium garments. We wrap garments in tissue paper before packaging, adding a premium unboxing experience for customers. Tissue wrapping can be combined with boxes for complete luxury presentation. This finishing touch costs minimally but significantly enhances perceived value. Tissue wrapping is ideal for luxury positioning and special occasion garments.</p>
+        
+        <p>Variable information printing adds specific data to packaging such as barcodes, QR codes, size information, or batch numbers. This printing enables inventory management, traceability, and retail system integration. Variable information can be printed on labels, bags, or boxes as required. This service is essential for brands with sophisticated inventory systems or retail requirements for product identification.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Quality Control</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Quality Assurance & Inspection</h2>
+      </div>
+      <div class="section__text">
+        <p>Quality assurance is fundamental to our garment finishing service. Finishing is the final opportunity to ensure garments meet quality standards before reaching customers. We maintain comprehensive quality control processes to ensure consistent results and customer satisfaction.</p>
+        
+        <p>Pre-finishing inspection documents garment condition before finishing processes begin. We photograph sample garments before finishing to provide a baseline for comparison. This inspection also verifies that garments are suitable for the intended finishing processes, preventing damage during finishing. Pre-finishing inspection typically rejects garments with construction defects or damage that would be exacerbated by finishing processes.</p>
+        
+        <p>In-process monitoring during finishing ensures that each operation meets quality standards. Our technicians monitor label placement accuracy, folding consistency, packaging integrity, and overall presentation throughout processing. We conduct periodic checks on finished samples from each batch to ensure consistency. This in-process monitoring allows real-time adjustments to maintain quality standards.</p>
+        
+        <p>Post-finishing inspection evaluates finished garments against your specifications. We verify label accuracy and placement, check packaging integrity, assess folding consistency, and evaluate overall presentation. Visual inspection identifies any defects introduced during finishing or existing defects not caught earlier. We provide detailed inspection reports documenting quality outcomes. Garments not meeting specifications undergo rework or are identified for replacement.</p>
+        
+        <p>AQL (Acceptable Quality Limit) sampling provides statistically valid quality assessment. We use appropriate AQL levels based on order size and your quality requirements. Standard AQL 2.5 for major defects and AQL 4.0 for minor defects provides balanced quality assessment without excessive sampling. AQL inspection ensures objective quality assessment and provides defensible quality documentation.</p>
+        
+        <p>Defect classification and tracking categorizes defects by type and severity for analysis and process improvement. We track common defect types to identify patterns and implement corrective actions. This systematic approach to quality management enables continuous improvement in both our finishing processes and upstream manufacturing when we produce the garments.</p>
+        
+        <p>Quality reporting provides comprehensive documentation of inspection results. We provide defect statistics, photographs of typical defects, and compliance verification for your specifications. This documentation enables quality traceability and provides assurance that finishing meets your standards. Quality reports are valuable for internal quality management and retailer compliance documentation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Bangladesh Advantage</span>
+        <div class="accent-line"></div>
+        <h2 class="section__Title">Why Choose Our Finishing Service in Bangladesh</h2>
+      </div>
+      <div class="section__text">
+        <p>Bangladesh has established itself as a competitive destination for garment finishing, combining cost advantages with developing expertise in apparel presentation. The country's textile industry includes numerous finishing facilities with specialized equipment for various finishing services. This specialization, combined with competitive costs, makes Bangladesh an attractive option for garment finishing services.</p>
+        
+        <p>Cost advantages in Bangladesh for garment finishing are significant, with processing costs 20-30% lower than in many other countries. This cost advantage does not come at the expense of quality. The Bangladeshi garment industry has developed particular expertise in apparel finishing, with skilled technicians who understand presentation standards for international markets. Our facility conducts regular training programs to ensure technicians remain proficient in the latest finishing techniques and quality standards.</p>
+        
+        <p>Bangladesh's garment finishing infrastructure includes specialized facilities with label sewing equipment, folding tables, packaging stations, steam equipment, and quality inspection areas. The country has invested in finishing capacity to serve its large garment manufacturing industry, reducing dependence on imported finishing services. This local availability of finishing infrastructure reduces logistics costs and lead times compared to sending garments to other countries for finishing.</p>
+        
+        <p>Label and packaging supply chains are well-established in Bangladesh, ensuring consistent access to woven labels, printed labels, hang tags, poly bags, and packaging materials at competitive prices. Local suppliers understand the specific requirements of garment finishing and can provide technical support. This established supply chain reduces procurement costs and ensures consistent material quality for finishing operations.</p>
+        
+        <p>Integration with garment manufacturing provides logistical advantages when finishing garments we produce. For garments manufactured by SDF Clothing, we can coordinate finishing seamlessly with production, reducing handling and shipping between processes. This integration reduces lead times and costs compared to using separate manufacturing and finishing providers. The coordination between our manufacturing and finishing teams ensures optimal coordination of production and finishing schedules.</p>
+        
+        <p>Quality standards in Bangladesh garment finishing have improved significantly with international retailer requirements driving continuous improvement. Our facility meets international quality standards and maintains comprehensive quality control systems. This quality focus ensures that finished garments meet the expectations of international markets and retailer requirements for presentation and quality.</p>
+        
+        <p>The Bangladesh garment industry has developed expertise in serving international markets, which directly translates to finishing expertise. Understanding retailer requirements for labeling, packaging, and presentation in various markets is well-established knowledge in the country's finishing sector. This market expertise ensures that finished garments meet the specific requirements of target markets without additional specification or rework.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Getting Started</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How to Get Started</h2>
+      </div>
+      <div class="section__text">
+        <p>Starting your garment finishing service with SDF Clothing follows a structured process designed to ensure your finishing requirements are understood and results meet expectations. The process begins with providing detailed specifications, after which we guide you through sample development and bulk processing.</p>
+        
+        <p>Step one is to submit your finishing requirements through our contact form or email. Essential information includes: garment type and quantity, label specifications (type, size, placement), packaging requirements, folding standards, quality criteria, and desired timeline. If you have label artwork or packaging designs, include them for clarity. For garments we manufacture, finishing specifications are coordinated with our production team.</p>
+        
+        <p>Step two involves our technical review and quotation. Within 24-48 hours of receiving your requirements, we provide a detailed quotation including finishing costs, label production costs, packaging costs, quality inspection, and any additional services. The quotation specifies lead times for sampling and bulk processing, minimum order quantities, and payment terms. For custom labels or packaging, we may provide separate quotations for material production. You may request revisions to the quotation to adjust specifications to meet budget targets.</p>
+        
+        <p>Step three is sample finishing and approval. After quotation acceptance, we proceed with sample development, typically taking 3-5 days for standard services and 5-7 days for complex combinations. Samples are shipped to you for review, and we provide detailed inspection reports documenting finishing results. You may approve samples as-is, request parameter adjustments, or proceed with additional sample rounds. Each sample round adds 2-3 days but ensures the final finishing meets your expectations. We recommend thorough sample approval before bulk processing.</p>
+        
+        <p>Step four is bulk finishing confirmation. Once finishing parameters are approved, we require a deposit to confirm processing and schedule production. Standard terms are 30% deposit with order confirmation and 70% before shipment. Processing begins after deposit receipt and garment receipt. We provide a processing schedule with key milestones including finishing completion, quality inspection, and expected delivery date. Throughout processing, we provide status updates on batch progress.</p>
+        
+        <p>Step five is final inspection and delivery. Before shipment, we conduct final quality inspection using our standard protocols with additional verification that finishing meets specifications. We provide an inspection report for your review. Once inspection is approved, we finalize packaging and prepare shipping documentation. Balance payment is required before release of finished garments. We provide all necessary documentation for your records and any regulatory requirements.</p>
+        
+        <p>Throughout the process, our team provides technical guidance on finishing optimization, label specifications, and packaging selection. We understand that finishing enhances both presentation and perceived value, requiring attention to detail and quality standards. Clear communication about your presentation requirements and quality expectations helps us deliver finished garments that enhance your brand and meet retail standards.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Garment Finishing Service FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order quantity for garment finishing?</h3>
+          <p class="faq__answer">Our minimum order quantity for garment finishing service is 500 pieces per order. This minimum ensures efficient batch processing while providing cost-effective pricing for brands. The 500-piece minimum can be distributed across multiple styles within a single order. Lower quantities are available for sampling and prototype development at higher per-piece costs for brands requiring smaller batches for testing or initial collections.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What finishing services do you offer?</h3>
+          <p class="faq__answer">We offer label attachment including woven labels, printed labels, and hang tags, packaging services including poly bags, boxes, and custom packaging, folding and bagging for retail presentation, quality inspection and defect removal, barcode and price tag application, and steam finishing for wrinkle removal. Each service can be combined for complete finishing solutions. Our services apply to all garment types from t-shirts to suits.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you provide custom label and tag services?</h3>
+          <p class="faq__answer">Yes. We provide custom woven labels with your brand name and care instructions, printed labels for size and content information, hang tags with branding and pricing, and hem tags for subtle branding. We can source and apply all label types according to your specifications. Custom label production typically takes 10-15 days before finishing can begin. We provide guidance on label specifications and placement to optimize presentation while controlling costs.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What packaging options do you offer?</h3>
+          <p class="faq__answer">We offer standard poly bags in various sizes, biodegradable poly bags for eco-friendly packaging, custom-printed poly bags with your branding, boxes for premium presentation, and tissue wrapping for luxury items. Packaging can be customized with barcodes, QR codes, and variable information printing. We recommend appropriate packaging based on garment type, retail requirements, and sustainability goals. Eco-friendly packaging options cost 5-10% more than conventional options.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you include quality inspection in finishing service?</h3>
+          <p class="faq__answer">Yes. Quality inspection is an integral part of our finishing service. We conduct visual inspection for defects, measurement verification against specifications, stitching quality checks, and labeling accuracy verification. Defective garments are identified, separated, and either reworked or documented for replacement. We provide detailed inspection reports with defect statistics. Quality inspection can be customized to your specific standards and requirements.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does garment finishing take?</h3>
+          <p class="faq__answer">Standard finishing timeline is 5-7 days from garment receipt for basic services like label attachment and bagging. Complex finishing including custom packaging and detailed inspection typically requires 7-10 days. Custom label production adds 10-15 days before finishing. Sampling takes 3-5 days for finishing approval. Multi-service finishing combinations may require 10-15 days total processing time. We provide detailed timelines with each quotation based on your specific requirements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Use Our Garment Finishing Service?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for professional garment finishing and packaging. We provide detailed quotes, processing timelines, and sample development. Labels, tags, packaging, folding, and quality inspection available from 500 pieces minimum with retail-ready presentation.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/sampling-service" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/washing-service" style="color: var(--color-primary);">washing service</a>, <a href="/sustainable-clothing-manufacturer" style="color: var(--color-primary);">sustainable clothing manufacturer</a>, .
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .hero__description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
+  .hero__cta--primary:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-alt);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .hero__stat-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    font-size: 1.25rem;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background-color: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background-color: var(--color-bg-alt);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .section__label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text p {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__ctas {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
+  .section__cta--primary:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-lg) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background-color: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison td {
+    color: var(--color-text-muted);
+  }
+
+  .comparison__row--highlight {
+    background-color: var(--color-bg-alt);
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    padding: var(--spacing-sm) 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .faq {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .faq__item {
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-alt);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .faq__answer {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__stats {
+      order: -1;
+    }
+
+    .trust__items {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+</style>

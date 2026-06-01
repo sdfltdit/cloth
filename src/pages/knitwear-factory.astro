@@ -1,0 +1,963 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Knitwear Factory | Stretch Fabric Production";
+const pageDescription = "Manufacture knitwear with SDF's stretch fabric production. We specialize in knit manufacturing for global fashion brands.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Knitwear Factory",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why is Bangladesh the world's largest knitwear exporter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh is the world's largest knitwear exporter due to 70% of $47B garment exports being knitwear, integrated supply chain with knitting-dyeing-finishing under one roof, competitive labor costs, duty-free access to EU and other markets, and decades of specialization in knitwear production. SDF is part of this ecosystem with direct factory access."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What knitwear structures can you produce?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We produce single jersey, double jersey, French terry, fleece, interlock, rib, pique, and waffle structures. Each structure serves different product categories: single jersey for t-shirts, French terry for hoodies, interlock for premium tops, rib for cuffs and collars. All structures available at direct factory pricing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is your minimum order for knitwear production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our direct factory minimum is 300 pieces per style for all knitwear products. This applies to t-shirts, hoodies, sweaters, and activewear. For established buyers with annual commitments, we can negotiate lower minimums based on total volume across knitwear categories."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide knitting services or only finished garments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide both knitting services and finished garments. As a vertically integrated knitwear factory, we offer fabric knitting, dyeing, cutting, sewing, and finishing. Buyers can source fabric only, finished garments only, or full package production. Knitting capacity is 50,000 kg/month with 50 circular knitting machines."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What GSM range do you offer for knitwear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer knitwear fabrics from 120 GSM lightweight to 380 GSM heavyweight. Common ranges: 140-160 GSM for lightweight t-shirts, 180-220 GSM for standard t-shirts, 260-300 GSM for hoodies and sweatshirts, 320-380 GSM for heavyweight winter wear. GSM tolerance guaranteed within ?5%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you ensure knitwear quality consistency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quality consistency through standardized knitting parameters, retained fabric samples for every order, inline quality checks at knitting, dyeing, and sewing stages, and AQL inspection before shipment. Fabric testing reports included with every shipment documenting GSM, shrinkage, and color fastness."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you handle complex knitwear constructions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We handle complex knitwear including jacquard patterns, striped fabrics, melange effects, and blended constructions. Our 50 circular knitting machines include various gauges (18-28 gauge) for different fabric weights and complexities. Technical knitwear for activewear with performance yarns also available."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications do you hold for knitwear production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We hold GOTS for organic cotton knitwear, OEKO-TEX Standard 100 for chemical safety, ISO 9001 for quality management, BSCI for social compliance, GRS for recycled materials, and additional certifications. Full certification documentation provided with every shipment."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com"
+      },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "NL"],
+      "description": "Custom clothing manufacturing from Bangladesh with low MOQ from 300 pieces."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Clothing from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Brief",
+          "text": "Share your design, quantity, fabric requirements and timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Quote",
+          "text": "Get a detailed FOB quote within 48 hours."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample",
+          "text": "Review and approve a pre-production sample."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Full production with inline quality checks."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipment",
+          "text": "FOB Dhaka shipment with full export documentation."
+        }
+      ]
+    }
+]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Knitwear Factory</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Direct Factory Access | Since 1998 | Bangladesh Knitwear</div>
+        <h1 class="hero__title">Knitwear Factory | Direct Access to Bangladesh's Premier Knitwear Production Facility</h1>
+        <p class="hero__description">
+          SDF Clothing is a direct-access knitwear factory in Bangladesh, the world's largest knitwear exporting country. T-shirts, hoodies, sweaters, and activewear from 300 pieces with vertical integration from knitting to finishing. No agents, no markup. Direct factory access to Bangladesh's #1 knitwear hub with 50 circular knitting machines and 200,000 pieces monthly capacity.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Request Factory Access</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20knitwear%20factory%20access`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">300</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">50</span>
+          <span class="hero__stat-label">Knitting Machines</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Factory</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">200K</span>
+          <span class="hero__stat-label">Monthly Capacity</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>GOTS Organic Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>ISO 9001 Quality</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>BSCI Social Compliance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Knitwear Hub</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Bangladesh | World's Largest Knitwear Exporter</h2>
+      </div>
+      <div class="section__text">
+        <p>Bangladesh is the world's largest knitwear exporter, accounting for approximately 70% of the country's $47 billion annual garment exports. As a leading <a href="/knitwear-exporter">knitwear exporter</a>, Bangladesh offers competitive advantages for brands seeking quality knitwear production. This dominance results from decades of specialization in knitwear production, integrated supply chains with knitting-dyeing-finishing under one roof, competitive labor costs, and duty-free access to EU and other major markets through trade agreements. Bangladesh knitwear exports to USA, UK, Australia, Canada, and EU markets represent the backbone of the country's manufacturing sector.</p>
+        
+        <p>The knitwear sector's success is built on specialization. While many countries produce both woven and knit garments, Bangladesh focused on knitwear as its competitive advantage, developing expertise, infrastructure, and labor skills specifically for knitwear production. This specialization means Bangladesh knitwear factories like SDF achieve higher efficiency, better quality consistency, and more competitive pricing than generalist factories. The ecosystem includes fabric mills, dye houses, accessory suppliers, and skilled labor all concentrated in industrial zones, reducing logistics costs and lead times.</p>
+        
+        <p>SDF is part of this knitwear ecosystem, operating as a vertically integrated knitwear factory with knitting, dyeing, cutting, sewing, and finishing all under one roof. This integration reduces total production time to 25-35 days from fabric to finished goods, faster than factories that outsource fabric production. Our location in Bangladesh's knitwear hub provides access to specialized suppliers, skilled labor, and infrastructure that supports efficient knitwear production.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Fabric Structures</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Knitwear Types and Structures</h2>
+      </div>
+      <div class="section__text">
+        <p>Knitwear encompasses diverse fabric structures, each suited to specific product categories and performance requirements. SDF produces all major knitwear structures in-house, enabling single-source supply for buyers with diverse product needs. The table below outlines our knitwear structure capabilities, GSM ranges, and key properties for each structure type.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Structure</th>
+              <th>Products</th>
+              <th>GSM Range</th>
+              <th>Key Properties</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Single Jersey</td>
+              <td>T-shirts, tanks, basic tops</td>
+              <td>120-180 GSM</td>
+              <td>Lightweight, breathable, good drape</td>
+              <td>Everyday basics, summer wear</td>
+            </tr>
+            <tr>
+              <td>Double Jersey</td>
+              <td>Premium t-shirts, dresses</td>
+              <td>160-220 GSM</td>
+              <td>Stable, less curling, better recovery</td>
+              <td>Premium basics, structured garments</td>
+            </tr>
+            <tr>
+              <td>French Terry</td>
+              <td>Hoodies, sweatshirts</td>
+              <td>260-320 GSM</td>
+              <td>Loop-back texture, medium weight</td>
+              <td>Athleisure, casual wear</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Fleece</td>
+              <td>Hoodies, winter wear</td>
+              <td>280-380 GSM</td>
+              <td>Brushed back, insulating, warm</td>
+              <td>Winter wear, premium hoodies</td>
+            </tr>
+            <tr>
+              <td>Interlock</td>
+              <td>Premium tops, activewear</td>
+              <td>180-240 GSM</td>
+              <td>Smooth both sides, stable, stretch</td>
+              <td>Premium activewear, fitted garments</td>
+            </tr>
+            <tr>
+              <td>Rib</td>
+              <td>Cuffs, collars, waistbands</td>
+              <td>180-240 GSM</td>
+              <td>High stretch, recovery, textured</td>
+              <td>Trims, fitted cuffs</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Pique</td>
+              <td>Polo shirts, textured tops</td>
+              <td>180-220 GSM</td>
+              <td>Textured surface, breathable</td>
+              <td>Polos, textured casual wear</td>
+            </tr>
+            <tr>
+              <td>Waffle</td>
+              <td>Thermal wear, textured tops</td>
+              <td>200-260 GSM</td>
+              <td>Grid texture, insulating, breathable</td>
+              <td>Thermal wear, winter basics</td>
+            </tr>
+          </tbody>
+          <caption>All structures produced in-house on 50 circular knitting machines. GSM tolerance guaranteed within ?5%. Custom structures available on request.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Vertical Integration</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">SDF Knitwear Factory | Vertical Integration</h2>
+      </div>
+      <div class="section__text">
+        <p>SDF operates as a vertically integrated knitwear factory, controlling every stage of production from knitting to finishing. This integration reduces lead times, improves quality control, and enables cost efficiency that benefits buyers through competitive pricing. Many factories outsource knitting or dyeing, adding coordination complexity and quality risk. SDF's in-house capabilities mean we control fabric quality, production timing, and total cost structure.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Capacity</th>
+              <th>Equipment</th>
+              <th>Lead Time</th>
+              <th>Quality Control</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Knitting</td>
+              <td>50,000 kg/month</td>
+              <td>50 circular machines (18-28 gauge)</td>
+              <td>7-10 days</td>
+              <td>GSM tolerance ?5%</td>
+            </tr>
+            <tr>
+              <td>Dyeing</td>
+              <td>60,000 kg/month</td>
+              <td>Jet dyeing machines</td>
+              <td>5-7 days</td>
+              <td>Color fastness Grade 4-5</td>
+            </tr>
+            <tr>
+              <td>Cutting</td>
+              <td>200,000 pieces/month</td>
+              <td>20 automatic cutting machines</td>
+              <td>2-3 days</td>
+              <td>Pattern accuracy ?2mm</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Sewing</td>
+              <td>200,000 pieces/month</td>
+              <td>300 sewing machines</td>
+              <td>15-20 days</td>
+              <td>AQL 2.5 inspection</td>
+            </tr>
+            <tr>
+              <td>Finishing</td>
+              <td>200,000 pieces/month</td>
+              <td>Steam iron, inspection lines</td>
+              <td>2-3 days</td>
+              <td>Final inspection AQL 4.0</td>
+            </tr>
+          </tbody>
+          <caption>Total production time: 25-35 days from knitting to finished goods. Integration reduces handovers and quality risk.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Product Range</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Knitwear Product Categories</h2>
+      </div>
+      <div class="section__text">
+        <p>SDF's knitwear factory produces comprehensive product categories across the knitwear spectrum. From basic t-shirts to complex activewear, from lightweight summer garments to heavyweight winter wear, our vertical integration enables production of diverse knitwear products without sacrificing quality consistency. Buyers can source multiple knitwear categories from a single factory, reducing vendor complexity while ensuring consistent quality across their product assortment.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Products</th>
+              <th>Fabric Structures</th>
+              <th>GSM Range</th>
+              <th>Minimum Order</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Basic T-Shirts</td>
+              <td>Short sleeve, long sleeve, tanks</td>
+              <td>Single jersey, double jersey</td>
+              <td>140-180 GSM</td>
+              <td>300 pieces</td>
+            </tr>
+            <tr>
+              <td>Hoodies & Sweatshirts</td>
+              <td>Pullover, zip hoodies, crews</td>
+              <td>French terry, fleece</td>
+              <td>260-380 GSM</td>
+              <td>300 pieces</td>
+            </tr>
+            <tr>
+              <td>Sweaters</td>
+              <td>Pullovers, cardigans, vests</td>
+              <td>Interlock, waffle, rib</td>
+              <td>200-320 GSM</td>
+              <td>300 pieces</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Activewear</td>
+              <td>Leggings, sports bras, sets</td>
+              <td>Interlock, performance blends</td>
+              <td>180-280 GSM</td>
+              <td>300 pieces</td>
+            </tr>
+            <tr>
+              <td>Polo Shirts</td>
+              <td>Short sleeve, long sleeve</td>
+              <td>Pique, interlock</td>
+              <td>180-220 GSM</td>
+              <td>300 pieces</td>
+            </tr>
+          </tbody>
+          <caption>All categories available at direct factory pricing with consistent quality standards across products.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Knitwear Factory FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">Why is Bangladesh the world's largest knitwear exporter?</h3>
+          <p class="faq__answer">Bangladesh is the world's largest knitwear exporter due to 70% of $47B garment exports being knitwear, integrated supply chain with knitting-dyeing-finishing under one roof, competitive labor costs, duty-free access to EU and other markets, and decades of specialization in knitwear production. SDF is part of this ecosystem with direct factory access.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What knitwear structures can you produce?</h3>
+          <p class="faq__answer">We produce single jersey, double jersey, French terry, fleece, interlock, rib, pique, and waffle structures. Each structure serves different product categories: single jersey for t-shirts, French terry for hoodies, interlock for premium tops, rib for cuffs and collars. All structures available at direct factory pricing with 50 circular knitting machines.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is your minimum order for knitwear production?</h3>
+          <p class="faq__answer">Our direct factory minimum is 300 pieces per style for all knitwear products. This applies to t-shirts, hoodies, sweaters, and activewear. For established buyers with annual commitments, we can negotiate lower minimums based on total volume across knitwear categories.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you provide knitting services or only finished garments?</h3>
+          <p class="faq__answer">We provide both knitting services and finished garments. As a vertically integrated knitwear factory, we offer fabric knitting, dyeing, cutting, sewing, and finishing. Buyers can source fabric only, finished garments only, or full package production. Knitting capacity is 50,000 kg/month with 50 circular knitting machines.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What GSM range do you offer for knitwear?</h3>
+          <p class="faq__answer">We offer knitwear fabrics from 120 GSM lightweight to 380 GSM heavyweight. Common ranges: 140-160 GSM for lightweight t-shirts, 180-220 GSM for standard t-shirts, 260-300 GSM for hoodies and sweatshirts, 320-380 GSM for heavyweight winter wear. GSM tolerance guaranteed within ?5%.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do you ensure knitwear quality consistency?</h3>
+          <p class="faq__answer">Quality consistency through standardized knitting parameters, retained fabric samples for every order, inline quality checks at knitting, dyeing, and sewing stages, and AQL inspection before shipment. Fabric testing reports included with every shipment documenting GSM, shrinkage, and color fastness.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you handle complex knitwear constructions?</h3>
+          <p class="faq__answer">Yes. We handle complex knitwear including jacquard patterns, striped fabrics, melange effects, and blended constructions. Our 50 circular knitting machines include various gauges (18-28 gauge) for different fabric weights and complexities. Technical knitwear for activewear with performance yarns also available.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What certifications do you hold for knitwear production?</h3>
+          <p class="faq__answer">We hold GOTS for organic cotton knitwear, OEKO-TEX Standard 100 for chemical safety, ISO 9001 for quality management, BSCI for social compliance, GRS for recycled materials, and additional certifications. Full certification documentation provided with every shipment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready for Direct Knitwear Factory Access?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for direct knitwear factory access. No agents, no markup. Direct access to Bangladesh's premier knitwear production facility with vertical integration from knitting to finishing. Request factory visit or sample today.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Request Factory Access</a>
+        <a href="/tools/sample-request" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/clothing-factory" style="color: var(--color-primary);">clothing factory</a>, <a href="/t-shirt-manufacturer" style="color: var(--color-primary);">t-shirt manufacturer</a>, <a href="/hoodie-manufacturer" style="color: var(--color-primary);">hoodie manufacturer</a>, <a href="/sweater-manufacturer" style="color: var(--color-primary);">sweater manufacturer</a>, <a href="/activewear-manufacturer" style="color: var(--color-primary);">activewear manufacturer</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/knitting-service" style="color: var(--color-primary);">knitting service</a>.
+      </p>
+    </div>
+  </section>
+
+<section style="padding:2rem 0;border-top:1px solid var(--color-border);margin-top:2rem"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:1.1rem;font-weight:600;color:var(--color-text);margin-bottom:1rem">Related Services</h2><nav aria-label="Related pages"><ul style="display:flex;flex-wrap:wrap;gap:0.75rem;list-style:none;padding:0"><li><a href="/low-moq-clothing-manufacturers" style="color:var(--color-primary)">Low MOQ Manufacturers</a></li><li><a href="/private-label-manufacturer" style="color:var(--color-primary)">Private Label</a></li><li><a href="/clothing-manufacturers-for-startups" style="color:var(--color-primary)">Startup Manufacturers</a></li><li><a href="/oem-clothing-manufacturer" style="color:var(--color-primary)">OEM Manufacturing</a></li><li><a href="/sustainable-clothing-manufacturers" style="color:var(--color-primary)">Sustainable Manufacturing</a></li><li><a href="/certifications" style="color:var(--color-primary)">Certifications</a></li><li><a href="/quality-inspection-service" style="color:var(--color-primary)">Quality Inspection</a></li><li><a href="/tech-pack-service" style="color:var(--color-primary)">Tech Pack Service</a></li><li><a href="/sampling-service" style="color:var(--color-primary)">Sampling Service</a></li><li><a href="/full-package-production" style="color:var(--color-primary)">Full Package Production</a></li><li><a href="/tools/price-calculator" style="color:var(--color-primary)">Price Calculator</a></li><li><a href="/contact" style="color:var(--color-primary)">Get a Quote</a></li></ul></nav></div></section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">SDF Clothing is a direct-access garment factory in Bangladesh | not a trading company or buying house. When you work with us, you communicate directly with our production team, receive transparent pricing without agent markup, and maintain full control over your supply chain. Our factory holds GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certifications.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Bangladesh is the world's second-largest garment exporter, shipping over $47 billion in apparel annually to USA, UK, EU and Australian markets. Our minimum order of 300 pieces reflects our commitment to supporting brands at every stage of growth | from first collections to established seasonal production runs. We offer full package production covering tech pack development, fabric sourcing, sampling, bulk manufacturing, quality inspection, and export documentation under one roof.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">For US brands, sourcing from Bangladesh avoids the Section 301 tariffs that add 25% or more to Chinese imports. For EU brands, Bangladesh's GSP duty-free access delivers lower landed costs compared to most other sourcing destinations. These trade advantages combine with competitive FOB pricing to deliver strong margins for our clients.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/tools/sample-request" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+
+
+
+
+

@@ -1,0 +1,1035 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Knitwear Exporter | Stretch Fabric Production";
+const pageDescription = "Manufacture knitwear with SDF's stretch fabric production. We specialize in knit manufacturing for global fashion brands.";
+const companyAge = getCompanyAgeString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl.href,
+      "url": canonicalUrl.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#organization",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": PHONE,
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Knitwear Exporter",
+            "item": canonicalUrl.href
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why is Bangladesh the world's largest knitwear exporter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh is the world's largest knitwear exporter with 70% of $47B garment exports being knitwear ($33B annually). This results from integrated supply chains, competitive labor costs, duty-free access to EU (EBA), Australia (DFQF), and Canada (FTA), and decades of specialization in knitwear production. BGMEA data confirms Bangladesh's knitwear dominance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What knitwear products do you export?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We export t-shirts, hoodies, sweatshirts, sweaters, activewear (leggings, sports bras), polo shirts, and other knit garments. All products available for export to USA, UK, Australia, Canada, and EU markets. Vertical integration from knitting to finishing ensures quality control and competitive pricing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is your minimum order for knitwear export?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our knitwear export minimum is 300 pieces per style. This applies to t-shirts, hoodies, sweaters, activewear, and all other knitwear categories. For established buyers with annual commitments, we can negotiate lower minimums based on total volume. Minimum can be split across sizes within a single colorway."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are you BGMEA certified for knitwear export?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. SDF is a BGMEA (Bangladesh Garment Manufacturers and Exporters Association) member in good standing. BGMEA membership ensures compliance with labor standards, safety regulations, and export requirements. BGMEA certification provides buyer confidence in ethical production and export legitimacy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What shipping terms do you offer for knitwear export?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer FOB (Free On Board), CIF (Cost, Insurance, Freight), and DDP (Delivered Duty Paid) terms per Incoterms 2020. FOB is standard for knitwear export. CIF recommended for first-time importers. DDP available for door-to-door delivery. Terms negotiable based on order volume and buyer preference."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you ensure knitwear export quality consistency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quality consistency through vertical integration (knitting to finishing in-house), retained fabric samples for every order, inline quality checks at knitting, dyeing, and sewing stages, and AQL inspection before shipment. Fabric testing reports included with every shipment documenting GSM, shrinkage, and color fastness."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What duty advantages does Bangladesh knitwear offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh knitwear qualifies for duty-free or reduced duty access to EU (0% under EBA), Australia (0% under DFQF), Canada (0% under FTA), and other markets through trade agreements. USA: MFN rate applies. Duty savings of 5-15% vs China depending on market. BGMEA data confirms Bangladesh's duty advantages for knitwear exports."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documentation do you provide for knitwear export?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Full export documentation: commercial invoice, packing list, bill of lading, certificate of origin, BGMEA membership certificate, export license, insurance certificate (for CIF/DDP), and all certification documents (GOTS, OEKO-TEX, etc.). Documentation tailored to destination market requirements for customs clearance."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com"
+      },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "NL"],
+      "description": "Custom clothing manufacturing from Bangladesh with low MOQ from 300 pieces."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Clothing from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Brief",
+          "text": "Share your design, quantity, fabric requirements and timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Quote",
+          "text": "Get a detailed FOB quote within 48 hours."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample",
+          "text": "Review and approve a pre-production sample."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Full production with inline quality checks."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipment",
+          "text": "FOB Dhaka shipment with full export documentation."
+        }
+      ]
+    }
+]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  canonicalUrl={canonicalUrl.href}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Knitwear Exporter</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Knitwear Export | Since 1998 | BGMEA Certified</div>
+        <h1 class="hero__title">Knitwear Exporter | Bangladesh Knitwear Exported to USA, UK, Australia and EU Buyers</h1>
+        <p class="hero__description">
+          SDF Clothing is a Bangladesh knitwear exporter shipping t-shirts, hoodies, sweaters, and activewear to USA, UK, Australia, Canada, and EU markets. Bangladesh is the world's largest knitwear exporter with $33B in annual knitwear exports. BGMEA certified with vertical integration from knitting to finishing, full export documentation, and duty-free access to major markets.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="hero__cta hero__cta--primary">Request Export Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20knitwear%20export%20services`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">$33B</span>
+          <span class="hero__stat-label">Annual Knitwear Exports</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">70%</span>
+          <span class="hero__stat-label">of Bangladesh Exports</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Export</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">300</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>BGMEA Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>GOTS Organic Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>ISO 9001 Quality</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Global Leadership</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Bangladesh | World's Largest Knitwear Exporter</h2>
+      </div>
+      <div class="section__text">
+        <p>Bangladesh is the world's largest knitwear exporter, with knitwear accounting for approximately 70% of the country's $47 billion annual garment exports. This translates to $33 billion in knitwear exports annually, making Bangladesh the dominant global source for t-shirts, hoodies, sweaters, activewear, and other knit garments. According to BGMEA (Bangladesh Garment Manufacturers and Exporters Association) data, Bangladesh's knitwear exports have grown consistently over the past two decades, overtaking China in knitwear volume for many product categories.</p>
+        
+        <p>The dominance of Bangladesh knitwear exports results from structural advantages: integrated supply chains with knitting-dyeing-finishing under one roof reducing lead times, competitive labor costs maintaining price advantage against China and other competitors, trade agreements providing duty-free or reduced duty access to EU (EBA scheme), Australia (DFQF scheme), Canada (Bangladesh-Canada FTA), and other markets, and decades of specialization in knitwear production creating expertise and infrastructure unmatched by generalist manufacturers.</p>
+        
+        <p>SDF is part of Bangladesh's knitwear export ecosystem as a BGMEA-certified manufacturer with {companyAge}+ years of export experience. We contribute to Bangladesh's knitwear export leadership by producing t-shirts, hoodies, sweaters, activewear, and other knit garments for USA, UK, Australia, Canada, and EU markets. Our vertical integration from knitting to finishing ensures quality control and competitive pricing that enables Bangladesh's continued knitwear export dominance.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Product Range</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Knitwear Export Product Categories</h2>
+      </div>
+      <div class="section__text">
+        <p>SDF exports comprehensive knitwear product categories, leveraging Bangladesh's knitwear specialization and vertical integration. From basic t-shirts to complex activewear, from lightweight summer garments to heavyweight winter wear, our knitwear export capabilities span the full spectrum of knit garments. Buyers can source multiple knitwear categories from a single exporter, reducing vendor complexity while ensuring consistent quality across their product assortment.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Products</th>
+              <th>Key Markets</th>
+              <th>Duty Advantage</th>
+              <th>Minimum Order</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>T-Shirts</td>
+              <td>Short sleeve, long sleeve, tanks, polos</td>
+              <td>USA, EU, UK, AU, CA</td>
+              <td>EU 0%, AU 0%, CA 0%</td>
+              <td>300 pieces</td>
+            </tr>
+            <tr>
+              <td>Hoodies & Sweatshirts</td>
+              <td>Pullover, zip hoodies, crews</td>
+              <td>USA, EU, UK, AU, CA</td>
+              <td>EU 0%, AU 0%, CA 0%</td>
+              <td>300 pieces</td>
+            </tr>
+            <tr>
+              <td>Sweaters</td>
+              <td>Pullovers, cardigans, vests</td>
+              <td>EU, UK, USA, CA</td>
+              <td>EU 0%, CA 0%</td>
+              <td>300 pieces</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Activewear</td>
+              <td>Leggings, sports bras, sets</td>
+              <td>USA, EU, UK, AU</td>
+              <td>EU 0%, AU 0%</td>
+              <td>300 pieces</td>
+            </tr>
+            <tr>
+              <td>Polo Shirts</td>
+              <td>Short sleeve, long sleeve</td>
+              <td>USA, EU, UK, AU</td>
+              <td>EU 0%, AU 0%</td>
+              <td>300 pieces</td>
+            </tr>
+          </tbody>
+          <caption>All categories available for export with full documentation. Duty advantages apply to qualifying products under trade agreements. Verify current rates with customs authorities.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">BGMEA Certification</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">BGMEA Certification | Export Compliance and Credibility</h2>
+      </div>
+      <div class="section__text">
+        <p>BGMEA (Bangladesh Garment Manufacturers and Exporters Association) certification is the industry standard for legitimate garment and knitwear exporters in Bangladesh. BGMEA membership ensures compliance with labor standards, workplace safety regulations, fire safety requirements, and export documentation standards. BGMEA also provides training, technical assistance, and advocacy for member factories. For international buyers, BGMEA membership provides confidence in ethical production and export legitimacy.</p>
+        
+        <p>SDF is a BGMEA member in good standing with {companyAge}+ years of continuous membership. BGMEA certification means we comply with Accord and Alliance factory safety standards, maintain proper worker welfare facilities, follow Bangladesh labor law requirements, and adhere to export documentation protocols. BGMEA membership is verified through annual audits covering safety, labor standards, and environmental compliance. We provide BGMEA membership certificates with every shipment upon request.</p>
+        
+        <p>BGMEA data shows that knitwear accounts for 70% of Bangladesh's garment exports, confirming the country's specialization. BGMEA's 4,500+ member factories collectively export to over 150 countries. SDF's BGMEA membership places us within this legitimate export ecosystem, providing buyers with assurance of compliance, credibility, and adherence to industry standards. BGMEA certification is particularly important for buyers sourcing from Bangladesh for the first time.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Duty Advantages</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Bangladesh Knitwear Duty Advantages vs China</h2>
+      </div>
+      <div class="section__text">
+        <p>Bangladesh knitwear exports benefit from trade agreements providing duty-free or reduced duty access to major markets, creating cost advantages over China and other competing countries. Duty savings directly impact landed cost, making Bangladesh knitwear more competitive despite similar production costs. Below are duty advantages for Bangladesh knitwear exports to major markets.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Market</th>
+              <th>Bangladesh Rate</th>
+              <th>China Rate</th>
+              <th>Saving</th>
+              <th>Trade Agreement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>EU</td>
+              <td>0% (duty-free)</td>
+              <td>12%</td>
+              <td>12%</td>
+              <td>EBA Scheme</td>
+            </tr>
+            <tr>
+              <td>Australia</td>
+              <td>0% (duty-free)</td>
+              <td>10%</td>
+              <td>10%</td>
+              <td>DFQF Scheme</td>
+            </tr>
+            <tr>
+              <td>Canada</td>
+              <td>0% (duty-free)</td>
+              <td>17-20%</td>
+              <td>17-20%</td>
+              <td>Bangladesh-Canada FTA</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>USA</td>
+              <td>16.5% (MFN)</td>
+              <td>16.5%</td>
+              <td>0%</td>
+              <td>MFN Rate</td>
+            </tr>
+            <tr>
+              <td>UK</td>
+              <td>0% (duty-free)</td>
+              <td>12%</td>
+              <td>12%</td>
+              <td>UK Developing Countries Scheme</td>
+            </tr>
+            <tr>
+              <td>Japan</td>
+              <td>0% (duty-free)</td>
+              <td>10-13%</td>
+              <td>10-13%</td>
+              <td>Bangladesh-Japan EPA</td>
+            </tr>
+          </tbody>
+          <caption>Duty rates are approximate and vary by specific knitwear category. Bangladesh duty-free access applies to qualifying products under trade agreements. Verify current rates with customs authorities.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Vertical Integration</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Vertical Integration | Knitting to Finishing</h2>
+      </div>
+      <div class="section__text">
+        <p>SDF operates as a vertically integrated knitwear exporter, controlling every stage from knitting to finishing. This integration reduces lead times, improves quality control, and enables cost efficiency that benefits buyers through competitive pricing. Many knitwear exporters outsource knitting or dyeing, adding coordination complexity and quality risk. SDF's in-house capabilities mean we control fabric quality, production timing, and total cost structure.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Capacity</th>
+              <th>Equipment</th>
+              <th>Lead Time</th>
+              <th>Quality Control</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Knitting</td>
+              <td>50,000 kg/month</td>
+              <td>50 circular machines (18-28 gauge)</td>
+              <td>7-10 days</td>
+              <td>GSM tolerance ?5%</td>
+            </tr>
+            <tr>
+              <td>Dyeing</td>
+              <td>60,000 kg/month</td>
+              <td>Jet dyeing machines</td>
+              <td>5-7 days</td>
+              <td>Color fastness Grade 4-5</td>
+            </tr>
+            <tr>
+              <td>Cutting</td>
+              <td>200,000 pieces/month</td>
+              <td>20 automatic cutting machines</td>
+              <td>2-3 days</td>
+              <td>Pattern accuracy ?2mm</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Sewing</td>
+              <td>200,000 pieces/month</td>
+              <td>300 sewing machines</td>
+              <td>15-20 days</td>
+              <td>AQL 2.5 inspection</td>
+            </tr>
+            <tr>
+              <td>Finishing</td>
+              <td>200,000 pieces/month</td>
+              <td>Steam iron, inspection lines</td>
+              <td>2-3 days</td>
+              <td>Final inspection AQL 4.0</td>
+            </tr>
+          </tbody>
+          <caption>Total production time: 25-35 days from knitting to finished goods. Integration reduces handovers and quality risk. Capacity scales 20% with advance notice.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Export Documentation</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Knitwear Export Documentation</h2>
+      </div>
+      <div class="section__text">
+        <p>Knitwear export documentation includes all required documents for customs clearance in destination markets. SDF provides comprehensive documentation packages: commercial invoice, packing list, bill of lading, certificate of origin, BGMEA membership certificate, export license, insurance certificate (for CIF/DDP), and all certification documents (GOTS, OEKO-TEX, etc.). Documentation is prepared according to destination market requirements for smooth customs clearance.</p>
+        
+        <p>Documentation varies by market. USA shipments include CPSIA compliance for children's knitwear, FTC labeling requirements, and country of origin marking. EU shipments include REACH compliance certificates, preferential origin documentation for duty-free access under EBA scheme, and CE marking where applicable. Australian and Canadian shipments include market-specific certification and import permit documentation. All documentation is provided in English and formatted per destination market requirements.</p>
+        
+        <p>For knitwear exports, we include fabric testing reports documenting GSM, shrinkage, and color fastness. These reports demonstrate quality compliance and may be required for customs or regulatory purposes in some markets. BGMEA membership certificate verifies our status as a legitimate Bangladesh garment manufacturer, providing additional credibility for customs and regulatory authorities.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Knitwear Exporter FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">Why is Bangladesh the world's largest knitwear exporter?</h3>
+          <p class="faq__answer">Bangladesh is the world's largest knitwear exporter with 70% of $47B garment exports being knitwear ($33B annually). This results from integrated supply chains, competitive labor costs, duty-free access to EU (EBA), Australia (DFQF), and Canada (FTA), and decades of specialization in knitwear production. BGMEA data confirms Bangladesh's knitwear dominance globally.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What knitwear products do you export?</h3>
+          <p class="faq__answer">We export t-shirts, hoodies, sweatshirts, sweaters, activewear (leggings, sports bras), polo shirts, and other knit garments. All products available for export to USA, UK, Australia, Canada, and EU markets. Vertical integration from knitting to finishing ensures quality control and competitive pricing for all knitwear categories.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is your minimum order for knitwear export?</h3>
+          <p class="faq__answer">Our knitwear export minimum is 300 pieces per style. This applies to t-shirts, hoodies, sweaters, activewear, and all other knitwear categories. For established buyers with annual commitments, we can negotiate lower minimums based on total volume. Minimum can be split across sizes within a single colorway.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Are you BGMEA certified for knitwear export?</h3>
+          <p class="faq__answer">Yes. SDF is a BGMEA (Bangladesh Garment Manufacturers and Exporters Association) member in good standing with {companyAge}+ years of continuous membership. BGMEA certification ensures compliance with labor standards, safety regulations, and export requirements. BGMEA membership provides buyer confidence in ethical production and export legitimacy.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What shipping terms do you offer for knitwear export?</h3>
+          <p class="faq__answer">We offer FOB (Free On Board), CIF (Cost, Insurance, Freight), and DDP (Delivered Duty Paid) terms per Incoterms 2020. FOB is standard for knitwear export. CIF recommended for first-time importers. DDP available for door-to-door delivery. Terms negotiable based on order volume and buyer preference for logistics control.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do you ensure knitwear export quality consistency?</h3>
+          <p class="faq__answer">Quality consistency through vertical integration (knitting to finishing in-house), retained fabric samples for every order, inline quality checks at knitting, dyeing, and sewing stages, and AQL inspection before shipment. Fabric testing reports included with every shipment documenting GSM, shrinkage, and color fastness for quality verification.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What duty advantages does Bangladesh knitwear offer?</h3>
+          <p class="faq__answer">Bangladesh knitwear qualifies for duty-free or reduced duty access to EU (0% under EBA), Australia (0% under DFQF), Canada (0% under FTA), and other markets through trade agreements. USA: MFN rate applies. Duty savings of 5-15% vs China depending on market. BGMEA data confirms Bangladesh's duty advantages for knitwear exports globally.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What documentation do you provide for knitwear export?</h3>
+          <p class="faq__answer">Full export documentation: commercial invoice, packing list, bill of lading, certificate of origin, BGMEA membership certificate, export license, insurance certificate (for CIF/DDP), and all certification documents (GOTS, OEKO-TEX, etc.). Documentation tailored to destination market requirements for customs clearance and regulatory compliance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Import Knitwear from Bangladesh?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for knitwear export pricing, shipping terms, and documentation. We provide detailed quotes with FOB, CIF, and DDP options, full export documentation, and duty optimization guidance. BGMEA certified with {companyAge}+ years of knitwear export experience. No commitment required for initial consultation.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact" class="section__cta section__cta--primary">Request Export Quote</a>
+        <a href="/tools/sample-request" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/garment-exporter" style="color: var(--color-primary);">garment exporter</a>, <a href="/clothing-exporter" style="color: var(--color-primary);">clothing exporter</a>, <a href="/knitwear-factory" style="color: var(--color-primary);">knitwear factory</a>, <a href="/t-shirt-manufacturer" style="color: var(--color-primary);">t-shirt manufacturer</a>, <a href="/hoodie-manufacturer" style="color: var(--color-primary);">hoodie manufacturer</a>, <a href="/sweater-manufacturer" style="color: var(--color-primary);">sweater manufacturer</a>, <a href="/activewear-manufacturer" style="color: var(--color-primary);">activewear manufacturer</a>.
+      </p>
+    </div>
+  </section>
+
+<section style="padding:2rem 0;border-top:1px solid var(--color-border);margin-top:2rem"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:1.1rem;font-weight:600;color:var(--color-text);margin-bottom:1rem">Related Services</h2><nav aria-label="Related pages"><ul style="display:flex;flex-wrap:wrap;gap:0.75rem;list-style:none;padding:0"><li><a href="/low-moq-clothing-manufacturers" style="color:var(--color-primary)">Low MOQ Manufacturers</a></li><li><a href="/private-label-manufacturer" style="color:var(--color-primary)">Private Label</a></li><li><a href="/clothing-manufacturers-for-startups" style="color:var(--color-primary)">Startup Manufacturers</a></li><li><a href="/oem-clothing-manufacturer" style="color:var(--color-primary)">OEM Manufacturing</a></li><li><a href="/sustainable-clothing-manufacturers" style="color:var(--color-primary)">Sustainable Manufacturing</a></li><li><a href="/certifications" style="color:var(--color-primary)">Certifications</a></li><li><a href="/quality-inspection-service" style="color:var(--color-primary)">Quality Inspection</a></li><li><a href="/tech-pack-service" style="color:var(--color-primary)">Tech Pack Service</a></li><li><a href="/sampling-service" style="color:var(--color-primary)">Sampling Service</a></li><li><a href="/full-package-production" style="color:var(--color-primary)">Full Package Production</a></li><li><a href="/tools/price-calculator" style="color:var(--color-primary)">Price Calculator</a></li><li><a href="/contact" style="color:var(--color-primary)">Get a Quote</a></li></ul></nav></div></section>
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)">
+<div style="max-width:900px;margin:0 auto;padding:0 1.5rem">
+<h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">
+Why Work with a Bangladesh Clothing Manufacturer?
+</h2>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+Bangladesh is the world's second-largest garment exporter, shipping over $47 billion
+in apparel annually to markets in the USA, UK, EU, and Australia. The country's
+manufacturing sector has spent four decades building infrastructure, expertise, and
+compliance systems that rival any other sourcing destination.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+For startup brands and established labels alike, Bangladesh offers a combination
+that's difficult to match: low minimum order quantities, competitive FOB pricing,
+world-class certifications including GOTS and OEKO-TEX, and duty-free access to
+EU markets through the GSP scheme. SDF Clothing brings all of these advantages
+under one roof, with a minimum order quantity of just 300 pieces per style.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+Working with a Bangladesh manufacturer means access to one of the deepest pools
+of garment-making expertise on the planet. Factories here specialize in knitwear,
+woven garments, denim, activewear, and technical apparel. Lead times are
+competitive | 30 to 45 days for bulk production | and the export infrastructure
+connecting Dhaka and Chittagong to global ports is mature and reliable.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+For brands targeting the US market, Bangladesh avoids the Section 301 tariffs
+that add 25% or more to Chinese imports. For EU brands, GSP duty-free access
+means lower landed costs compared to sourcing from countries without preferential
+trade agreements. These trade advantages translate directly into better margins
+or more competitive retail pricing.
+</p>
+<h3 style="font-size:1.25rem;font-weight:600;color:var(--color-text);margin:2rem 0 1rem">
+SDF Clothing | Your Direct Manufacturing Partner
+</h3>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+SDF Clothing is a direct-access factory | not a trading company or buying house.
+When you work with us, you communicate directly with our production team, receive
+transparent pricing without agent markup, and maintain full control over your
+supply chain. Our certifications include GOTS, OEKO-TEX Standard 100, BSCI,
+WRAP, and ISO 9001, giving you and your customers confidence in every order.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+We work with brands at every stage | from first-time founders ordering 300 pieces
+to established labels running tens of thousands of units per season. Our in-house
+services cover tech pack development, fabric sourcing, sampling, bulk production,
+quality inspection, and export documentation. One team, one point of contact,
+from your first enquiry to shipment confirmation.
+</p>
+</div>
+</section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">SDF Clothing is a direct-access garment factory in Bangladesh | not a trading company or buying house. When you work with us, you communicate directly with our production team, receive transparent pricing without agent markup, and maintain full control over your supply chain. Our factory holds GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certifications.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Bangladesh is the world's second-largest garment exporter, shipping over $47 billion in apparel annually to USA, UK, EU and Australian markets. Our minimum order of 300 pieces reflects our commitment to supporting brands at every stage of growth | from first collections to established seasonal production runs. We offer full package production covering tech pack development, fabric sourcing, sampling, bulk manufacturing, quality inspection, and export documentation under one roof.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">For US brands, sourcing from Bangladesh avoids the Section 301 tariffs that add 25% or more to Chinese imports. For EU brands, Bangladesh's GSP duty-free access delivers lower landed costs compared to most other sourcing destinations. These trade advantages combine with competitive FOB pricing to deliver strong margins for our clients.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/tools/sample-request" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+
+
+
+
