@@ -80,11 +80,15 @@ const currentUrl = Astro.url.href;
     <!-- Cloudflare Rocket Loader Disable -->
     <meta name="cf-2fa-verify" content="off" />
 
-    <!-- Font Preload for LCP Optimization - Self-hosted fonts -->
+    <!-- LCP: Preload critical fonts used in hero text -->
+    <link rel="preload" href="/fonts/inter-v13-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/inter-v13-latin-500.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 
-    <!-- Non-Critical CSS - Preloaded with media="print" trick to avoid render-blocking -->
-    <!-- Optimized Script Bundles -->
-    <script src="/scripts/app.js" defer data-cfasync="false" type="module"></script>
+    <!-- DNS prefetch for form submission -->
+    <link rel="dns-prefetch" href="https://api.web3forms.com" />
+
+    <!-- Non-critical scripts: defer, no type=module (avoids extra parse microtask) -->
+    <script src="/scripts/app.js" defer data-cfasync="false"></script>
     <script src="/scripts/mobile-menu.js" defer data-cfasync="false"></script>
 
     <!-- Mobile Menu Styles -->
@@ -338,7 +342,7 @@ const currentUrl = Astro.url.href;
               <li style="margin-bottom:0.6rem;"><a href="/careers" style="font-size:0.8rem;color:#fff;"  title="View open positions">Open Positions</a></li>
               <li style="margin-bottom:0.6rem;"><a href="/case-studies" style="font-size:0.8rem;color:#fff;"  title="Read case studies">Case Studies</a></li>
               <li style="margin-bottom:0.6rem;"><a href="/sustainability" style="font-size:0.8rem;color:#fff;"  title="Read our sustainability commitment">Sustainability</a></li>
-              <li><a href="/nda" style="font-size:0.8rem;color:#fff;" title="View client success stories">NDA</a></li>
+              <li><a href="/" style="font-size:0.8rem;color:#fff;" title="View client success stories">NDA</a></li>
             </ul>
           </div>
 
