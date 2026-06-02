@@ -327,6 +327,49 @@ const schemaManufacturingService = {
   }
 };
 
+const schemaOEMService = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "B2B Clothing Manufacturing Services — OEM ODM Private Label CMT",
+  "provider": { "@id": SITE + "/#organization" },
+  "serviceType": "Garment Manufacturing",
+  "description": "SDF Clothing offers four core B2B manufacturing models for fashion brands: OEM, ODM, Private Label, and CMT. All production handled in-house at our Dhaka, Bangladesh facility.",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Manufacturing Service Types",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "OEM Clothing Manufacturing", "description": "Production from your own designs and tech packs under your brand label" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ODM Clothing Manufacturing", "description": "Choose from our existing base designs and customise with your own branding" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Private Label Apparel Manufacturing", "description": "Full private label service with custom woven labels, hang tags, and branded packaging" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CMT Garment Service", "description": "You supply the fabric, we handle cutting, sewing, and finishing to your specification" } }
+    ]
+  }
+};
+
+const schemaClientEligibility = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "B2B Clothing Manufacturing — Who We Manufacture For",
+  "provider": { "@id": SITE + "/#organization" },
+  "description": "SDF Clothing manufactures exclusively for registered fashion brands, labels, wholesalers, and buying houses. We do not sell retail or accept individual orders below our 300-piece MOQ.",
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "Fashion brands, startup clothing labels, wholesale businesses, private label buyers, buying houses, e-commerce apparel brands, garment sourcing agents"
+  }
+};
+
+const schemaBangladeshArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Why Fashion Brands Choose Bangladesh Clothing Manufacturers",
+  "author": { "@id": SITE + "/#founder" },
+  "publisher": { "@id": SITE + "/#organization" },
+  "datePublished": "2024-01-01",
+  "dateModified": new Date().toISOString().split("T")[0],
+  "about": { "@id": SITE + "/#organization" },
+  "description": "Bangladesh is the world's second-largest apparel exporter. Sourcing from a Bangladesh clothing manufacturer offers 30–40% cost savings over China and Vietnam, EU and UK duty-free access under GSP, and the highest concentration of GOTS certified garment factories globally."
+};
+
 const combinedSchema = [
   schemaOrganization,
   schemaWebSite,
@@ -338,7 +381,10 @@ const combinedSchema = [
   schemaAccessoryList,
   schemaToolsList,
   schemaAggregateRating,
-  schemaManufacturingService
+  schemaManufacturingService,
+  schemaOEMService,
+  schemaClientEligibility,
+  schemaBangladeshArticle
 ];
 ---
 
@@ -1608,7 +1654,7 @@ const combinedSchema = [
 
         <div id="service-result" style="margin-top: var(--space-md); display: none;">
           <p style="font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-red); margin-bottom: var(--space-xs);">Recommended</p>
-          <h3 id="result-service" style="color: var(--color-text); font-size: 1.2rem; font-weight: 500; margin-bottom: var(--space-xs);"></h3>
+          <h3 id="result-service" aria-label="Recommended manufacturing service result" style="color: var(--color-text); font-size: 1.2rem; font-weight: 500; margin-bottom: var(--space-xs);"></h3>
           <p id="result-description" style="color: var(--color-text); font-size: 0.9rem; line-height: 1.5; margin-bottom: var(--space-sm);"></p>
           <div style="display: flex; gap: var(--space-md);">
             <a href="/contact" style="color: var(--color-text); text-decoration: none; font-size: 0.9rem;" title="Request a free quote from our garment manufacturers">Get quote →</a>
@@ -1694,7 +1740,7 @@ const combinedSchema = [
           <div id="duty-result" class="index__price-result" style="margin-top: var(--space-md); display: none;">
             <p id="duty-savings" style="color: var(--color-text); font-size: 1.1rem; font-weight: 500;"></p>
             <div id="duty-port-info" style="margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-red); display: none; background-color: var(--color-bg);">
-              <h4 id="duty-port-heading" style="color: var(--color-text); font-size: 0.9rem; margin-bottom: var(--space-sm);"></h4>
+              <h4 id="duty-port-heading" aria-label="Import duty port information" style="color: var(--color-text); font-size: 0.9rem; margin-bottom: var(--space-sm);"></h4>
               <div class="index__grid index__grid--3" style="gap: var(--space-md); background-color: var(--color-bg);">
                 <div id="duty-sea-ports" style="font-size: 0.75rem; color: var(--color-text);">
                   <p style="font-weight: 500; margin-bottom: var(--space-xs); color: var(--color-text);">Sea Ports</p>
@@ -2307,24 +2353,6 @@ const combinedSchema = [
        ==================================================== -->
   <section class="index__section" aria-label="Types of clothing manufacturing — OEM, ODM, private label and CMT" itemscope itemtype="https://schema.org/Service">
     <div class="index__container">
-      <script type="application/ld+json">{
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "B2B Clothing Manufacturing Services",
-        "provider": {"@id": "https://sdfltd.com/#organization"},
-        "serviceType": "Garment Manufacturing",
-        "description": "SDF Clothing offers four core B2B manufacturing models for fashion brands: OEM, ODM, Private Label, and CMT. All production is handled in-house at our Dhaka, Bangladesh facility.",
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Manufacturing Service Types",
-          "itemListElement": [
-            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "OEM — Original Equipment Manufacturing", "description": "Production from your own designs and tech packs under your brand label"}},
-            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "ODM — Original Design Manufacturing", "description": "Choose from our existing base designs and customise with your own branding"}},
-            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Private Label Apparel", "description": "Full private label service with custom woven labels, hang tags, and branded packaging"}},
-            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "CMT — Cut Make Trim", "description": "You supply the fabric, we handle cutting, sewing, and finishing to your specification"}}
-          ]
-        }
-      }</script>
 
       <header class="index__section-header">
         <span class="index__section-label">MANUFACTURING MODELS</span>
@@ -2364,17 +2392,6 @@ const combinedSchema = [
        ==================================================== -->
   <section class="index__section" aria-label="Who we manufacture for — B2B clothing brands and wholesale buyers">
     <div class="index__container">
-      <script type="application/ld+json">{
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "B2B Clothing Manufacturing — Client Eligibility",
-        "provider": {"@id": "https://sdfltd.com/#organization"},
-        "description": "SDF Clothing manufactures exclusively for registered fashion brands, labels, wholesalers, and buying houses. We do not sell retail, stock garments, or accept individual orders below our 300-piece MOQ.",
-        "audience": {
-          "@type": "BusinessAudience",
-          "audienceType": "Fashion brands, startup clothing labels, wholesale businesses, private label buyers, buying houses, e-commerce apparel brands"
-        }
-      }</script>
 
       <header class="index__section-header">
         <span class="index__section-label">WHO WE SERVE</span>
@@ -2442,17 +2459,6 @@ const combinedSchema = [
        ==================================================== -->
   <section class="index__section" aria-label="Why Bangladesh clothing manufacturers — cost, duty and certification advantages">
     <div class="index__container">
-      <script type="application/ld+json">{
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Why Fashion Brands Source from Bangladesh Clothing Manufacturers",
-        "author": {"@id": "https://sdfltd.com/#founder"},
-        "publisher": {"@id": "https://sdfltd.com/#organization"},
-        "datePublished": "2024-01-01",
-        "dateModified": "2026-06-01",
-        "about": {"@id": "https://sdfltd.com/#organization"},
-        "description": "Bangladesh is the world's second-largest apparel exporter. Sourcing from a Bangladesh clothing manufacturer offers 30-40% cost savings over China and Vietnam, EU and UK duty-free access, and the highest concentration of GOTS certified garment factories globally."
-      }</script>
 
       <header class="index__section-header">
         <span class="index__section-label">WHY BANGLADESH</span>
@@ -2726,6 +2732,11 @@ const combinedSchema = [
             <div style="margin-top:1rem;text-align:center;">
               <a href="/clothing-manufacturers/" class="index__link" style="font-size:0.75rem;" title="View all clothing manufacturer country pages">View all 36 country pages →</a>
             </div>
+          </div><!-- end country list div -->
+          </div><!-- end faq-right -->
+        </div><!-- end faq-grid -->
+      </div><!-- end container -->
+    </section><!-- end FAQ section -->
 
   <section class="index__section" aria-label="Clothing manufacturing guides and free tools for fashion brands">
     <div class="index__container">
@@ -2804,7 +2815,7 @@ const combinedSchema = [
     </p>
   </div>
 
-</div>
+</div><!-- end .index -->
 
 <div id="sticky-bar" class="index__sticky-bar">
   <a href="/contact" class="index__btn index__btn--primary" title="Get your free clothing manufacturing quote">Get Free Quote</a>
