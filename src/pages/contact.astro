@@ -9,8 +9,6 @@ const canonicalUrl = "https://sdfltd.com/contact";
 
 <BaseLayout title={pageTitle} description={pageDescription}>
 
-<!-- Preconnect to form submission origins -->
-
 <meta name="robots" content="index, follow" />
 
 <meta property="og:title" content="Contact Garment Factory Bangladesh | Free FOB Quote — SDF Clothing" />
@@ -102,7 +100,6 @@ const canonicalUrl = "https://sdfltd.com/contact";
         <h2 style="font-size:0.9rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#fff;margin-bottom:1rem;">Send Your Inquiry</h2>
 
         <form id="contactForm" data-contact>
-          <!-- Honeypot -->
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
           <div style="margin-bottom:0.6rem;">
@@ -477,8 +474,8 @@ const canonicalUrl = "https://sdfltd.com/contact";
   </div>
 </section>
 
-<!-- THANK YOU OVERLAY (hidden, shown via JS) -->
-<div id="sdf-thankyou" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.97);display:none;align-items:center;justify-content:center;z-index:9999;padding:2rem;">
+<!-- THANK YOU OVERLAY -->
+<div id="sdf-thankyou" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.97);align-items:center;justify-content:center;z-index:9999;padding:2rem;">
   <div style="max-width:460px;width:100%;border:1px solid #e00;padding:3rem 2.5rem;text-align:center;">
     <div style="width:48px;height:48px;border:1px solid #e00;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.4rem;color:#e00;">✓</div>
     <h2 style="font-size:1.1rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;margin-bottom:0.5rem;">Message Received</h2>
@@ -496,7 +493,6 @@ const canonicalUrl = "https://sdfltd.com/contact";
 document.addEventListener('DOMContentLoaded', function() {
   const pageLoadTime = Date.now();
 
-  // Country data — inline
   const COUNTRIES = [
     {code:"AF",name:"Afghanistan",phone:"+93",flag:"🇦🇫"},
     {code:"AL",name:"Albania",phone:"+355",flag:"🇦🇱"},
@@ -700,7 +696,7 @@ document.addEventListener('DOMContentLoaded', function() {
     COUNTRIES.forEach(c => {
       const opt = document.createElement('option');
       opt.value = c.phone;
-      opt.textContent = `${c.flag} ${c.phone}`;
+      opt.textContent = c.flag + ' ' + c.phone;
       opt.dataset.code = c.code;
       if (c.code === selectedCode) opt.selected = true;
       sel.appendChild(opt);
@@ -714,22 +710,44 @@ document.addEventListener('DOMContentLoaded', function() {
     COUNTRIES.forEach(c => {
       const opt = document.createElement('option');
       opt.value = c.name;
-      opt.textContent = `${c.flag} ${c.name}`;
+      opt.textContent = c.flag + ' ' + c.name;
       if (c.code === selectedCode) opt.selected = true;
       sel.appendChild(opt);
     });
   }
 
+  async function getGeo() {
+    try {
+      const r = await fetch('https://ipinfo.io/json');
+      const d = await r.json();
+      if (d.ip) return { ip: d.ip, city: d.city||'', region: d.region||'', country: d.country||'Unknown', countryCode: d.country||'', isp: d.org||'Unknown' };
+    } catch {}
+    try {
+      const r = await fetch('https://ipapi.co/json/');
+      const d = await r.json();
+      if (d.ip) return { ip: d.ip, city: d.city||'', region: d.region||'', country: d.country_name||'Unknown', countryCode: d.country_code||'', isp: d.org||'Unknown' };
+    } catch {}
+    try {
+      const r = await fetch('https://ip-api.com/json/');
+      const d = await r.json();
+      if (d.query) return { ip: d.query, city: d.city||'', region: d.regionName||'', country: d.country||'Unknown', countryCode: d.countryCode||'', isp: d.isp||'Unknown' };
+    } catch {}
+    try {
+      const r = await fetch('https://api.ipify.org?format=json');
+      const d = await r.json();
+      return { ip: d.ip||'–', city: '', region: '', country: 'Unknown', countryCode: '', isp: 'Unknown' };
+    } catch {}
+    return { ip: '–', city: '', region: '', country: 'Unknown', countryCode: '', isp: 'Unknown' };
+  }
+
   async function autoDetect() {
     const geo = await getGeo();
-    
     if (geo.countryCode && geo.countryCode !== '') {
       populateCountryDropdown(geo.countryCode);
       populatePhoneDropdown(geo.countryCode);
     } else {
       populateCountryDropdown('');
       populatePhoneDropdown('');
-      
       const wrapper = document.getElementById('phone-wrapper');
       if (wrapper) {
         const warn = document.createElement('p');
@@ -738,7 +756,6 @@ document.addEventListener('DOMContentLoaded', function() {
         wrapper.parentNode.insertBefore(warn, wrapper.nextSibling);
       }
     }
-    
     return geo;
   }
 
@@ -765,77 +782,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const ua = navigator.userAgent;
     let browser = 'Unknown';
     let version = '';
-    
     if (ua.indexOf('Chrome') > -1 && ua.indexOf('Edg') === -1 && ua.indexOf('OPR') === -1) {
       browser = 'Chrome';
-      const match = ua.match(/Chrome\/(\d+\.\d+\.\d+\.\d+)/);
-      if (match) version = match[1];
+      const m = ua.match(/Chrome\/(\d+\.\d+\.\d+\.\d+)/);
+      if (m) version = m[1];
     } else if (ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') === -1) {
       browser = 'Safari';
-      const match = ua.match(/Version\/(\d+\.\d+)/);
-      if (match) version = match[1];
+      const m = ua.match(/Version\/(\d+\.\d+)/);
+      if (m) version = m[1];
     } else if (ua.indexOf('Firefox') > -1) {
       browser = 'Firefox';
-      const match = ua.match(/Firefox\/(\d+\.\d+)/);
-      if (match) version = match[1];
+      const m = ua.match(/Firefox\/(\d+\.\d+)/);
+      if (m) version = m[1];
     } else if (ua.indexOf('Edg') > -1) {
       browser = 'Edge';
-      const match = ua.match(/Edg\/(\d+\.\d+\.\d+\.\d+)/);
-      if (match) version = match[1];
+      const m = ua.match(/Edg\/(\d+\.\d+\.\d+\.\d+)/);
+      if (m) version = m[1];
     } else if (ua.indexOf('OPR') > -1) {
       browser = 'Opera';
-      const match = ua.match(/OPR\/(\d+\.\d+\.\d+\.\d+)/);
-      if (match) version = match[1];
+      const m = ua.match(/OPR\/(\d+\.\d+\.\d+\.\d+)/);
+      if (m) version = m[1];
     }
-    
-    return version ? `${browser} ${version}` : browser;
-  }
-
-  async function getGeo() {
-    try {
-      const r = await fetch('https://ipinfo.io/json');
-      const d = await r.json();
-      if (d.ip) return {
-        ip: d.ip,
-        city: d.city||'',
-        region: d.region||'',
-        country: d.country||'Unknown',
-        countryCode: d.country||'',
-        isp: d.org||'Unknown'
-      };
-    } catch {}
-    try {
-      const r = await fetch('https://ipapi.co/json/');
-      const d = await r.json();
-      if (d.ip) return {
-        ip: d.ip,
-        city: d.city||'',
-        region: d.region||'',
-        country: d.country_name||'Unknown',
-        countryCode: d.country_code||'',
-        isp: d.org||'Unknown'
-      };
-    } catch {}
-    try {
-      const r = await fetch('https://ip-api.com/json/');
-      const d = await r.json();
-      if (d.query) return {
-        ip: d.query,
-        city: d.city||'',
-        region: d.regionName||'',
-        country: d.country||'Unknown',
-        countryCode: d.countryCode||'',
-        isp: d.isp||'Unknown'
-      };
-    } catch {}
-    try {
-      const r = await fetch('https://api.ipify.org?format=json');
-      const d = await r.json();
-      return {ip:d.ip||'–',city:'',region:'',
-              country:'Unknown',countryCode:'',isp:'Unknown'};
-    } catch {}
-    return {ip:'–',city:'',region:'',country:'Unknown',
-            countryCode:'',isp:'Unknown'};
+    return version ? browser + ' ' + version : browser;
   }
 
   function generateReferenceId(ip) {
@@ -846,17 +814,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const hours = String(now.getHours()).padStart(2,'0');
     const minutes = String(now.getMinutes()).padStart(2,'0');
     const seconds = String(now.getSeconds()).padStart(2,'0');
-    const hhmm = `${hours}${minutes}`;
-    
-    // Generate device fingerprint
+    const hhmm = hours + minutes;
     const canvas = document.createElement('canvas');
     const gl = canvas.getContext('webgl');
     const debugInfo = gl ? gl.getExtension('WEBGL_debug_renderer_info') : null;
-    const gpuHash = debugInfo ? 
-      gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL).slice(0,4).replace(/\s/g,'') : 
-      Math.random().toString(36).slice(2,6).toUpperCase();
-    
-    // IP last segment or random
+    const gpuHash = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL).slice(0,4).replace(/\s/g,'') : Math.random().toString(36).slice(2,6).toUpperCase();
     let ipSuffix = '0000';
     if (ip && ip !== '–' && ip !== 'Unknown') {
       const parts = ip.split('.');
@@ -866,135 +828,76 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       ipSuffix = Math.floor(1000 + Math.random() * 9000).toString();
     }
-    
-    return `SDF-${year}${month}${day}-${hhmm}${seconds}-${ipSuffix}`;
+    return 'SDF-' + year + month + day + '-' + hhmm + seconds + '-' + ipSuffix;
   }
 
   function showThanks(geo, device, fillDuration, referenceId, deviceId) {
-    const overlay  = document.getElementById('sdf-thankyou');
-    const details  = document.getElementById('ty-details');
+    const overlay = document.getElementById('sdf-thankyou');
+    const details = document.getElementById('ty-details');
     const closeBtn = document.getElementById('ty-close');
     if (!overlay || !details) return;
-
-    const now  = new Date();
-    const time = now.toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
-    const loc  = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
+    const now = new Date();
+    const time = now.toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    const loc = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
     const browser = getBrowser();
-    const resolution = `${window.screen.width} x ${window.screen.height}`;
+    const resolution = window.screen.width + ' x ' + window.screen.height;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
     const referrer = document.referrer || 'Direct';
-
-    details.innerHTML = `
-      <span style="color:#FFFFFF;">Reference ID</span><span style="color:#fff;">${referenceId}</span>
-      <span style="color:#FFFFFF;">Device ID</span><span style="color:#fff;">${deviceId||'N/A'}</span>
-      <span style="color:#FFFFFF;">Device</span><span style="color:#fff;">${device}</span>
-      <span style="color:#FFFFFF;">Browser</span><span style="color:#fff;">${browser}</span>
-      <span style="color:#FFFFFF;">Resolution</span><span style="color:#fff;">${resolution}</span>
-      <span style="color:#FFFFFF;">Timezone</span><span style="color:#fff;">${timezone}</span>
-      <span style="color:#FFFFFF;">Location</span><span style="color:#fff;">${loc||'Unknown'}</span>
-      <span style="color:#FFFFFF;">ISP</span><span style="color:#fff;">${geo.isp}</span>
-      <span style="color:#FFFFFF;">IP</span><span style="color:#fff;">${geo.ip}</span>
-      <span style="color:#FFFFFF;">Referrer</span><span style="color:#fff;">${referrer}</span>
-      <span style="color:#FFFFFF;">Fill Time</span><span style="color:#fff;">${fillDuration}s</span>
-      <span style="color:#FFFFFF;">Time</span><span style="color:#fff;">${time}</span>
-    `;
-
+    details.innerHTML =
+      '<span style="color:#FFFFFF;">Reference ID</span><span style="color:#fff;">' + referenceId + '</span>' +
+      '<span style="color:#FFFFFF;">Device ID</span><span style="color:#fff;">' + (deviceId||'N/A') + '</span>' +
+      '<span style="color:#FFFFFF;">Device</span><span style="color:#fff;">' + device + '</span>' +
+      '<span style="color:#FFFFFF;">Browser</span><span style="color:#fff;">' + browser + '</span>' +
+      '<span style="color:#FFFFFF;">Resolution</span><span style="color:#fff;">' + resolution + '</span>' +
+      '<span style="color:#FFFFFF;">Timezone</span><span style="color:#fff;">' + timezone + '</span>' +
+      '<span style="color:#FFFFFF;">Location</span><span style="color:#fff;">' + (loc||'Unknown') + '</span>' +
+      '<span style="color:#FFFFFF;">ISP</span><span style="color:#fff;">' + geo.isp + '</span>' +
+      '<span style="color:#FFFFFF;">IP</span><span style="color:#fff;">' + geo.ip + '</span>' +
+      '<span style="color:#FFFFFF;">Referrer</span><span style="color:#fff;">' + referrer + '</span>' +
+      '<span style="color:#FFFFFF;">Fill Time</span><span style="color:#fff;">' + fillDuration + 's</span>' +
+      '<span style="color:#FFFFFF;">Time</span><span style="color:#fff;">' + time + '</span>';
     overlay.style.display = 'flex';
-    if (closeBtn) closeBtn.onclick = () => { overlay.style.display = 'none'; };
+    if (closeBtn) closeBtn.onclick = function() { overlay.style.display = 'none'; };
   }
 
   function withTimeout(promise, ms) {
     return Promise.race([
       promise,
-      new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), ms))
+      new Promise(function(_, reject) { setTimeout(function() { reject(new Error('Timeout')); }, ms); })
     ]);
   }
 
-  async function submitToWorker(data) {
-  // PRIMARY — Web3Forms direct
-  try {
-    const formData = new FormData();
-    formData.append('access_key', '028983eb-bca7-4bbc-be4f-7db2873903aa');
-    formData.append('subject', `[SDF] New Contact Inquiry — ${data.name || 'Unknown'}`);
-    formData.append('from_name', 'SDF Clothing Website');
-    formData.append('name',    data.name    || '');
-    formData.append('email',   data.email   || '');
-    formData.append('phone',   data.phone   || data['phone-number'] || '');
-    formData.append('company', data.company || '');
-    formData.append('country', data.country || '');
-    formData.append('message', data.message || '');
-    formData.append('_device',        data._device        || '');
-    formData.append('_location',      data._location      || '');
-    formData.append('_ip',            data._ip            || '');
-    formData.append('_reference_id',  data._reference_id  || '');
-    formData.append('_device_id',     data._device_id     || '');
-    formData.append('_screen',        data._screen        || '');
-    formData.append('_timezone',      data._timezone      || '');
-    formData.append('_language',      data._language      || '');
-
-    const r = await withTimeout(
-      fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData }),
-      6000
-    );
-    const j = await r.json();
-    if (j.success === true) return true;
-  } catch {}
-
-  // BACKUP 1 — Forminit direct
-  try {
-    const r = await withTimeout(
-      fetch('https://forminit.com/f/cfy9nydyv19', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name:    data.name    || '',
-          email:   data.email   || '',
-          phone:   data.phone   || data['phone-number'] || '',
-          company: data.company || '',
-          country: data.country || '',
-          message: data.message || '',
-          _device:       data._device       || '',
-          _location:     data._location     || '',
-          _reference_id: data._reference_id || '',
-        }),
-      }),
-      6000
-    );
-    if (r.ok) return true;
-  } catch {}
-
-  // BACKUP 2 — Cloudflare Worker (EmailJS relay)
-  try {
-    const r = await withTimeout(
-      fetch('https://sdf-email.boom3model.workers.dev/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          _form_type:    'contact',
-          name:          data.name    || '',
-          email:         data.email   || '',
-          phone:         data.phone   || data['phone-number'] || '',
-          company:       data.company || '',
-          country:       data.country || '',
-          message:       data.message || '',
-          _device:       data._device       || '',
-          _location:     data._location     || '',
-          _ip:           data._ip           || '',
-          _reference_id: data._reference_id || '',
-          _device_id:    data._device_id    || '',
-          _screen:       data._screen       || '',
-          _timezone:     data._timezone     || '',
-          _language:     data._language     || '',
-        }),
-      }),
-      8000
-    );
-    const j = await r.json();
-    if (j.success === true) return true;
-  } catch {}
-
-  return false;
-}
+  async function submitToWeb3Forms(data) {
+    try {
+      const formData = new FormData();
+      formData.append('access_key',  '028983eb-bca7-4bbc-be4f-7db2873903aa');
+      formData.append('subject',     '[SDF] New Contact Inquiry — ' + (data.name || 'Unknown'));
+      formData.append('from_name',   'SDF Clothing Website');
+      formData.append('name',        data.name    || '');
+      formData.append('email',       data.email   || '');
+      formData.append('phone',       data.whatsapp || data.phone || '');
+      formData.append('company',     data.company  || '');
+      formData.append('country',     data.country  || '');
+      formData.append('category',    data.category || '');
+      formData.append('quantity',    data.quantity || '');
+      formData.append('message',     data.message  || '');
+      formData.append('device',      data._device        || '');
+      formData.append('location',    data._location      || '');
+      formData.append('ip',          data._ip            || '');
+      formData.append('reference_id', data._reference_id || '');
+      formData.append('device_id',   data._device_id     || '');
+      formData.append('screen',      data._screen        || '');
+      formData.append('timezone',    data._timezone      || '');
+      formData.append('language',    data._language      || '');
+      const r = await withTimeout(
+        fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData }),
+        8000
+      );
+      const j = await r.json();
+      if (j.success === true) return true;
+    } catch {}
+    return false;
+  }
 
   function setButtonLoading(btn, loading) {
     if (!btn) return;
@@ -1020,7 +923,7 @@ document.addEventListener('DOMContentLoaded', function() {
     combinePhone();
 
     const data = {};
-    new FormData(form).forEach((v,k) => { data[k]=v; });
+    new FormData(form).forEach(function(v, k) { data[k] = v; });
     data['_replyto'] = data.email || '';
     data['_subject'] = 'New Inquiry — SDF Clothing';
 
@@ -1045,9 +948,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const phoneNum = document.getElementById('phone-number-input')?.value.trim() || '';
     if (!phoneNum || phoneNum.replace(/[\s\-\(\)]/g,'').length < 5) {
       alert('Please enter your phone number.');
-      setButtonLoading(btn, false);
-      btn.disabled = false;
-      btn.textContent = 'Send Inquiry';
       return;
     }
 
@@ -1056,9 +956,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const geo = await getGeo();
     const device = getDevice();
 
-    // Collect device fingerprint
     const deviceFingerprint = {
-      screen: `${window.screen.width}x${window.screen.height}`,
+      screen: window.screen.width + 'x' + window.screen.height,
       colorDepth: window.screen.colorDepth,
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       language: navigator.language,
@@ -1080,9 +979,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ipSubmissionCount[geo.ip] = (ipSubmissionCount[geo.ip] || 0) + 1;
       if (ipSubmissionCount[geo.ip] > 3) {
         setButtonLoading(btn, false);
-        btn.disabled = false;
-        btn.textContent = 'Send Inquiry';
-        alert('Too many submissions. Please contact us directly through our contact form.');
+        alert('Too many submissions. Please contact us directly.');
         return;
       }
     }
@@ -1092,14 +989,13 @@ document.addEventListener('DOMContentLoaded', function() {
     data['_location']     = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
     data['_ip']           = geo.ip;
     data['_reference_id'] = referenceId;
-    data['_device_id'] = deviceId;
-    data['_device_fingerprint'] = JSON.stringify(deviceFingerprint);
-    data['_screen'] = deviceFingerprint.screen;
-    data['_timezone'] = deviceFingerprint.timezone;
-    data['_language'] = deviceFingerprint.language;
+    data['_device_id']    = deviceId;
+    data['_screen']       = deviceFingerprint.screen;
+    data['_timezone']     = deviceFingerprint.timezone;
+    data['_language']     = deviceFingerprint.language;
 
     let success = false;
-    try { success = await submitToWorker(data); } catch {}
+    try { success = await submitToWeb3Forms(data); } catch {}
 
     setButtonLoading(btn, false);
 
@@ -1109,7 +1005,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       btn.disabled = false;
       btn.textContent = 'Send Inquiry';
-      alert('Something went wrong. Please contact us directly through our contact form.');
+      alert('Something went wrong. Please email us directly at info@sdfltd.com');
     }
   });
 
@@ -1117,50 +1013,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Tool 1: FOB Price Estimator
   const cmRates = {
-    'tshirt': { min: 0.85, max: 1.40 },
-    'hoodie': { min: 1.80, max: 2.80 },
-    'woven': { min: 1.20, max: 2.00 },
-    'trousers': { min: 1.40, max: 2.20 },
-    'jacket': { min: 3.50, max: 6.00 },
-    'dress': { min: 1.60, max: 2.80 },
-    'knitwear': { min: 2.50, max: 4.50 },
-    'activewear': { min: 1.60, max: 2.60 },
+    'tshirt':      { min: 0.85, max: 1.40 },
+    'hoodie':      { min: 1.80, max: 2.80 },
+    'woven':       { min: 1.20, max: 2.00 },
+    'trousers':    { min: 1.40, max: 2.20 },
+    'jacket':      { min: 3.50, max: 6.00 },
+    'dress':       { min: 1.60, max: 2.80 },
+    'knitwear':    { min: 2.50, max: 4.50 },
+    'activewear':  { min: 1.60, max: 2.60 },
     'accessories': { min: 0.60, max: 1.20 }
   };
 
   const fabricCosts = {
-    'cotton': { min: 1.20, max: 2.20 },
+    'cotton':      { min: 1.20, max: 2.20 },
     'cotton-poly': { min: 0.90, max: 1.80 },
-    'polyester': { min: 0.70, max: 1.40 },
-    'fleece': { min: 1.80, max: 3.20 },
-    'denim': { min: 2.00, max: 3.80 },
-    'linen': { min: 2.20, max: 4.00 },
-    'technical': { min: 2.80, max: 5.00 },
-    'organic': { min: 2.50, max: 4.50 }
+    'polyester':   { min: 0.70, max: 1.40 },
+    'fleece':      { min: 1.80, max: 3.20 },
+    'denim':       { min: 2.00, max: 3.80 },
+    'linen':       { min: 2.20, max: 4.00 },
+    'technical':   { min: 2.80, max: 5.00 },
+    'organic':     { min: 2.50, max: 4.50 }
   };
 
   const decorationAdd = {
-    'none': 0,
-    'screen': 0.35,
+    'none':      0,
+    'screen':    0.35,
     'emb-small': 0.55,
     'emb-large': 1.20,
-    'aop': 1.80,
-    'multi': 2.20
+    'aop':       1.80,
+    'multi':     2.20
   };
 
   document.getElementById('fob-calculate').addEventListener('click', function() {
-    const product = document.getElementById('fob-product').value;
-    const fabric = document.getElementById('fob-fabric').value;
-    const quantity = parseInt(document.getElementById('fob-quantity').value) || 0;
+    const product    = document.getElementById('fob-product').value;
+    const fabric     = document.getElementById('fob-fabric').value;
+    const quantity   = parseInt(document.getElementById('fob-quantity').value) || 0;
     const decoration = document.getElementById('fob-decoration').value;
-    const incoterms = document.getElementById('fob-incoterms').value;
+    const incoterms  = document.getElementById('fob-incoterms').value;
 
-    if (quantity < 1) {
-      alert('Please enter a valid order quantity');
-      return;
-    }
+    if (quantity < 1) { alert('Please enter a valid order quantity'); return; }
 
-    // Quantity discount factor
     let factor;
     if (quantity < 500) factor = 1.18;
     else if (quantity < 1000) factor = 1.10;
@@ -1169,7 +1061,6 @@ document.addEventListener('DOMContentLoaded', function() {
     else if (quantity < 10000) factor = 0.96;
     else factor = 0.92;
 
-    // Incoterms add-on
     let incotermsAdd;
     if (incoterms === 'fob') incotermsAdd = 0;
     else if (incoterms === 'cif') incotermsAdd = 0.55;
@@ -1179,7 +1070,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cmMax = cmRates[product].max;
     const fabricMin = fabricCosts[fabric].min;
     const fabricMax = fabricCosts[fabric].max;
-    const decorAdd = decorationAdd[decoration];
+    const decorAdd  = decorationAdd[decoration];
 
     const fobMin = (fabricMin + cmMin + decorAdd) * factor * 1.15 + incotermsAdd;
     const fobMax = (fabricMax + cmMax + decorAdd) * factor * 1.15 + incotermsAdd;
@@ -1187,32 +1078,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalMin = fobMin * quantity;
     const totalMax = fobMax * quantity;
 
-    // Payment recommendation
     let payment;
     if (totalMin < 5000) payment = 'WorldRemit';
     else if (totalMin < 30000) payment = 'TT (Bank Transfer)';
     else payment = 'Letter of Credit (LC)';
 
-    document.getElementById('fob-price-range').textContent = `$${fobMin.toFixed(2)} – $${fobMax.toFixed(2)} per piece`;
-    document.getElementById('fob-total-value').textContent = `Total Order Value: $${totalMin.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})} – $${totalMax.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
-    document.getElementById('fob-payment').textContent = `Recommended Payment: ${payment}`;
+    document.getElementById('fob-price-range').textContent = '$' + fobMin.toFixed(2) + ' – $' + fobMax.toFixed(2) + ' per piece';
+    document.getElementById('fob-total-value').textContent = 'Total Order Value: $' + totalMin.toLocaleString('en-US', { minimumFractionDigits:0, maximumFractionDigits:0 }) + ' – $' + totalMax.toLocaleString('en-US', { minimumFractionDigits:0, maximumFractionDigits:0 });
+    document.getElementById('fob-payment').textContent = 'Recommended Payment: ' + payment;
     document.getElementById('fob-results').style.display = 'block';
   });
 
   // Tool 2: Shipment Readiness Calculator
   const productionDays = {
-    'tshirt': 35,
-    'hoodie': 45,
-    'woven': 40,
-    'trousers': 40,
-    'jacket': 60,
-    'dress': 45,
-    'knitwear': 55,
-    'activewear': 40,
+    'tshirt':      35,
+    'hoodie':      45,
+    'woven':       40,
+    'trousers':    40,
+    'jacket':      60,
+    'dress':       45,
+    'knitwear':    55,
+    'activewear':  40,
     'accessories': 25
   };
 
-  // Set minimum date for delivery date (today + 45 days)
   const shipDateInput = document.getElementById('ship-date');
   if (shipDateInput) {
     const minDate = new Date();
@@ -1222,35 +1111,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.getElementById('ship-calculate').addEventListener('click', function() {
     const deliveryDateStr = document.getElementById('ship-date').value;
-    const product = document.getElementById('ship-product').value;
-    const quantity = parseInt(document.getElementById('ship-quantity').value) || 0;
+    const product      = document.getElementById('ship-product').value;
+    const quantity     = parseInt(document.getElementById('ship-quantity').value) || 0;
     const sampleRequired = document.querySelector('input[name="ship-sample"]:checked').value === 'yes';
-    const fabricSource = document.querySelector('input[name="ship-fabric"]:checked').value;
+    const fabricSource   = document.querySelector('input[name="ship-fabric"]:checked').value;
 
-    if (!deliveryDateStr) {
-      alert('Please select a required delivery date');
-      return;
-    }
+    if (!deliveryDateStr) { alert('Please select a required delivery date'); return; }
 
     const deliveryDate = new Date(deliveryDateStr);
 
-    // Calculate lead time components
     let production = productionDays[product];
-
-    // Quantity adjustment
     if (quantity >= 10000) production += 15;
     else if (quantity >= 5000) production += 10;
     else if (quantity >= 1000) production += 5;
 
-    let sampleDays = sampleRequired ? 21 : 0;
-    let fabricDays = fabricSource === 'client' ? 14 : 10;
+    const sampleDays   = sampleRequired ? 21 : 0;
+    const fabricDays   = fabricSource === 'client' ? 14 : 10;
     const shippingDays = 28;
-    const lcDays = (quantity * 3) > 30000 ? 7 : 0;
-    const bufferDays = 5;
-
+    const lcDays       = (quantity * 3) > 30000 ? 7 : 0;
+    const bufferDays   = 5;
     const totalLeadTime = production + sampleDays + fabricDays + shippingDays + lcDays + bufferDays;
 
-    // Calculate dates backwards
     const eta = deliveryDate;
     const etd = new Date(deliveryDate);
     etd.setDate(etd.getDate() - shippingDays);
@@ -1265,53 +1146,40 @@ document.addEventListener('DOMContentLoaded', function() {
     fabricComplete.setDate(fabricComplete.getDate() - fabricDays);
 
     const sampleApproval = sampleRequired ? new Date(fabricComplete) : null;
-    if (sampleApproval) {
-      sampleApproval.setDate(sampleApproval.getDate() - sampleDays);
-    }
+    if (sampleApproval) sampleApproval.setDate(sampleApproval.getDate() - sampleDays);
 
     const orderConfirmation = sampleApproval ? new Date(sampleApproval) : new Date(fabricComplete);
     orderConfirmation.setDate(orderConfirmation.getDate() - 5);
 
     const today = new Date();
-
-    // Format dates
-    const formatDate = (date) => {
-      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const formatDate = function(date) {
+      return date.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
     };
+    const isPast = function(date) { return date < today; };
 
-    const isPast = (date) => date < today;
+    const timelineItems = [
+      { label: 'Order Confirmation',      date: orderConfirmation },
+      { label: 'Sample Approval',         date: sampleApproval,  condition: sampleRequired },
+      { label: 'Fabric Sourcing Complete',date: fabricComplete },
+      { label: 'Production Start',        date: productionStart },
+      { label: 'Ex-Factory',              date: exFactory },
+      { label: 'ETD Chittagong Port',     date: etd },
+      { label: 'ETA Destination',         date: eta }
+    ];
 
-    // Build timeline
     let timelineHtml = '';
     let hasPassedDates = false;
 
-    const timelineItems = [
-      { label: 'Order Confirmation', date: orderConfirmation },
-      { label: 'Sample Approval', date: sampleApproval, condition: sampleRequired },
-      { label: 'Fabric Sourcing Complete', date: fabricComplete },
-      { label: 'Production Start', date: productionStart },
-      { label: 'Ex-Factory', date: exFactory },
-      { label: 'ETD Chittagong Port', date: etd },
-      { label: 'ETA Destination', date: eta }
-    ];
-
-    timelineItems.forEach(item => {
+    timelineItems.forEach(function(item) {
       if (item.condition === false) return;
       if (!item.date) return;
-
-      const dateStr = formatDate(item.date);
       const datePassed = isPast(item.date);
       if (datePassed) hasPassedDates = true;
-
-      const icon = datePassed ? '⚠️' : '✅';
+      const icon  = datePassed ? '⚠️' : '✅';
       const color = datePassed ? '#e00' : '#fff';
-
-      timelineHtml += `<p style="color:${color};font-size:0.85rem;display:flex;align-items:center;gap:0.5rem;"><span>${icon}</span> <span>${item.label}: <strong>${dateStr}</strong></span></p>`;
+      timelineHtml += '<p style="color:' + color + ';font-size:0.85rem;display:flex;align-items:center;gap:0.5rem;"><span>' + icon + '</span><span>' + item.label + ': <strong>' + formatDate(item.date) + '</strong></span></p>';
     });
 
-    document.getElementById('ship-timeline').innerHTML = timelineHtml;
-
-    // Show warning if timeline is tight
     const warningEl = document.getElementById('ship-warning');
     if (totalLeadTime < 45) {
       warningEl.style.display = 'block';
@@ -1320,11 +1188,10 @@ document.addEventListener('DOMContentLoaded', function() {
       warningEl.style.display = 'none';
     }
 
-    // Show overall status
     if (hasPassedDates) {
-      timelineHtml += `<p style="color:#e00;font-size:0.8rem;margin-top:0.5rem;">⚠️ Some dates have already passed — tight timeline</p>`;
+      timelineHtml += '<p style="color:#e00;font-size:0.8rem;margin-top:0.5rem;">⚠️ Some dates have already passed — tight timeline</p>';
     } else {
-      timelineHtml += `<p style="color:#0f0;font-size:0.8rem;margin-top:0.5rem;">✅ Achievable timeline</p>`;
+      timelineHtml += '<p style="color:#0f0;font-size:0.8rem;margin-top:0.5rem;">✅ Achievable timeline</p>';
     }
 
     document.getElementById('ship-timeline').innerHTML = timelineHtml;
@@ -1333,105 +1200,77 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Tool 3: Sustainability Score Calculator
   const fabricScores = {
-    'organic-cotton': 38,
-    'recycled-poly': 35,
-    'bamboo': 36,
-    'linen': 34,
-    'conventional-cotton': 22,
-    'synthetic-blend': 18,
-    'denim': 16,
-    'conventional-poly': 14
+    'organic-cotton':     38,
+    'recycled-poly':      35,
+    'bamboo':             36,
+    'linen':              34,
+    'conventional-cotton':22,
+    'synthetic-blend':    18,
+    'denim':              16,
+    'conventional-poly':  14
   };
 
   const shippingScores = {
-    'sea': 24,
-    'air': 8,
-    'express': 3
+    'sea':     24,
+    'air':      8,
+    'express':  3
   };
 
   const packagingScores = {
-    'fsc': 19,
+    'fsc':      19,
     'recycled': 18,
-    'minimal': 16,
-    'polybag': 6
+    'minimal':  16,
+    'polybag':   6
   };
 
   document.getElementById('sus-calculate').addEventListener('click', function() {
-    const fabric = document.getElementById('sus-fabric').value;
+    const fabric   = document.getElementById('sus-fabric').value;
     const quantity = parseInt(document.getElementById('sus-quantity').value) || 0;
     const shipping = document.getElementById('sus-shipping').value;
-    const packaging = document.getElementById('sus-packaging').value;
+    const packaging= document.getElementById('sus-packaging').value;
 
-    if (quantity < 1) {
-      alert('Please enter a valid order quantity');
-      return;
-    }
+    if (quantity < 1) { alert('Please enter a valid order quantity'); return; }
 
-    // Calculate scores
-    const fabricScore = fabricScores[fabric];
+    const fabricScore   = fabricScores[fabric];
     const shippingScore = shippingScores[shipping];
-    const packagingScore = packagingScores[packaging];
+    const packagingScore= packagingScores[packaging];
 
-    // Quantity efficiency bonus
     let quantityBonus;
     if (quantity >= 10000) quantityBonus = 15;
     else if (quantity >= 5000) quantityBonus = 12;
     else if (quantity >= 2000) quantityBonus = 9;
     else if (quantity >= 1000) quantityBonus = 6;
-    else if (quantity >= 500) quantityBonus = 4;
+    else if (quantity >= 500)  quantityBonus = 4;
     else quantityBonus = 2;
 
     const totalScore = fabricScore + shippingScore + packagingScore + quantityBonus;
 
-    // Determine label and color
     let label, color;
-    if (totalScore < 40) {
-      label = '🔴 Needs Improvement';
-      color = '#e00';
-    } else if (totalScore < 60) {
-      label = '🟡 Developing';
-      color = '#ffcc00';
-    } else if (totalScore < 75) {
-      label = '🟢 Good';
-      color = '#0f0';
-    } else if (totalScore < 90) {
-      label = '🟢 Strong';
-      color = '#0f0';
-    } else {
-      label = '🟢 Excellent — EU Ready';
-      color = '#0f0';
-    }
+    if (totalScore < 40) { label = '🔴 Needs Improvement'; color = '#e00'; }
+    else if (totalScore < 60) { label = '🟡 Developing'; color = '#ffcc00'; }
+    else if (totalScore < 75) { label = '🟢 Good'; color = '#0f0'; }
+    else if (totalScore < 90) { label = '🟢 Strong'; color = '#0f0'; }
+    else { label = '🟢 Excellent — EU Ready'; color = '#0f0'; }
 
     document.getElementById('sus-score-number').textContent = totalScore;
     document.getElementById('sus-circle').style.borderColor = color;
-    document.getElementById('sus-score-label').textContent = `Your Score: ${totalScore} / 100 — ${label}`;
+    document.getElementById('sus-score-label').textContent = 'Your Score: ' + totalScore + ' / 100 — ' + label;
 
-    // Generate tips
-    let tips = [];
-    if (fabric === 'conventional-poly') {
-      tips.push('Switch to rPET fabric to gain +21 points');
-    }
-    if (fabric === 'conventional-cotton') {
-      tips.push('Switch to organic cotton (GOTS) to gain +16 points');
-    }
-    if (shipping === 'air' || shipping === 'express') {
-      tips.push('Sea freight reduces your carbon footprint by up to 95% vs air');
-    }
-    if (packaging === 'polybag') {
-      tips.push('Recycled packaging adds +12 points and meets EU packaging directives');
-    }
-    if (totalScore > 75 && tips.length === 0) {
-      tips.push('Your order profile meets the baseline requirements for most EU sustainability audits');
-    }
-    if (totalScore > 85) {
-      tips.push('Your order qualifies for SDF Clothing\'s Green Production Programme — mention this in your inquiry');
-    }
+    const tips = [];
+    if (fabric === 'conventional-poly')    tips.push('Switch to rPET fabric to gain +21 points');
+    if (fabric === 'conventional-cotton')  tips.push('Switch to organic cotton (GOTS) to gain +16 points');
+    if (shipping === 'air' || shipping === 'express') tips.push('Sea freight reduces your carbon footprint by up to 95% vs air');
+    if (packaging === 'polybag')           tips.push('Recycled packaging adds +12 points and meets EU packaging directives');
+    if (totalScore > 75 && tips.length === 0) tips.push('Your order profile meets the baseline requirements for most EU sustainability audits');
+    if (totalScore > 85) tips.push("Your order qualifies for SDF Clothing's Green Production Programme — mention this in your inquiry");
 
-    const tipsHtml = tips.map(tip => `<p style="color:rgba(255,255,255,0.8);font-size:0.8rem;margin-bottom:0.5rem;">• ${tip}</p>`).join('');
-    document.getElementById('sus-tips').innerHTML = tipsHtml;
+    document.getElementById('sus-tips').innerHTML = tips.map(function(tip) {
+      return '<p style="color:rgba(255,255,255,0.8);font-size:0.8rem;margin-bottom:0.5rem;">• ' + tip + '</p>';
+    }).join('');
 
     document.getElementById('sus-results').style.display = 'block';
   });
+
 });
 </script>
 
@@ -1450,6 +1289,7 @@ document.addEventListener('DOMContentLoaded', function() {
 @media (max-width: 1280px) {
   .contact-layout {
     grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
   }
 }
 
@@ -1457,7 +1297,6 @@ document.addEventListener('DOMContentLoaded', function() {
   .contact-layout {
     grid-template-columns: 1fr;
   }
-  /* On mobile: form first, then tools */
 }
 
 @media (max-width: 768px) {
