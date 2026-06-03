@@ -1,0 +1,352 @@
+---
+// ============================================================
+// SDF CLOTHING — FOB PRICE CALCULATOR
+// src/components/FobCalculator.astro
+// Usage: <FobCalculator />
+// ============================================================
+---
+
+<section id="fob-calculator" aria-labelledby="fob-title">
+  <div class="tool-header">
+    <span class="tool-label">Interactive Tool</span>
+    <h2 id="fob-title">FOB Price Calculator</h2>
+    <p>Enter your garment specifications to estimate FOB pricing from Bangladesh. Based on current 2025–2026 market rates.</p>
+  </div>
+
+  <div class="fob-grid">
+    <!-- Inputs -->
+    <div class="fob-inputs">
+
+      <div class="input-group">
+        <label for="fob-garment-type">Garment Type</label>
+        <select id="fob-garment-type">
+          <option value="tshirt">T-Shirt (Basic Jersey)</option>
+          <option value="polo">Polo Shirt</option>
+          <option value="woven-shirt">Woven Shirt</option>
+          <option value="chino">Chinos / Trousers</option>
+          <option value="denim">Denim Jeans</option>
+          <option value="hoodie">Hoodie / Sweatshirt</option>
+          <option value="jacket">Jacket (Outerwear)</option>
+          <option value="dress">Dress / Skirt</option>
+          <option value="activewear">Activewear (Cut & Sew)</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="fob-fabric-cost">Fabric Cost (USD/kg)</label>
+        <input type="number" id="fob-fabric-cost" min="1" max="50" step="0.5" value="4.5" placeholder="4.50" />
+        <span class="input-hint">Jersey ~$3–5/kg · Woven ~$4–8/kg · Denim ~$5–9/kg</span>
+      </div>
+
+      <div class="input-group">
+        <label for="fob-fabric-consumption">Fabric Consumption (kg/pcs)</label>
+        <input type="number" id="fob-fabric-consumption" min="0.1" max="3" step="0.05" value="0.35" placeholder="0.35" />
+        <span class="input-hint">T-shirt ~0.2–0.4kg · Trousers ~0.5–0.8kg · Jacket ~1–1.8kg</span>
+      </div>
+
+      <div class="input-group">
+        <label for="fob-trim-cost">Trims & Accessories (USD/pcs)</label>
+        <input type="number" id="fob-trim-cost" min="0" max="10" step="0.1" value="0.45" placeholder="0.45" />
+        <span class="input-hint">Labels, buttons, zips, hang tags, polybag, carton</span>
+      </div>
+
+      <div class="input-group">
+        <label for="fob-sam">SAM (Standard Allowed Minutes)</label>
+        <input type="number" id="fob-sam" min="5" max="120" step="0.5" value="18" placeholder="18" />
+        <span class="input-hint">T-shirt ~12–20 · Shirt ~25–40 · Trousers ~30–50 · Jacket ~60–90</span>
+      </div>
+
+      <div class="input-group">
+        <label for="fob-quantity">Order Quantity (pcs)</label>
+        <select id="fob-quantity">
+          <option value="500">500 pcs (Sample/Small)</option>
+          <option value="1000">1,000 pcs</option>
+          <option value="3000" selected>3,000 pcs</option>
+          <option value="5000">5,000 pcs</option>
+          <option value="10000">10,000 pcs</option>
+          <option value="30000">30,000 pcs</option>
+          <option value="100000">100,000+ pcs</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="fob-compliance">Compliance Requirements</label>
+        <select id="fob-compliance">
+          <option value="basic">Basic (No certification)</option>
+          <option value="oeko">OEKO-TEX Standard 100</option>
+          <option value="gots">GOTS Organic</option>
+          <option value="grs">GRS Recycled</option>
+          <option value="bci">BCI / Better Cotton</option>
+        </select>
+      </div>
+
+      <button id="fob-calculate-btn" class="calculate-btn" type="button">
+        Calculate FOB Price →
+      </button>
+    </div>
+
+    <!-- Result -->
+    <div class="fob-result" id="fob-result" aria-live="polite">
+      <div class="result-placeholder" id="fob-placeholder">
+        <div class="result-placeholder-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+        </div>
+        <p>Fill in your garment specifications and click Calculate to see your estimated FOB price breakdown.</p>
+      </div>
+
+      <div class="result-content" id="fob-result-content" style="display:none;">
+        <div class="result-header">
+          <span class="result-label">Estimated FOB Price</span>
+          <div class="result-price" id="fob-total-price">$0.00</div>
+          <div class="result-range" id="fob-price-range">Range: $0.00 – $0.00</div>
+        </div>
+
+        <div class="result-breakdown">
+          <div class="breakdown-title">Cost Breakdown</div>
+          <div class="breakdown-row">
+            <span>Fabric Cost</span>
+            <span id="fob-b-fabric">$0.00</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Trims &amp; Accessories</span>
+            <span id="fob-b-trim">$0.00</span>
+          </div>
+          <div class="breakdown-row">
+            <span>CM (Cut &amp; Make)</span>
+            <span id="fob-b-cm">$0.00</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Compliance Uplift</span>
+            <span id="fob-b-compliance">$0.00</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Factory Overhead (12%)</span>
+            <span id="fob-b-overhead">$0.00</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Factory Margin (15%)</span>
+            <span id="fob-b-margin">$0.00</span>
+          </div>
+          <div class="breakdown-row breakdown-total">
+            <span>Total FOB (USD)</span>
+            <span id="fob-b-total">$0.00</span>
+          </div>
+        </div>
+
+        <div class="result-notes" id="fob-quantity-note"></div>
+
+        <div class="result-disclaimer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Estimates based on 2025–2026 Bangladesh market rates. Actual quotes vary by factory tier, product complexity, and market conditions. <a href="/contact" style="color:#e00;">Get an exact quote →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #fob-calculator {
+    padding: 3rem 0;
+    border-top: 1px solid #e00;
+  }
+  .tool-header { margin-bottom: 2rem; }
+  .tool-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .tool-header h2 {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .tool-header p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+  .fob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (max-width: 768px) { .fob-grid { grid-template-columns: 1fr; } }
+
+  .fob-inputs { display: flex; flex-direction: column; gap: 1rem; }
+
+  .input-group { display: flex; flex-direction: column; gap: 0.3rem; }
+  .input-group label {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+  .input-group input,
+  .input-group select {
+    background: #000;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0.6rem 0.85rem;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
+    min-height: 44px;
+    width: 100%;
+  }
+  .input-group input:focus,
+  .input-group select:focus { border-color: #e00; outline: none; }
+  .input-hint { font-size: 0.7rem; color: rgba(255,255,255,0.4); line-height: 1.4; }
+
+  .calculate-btn {
+    background: #e00;
+    color: #fff;
+    border: 1px solid #e00;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+    min-height: 44px;
+    font-family: 'Inter', sans-serif;
+  }
+  .calculate-btn:hover { background: #aa0000; }
+
+  /* Result panel */
+  .fob-result {
+    background: #000;
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 1.75rem;
+    position: sticky;
+    top: 80px;
+  }
+  .result-placeholder { text-align: center; padding: 2rem 0; }
+  .result-placeholder-icon { margin-bottom: 1rem; color: rgba(255,255,255,0.3); }
+  .result-placeholder p { font-size: 0.85rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+  .result-header { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .result-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: #e00; display: block; margin-bottom: 0.5rem; }
+  .result-price { font-size: 2.5rem; font-weight: 600; color: #fff; letter-spacing: -0.02em; line-height: 1; }
+  .result-range { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 0.35rem; }
+
+  .breakdown-title { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.75rem; }
+  .breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.45rem 0;
+    font-size: 0.85rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.8);
+  }
+  .breakdown-total {
+    border-bottom: none;
+    border-top: 1px solid #e00;
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.95rem;
+  }
+  .result-notes { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin: 1rem 0; padding: 0.75rem; background: rgba(255,255,255,0.04); border-left: 2px solid #e00; line-height: 1.5; }
+  .result-disclaimer { font-size: 0.72rem; color: rgba(255,255,255,0.4); line-height: 1.6; margin-top: 1rem; display: flex; gap: 0.5rem; align-items: flex-start; }
+  .result-disclaimer svg { flex-shrink: 0; margin-top: 2px; }
+</style>
+
+<script>
+  const garmentSamDefaults: Record<string, number> = {
+    tshirt: 18, polo: 28, 'woven-shirt': 35, chino: 42,
+    denim: 55, hoodie: 40, jacket: 75, dress: 38, activewear: 30
+  };
+  const garmentFabricDefaults: Record<string, number> = {
+    tshirt: 0.32, polo: 0.38, 'woven-shirt': 0.42, chino: 0.65,
+    denim: 0.82, hoodie: 0.72, jacket: 1.2, dress: 0.55, activewear: 0.38
+  };
+  const complianceUplifts: Record<string, number> = {
+    basic: 0, oeko: 0.08, gots: 0.22, grs: 0.18, bci: 0.06
+  };
+  const quantityDiscounts: Record<string, number> = {
+    '500': 1.18, '1000': 1.10, '3000': 1.0, '5000': 0.96, '10000': 0.92, '30000': 0.88, '100000': 0.84
+  };
+
+  const garmentTypeEl = document.getElementById('fob-garment-type') as HTMLSelectElement;
+  const fabricCostEl = document.getElementById('fob-fabric-cost') as HTMLInputElement;
+  const fabricConsEl = document.getElementById('fob-fabric-consumption') as HTMLInputElement;
+  const trimCostEl = document.getElementById('fob-trim-cost') as HTMLInputElement;
+  const samEl = document.getElementById('fob-sam') as HTMLInputElement;
+  const qtyEl = document.getElementById('fob-quantity') as HTMLSelectElement;
+  const complianceEl = document.getElementById('fob-compliance') as HTMLSelectElement;
+  const calcBtn = document.getElementById('fob-calculate-btn');
+  const placeholder = document.getElementById('fob-placeholder');
+  const resultContent = document.getElementById('fob-result-content');
+
+  // Auto-fill SAM and fabric consumption on garment type change
+  garmentTypeEl?.addEventListener('change', () => {
+    const gt = garmentTypeEl.value;
+    if (samEl) samEl.value = String(garmentSamDefaults[gt] || 18);
+    if (fabricConsEl) fabricConsEl.value = String(garmentFabricDefaults[gt] || 0.35);
+  });
+
+  calcBtn?.addEventListener('click', calculate);
+
+  function fmt(n: number) { return '$' + n.toFixed(2); }
+
+  function calculate() {
+    const fabricCost = parseFloat(fabricCostEl?.value) || 4.5;
+    const fabricCons = parseFloat(fabricConsEl?.value) || 0.35;
+    const trimCost = parseFloat(trimCostEl?.value) || 0.45;
+    const sam = parseFloat(samEl?.value) || 18;
+    const qty = qtyEl?.value || '3000';
+    const compliance = complianceEl?.value || 'basic';
+
+    // CM rate: Bangladesh operator wage ~$140/month, 8hrs/day, 26 days, efficiency 70%
+    // Effective minute rate ≈ $0.012
+    const minuteRate = 0.012;
+    const cm = sam * minuteRate;
+
+    const fabricTotal = fabricCost * fabricCons;
+    const compUplift = (fabricTotal + trimCost + cm) * complianceUplifts[compliance];
+    const subtotal = fabricTotal + trimCost + cm + compUplift;
+    const overhead = subtotal * 0.12;
+    const marginBase = subtotal + overhead;
+    const margin = marginBase * 0.15;
+    const baseTotal = subtotal + overhead + margin;
+    const qtyFactor = quantityDiscounts[qty] || 1.0;
+    const total = baseTotal * qtyFactor;
+
+    const lo = total * 0.88;
+    const hi = total * 1.18;
+
+    (document.getElementById('fob-total-price') as HTMLElement).textContent = fmt(total);
+    (document.getElementById('fob-price-range') as HTMLElement).textContent = `Market range: ${fmt(lo)} – ${fmt(hi)}`;
+    (document.getElementById('fob-b-fabric') as HTMLElement).textContent = fmt(fabricTotal * qtyFactor);
+    (document.getElementById('fob-b-trim') as HTMLElement).textContent = fmt(trimCost * qtyFactor);
+    (document.getElementById('fob-b-cm') as HTMLElement).textContent = fmt(cm * qtyFactor);
+    (document.getElementById('fob-b-compliance') as HTMLElement).textContent = fmt(compUplift * qtyFactor);
+    (document.getElementById('fob-b-overhead') as HTMLElement).textContent = fmt(overhead * qtyFactor);
+    (document.getElementById('fob-b-margin') as HTMLElement).textContent = fmt(margin * qtyFactor);
+    (document.getElementById('fob-b-total') as HTMLElement).textContent = fmt(total);
+
+    const noteEl = document.getElementById('fob-quantity-note');
+    if (noteEl) {
+      const qtyNum = parseInt(qty);
+      if (qtyNum < 1000) {
+        noteEl.textContent = 'Small quantities (<1,000 pcs) typically attract surcharges. Consider consolidating styles or colors to reach 3,000+ pcs per PO for competitive pricing.';
+      } else if (qtyNum >= 10000) {
+        noteEl.textContent = `Volume discount applied (${Math.round((1 - qtyFactor) * 100)}%). At this quantity you have significant leverage for price negotiation and priority production scheduling.`;
+      } else {
+        noteEl.textContent = '';
+      }
+    }
+
+    if (placeholder) placeholder.style.display = 'none';
+    if (resultContent) resultContent.style.display = 'block';
+  }
+</script>
