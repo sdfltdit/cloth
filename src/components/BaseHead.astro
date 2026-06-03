@@ -105,27 +105,38 @@ const baseSchemas = {
 // Merge base schemas with page-specific schemas
 let finalSchema;
 if (schema) {
-  // If page provides schema, merge with base schemas
   const pageSchemas = Array.isArray(schema) ? schema : [schema];
   const graph = [...baseSchemas["@graph"]];
-  
-  // Add page-specific schemas to @graph
+
   for (const s of pageSchemas) {
-    // Skip if it's Organization or WebSite (already in base)
-    if (s["@type"]) {
-      const types = Array.isArray(s["@type"]) ? s["@type"] : [s["@type"]];
-      if (!types.includes("Organization") && !types.includes("WebSite")) {
-        graph.push(s);
+    // If the page schema is itself a @graph wrapper, extract its nodes
+    if (s["@graph"]) {
+      for (const node of s["@graph"]) {
+        const types = Array.isArray(node["@type"]) ? node["@type"] : [node["@type"] ?? ""];
+        if (!types.includes("Organization") && !types.includes("LocalBusiness") && !types.includes("WebSite")) {
+          const { "@context": _ctx, ...rest } = node;
+          graph.push(rest);
+        }
       }
+      continue;
     }
+
+    if (!s["@type"]) continue;
+
+    const types = Array.isArray(s["@type"]) ? s["@type"] : [s["@type"]];
+    // Skip types already covered in base @graph
+    if (types.includes("Organization") || types.includes("LocalBusiness") || types.includes("WebSite")) continue;
+
+    // Strip @context before pushing into the shared @graph
+    const { "@context": _ctx, ...rest } = s;
+    graph.push(rest);
   }
-  
+
   finalSchema = {
     "@context": "https://schema.org",
     "@graph": graph
   };
 } else {
-  // No page schema, use base schemas only
   finalSchema = baseSchemas;
 }
 ---
