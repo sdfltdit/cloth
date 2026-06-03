@@ -1,18 +1,48 @@
-# Auth.md
+# auth.md
 
-SDF Clothing does not require authentication for public content.
+This service supports agentic access. Resource server: https://sdfltd.com. Authorization server: https://sdfltd.com.
 
-All pages and the llms.txt file are publicly accessible without any API key or login.
+## 1. Discover
 
-## Agent Registration
+Fetch Protected Resource Metadata:
+GET /.well-known/oauth-protected-resource
 
-No registration required. All content is freely accessible.
+Fetch Authorization Server Metadata:
+GET /.well-known/oauth-authorization-server
 
-## Identity Types Supported
+Read the agent_auth block: register_uri, identity_types_supported, credential_types_supported.
 
-- None required for public access
+## 2. Pick a method
 
-## Contact
+- No user account required for public content
+- Use anonymous flow for all public pages
 
-- Website: https://sdfltd.com
-- Email: contact@sdfltd.com
+## 3. Register
+
+POST /contact HTTP/1.1
+Content-Type: application/json
+
+{"type": "anonymous"}
+
+Response:
+{"status": "ok", "access": "public", "credential": null}
+
+## 4. Claim ceremony
+
+No claim required. All content is publicly accessible without OTP or verification.
+
+## 5. Use the credential
+
+No credential required for public content.
+Authorization: Bearer (not required)
+
+## 6. Errors
+
+| Error | Endpoint | Action |
+|---|---|---|
+| 404 | Any | Resource not found |
+| 500 | Any | Retry request |
+
+## 7. Revocation
+
+No credentials are issued. No revocation required.
