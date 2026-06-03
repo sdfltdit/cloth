@@ -1,133 +1,27 @@
 ---
+// ============================================================
+// SDF CLOTHING — LEARNING HUB
+// src/pages/insights/index.astro
+// FobCalculator import removed — replaced with inline calculator
+// ============================================================
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import AqlTool from '../../components/AqlTool.astro';
+import LeadTimeEstimator from '../../components/LeadTimeEstimator.astro';
+import Glossary from '../../components/Glossary.astro';
+import { articles, sectors, learningPaths, downloadables } from '../../data/learning-hub.ts';
 
 export const prerender = true;
 
-const pageTitle = "Industry Insights | SDF Clothing Manufacturing Blog";
-const pageDescription = "Industry insights on garment manufacturing, sourcing strategy, compliance, and sustainability for fashion brands. Updated regularly by SDF Clothing experts.";
+const pageTitle = "Sustainable Clothing Manufacturer — How to Find GOTS Certified | SDF";
+const pageDescription = "Tips for finding a sustainable clothing manufacturer with real certification. SDF holds GOTS, OEKO-TEX, GRS — easy to verify, ships to EU, UK, USA.";
 const canonicalUrl = "https://sdfltd.com/insights/";
 
-// Article data - 3 existing + 9 placeholders
-const articles = [
-  // Existing articles
-  {
-    date: "Dec 14, 2025",
-    category: "Manufacturing",
-    title: "Bangladesh Clothing Manufacturing Costs",
-    excerpt: "Real cost breakdown for international fashion brands sourcing from Bangladesh. Understand labor rates, material prices, factory overhead, and FOB pricing to plan your margins accurately.",
-    readTime: "10 min read",
-    slug: "/insights/manufacturing-costs",
-    isPlaceholder: false
-  },
-  {
-    date: "Nov 28, 2025",
-    category: "Compliance",
-    title: "EU Clothing Regulations 2026",
-    excerpt: "Comprehensive guide to EU clothing regulations taking effect in 2025–2026. Essential for fashion brands sourcing from Bangladesh — understand EPR, Ecodesign, and Digital Product Passport requirements.",
-    readTime: "12 min read",
-    slug: "/insights/eu-clothing-regulations-2026",
-    isPlaceholder: false
-  },
-  {
-    date: "Nov 15, 2025",
-    category: "Manufacturing",
-    title: "Bangladesh Production Lead Times",
-    excerpt: "Plan your inventory and product launches with realistic production timelines from Bangladesh's leading clothing manufacturer. Accurate lead times help you meet market windows and manage customer expectations.",
-    readTime: "8 min read",
-    slug: "/insights/clothing-manufacturing-lead-time",
-    isPlaceholder: false
-  },
-  // Placeholder articles
-  {
-    date: "Apr 15, 2026",
-    category: "Compliance",
-    title: "EU ESPR Compliance Timeline — What Brands Need to Know for 2027",
-    excerpt: "The European Sustainable Products Regulation begins enforcement in 2027. This analysis breaks down DPP requirements, manufacturer obligations, and brand preparation timelines for textile-specific implementation acts expected H2 2026.",
-    readTime: "12 min read",
-    slug: "#",
-    isPlaceholder: true
-  },
-  {
-    date: "Mar 28, 2026",
-    category: "Sourcing Strategy",
-    title: "China + 2: Why Smart Brands Are Diversifying Beyond Bangladesh and Vietnam",
-    excerpt: "Multi-region sourcing strategies have evolved beyond simple China-plus-one allocation. This analysis explores 60-30-10 distribution models, near-shoring economics, and how procurement teams build resilient apparel supply chains in 2026.",
-    readTime: "15 min read",
-    slug: "#",
-    isPlaceholder: true
-  },
-  {
-    date: "Mar 12, 2026",
-    category: "Sustainability",
-    title: "GOTS 7.0 vs OEKO-TEX vs GRS — A Practical Certification Guide",
-    excerpt: "Three certifications dominate sustainable textile manufacturing — but they cover different aspects of compliance. This guide explains what each certifies, when to require which, and how to verify authenticity.",
-    readTime: "10 min read",
-    slug: "#",
-    isPlaceholder: true
-  },
-  {
-    date: "Feb 24, 2026",
-    category: "Manufacturing",
-    title: "Understanding SAM, GSD, and Line Efficiency in Garment Production",
-    excerpt: "Standard Allowed Minute (SAM), General Sewing Data (GSD), and line efficiency metrics determine manufacturer capability and pricing. This technical guide explains how these operations metrics affect your sourcing decisions.",
-    readTime: "9 min read",
-    slug: "#",
-    isPlaceholder: true
-  },
-  {
-    date: "Feb 08, 2026",
-    category: "Compliance",
-    title: "UFLPA Cotton Origin Documentation — A Compliance Workflow",
-    excerpt: "The Uyghur Forced Labor Prevention Act has expanded enforcement in 2026. Brands shipping to USA need verifiable cotton origin documentation across the entire supply chain. This guide details the documentation workflow.",
-    readTime: "11 min read",
-    slug: "#",
-    isPlaceholder: true
-  },
-  {
-    date: "Jan 22, 2026",
-    category: "Industry News",
-    title: "Bangladesh LDC Graduation 2026 — What Changes for Apparel Brands",
-    excerpt: "Bangladesh graduates from Least Developed Country status in November 2026. The 3-year EBA transition period and trade implications are significant. Here's what brands need to plan for 2027-2028.",
-    readTime: "13 min read",
-    slug: "#",
-    isPlaceholder: true
-  },
-  {
-    date: "Jan 08, 2026",
-    category: "Manufacturing",
-    title: "AQL Inspection — A Practical Guide for Apparel Buyers",
-    excerpt: "ANSI/ASQ Z1.4 sampling standards govern quality acceptance for apparel production. This guide explains AQL levels, defect classification, and how to set inspection requirements that match your brand quality tier.",
-    readTime: "14 min read",
-    slug: "#",
-    isPlaceholder: true
-  },
-  {
-    date: "Dec 14, 2025",
-    category: "Sourcing Strategy",
-    title: "Negotiating Apparel Manufacturing Contracts — Multi-Year Pricing Strategies",
-    excerpt: "Procurement teams structure multi-year apparel agreements with index-linked pricing, volume commitments, and SLA frameworks. This analysis covers fixed pricing vs cotton-indexed structures and risk allocation.",
-    readTime: "16 min read",
-    slug: "#",
-    isPlaceholder: true
-  },
-  {
-    date: "Nov 30, 2025",
-    category: "Sustainability",
-    title: "Digital Product Passports for Textiles — Implementation Realities",
-    excerpt: "DPP infrastructure becomes mandatory for textiles in 2027. Manufacturers and brands face data architecture, traceability, and disclosure decisions now. Early adopter learnings from 2025-2026 pilots.",
-    readTime: "12 min read",
-    slug: "#",
-    isPlaceholder: true
-  }
-];
-
-// Get unique categories
-const categories = [...new Set(articles.map(a => a.category))];
+const featuredArticles = articles.filter(a => a.isFeatured && !a.isPlaceholder);
+const allArticles = articles;
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl}>
 
-  <!-- Open Graph / Twitter Card -->
   <meta property="og:title" content={pageTitle} />
   <meta property="og:description" content={pageDescription} />
   <meta property="og:type" content="website" />
@@ -136,96 +30,541 @@ const categories = [...new Set(articles.map(a => a.category))];
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={pageTitle} />
   <meta name="twitter:description" content={pageDescription} />
-  <meta name="twitter:image" content="https://sdfltd.com/hero.webp" />
   <link rel="canonical" href={canonicalUrl} />
 
-  <div style="background: #000; min-height: 100vh;">
+  <div class="hub-root">
 
-    <!-- Hero Section -->
-    <header style="padding: 4rem 1.5rem 3rem; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid #e00;">
-      <span style="font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: #e00; font-family: 'Inter', monospace; display: block; margin-bottom: 1rem;">INDUSTRY INSIGHTS</span>
-      <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; color: #fff; line-height: 1.1; margin-bottom: 1.25rem; letter-spacing: 0.01em;">
-        Industry Insights
-      </h1>
-      <p style="font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 760px; margin: 0;">
-        Analysis, technical guides, and industry perspectives on garment manufacturing, sustainability, sourcing strategy, and 2026-2027 regulatory shifts. Updated regularly. Explore <a href="/about" style="color: #e00; text-decoration: none;">about SDF Clothing</a>, <a href="/case-studies/index" style="color: #e00; text-decoration: none;">our client case studies</a>, and <a href="/clothing-manufacturer-bangladesh" style="color: #e00; text-decoration: none;">Bangladesh manufacturing insights</a>.
-      </p>
+    <header class="hub-hero">
+      <div class="container">
+        <span class="section-label">Learning Hub</span>
+        <div class="accent-line"></div>
+        <h1 class="hub-hero-title">
+          Sustainable Clothing Manufacturer <br />
+          <span class="hub-hero-accent">How GOTS Certification Works for Your Brand.</span>
+        </h1>
+        <p class="hub-hero-sub">
+          Interactive tools, technical guides, compliance timelines, and industry data for fashion brands sourcing from Bangladesh. Updated continuously by the SDF team.
+        </p>
+
+        <div class="hub-sectors" id="hub-sectors">
+          {sectors.map(s => (
+            <button
+              class={`sector-pill ${s.id === 'all' ? 'active' : ''}`}
+              data-sector={s.id}
+              type="button"
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+
+        <div class="hub-stats">
+          <div class="hub-stat">
+            <span class="hub-stat-num">3</span>
+            <span class="hub-stat-label">Live Guides</span>
+          </div>
+          <div class="hub-stat-div"></div>
+          <div class="hub-stat">
+            <span class="hub-stat-num">3</span>
+            <span class="hub-stat-label">Interactive Tools</span>
+          </div>
+          <div class="hub-stat-div"></div>
+          <div class="hub-stat">
+            <span class="hub-stat-num">20</span>
+            <span class="hub-stat-label">Glossary Terms</span>
+          </div>
+          <div class="hub-stat-div"></div>
+          <div class="hub-stat">
+            <span class="hub-stat-num">5</span>
+            <span class="hub-stat-label">Industry Sectors</span>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <!-- Category Filter Bar -->
-    <div style="padding: 2rem 1.5rem; max-width: 1200px; margin: 0 auto;">
-      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;">
-        <button style="font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Inter', monospace; background: #e00; color: #fff; border: 1px solid #e00; padding: 0.5rem 1rem; cursor: pointer; transition: background 0.2s;">
-          All
-        </button>
-        {categories.map(category => (
-          <button style="font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Inter', monospace; background: transparent; color: #e00; border: 1px solid #e00; padding: 0.5rem 1rem; cursor: pointer; transition: background 0.2s, color 0.2s;">
-            {category}
-          </button>
-        ))}
-      </div>
-    </div>
+    <div class="container hub-body">
 
-    <!-- Articles Grid -->
-    <div style="padding: 0 1.5rem 5rem; max-width: 1200px; margin: 0 auto;">
-      <div style="display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(255,255,255,0.1);">
-        {articles.map(article => (
-          <article style="background: #000; padding: 2rem; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.2s;">
-            <div style="margin-bottom: 1rem;">
-              <time style="font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Inter', monospace; color: rgba(255,255,255,0.6); display: block; margin-bottom: 0.5rem;">
-                {article.date}
-              </time>
-              <span style="font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; font-family: 'Inter', monospace; color: #e00; border: 1px solid #e00; padding: 0.25rem 0.75rem; display: inline-block;">
-                {article.category}
-              </span>
+      <!-- LEARNING PATHS -->
+      <section class="hub-section section-header" id="learning-paths" aria-labelledby="paths-title">
+        <div class="section-header-inner">
+          <span class="section-label">Curated Paths</span>
+          <div class="accent-line"></div>
+          <h2 id="paths-title">Learning Paths</h2>
+          <p>Not sure where to start? Follow a curated sequence based on your goal.</p>
+        </div>
+        <div class="paths-grid">
+          {learningPaths.map((path) => (
+            <div class="path-card">
+              <div class="path-meta">
+                <span class="path-level">{path.level}</span>
+                <span class="path-duration">{path.duration}</span>
+              </div>
+              <h3 class="path-title">{path.title}</h3>
+              <p class="path-desc">{path.description}</p>
+              <ol class="path-steps">
+                {path.steps.map((step, si) => (
+                  <li class="path-step">
+                    <span class="path-step-num">{si + 1}</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
-            {article.isPlaceholder ? (
-              <h2 style="font-size: 1.25rem; font-weight: 600; color: #fff; line-height: 1.4; margin-bottom: 0.75rem; letter-spacing: 0.01em;">
-                {article.title}
-              </h2>
-            ) : (
-              <a href={article.slug} style="text-decoration: none;">
-                <h2 style="font-size: 1.25rem; font-weight: 600; color: #fff; line-height: 1.4; margin-bottom: 0.75rem; letter-spacing: 0.01em; transition: color 0.2s;">
-                  {article.title}
-                </h2>
-              </a>
-            )}
-            <p style="font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 1rem;">
-              {article.excerpt}
-            </p>
-            <div style="display: flex; align-items: center; gap: 1rem; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Inter', monospace; color: rgba(255,255,255,0.6);">
-              <span>{article.readTime}</span>
+          ))}
+        </div>
+      </section>
+
+      <!-- FEATURED ARTICLES -->
+      <section class="hub-section" id="featured" aria-labelledby="featured-title">
+        <div class="section-header-inner section-header">
+          <span class="section-label">Live Now</span>
+          <div class="accent-line"></div>
+          <h2 id="featured-title">Featured Guides</h2>
+        </div>
+        <div class="featured-grid">
+          {featuredArticles.map(article => (
+            <a href={article.slug} class="featured-card" aria-label={`Read: ${article.title}`}>
+              <div class="featured-card-top">
+                <span class="article-category">{article.category}</span>
+                <time class="article-date">{article.date}</time>
+              </div>
+              <h3 class="featured-card-title">{article.title}</h3>
+              <p class="featured-card-excerpt">{article.excerpt}</p>
+              <div class="featured-card-footer">
+                <span class="article-readtime">{article.readTime}</span>
+                <span class="read-more-arrow">→</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- ALL ARTICLES -->
+      <section class="hub-section" id="all-articles" aria-labelledby="all-articles-title">
+        <div class="section-header-inner section-header">
+          <span class="section-label">All Insights</span>
+          <div class="accent-line"></div>
+          <h2 id="all-articles-title">Articles &amp; Guides</h2>
+          <p>Full archive. Filter by sector or search by topic.</p>
+        </div>
+
+        <div class="articles-search-bar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="search" id="articles-search" placeholder="Search articles…" aria-label="Search articles" />
+        </div>
+
+        <div class="articles-filter-bar" id="articles-filter-bar">
+          {sectors.map(s => (
+            <button class={`afilter ${s.id === 'all' ? 'active' : ''}`} data-sector={s.id} type="button">
+              {s.label}
+            </button>
+          ))}
+        </div>
+
+        <div class="articles-count" id="articles-count" aria-live="polite">
+          Showing {allArticles.length} articles
+        </div>
+
+        <div class="articles-list" id="articles-list">
+          {allArticles.map(article => (
+            <article
+              class={`article-row ${article.isPlaceholder ? 'article-placeholder' : 'article-live'}`}
+              data-sector={article.sectorId}
+              data-title={article.title.toLowerCase()}
+              data-excerpt={article.excerpt.toLowerCase()}
+            >
+              <div class="article-row-meta">
+                <span class="article-category">{article.category}</span>
+                <time class="article-date">{article.date}</time>
+              </div>
+              <div class="article-row-body">
+                {article.isPlaceholder ? (
+                  <h3 class="article-row-title placeholder-title">
+                    {article.title}
+                    <span class="coming-soon-badge">Coming Soon</span>
+                  </h3>
+                ) : (
+                  <a href={article.slug} class="article-row-link">
+                    <h3 class="article-row-title">{article.title}</h3>
+                  </a>
+                )}
+                <p class="article-row-excerpt">{article.excerpt}</p>
+                <div class="article-row-footer">
+                  <span class="article-readtime">{article.readTime}</span>
+                  {!article.isPlaceholder && (
+                    <a href={article.slug} class="read-link" aria-label={`Read ${article.title}`}>Read Guide →</a>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="articles-empty" id="articles-empty" style="display:none;" aria-live="polite">
+          <p>No articles match your search. <a href="/contact" style="color:#e00;">Ask us a question directly →</a></p>
+        </div>
+      </section>
+
+      <!-- INTERACTIVE TOOLS -->
+      <section class="hub-section" id="tools" aria-labelledby="tools-title">
+        <div class="section-header-inner section-header">
+          <span class="section-label">Interactive Tools</span>
+          <div class="accent-line"></div>
+          <h2 id="tools-title">Calculators &amp; Estimators</h2>
+          <p>Practical tools used by sourcing teams and procurement managers. No signup required.</p>
+        </div>
+
+        <div class="tools-nav">
+          <button class="tool-tab active" data-tool="fob" type="button">FOB Calculator</button>
+          <button class="tool-tab" data-tool="aql" type="button">AQL Inspector</button>
+          <button class="tool-tab" data-tool="leadtime" type="button">Lead Time Estimator</button>
+        </div>
+
+        <!-- FOB Calculator inline — FobCalculator.astro component replaced -->
+        <div id="tool-fob" class="tool-panel">
+          <div class="fob-calc">
+            <p class="fob-desc">Calculate your estimated FOB (Free On Board) cost from Chittagong or Dhaka port. Enter your order details below.</p>
+            <div class="fob-grid">
+              <div class="fob-field">
+                <label for="fob-garment" class="fob-label">Garment Type</label>
+                <select id="fob-garment" class="fob-select" aria-label="Select garment type">
+                  <option value="">Select garment</option>
+                  <option value="tshirt">T-Shirt</option>
+                  <option value="polo">Polo Shirt</option>
+                  <option value="hoodie">Hoodie</option>
+                  <option value="sweatshirt">Sweatshirt</option>
+                  <option value="jogger">Jogger / Sweatpant</option>
+                  <option value="shorts">Shorts</option>
+                  <option value="jacket">Jacket / Outerwear</option>
+                  <option value="dress">Dress</option>
+                  <option value="shirt">Woven Shirt</option>
+                  <option value="activewear">Activewear</option>
+                </select>
+              </div>
+              <div class="fob-field">
+                <label for="fob-fabric" class="fob-label">Fabric Type</label>
+                <select id="fob-fabric" class="fob-select" aria-label="Select fabric type">
+                  <option value="">Select fabric</option>
+                  <option value="cotton">100% Cotton</option>
+                  <option value="organic">Organic Cotton (GOTS)</option>
+                  <option value="recycled">Recycled Polyester (GRS)</option>
+                  <option value="polycotton">Poly Cotton Blend</option>
+                  <option value="fleece">Fleece / French Terry</option>
+                  <option value="denim">Denim</option>
+                  <option value="linen">Linen</option>
+                  <option value="nylon">Nylon / Performance</option>
+                </select>
+              </div>
+              <div class="fob-field">
+                <label for="fob-qty" class="fob-label">Quantity (pieces per style)</label>
+                <input type="number" id="fob-qty" class="fob-input" placeholder="e.g. 500" min="300" aria-label="Enter quantity" />
+              </div>
+              <div class="fob-field">
+                <label for="fob-print" class="fob-label">Print / Embroidery</label>
+                <select id="fob-print" class="fob-select" aria-label="Select print or embroidery">
+                  <option value="none">None</option>
+                  <option value="screen">Screen Print (1–4 colour)</option>
+                  <option value="dtf">DTF / Digital Print</option>
+                  <option value="embroidery">Embroidery (flat)</option>
+                  <option value="embroidery3d">Embroidery (3D puff)</option>
+                </select>
+              </div>
             </div>
-          </article>
-        ))}
-      </div>
+            <button type="button" id="fob-calculate" class="fob-btn">Calculate FOB Price →</button>
+            <div id="fob-result" class="fob-result" style="display:none;">
+              <p class="fob-result-label">Estimated FOB Price Range</p>
+              <p class="fob-result-price" id="fob-price-range"></p>
+              <p class="fob-result-note">Price is FOB Chittagong or Dhaka. Includes fabric, CM, AQL inspection, woven labels, hang tags, and poly bag. Excludes freight and import duty. Final price confirmed after tech pack review.</p>
+              <a href="/contact" class="fob-cta">Get Exact Quote →</a>
+            </div>
+            <p class="fob-disclaimer">Estimates are indicative based on current Bangladesh market rates. Actual FOB price depends on fabric specification, style complexity, and confirmed order quantity.</p>
+          </div>
+        </div>
 
-      <!-- Pagination -->
-      <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-        <button style="font-size: 0.8rem; color: #e00; background: transparent; border: none; cursor: pointer; padding: 0.5rem 1rem; transition: color 0.2s;" disabled>
-          Previous
-        </button>
-        <span style="font-size: 0.9rem; color: #fff; font-weight: 500;">1</span>
-        <button style="font-size: 0.8rem; color: #e00; background: transparent; border: none; cursor: pointer; padding: 0.5rem 1rem; transition: color 0.2s;" disabled>
-          Next
-        </button>
-      </div>
-    </div>
+        <div id="tool-aql" class="tool-panel" style="display:none;">
+          <AqlTool />
+        </div>
+        <div id="tool-leadtime" class="tool-panel" style="display:none;">
+          <LeadTimeEstimator />
+        </div>
+      </section>
 
-  </div>
+      <!-- DOWNLOADABLE RESOURCES -->
+      <section class="hub-section" id="downloads" aria-labelledby="downloads-title">
+        <div class="section-header-inner section-header">
+          <span class="section-label">Free Downloads</span>
+          <div class="accent-line"></div>
+          <h2 id="downloads-title">Templates &amp; Checklists</h2>
+          <p>Ready-to-use documents for sourcing, compliance, and quality management.</p>
+        </div>
+        <div class="downloads-grid">
+          {downloadables.map(dl => (
+            <a href={dl.href} class="download-card" aria-label={`Download ${dl.title}`} download>
+              <div class="dl-top">
+                <span class="dl-format">{dl.format}</span>
+                <span class="dl-size">{dl.size}</span>
+              </div>
+              <h3 class="dl-title">{dl.title}</h3>
+              <p class="dl-desc">{dl.description}</p>
+              <div class="dl-action">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download Free
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
 
-  <!-- Responsive grid -->
+      <!-- GLOSSARY -->
+      <section class="hub-section" id="glossary-section">
+        <Glossary />
+      </section>
+
+      <!-- NEWSLETTER -->
+      <section class="hub-section hub-newsletter" aria-labelledby="newsletter-title">
+        <div class="newsletter-inner">
+          <div class="newsletter-text">
+            <span class="section-label">Stay Updated</span>
+            <h2 id="newsletter-title">New regulation? We'll alert you first.</h2>
+            <p>Get notified when new guides go live, EU regulations update, or Bangladesh trade conditions change. No spam — only signal.</p>
+          </div>
+          <form class="newsletter-form" id="newsletter-form" novalidate>
+            <div class="newsletter-fields">
+              <input type="email" id="newsletter-email" name="email" placeholder="your@email.com" required aria-label="Email address" />
+              <button type="submit" class="btn-primary">Subscribe →</button>
+            </div>
+            <p class="newsletter-note">No spam. Unsubscribe anytime. Relevant updates only.</p>
+          </form>
+        </div>
+      </section>
+
+    </div><!-- /hub-body -->
+  </div><!-- /hub-root -->
+
   <style is:inline>
-    @media (min-width: 768px) {
-      .articles-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-      }
-    }
-    @media (min-width: 1024px) {
-      .articles-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-      }
+    .hub-root { background: #000; min-height: 100vh; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .hub-hero { padding: 4rem 0 3rem; border-bottom: 1px solid #e00; }
+    .hub-hero-title { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 600; color: #fff; line-height: 1.15; margin-bottom: 1rem; letter-spacing: 0.01em; }
+    .hub-hero-accent { color: #e00; }
+    .hub-hero-sub { font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 640px; margin-bottom: 2rem; }
+    .hub-sectors { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+    .sector-pill { background: transparent; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.15); padding: 0.4rem 1rem; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; min-height: 36px; }
+    .sector-pill:hover { border-color: #e00; color: #e00; }
+    .sector-pill.active { background: #e00; color: #fff; border-color: #e00; }
+    .hub-stats { display: flex; flex-wrap: wrap; gap: 0; align-items: center; }
+    .hub-stat { padding: 0 2rem 0 0; }
+    .hub-stat:first-child { padding-left: 0; }
+    .hub-stat-num { font-size: 1.75rem; font-weight: 700; color: #e00; display: block; line-height: 1; }
+    .hub-stat-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); display: block; margin-top: 0.2rem; }
+    .hub-stat-div { width: 1px; height: 2rem; background: rgba(255,255,255,0.15); margin-right: 2rem; }
+    .hub-body { padding-top: 0; }
+    .hub-section { padding: 4rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .hub-section:last-child { border-bottom: none; }
+    .section-header-inner { margin-bottom: 2.5rem; }
+    .section-header-inner h2 { font-size: clamp(1.25rem, 2.5vw, 1.85rem); font-weight: 600; color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+    .section-header-inner p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+    .paths-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: rgba(255,255,255,0.1); }
+    .path-card { background: #000; padding: 1.75rem; transition: background 0.2s; }
+    .path-card:hover { background: rgba(255,255,255,0.03); }
+    .path-meta { display: flex; justify-content: space-between; margin-bottom: 1rem; }
+    .path-level { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #e00; border: 1px solid #e00; padding: 0.2rem 0.6rem; }
+    .path-duration { font-size: 0.72rem; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; }
+    .path-title { font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 0.6rem; letter-spacing: 0.01em; }
+    .path-desc { font-size: 0.83rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 1.25rem; }
+    .path-steps { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .path-step { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.82rem; color: rgba(255,255,255,0.7); }
+    .path-step-num { width: 20px; height: 20px; border-radius: 50%; background: #e00; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .featured-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1px; background: rgba(255,255,255,0.1); }
+    .featured-card { background: #000; padding: 2rem; text-decoration: none; display: flex; flex-direction: column; transition: background 0.2s; border: none; }
+    .featured-card:hover { background: rgba(255,255,255,0.04); }
+    .featured-card:hover .read-more-arrow { transform: translateX(4px); }
+    .featured-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .featured-card-title { font-size: 1.1rem; font-weight: 600; color: #fff; line-height: 1.4; margin-bottom: 0.75rem; }
+    .featured-card-excerpt { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.7; flex: 1; margin-bottom: 1.25rem; }
+    .featured-card-footer { display: flex; justify-content: space-between; align-items: center; }
+    .read-more-arrow { color: #e00; font-size: 1rem; transition: transform 0.2s; }
+    .articles-search-bar { display: flex; align-items: center; gap: 0.75rem; background: #000; border: 1px solid rgba(255,255,255,0.2); padding: 0 1rem; margin-bottom: 1rem; transition: border-color 0.2s; }
+    .articles-search-bar:focus-within { border-color: #e00; }
+    .articles-search-bar svg { color: rgba(255,255,255,0.4); flex-shrink: 0; }
+    #articles-search { background: transparent; border: none; color: #fff; font-size: 0.9rem; font-family: 'Inter', sans-serif; padding: 0.75rem 0; width: 100%; outline: none; min-height: 44px; }
+    #articles-search::placeholder { color: rgba(255,255,255,0.35); }
+    .articles-filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .afilter { background: transparent; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.15); padding: 0.35rem 0.85rem; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; min-height: 36px; }
+    .afilter:hover { border-color: #e00; color: #e00; }
+    .afilter.active { background: #e00; color: #fff; border-color: #e00; }
+    .articles-count { font-size: 0.72rem; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+    .articles-list { display: flex; flex-direction: column; gap: 1px; background: rgba(255,255,255,0.08); }
+    .article-row { background: #000; padding: 1.75rem 2rem; display: grid; grid-template-columns: 180px 1fr; gap: 1.5rem; transition: background 0.2s; }
+    .article-row:hover { background: rgba(255,255,255,0.03); }
+    @media (max-width: 600px) { .article-row { grid-template-columns: 1fr; gap: 0.75rem; padding: 1.25rem; } }
+    .article-row-meta { display: flex; flex-direction: column; gap: 0.5rem; padding-top: 3px; }
+    .article-category { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #e00; border: 1px solid #e00; padding: 0.2rem 0.6rem; display: inline-block; width: fit-content; }
+    .article-date { font-size: 0.72rem; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; }
+    .article-readtime { font-size: 0.72rem; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; }
+    .article-row-link { text-decoration: none; }
+    .article-row-title { font-size: 1.05rem; font-weight: 600; color: #fff; line-height: 1.4; margin-bottom: 0.6rem; letter-spacing: 0.01em; }
+    .article-row-link:hover .article-row-title { color: #e00; }
+    .placeholder-title { display: flex; align-items: flex-start; gap: 0.75rem; flex-wrap: wrap; }
+    .coming-soon-badge { font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.2); padding: 0.2rem 0.5rem; white-space: nowrap; flex-shrink: 0; margin-top: 3px; }
+    .article-row-excerpt { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 0.75rem; }
+    .article-row-footer { display: flex; justify-content: space-between; align-items: center; }
+    .read-link { font-size: 0.75rem; letter-spacing: 0.08em; color: #e00; text-decoration: none; transition: opacity 0.2s; }
+    .read-link:hover { opacity: 0.8; }
+    .articles-empty { padding: 2.5rem 0; text-align: center; font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+    .tools-nav { display: flex; flex-wrap: wrap; gap: 0; margin-bottom: 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .tool-tab { background: transparent; color: rgba(255,255,255,0.5); border: none; border-bottom: 2px solid transparent; padding: 0.75rem 1.5rem; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; min-height: 44px; margin-bottom: -1px; }
+    .tool-tab:hover { color: #fff; }
+    .tool-tab.active { color: #e00; border-bottom-color: #e00; }
+    .tool-panel { padding-top: 2rem; }
+    .fob-calc { max-width: 700px; }
+    .fob-desc { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 1.5rem; }
+    .fob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+    @media (max-width: 600px) { .fob-grid { grid-template-columns: 1fr; } }
+    .fob-field { display: flex; flex-direction: column; gap: 0.35rem; }
+    .fob-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+    .fob-select, .fob-input { background: #000; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 0.65rem 0.85rem; font-size: 0.88rem; font-family: 'Inter', sans-serif; min-height: 44px; outline: none; width: 100%; }
+    .fob-select:focus, .fob-input:focus { border-color: #e00; }
+    .fob-btn { background: #e00; color: #fff; border: none; padding: 0.8rem 1.75rem; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s; min-height: 44px; margin-bottom: 1.25rem; }
+    .fob-btn:hover { background: #aa0000; }
+    .fob-result { border: 1px solid #e00; padding: 1.25rem; margin-bottom: 1rem; }
+    .fob-result-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.4rem; }
+    .fob-result-price { font-size: 1.75rem; font-weight: 600; color: #e00; margin-bottom: 0.75rem; }
+    .fob-result-note { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 1rem; }
+    .fob-cta { display: inline-block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #e00; text-decoration: none; border-bottom: 1px solid #e00; padding-bottom: 2px; }
+    .fob-disclaimer { font-size: 0.72rem; color: rgba(255,255,255,0.35); line-height: 1.5; font-style: italic; }
+    .downloads-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; background: rgba(255,255,255,0.1); }
+    .download-card { background: #000; padding: 1.5rem; text-decoration: none; display: flex; flex-direction: column; transition: background 0.2s; }
+    .download-card:hover { background: rgba(255,255,255,0.04); }
+    .dl-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .dl-format { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #e00; border: 1px solid #e00; padding: 0.2rem 0.6rem; }
+    .dl-size { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+    .dl-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 0.6rem; line-height: 1.3; }
+    .dl-desc { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.6; flex: 1; margin-bottom: 1.25rem; }
+    .dl-action { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #e00; }
+    .hub-newsletter { border-top: 1px solid #e00; }
+    .newsletter-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 768px) { .newsletter-inner { grid-template-columns: 1fr; gap: 1.5rem; } }
+    .newsletter-text h2 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 600; color: #fff; margin-bottom: 0.6rem; }
+    .newsletter-text p { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.7; }
+    .newsletter-fields { display: flex; gap: 0; }
+    .newsletter-fields input { flex: 1; background: #000; border: 1px solid rgba(255,255,255,0.2); border-right: none; color: #fff; padding: 0.75rem 1rem; font-size: 0.9rem; font-family: 'Inter', sans-serif; outline: none; min-height: 44px; }
+    .newsletter-fields input:focus { border-color: #e00; }
+    .newsletter-fields .btn-primary { white-space: nowrap; flex-shrink: 0; }
+    .newsletter-note { font-size: 0.72rem; color: rgba(255,255,255,0.35); margin-top: 0.6rem; }
+    @media (max-width: 768px) {
+      .hub-hero { padding: 2.5rem 0 2rem; }
+      .hub-stat-div { display: none; }
+      .hub-stat { padding: 0 1.5rem 0 0; }
+      .hub-stats { gap: 1.5rem; }
+      .paths-grid, .featured-grid, .downloads-grid { grid-template-columns: 1fr; }
     }
   </style>
+
+  <script is:inline>
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.section-header').forEach(el => sectionObserver.observe(el));
+
+    document.querySelectorAll('.sector-pill').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.sector-pill').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const sector = this.dataset.sector;
+        const matchingFilter = document.querySelector(`.afilter[data-sector="${sector}"]`);
+        if (matchingFilter) {
+          matchingFilter.click();
+          document.getElementById('all-articles')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    let activeArticleSector = 'all';
+    let articleSearch = '';
+
+    function filterArticles() {
+      const rows = document.querySelectorAll('.article-row');
+      let visible = 0;
+      rows.forEach(row => {
+        const sectorMatch = activeArticleSector === 'all' || row.dataset.sector === activeArticleSector;
+        const q = articleSearch.toLowerCase();
+        const searchMatch = !q || (row.dataset.title || '').includes(q) || (row.dataset.excerpt || '').includes(q);
+        const show = sectorMatch && searchMatch;
+        row.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      const countEl = document.getElementById('articles-count');
+      if (countEl) countEl.textContent = `Showing ${visible} of ${rows.length} articles`;
+      const emptyEl = document.getElementById('articles-empty');
+      if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    document.getElementById('articles-filter-bar')?.addEventListener('click', e => {
+      const btn = e.target.closest('.afilter');
+      if (!btn) return;
+      activeArticleSector = btn.dataset.sector;
+      document.querySelectorAll('.afilter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterArticles();
+    });
+
+    document.getElementById('articles-search')?.addEventListener('input', e => {
+      articleSearch = e.target.value;
+      filterArticles();
+    });
+
+    document.querySelectorAll('.tool-tab').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.tool-tab').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelectorAll('.tool-panel').forEach(p => p.style.display = 'none');
+        const panel = document.getElementById('tool-' + this.dataset.tool);
+        if (panel) panel.style.display = 'block';
+      });
+    });
+
+    document.getElementById('fob-calculate')?.addEventListener('click', function() {
+      const garment = document.getElementById('fob-garment').value;
+      const fabric = document.getElementById('fob-fabric').value;
+      const qty = parseInt(document.getElementById('fob-qty').value) || 0;
+      const print = document.getElementById('fob-print').value;
+
+      if (!garment || !fabric || qty < 300) {
+        alert('Please select garment type, fabric, and enter quantity (minimum 300 pieces).');
+        return;
+      }
+
+      const basePrices = { tshirt:[3.5,6], polo:[4.5,7.5], hoodie:[9,16], sweatshirt:[7,12], jogger:[6,10], shorts:[4,7], jacket:[12,22], dress:[6,12], shirt:[5,9], activewear:[7,14] };
+      const fabricMult = { cotton:1, organic:1.18, recycled:1.15, polycotton:0.9, fleece:1.05, denim:1.1, linen:1.12, nylon:1.08 };
+      const qtyDiscount = qty >= 5000 ? 0.82 : qty >= 2000 ? 0.88 : qty >= 1000 ? 0.93 : qty >= 500 ? 0.97 : 1;
+      const printAdd = { none:0, screen:0.6, dtf:0.8, embroidery:1.2, embroidery3d:1.8 };
+
+      const base = basePrices[garment] || [5, 10];
+      const mult = fabricMult[fabric] || 1;
+      const add = printAdd[print] || 0;
+      const low = ((base[0] * mult) + add) * qtyDiscount;
+      const high = ((base[1] * mult) + add) * qtyDiscount;
+
+      document.getElementById('fob-price-range').textContent = `$${low.toFixed(2)} – $${high.toFixed(2)} per piece FOB`;
+      document.getElementById('fob-result').style.display = 'block';
+    });
+
+    document.getElementById('newsletter-form')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('newsletter-email')?.value;
+      if (!email) return;
+      this.innerHTML = '<p style="color:#e00; font-size:0.9rem; padding:1rem 0;">✓ Subscribed. You\'ll hear from us when it matters.</p>';
+    });
+  </script>
 
 </BaseLayout>
