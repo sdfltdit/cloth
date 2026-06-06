@@ -462,6 +462,24 @@ const currentUrl = Astro.url.href;
         document.getElementById('footer-social').addEventListener('click', function() { toggleFooter('social'); });
       });
     </script>
-
+<script>
+if ('modelContext' in navigator) {
+  navigator.modelContext.registerTool({
+    name: "search_products",
+    description: "Search SDF clothing products by keyword or category",
+    input_schema: {
+      type: "object",
+      properties: {
+        query: { type: "string", description: "search term" }
+      },
+      required: ["query"]
+    },
+    execute: async ({ query }) => {
+      window.location.href = `/search?q=${encodeURIComponent(query)}`;
+      return { success: true };
+    }
+  });
+}
+</script>
   </body>
 </html>
