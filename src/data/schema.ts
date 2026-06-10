@@ -32,8 +32,7 @@ export const schemaOrganization = {
   "description": "SDF Clothing is a vertically integrated B2B clothing manufacturer based in Dhaka, Bangladesh. Founded in 1998 by Chowdhury Remon, we are a direct factory — not an agent, trader, or buying house. We operate yarn spinning, fabric knitting, weaving, dyeing, cutting, sewing, finishing, and warehousing under one ownership. We serve startup and established fashion brands worldwide with low MOQ from 300 pieces, GOTS certification, and 13 international quality certifications. B2B manufacturing only — no retail, no stock garments. Exporting to USA, EU, UK, Canada, Australia, Japan, and UAE.",
 
   "additionalType": [
-    "https://schema.org/TextileMill",
-    "https://schema.org/AutomotiveBusiness"
+    "https://schema.org/TextileMill"
   ],
 
   "foundingDate": "1998",
