@@ -6,6 +6,7 @@ export interface Props {
   description: string;
   canonicalUrl?: string;
   ogImage?: string;
+  ogType?: string;
   datePublished?: string;
   dateModified?: string;
   schema?: object | object[];
@@ -16,6 +17,7 @@ const {
   description,
   canonicalUrl,
   ogImage = "/factory.jpg",
+  ogType = "website",
   datePublished,
   dateModified,
   schema
@@ -159,7 +161,7 @@ if (schema) {
 <meta name="copyright" content={`© ${new Date().getFullYear()} SDF Clothing`} />
 <meta name="webmcp-tools" content="search,browse,cart">
 <!-- OPEN GRAPH -->
-<meta property="og:type" content={datePublished ? "article" : "website"} />
+<meta property="og:type" content={ogType} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
