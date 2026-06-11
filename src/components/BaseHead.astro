@@ -104,19 +104,37 @@ const baseSchemas = {
   ]
 };
 
-// Merge base schemas with page-specific schemas
+// Merge base schemas with page-specific schemas.
+// If a page provides a richer Organization schema (e.g. with ManufacturingBusiness,
+// certifications, NAICS codes), it REPLACES the simple base Organization node so
+// that data is not silently discarded.
 let finalSchema;
 if (schema) {
   const pageSchemas = Array.isArray(schema) ? schema : [schema];
   const graph = [...baseSchemas["@graph"]];
 
+  // Helper: replace the base Organization node with a richer page-provided one
+  const replaceBaseOrg = (node: Record<string, unknown>) => {
+    const idx = graph.findIndex((n: Record<string, unknown>) => {
+      const t = Array.isArray(n["@type"]) ? n["@type"] : [n["@type"] ?? ""];
+      return t.includes("Organization") || t.includes("LocalBusiness");
+    });
+    if (idx >= 0) graph.splice(idx, 1, node);
+    else graph.push(node);
+  };
+
   for (const s of pageSchemas) {
-    // If the page schema is itself a @graph wrapper, extract its nodes
+    // Page schema is a @graph wrapper — extract and process each node
     if (s["@graph"]) {
       for (const node of s["@graph"]) {
-        const types = Array.isArray(node["@type"]) ? node["@type"] : [node["@type"] ?? ""];
-        if (!types.includes("Organization") && !types.includes("LocalBusiness") && !types.includes("WebSite")) {
-          const { "@context": _ctx, ...rest } = node;
+        const nodeTypes = Array.isArray(node["@type"]) ? node["@type"] : [node["@type"] ?? ""];
+        const { "@context": _ctx, ...rest } = node;
+        if (nodeTypes.includes("Organization") || nodeTypes.includes("LocalBusiness")) {
+          // Richer Org schema from page — replace the simple base node
+          replaceBaseOrg(rest);
+        } else if (nodeTypes.includes("WebSite")) {
+          // Base WebSite node is sufficient — skip page duplicate
+        } else {
           graph.push(rest);
         }
       }
@@ -126,12 +144,16 @@ if (schema) {
     if (!s["@type"]) continue;
 
     const types = Array.isArray(s["@type"]) ? s["@type"] : [s["@type"]];
-    // Skip types already covered in base @graph
-    if (types.includes("Organization") || types.includes("LocalBusiness") || types.includes("WebSite")) continue;
-
-    // Strip @context before pushing into the shared @graph
     const { "@context": _ctx, ...rest } = s;
-    graph.push(rest);
+
+    if (types.includes("Organization") || types.includes("LocalBusiness")) {
+      // Richer Org schema from page — replace the simple base node
+      replaceBaseOrg(rest);
+    } else if (types.includes("WebSite")) {
+      // Base WebSite node is sufficient — skip page duplicate
+    } else {
+      graph.push(rest);
+    }
   }
 
   finalSchema = {
