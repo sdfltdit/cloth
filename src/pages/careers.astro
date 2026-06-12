@@ -760,19 +760,27 @@ const talentAreas = [
 
         fetch('https://usebasin.com/f/9ecfe65e8aee', {
           method: 'POST',
-          body: fd
+          body: fd,
+          headers: {
+            'Accept': 'application/json'
+          }
         })
         .then(function (res) {
-          if (res.ok || res.status === 200 || res.status === 302) {
+          if (res.ok) {
             showSuccess();
           } else {
-            throw new Error('status ' + res.status);
+            return res.json().catch(function () { return {}; }).then(function (data) {
+              throw new Error((data && data.message) || ('status ' + res.status));
+            });
           }
         })
         .catch(function () {
-          /* Basin may return opaque response due to redirect — treat as success
-             if the form passed validation and network didn't fully fail */
-          showSuccess();
+          submitBtn.disabled = false;
+          if (submitLabelEl) submitLabelEl.textContent = 'Submit Your CV';
+          if (spinner) spinner.hidden = true;
+          if (statusEl) statusEl.textContent = '';
+          var fileErr = document.getElementById('e-cv');
+          if (fileErr) fileErr.textContent = 'Something went wrong while sending your CV. Please check your connection and try again, or email your CV directly via the contact page.';
         });
       });
     }
