@@ -360,15 +360,17 @@ const talentAreas = [
         </div>
 
         <div class="c-form-box">
+          <iframe name="basin-target" id="basin-target" title="Form submission target" style="display:none;" aria-hidden="true"></iframe>
           <form
             id="cv-upload-form"
             action="https://usebasin.com/f/9ecfe65e8aee"
             method="POST"
             enctype="multipart/form-data"
+            target="basin-target"
             novalidate
             aria-label="CV submission form"
           >
-            <!-- Redirect target after Basin processes the submission -->
+            <!-- Redirect target (ignored on free plan, harmless) -->
             <input type="hidden" name="_redirect" value="https://sdfltd.com/careers?submitted=1" />
 
             <div class="c-field">
@@ -728,22 +730,16 @@ const talentAreas = [
       if (el) el.addEventListener('change', function () { clearErr(id); });
     });
 
-    /* ─── Form submit — fully native POST to Basin, redirects back here ─── */
+    /* ─── Form submit — POST to hidden iframe, stay on this page ─── */
     var form = document.getElementById('cv-upload-form');
     var submitBtn = document.getElementById('cv-submit');
     var submitLabelEl = document.getElementById('submit-label');
     var spinner = document.getElementById('submit-spinner');
     var statusEl = document.getElementById('submit-status');
+    var basinFrame = document.getElementById('basin-target');
+    var submissionInFlight = false;
 
-    /* If we've just been redirected back from Basin, show success immediately */
-    if (window.location.search.indexOf('submitted=1') !== -1) {
-      showSuccess();
-      if (window.history && window.history.replaceState) {
-        window.history.replaceState({}, '', window.location.pathname);
-      }
-    }
-
-    if (form && submitBtn) {
+    if (form && submitBtn && basinFrame) {
       form.addEventListener('submit', function (e) {
         if (!validate()) {
           e.preventDefault();
@@ -752,7 +748,7 @@ const talentAreas = [
           return;
         }
 
-        /* Save applicant summary so it survives the redirect back from Basin */
+        /* Save applicant summary for the success message */
         try {
           var nameField = document.getElementById('f-name');
           var emailField = document.getElementById('f-email');
@@ -762,13 +758,34 @@ const talentAreas = [
           sessionStorage.setItem('sdf_cv_area', areaField ? areaField.value : '');
         } catch (err) { /* sessionStorage unavailable — meta will show placeholders */ }
 
-        /* loading state — form then submits natively and the browser
-           navigates to Basin, which redirects back to ?submitted=1 */
+        /* loading state */
         submitBtn.disabled = true;
         if (submitLabelEl) submitLabelEl.textContent = 'Submitting…';
         if (spinner) spinner.hidden = false;
-        if (statusEl) statusEl.textContent = 'Sending your CV — please wait, you will be redirected back automatically.';
-        /* do not call preventDefault — let the browser submit normally */
+        if (statusEl) statusEl.textContent = 'Sending your CV — please wait.';
+        submissionInFlight = true;
+
+        /* Fallback: even if the iframe load event doesn't fire (cross-origin
+           load events can be unreliable), show success after a short delay
+           since the POST has already been sent to Basin by then. */
+        var fallbackTimer = setTimeout(function () {
+          if (submissionInFlight) {
+            submissionInFlight = false;
+            showSuccess();
+          }
+        }, 2500);
+
+        basinFrame.addEventListener('load', function onFrameLoad() {
+          basinFrame.removeEventListener('load', onFrameLoad);
+          if (submissionInFlight) {
+            submissionInFlight = false;
+            clearTimeout(fallbackTimer);
+            showSuccess();
+          }
+        });
+
+        /* do not call preventDefault — the form submits natively into the
+           hidden iframe, which keeps this page in place */
       });
     }
 
