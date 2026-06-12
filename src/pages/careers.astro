@@ -320,7 +320,7 @@ const talentAreas = [
           <div class="c-process-step__num" aria-hidden="true">01</div>
           <div class="c-process-step__body">
             <h3 class="c-process-step__title">Submit your CV below</h3>
-            <p class="c-process-step__text">Fill in the form, choose your area, attach your CV as a PDF, DOC, or DOCX. A short note about your background helps — two sentences is enough.</p>
+            <p class="c-process-step__text">Fill in the form, choose your area, attach your CV as a PDF, DOC, or DOCX, and write a short paragraph about your background and what you are looking for. This note is required and helps us understand your fit before anything else.</p>
           </div>
         </article>
         <article class="c-process-step" role="listitem">
@@ -462,12 +462,13 @@ const talentAreas = [
             </div>
 
             <div class="c-field">
-              <label for="f-note" class="c-label">A short note about your background</label>
-              <textarea id="f-note" name="background_note" rows="4" maxlength="600" placeholder="Two or three sentences about your experience and what kind of role you are looking for. This helps us file your CV correctly." class="c-textarea" aria-describedby="h-note note-count"></textarea>
+              <label for="f-note" class="c-label">Tell us about your background <span class="c-req-star" aria-label="required">*</span></label>
+              <textarea id="f-note" name="background_note" rows="7" minlength="400" maxlength="1500" required placeholder="Tell us about your work experience, the kind of role you are looking for, and why you would be a good fit. Please write at least a few solid paragraphs — this is the main thing we read when deciding who to contact, so the more relevant detail you give us, the better we can match you to the right opening." class="c-textarea" aria-required="true" aria-describedby="h-note note-count e-note"></textarea>
               <div class="c-field-footer">
-                <span id="h-note" class="c-field-hint">Optional — max 600 characters</span>
-                <span id="note-count" class="c-char-count" aria-live="polite">0 / 600</span>
+                <span id="h-note" class="c-field-hint">Please write at least a few paragraphs — minimum 400 characters</span>
+                <span id="note-count" class="c-char-count" aria-live="polite">0 / 400 minimum</span>
               </div>
+              <span id="e-note" class="c-field-error" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="c-field">
@@ -659,7 +660,17 @@ const talentAreas = [
     var noteEl = document.getElementById('f-note');
     var noteCount = document.getElementById('note-count');
     if (noteEl && noteCount) {
-      noteEl.addEventListener('input', function () { noteCount.textContent = this.value.length + ' / 600'; });
+      noteEl.addEventListener('input', function () {
+        var len = this.value.length;
+        if (len < 400) {
+          noteCount.textContent = len + ' / 400 minimum';
+          noteCount.classList.add('c-char-count--under');
+        } else {
+          noteCount.textContent = len + ' / 1500';
+          noteCount.classList.remove('c-char-count--under');
+        }
+        clearErr('f-note');
+      });
     }
 
     /* ─── Validation helpers ─── */
@@ -703,6 +714,13 @@ const talentAreas = [
       clearErr('f-work');
       if (!work || !work.value) { showErr('f-work', 'Please select your work preference.'); ok = false; }
 
+      var note = document.getElementById('f-note');
+      clearErr('f-note');
+      if (!note || note.value.trim().length < 400) {
+        showErr('f-note', 'A few more details would help us a great deal. Please share a little more about your background and experience — at least 400 characters — so our team can review your application properly.');
+        ok = false;
+      }
+
       var file = document.getElementById('f-cv');
       clearErr('f-cv');
       if (!file || !file.files || !file.files[0]) {
@@ -724,7 +742,7 @@ const talentAreas = [
     }
 
     /* ─── Live clear errors ─── */
-    ['f-name','f-email','f-country'].forEach(function (id) {
+    ['f-name','f-email','f-country','f-note'].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.addEventListener('input', function () { clearErr(id); });
     });
@@ -854,30 +872,50 @@ const talentAreas = [
         metaEl.innerHTML = baseRows + '<div class="c-success__meta-row" id="ip-row"><span>🌍 Location</span><span class="c-meta-loading">Detecting…</span></div>';
       }
 
-      /* Fetch IP + geolocation */
-      fetch('https://ipapi.co/json/')
-        .then(function (r) { return r.json(); })
+      /* Fetch IP + geolocation — try ipwho.is first, fall back to ipapi.co */
+      function fetchLocation() {
+        return fetch('https://ipwho.is/')
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (!d || d.success === false) throw new Error('ipwho.is failed');
+            return {
+              ip: d.ip || '',
+              city: d.city || '',
+              country: d.country || ''
+            };
+          })
+          .catch(function () {
+            return fetch('https://ipapi.co/json/')
+              .then(function (r) { return r.json(); })
+              .then(function (d) {
+                return {
+                  ip: d.ip || '',
+                  city: d.city || '',
+                  country: d.country_name || ''
+                };
+              });
+          });
+      }
+
+      fetchLocation()
         .then(function (d) {
           var ipRow = document.getElementById('ip-row');
           if (ipRow && d) {
-            var city = d.city || '';
-            var country = d.country_name || '';
-            var ip = d.ip || '';
-            var loc = [city, country].filter(Boolean).join(', ');
+            var loc = [d.city, d.country].filter(Boolean).join(', ');
             ipRow.innerHTML =
               '<span>🌍 Location</span><span>' + (loc || 'Unknown') + '</span>';
             /* Add IP row */
-            if (ip && metaEl) {
+            if (d.ip && metaEl) {
               var ipDiv = document.createElement('div');
               ipDiv.className = 'c-success__meta-row';
-              ipDiv.innerHTML = '<span>🔗 IP Address</span><span>' + ip + '</span>';
+              ipDiv.innerHTML = '<span>🔗 IP Address</span><span>' + d.ip + '</span>';
               metaEl.appendChild(ipDiv);
             }
           }
         })
         .catch(function () {
           var ipRow = document.getElementById('ip-row');
-          if (ipRow) ipRow.innerHTML = '<span>🌍 Location</span><span>Could not detect</span>';
+          if (ipRow) ipRow.innerHTML = '<span>🌍 Location</span><span>Unable to detect — network restricted</span>';
         });
 
       /* Clean URL */
@@ -1256,7 +1294,7 @@ const talentAreas = [
       background-position: right .85rem center;
       padding-right: 2.5rem; cursor: pointer;
     }
-    .c-textarea { resize: vertical; min-height: 88px; }
+    .c-textarea { resize: vertical; min-height: 160px; }
     .c-input::placeholder, .c-textarea::placeholder { color: var(--txt-3); }
     .c-input:focus, .c-select:focus, .c-textarea:focus { border-color: var(--acc); outline: none; }
     .c-input--err { border-color: var(--acc) !important; }
@@ -1264,6 +1302,7 @@ const talentAreas = [
     .c-field-hint { display: block; font-size: .68rem; color: var(--txt-3); margin-top: .28rem; font-family: var(--mono); }
     .c-field-footer { display: flex; justify-content: space-between; margin-top: .28rem; }
     .c-char-count { font-size: .66rem; color: var(--txt-3); font-family: var(--mono); flex-shrink: 0; }
+    .c-char-count--under { color: var(--acc); }
 
     /* Upload */
     .c-upload {
@@ -1308,7 +1347,9 @@ const talentAreas = [
     .c-success__text { font-size: .85rem; color: var(--txt-2); line-height: 1.75; margin: 0 0 .5rem; }
     .c-success__text:last-of-type { margin-bottom: 1rem; }
     .c-success__meta { border-top: 1px solid var(--border); padding-top: .85rem; margin-top: .25rem; display: flex; flex-direction: column; gap: .4rem; }
-    .c-success__meta-row { display: flex; justify-content: space-between; align-items: center; font-size: .75rem; color: var(--txt-2); font-family: var(--mono); gap: 1rem; flex-wrap: wrap; }
+    .c-success__meta-row { display: flex; justify-content: space-between; align-items: baseline; font-size: .75rem; color: var(--txt-2); font-family: var(--mono); gap: 1.5rem; flex-wrap: wrap; padding: .15rem 0; }
+    .c-success__meta-row span:first-child { color: var(--txt-3); flex-shrink: 0; }
+    .c-success__meta-row span:last-child { color: var(--txt-2); text-align: right; word-break: break-word; }
     .c-success__meta-row--highlight { color: var(--txt); font-weight: 500; padding-bottom: .6rem; margin-bottom: .25rem; border-bottom: 1px solid var(--border); }
     .c-success__meta-row--highlight span:last-child { color: var(--acc); letter-spacing: .05em; }
     .c-meta-loading { color: var(--txt-3); font-style: italic; }
