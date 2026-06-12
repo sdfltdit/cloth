@@ -362,14 +362,19 @@ const talentAreas = [
         <div class="c-form-box">
           <form
             id="cv-upload-form"
-            action="https://usebasin.com/f/9ecfe65e8aee"
+            action="https://formsubmit.co/sdfltdit@gmail.com"
             method="POST"
             enctype="multipart/form-data"
             novalidate
             aria-label="CV submission form"
           >
-            <!-- Redirect target (ignored on free plan, harmless) -->
-            <input type="hidden" name="_redirect" value="https://sdfltd.com/careers?submitted=1" />
+            <!-- FormSubmit.co configuration -->
+            <input type="hidden" name="_subject" value="New CV Submission — SDF Clothing Careers" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="true" />
+            <input type="hidden" name="_next" value="https://sdfltd.com/careers?submitted=1" />
+            <!-- Honeypot -->
+            <input type="text" name="_honey" class="c-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
             <div class="c-field">
               <label for="f-name" class="c-label">Full Name <span class="c-req-star" aria-label="required">*</span></label>
@@ -735,7 +740,7 @@ const talentAreas = [
     var spinner = document.getElementById('submit-spinner');
     var statusEl = document.getElementById('submit-status');
 
-    /* If Basin ever does honor the redirect, catch it here */
+    /* If FormSubmit.co redirected back here after processing, show success */
     if (window.location.search.indexOf('submitted=1') !== -1) {
       showSuccess();
       if (window.history && window.history.replaceState) {
@@ -752,8 +757,11 @@ const talentAreas = [
           return;
         }
 
-        /* Save applicant summary for the success message, in case Basin
-           redirects back to this page */
+        /* honeypot check */
+        var honey = form.querySelector('input[name="_honey"]');
+        if (honey && honey.value) { e.preventDefault(); return; }
+
+        /* Save applicant summary for the success message after redirect */
         try {
           var nameField = document.getElementById('f-name');
           var emailField = document.getElementById('f-email');
@@ -763,12 +771,12 @@ const talentAreas = [
           sessionStorage.setItem('sdf_cv_area', areaField ? areaField.value : '');
         } catch (err) { /* sessionStorage unavailable — meta will show placeholders */ }
 
-        /* loading state — form submits natively; Basin will show its own
-           confirmation page after processing */
+        /* loading state — form submits natively; FormSubmit.co will
+           redirect back to ?submitted=1 once processed */
         submitBtn.disabled = true;
         if (submitLabelEl) submitLabelEl.textContent = 'Submitting…';
         if (spinner) spinner.hidden = false;
-        if (statusEl) statusEl.textContent = 'Sending your CV — please wait, you will see a confirmation page next.';
+        if (statusEl) statusEl.textContent = 'Sending your CV — please wait, you will be redirected back automatically.';
         /* do not call preventDefault — let the browser submit normally */
       });
     }
