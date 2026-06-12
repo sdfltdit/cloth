@@ -1,281 +1,1132 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const title = "Press Releases | SDF Clothing News & Announcements";
-const description = "Latest news from SDF Clothing — manufacturing updates, certifications, partnerships, and industry insights from Bangladesh garment producer.";
+// ─── helpers ────────────────────────────────────────────────────────────────
+function hexToRgb(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `${r},${g},${b}`;
+}
+
+// ─── page meta ──────────────────────────────────────────────────────────────
+const pageTitle = "Textile Industry News & Manufacturing Insights — SDF Clothing Journal";
+const pageDesc  = "Bangladesh garment manufacturer SDF Clothing documents textile industry news, RMG sector developments, GOTS and BSCI certification updates, EU regulatory changes, and supply chain insights from our Dhaka production facility.";
 const canonical = "https://sdfltd.com/journal/";
+
+// ─── inline SVG icon map ─────────────────────────────────────────────────────
+const ICONS: Record<string, string> = {
+  certification: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>`,
+  expansion:     `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`,
+  people:        `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+  innovation:    `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+  financial:     `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+  award:         `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  partnership:   `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
+  event:         `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+};
+
+// Arrow icon reused in cards
+const ARROW = `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
+
+// ─── post data ───────────────────────────────────────────────────────────────
+const rawPosts = [
+  {
+    id: "gots-7-recertification-2026",
+    dateDisplay: "May 2026", dateISO: "2026-05-01",
+    title: "SDF Clothing Achieves GOTS 7.0 Recertification for 2026 Production",
+    excerpt: "Our third consecutive GOTS recertification covers all primary production lines — from fabric preparation through final finishing. The 7.0 standard introduced stricter chemical input controls and traceability documentation requirements that reshaped wet processing procedures across the Dhaka facility.",
+    category: "Certification", catColor: "#00c46a", catSlug: "certification",
+    tags: ["GOTS 7.0", "organic textiles", "chemical compliance"],
+    readTime: "4 min", featured: true, isNew: true, year: 2026,
+    href: "/journal/gots-7-recertification-2026/",
+  },
+  {
+    id: "capacity-expansion-2026",
+    dateDisplay: "Apr 2026", dateISO: "2026-04-01",
+    title: "SDF Clothing Adds 15% Capacity at Dhaka Facility",
+    excerpt: "Sixteen new sewing lines and updated finishing equipment at our Kafrul facility extend monthly output. The investment directly answers confirmed purchase orders from three European fashion brands placing Spring/Summer 2027 collections.",
+    category: "Expansion", catColor: "#0088ff", catSlug: "expansion",
+    tags: ["manufacturing capacity", "EU sourcing", "Bangladesh garment"],
+    readTime: "3 min", featured: false, isNew: false, year: 2026,
+    href: "/clothing-manufacturer-bangladesh/",
+  },
+  {
+    id: "sustainability-director-2026",
+    dateDisplay: "Mar 2026", dateISO: "2026-03-01",
+    title: "SDF Clothing Welcomes New Sustainability Director",
+    excerpt: "Seventeen years across sourcing, compliance, and lifecycle assessment bring grounded expertise to our ESPR preparation roadmap. Focus areas: DPP integration, REACH chemical compliance, and end-of-life traceability for EU market clients.",
+    category: "People", catColor: "#a855f7", catSlug: "people",
+    tags: ["ESPR 2027", "DPP compliance", "circular economy"],
+    readTime: "3 min", featured: false, isNew: false, year: 2026,
+    href: "/insights/index/",
+  },
+  {
+    id: "digital-product-passport-2026",
+    dateDisplay: "Feb 2026", dateISO: "2026-02-01",
+    title: "SDF Clothing Launches Digital Product Passport Pilot Program",
+    excerpt: "We enrolled twelve SKUs from two client collections in an early DPP pilot, testing serialised QR codes against three proposed EU registry frameworks. Results directly inform how we structure passport data architecture ahead of the 2027 mandate.",
+    category: "Innovation", catColor: "#8b5cf6", catSlug: "innovation",
+    tags: ["digital product passport", "EU textile regulations", "supply chain traceability"],
+    readTime: "5 min", featured: false, isNew: false, year: 2026,
+    href: "/insights/index/",
+  },
+  {
+    id: "annual-growth-2025",
+    dateDisplay: "Jan 2026", dateISO: "2026-01-10",
+    title: "SDF Clothing Reports 28% Year-Over-Year Growth in 2025",
+    excerpt: "Full-year 2025 revenue reached the highest point in company history, driven by eight new brand relationships and increased repeat volumes from North America. EBITDA margin held steady despite raw material cost increases across Q3.",
+    category: "Financial", catColor: "#f59e0b", catSlug: "financial",
+    tags: ["Bangladesh apparel exports", "RMG growth", "2025 results"],
+    readTime: "4 min", featured: false, isNew: false, year: 2026,
+    href: "/journal/annual-growth-2025/",
+  },
+  {
+    id: "bsci-excellence-2025",
+    dateDisplay: "Dec 2025", dateISO: "2025-12-01",
+    title: "SDF Clothing Receives BSCI Compliance Excellence Recognition",
+    excerpt: "The annual BSCI audit assessed wages, working hours, health and safety systems, and freedom of association. Receiving the highest rating across all six assessment areas reflects consistent process work — not pre-audit preparation.",
+    category: "Award", catColor: "#f97316", catSlug: "award",
+    tags: ["BSCI", "social compliance", "ethical manufacturing"],
+    readTime: "4 min", featured: false, isNew: false, year: 2025,
+    href: "/certifications/",
+  },
+  {
+    id: "european-mill-partnership-2025",
+    dateDisplay: "Nov 2025", dateISO: "2025-11-01",
+    title: "SDF Clothing Partners with European Textile Mill Network",
+    excerpt: "New supply agreements with three certified mills in Portugal and one in northern Italy give our clients direct access to GOTS-certified and GRS-verified fabrics with documented chain of custody — reducing sourcing complexity at a critical tier.",
+    category: "Partnership", catColor: "#06b6d4", catSlug: "partnership",
+    tags: ["sustainable fabric sourcing", "GRS certification", "Portugal textile"],
+    readTime: "3 min", featured: false, isNew: false, year: 2025,
+    href: "/journal/european-mill-partnership-2025/",
+  },
+  {
+    id: "sourcing-summit-2025",
+    dateDisplay: "Oct 2025", dateISO: "2025-10-01",
+    title: "SDF Clothing Hosts Industry Sourcing Summit in Dhaka",
+    excerpt: "Over sixty attendees — brand sustainability leads, sourcing managers, and Bangladesh factory representatives — worked through 2026 priorities: DPP readiness, LDC graduation implications, and nearshoring pressure on South Asian suppliers.",
+    category: "Event", catColor: "#6366f1", catSlug: "event",
+    tags: ["Bangladesh sourcing", "LDC graduation", "Dhaka industry event"],
+    readTime: "5 min", featured: false, isNew: false, year: 2025,
+    href: "/journal/sourcing-summit-2025/",
+  },
+];
+
+// Enrich with computed RGB string
+const posts = rawPosts.map(p => ({ ...p, catRgb: hexToRgb(p.catColor) }));
+
+const featured   = posts.find(p => p.featured)!;
+const posts2026  = posts.filter(p => !p.featured && p.year === 2026);
+const posts2025  = posts.filter(p => p.year === 2025);
+const categories = ["All", ...new Set(posts.map(p => p.category))];
+
+// ─── semantic topic coverage areas ──────────────────────────────────────────
+const coverageAreas = [
+  { icon: "🏅", title: "Sustainability Certifications", color: "#00c46a", rgb: "0,196,106",
+    body: "GOTS, OEKO-TEX, GRS, BSCI — what each standard covers, what changes between versions, and how recertification cycles affect production scheduling.",
+    tags: ["GOTS", "OEKO-TEX", "GRS", "BSCI"] },
+  { icon: "🌐", title: "EU Textile Regulations", color: "#0088ff", rgb: "0,136,255",
+    body: "The ESPR framework, Digital Product Passport timelines, Extended Producer Responsibility, and how Bangladesh manufacturers prepare for 2027 compliance.",
+    tags: ["ESPR", "DPP", "EPR", "EU 2027"] },
+  { icon: "📦", title: "Bangladesh RMG Industry", color: "#ee0000", rgb: "238,0,0",
+    body: "Export performance, LDC graduation implications, BGMEA policy developments, and structural shifts across the world's second-largest garment-exporting country.",
+    tags: ["RMG sector", "LDC graduation", "apparel exports"] },
+  { icon: "🔗", title: "Supply Chain Transparency", color: "#06b6d4", rgb: "6,182,212",
+    body: "Traceability requirements, chain-of-custody documentation, raw material sourcing, and what brands increasingly ask of tier-two and tier-three suppliers.",
+    tags: ["traceability", "chain of custody", "responsible sourcing"] },
+  { icon: "🏭", title: "Manufacturing & Capacity", color: "#f59e0b", rgb: "245,158,11",
+    body: "Facility updates, technology adoption, production line efficiency, and the operational decisions that shape output at a mid-scale Bangladesh garment factory.",
+    tags: ["factory capacity", "sewing lines", "Bangladesh manufacturing"] },
+  { icon: "🤝", title: "Partnerships & Events", color: "#6366f1", rgb: "99,102,241",
+    body: "Mill relationships, buyer partnerships, industry sourcing summits, and team appointments from the Bangladesh factory floor and beyond.",
+    tags: ["sourcing events", "mill partnerships", "industry news"] },
+];
+
+// ─── JSON-LD structured data ─────────────────────────────────────────────────
+const jsonLD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#organization",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "description": "Bangladesh-based garment manufacturer producing sustainable, certified clothing for European and North American brands.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Kafrul",
+        "addressLocality": "Dhaka",
+        "addressCountry": "BD"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://sdfltd.com/#website",
+      "url": "https://sdfltd.com",
+      "name": "SDF Clothing",
+      "publisher": { "@id": "https://sdfltd.com/#organization" }
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://sdfltd.com/journal/#webpage",
+      "url": canonical,
+      "name": pageTitle,
+      "description": pageDesc,
+      "isPartOf": { "@id": "https://sdfltd.com/#website" },
+      "about": { "@id": "https://sdfltd.com/#organization" },
+      "breadcrumb": { "@id": "https://sdfltd.com/journal/#breadcrumb" },
+      "inLanguage": "en",
+      "dateModified": "2026-05-01"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://sdfltd.com/journal/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home",    "item": "https://sdfltd.com" },
+        { "@type": "ListItem", "position": 2, "name": "Journal", "item": canonical }
+      ]
+    },
+    {
+      "@type": "Blog",
+      "@id": "https://sdfltd.com/journal/#blog",
+      "name": "SDF Clothing Industry Journal",
+      "url": canonical,
+      "description": "Textile industry news, Bangladesh RMG sector updates, sustainability certifications, EU compliance preparation, and supply chain transparency insights from SDF Clothing.",
+      "publisher": { "@id": "https://sdfltd.com/#organization" },
+      "blogPost": posts.map(p => ({
+        "@type": "BlogPosting",
+        "@id": `https://sdfltd.com/journal/${p.id}/`,
+        "url": `https://sdfltd.com/journal/${p.id}/`,
+        "headline": p.title,
+        "description": p.excerpt,
+        "datePublished": p.dateISO,
+        "dateModified": p.dateISO,
+        "keywords": p.tags.join(", "),
+        "articleSection": p.category,
+        "author":    { "@id": "https://sdfltd.com/#organization" },
+        "publisher": { "@id": "https://sdfltd.com/#organization" },
+        "mainEntityOfPage": { "@id": "https://sdfltd.com/journal/#webpage" }
+      }))
+    }
+  ]
+};
 ---
 
-<BaseLayout title={title} description={canonical}>
-  <link rel="canonical" href={canonical} />
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:url" content={canonical} />
-  <meta property="og:type" content="website" />
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
+<BaseLayout title={pageTitle} description={pageDesc}>
 
+  <!-- ── head injections ─────────────────────────────────────────────── -->
+  <link rel="canonical"  href={canonical} />
+  <link rel="alternate"  hreflang="en" href={canonical} />
+  <meta name="robots"    content="index, follow, max-snippet:-1, max-image-preview:large" />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content={pageTitle} />
+  <meta property="og:description" content={pageDesc} />
+  <meta property="og:url"         content={canonical} />
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="SDF Clothing" />
+  <meta property="og:locale"      content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content={pageTitle} />
+  <meta name="twitter:description" content={pageDesc} />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
+
+  <!-- ── styles ──────────────────────────────────────────────────────── -->
   <style>
-    .journal-container {
-      max-width: 900px;
+    /* ── tokens ─────────────────────────────────────── */
+    .jw {
+      --red:        #ee0000;
+      --red-dim:    rgba(238,0,0,0.09);
+      --red-border: rgba(238,0,0,0.35);
+      --card-bg:    #111111;
+      --card-hover: #161616;
+      --border:     rgba(255,255,255,0.08);
+      --border-md:  rgba(255,255,255,0.14);
+      --white:      #ffffff;
+      --muted:      rgba(255,255,255,0.48);
+      --muted-md:   rgba(255,255,255,0.68);
+      --ink:        #000000;
+      --font:       'Inter', system-ui, sans-serif;
+      --mono:       'Inter', ui-monospace, monospace;
+
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 4rem 1.5rem 6rem;
-      background: #000000;
+      padding: 0 1.5rem 7rem;
+      background: var(--ink);
       min-height: 100vh;
     }
 
-    .hero-section {
-      padding-bottom: 2rem;
-      border-bottom: 2px solid #e00;
-      margin-bottom: 3rem;
-    }
-
-    .hero-label {
-      font-family: 'Inter', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #e00;
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-
-    .hero-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #FFFFFF;
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.02em;
-    }
-
-    @media (max-width: 768px) {
-      .hero-title {
-        font-size: 1.75rem;
-      }
-    }
-
-    .hero-subtitle {
-      font-family: 'Inter', sans-serif;
-      font-size: 1.1rem;
-      font-style: italic;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 1.25rem;
-      line-height: 1.5;
-    }
-
-    .hero-meta {
+    /* ── breadcrumb ──────────────────────────────────── */
+    .bc {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
+      gap: 0.45rem;
+      padding: 1.75rem 0 0;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      list-style: none;
+    }
+    .bc a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .bc a:hover { color: var(--red); }
+    .bc-sep { color: var(--muted); font-size: 0.8rem; }
+    .bc-current { color: var(--red); font-weight: 600; }
+
+    /* ── page header ─────────────────────────────────── */
+    .ph {
+      padding: 2.75rem 0 2.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.25rem;
+    }
+    .ph-eye {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 1.1rem;
+    }
+    .ph-eye-line {
+      display: block;
+      width: 2.25rem;
+      height: 2px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+    .ph-title {
+      font-family: var(--font);
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.1rem;
+    }
+    .ph-title em {
+      font-style: normal;
+      color: var(--red);
+    }
+    .ph-intro {
+      font-family: var(--font);
+      font-size: 1.02rem;
+      line-height: 1.72;
+      color: var(--muted-md);
+      max-width: 660px;
+    }
+    .ph-updated {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.1rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+    }
+    .ph-updated-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--red);
+      border-radius: 50%;
     }
 
-    .hero-date {
-      font-family: 'Inter', monospace;
-      font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.6);
-      letter-spacing: 0.05em;
+    /* ── stats infographic bar ───────────────────────── */
+    .stats {
+      display: flex;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      margin-bottom: 1.75rem;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
-
-    .new-badge {
-      background: #e00;
-      color: #FFFFFF;
-      font-family: 'Inter', monospace;
+    .stats::-webkit-scrollbar { display: none; }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem 1.75rem;
+      flex: 1;
+      min-width: 110px;
+      gap: 0.2rem;
+      position: relative;
+    }
+    .stat-item + .stat-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 22%;
+      bottom: 22%;
+      width: 1px;
+      background: var(--border);
+    }
+    .stat-icon { font-size: 1.15rem; line-height: 1; }
+    .stat-val {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .stat-lbl {
+      font-family: var(--mono);
       font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      font-weight: 600;
-    }
-
-    .year-label {
-      font-family: 'Inter', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 0.75rem;
-      font-weight: 600;
-    }
-
-    .year-line {
-      height: 1px;
-      background: #e00;
-      margin-bottom: 2rem;
-    }
-
-    .press-item {
-      display: grid;
-      grid-template-columns: 80px 1fr auto;
-      gap: 1.5rem;
-      padding: 1.5rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      align-items: flex-start;
-    }
-
-    @media (max-width: 768px) {
-      .press-item {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-      }
-    }
-
-    .item-date {
-      font-family: 'Inter', monospace;
-      font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.6);
-      letter-spacing: 0.05em;
-    }
-
-    .item-content {
-      min-width: 0;
-    }
-
-    .item-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #FFFFFF;
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-      letter-spacing: -0.01em;
-    }
-
-    .item-subtitle {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      font-style: italic;
-      color: rgba(255, 255, 255, 0.6);
-      line-height: 1.5;
-    }
-
-    .item-tag {
-      font-family: 'Inter', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #e00;
-      border: 1px solid #e00;
-      padding: 3px 8px;
-      font-weight: 600;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: 0.04em;
       white-space: nowrap;
     }
 
-    .year-separator {
+    /* ── category filter ─────────────────────────────── */
+    .filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.45rem 0.95rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+      line-height: 1;
+    }
+    .filter-btn:hover {
+      border-color: var(--border-md);
+      color: var(--white);
+    }
+    .filter-btn.is-active {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+    }
+
+    /* ── featured card ───────────────────────────────── */
+    .feat {
+      position: relative;
+      padding: 2.25rem 2.25rem 2rem;
+      border: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .feat:hover { border-color: var(--border-md); }
+
+    /* stitch — the signature textile element */
+    .feat::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 14px; bottom: 14px;
+      width: 3px;
+      background: repeating-linear-gradient(
+        to bottom,
+        var(--stitch) 0px, var(--stitch) 10px,
+        transparent   10px, transparent  19px
+      );
+    }
+    .feat::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(var(--cat-rgb), 0.055) 0%,
+        transparent 55%
+      );
+      pointer-events: none;
+    }
+    .feat-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .feat-right {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .feat-title {
+      font-family: var(--font);
+      font-size: clamp(1.3rem, 3vw, 1.75rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.875rem;
+    }
+    .feat-title a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .feat-title a:hover { color: rgba(255,255,255,0.8); }
+    .feat-excerpt {
+      font-family: var(--font);
+      font-size: 0.97rem;
+      line-height: 1.68;
+      color: var(--muted-md);
+      margin-bottom: 1.4rem;
+      max-width: 720px;
+    }
+
+    /* ── shared card elements ────────────────────────── */
+    .cat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 0.3rem 0.65rem;
+      border: 1px solid;
+      line-height: 1;
+    }
+    .post-date {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .new-badge {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 3px 8px;
+      background: var(--red);
+      color: var(--white);
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 2px 7px;
+      white-space: nowrap;
+    }
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--red);
+      text-decoration: none;
+      transition: gap 0.15s;
+      flex-shrink: 0;
+    }
+    .read-more:hover { gap: 0.55rem; }
+    .read-time {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+
+    /* ── year group ──────────────────────────────────── */
+    .year-group { margin-bottom: 0; }
+    .year-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5px;
+    }
+    .year-label {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      flex-shrink: 0;
+      padding: 1.75rem 0 0.6rem;
+    }
+    .year-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--red);
+      margin-top: 0.75rem;
+    }
+    .year-count {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      flex-shrink: 0;
+      margin-top: 0.75rem;
+    }
+
+    /* ── posts grid ──────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-top: none;
+    }
+    @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
+
+    /* ── post card ───────────────────────────────────── */
+    .pc {
+      position: relative;
+      padding: 1.6rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: background 0.15s;
+      overflow: hidden;
+    }
+    .pc::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: repeating-linear-gradient(
+        to bottom,
+        var(--stitch) 0px, var(--stitch) 7px,
+        transparent   7px, transparent  14px
+      );
+      opacity: 0.75;
+    }
+    .pc::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        150deg,
+        rgba(var(--cat-rgb), 0.05) 0%,
+        #111111 48%
+      );
+      pointer-events: none;
+    }
+    .pc:hover { background: var(--card-hover); }
+    .pc-meta {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .pc-title {
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 650;
+      color: var(--white);
+      line-height: 1.38;
+      letter-spacing: -0.015em;
+    }
+    .pc-title a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .pc-title a:hover { color: rgba(255,255,255,0.78); }
+    .pc-excerpt {
+      font-family: var(--font);
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--muted-md);
+      flex: 1;
+    }
+    .pc-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    /* ── year separator ──────────────────────────────── */
+    .ysep {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 1rem;
-      margin: 3rem 0;
+      padding: 2.5rem 0;
     }
-
-    .separator-line {
+    .ysep-line {
       flex: 1;
       height: 1px;
-      background: #e00;
+      background: linear-gradient(to right, transparent, var(--red), transparent);
+    }
+    .ysep-diamond { color: var(--red); font-size: 1.1rem; }
+
+    /* ── coverage section ────────────────────────────── */
+    .cov {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .cov-eye {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .cov-title {
+      font-family: var(--font);
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.025em;
+      margin-bottom: 0.55rem;
+      line-height: 1.2;
+    }
+    .cov-sub {
+      font-family: var(--font);
+      font-size: 0.93rem;
+      color: var(--muted-md);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      max-width: 560px;
+    }
+    .cov-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    @media (max-width: 860px) { .cov-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .cov-grid { grid-template-columns: 1fr; } }
+
+    .cov-card {
+      padding: 1.6rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      transition: background 0.15s;
+    }
+    .cov-card:hover { background: var(--card-hover); }
+    .cov-icon { font-size: 1.3rem; line-height: 1; }
+    .cov-card-title {
+      font-family: var(--font);
+      font-size: 0.95rem;
+      font-weight: 650;
+      color: var(--white);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+    .cov-card-body {
+      font-family: var(--font);
+      font-size: 0.825rem;
+      color: var(--muted-md);
+      line-height: 1.62;
+      flex: 1;
+    }
+    .cov-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+    .cov-tag {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      border: 1px solid;
+      padding: 2px 7px;
     }
 
-    .separator-diamond {
-      color: #e00;
-      font-size: 1.25rem;
+    /* ── context box ─────────────────────────────────── */
+    .ctx {
+      margin-top: 3rem;
+      padding: 1.75rem 2rem;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--red);
+      background: var(--card-bg);
     }
+    .ctx-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+    .ctx-body {
+      font-family: var(--font);
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--muted-md);
+    }
+    .ctx-body strong { color: var(--white); font-weight: 600; }
+
+    /* ── hidden filter state ─────────────────────────── */
+    .is-hidden { display: none !important; }
   </style>
 
-  <div class="journal-container">
-    <!-- Hero Section - Latest Release -->
-    <section class="hero-section">
-      <div class="hero-label">Latest Release</div>
-      <h1 class="hero-title">SDF Clothing Achieves GOTS 7.0 Recertification for 2026 Production</h1>
-      <p class="hero-subtitle">Continued commitment to organic textile standards across all production lines. See our <a href="/certifications" style="color: #e00; text-decoration: none;">full certification portfolio</a>.</p>
-      <div class="hero-meta">
-        <span class="hero-date">May 2026</span>
-        <span class="new-badge">New</span>
+  <!-- ════════════════════════════════════════════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════════════════════════════════════════════ -->
+  <div class="jw">
+
+    <!-- ── breadcrumb ─────────────────────────────────────────────────── -->
+    <nav aria-label="Breadcrumb">
+      <ol class="bc">
+        <li><a href="/">Home</a></li>
+        <li class="bc-sep" aria-hidden="true">›</li>
+        <li><span class="bc-current" aria-current="page">Journal</span></li>
+      </ol>
+    </nav>
+
+    <!-- ── page header ────────────────────────────────────────────────── -->
+    <header class="ph">
+      <div class="ph-eye" aria-label="Section label">
+        <span class="ph-eye-line" aria-hidden="true"></span>
+        Textile Industry News
+      </div>
+      <h1 class="ph-title">Manufacturing Insights<br>&amp; <em>Industry Journal</em></h1>
+      <p class="ph-intro">
+        We document what's changing in global garment manufacturing — certification cycles,
+        regulatory shifts, capacity decisions, and the people behind them. Coverage draws
+        directly from operational experience producing for European and North American brands
+        out of our Dhaka facility: Bangladesh RMG sector developments, sustainable textile
+        standards, EU compliance preparation, and supply chain transparency requirements
+        that now shape sourcing decisions at every tier.
+      </p>
+      <span class="ph-updated">
+        <span class="ph-updated-dot" aria-hidden="true"></span>
+        Journal updated May 2026 &nbsp;·&nbsp; {posts.length} entries
+      </span>
+    </header>
+
+    <!-- ── stats infographic bar ──────────────────────────────────────── -->
+    <div class="stats" role="region" aria-label="Company metrics">
+      <div class="stat-item">
+        <div class="stat-icon" aria-hidden="true">📈</div>
+        <div class="stat-val">28%</div>
+        <div class="stat-lbl">YoY Growth 2025</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon" aria-hidden="true">✅</div>
+        <div class="stat-val">GOTS 7.0</div>
+        <div class="stat-lbl">Recertified 2026</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon" aria-hidden="true">🏭</div>
+        <div class="stat-val">+15%</div>
+        <div class="stat-lbl">Production Capacity</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon" aria-hidden="true">⭐</div>
+        <div class="stat-val">A Grade</div>
+        <div class="stat-lbl">BSCI Audit 2025</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon" aria-hidden="true">🌍</div>
+        <div class="stat-val">2027</div>
+        <div class="stat-lbl">EU ESPR Ready</div>
+      </div>
+    </div>
+
+    <!-- ── category filter ────────────────────────────────────────────── -->
+    <div class="filter" role="group" aria-label="Filter posts by category">
+      {categories.map((cat, i) => (
+        <button
+          class={`filter-btn${i === 0 ? ' is-active' : ''}`}
+          data-filter={i === 0 ? 'all' : cat.toLowerCase()}
+          aria-pressed={i === 0 ? 'true' : 'false'}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- ── featured card ──────────────────────────────────────────────── -->
+    <article
+      class="feat"
+      data-cat={featured.catSlug}
+      id={featured.id}
+      style={`--stitch: ${featured.catColor}; --cat-rgb: ${featured.catRgb};`}
+      itemscope itemtype="https://schema.org/BlogPosting"
+    >
+      <meta itemprop="datePublished" content={featured.dateISO} />
+      <meta itemprop="keywords" content={featured.tags.join(', ')} />
+      <meta itemprop="articleSection" content={featured.category} />
+
+      <div class="feat-meta">
+        <span
+          class="cat-badge"
+          style={`color: ${featured.catColor}; border-color: ${featured.catColor}40;`}
+        >
+          <span set:html={ICONS[featured.catSlug]} />
+          {featured.category}
+        </span>
+        <div class="feat-right">
+          <time class="post-date" datetime={featured.dateISO}>{featured.dateDisplay}</time>
+          {featured.isNew && <span class="new-badge">New</span>}
+        </div>
+      </div>
+
+      <h2 class="feat-title" itemprop="headline">
+        <a href={featured.href}>{featured.title}</a>
+      </h2>
+      <p class="feat-excerpt" itemprop="description">{featured.excerpt}</p>
+
+      <div class="card-footer">
+        <div class="tag-row" aria-label="Tags">
+          {featured.tags.map(t => <span class="tag">{t}</span>)}
+        </div>
+        <a href={featured.href} class="read-more" aria-label={`Read: ${featured.title}`}>
+          Read more <span set:html={ARROW} />
+        </a>
+      </div>
+    </article>
+
+    <!-- ── 2026 posts ─────────────────────────────────────────────────── -->
+    <section class="year-group" id="posts-2026" aria-label="2026 journal entries">
+      <div class="year-header" aria-hidden="true">
+        <h2 class="year-label">2026</h2>
+        <div class="year-rule"></div>
+        <span class="year-count">{posts2026.length + 1} entries</span>
+      </div>
+      <div class="grid">
+        {posts2026.map(post => (
+          <article
+            class="pc"
+            data-cat={post.catSlug}
+            id={post.id}
+            style={`background: #111111; --stitch: ${post.catColor}; --cat-rgb: ${post.catRgb};`}
+            itemscope itemtype="https://schema.org/BlogPosting"
+          >
+            <meta itemprop="datePublished" content={post.dateISO} />
+            <meta itemprop="keywords" content={post.tags.join(', ')} />
+            <meta itemprop="articleSection" content={post.category} />
+
+            <div class="pc-meta">
+              <span
+                class="cat-badge"
+                style={`color: ${post.catColor}; border-color: ${post.catColor}38;`}
+              >
+                <span set:html={ICONS[post.catSlug]} />
+                {post.category}
+              </span>
+              <time class="post-date" datetime={post.dateISO}>{post.dateDisplay}</time>
+            </div>
+
+            <h3 class="pc-title" itemprop="headline">
+              <a href={post.href}>{post.title}</a>
+            </h3>
+            <p class="pc-excerpt" itemprop="description">{post.excerpt}</p>
+
+            <div class="pc-footer">
+              <div class="tag-row">
+                {post.tags.slice(0, 2).map(t => <span class="tag">{t}</span>)}
+              </div>
+              <span class="read-time">⏱ {post.readTime}</span>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
 
-    <!-- Year 2026 -->
-    <div class="year-label">2026</div>
-    <div class="year-line"></div>
-
-    <article class="press-item">
-      <div class="item-date">Apr 2026</div>
-      <div class="item-content">
-        <h2 class="item-title">SDF Clothing Adds 15% Capacity Expansion in Dhaka Facility</h2>
-        <p class="item-subtitle">New sewing lines and finishing equipment support growing European demand. Learn about our <a href="/clothing-manufacturer-bangladesh" style="color: #e00; text-decoration: none;">Bangladesh operations</a>.</p>
-      </div>
-      <span class="item-tag">Expansion</span>
-    </article>
-
-    <article class="press-item">
-      <div class="item-date">Mar 2026</div>
-      <div class="item-content">
-        <h2 class="item-title">SDF Clothing Welcomes New Sustainability Director</h2>
-        <p class="item-subtitle">Industry veteran joins to lead 2027 ESPR compliance preparation. See our <a href="/insights/index" style="color: #e00; text-decoration: none;">industry insights</a> on compliance.</p>
-      </div>
-      <span class="item-tag">People</span>
-    </article>
-
-    <article class="press-item">
-      <div class="item-date">Feb 2026</div>
-      <div class="item-content">
-        <h2 class="item-title">SDF Clothing Launches Digital Product Passport Pilot Program</h2>
-        <p class="item-subtitle">Early adoption initiative prepares clients for 2027 EU regulations</p>
-      </div>
-      <span class="item-tag">Innovation</span>
-    </article>
-
-    <article class="press-item">
-      <div class="item-date">Jan 2026</div>
-      <div class="item-content">
-        <h2 class="item-title">SDF Clothing Reports 28% Year-Over-Year Growth in 2025</h2>
-        <p class="item-subtitle">Strong demand from European and North American brands drives expansion</p>
-      </div>
-      <span class="item-tag">Financial</span>
-    </article>
-
-    <!-- Year Separator -->
-    <div class="year-separator">
-      <div class="separator-line"></div>
-      <span class="separator-diamond">◆</span>
-      <div class="separator-line"></div>
+    <!-- ── year separator ─────────────────────────────────────────────── -->
+    <div class="ysep" id="ysep" aria-hidden="true">
+      <div class="ysep-line"></div>
+      <span class="ysep-diamond">◆</span>
+      <div class="ysep-line"></div>
     </div>
 
-    <!-- Year 2025 -->
-    <div class="year-label">2025</div>
-    <div class="year-line"></div>
-
-    <article class="press-item">
-      <div class="item-date">Dec 2025</div>
-      <div class="item-content">
-        <h2 class="item-title">SDF Clothing Receives BSCI Compliance Excellence Recognition</h2>
-        <p class="item-subtitle">Annual social compliance audit results in highest rating tier</p>
+    <!-- ── 2025 posts ─────────────────────────────────────────────────── -->
+    <section class="year-group" id="posts-2025" aria-label="2025 journal entries">
+      <div class="year-header" aria-hidden="true">
+        <h2 class="year-label">2025</h2>
+        <div class="year-rule"></div>
+        <span class="year-count">{posts2025.length} entries</span>
       </div>
-      <span class="item-tag">Award</span>
-    </article>
+      <div class="grid">
+        {posts2025.map(post => (
+          <article
+            class="pc"
+            data-cat={post.catSlug}
+            id={post.id}
+            style={`background: #111111; --stitch: ${post.catColor}; --cat-rgb: ${post.catRgb};`}
+            itemscope itemtype="https://schema.org/BlogPosting"
+          >
+            <meta itemprop="datePublished" content={post.dateISO} />
+            <meta itemprop="keywords" content={post.tags.join(', ')} />
+            <meta itemprop="articleSection" content={post.category} />
 
-    <article class="press-item">
-      <div class="item-date">Nov 2025</div>
-      <div class="item-content">
-        <h2 class="item-title">SDF Clothing Partners with European Textile Mill Network</h2>
-        <p class="item-subtitle">New partnerships expand sustainable fabric sourcing options</p>
-      </div>
-      <span class="item-tag">Partnership</span>
-    </article>
+            <div class="pc-meta">
+              <span
+                class="cat-badge"
+                style={`color: ${post.catColor}; border-color: ${post.catColor}38;`}
+              >
+                <span set:html={ICONS[post.catSlug]} />
+                {post.category}
+              </span>
+              <time class="post-date" datetime={post.dateISO}>{post.dateDisplay}</time>
+            </div>
 
-    <article class="press-item" style="border-bottom: none;">
-      <div class="item-date">Oct 2025</div>
-      <div class="item-content">
-        <h2 class="item-title">SDF Clothing Hosts Industry Sourcing Summit in Dhaka</h2>
-        <p class="item-subtitle">Brand owners and manufacturers discuss 2026 supply chain priorities</p>
+            <h3 class="pc-title" itemprop="headline">
+              <a href={post.href}>{post.title}</a>
+            </h3>
+            <p class="pc-excerpt" itemprop="description">{post.excerpt}</p>
+
+            <div class="pc-footer">
+              <div class="tag-row">
+                {post.tags.slice(0, 2).map(t => <span class="tag">{t}</span>)}
+              </div>
+              <span class="read-time">⏱ {post.readTime}</span>
+            </div>
+          </article>
+        ))}
       </div>
-      <span class="item-tag">Event</span>
-    </article>
-  </div>
+    </section>
+
+    <!-- ── industry context box ───────────────────────────────────────── -->
+    <aside class="ctx" aria-label="Bangladesh textile industry context">
+      <div class="ctx-label">Bangladesh RMG Sector — 2025/26 Context</div>
+      <p class="ctx-body">
+        Bangladesh holds approximately <strong>6% of global apparel market share</strong> — second only
+        to China — with garment exports reaching <strong>$39.35 billion in FY2024–25</strong>, up 9%
+        year-on-year. Over <strong>4.4 million workers</strong> are employed across more than 3,500
+        certified factories. The country's LDC graduation, expected to take full effect in 2029, is
+        already reshaping sourcing strategies as brands assess future duty structures and compliance
+        requirements for their Bangladesh supplier base.
+      </p>
+    </aside>
+
+    <!-- ── coverage areas ─────────────────────────────────────────────── -->
+    <section class="cov" aria-labelledby="cov-title">
+      <div class="cov-eye">Coverage Areas</div>
+      <h2 class="cov-title" id="cov-title">Topics in This Journal</h2>
+      <p class="cov-sub">
+        Each entry here connects to a broader subject area. These are the six topics we return to most,
+        drawn from daily production work, compliance cycles, and conversations with the brands we supply.
+      </p>
+
+      <div class="cov-grid">
+        {coverageAreas.map(area => (
+          <div
+            class="cov-card"
+            style={`background: linear-gradient(150deg, rgba(${area.rgb},0.05) 0%, #111111 50%);`}
+          >
+            <div class="cov-icon" aria-hidden="true">{area.icon}</div>
+            <h3 class="cov-card-title">{area.title}</h3>
+            <p class="cov-card-body">{area.body}</p>
+            <div class="cov-tags">
+              {area.tags.map(t => (
+                <span
+                  class="cov-tag"
+                  style={`color: ${area.color}; border-color: ${area.color}40;`}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </div><!-- /.jw -->
+
 </BaseLayout>
+
+<!-- ── category filter JS ────────────────────────────────────────────────── -->
+<script is:inline>
+(function () {
+  var btns    = document.querySelectorAll('.filter-btn');
+  var cards   = document.querySelectorAll('[data-cat]');
+  var groups  = document.querySelectorAll('.year-group');
+  var sep     = document.getElementById('ysep');
+
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      // update button states
+      btns.forEach(function (b) {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      var filter = btn.getAttribute('data-filter');
+
+      // show / hide post cards
+      cards.forEach(function (card) {
+        var match = filter === 'all' || card.getAttribute('data-cat') === filter;
+        if (match) {
+          card.classList.remove('is-hidden');
+        } else {
+          card.classList.add('is-hidden');
+        }
+      });
+
+      // show / hide year sections
+      var allVisible = [];
+      groups.forEach(function (group) {
+        var visible = group.querySelectorAll('[data-cat]:not(.is-hidden)');
+        if (visible.length === 0) {
+          group.classList.add('is-hidden');
+          allVisible.push(false);
+        } else {
+          group.classList.remove('is-hidden');
+          allVisible.push(true);
+        }
+      });
+
+      // show sep only when both year groups are visible
+      if (sep) {
+        var bothVisible = allVisible.length === 2 && allVisible[0] && allVisible[1];
+        if (bothVisible) {
+          sep.classList.remove('is-hidden');
+        } else {
+          sep.classList.add('is-hidden');
+        }
+      }
+    });
+  });
+})();
+</script>
