@@ -110,7 +110,6 @@ export default defineConfig({
       rollupOptions: {
         output: {
           manualChunks: undefined,
-          inlineDynamicImports: true
         }
       },
       assetsInlineLimit: 8192,
