@@ -1,0 +1,504 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Apparel Production Timeline Calculator — Reverse-Engineer Your Launch Date | SDF Clothing";
+const pageDescription = "Free clothing production timeline calculator. Enter your target launch date and instantly get every deadline reverse-engineered — tech pack submission, sample approval, bulk cut date, and shipment. Never miss a fashion season. No signup needed.";
+const canonicalUrl = "https://sdfltd.com/tools/production-timeline";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  dateModified={new Date().toISOString().split("T")[0]}
+>
+
+<meta name="robots" content="index, follow" />
+<meta property="og:title" content="Apparel Production Timeline Calculator — Reverse-Engineer Your Launch Date" />
+<meta property="og:description" content="Free tool for clothing brands. Enter your launch date, get every production deadline reverse-engineered. Tech pack, sampling, bulk production, shipment — all mapped out instantly." />
+<meta property="og:url" content="https://sdfltd.com/tools/production-timeline" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Apparel Production Timeline Calculator — Never Miss a Season" />
+<meta name="twitter:description" content="Enter your target launch date and get every production deadline mapped out — tech pack, sampling, bulk production, shipment. Free for clothing brands." />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://sdfltd.com/tools/production-timeline#app",
+      "name": "Apparel Production Timeline Calculator",
+      "url": "https://sdfltd.com/tools/production-timeline",
+      "description": "Free clothing production timeline calculator that reverse-engineers every deadline from your target launch date. Covers tech pack submission, proto sampling, pre-production sample approval, bulk production, QC, and sea or air shipment.",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Fashion Production Planning Tool",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "featureList": [
+        "Launch date reverse-engineering",
+        "Tech pack submission deadline",
+        "Sample approval milestones",
+        "Bulk production start date",
+        "Sea and air freight timeline",
+        "OEM, ODM, CMT, and private label support",
+        "Urgency alerts when timeline is at risk"
+      ],
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com",
+        "@id": "https://sdfltd.com/#org"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "https://sdfltd.com/tools" },
+        { "@type": "ListItem", "position": 3, "name": "Production Timeline Calculator", "item": "https://sdfltd.com/tools/production-timeline" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does clothing manufacturing take from Bangladesh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Total clothing production lead time from Bangladesh typically ranges from 60 to 120 days depending on order complexity and quantity. A standard order of 500–2,000 pieces with OEM production takes approximately 90 days from tech pack approval to goods delivered by sea freight: 3–5 days order confirmation, 14–18 days proto sampling, 7 days buyer review, 7–10 days pre-production sample, 40 days bulk production, and 40–42 days sea freight from Chittagong."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a clothing production timeline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A clothing production timeline is a reverse-engineered schedule that maps every milestone from design confirmation to goods delivery, working backward from your target launch or ship date. It covers tech pack submission, fabric sourcing, proto sampling, pre-production sample approval, bulk cut and sew, quality control inspection, packing, export documentation, and sea or air freight transit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I start production for a Christmas or Holiday launch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For a December 1st Christmas launch in the USA with sea freight from Bangladesh, you need goods to depart Chittagong by approximately October 10th. That means bulk production must start by September 1st, pre-production sample approval by August 20th, and tech pack submission by July 10th at the latest. The calculator above will give you exact dates based on your specific garment type and order quantity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between OEM, ODM, CMT, and private label production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "OEM (Original Equipment Manufacturer): You provide the full tech pack and designs; the factory manufactures to your specifications. ODM (Original Design Manufacturer): The factory has existing base designs that you can modify and brand. CMT (Cut, Make, Trim): You supply your own fabric; the factory handles cutting, sewing, and finishing only. Private Label: The factory has ready-made styles you brand as your own with minimal modification. OEM has the longest lead time; CMT and private label are typically fastest."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get air freight from Bangladesh if my timeline is tight?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. SDF Clothing ships via air freight from Dhaka Hazrat Shahjalal International Airport. Air transit is 5–7 days versus 40–42 days by sea from Chittagong. However, air freight costs approximately 4–5 times more per unit than sea freight, so it significantly increases your landed cost. Use our Garment Cost Calculator to compare the total cost impact of air vs sea before deciding."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+.tool-page { max-width: 920px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+.tool-hero { margin-bottom: 2.5rem; }
+.tool-hero h1 { font-size: clamp(1.9rem, 3.5vw, 2.7rem); font-weight: 300; color: #fff; letter-spacing: 0.03em; line-height: 1.2; margin-bottom: 0.75rem; }
+.tool-hero .sub { font-size: 0.9rem; color: rgba(255,255,255,0.6); max-width: 620px; line-height: 1.85; margin-bottom: 1.25rem; }
+.trust-row { display: flex; flex-wrap: wrap; gap: 1rem; }
+.trust-item { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); display: flex; align-items: center; gap: 0.35rem; }
+.trust-item::before { content: '✓'; color: #e00; }
+
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 2rem 0 1.25rem; }
+@media (max-width: 580px) { .calc-grid { grid-template-columns: 1fr; } }
+
+.field-group { display: flex; flex-direction: column; gap: 0.45rem; }
+.field-group label { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.field-group select, .field-group input {
+  background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.12);
+  padding: 0.75rem 1rem; font-size: 0.87rem; width: 100%;
+  transition: border-color 0.2s; outline: none; font-family: inherit;
+  appearance: none; -webkit-appearance: none; color-scheme: dark;
+}
+.field-group select:focus, .field-group input:focus { border-color: #e00; outline: 2px solid rgba(238,0,0,0.2); outline-offset: 2px; }
+.field-group select option { background: #111; }
+.field-hint { font-size: 0.7rem; color: rgba(255,255,255,0.28); margin-top: 0.2rem; }
+
+.calc-btn {
+  width: 100%; background: #e00; color: #fff; border: none;
+  padding: 1rem; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: background 0.2s; font-family: inherit; min-height: 52px;
+  margin-top: 0.25rem; margin-bottom: 2.5rem;
+}
+.calc-btn:hover { background: #c00; }
+
+/* Results */
+.results { display: none; animation: fadeInUp 0.4s ease; }
+.results.visible { display: block; }
+@keyframes fadeInUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+/* Alert */
+.alert { padding: 1rem 1.25rem; margin-bottom: 1.5rem; border-left: 3px solid; font-size: 0.85rem; line-height: 1.7; }
+.alert-green  { border-color: #4ade80; background: rgba(74,222,128,0.05); color: #4ade80; }
+.alert-yellow { border-color: #facc15; background: rgba(250,204,21,0.05); color: #facc15; }
+.alert-red    { border-color: #e00; background: rgba(238,0,0,0.05); color: #ff6b6b; }
+
+/* Summary */
+.sum-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.07); margin-bottom: 2rem; }
+@media(max-width:480px){ .sum-grid { grid-template-columns: 1fr; } }
+.sum-item { background: #000; padding: 1.1rem 1rem; }
+.sum-item .s-lbl { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 0.3rem; }
+.sum-item .s-val { font-size: 1.2rem; font-weight: 300; color: #fff; }
+
+/* Timeline */
+.tl-wrap { position: relative; margin-bottom: 2.5rem; }
+.tl-wrap::before { content:''; position:absolute; left:14px; top:0; bottom:0; width:1px; background:rgba(255,255,255,0.08); }
+.tl-item { display:flex; gap:1.5rem; position:relative; }
+.tl-dot-col { flex-shrink:0; width:30px; display:flex; align-items:flex-start; padding-top:3px; }
+.tl-dot { width:10px; height:10px; border-radius:50%; background:#e00; z-index:1; flex-shrink:0; }
+.tl-dot.done  { background:#4ade80; }
+.tl-dot.warn  { background:#facc15; }
+.tl-dot.late  { background:#ff4444; box-shadow:0 0 8px rgba(255,68,68,0.4); }
+.tl-dot.target{ background:#e00; box-shadow:0 0 10px rgba(238,0,0,0.5); }
+.tl-body { flex:1; padding-bottom:1.5rem; border-bottom:1px solid rgba(255,255,255,0.05); }
+.tl-item:last-child .tl-body { border-bottom:none; }
+.tl-date { font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:0.2rem; }
+.tl-date.urgent { color:#e00; font-weight:500; }
+.tl-title { font-size:0.95rem; font-weight:500; color:#fff; margin-bottom:0.2rem; }
+.tl-desc  { font-size:0.8rem; color:rgba(255,255,255,0.42); line-height:1.65; }
+.tl-tag { display:inline-block; font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.18rem 0.45rem; border:1px solid; margin-top:0.4rem; }
+.tl-tag.sdf    { border-color:#e00; color:#e00; }
+.tl-tag.buyer  { border-color:rgba(255,255,255,0.25); color:rgba(255,255,255,0.45); }
+.tl-tag.ship   { border-color:#60a5fa; color:#60a5fa; }
+.tl-tag.target { border-color:#4ade80; color:#4ade80; }
+
+/* CTA */
+.tool-cta { background:#000; border:1px solid #e00; padding:2rem; text-align:center; margin-bottom:3rem; }
+.tool-cta p { font-size:0.85rem; color:rgba(255,255,255,0.6); margin-bottom:1.25rem; line-height:1.8; }
+.cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+/* SEO body */
+.seo-content { border-top:1px solid rgba(255,255,255,0.07); padding-top:3rem; }
+.seo-content h2 { font-size:1.35rem; font-weight:300; color:#fff; letter-spacing:0.04em; margin-bottom:1rem; margin-top:2.5rem; }
+.seo-content h2:first-child { margin-top:0; }
+.seo-content h3 { font-size:1rem; font-weight:500; color:#fff; margin-bottom:0.6rem; margin-top:1.75rem; }
+.seo-content p { font-size:0.87rem; color:rgba(255,255,255,0.6); line-height:1.9; margin-bottom:1rem; }
+.seo-content ul { margin:0.75rem 0 1rem 0; padding-left:0; list-style:none; }
+.seo-content ul li { font-size:0.87rem; color:rgba(255,255,255,0.6); line-height:1.8; padding-left:1.2rem; position:relative; margin-bottom:0.35rem; }
+.seo-content ul li::before { content:'—'; position:absolute; left:0; color:#e00; }
+
+/* Lead time table */
+.lt-table { width:100%; border-collapse:collapse; margin:1.25rem 0; font-size:0.82rem; }
+.lt-table th { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.4); padding:0.6rem 0.75rem; border-bottom:1px solid rgba(255,255,255,0.07); text-align:left; font-weight:400; }
+.lt-table td { padding:0.65rem 0.75rem; color:rgba(255,255,255,0.65); border-bottom:1px solid rgba(255,255,255,0.04); }
+.lt-table tr:last-child td { border-bottom:none; }
+.lt-table td:first-child { color:#fff; }
+
+.disclaimer { font-size:0.71rem; color:rgba(255,255,255,0.28); line-height:1.7; margin-top:1.5rem; border-top:1px solid rgba(255,255,255,0.05); padding-top:1.25rem; }
+</style>
+
+<div class="tool-page">
+
+  <nav aria-label="Breadcrumb" style="margin-bottom:2rem;">
+    <ol style="display:flex;gap:0.5rem;list-style:none;font-size:0.7rem;color:rgba(255,255,255,0.3);" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/" style="color:rgba(255,255,255,0.3);text-decoration:none;" itemprop="item"><span itemprop="name">Home</span></a>
+        <meta itemprop="position" content="1" />
+      </li>
+      <li style="color:rgba(255,255,255,0.18);">/</li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/tools" style="color:rgba(255,255,255,0.3);text-decoration:none;" itemprop="item"><span itemprop="name">Free Tools</span></a>
+        <meta itemprop="position" content="2" />
+      </li>
+      <li style="color:rgba(255,255,255,0.18);">/</li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span style="color:#fff;" itemprop="name">Production Timeline Calculator</span>
+        <meta itemprop="position" content="3" />
+      </li>
+    </ol>
+  </nav>
+
+  <div class="tool-hero">
+    <span class="section-label">Free Tool — No Signup Required</span>
+    <h1>Apparel Production Timeline Calculator</h1>
+    <p class="sub">The single biggest reason clothing brands miss their launch is not knowing when to start. Most brands underestimate total production time by 30–60 days. Enter your target launch date and this tool reverse-engineers every deadline — tech pack, sampling, bulk production, and shipment — so you never miss a season again.</p>
+    <div class="trust-row">
+      <span class="trust-item">Reverse-engineer from launch date</span>
+      <span class="trust-item">OEM, ODM, CMT &amp; private label</span>
+      <span class="trust-item">Sea &amp; air freight included</span>
+      <span class="trust-item">Urgency alerts built in</span>
+    </div>
+  </div>
+
+  <div class="calc-grid">
+    <div class="field-group">
+      <label for="launch-date">Target Launch / In-Hand Date</label>
+      <input type="date" id="launch-date" aria-label="Select your target launch or in-hand date" />
+      <span class="field-hint">When do you need goods in your warehouse?</span>
+    </div>
+    <div class="field-group">
+      <label for="service-type">Production Type</label>
+      <select id="service-type" aria-label="Select production type">
+        <option value="oem">OEM — I have my own tech pack</option>
+        <option value="odm">ODM — Need design assistance</option>
+        <option value="cmt">CMT — I supply my own fabric</option>
+        <option value="private">Private Label</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label for="order-qty">Order Quantity</label>
+      <select id="order-qty" aria-label="Select order quantity range">
+        <option value="small">300–500 pieces</option>
+        <option value="medium" selected>500–2,000 pieces</option>
+        <option value="large">2,000–10,000 pieces</option>
+        <option value="xlarge">10,000+ pieces</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label for="ship-mode">Shipping Mode to You</label>
+      <select id="ship-mode" aria-label="Select shipping mode">
+        <option value="sea">Sea Freight (~40 days from Chittagong)</option>
+        <option value="air">Air Freight (~5 days from Dhaka)</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="buildTimeline()" aria-label="Calculate production timeline">
+    Build My Production Timeline →
+  </button>
+
+  <!-- RESULTS -->
+  <div class="results" id="results" aria-live="polite">
+
+    <div id="alert-box"></div>
+
+    <div class="sum-grid">
+      <div class="sum-item">
+        <div class="s-lbl">Start No Later Than</div>
+        <div class="s-val" id="s-start">—</div>
+      </div>
+      <div class="sum-item">
+        <div class="s-lbl">Total Lead Time</div>
+        <div class="s-val" id="s-lead">—</div>
+      </div>
+      <div class="sum-item">
+        <div class="s-lbl">Target Launch Date</div>
+        <div class="s-val" id="s-launch">—</div>
+      </div>
+    </div>
+
+    <div class="tl-wrap" id="timeline" aria-label="Production timeline milestones"></div>
+
+    <div class="tool-cta">
+      <p id="cta-text">SDF Clothing offers 14-day sample turnaround and 40-day bulk production from confirmed order. Production slots fill 60–90 days ahead of peak season — secure yours today.</p>
+      <div class="cta-btns">
+        <a href="/contact" class="btn-primary" title="Book your production slot at SDF Clothing">Book Production Slot →</a>
+        <a href="https://wa.me/8801911733226?text=Hi%20SDF%2C%20I%20used%20your%20production%20timeline%20calculator%20and%20want%20to%20discuss%20a%20slot." target="_blank" rel="noopener noreferrer" class="whatsapp-cta" title="WhatsApp SDF Clothing">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp Us
+        </a>
+      </div>
+    </div>
+
+    <p class="disclaimer">Timeline estimates are based on SDF Clothing's standard production schedule from Dhaka, Bangladesh. Actual dates depend on tech pack completeness, fabric availability, sample approval speed, and confirmed order. Sea freight is 38–45 days from Chittagong port; air freight is 5–7 days from Dhaka airport. Add 3–7 days buffer for customs clearance at destination. All timelines assume weekday working days excluding Bangladesh public holidays.</p>
+  </div>
+
+  <!-- SEO BODY CONTENT -->
+  <div class="seo-content">
+
+    <h2>How Long Does Clothing Production Take From Bangladesh?</h2>
+    <p>One of the most common mistakes new clothing brands make is dramatically underestimating production lead time. A standard OEM order of 500–2,000 pieces from Bangladesh takes <strong style="color:#fff;">approximately 90 days</strong> from tech pack confirmation to goods arriving at your warehouse by sea freight. Breaking that down:</p>
+
+    <table class="lt-table" aria-label="Clothing production lead time breakdown">
+      <thead>
+        <tr>
+          <th>Stage</th>
+          <th>Who acts</th>
+          <th>Typical duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Tech pack review &amp; order confirmation</td><td>Buyer + Factory</td><td>3–5 days</td></tr>
+        <tr><td>30% deposit payment</td><td>Buyer</td><td>1–2 days</td></tr>
+        <tr><td>Proto / first sample production</td><td>Factory (SDF)</td><td>12–18 days</td></tr>
+        <tr><td>Buyer review &amp; revision feedback</td><td>Buyer</td><td>5–7 days</td></tr>
+        <tr><td>Pre-production sample (PP sample)</td><td>Factory (SDF)</td><td>7–10 days</td></tr>
+        <tr><td>PP sample sign-off</td><td>Buyer</td><td>3–5 days</td></tr>
+        <tr><td>Bulk cut &amp; sew production</td><td>Factory (SDF)</td><td>30–50 days</td></tr>
+        <tr><td>Final QC, packing &amp; export docs</td><td>Factory (SDF)</td><td>3–5 days</td></tr>
+        <tr><td>Sea freight (Chittagong → destination)</td><td>Freight forwarder</td><td>38–45 days</td></tr>
+        <tr><td>Customs clearance at destination</td><td>Buyer's broker</td><td>3–7 days</td></tr>
+      </tbody>
+    </table>
+
+    <p>ODM and private label orders are faster because SDF already has base patterns and fabric relationships. CMT orders skip fabric sourcing delays. The timeline calculator above adjusts for all of these scenarios automatically.</p>
+
+    <h2>What Is the Critical Path in Apparel Production?</h2>
+    <p>The <strong style="color:#fff;">critical path</strong> is the sequence of steps where any delay pushes back the entire delivery. In apparel production, the most common bottlenecks are:</p>
+    <ul>
+      <li><strong style="color:#fff;">Incomplete tech pack</strong> — factories cannot start without measurements, construction details, BOM, and artwork. This is the single biggest cause of delays for new brands</li>
+      <li><strong style="color:#fff;">Slow sample approval</strong> — every extra round of revisions adds 14–21 days to your timeline</li>
+      <li><strong style="color:#fff;">Custom fabric lead time</strong> — special fabrics (custom dye colours, unique weaves, certified organic) require 20–30 days just for fabric production before cutting can begin</li>
+      <li><strong style="color:#fff;">Late payment</strong> — factories do not begin production until the deposit is cleared. Bank transfer delays cost 2–5 days</li>
+    </ul>
+
+    <h2>Seasonal Production Deadlines — When to Start</h2>
+    <p>If you are targeting a specific retail season, use these rough start dates for sea freight from Bangladesh. These are the <strong style="color:#fff;">latest possible</strong> dates to submit your tech pack and begin production:</p>
+    <ul>
+      <li><strong style="color:#fff;">Christmas / Holiday (Dec 1st in-hand, USA):</strong> Tech pack by July 10th at the latest</li>
+      <li><strong style="color:#fff;">Spring / Summer drop (Mar 1st in-hand, Europe):</strong> Tech pack by November 10th</li>
+      <li><strong style="color:#fff;">Back to School (Aug 1st in-hand, USA):</strong> Tech pack by April 5th</li>
+      <li><strong style="color:#fff;">Black Friday (Nov 15th in-hand, USA):</strong> Tech pack by June 20th</li>
+    </ul>
+    <p>The calculator above gives you exact dates for your specific launch date and production type.</p>
+
+    <h2>OEM vs ODM vs CMT vs Private Label — Which Is Right for You?</h2>
+    <ul>
+      <li><strong style="color:#fff;">OEM</strong> — You design everything, provide tech packs. Full control, longest lead time. Best for established brands with in-house design capability</li>
+      <li><strong style="color:#fff;">ODM</strong> — SDF provides base designs you modify and brand. Faster sampling, lower development cost. Best for brands scaling quickly without a dedicated design team</li>
+      <li><strong style="color:#fff;">CMT</strong> — You source and ship fabric to SDF; SDF cuts, sews, and finishes. Lower CM cost but you bear fabric sourcing risk</li>
+      <li><strong style="color:#fff;">Private Label</strong> — SDF has ready styles; you add your label. Fastest route to market. Best for first-time brands testing demand before investing in custom design</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:1.25rem;margin-bottom:1.25rem;">
+      <h3 style="margin-top:0;">Can SDF Clothing expedite production for urgent orders?</h3>
+      <p>Yes, subject to capacity availability. SDF offers priority production slots for urgent orders at a surcharge. Contact us immediately if your timeline is under 60 days — expedited orders require air freight and carry a higher per-unit cost. Use our <a href="/tools/garment-cost-calculator" style="color:#e00;" title="Garment cost calculator">Garment Cost Calculator</a> to see the air vs sea freight cost difference.</p>
+    </div>
+    <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:1.25rem;margin-bottom:1.25rem;">
+      <h3 style="margin-top:0;">What happens if I do not approve the sample on time?</h3>
+      <p>Any delay in sample approval directly delays bulk production start. Each week of delay pushes your ex-factory date by one week. If you are approaching a seasonal deadline, SDF will flag this and recommend switching to air freight to recover transit time — though this increases your unit cost.</p>
+    </div>
+    <div style="padding-bottom:1.25rem;">
+      <h3 style="margin-top:0;">What other free tools does SDF offer for clothing brands?</h3>
+      <p>SDF provides a full suite of free planning tools including a <a href="/tools/garment-cost-calculator" style="color:#e00;" title="Garment cost calculator">Garment Cost Calculator</a>, a <a href="/tools/manufacturer-email-generator" style="color:#e00;" title="Manufacturer email generator">Manufacturer Email Generator</a>, an <a href="/tools/aql-calculator" style="color:#e00;" title="AQL calculator">AQL Calculator</a>, a <a href="/tools/gsm-converter" style="color:#e00;" title="GSM converter">GSM to OZ Converter</a>, and more. All free, no signup.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function addDays(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
+function subDays(d,n){ const x=new Date(d); x.setDate(x.getDate()-n); return x; }
+function fmtFull(d){ return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}); }
+function fmtShort(d){ return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'}); }
+function daysBetween(a,b){ return Math.round((b-a)/(1000*60*60*24)); }
+
+function buildTimeline(){
+  const launchVal = document.getElementById('launch-date').value;
+  if(!launchVal){ alert('Please select your target launch date.'); return; }
+
+  const launch   = new Date(launchVal);
+  const svc      = document.getElementById('service-type').value;
+  const qty      = document.getElementById('order-qty').value;
+  const shipMode = document.getElementById('ship-mode').value;
+  const today    = new Date(); today.setHours(0,0,0,0);
+
+  const freightDays = shipMode==='air'?7:43;
+  const customsDays = 5;
+  const prodDays = {small:30,medium:40,large:52,xlarge:68}[qty];
+  const sampleDays = (svc==='odm'||svc==='private')?13:18;
+  const ppDays = svc==='cmt'?0:10;
+  const ppReviewDays = svc==='cmt'?0:5;
+  const buyerReviewDays = 7;
+  const confirmDays = 4;
+  const techPackDays = (svc==='oem'||svc==='cmt')?3:0;
+
+  const totalDays = techPackDays+confirmDays+sampleDays+buyerReviewDays+ppDays+ppReviewDays+prodDays+freightDays+customsDays;
+
+  // Work backward from launch
+  const custClear  = subDays(launch, 0);
+  const portArr    = subDays(custClear, customsDays);
+  const shipDepart = subDays(portArr, freightDays);
+  const exFactory  = subDays(shipDepart, 3);
+  const bulkEnd    = subDays(exFactory, 0);
+  const bulkStart  = subDays(bulkEnd, prodDays);
+  const ppApprove  = subDays(bulkStart, ppReviewDays);
+  const ppReady    = subDays(ppApprove, ppDays);
+  const protoApprove = ppDays>0 ? subDays(ppReady, buyerReviewDays) : subDays(bulkStart, buyerReviewDays);
+  const protoReady = subDays(protoApprove, sampleDays);
+  const orderConfirm = subDays(protoReady, confirmDays);
+  const techPackDue = subDays(orderConfirm, techPackDays+1);
+  const startDate = svc==='oem'||svc==='cmt' ? techPackDue : orderConfirm;
+
+  const daysToStart = daysBetween(today, startDate);
+  const daysToLaunch = daysBetween(today, launch);
+
+  // Alert
+  let alertHtml = '';
+  if(daysToStart<0){
+    alertHtml=`<div class="alert alert-red" role="alert">⚠ Your start deadline has already passed by ${Math.abs(daysToStart)} days. Air freight may recover some time but will increase your unit cost significantly. Contact SDF immediately for a fast-track assessment.</div>`;
+  } else if(daysToStart<=14){
+    alertHtml=`<div class="alert alert-yellow" role="alert">⚡ You need to start in ${daysToStart} days. This is a tight window. Contact SDF today to check production slot availability and consider air freight.</div>`;
+  } else {
+    alertHtml=`<div class="alert alert-green" role="alert">✓ Your timeline is achievable. Start no later than <strong>${fmtFull(startDate)}</strong> to hit your launch date.</div>`;
+  }
+  document.getElementById('alert-box').innerHTML = alertHtml;
+
+  // Summary
+  document.getElementById('s-start').textContent = fmtShort(startDate);
+  document.getElementById('s-lead').textContent = totalDays+' days';
+  document.getElementById('s-launch').textContent = fmtShort(launch);
+
+  // Build milestones
+  const tagMap = {sdf:'SDF Action',buyer:'Your Action',ship:'Logistics',target:'Launch'};
+  const ms = [];
+
+  if(svc==='oem'||svc==='cmt'){
+    ms.push({ date:techPackDue, title:'Submit Tech Pack / Spec Sheet', desc:'Send complete tech pack with measurements, construction notes, BOM, fabric spec, and artwork files. Incomplete tech packs are the #1 cause of production delays.', tag:'buyer', dot:today>techPackDue?'done':daysToStart<=7?'warn':'now' });
+  }
+  ms.push({ date:orderConfirm, title:'Order Confirmation + 30% Deposit', desc:'Confirm final quantity, colourway, size ratio, incoterms, and payment of deposit. Factory does not begin sampling until deposit is cleared.', tag:'buyer', dot:today>orderConfirm?'done':'now' });
+  ms.push({ date:protoReady, title:'Proto / First Sample Ready', desc:`SDF delivers first prototype sample for fit, construction, and fabric review. ${svc==='odm'||svc==='private'?'Based on SDF base pattern — faster turnaround.':'Based on your tech pack.'}`, tag:'sdf', dot:today>protoReady?'done':'now' });
+  ms.push({ date:protoApprove, title:'Proto Sample Approval', desc:'Review sample, measure against spec, and send written approval or detailed revision comments. Each revision round adds 12–18 days.', tag:'buyer', dot:today>protoApprove?'done':'now' });
+  if(ppDays>0){
+    ms.push({ date:ppReady, title:'Pre-Production Sample Ready', desc:'Final sample in bulk fabric and confirmed trims. Must match approved proto exactly. This is the sign-off sample for bulk production.', tag:'sdf', dot:today>ppReady?'done':'now' });
+    ms.push({ date:ppApprove, title:'PP Sample Sign-Off Required', desc:'Written approval mandatory. Bulk production cannot begin without this. Review within 5 days to avoid delaying bulk start.', tag:'buyer', dot:today>ppApprove?'done':'now' });
+  }
+  ms.push({ date:bulkStart, title:'Bulk Production Starts', desc:`Fabric cut, sewing lines assigned, trims staged. ${prodDays} production days. SDF production reports shared weekly.`, tag:'sdf', dot:today>bulkStart?'done':'now' });
+  ms.push({ date:exFactory, title:'Ex-Factory — Final QC + Packing', desc:'AQL final inspection, carton packing, export documentation. Balance payment (70%) due before shipment release.', tag:'sdf', dot:today>exFactory?'done':'now' });
+  ms.push({ date:shipDepart, title: shipMode==='air'?'Air Shipment Departs Dhaka':'Sea Container Departs Chittagong', desc:shipMode==='air'?'Air freight via Dhaka Hazrat Shahjalal Airport. ~5–7 days transit.':'FCL/LCL container from Chittagong. ~40–43 days transit to destination port.', tag:'ship', dot:today>shipDepart?'done':'now' });
+  ms.push({ date:launch, title:'🎯 Goods In Hand — Launch Ready', desc:'Goods arrive at destination port, clear customs, and are delivered to your warehouse or 3PL. Ready for launch, retail drop, or Amazon FBA.', tag:'target', dot:'target' });
+
+  let html = '';
+  ms.forEach(m=>{
+    const urgent = daysBetween(today,m.date)<=7 && today<=m.date;
+    html += `<div class="tl-item">
+      <div class="tl-dot-col"><div class="tl-dot ${m.dot}"></div></div>
+      <div class="tl-body">
+        <div class="tl-date${urgent?' urgent':''}">${fmtFull(m.date)}</div>
+        <div class="tl-title">${m.title}</div>
+        <div class="tl-desc">${m.desc}</div>
+        <span class="tl-tag ${m.tag}">${tagMap[m.tag]}</span>
+      </div>
+    </div>`;
+  });
+  document.getElementById('timeline').innerHTML = html;
+
+  // CTA
+  if(daysToStart<0){
+    document.getElementById('cta-text').textContent = 'Your timeline is critical. Contact SDF Clothing immediately — we offer fast-track assessment and air freight solutions for urgent orders.';
+  } else {
+    document.getElementById('cta-text').textContent = `You need to start by ${fmtFull(startDate)}. SDF Clothing offers ${svc==='odm'||svc==='private'?'13':'14'}-day sample turnaround. Secure your production slot today — we fill up ${totalDays>90?'90':'60'} days ahead of peak season.`;
+  }
+
+  const res = document.getElementById('results');
+  res.classList.add('visible');
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+
+</BaseLayout>
