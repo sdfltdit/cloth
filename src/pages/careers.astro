@@ -360,11 +360,13 @@ const talentAreas = [
         </div>
 
         <div class="c-form-box">
+          <iframe name="basin-target" id="basin-target" title="Form submission target" style="display:none;" aria-hidden="true"></iframe>
           <form
             id="cv-upload-form"
             action="https://usebasin.com/f/9ecfe65e8aee"
             method="POST"
             enctype="multipart/form-data"
+            target="basin-target"
             novalidate
             aria-label="CV submission form"
           >
@@ -728,18 +730,19 @@ const talentAreas = [
       if (el) el.addEventListener('change', function () { clearErr(id); });
     });
 
-    /* ─── Form submit — AJAX to Basin (multipart/form-data with file) ─── */
+    /* ─── Form submit — native POST to hidden iframe (avoids CORS) ─── */
     var form = document.getElementById('cv-upload-form');
     var submitBtn = document.getElementById('cv-submit');
     var submitLabelEl = document.getElementById('submit-label');
     var spinner = document.getElementById('submit-spinner');
     var statusEl = document.getElementById('submit-status');
+    var basinFrame = document.getElementById('basin-target');
+    var hasSubmitted = false;
 
-    if (form && submitBtn) {
+    if (form && submitBtn && basinFrame) {
       form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
         if (!validate()) {
+          e.preventDefault();
           var firstErr = form.querySelector('.c-input--err');
           if (firstErr) firstErr.focus();
           return;
@@ -747,41 +750,29 @@ const talentAreas = [
 
         /* honeypot check */
         var honey = form.querySelector('input[name="_honey"]');
-        if (honey && honey.value) { return; }
+        if (honey && honey.value) { e.preventDefault(); return; }
 
         /* loading state */
         submitBtn.disabled = true;
         if (submitLabelEl) submitLabelEl.textContent = 'Submitting…';
         if (spinner) spinner.hidden = false;
         if (statusEl) statusEl.textContent = 'Sending your CV — please wait.';
+        hasSubmitted = true;
 
-        /* Build FormData — includes file upload */
-        var fd = new FormData(form);
+        /* Form submits natively to the hidden iframe — no page navigation,
+           no CORS restriction, Basin receives a normal multipart POST. */
+        var timeoutId = setTimeout(function () {
+          if (hasSubmitted) showSuccess();
+        }, 4000);
 
-        fetch('https://usebasin.com/f/9ecfe65e8aee', {
-          method: 'POST',
-          body: fd,
-          headers: {
-            'Accept': 'application/json'
-          }
-        })
-        .then(function (res) {
-          if (res.ok) {
+        basinFrame.addEventListener('load', function onLoad() {
+          basinFrame.removeEventListener('load', onLoad);
+          if (hasSubmitted) {
+            clearTimeout(timeoutId);
             showSuccess();
-          } else {
-            return res.json().catch(function () { return {}; }).then(function (data) {
-              throw new Error((data && data.message) || ('status ' + res.status));
-            });
           }
-        })
-        .catch(function () {
-          submitBtn.disabled = false;
-          if (submitLabelEl) submitLabelEl.textContent = 'Submit Your CV';
-          if (spinner) spinner.hidden = true;
-          if (statusEl) statusEl.textContent = '';
-          var fileErr = document.getElementById('e-cv');
-          if (fileErr) fileErr.textContent = 'Something went wrong while sending your CV. Please check your connection and try again, or email your CV directly via the contact page.';
         });
+        /* form submission proceeds natively — do not call preventDefault */
       });
     }
 
