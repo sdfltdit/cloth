@@ -368,6 +368,11 @@ const talentAreas = [
             novalidate
             aria-label="CV submission form"
           >
+            <!-- Honeypot (Basin's recognized spam-trap field name) -->
+            <input type="text" name="_gotcha" class="c-form__honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <!-- Redirect target after Basin processes the submission -->
+            <input type="hidden" name="_redirect" value="https://sdfltd.com/careers?submitted=1" />
+
             <div class="c-field">
               <label for="f-name" class="c-label">Full Name <span class="c-req-star" aria-label="required">*</span></label>
               <input type="text" id="f-name" name="name" required autocomplete="name" placeholder="Your full name" class="c-input" aria-required="true" aria-describedby="e-name" />
@@ -750,7 +755,7 @@ const talentAreas = [
         }
 
         /* honeypot check */
-        var honey = form.querySelector('input[name="_honey"]');
+        var honey = form.querySelector('input[name="_gotcha"]');
         if (honey && honey.value) { e.preventDefault(); return; }
 
         /* Save applicant summary so it survives the redirect back from Basin */
