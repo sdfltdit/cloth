@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss/utilities";
 @source "../**/*.{astro,html,js,ts}";
 
 @theme {
@@ -20,29 +20,6 @@
   --color-black: #000000;
 }
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-}
-
-/* ============================================
-   SDF CLOTHING — GLOBAL STYLES
-   Palette: Black #000 · Red #e00 · White #fff
-   ============================================ */
-
 :root {
   --color-bg: #000000;
   --color-bg-card: #000000;
@@ -52,11 +29,11 @@
   --color-bg-input: #000000;
   --color-bg-modal: #000000;
   --color-bg-button: #000000;
-  
+
   --color-text: #FFFFFF;
-  --color-text-subtle: rgba(255, 255, 255, 0.7);
+  --color-text-subtle: rgba(255, 255, 255, 0.70);
   --color-text-placeholder: rgba(255, 255, 255, 0.5);
-  
+
   --color-accent: #e00;
   --color-border: rgba(255, 255, 255, 0.1);
   --color-border-thin: #e00;
@@ -65,16 +42,13 @@
   --color-link-hover: #e00;
 }
 
-/* === PREVENT HORIZONTAL OVERFLOW === */
 html, body { overflow-x: hidden; max-width: 100%; }
 
-/* === GLOBAL ANIMATIONS === */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Section header scroll-in */
 .section-header .section-label,
 .section-header .accent-line,
 .section-header h2,
@@ -86,7 +60,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
 .section-header.visible h3             { animation: fadeInUp 0.6s ease forwards 0.2s; }
 .section-header.visible p              { animation: fadeInUp 0.6s ease forwards 0.35s; }
 
-/* === CARDS / BOXES — thin red border on hover === */
 .snake-card {
   position: relative;
   background: #000;
@@ -99,7 +72,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
   transform: translateY(-2px);
 }
 
-/* Generic card used across pages */
 .card, .grid-card, .feature-card, .stat-card, .process-card, .cert-card {
   background: #000;
   border: 1px solid #e00;
@@ -110,20 +82,16 @@ html, body { overflow-x: hidden; max-width: 100%; }
   border-color: #e00;
 }
 
-/* Replace ALL gray backgrounds with pure black */
 .bg-gray-900, .bg-gray-800, .bg-gray-700,
 [class*="bg-gray"] { background: #000 !important; }
 
-/* Replace gray borders with brand red */
 .border-gray-700, .border-gray-600, .border-gray-800,
 [class*="border-gray"] { border-color: #e00 !important; }
 
-/* Replace gray text with white */
 .text-gray-400 { color: #FFFFFF !important; }
 .text-gray-300 { color: #FFFFFF !important; }
 .text-gray-500, .text-gray-600 { color: #FFFFFF !important; }
 
-/* Accent line (red) */
 .accent-line {
   width: 40px;
   height: 1px;
@@ -131,7 +99,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
   margin-bottom: 1rem;
 }
 
-/* Section label */
 .section-label {
   font-size: 0.65rem;
   letter-spacing: 0.25em;
@@ -141,7 +108,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
   display: block;
 }
 
-/* === BUTTONS === */
 .btn-primary {
   background: #e00;
   color: #fff;
@@ -174,7 +140,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
 }
 .btn-secondary:hover { border-color: #e00; color: #e00; }
 
-/* CTA button (used across pages) */
 .cta-button {
   background: #e00;
   color: #fff;
@@ -191,7 +156,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
 }
 .cta-button:hover { background: #aa0000; }
 
-/* WhatsApp CTA */
 .whatsapp-cta {
   background: #000;
   color: #fff;
@@ -210,7 +174,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
 }
 .whatsapp-cta:hover { background: #e00; }
 
-/* === SOCIAL ICONS === */
 .social-icon-brand {
   width: 44px;
   height: 44px;
@@ -226,7 +189,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
 }
 .social-icon-brand:hover { border-color: #e00; }
 
-/* === NAVIGATION === */
 .nav-links a:hover { color: #e00; }
 .nav-cta {
   color: #e00 !important;
@@ -236,7 +198,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
 }
 .nav-cta:hover { background: #e00; color: #fff !important; }
 
-/* === FOOTER === */
 footer {
   background: #000;
   border-top: 1px solid #e00;
@@ -269,10 +230,8 @@ footer {
 .footer-social-links a { font-size: 0.72rem; color: #FFFFFF; text-decoration: none; transition: color 0.2s; }
 .footer-social-links a:hover { color: #fff; }
 
-/* Footer accordion arrow */
 .footer-arrow { transition: transform 0.3s ease; }
 
-/* Footer links - Desktop: always visible */
 .footer-links-list {
   overflow: visible;
   max-height: none;
@@ -281,11 +240,9 @@ footer {
 .footer-links-list a { color: #fff; font-size: 0.8rem; transition: color 0.2s; }
 .footer-links-list a:hover { color: #e00; }
 
-/* Hide accordion buttons and arrows on desktop */
 .footer-grid button { display: none; }
 .footer-arrow { display: none; }
 
-/* === MOBILE FOOTER ACCORDION === */
 @media (max-width: 768px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
@@ -300,13 +257,8 @@ footer {
     padding: 1.5rem 0;
     border-bottom: 1px solid #e00;
   }
-  .footer-grid button {
-    display: block;
-  }
-  .footer-arrow {
-    display: block;
-  }
-  /* Collapse links by default on mobile */
+  .footer-grid button { display: block; }
+  .footer-arrow { display: block; }
   .footer-links-list {
     overflow: hidden;
     max-height: 0;
@@ -316,7 +268,6 @@ footer {
     max-height: 400px;
     padding-bottom: 1rem;
   }
-  /* Rotate arrow when open */
   button[aria-expanded="true"] .footer-arrow {
     transform: rotate(180deg);
   }
@@ -326,7 +277,6 @@ footer {
   .footer-grid { grid-template-columns: 1fr; }
 }
 
-/* === FAQ ACCORDION === */
 .faq-item { border-bottom: 1px solid #e00; }
 .faq-question {
   width: 100%;
@@ -360,7 +310,6 @@ footer {
 .faq-icon { transition: transform 0.3s ease; flex-shrink: 0; }
 .faq-question[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
 
-/* === ANIMATED GRADIENT (red only) === */
 @keyframes gradient-shift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
@@ -372,7 +321,6 @@ footer {
   animation: gradient-shift 3s ease infinite;
 }
 
-/* === PARTICLES (subtle, black/white only) === */
 .particles {
   position: fixed;
   top: 0; left: 0;
@@ -406,12 +354,10 @@ footer {
   100% { transform: translateY(-10vh) scale(1); opacity: 0; }
 }
 
-/* === PERFORMANCE: Disable heavy animations on mobile === */
 @media (max-width: 768px) {
   .particles { display: none; }
 }
 
-/* === ACCESSIBILITY: Respect reduced-motion === */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -419,7 +365,6 @@ footer {
   }
 }
 
-/* === FORM STYLES === */
 input, textarea, select {
   background: #000;
   color: #fff;
@@ -432,14 +377,13 @@ input, textarea, select {
   font-family: inherit;
   min-height: 44px;
 }
-input:focus, textarea:focus, select:focus { 
+input:focus, textarea:focus, select:focus {
   border-color: #e00;
   outline: 2px solid #e00;
   outline-offset: 2px;
 }
 input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.5); }
 
-/* === THANK YOU / SUCCESS === */
 .form-success {
   background: #000;
   border: 1px solid #e00;
@@ -447,17 +391,9 @@ input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.5); }
   text-align: center;
 }
 
-/* === SCROLL BAR === */
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: #000; }
 ::-webkit-scrollbar-thumb { background: #e00; border-radius: 2px; }
 
-/* === SELECTION === */
-::selection {
-  background-color: var(--color-accent, #e00);
-  color: #ffffff;
-}
-::-moz-selection {
-  background-color: var(--color-accent, #e00);
-  color: #ffffff;
-}
+::selection { background-color: #e00; color: #ffffff; }
+::-moz-selection { background-color: #e00; color: #ffffff; }
