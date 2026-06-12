@@ -95,14 +95,14 @@ export default defineConfig({
 
   build: {
     format: 'directory',
-    inlineStylesheets: 'always',
+    inlineStylesheets: 'never',
     assets: '_astro',
   },
 
   vite: {
     plugins: [tailwindcss()],
     build: {
-      cssCodeSplit: false,
+      cssCodeSplit: true,
       cssMinify: 'esbuild',
       minify: 'esbuild',
       cssTarget: 'esnext',
