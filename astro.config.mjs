@@ -12,12 +12,7 @@ export default defineConfig({
     defaultStrategy: 'hover'
   },
 
-  script: {
-    defer: true
-  },
-
   integrations: [
-     
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
@@ -25,18 +20,15 @@ export default defineConfig({
         const url = item.url;
         const today = new Date().toISOString().split('T')[0];
 
-        // Set lastmod for all pages
         item.lastmod = today;
 
-        // Homepage
         if (url === 'https://sdfltd.com/') {
           item.priority = 1.0;
           item.changefreq = 'weekly';
           return item;
         }
 
-        // Core pages — priority 0.9
-        const corePaths = ['/contact/', '/about/', '/certifications/', 
+        const corePaths = ['/contact/', '/about/', '/certifications/',
           '/products/', '/sustainability/', '/work-process/',
           '/low-moq-clothing-manufacturers/', '/clothing-manufacturers/',
           '/clothing-manufacturers-for-startups/'];
@@ -46,21 +38,18 @@ export default defineConfig({
           return item;
         }
 
-        // Country pages — priority 0.8
         if (url.includes('/clothing-manufacturer-')) {
           item.priority = 0.8;
           item.changefreq = 'monthly';
           return item;
         }
 
-        // Tool pages — priority 0.8
         if (url.includes('/tools/')) {
           item.priority = 0.8;
           item.changefreq = 'monthly';
           return item;
         }
 
-        // Service/category pages — priority 0.7
         const servicePaths = ['/apparel-manufacturers/', '/fashion-manufacturers/',
           '/garments-factory/', '/garments-manufacturers/', '/textile-manufacturers/',
           '/t-shirt-manufacturer/', '/hoodie-manufacturer/', '/full-package-production/',
@@ -74,15 +63,13 @@ export default defineConfig({
           return item;
         }
 
-        // Guide/insight/journal pages — priority 0.7
-        if (url.includes('/guides/') || url.includes('/insights/') || 
-            url.includes('/journal/')) {
+        if (url.includes('/guides/') || url.includes('/insights/') ||
+          url.includes('/journal/')) {
           item.priority = 0.7;
           item.changefreq = 'monthly';
           return item;
         }
 
-        // Secondary pages — priority 0.5
         const secondaryPaths = ['/careers/', '/csr/', '/philanthropy/',
           '/case-studies/', '/branding-launch/', '/editorial-policy/',
           '/public-notice/'];
@@ -92,7 +79,6 @@ export default defineConfig({
           return item;
         }
 
-        // Legal pages — priority 0.3
         const legalPaths = ['/privacy/', '/terms/'];
         if (legalPaths.some(p => url.endsWith(p))) {
           item.priority = 0.3;
@@ -100,7 +86,6 @@ export default defineConfig({
           return item;
         }
 
-        // Default
         item.priority = 0.6;
         item.changefreq = 'monthly';
         return item;
@@ -109,17 +94,15 @@ export default defineConfig({
   ],
 
   build: {
-    format: "directory",
+    format: 'directory',
     inlineStylesheets: 'always',
-    split: false,
     assets: '_astro',
-    assetsPrefix: undefined
   },
 
   vite: {
     plugins: [tailwindcss()],
     build: {
-      cssCodeSplit: true,
+      cssCodeSplit: false,
       cssMinify: 'esbuild',
       minify: 'esbuild',
       cssTarget: 'esnext',
@@ -127,10 +110,11 @@ export default defineConfig({
       rollupOptions: {
         output: {
           manualChunks: undefined,
-          inlineDynamicImports: false
+          inlineDynamicImports: true
         }
       },
-      assetsInlineLimit: 8192
+      assetsInlineLimit: 8192,
+      modulePreload: false,
     },
     css: {
       devSourcemap: false,
