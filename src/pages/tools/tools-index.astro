@@ -1,505 +1,1370 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
 export const prerender = true;
 
-const pageTitle = "Free Garment Manufacturing Tools — Calculators for Clothing Brands & Buyers | SDF Clothing";
-const pageDescription = "14 free garment manufacturing tools for clothing brands and apparel buyers. AQL calculator, GSM converter, landed cost calculator, production timeline, EU readiness checker, HS code finder, fabric shrinkage calculator, wash care label generator, and more. No signup required.";
-const canonicalUrl = "https://sdfltd.com/tools";
+const pageTitle = "Remote Fashion Designer Jobs Worldwide — Submit Your CV | SDF Clothing";
+const pageDescription = "Looking for remote fashion designer jobs or garment industry careers? Submit your CV to SDF Clothing — hiring globally for design, merchandising, quality, sustainability and production roles. Open to candidates worldwide.";
+const canonicalURL = "https://sdfltd.com/careers";
+
+const talentAreas = [
+  {
+    id: "design",
+    emoji: "🎨",
+    title: "Fashion Design & Pattern Making",
+    subtitle: "Remote & On-site",
+    color: "#1a1a2e",
+    accent: "#e00",
+    description: "Fashion designers, pattern makers, CAD operators, tech pack developers, and sample coordinators. Remote-friendly for design work. On-site for sample review and production grading at our Dhaka facility.",
+    tags: ["Fashion Design", "Pattern Making", "Lectra CAD", "Tech Packs", "Sample Dev"]
+  },
+  {
+    id: "quality",
+    emoji: "🔍",
+    title: "Quality Assurance & Compliance",
+    subtitle: "Primarily On-site",
+    color: "#1a2e1a",
+    accent: "#e00",
+    description: "In-line and end-line quality inspectors, AQL specialists, compliance officers, and audit managers. Mostly on-site at our Dhaka and Narayanganj facilities.",
+    tags: ["AQL Inspection", "BSCI Audits", "GOTS Compliance", "Defect Analysis", "QC Reporting"]
+  },
+  {
+    id: "merchandising",
+    emoji: "📦",
+    title: "Garment Merchandising",
+    subtitle: "Remote & On-site",
+    color: "#2e2a1a",
+    accent: "#e00",
+    description: "Merchandisers managing buyer communication from sample stage through bulk delivery. Direct contact with fashion brand clients in the USA, UK, and Europe.",
+    tags: ["Buyer Communication", "Production Planning", "Order Tracking", "ERP Systems", "Multi-style Mgmt"]
+  },
+  {
+    id: "sustainability",
+    emoji: "🌱",
+    title: "Sustainability & Certifications",
+    subtitle: "Remote Possible",
+    color: "#1a2e2a",
+    accent: "#e00",
+    description: "Specialists in GOTS, OEKO-TEX, ESPR, and Digital Product Passport compliance. We are preparing for EU DPP requirements and need people who understand regulatory apparel standards.",
+    tags: ["GOTS 7.0", "OEKO-TEX", "ESPR Readiness", "Audit Management", "DPP Compliance"]
+  },
+  {
+    id: "engineering",
+    emoji: "⚙️",
+    title: "Industrial Engineering & Production",
+    subtitle: "On-site Dhaka",
+    color: "#2e1a2a",
+    accent: "#e00",
+    description: "Industrial engineers, line supervisors, production planners, and floor managers. SAM calculation, GSD, lean manufacturing, and efficiency improvement roles.",
+    tags: ["SAM Calculation", "GSD", "Line Balancing", "Lean Manufacturing", "Time Studies"]
+  },
+  {
+    id: "corporate",
+    emoji: "💼",
+    title: "Marketing, Operations & Corporate",
+    subtitle: "Mostly Remote",
+    color: "#1a1e2e",
+    accent: "#e00",
+    description: "B2B marketing coordinators, content writers, operations managers, and corporate support roles. Well-suited to remote candidates. Fashion or manufacturing experience is an advantage.",
+    tags: ["B2B Marketing", "Content Writing", "LinkedIn Mgmt", "Trade Shows", "Operations"]
+  }
+];
 ---
 
-<BaseLayout
-  title={pageTitle}
-  description={pageDescription}
-  canonicalUrl={canonicalUrl}
-  ogType="website"
-  dateModified={new Date().toISOString().split("T")[0]}
->
+<BaseLayout title={pageTitle} description={pageDescription}>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "CollectionPage",
-      "@id": "https://sdfltd.com/tools#page",
-      "name": "Free Garment Manufacturing Tools",
-      "url": "https://sdfltd.com/tools",
-      "description": "Free calculators and tools for clothing brands, garment buyers, and apparel sourcing teams. Covers costing, quality inspection, fabric conversion, EU compliance, production planning, and more.",
-      "provider": { "@id": "https://sdfltd.com/#organization" },
-      "inLanguage": "en",
-      "hasPart": [
-        {
-          "@type": "SoftwareApplication",
-          "name": "Garment Cost Calculator",
-          "url": "https://sdfltd.com/tools/garment-cost-calculator",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Production Timeline Calculator",
-          "url": "https://sdfltd.com/tools/production-timeline",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Manufacturer Email Generator",
-          "url": "https://sdfltd.com/tools/manufacturer-email-generator",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "EU Readiness Checker",
-          "url": "https://sdfltd.com/tools/eu-readiness-checker",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "AQL Calculator",
-          "url": "https://sdfltd.com/tools/aql-calculator",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "GSM to OZ Converter",
-          "url": "https://sdfltd.com/tools/gsm-converter",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Fabric Shrinkage Calculator",
-          "url": "https://sdfltd.com/tools/shrinkage-calculator",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Wash Care Label Generator",
-          "url": "https://sdfltd.com/tools/wash-care-label-generator",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "HS Code Finder",
-          "url": "https://sdfltd.com/tools/hs-code",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Price Calculator",
-          "url": "https://sdfltd.com/tools/price-calculator",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "MOQ Calculator",
-          "url": "https://sdfltd.com/tools/moq-calculator",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Lead Time Calculator",
-          "url": "https://sdfltd.com/tools/lead-time-calculator",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Color Converter",
-          "url": "https://sdfltd.com/tools/color-converter",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Sample Request",
-          "url": "https://sdfltd.com/tools/sample-request",
-          "applicationCategory": "BusinessApplication",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        }
-      ]
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Remote Fashion Designer Jobs Worldwide — Submit Your CV | SDF Clothing",
+    "description": "Looking for remote fashion designer jobs or garment industry careers? Submit your CV to SDF Clothing — hiring globally for design, merchandising, quality, sustainability and production roles.",
+    "url": "https://sdfltd.com/careers",
+    "lastReviewed": "2026-06-11",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com"
     },
-    {
+    "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "https://sdfltd.com/tools" }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is an AQL calculator and how is it used in garment manufacturing?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "An AQL (Acceptable Quality Level) calculator determines how many garments to inspect from a production lot and how many defects are allowable before rejecting the shipment. Based on ISO 2859-1 (ANSI/ASQ Z1.4), it takes your lot size and inspection level and outputs a sample size and accept/reject numbers. AQL 2.5 is the garment industry standard — it means a maximum 2.5% defective rate is acceptable. SDF Clothing applies AQL 2.5 on every order before packing."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is GSM in clothing and how do I convert it to ounces?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "GSM stands for Grams per Square Metre — the standard measure of fabric weight. Higher GSM means heavier, denser fabric. To convert GSM to oz/yd², divide by 33.906. To convert oz/yd² to GSM, multiply by 33.906. A standard T-shirt fabric is 170–200 GSM (5–6 oz). A standard hoodie fleece is 300–340 GSM (8.9–10 oz). Specifying GSM correctly in your tech pack is critical for accurate factory pricing and correct hand-feel."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is fabric shrinkage and how is it calculated?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Fabric shrinkage is the reduction in a fabric's dimensions after washing or processing. It is calculated as: Shrinkage % = [(Initial Measurement – Final Measurement) / Initial Measurement] × 100. For garment production, shrinkage must be measured in both warp (length) and weft (width) directions. Cotton typically shrinks 2–5%. A shrinkage rate below 3% is generally acceptable for most retail buyers. Manufacturers apply pre-shrinking treatments to control shrinkage before cutting."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What HS code do I use for clothing imports?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Clothing HS codes fall under Chapters 61 (knitted or crocheted garments) and 62 (woven garments). T-shirts are HS 6109, hoodies and sweatshirts are HS 6110, woven trousers are HS 6203/6204, and jackets are HS 6201/6202. The correct HS code determines your import duty rate. Misclassification can result in penalties and retrospective duty assessments. For Bangladesh exports to the EU and UK, the correct HS code is also required to claim duty-free EBA/DCTS access."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What are GINETEX care label symbols?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "GINETEX care symbols are the international standard for textile care labelling under ISO 3758. They use five base shapes: washtub (washing), triangle (bleaching), square (drying), iron (ironing), and circle (professional care). Numbers inside the washtub indicate maximum wash temperature in °C. An X through any symbol means 'do not'. EU textile labelling regulations require care symbols on all garments sold in Europe. The sequence must always follow: washing → bleaching → drying → ironing → professional care."
-          }
-        }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com" },
+        { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://sdfltd.com/careers" }
       ]
     }
-  ]
-}
-</script>
+  }
+  </script>
 
-<style>
-.tools-page { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    "title": "Remote Fashion Designer — Garment Industry Roles Worldwide",
+    "description": "SDF Clothing is always looking for skilled fashion designers, pattern makers, merchandisers, and garment industry professionals for remote and on-site roles. Submit your CV to be considered for current and future openings across design, quality, merchandising, sustainability, and production.",
+    "datePosted": "2026-06-01",
+    "validThrough": "2026-12-31",
+    "employmentType": ["FULL_TIME", "CONTRACTOR"],
+    "jobLocationType": "TELECOMMUTE",
+    "hiringOrganization": {
+      "@type": "Organization",
+      "name": "SDF Clothing",
+      "sameAs": "https://sdfltd.com",
+      "logo": "https://sdfltd.com/logo-small.svg"
+    },
+    "applicantLocationRequirements": { "@type": "Country", "name": "Worldwide" },
+    "jobLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Dhaka",
+        "addressCountry": "BD"
+      }
+    },
+    "occupationalCategory": ["Fashion Design", "Garment Manufacturing", "Textile Industry", "Apparel Merchandising"],
+    "skills": "Fashion Design, Pattern Making, Garment Merchandising, Quality Assurance, AQL, GOTS, Sustainability, Industrial Engineering"
+  }
+  </script>
 
-/* Hero */
-.tools-hero { margin-bottom: 3.5rem; }
-.tools-hero h1 { font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 300; color: #fff; letter-spacing: 0.03em; line-height: 1.2; margin-bottom: 0.75rem; }
-.tools-hero .sub { font-size: 0.92rem; color: rgba(255,255,255,0.6); max-width: 640px; line-height: 1.85; margin-bottom: 1.25rem; }
-.trust-row { display: flex; flex-wrap: wrap; gap: 1rem; }
-.trust-item { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); display: flex; align-items: center; gap: 0.35rem; }
-.trust-item::before { content: '✓'; color: #e00; }
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does SDF Clothing offer remote fashion designer jobs?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Design, merchandising, and marketing roles are open to remote candidates worldwide. We review every CV regardless of location and contact candidates when a suitable opening arises." }
+      },
+      {
+        "@type": "Question",
+        "name": "What garment industry jobs does SDF Clothing hire for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "We hire across six areas: fashion design and pattern making, quality assurance and compliance, garment merchandising, sustainability and certifications, industrial engineering, and corporate functions including marketing and operations." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I apply for fashion jobs from outside Bangladesh?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. We welcome candidates worldwide. Design, merchandising, and marketing roles have been filled by candidates from the UK, USA, Europe, and Southeast Asia working remotely." }
+      },
+      {
+        "@type": "Question",
+        "name": "What CV file formats do you accept?",
+        "acceptedAnswer": { "@type": "Answer", "text": "PDF, DOC, and DOCX only. Maximum file size is 10MB. No image files, ZIP archives, or Google Drive links." }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to hear back after submitting a CV?",
+        "acceptedAnswer": { "@type": "Answer", "text": "We read every CV. If your background matches a current or upcoming opening, we contact you within two to four weeks. CVs are kept on file for six months." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best way to find remote fashion designer jobs at a garment factory?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Submit your CV directly to manufacturers like SDF Clothing who hire internationally for design and merchandising roles. Include your area of expertise, preferred work arrangement, and a short note about your background. Factories that work with international brands are most likely to offer remote options." }
+      }
+    ]
+  }
+  </script>
 
-/* Category label */
-.cat-label { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: #e00; margin-bottom: 1rem; margin-top: 3rem; display: block; }
-.cat-label:first-of-type { margin-top: 0; }
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SDF Clothing",
+    "url": "https://sdfltd.com",
+    "logo": "https://sdfltd.com/logo-small.svg",
+    "foundingDate": "1998",
+    "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 500 },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "House 125, Road 01, Baridhara DOHS",
+      "addressLocality": "Dhaka",
+      "postalCode": "1212",
+      "addressCountry": "BD"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/clothing-manufacturers",
+      "https://x.com/clothing_makers"
+    ]
+  }
+  </script>
 
-/* Tool grid */
-.tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.07); margin-bottom: 0.25rem; }
-@media (max-width: 700px) { .tool-grid { grid-template-columns: 1fr; } }
-@media (min-width: 701px) and (max-width: 960px) { .tool-grid { grid-template-columns: 1fr 1fr; } }
-
-.tool-card { background: #000; padding: 1.75rem; border-top: 2px solid transparent; transition: border-color 0.2s; display: flex; flex-direction: column; }
-.tool-card:hover { border-top-color: #e00; }
-.tool-card a { text-decoration: none; color: inherit; flex: 1; display: flex; flex-direction: column; }
-
-.tc-badge { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: #e00; margin-bottom: 0.6rem; }
-.tc-badge.new { color: #4ade80; }
-.tc-badge.updated { color: #facc15; }
-
-.tc-title { font-size: 0.97rem; font-weight: 500; color: #fff; margin-bottom: 0.5rem; line-height: 1.35; }
-.tc-desc { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.75; flex: 1; margin-bottom: 1rem; }
-.tc-arrow { font-size: 0.75rem; color: #e00; margin-top: auto; }
-
-/* 2-col grid for featured tools */
-.tool-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.07); margin-bottom: 0.25rem; }
-@media (max-width: 600px) { .tool-grid-2 { grid-template-columns: 1fr; } }
-
-.tool-card-featured { background: #000; padding: 2rem; border-top: 2px solid #e00; display: flex; flex-direction: column; }
-.tool-card-featured a { text-decoration: none; color: inherit; flex: 1; display: flex; flex-direction: column; }
-
-/* SEO body */
-.seo-section { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 3.5rem; margin-top: 4rem; }
-.seo-section h2 { font-size: 1.35rem; font-weight: 300; color: #fff; margin-bottom: 1rem; margin-top: 2.5rem; }
-.seo-section h2:first-child { margin-top: 0; }
-.seo-section h3 { font-size: 1rem; font-weight: 500; color: #fff; margin-bottom: 0.6rem; margin-top: 1.75rem; }
-.seo-section p { font-size: 0.87rem; color: rgba(255,255,255,0.6); line-height: 1.9; margin-bottom: 1rem; }
-.seo-section ul { margin: 0.75rem 0 1rem; padding: 0; list-style: none; }
-.seo-section ul li { font-size: 0.87rem; color: rgba(255,255,255,0.6); line-height: 1.8; padding-left: 1.2rem; position: relative; margin-bottom: 0.3rem; }
-.seo-section ul li::before { content: '—'; position: absolute; left: 0; color: #e00; }
-.seo-section a { color: #e00; text-decoration: none; }
-.seo-section a:hover { text-decoration: underline; }
-
-.faq-item { border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 1.25rem; margin-bottom: 1.25rem; }
-.faq-item:last-child { border-bottom: none; }
-</style>
-
-<div class="tools-page">
-
-  <nav aria-label="Breadcrumb" style="margin-bottom:2rem;" itemscope itemtype="https://schema.org/BreadcrumbList">
-    <ol style="display:flex;gap:0.5rem;list-style:none;font-size:0.7rem;color:rgba(255,255,255,0.3);">
-      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a href="/" style="color:rgba(255,255,255,0.3);text-decoration:none;" itemprop="item"><span itemprop="name">Home</span></a>
-        <meta itemprop="position" content="1" />
-      </li>
-      <li style="color:rgba(255,255,255,0.18);">/</li>
-      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <span style="color:#fff;" itemprop="name">Free Tools</span>
-        <meta itemprop="position" content="2" />
-      </li>
-    </ol>
+  <!-- BREADCRUMB -->
+  <nav aria-label="Breadcrumb" class="c-breadcrumb">
+    <div class="c-container">
+      <ol class="c-breadcrumb__list">
+        <li class="c-breadcrumb__item"><a href="/" class="c-breadcrumb__link">Home</a></li>
+        <li class="c-breadcrumb__item" aria-current="page">Careers</li>
+      </ol>
+    </div>
   </nav>
 
   <!-- HERO -->
-  <div class="tools-hero">
-    <span class="section-label">Free Tools — No Signup Required</span>
-    <h1>Free Garment Manufacturing Tools for Clothing Brands &amp; Buyers</h1>
-    <p class="sub">14 free calculators and tools covering every stage of apparel sourcing — from initial cost estimates and production planning to quality inspection, EU compliance, fabric specification, and customs classification. Built by SDF Clothing, a Bangladesh garment manufacturer since 1998.</p>
-    <div class="trust-row">
-      <span class="trust-item">No signup required</span>
-      <span class="trust-item">No data collected</span>
-      <span class="trust-item">Updated for 2025–2026 regulations</span>
-      <span class="trust-item">Used by 5,000+ brands</span>
+  <section class="c-hero" aria-labelledby="hero-h1">
+    <div class="c-container">
+      <div class="c-hero__inner">
+        <div class="c-hero__text">
+          <p class="c-eyebrow">Careers — Open Worldwide</p>
+          <h1 id="hero-h1" class="c-hero__h1">
+            Remote Fashion Designer Jobs<br>
+            <span class="c-hero__h1-line2">and Garment Industry Careers</span>
+          </h1>
+          <p class="c-hero__lead">
+            We are a clothing manufacturer in Dhaka, Bangladesh — running our own factory since 1998. We work with fashion brands across 36 countries. When we need someone good, we look everywhere. Submit your CV and we will reach out when the right role opens.
+          </p>
+          <div class="c-hero__actions">
+            <a href="#cv-form" class="c-btn c-btn--primary">Submit Your CV</a>
+            <a href="#talent-areas" class="c-btn c-btn--ghost">See Open Areas</a>
+          </div>
+        </div>
+        <div class="c-hero__stats" aria-label="Company facts">
+          <div class="c-stat">
+            <span class="c-stat__num">1998</span>
+            <span class="c-stat__label">Factory founded</span>
+          </div>
+          <div class="c-stat">
+            <span class="c-stat__num">36</span>
+            <span class="c-stat__label">Countries served</span>
+          </div>
+          <div class="c-stat">
+            <span class="c-stat__num">13</span>
+            <span class="c-stat__label">Certifications held</span>
+          </div>
+          <div class="c-stat">
+            <span class="c-stat__num">6</span>
+            <span class="c-stat__label">Areas we hire in</span>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- FEATURED: BRAND PLANNING -->
-  <span class="cat-label">Brand Planning &amp; Sourcing — Most Used</span>
-  <div class="tool-grid-2">
+  <!-- TALENT AREA CARDS — Google Careers style -->
+  <section class="c-areas" id="talent-areas" aria-labelledby="areas-h2">
+    <div class="c-container">
+      <p class="c-eyebrow">Who We Hire</p>
+      <h2 id="areas-h2" class="c-section-h2">Six areas we are always hiring in</h2>
+      <p class="c-section-lead">We do not post every opening. Instead we keep a pool of CVs and reach out when something comes up. Pick the area that fits your background when you submit below.</p>
 
-    <div class="tool-card-featured">
-      <a href="/tools/garment-cost-calculator" title="Free garment cost calculator — FOB price, import duty, landed cost per unit">
-        <div class="tc-badge new">New — Updated 2025</div>
-        <div class="tc-title">Garment Cost Calculator</div>
-        <div class="tc-desc">Enter garment type, fabric, quantity, and destination country — get your FOB price from Bangladesh, import duty rate, sea or air freight cost, and total landed cost per unit in seconds. Includes gross margin calculator and Bangladesh vs China vs Vietnam cost comparison. The only free tool that shows your true all-in cost before you contact a factory.</div>
-        <span class="tc-arrow">Calculate my landed cost →</span>
-      </a>
+      <div class="c-areas__grid" role="list">
+        {talentAreas.map((area) => (
+          <article class="c-area-card" role="listitem" data-area-id={area.id}>
+            <div class="c-area-card__top">
+              <div class="c-area-card__emoji" aria-hidden="true">{area.emoji}</div>
+              <span class="c-area-card__badge">{area.subtitle}</span>
+            </div>
+            <h3 class="c-area-card__title">{area.title}</h3>
+            <p class="c-area-card__desc">{area.description}</p>
+            <ul class="c-area-card__tags" aria-label="Skills">
+              {area.tags.map(tag => <li>{tag}</li>)}
+            </ul>
+            <button
+              class="c-area-card__apply"
+              data-area={area.title}
+              aria-label={`Apply for ${area.title} — opens CV form`}
+            >
+              Submit CV for this area →
+            </button>
+          </article>
+        ))}
+      </div>
     </div>
+  </section>
 
-    <div class="tool-card-featured">
-      <a href="/tools/production-timeline" title="Free apparel production timeline calculator — reverse-engineer from your launch date">
-        <div class="tc-badge new">New — Updated 2025</div>
-        <div class="tc-title">Production Timeline Calculator</div>
-        <div class="tc-desc">Enter your target launch or ship date and get every production deadline reverse-engineered — tech pack submission, proto sample approval, pre-production sign-off, bulk cut start, final QC, and shipment. Urgency alerts fire when your window is at risk. Supports OEM, ODM, CMT, and private label. The most common reason brands miss their season is underestimating lead time — this tool prevents that.</div>
-        <span class="tc-arrow">Build my production timeline →</span>
-      </a>
+  <!-- WHY JOIN -->
+  <section class="c-why" aria-labelledby="why-h2">
+    <div class="c-container">
+      <p class="c-eyebrow">Why Work Here</p>
+      <h2 id="why-h2" class="c-section-h2">What working at SDF actually looks like</h2>
+      <div class="c-why__grid" role="list">
+        <article class="c-why-card" role="listitem">
+          <span class="c-why-card__icon" aria-hidden="true">🌍</span>
+          <h3 class="c-why-card__title">Remote-friendly positions</h3>
+          <p class="c-why-card__body">Design, merchandising, and marketing roles have been filled by people in the UK, USA, Germany, and Southeast Asia. If your work is strong, location rarely stops us.</p>
+        </article>
+        <article class="c-why-card" role="listitem">
+          <span class="c-why-card__icon" aria-hidden="true">🧵</span>
+          <h3 class="c-why-card__title">Real production exposure</h3>
+          <p class="c-why-card__body">Every role here touches actual garments. Designers review factory samples. Merchandisers see the cutting floor. You learn how fashion actually moves from sketch to shipment.</p>
+        </article>
+        <article class="c-why-card" role="listitem">
+          <span class="c-why-card__icon" aria-hidden="true">📈</span>
+          <h3 class="c-why-card__title">Room to grow quickly</h3>
+          <p class="c-why-card__body">The team is small enough that good work gets noticed. Several people joined as coordinators and moved into senior roles within two years because there is no rigid hierarchy blocking them.</p>
+        </article>
+        <article class="c-why-card" role="listitem">
+          <span class="c-why-card__icon" aria-hidden="true">🌱</span>
+          <h3 class="c-why-card__title">Sustainability is real work</h3>
+          <p class="c-why-card__body">We hold GOTS, OEKO-TEX, BSCI, SA8000 and nine more certifications. This is not marketing — it is audit schedules and production decisions made every single week.</p>
+        </article>
+        <article class="c-why-card" role="listitem">
+          <span class="c-why-card__icon" aria-hidden="true">✈️</span>
+          <h3 class="c-why-card__title">International client base</h3>
+          <p class="c-why-card__body">Our clients are fashion brands from the USA, UK, Germany, and Australia. Merchandising and design roles involve direct communication with buyers you would not normally reach from a factory job.</p>
+        </article>
+        <article class="c-why-card" role="listitem">
+          <span class="c-why-card__icon" aria-hidden="true">🏭</span>
+          <h3 class="c-why-card__title">End-to-end manufacturing</h3>
+          <p class="c-why-card__body">Spinning, knitting, dyeing, cutting, sewing, finishing — all in-house. You see the complete picture of how a garment goes from fibre to finished product. Most fashion jobs do not give you that.</p>
+        </article>
+      </div>
     </div>
+  </section>
 
-    <div class="tool-card-featured">
-      <a href="/tools/manufacturer-email-generator" title="Free manufacturer inquiry email generator — get factory replies">
-        <div class="tc-badge new">New — Updated 2025</div>
-        <div class="tc-title">Manufacturer Email Generator</div>
-        <div class="tc-desc">Factories receive 30–50 inquiry emails per day and ignore most of them because they are vague. Fill in your garment spec, quantity, timeline, certifications, and incoterms — get a structured, factory-ready inquiry email in 30 seconds. Copy and send to any manufacturer. Used by 1,000+ brands to get faster responses from Bangladesh, China, and Vietnam factories.</div>
-        <span class="tc-arrow">Generate my inquiry email →</span>
-      </a>
+  <!-- HOW IT WORKS -->
+  <section class="c-process" aria-labelledby="process-h2">
+    <div class="c-container">
+      <p class="c-eyebrow">How It Works</p>
+      <h2 id="process-h2" class="c-section-h2">What happens after you submit your CV</h2>
+      <div class="c-process__steps" role="list">
+        <article class="c-process-step" role="listitem">
+          <div class="c-process-step__num" aria-hidden="true">01</div>
+          <div class="c-process-step__body">
+            <h3 class="c-process-step__title">Submit your CV below</h3>
+            <p class="c-process-step__text">Fill in the form, choose your area, attach your CV as a PDF, DOC, or DOCX. A short note about your background helps — two sentences is enough.</p>
+          </div>
+        </article>
+        <article class="c-process-step" role="listitem">
+          <div class="c-process-step__num" aria-hidden="true">02</div>
+          <div class="c-process-step__body">
+            <h3 class="c-process-step__title">A person reads it</h3>
+            <p class="c-process-step__text">No automated filters. Someone here reads every CV. If your background is relevant, your file goes into our active pool and stays there for six months.</p>
+          </div>
+        </article>
+        <article class="c-process-step" role="listitem">
+          <div class="c-process-step__num" aria-hidden="true">03</div>
+          <div class="c-process-step__body">
+            <h3 class="c-process-step__title">We contact you when there is a match</h3>
+            <p class="c-process-step__text">When an opening fits your profile, we email you directly. Most conversations start with a short email exchange followed by a video call with the team lead.</p>
+          </div>
+        </article>
+      </div>
     </div>
+  </section>
 
-    <div class="tool-card-featured">
-      <a href="/tools/eu-readiness-checker" title="Free EU compliance checker — GPSR 2024, REACH, ESPR, textile labelling">
-        <div class="tc-badge new">New — GPSR Dec 2024</div>
-        <div class="tc-title">EU Readiness Checker</div>
-        <div class="tc-desc">Answer 18 questions and get a personalised EU compliance score across five categories: GPSR 2024, REACH chemical restrictions, EU textile labelling regulation 1007/2011, ESPR and Digital Product Passport readiness, and factory certification requirements. Covers every major regulation affecting clothing brands selling into the EU in 2025–2028. Free compliance gap analysis and prioritised action plan included.</div>
-        <span class="tc-arrow">Check my EU compliance →</span>
-      </a>
+  <!-- CV FORM -->
+  <section class="c-form-section" id="cv-form" aria-labelledby="form-h2">
+    <div class="c-container">
+      <div class="c-form-layout">
+
+        <div class="c-form-sidebar">
+          <p class="c-eyebrow">Submit Your CV</p>
+          <h2 id="form-h2" class="c-section-h2">Send us your details — we keep your CV on file</h2>
+          <p class="c-form-sidebar__body">There is no specific job to apply for right now. You are submitting so we can reach out when something relevant opens up. Candidates from any country are welcome.</p>
+          <div class="c-form-sidebar__reqs" role="list" aria-label="File requirements">
+            <div class="c-req" role="listitem"><span aria-hidden="true">📄</span><span>PDF, DOC, or DOCX only</span></div>
+            <div class="c-req" role="listitem"><span aria-hidden="true">📏</span><span>Maximum file size 10 MB</span></div>
+            <div class="c-req" role="listitem"><span aria-hidden="true">🔒</span><span>Your data stays private</span></div>
+            <div class="c-req" role="listitem"><span aria-hidden="true">🗂️</span><span>CV kept on file for 6 months</span></div>
+            <div class="c-req" role="listitem"><span aria-hidden="true">🌍</span><span>Open to candidates worldwide</span></div>
+          </div>
+        </div>
+
+        <div class="c-form-box">
+          <form
+            id="cv-upload-form"
+            action="https://usebasin.com/f/9ecfe65e8aee"
+            method="POST"
+            enctype="multipart/form-data"
+            novalidate
+            aria-label="CV submission form"
+          >
+            <div class="c-field">
+              <label for="f-name" class="c-label">Full Name <span class="c-req-star" aria-label="required">*</span></label>
+              <input type="text" id="f-name" name="name" required autocomplete="name" placeholder="Your full name" class="c-input" aria-required="true" aria-describedby="e-name" />
+              <span id="e-name" class="c-field-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="c-field-row">
+              <div class="c-field">
+                <label for="f-email" class="c-label">Email Address <span class="c-req-star" aria-label="required">*</span></label>
+                <input type="email" id="f-email" name="email" required autocomplete="email" placeholder="you@example.com" class="c-input" aria-required="true" aria-describedby="e-email" />
+                <span id="e-email" class="c-field-error" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="c-field">
+                <label for="f-phone" class="c-label">Phone Number</label>
+                <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="+1 555 000 0000" class="c-input" aria-describedby="h-phone" />
+                <span id="h-phone" class="c-field-hint">Include country code</span>
+              </div>
+            </div>
+
+            <div class="c-field-row">
+              <div class="c-field">
+                <label for="f-country" class="c-label">Country <span class="c-req-star" aria-label="required">*</span></label>
+                <input type="text" id="f-country" name="country" required autocomplete="country-name" placeholder="e.g. United Kingdom" class="c-input" aria-required="true" aria-describedby="e-country" />
+                <span id="e-country" class="c-field-error" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="c-field">
+                <label for="f-experience" class="c-label">Years of Experience <span class="c-req-star" aria-label="required">*</span></label>
+                <select id="f-experience" name="years_of_experience" required class="c-select" aria-required="true" aria-describedby="e-experience">
+                  <option value="">Select</option>
+                  <option value="Under 1 year">Under 1 year</option>
+                  <option value="1 to 3 years">1 to 3 years</option>
+                  <option value="3 to 5 years">3 to 5 years</option>
+                  <option value="5 to 10 years">5 to 10 years</option>
+                  <option value="Over 10 years">Over 10 years</option>
+                </select>
+                <span id="e-experience" class="c-field-error" role="alert" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="c-field-row">
+              <div class="c-field">
+                <label for="f-area" class="c-label">Area of Expertise <span class="c-req-star" aria-label="required">*</span></label>
+                <select id="f-area" name="area_of_expertise" required class="c-select" aria-required="true" aria-describedby="e-area">
+                  <option value="">Select area</option>
+                  <option value="Fashion Design & Pattern Making">Fashion Design &amp; Pattern Making</option>
+                  <option value="Quality Assurance & Compliance">Quality Assurance &amp; Compliance</option>
+                  <option value="Garment Merchandising">Garment Merchandising</option>
+                  <option value="Sustainability & Certifications">Sustainability &amp; Certifications</option>
+                  <option value="Industrial Engineering & Production">Industrial Engineering &amp; Production</option>
+                  <option value="Marketing, Operations & Corporate">Marketing, Operations &amp; Corporate</option>
+                  <option value="Other">Other / Not Listed</option>
+                </select>
+                <span id="e-area" class="c-field-error" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="c-field">
+                <label for="f-work" class="c-label">Work Preference <span class="c-req-star" aria-label="required">*</span></label>
+                <select id="f-work" name="work_arrangement" required class="c-select" aria-required="true" aria-describedby="e-work">
+                  <option value="">Select preference</option>
+                  <option value="Remote — open to any location">Remote — any location</option>
+                  <option value="On-site — Dhaka, Bangladesh">On-site — Dhaka</option>
+                  <option value="Hybrid arrangement preferred">Hybrid preferred</option>
+                  <option value="Either remote or on-site">Either works for me</option>
+                </select>
+                <span id="e-work" class="c-field-error" role="alert" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="c-field">
+              <label for="f-cv" class="c-label">Your CV <span class="c-req-star" aria-label="required">*</span></label>
+              <div class="c-upload" id="upload-zone" role="button" tabindex="0" aria-label="Click or drag to upload your CV file">
+                <span class="c-upload__icon" aria-hidden="true">📎</span>
+                <span class="c-upload__main" id="upload-label">Drag &amp; drop your CV here, or click to browse</span>
+                <span class="c-upload__sub">PDF, DOC, or DOCX — max 10 MB</span>
+                <input type="file" id="f-cv" name="cv_file" required accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="c-upload__input" aria-required="true" aria-describedby="e-cv h-cv" />
+              </div>
+              <span id="h-cv" class="c-field-hint">Only PDF, DOC, and DOCX accepted</span>
+              <span id="e-cv" class="c-field-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="c-field">
+              <label for="f-linkedin" class="c-label">LinkedIn Profile URL</label>
+              <input type="url" id="f-linkedin" name="linkedin_url" placeholder="https://linkedin.com/in/yourname" class="c-input" aria-describedby="h-linkedin" />
+              <span id="h-linkedin" class="c-field-hint">Optional — helpful for design and marketing roles</span>
+            </div>
+
+            <div class="c-field">
+              <label for="f-note" class="c-label">A short note about your background</label>
+              <textarea id="f-note" name="background_note" rows="4" maxlength="600" placeholder="Two or three sentences about your experience and what kind of role you are looking for. This helps us file your CV correctly." class="c-textarea" aria-describedby="h-note note-count"></textarea>
+              <div class="c-field-footer">
+                <span id="h-note" class="c-field-hint">Optional — max 600 characters</span>
+                <span id="note-count" class="c-char-count" aria-live="polite">0 / 600</span>
+              </div>
+            </div>
+
+            <div class="c-field">
+              <label class="c-checkbox-label">
+                <input type="checkbox" id="f-consent" name="gdpr_consent" value="yes" required class="c-checkbox" aria-required="true" aria-describedby="e-consent" />
+                <span class="c-checkbox-text">I agree that SDF Clothing may store my details and CV for up to six months for recruitment purposes. I can request removal at any time by <a href="/contact" class="c-link">contacting the team</a>.</span>
+              </label>
+              <span id="e-consent" class="c-field-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <button type="submit" id="cv-submit" class="c-btn c-btn--primary c-btn--full" aria-describedby="submit-status">
+              <span id="submit-label">Submit Your CV</span>
+              <span id="submit-spinner" class="c-spinner" aria-hidden="true" hidden></span>
+            </button>
+            <span id="submit-status" class="c-submit-status" aria-live="polite"></span>
+
+          </form>
+
+          <!-- SUCCESS MESSAGE (shown after submit) -->
+          <div id="cv-success" class="c-success" hidden role="status" aria-live="polite">
+            <div class="c-success__icon" aria-hidden="true">✅</div>
+            <div class="c-success__body">
+              <h3 class="c-success__title">Your CV has been received — thank you</h3>
+              <p class="c-success__text">We have everything we need from you. Someone on our team will read your CV and, if your background matches a current or upcoming opening, we will be in touch directly by email.</p>
+              <p class="c-success__text">There is nothing else for you to do. We do not send automated acknowledgement emails, so this confirmation on screen is your record that the submission went through. We keep CVs on file for six months.</p>
+              <div class="c-success__notice">
+                <span class="c-success__notice-icon" aria-hidden="true">🛡️</span>
+                <p class="c-success__notice-text">As part of our standard verification process, we record basic submission details below — including your approximate location and device information. This is collected from every applicant to help us identify spam and fraudulent submissions, and is handled in line with our <a href="/privacy-policy" class="c-link">privacy policy</a>.</p>
+              </div>
+              <div class="c-success__meta" id="submission-meta" aria-label="Submission details"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-  </div>
+  <!-- FAQ -->
+  <section class="c-faq" aria-labelledby="faq-h2">
+    <div class="c-container">
+      <p class="c-eyebrow">Common Questions</p>
+      <h2 id="faq-h2" class="c-section-h2">Questions about applying</h2>
+      <div class="c-faq__list" role="list">
 
-  <!-- QUALITY & INSPECTION -->
-  <span class="cat-label">Quality Control &amp; Inspection</span>
-  <div class="tool-grid">
+        <article class="c-faq-item" role="listitem">
+          <button class="c-faq-item__q" aria-expanded="false" aria-controls="faq-a1">
+            Does SDF Clothing offer remote fashion designer jobs?
+            <span class="c-faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="c-faq-item__a" id="faq-a1" hidden>
+            <p>Yes. Design, merchandising, and marketing roles are open to remote candidates worldwide. We review every CV regardless of location and reach out when a suitable opening arises. On-site roles at our Dhaka facility are also available.</p>
+          </div>
+        </article>
 
-    <div class="tool-card">
-      <a href="/tools/aql-calculator" title="Free AQL calculator — garment inspection sample size and accept/reject criteria">
-        <div class="tc-badge">Quality Inspection</div>
-        <div class="tc-title">AQL Calculator</div>
-        <div class="tc-desc">Calculate your garment inspection sample size and accept/reject criteria based on ISO 2859-1 (ANSI/ASQ Z1.4). Enter lot size and inspection level — get your code letter, sample size, and maximum allowable defects instantly. AQL 2.5 is the garment industry standard. Use before every pre-shipment inspection to set the correct sampling plan.</div>
-        <span class="tc-arrow">Calculate inspection size →</span>
-      </a>
+        <article class="c-faq-item" role="listitem">
+          <button class="c-faq-item__q" aria-expanded="false" aria-controls="faq-a2">
+            What garment industry jobs does SDF Clothing hire for?
+            <span class="c-faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="c-faq-item__a" id="faq-a2" hidden>
+            <p>We hire across six areas: fashion design and pattern making, quality assurance and compliance, garment merchandising, sustainability and certifications, industrial engineering and production, and corporate functions including marketing and operations.</p>
+          </div>
+        </article>
+
+        <article class="c-faq-item" role="listitem">
+          <button class="c-faq-item__q" aria-expanded="false" aria-controls="faq-a3">
+            Can I apply from outside Bangladesh?
+            <span class="c-faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="c-faq-item__a" id="faq-a3" hidden>
+            <p>Yes. We welcome applications from anywhere in the world. Some positions require on-site presence in Dhaka. But design, merchandising, marketing, and certain compliance roles have been filled by candidates in the UK, USA, Europe, and Southeast Asia working remotely.</p>
+          </div>
+        </article>
+
+        <article class="c-faq-item" role="listitem">
+          <button class="c-faq-item__q" aria-expanded="false" aria-controls="faq-a4">
+            What file formats do you accept for CV submissions?
+            <span class="c-faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="c-faq-item__a" id="faq-a4" hidden>
+            <p>PDF, DOC, and DOCX only. Maximum file size is 10 MB. Do not send image files, ZIP archives, or Google Drive links. If your CV is in another format, convert to PDF before submitting — it is the most reliable format for us to open.</p>
+          </div>
+        </article>
+
+        <article class="c-faq-item" role="listitem">
+          <button class="c-faq-item__q" aria-expanded="false" aria-controls="faq-a5">
+            How long does it take to hear back?
+            <span class="c-faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="c-faq-item__a" id="faq-a5" hidden>
+            <p>We read every CV. If your background matches a current or upcoming opening, we will contact you within two to four weeks. CVs stay in our active pool for six months. We do not send automated rejection emails — no response means your CV is still on file.</p>
+          </div>
+        </article>
+
+        <article class="c-faq-item" role="listitem">
+          <button class="c-faq-item__q" aria-expanded="false" aria-controls="faq-a6">
+            Do I need Bangladesh garment industry experience?
+            <span class="c-faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="c-faq-item__a" id="faq-a6" hidden>
+            <p>No. What matters is that your experience is relevant to the area you are applying for. Several current team members came from fashion brands and design agencies outside Bangladesh. Industry experience anywhere in the world counts.</p>
+          </div>
+        </article>
+
+      </div>
     </div>
+  </section>
 
-    <div class="tool-card">
-      <a href="/tools/shrinkage-calculator" title="Free fabric shrinkage calculator — measure and predict garment shrinkage rate">
-        <div class="tc-badge">Fabric Testing</div>
-        <div class="tc-title">Fabric Shrinkage Calculator</div>
-        <div class="tc-desc">Calculate your fabric shrinkage rate from before and after measurements. Enter pre-wash and post-wash dimensions in both warp (length) and weft (width) directions — get shrinkage percentage for each. Shrinkage above 3% is typically rejected by major retail buyers. Cotton shrinks 2–5%; polyester 0–1%; wool up to 10% without preshrink treatment. Essential before cutting bulk fabric.</div>
-        <span class="tc-arrow">Calculate shrinkage rate →</span>
-      </a>
+  <!-- BOTTOM CTA -->
+  <section class="c-cta-bottom" aria-labelledby="cta-h2">
+    <div class="c-container">
+      <div class="c-cta-bottom__inner">
+        <div class="c-cta-bottom__text">
+          <h2 id="cta-h2" class="c-cta-bottom__h2">Not looking yourself — but know someone who is?</h2>
+          <p class="c-cta-bottom__body">Share this page with anyone working in fashion design, garment manufacturing, or apparel sourcing. We are always looking for the right people.</p>
+        </div>
+        <div class="c-cta-bottom__actions">
+          <a href="#cv-form" class="c-btn c-btn--primary">Submit a CV</a>
+          <a href="/contact" class="c-btn c-btn--ghost">Get in touch instead</a>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="tool-card">
-      <a href="/tools/sample-request" title="Request free garment samples from SDF Clothing Bangladesh">
-        <div class="tc-badge">Sampling</div>
-        <div class="tc-title">Sample Request</div>
-        <div class="tc-desc">Request a proto sample or pre-production sample from SDF Clothing. Fill in your garment requirements and we will confirm within 48 hours. Proto samples ready in 7–14 days. Unlimited revision rounds included. Samples are credited against your first confirmed bulk order above qualifying value. No obligation at sample stage.</div>
-        <span class="tc-arrow">Request a sample →</span>
-      </a>
-    </div>
+  <script is:inline>
+  (function () {
+    'use strict';
 
-  </div>
+    /* ─── FAQ accordion ─── */
+    document.querySelectorAll('.c-faq-item__q').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = this.getAttribute('aria-controls');
+        var panel = document.getElementById(id);
+        var icon = this.querySelector('.c-faq-item__icon');
+        var open = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', open ? 'false' : 'true');
+        panel.hidden = open;
+        if (icon) icon.textContent = open ? '+' : '−';
+      });
+    });
 
-  <!-- FABRIC & TECHNICAL -->
-  <span class="cat-label">Fabric &amp; Technical Specification</span>
-  <div class="tool-grid">
+    /* ─── Area card → pre-select form ─── */
+    document.querySelectorAll('.c-area-card__apply').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var area = this.getAttribute('data-area');
+        var sel = document.getElementById('f-area');
+        if (sel && area) {
+          for (var i = 0; i < sel.options.length; i++) {
+            if (sel.options[i].value === area) { sel.selectedIndex = i; break; }
+          }
+        }
+        var form = document.getElementById('cv-form');
+        if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
 
-    <div class="tool-card">
-      <a href="/tools/gsm-converter" title="Free GSM to OZ fabric weight converter — convert between GSM and oz/yd²">
-        <div class="tc-badge">Fabric Weight</div>
-        <div class="tc-title">GSM to OZ Converter</div>
-        <div class="tc-desc">Convert fabric weight between GSM (grams per square metre) and oz/yd² (ounces per square yard) instantly. Formula: GSM ÷ 33.906 = oz/yd². Essential when comparing fabric from US suppliers (who quote in oz) with Asian suppliers (who quote in GSM). A 300 GSM fleece = 8.85 oz. A 180 GSM single jersey = 5.3 oz. Includes reference chart for common garment weights.</div>
-        <span class="tc-arrow">Convert fabric weight →</span>
-      </a>
-    </div>
+    /* ─── Upload drag-drop ─── */
+    var zone = document.getElementById('upload-zone');
+    var fileInput = document.getElementById('f-cv');
+    var uploadLabel = document.getElementById('upload-label');
 
-    <div class="tool-card">
-      <a href="/tools/color-converter" title="Free Pantone to hex and RGB color converter for garment specification">
-        <div class="tc-badge">Colour Specification</div>
-        <div class="tc-title">Colour Converter</div>
-        <div class="tc-desc">Convert Pantone colours to hex, RGB, and CMYK values for garment specification. Factories require Pantone references for accurate colour matching — a digital hex code alone is insufficient because screen rendering varies. Use this tool to identify the closest Pantone reference for any digital colour in your brand palette before submitting your tech pack.</div>
-        <span class="tc-arrow">Convert my colours →</span>
-      </a>
-    </div>
+    if (zone && fileInput) {
+      zone.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+      });
+      ['dragenter', 'dragover'].forEach(function (ev) {
+        zone.addEventListener(ev, function (e) { e.preventDefault(); zone.classList.add('c-upload--drag'); });
+      });
+      ['dragleave', 'drop'].forEach(function (ev) {
+        zone.addEventListener(ev, function (e) { e.preventDefault(); zone.classList.remove('c-upload--drag'); });
+      });
+      zone.addEventListener('drop', function (e) {
+        if (e.dataTransfer && e.dataTransfer.files.length) {
+          fileInput.files = e.dataTransfer.files;
+          setFileName(e.dataTransfer.files[0]);
+        }
+      });
+      fileInput.addEventListener('change', function () {
+        if (this.files && this.files[0]) setFileName(this.files[0]);
+      });
+      function setFileName(f) {
+        if (uploadLabel) uploadLabel.textContent = '📎 ' + f.name;
+        zone.classList.add('c-upload--has-file');
+        clearErr('f-cv');
+      }
+    }
 
-    <div class="tool-card">
-      <a href="/tools/wash-care-label-generator" title="Free wash care label generator — ISO 3758 GINETEX symbols for garment labels">
-        <div class="tc-badge">Care Labelling</div>
-        <div class="tc-title">Wash Care Label Generator</div>
-        <div class="tc-desc">Generate the correct ISO 3758 / GINETEX care label symbols for your garment based on fabric type and construction. EU textile labelling regulation 1007/2011 requires care symbols on all garments sold in Europe. US FTC Care Labeling Rule requires them in the US. Select your fabric, wash method, drying method, ironing temperature, and bleach instructions — get your correct symbol sequence instantly.</div>
-        <span class="tc-arrow">Generate care label →</span>
-      </a>
-    </div>
+    /* ─── Char counter ─── */
+    var noteEl = document.getElementById('f-note');
+    var noteCount = document.getElementById('note-count');
+    if (noteEl && noteCount) {
+      noteEl.addEventListener('input', function () { noteCount.textContent = this.value.length + ' / 600'; });
+    }
 
-  </div>
+    /* ─── Validation helpers ─── */
+    function showErr(id, msg) {
+      var el = document.getElementById(id);
+      var err = document.getElementById('e-' + id.replace('f-', ''));
+      if (el) el.classList.add('c-input--err');
+      if (err) err.textContent = msg;
+    }
+    function clearErr(id) {
+      var el = document.getElementById(id);
+      var errId = 'e-' + id.replace('f-', '');
+      var err = document.getElementById(errId);
+      if (el) el.classList.remove('c-input--err');
+      if (err) err.textContent = '';
+    }
 
-  <!-- COSTING & TRADE -->
-  <span class="cat-label">Costing, Trade &amp; Customs</span>
-  <div class="tool-grid">
+    function validate() {
+      var ok = true;
+      var name = document.getElementById('f-name');
+      clearErr('f-name');
+      if (!name || name.value.trim().length < 2) { showErr('f-name', 'Please enter your full name.'); ok = false; }
 
-    <div class="tool-card">
-      <a href="/tools/price-calculator" title="Free apparel price calculator — garment FOB and retail price estimation">
-        <div class="tc-badge">Costing</div>
-        <div class="tc-title">Price Calculator</div>
-        <div class="tc-desc">Estimate your garment FOB price based on fabric cost, cut and make (CM) rate, trims, and commercial costs. Input your specifications and target margin — get a FOB price estimate and recommended retail price range. Useful for validating factory quotes and setting retail prices before sampling. Works for knitwear, wovens, and accessories.</div>
-        <span class="tc-arrow">Estimate my price →</span>
-      </a>
-    </div>
+      var email = document.getElementById('f-email');
+      clearErr('f-email');
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { showErr('f-email', 'Please enter a valid email address.'); ok = false; }
 
-    <div class="tool-card">
-      <a href="/tools/hs-code" title="Free HS code finder for clothing and apparel import classification">
-        <div class="tc-badge">Customs Classification</div>
-        <div class="tc-title">HS Code Finder</div>
-        <div class="tc-desc">Find the correct Harmonised System (HS) code for your garment or textile product. Clothing falls under Chapter 61 (knitted) and Chapter 62 (woven). The correct HS code determines your import duty rate and whether you can claim preferential duty-free access from Bangladesh. Misclassification carries penalties — US CBP issued over 5,000 apparel misclassification penalties in 2025 alone.</div>
-        <span class="tc-arrow">Find my HS code →</span>
-      </a>
-    </div>
+      var country = document.getElementById('f-country');
+      clearErr('f-country');
+      if (!country || country.value.trim().length < 2) { showErr('f-country', 'Please enter your country.'); ok = false; }
 
-    <div class="tool-card">
-      <a href="/tools/moq-calculator" title="Free MOQ calculator — check if your order quantity meets Bangladesh factory minimums">
-        <div class="tc-badge">Order Planning</div>
-        <div class="tc-title">MOQ Calculator</div>
-        <div class="tc-desc">Check whether your planned order quantity meets factory minimums and calculate how to distribute pieces across styles, sizes, and colourways. SDF Clothing's MOQ is 300 pieces per style with flexible size and colour splits. This tool helps startup brands and small buyers understand whether their order is viable and how to structure it efficiently.</div>
-        <span class="tc-arrow">Check my MOQ →</span>
-      </a>
-    </div>
+      var exp = document.getElementById('f-experience');
+      clearErr('f-experience');
+      if (!exp || !exp.value) { showErr('f-experience', 'Please select your years of experience.'); ok = false; }
 
-    <div class="tool-card">
-      <a href="/tools/lead-time-calculator" title="Free garment lead time calculator — estimate Bangladesh production and shipping time">
-        <div class="tc-badge">Logistics Planning</div>
-        <div class="tc-title">Lead Time Calculator</div>
-        <div class="tc-desc">Estimate your total order lead time from confirmed purchase order to goods delivered. Covers sampling (7–14 days), production (30–60 days depending on garment and quantity), AQL inspection (2–3 days), packing and documentation (2–3 days), and sea or air freight from Chittagong or Dhaka. Includes port clearance buffer at destination.</div>
-        <span class="tc-arrow">Estimate lead time →</span>
-      </a>
-    </div>
+      var area = document.getElementById('f-area');
+      clearErr('f-area');
+      if (!area || !area.value) { showErr('f-area', 'Please select your area of expertise.'); ok = false; }
 
-  </div>
+      var work = document.getElementById('f-work');
+      clearErr('f-work');
+      if (!work || !work.value) { showErr('f-work', 'Please select your work preference.'); ok = false; }
 
-  <!-- SEO BODY CONTENT -->
-  <div class="seo-section">
+      var file = document.getElementById('f-cv');
+      clearErr('f-cv');
+      if (!file || !file.files || !file.files[0]) {
+        showErr('f-cv', 'Please attach your CV file.');
+        ok = false;
+      } else {
+        var f = file.files[0];
+        var allowed = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        var extOk = /\.(pdf|doc|docx)$/i.test(f.name);
+        if (!allowed.includes(f.type) && !extOk) { showErr('f-cv', 'Only PDF, DOC, and DOCX files are accepted.'); ok = false; }
+        else if (f.size > 10 * 1024 * 1024) { showErr('f-cv', 'File size must be under 10 MB.'); ok = false; }
+      }
 
-    <h2>Free Garment Manufacturing Tools — Why They Exist</h2>
-    <p>Clothing brands and apparel buyers spend enormous amounts of time on calculations, research, and document preparation that should take minutes. An EU compliance check involves reading across five separate regulations. A landed cost calculation requires a FOB quote, a duty rate lookup, a freight estimate, and a margin calculation — across four different sources. An AQL inspection plan requires cross-referencing two ISO tables.</p>
-    <p>SDF Clothing built these tools because our buyers needed them. Every tool on this page is used by brands and sourcing teams before they place an order. They are free because better-prepared buyers lead to better production outcomes for everyone.</p>
+      var consent = document.getElementById('f-consent');
+      clearErr('f-consent');
+      if (!consent || !consent.checked) { showErr('f-consent', 'Please confirm your consent to continue.'); ok = false; }
 
-    <h2>AQL Quality Inspection — What the Standard Actually Means</h2>
-    <p>AQL (Acceptable Quality Level) is the maximum percentage of defective units that can be accepted in a production lot. The garment industry standard is <strong style="color:#fff;">AQL 2.5</strong> — meaning up to 2.5% of inspected pieces can have major defects before the shipment is rejected.</p>
-    <p>The AQL calculator determines two things: how many garments to inspect from a lot (sample size), and how many defects are allowable before rejection (acceptance number). Both depend on your lot size and inspection level. ISO 2859-1 General Inspection Level II is the default for most garment inspections.</p>
-    <ul>
-      <li>Critical defects (safety risk) — AQL 0 or 0.065. Zero tolerance</li>
-      <li>Major defects (functional or appearance) — AQL 2.5. Standard garment inspection</li>
-      <li>Minor defects (cosmetic only) — AQL 4.0. Relaxed standard for minor issues</li>
-    </ul>
-    <p>SDF Clothing applies AQL 2.5 on every order before packing. Third-party inspection by SGS, Bureau Veritas, or Intertek is available on request.</p>
+      return ok;
+    }
 
-    <h2>GSM — The Most Important Number in Your Tech Pack</h2>
-    <p>GSM (Grams per Square Metre) is the standard measure of fabric weight used across Bangladesh, Europe, and Asia. US suppliers often quote in oz/yd² instead. Getting this wrong — specifying 180 GSM when you want 180 oz — creates a catastrophic error in your sample fabric weight.</p>
-    <p>The conversion is: <strong style="color:#fff;">GSM ÷ 33.906 = oz/yd²</strong>. Common reference points:</p>
-    <ul>
-      <li>Lightweight T-shirt — 140–160 GSM (4.1–4.7 oz)</li>
-      <li>Standard retail T-shirt — 170–200 GSM (5–5.9 oz)</li>
-      <li>Heavyweight streetwear T-shirt — 220–260 GSM (6.5–7.7 oz)</li>
-      <li>Standard hoodie (French terry) — 300–340 GSM (8.8–10 oz)</li>
-      <li>Heavyweight hoodie (brushed fleece) — 380–420 GSM (11.2–12.4 oz)</li>
-    </ul>
-    <p>Always specify GSM in your tech pack. Factories cannot price or produce accurately without it.</p>
+    /* ─── Live clear errors ─── */
+    ['f-name','f-email','f-country'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('input', function () { clearErr(id); });
+    });
+    ['f-experience','f-area','f-work'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('change', function () { clearErr(id); });
+    });
 
-    <h2>Fabric Shrinkage — Why It Matters Before You Cut</h2>
-    <p>Fabric shrinks. Cotton shrinks 2–5% after first wash. If you cut 100 cm panels without accounting for 4% shrinkage, your finished garment will measure 96 cm — outside spec. For a 300-piece order of hoodies, that is 300 garments that do not fit as intended.</p>
-    <p>Manufacturers test fabric shrinkage before cutting by washing a test swatch and measuring the dimensional change. The formula is: <strong style="color:#fff;">Shrinkage % = [(Pre-wash – Post-wash) / Pre-wash] × 100</strong>. Test both length (warp) and width (weft) — they shrink at different rates. SDF Clothing pre-shrinks all cotton fabrics before cutting for orders where dimensional stability is critical.</p>
+    /* ─── Form submit — fully native POST to Basin, redirects back here ─── */
+    var form = document.getElementById('cv-upload-form');
+    var submitBtn = document.getElementById('cv-submit');
+    var submitLabelEl = document.getElementById('submit-label');
+    var spinner = document.getElementById('submit-spinner');
+    var statusEl = document.getElementById('submit-status');
 
-    <h2>HS Codes for Clothing — What You Need to Know</h2>
-    <p>Every garment imported internationally must be classified under a Harmonised System (HS) code. The correct code determines:</p>
-    <ul>
-      <li>Your import duty rate — a small difference in code can change duty from 12% to 0%</li>
-      <li>Whether you can claim preferential duty-free access for Bangladesh-origin goods</li>
-      <li>Whether quota or trade restriction applies</li>
-      <li>Statistics and compliance documentation requirements</li>
-    </ul>
-    <p>Garment HS codes are structured around Chapter 61 (knitted and crocheted garments) and Chapter 62 (woven garments). T-shirts are 6109. Hoodies and sweatshirts are 6110. Men's woven trousers are 6203. Women's woven trousers are 6204. Always verify with a licensed customs broker for your specific destination market.</p>
+    /* If we've just been redirected back from Basin, show success immediately */
+    if (window.location.search.indexOf('submitted=1') !== -1) {
+      showSuccess();
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+    }
 
-    <h2>Care Label Requirements — EU, US, and Australia</h2>
-    <p>Care labels are a legal requirement in the EU, US, and most major markets. Getting them wrong leads to product recalls, customs holds, and retailer chargebacks.</p>
-    <ul>
-      <li><strong style="color:#fff;">EU</strong> — ISO 3758 / GINETEX symbols required in the language of the country of sale. Five symbols in sequence: washing, bleaching, drying, ironing, professional care</li>
-      <li><strong style="color:#fff;">USA</strong> — FTC Care Labeling Rule requires written care instructions in English. Symbols alone are not sufficient without text</li>
-      <li><strong style="color:#fff;">Australia</strong> — ISO 3758 symbols accepted. Must be permanently attached and legible after care cycles</li>
-    </ul>
-    <p>SDF Clothing produces care labels in any language required for your destination market as part of standard production.</p>
+    if (form && submitBtn) {
+      form.addEventListener('submit', function (e) {
+        if (!validate()) {
+          e.preventDefault();
+          var firstErr = form.querySelector('.c-input--err');
+          if (firstErr) firstErr.focus();
+          return;
+        }
 
-    <h2>Related Manufacturing Resources</h2>
-    <ul>
-      <li><a href="/garments-manufacturers" title="Garments manufacturers Bangladesh">Garments Manufacturers</a> — GSM reference guide, import duty advantages, certification verification</li>
-      <li><a href="/clothing-manufacturers" title="Clothing manufacturers Bangladesh">Clothing Manufacturers</a> — MOQ guide, production lead times, what changed in 2026</li>
-      <li><a href="/fashion-manufacturers" title="Fashion manufacturers Bangladesh">Fashion Manufacturers</a> — Tech pack guide, certifications and brand claims, sampling process</li>
-      <li><a href="/certifications" title="SDF Clothing certifications">Our Certifications</a> — All 13 certificates with verification links</li>
-      <li><a href="/contact" title="Get a free quote from SDF Clothing">Get a Free Quote</a> — FOB quote within 48 hours, MOQ 300 pieces</li>
-    </ul>
+        /* Save applicant summary so it survives the redirect back from Basin */
+        try {
+          var nameField = document.getElementById('f-name');
+          var emailField = document.getElementById('f-email');
+          var areaField = document.getElementById('f-area');
+          sessionStorage.setItem('sdf_cv_name', nameField ? nameField.value : '');
+          sessionStorage.setItem('sdf_cv_email', emailField ? emailField.value : '');
+          sessionStorage.setItem('sdf_cv_area', areaField ? areaField.value : '');
+        } catch (err) { /* sessionStorage unavailable — meta will show placeholders */ }
 
-    <h2>Frequently Asked Questions</h2>
+        /* loading state — form then submits natively and the browser
+           navigates to Basin, which redirects back to ?submitted=1 */
+        submitBtn.disabled = true;
+        if (submitLabelEl) submitLabelEl.textContent = 'Submitting…';
+        if (spinner) spinner.hidden = false;
+        if (statusEl) statusEl.textContent = 'Sending your CV — please wait, you will be redirected back automatically.';
+        /* do not call preventDefault — let the browser submit normally */
+      });
+    }
 
-    <div class="faq-item">
-      <h3 style="margin-top:0;">Are these tools really free?</h3>
-      <p>Yes. All 14 tools are completely free to use with no signup, no email required, and no usage limits. They are built and maintained by SDF Clothing as a free resource for clothing brands and apparel buyers worldwide.</p>
-    </div>
-    <div class="faq-item">
-      <h3 style="margin-top:0;">How accurate are the garment cost estimates?</h3>
-      <p>The Garment Cost Calculator uses current Bangladesh RMG industry average FOB prices, 2025 MFN and EBA/DCTS import duty rates, and standard Chittagong port freight rates. Estimates have a ±10–15% variance depending on your exact garment specification, fabric sourcing, and order timing. Always get a confirmed factory quote before committing to pricing.</p>
-    </div>
-    <div class="faq-item">
-      <h3 style="margin-top:0;">How often are the tools updated?</h3>
-      <p>Tools are reviewed and updated when regulations change (GPSR December 2024, EU textile labelling updates, duty rate changes) and when industry data shifts. The EU Readiness Checker was updated for GPSR December 2024 and covers regulations through 2028. The Garment Cost Calculator uses 2025 import duty schedules.</p>
-    </div>
-    <div class="faq-item">
-      <h3 style="margin-top:0;">Can I use these tools if I am not buying from SDF Clothing?</h3>
-      <p>Yes. These tools are useful for any brand sourcing from Bangladesh, China, Vietnam, or any other manufacturing country. The Garment Cost Calculator includes Bangladesh, China, and Vietnam cost comparisons. The AQL Calculator, GSM Converter, Shrinkage Calculator, and Care Label Generator are universal.</p>
-    </div>
+    function showSuccess() {
+      var formEl = document.getElementById('cv-upload-form');
+      var successEl = document.getElementById('cv-success');
+      var metaEl = document.getElementById('submission-meta');
+      if (formEl) formEl.hidden = true;
+      if (successEl) successEl.hidden = false;
+      if (successEl) successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-  </div>
+      /* Device / browser info */
+      var now = new Date();
+      var timeStr = now.toLocaleString('en-GB', { dateStyle: 'long', timeStyle: 'short' });
+      var ua = navigator.userAgent;
+      var device = /Mobile|Android|iPhone|iPad/i.test(ua) ? '📱 Mobile' : '🖥️ Desktop';
+      var os = 'Unknown OS';
+      if (/Windows NT 10/i.test(ua)) os = 'Windows 10 / 11';
+      else if (/Windows/i.test(ua)) os = 'Windows';
+      else if (/Mac OS X/i.test(ua)) os = 'macOS';
+      else if (/Android/i.test(ua)) os = 'Android';
+      else if (/iPhone|iPad/i.test(ua)) os = 'iOS';
+      else if (/Linux/i.test(ua)) os = 'Linux';
+      var browser = 'Unknown browser';
+      if (/Edg\//i.test(ua)) browser = 'Microsoft Edge';
+      else if (/OPR\//i.test(ua)) browser = 'Opera';
+      else if (/Chrome\//i.test(ua)) browser = 'Google Chrome';
+      else if (/Firefox\//i.test(ua)) browser = 'Mozilla Firefox';
+      else if (/Safari\//i.test(ua)) browser = 'Apple Safari';
+      var lang = navigator.language || 'Unknown';
+      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
+      var screen_res = window.screen.width + ' × ' + window.screen.height;
 
-</div>
+      /* Connection type, if available */
+      var connType = 'Unknown';
+      if (navigator.connection && navigator.connection.effectiveType) {
+        connType = navigator.connection.effectiveType.toUpperCase();
+      }
+
+      /* Reference ID for this submission */
+      var refId = 'SDF-' + now.getFullYear() +
+        String(now.getMonth() + 1).padStart(2, '0') +
+        String(now.getDate()).padStart(2, '0') + '-' +
+        Math.random().toString(36).substring(2, 7).toUpperCase();
+
+      /* Applicant summary — read from sessionStorage since the form is
+         empty after the redirect back from Basin */
+      var nameVal = '—';
+      var emailVal = '—';
+      var areaVal = '—';
+      try {
+        nameVal = sessionStorage.getItem('sdf_cv_name') || '—';
+        emailVal = sessionStorage.getItem('sdf_cv_email') || '—';
+        areaVal = sessionStorage.getItem('sdf_cv_area') || '—';
+        sessionStorage.removeItem('sdf_cv_name');
+        sessionStorage.removeItem('sdf_cv_email');
+        sessionStorage.removeItem('sdf_cv_area');
+      } catch (err) { /* sessionStorage unavailable */ }
+
+      /* Build meta rows — IP + location fetched from free API */
+      var baseRows =
+        '<div class="c-success__meta-row c-success__meta-row--highlight"><span>🆔 Reference ID</span><span>' + refId + '</span></div>' +
+        '<div class="c-success__meta-row"><span>👤 Applicant</span><span>' + nameVal + '</span></div>' +
+        '<div class="c-success__meta-row"><span>✉️ Email on file</span><span>' + emailVal + '</span></div>' +
+        '<div class="c-success__meta-row"><span>🗂️ Area applied for</span><span>' + areaVal + '</span></div>' +
+        '<div class="c-success__meta-row"><span>📅 Submitted</span><span>' + timeStr + '</span></div>' +
+        '<div class="c-success__meta-row"><span>' + device + ' · ' + os + '</span><span>' + browser + '</span></div>' +
+        '<div class="c-success__meta-row"><span>🖥️ Screen resolution</span><span>' + screen_res + '</span></div>' +
+        '<div class="c-success__meta-row"><span>📶 Connection</span><span>' + connType + '</span></div>' +
+        '<div class="c-success__meta-row"><span>🌐 Time zone</span><span>' + tz + '</span></div>' +
+        '<div class="c-success__meta-row"><span>🗣️ Browser language</span><span>' + lang + '</span></div>';
+
+      if (metaEl) {
+        metaEl.innerHTML = baseRows + '<div class="c-success__meta-row" id="ip-row"><span>🌍 Location</span><span class="c-meta-loading">Detecting…</span></div>';
+      }
+
+      /* Fetch IP + geolocation */
+      fetch('https://ipapi.co/json/')
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          var ipRow = document.getElementById('ip-row');
+          if (ipRow && d) {
+            var city = d.city || '';
+            var country = d.country_name || '';
+            var ip = d.ip || '';
+            var loc = [city, country].filter(Boolean).join(', ');
+            ipRow.innerHTML =
+              '<span>🌍 Location</span><span>' + (loc || 'Unknown') + '</span>';
+            /* Add IP row */
+            if (ip && metaEl) {
+              var ipDiv = document.createElement('div');
+              ipDiv.className = 'c-success__meta-row';
+              ipDiv.innerHTML = '<span>🔗 IP Address</span><span>' + ip + '</span>';
+              metaEl.appendChild(ipDiv);
+            }
+          }
+        })
+        .catch(function () {
+          var ipRow = document.getElementById('ip-row');
+          if (ipRow) ipRow.innerHTML = '<span>🌍 Location</span><span>Could not detect</span>';
+        });
+
+      /* Clean URL */
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState({}, '', '/careers');
+      }
+    }
+
+  })();
+  </script>
+
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --bg:           #000000;
+      --bg-card:      #0d0d0d;
+      --bg-card-2:    #111111;
+      --bg-form:      #0a0a0a;
+      --acc:          #ee0000;
+      --acc-dim:      rgba(238,0,0,0.1);
+      --acc-border:   rgba(238,0,0,0.35);
+      --txt:          #ffffff;
+      --txt-2:        rgba(255,255,255,0.6);
+      --txt-3:        rgba(255,255,255,0.35);
+      --border:       rgba(255,255,255,0.08);
+      --border-2:     rgba(255,255,255,0.16);
+      --mono:         'Inter', ui-monospace, monospace;
+      --sec:          clamp(4rem, 8vw, 7rem);
+      --radius:       4px;
+    }
+
+    /* ── Layout ── */
+    .c-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 4vw, 2.5rem);
+    }
+
+    /* ── Breadcrumb ── */
+    .c-breadcrumb {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: .75rem 0;
+    }
+    .c-breadcrumb__list {
+      list-style: none;
+      margin: 0; padding: 0;
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+    .c-breadcrumb__item {
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+      font-family: var(--mono);
+    }
+    .c-breadcrumb__item + .c-breadcrumb__item::before { content: '/'; margin-right: .5rem; color: var(--txt-3); }
+    .c-breadcrumb__item[aria-current="page"] { color: var(--acc); }
+    .c-breadcrumb__link { color: var(--txt-2); text-decoration: none; transition: color .15s; }
+    .c-breadcrumb__link:hover,
+    .c-breadcrumb__link:focus-visible { color: var(--acc); }
+    .c-breadcrumb__link:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+
+    /* ── Shared type ── */
+    .c-eyebrow {
+      font-size: .62rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--acc);
+      margin: 0 0 .8rem;
+      font-family: var(--mono);
+    }
+    .c-section-h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 300;
+      color: var(--txt);
+      margin: 0 0 .9rem;
+      line-height: 1.2;
+      letter-spacing: -.01em;
+    }
+    .c-section-lead {
+      font-size: clamp(.88rem, 1.4vw, 1rem);
+      color: var(--txt-2);
+      line-height: 1.8;
+      max-width: 680px;
+      margin: 0 0 3rem;
+    }
+
+    /* ── Buttons ── */
+    .c-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      text-decoration: none;
+      padding: .8rem 1.8rem;
+      font-size: .72rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      font-family: var(--mono);
+      min-height: 44px;
+      cursor: pointer;
+      border: none;
+      transition: opacity .15s, border-color .15s, color .15s;
+    }
+    .c-btn--primary { background: var(--acc); color: var(--txt); }
+    .c-btn--primary:hover, .c-btn--primary:focus-visible { opacity: .85; }
+    .c-btn--ghost { background: transparent; color: var(--txt-2); border: 1px solid var(--border-2); }
+    .c-btn--ghost:hover, .c-btn--ghost:focus-visible { color: var(--txt); border-color: var(--acc); }
+    .c-btn--full { width: 100%; border-radius: 0; }
+    .c-btn:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
+    .c-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    /* ── HERO ── */
+    .c-hero {
+      background: var(--bg);
+      padding: var(--sec) 0;
+      border-bottom: 1px solid var(--acc);
+    }
+    .c-hero__inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: start;
+    }
+    .c-hero__h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 200;
+      color: var(--txt);
+      margin: 0 0 1.4rem;
+      line-height: 1.1;
+      letter-spacing: -.025em;
+    }
+    .c-hero__h1-line2 { color: var(--acc); }
+    .c-hero__lead {
+      font-size: clamp(.9rem, 1.5vw, 1.05rem);
+      color: var(--txt-2);
+      line-height: 1.8;
+      max-width: 620px;
+      margin: 0 0 2rem;
+    }
+    .c-hero__actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .c-hero__stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      min-width: 220px;
+      flex-shrink: 0;
+    }
+    .c-stat { background: var(--bg); padding: 1.25rem 1rem; }
+    .c-stat__num {
+      display: block;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 200;
+      color: var(--txt);
+      font-family: var(--mono);
+      line-height: 1;
+      margin-bottom: .3rem;
+    }
+    .c-stat__label {
+      display: block;
+      font-size: .62rem;
+      letter-spacing: .06em;
+      color: var(--txt-2);
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+
+    /* ── TALENT AREA CARDS — Google Careers style ── */
+    .c-areas {
+      background: var(--bg-card);
+      padding: var(--sec) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .c-areas__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .c-area-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: .9rem;
+      transition: border-color .2s, transform .2s;
+      cursor: default;
+    }
+    .c-area-card:hover {
+      border-color: var(--acc-border);
+      transform: translateY(-2px);
+    }
+    .c-area-card__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: .5rem;
+    }
+    .c-area-card__emoji {
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .c-area-card__badge {
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--acc);
+      border: 1px solid var(--acc-border);
+      padding: .2rem .55rem;
+      font-family: var(--mono);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .c-area-card__title {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--txt);
+      margin: 0;
+      line-height: 1.3;
+    }
+    .c-area-card__desc {
+      font-size: .85rem;
+      color: var(--txt-2);
+      line-height: 1.75;
+      margin: 0;
+      flex: 1;
+    }
+    .c-area-card__tags {
+      list-style: none;
+      margin: 0; padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+    }
+    .c-area-card__tags li {
+      font-size: .6rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--txt-3);
+      border: 1px solid var(--border-2);
+      padding: .18rem .5rem;
+      font-family: var(--mono);
+    }
+    .c-area-card__apply {
+      background: transparent;
+      color: var(--acc);
+      border: 1px solid var(--acc-border);
+      padding: .6rem 1rem;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: var(--mono);
+      min-height: 40px;
+      transition: background .15s, color .15s;
+      margin-top: auto;
+      text-align: left;
+      border-radius: 0;
+    }
+    .c-area-card__apply:hover,
+    .c-area-card__apply:focus-visible {
+      background: var(--acc);
+      color: var(--txt);
+    }
+    .c-area-card__apply:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+
+    /* ── WHY JOIN ── */
+    .c-why {
+      background: var(--bg);
+      padding: var(--sec) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .c-why__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .c-why-card {
+      background: var(--bg);
+      padding: clamp(1.5rem, 3vw, 2rem);
+      transition: background .2s;
+    }
+    .c-why-card:hover { background: var(--bg-card); }
+    .c-why-card__icon { font-size: 1.6rem; display: block; margin-bottom: .8rem; line-height: 1; }
+    .c-why-card__title { font-size: .95rem; font-weight: 500; color: var(--txt); margin: 0 0 .6rem; }
+    .c-why-card__body { font-size: .85rem; color: var(--txt-2); line-height: 1.75; margin: 0; }
+
+    /* ── PROCESS ── */
+    .c-process {
+      background: var(--bg-card);
+      padding: var(--sec) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .c-process__steps {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      max-width: 780px;
+    }
+    .c-process-step {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .c-process-step:last-child { border-bottom: none; }
+    .c-process-step__num {
+      font-size: .6rem;
+      letter-spacing: .2em;
+      color: var(--acc);
+      font-family: var(--mono);
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      padding: 1.5rem 1rem;
+      padding-top: 1.75rem;
+    }
+    .c-process-step__body { padding: 1.6rem 1.75rem; }
+    .c-process-step__title { font-size: .95rem; font-weight: 500; color: var(--txt); margin: 0 0 .4rem; }
+    .c-process-step__text { font-size: .85rem; color: var(--txt-2); line-height: 1.75; margin: 0; }
+
+    /* ── CV FORM SECTION ── */
+    .c-form-section {
+      background: var(--bg);
+      padding: var(--sec) 0;
+      border-bottom: 1px solid var(--border);
+      scroll-margin-top: 1.5rem;
+    }
+    .c-form-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: start;
+    }
+    .c-form-sidebar__body {
+      font-size: .9rem;
+      color: var(--txt-2);
+      line-height: 1.8;
+      margin: 0 0 1.75rem;
+    }
+    .c-form-sidebar__reqs { display: flex; flex-direction: column; gap: .55rem; }
+    .c-req { display: flex; align-items: center; gap: .6rem; font-size: .78rem; color: var(--txt-2); font-family: var(--mono); }
+    .c-req span:first-child { font-size: 1rem; flex-shrink: 0; }
+
+    /* Form box */
+    .c-form-box {
+      background: var(--bg-form);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .c-honeypot { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; overflow: hidden; }
+
+    /* Fields */
+    .c-field { margin-bottom: 1.15rem; }
+    .c-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.15rem; }
+    .c-label { display: block; font-size: .67rem; letter-spacing: .12em; text-transform: uppercase; color: var(--txt); margin-bottom: .4rem; font-family: var(--mono); }
+    .c-req-star { color: var(--acc); }
+    .c-input, .c-select, .c-textarea {
+      display: block; width: 100%; box-sizing: border-box;
+      background: var(--bg-card-2); border: 1px solid var(--border-2);
+      color: var(--txt); padding: .7rem .85rem;
+      font-size: .88rem; font-family: inherit; line-height: 1.5;
+      transition: border-color .15s; border-radius: 0; appearance: none; -webkit-appearance: none;
+    }
+    .c-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23ffffff' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right .85rem center;
+      padding-right: 2.5rem; cursor: pointer;
+    }
+    .c-textarea { resize: vertical; min-height: 88px; }
+    .c-input::placeholder, .c-textarea::placeholder { color: var(--txt-3); }
+    .c-input:focus, .c-select:focus, .c-textarea:focus { border-color: var(--acc); outline: none; }
+    .c-input--err { border-color: var(--acc) !important; }
+    .c-field-error { display: block; font-size: .68rem; color: var(--acc); margin-top: .28rem; min-height: 1em; font-family: var(--mono); }
+    .c-field-hint { display: block; font-size: .68rem; color: var(--txt-3); margin-top: .28rem; font-family: var(--mono); }
+    .c-field-footer { display: flex; justify-content: space-between; margin-top: .28rem; }
+    .c-char-count { font-size: .66rem; color: var(--txt-3); font-family: var(--mono); flex-shrink: 0; }
+
+    /* Upload */
+    .c-upload {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: .4rem; text-align: center; cursor: pointer;
+      border: 2px dashed var(--border-2); padding: 1.75rem 1.5rem;
+      background: var(--bg-card-2); position: relative;
+      transition: border-color .15s, background .15s; border-radius: 0;
+    }
+    .c-upload:hover, .c-upload--drag, .c-upload:focus-within { border-color: var(--acc); background: var(--acc-dim); }
+    .c-upload--has-file { border-style: solid; border-color: var(--acc); }
+    .c-upload__icon { font-size: 1.5rem; line-height: 1; }
+    .c-upload__main { font-size: .85rem; color: var(--txt); line-height: 1.4; }
+    .c-upload__sub { font-size: .7rem; color: var(--txt-2); font-family: var(--mono); }
+    .c-upload__input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+
+    /* Consent */
+    .c-checkbox-label { display: flex; align-items: flex-start; gap: .65rem; cursor: pointer; }
+    .c-checkbox { width: 15px; height: 15px; flex-shrink: 0; margin-top: 2px; accent-color: var(--acc); cursor: pointer; }
+    .c-checkbox-text { font-size: .78rem; color: var(--txt-2); line-height: 1.6; }
+    .c-link { color: var(--acc); text-decoration: none; }
+    .c-link:hover { text-decoration: underline; }
+
+    /* Submit */
+    .c-spinner {
+      width: 13px; height: 13px;
+      border: 2px solid rgba(255,255,255,.3); border-top-color: #fff;
+      border-radius: 50%; animation: spin .65s linear infinite; flex-shrink: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .c-submit-status { display: block; font-size: .7rem; color: var(--txt-2); font-family: var(--mono); text-align: center; margin-top: .5rem; min-height: 1em; }
+
+    /* Success */
+    .c-success {
+      display: flex; align-items: flex-start; gap: 1.25rem;
+      border-left: 3px solid var(--acc); padding: 1.75rem;
+      background: var(--bg-card);
+    }
+    .c-success[hidden] { display: none; }
+    .c-success__icon { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
+    .c-success__title { font-size: 1.05rem; font-weight: 500; color: var(--txt); margin: 0 0 .5rem; }
+    .c-success__text { font-size: .85rem; color: var(--txt-2); line-height: 1.75; margin: 0 0 .5rem; }
+    .c-success__text:last-of-type { margin-bottom: 1rem; }
+    .c-success__meta { border-top: 1px solid var(--border); padding-top: .85rem; margin-top: .25rem; display: flex; flex-direction: column; gap: .4rem; }
+    .c-success__meta-row { display: flex; justify-content: space-between; align-items: center; font-size: .75rem; color: var(--txt-2); font-family: var(--mono); gap: 1rem; flex-wrap: wrap; }
+    .c-success__meta-row--highlight { color: var(--txt); font-weight: 500; padding-bottom: .6rem; margin-bottom: .25rem; border-bottom: 1px solid var(--border); }
+    .c-success__meta-row--highlight span:last-child { color: var(--acc); letter-spacing: .05em; }
+    .c-meta-loading { color: var(--txt-3); font-style: italic; }
+    .c-success__notice {
+      display: flex; align-items: flex-start; gap: .65rem;
+      background: var(--bg-card-2); border: 1px solid var(--border);
+      padding: .85rem 1rem; margin: 0 0 1.1rem;
+    }
+    .c-success__notice-icon { font-size: 1rem; line-height: 1.4; flex-shrink: 0; }
+    .c-success__notice-text { font-size: .76rem; color: var(--txt-2); line-height: 1.7; margin: 0; }
+
+    /* ── FAQ ── */
+    .c-faq { background: var(--bg-card); padding: var(--sec) 0; border-bottom: 1px solid var(--border); }
+    .c-faq__list { max-width: 780px; border: 1px solid var(--border); }
+    .c-faq-item { border-bottom: 1px solid var(--border); }
+    .c-faq-item:last-child { border-bottom: none; }
+    .c-faq-item__q {
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      width: 100%; background: transparent; border: none; color: var(--txt);
+      padding: 1.2rem 1.5rem; font-size: .92rem; font-weight: 500;
+      text-align: left; cursor: pointer; font-family: inherit; line-height: 1.4;
+      transition: background .15s;
+    }
+    .c-faq-item__q:hover { background: var(--bg-card-2); }
+    .c-faq-item__q:focus-visible { outline: 2px solid var(--acc); outline-offset: -2px; }
+    .c-faq-item__icon { color: var(--acc); font-size: 1.2rem; flex-shrink: 0; }
+    .c-faq-item__a { padding: 0 1.5rem 1.2rem; }
+    .c-faq-item__a[hidden] { display: none; }
+    .c-faq-item__a p { font-size: .88rem; color: var(--txt-2); line-height: 1.8; margin: 0; }
+
+    /* ── BOTTOM CTA ── */
+    .c-cta-bottom { background: var(--bg); padding: var(--sec) 0; }
+    .c-cta-bottom__inner {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 2rem; flex-wrap: wrap;
+      border: 1px solid var(--border);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .c-cta-bottom__h2 { font-size: clamp(1.1rem, 2.5vw, 1.45rem); font-weight: 300; color: var(--txt); margin: 0 0 .5rem; }
+    .c-cta-bottom__body { font-size: .88rem; color: var(--txt-2); line-height: 1.7; margin: 0; max-width: 560px; }
+    .c-cta-bottom__actions { display: flex; gap: .65rem; flex-shrink: 0; flex-wrap: wrap; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .c-areas__grid { grid-template-columns: repeat(2, 1fr); }
+      .c-why__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 860px) {
+      .c-hero__inner { grid-template-columns: 1fr; }
+      .c-hero__stats { grid-template-columns: repeat(4, 1fr); max-width: 100%; }
+      .c-form-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .c-areas__grid { grid-template-columns: 1fr; }
+      .c-why__grid { grid-template-columns: 1fr; }
+      .c-hero__stats { grid-template-columns: repeat(2, 1fr); }
+      .c-field-row { grid-template-columns: 1fr; }
+      .c-cta-bottom__inner { flex-direction: column; align-items: flex-start; }
+      .c-cta-bottom__actions { flex-direction: column; width: 100%; }
+      .c-cta-bottom__actions .c-btn { justify-content: center; }
+    }
+    @media (max-width: 400px) {
+      .c-process-step { grid-template-columns: 3rem 1fr; }
+      .c-process-step__num { padding: 1.25rem .6rem; font-size: .55rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
 
 </BaseLayout>
