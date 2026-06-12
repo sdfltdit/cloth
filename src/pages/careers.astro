@@ -371,7 +371,6 @@ const talentAreas = [
             <!-- Honeypot -->
             <input type="text" name="_honey" class="c-form__honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
-
             <div class="c-field">
               <label for="f-name" class="c-label">Full Name <span class="c-req-star" aria-label="required">*</span></label>
               <input type="text" id="f-name" name="name" required autocomplete="name" placeholder="Your full name" class="c-input" aria-required="true" aria-describedby="e-name" />
@@ -489,6 +488,10 @@ const talentAreas = [
               <h3 class="c-success__title">Your CV has been received — thank you</h3>
               <p class="c-success__text">We have everything we need from you. Someone on our team will read your CV and, if your background matches a current or upcoming opening, we will be in touch directly by email.</p>
               <p class="c-success__text">There is nothing else for you to do. We do not send automated acknowledgement emails, so this confirmation on screen is your record that the submission went through. We keep CVs on file for six months.</p>
+              <div class="c-success__notice">
+                <span class="c-success__notice-icon" aria-hidden="true">🛡️</span>
+                <p class="c-success__notice-text">As part of our standard verification process, we record basic submission details below — including your approximate location and device information. This is collected from every applicant to help us identify spam and fraudulent submissions, and is handled in line with our <a href="/privacy-policy" class="c-link">privacy policy</a>.</p>
+              </div>
               <div class="c-success__meta" id="submission-meta" aria-label="Submission details"></div>
             </div>
           </div>
@@ -622,7 +625,6 @@ const talentAreas = [
     var uploadLabel = document.getElementById('upload-label');
 
     if (zone && fileInput) {
-      zone.addEventListener('click', function () { fileInput.click(); });
       zone.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
       });
@@ -805,13 +807,35 @@ const talentAreas = [
       var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
       var screen_res = window.screen.width + ' × ' + window.screen.height;
 
+      /* Connection type, if available */
+      var connType = 'Unknown';
+      if (navigator.connection && navigator.connection.effectiveType) {
+        connType = navigator.connection.effectiveType.toUpperCase();
+      }
+
+      /* Reference ID for this submission */
+      var refId = 'SDF-' + now.getFullYear() +
+        String(now.getMonth() + 1).padStart(2, '0') +
+        String(now.getDate()).padStart(2, '0') + '-' +
+        Math.random().toString(36).substring(2, 7).toUpperCase();
+
+      /* Applicant summary from the form */
+      var nameVal = (document.getElementById('f-name') || {}).value || '—';
+      var emailVal = (document.getElementById('f-email') || {}).value || '—';
+      var areaVal = (document.getElementById('f-area') || {}).value || '—';
+
       /* Build meta rows — IP + location fetched from free API */
       var baseRows =
+        '<div class="c-success__meta-row c-success__meta-row--highlight"><span>🆔 Reference ID</span><span>' + refId + '</span></div>' +
+        '<div class="c-success__meta-row"><span>👤 Applicant</span><span>' + nameVal + '</span></div>' +
+        '<div class="c-success__meta-row"><span>✉️ Email on file</span><span>' + emailVal + '</span></div>' +
+        '<div class="c-success__meta-row"><span>🗂️ Area applied for</span><span>' + areaVal + '</span></div>' +
         '<div class="c-success__meta-row"><span>📅 Submitted</span><span>' + timeStr + '</span></div>' +
         '<div class="c-success__meta-row"><span>' + device + ' · ' + os + '</span><span>' + browser + '</span></div>' +
-        '<div class="c-success__meta-row"><span>🖥️ Screen</span><span>' + screen_res + '</span></div>' +
+        '<div class="c-success__meta-row"><span>🖥️ Screen resolution</span><span>' + screen_res + '</span></div>' +
+        '<div class="c-success__meta-row"><span>📶 Connection</span><span>' + connType + '</span></div>' +
         '<div class="c-success__meta-row"><span>🌐 Time zone</span><span>' + tz + '</span></div>' +
-        '<div class="c-success__meta-row"><span>🗣️ Language</span><span>' + lang + '</span></div>';
+        '<div class="c-success__meta-row"><span>🗣️ Browser language</span><span>' + lang + '</span></div>';
 
       if (metaEl) {
         metaEl.innerHTML = baseRows + '<div class="c-success__meta-row" id="ip-row"><span>🌍 Location</span><span class="c-meta-loading">Detecting…</span></div>';
@@ -1273,7 +1297,16 @@ const talentAreas = [
     .c-success__text:last-of-type { margin-bottom: 1rem; }
     .c-success__meta { border-top: 1px solid var(--border); padding-top: .85rem; margin-top: .25rem; display: flex; flex-direction: column; gap: .4rem; }
     .c-success__meta-row { display: flex; justify-content: space-between; align-items: center; font-size: .75rem; color: var(--txt-2); font-family: var(--mono); gap: 1rem; flex-wrap: wrap; }
+    .c-success__meta-row--highlight { color: var(--txt); font-weight: 500; padding-bottom: .6rem; margin-bottom: .25rem; border-bottom: 1px solid var(--border); }
+    .c-success__meta-row--highlight span:last-child { color: var(--acc); letter-spacing: .05em; }
     .c-meta-loading { color: var(--txt-3); font-style: italic; }
+    .c-success__notice {
+      display: flex; align-items: flex-start; gap: .65rem;
+      background: var(--bg-card-2); border: 1px solid var(--border);
+      padding: .85rem 1rem; margin: 0 0 1.1rem;
+    }
+    .c-success__notice-icon { font-size: 1rem; line-height: 1.4; flex-shrink: 0; }
+    .c-success__notice-text { font-size: .76rem; color: var(--txt-2); line-height: 1.7; margin: 0; }
 
     /* ── FAQ ── */
     .c-faq { background: var(--bg-card); padding: var(--sec) 0; border-bottom: 1px solid var(--border); }
