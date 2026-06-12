@@ -95,7 +95,7 @@ export default defineConfig({
 
   build: {
     format: 'directory',
-    inlineStylesheets: 'never',
+    inlineStylesheets: 'auto',
     assets: '_astro',
   },
 
@@ -112,7 +112,7 @@ export default defineConfig({
           manualChunks: undefined,
         }
       },
-      assetsInlineLimit: 8192,
+      assetsInlineLimit: 20480,
       modulePreload: false,
     },
     css: {
