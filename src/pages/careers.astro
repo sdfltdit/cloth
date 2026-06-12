@@ -368,8 +368,6 @@ const talentAreas = [
             novalidate
             aria-label="CV submission form"
           >
-            <!-- Honeypot (Basin's recognized spam-trap field name) -->
-            <input type="text" name="_gotcha" class="c-form__honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <!-- Redirect target after Basin processes the submission -->
             <input type="hidden" name="_redirect" value="https://sdfltd.com/careers?submitted=1" />
 
@@ -753,10 +751,6 @@ const talentAreas = [
           if (firstErr) firstErr.focus();
           return;
         }
-
-        /* honeypot check */
-        var honey = form.querySelector('input[name="_gotcha"]');
-        if (honey && honey.value) { e.preventDefault(); return; }
 
         /* Save applicant summary so it survives the redirect back from Basin */
         try {
@@ -1234,7 +1228,6 @@ const talentAreas = [
       padding: clamp(1.5rem, 3vw, 2.5rem);
     }
     .c-honeypot { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; overflow: hidden; }
-    .c-form__honeypot { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; overflow: hidden; }
 
     /* Fields */
     .c-field { margin-bottom: 1.15rem; }
