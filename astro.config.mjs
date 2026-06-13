@@ -92,7 +92,7 @@ export default defineConfig({
 
   build: {
     format: 'directory',
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
     assets: '_astro',
   },
 
