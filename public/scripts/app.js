@@ -84,42 +84,60 @@
      3. FAQ ACCORDION
   ============================================================ */
   function initFAQ() {
-    var buttons = document.querySelectorAll('[id^="faq-question-"]');
-    if (!buttons.length) return;
+    var faqSection = document.querySelector('[id^="faq-question-"]');
+    if (!faqSection) return;
 
-    buttons.forEach(function (btn, i) {
-      btn.addEventListener('click', function () {
-        var answer = document.getElementById('faq-answer-' + i);
-        var icon   = document.getElementById('faq-icon-' + i);
-        var isOpen = this.getAttribute('aria-expanded') === 'true';
+    function attachFAQListeners() {
+      var buttons = document.querySelectorAll('[id^="faq-question-"]');
+      if (!buttons.length) return;
 
-        // Batch: read first, then write
-        batchWrite(function () {
-          buttons.forEach(function (b, j) {
-            b.setAttribute('aria-expanded', 'false');
-            var a  = document.getElementById('faq-answer-' + j);
-            var ic = document.getElementById('faq-icon-' + j);
-            if (a)  { a.classList.remove('open'); a.style.display = 'none'; }
-            if (ic) ic.style.transform = 'rotate(0deg)';
+      buttons.forEach(function (btn, i) {
+        btn.addEventListener('click', function () {
+          var answer = document.getElementById('faq-answer-' + i);
+          var icon   = document.getElementById('faq-icon-' + i);
+          var isOpen = this.getAttribute('aria-expanded') === 'true';
+
+          batchWrite(function () {
+            buttons.forEach(function (b, j) {
+              b.setAttribute('aria-expanded', 'false');
+              var a  = document.getElementById('faq-answer-' + j);
+              var ic = document.getElementById('faq-icon-' + j);
+              if (a)  { a.classList.remove('open'); a.style.display = 'none'; }
+              if (ic) ic.style.transform = 'rotate(0deg)';
+            });
+
+            if (!isOpen) {
+              btn.setAttribute('aria-expanded', 'true');
+              if (answer)  { answer.classList.add('open'); answer.style.display = 'block'; }
+              if (icon) icon.style.transform = 'rotate(45deg)';
+            }
           });
+        });
 
-          if (!isOpen) {
-            btn.setAttribute('aria-expanded', 'true');
-            if (answer)  { answer.classList.add('open'); answer.style.display = 'block'; }
-            if (icon) icon.style.transform = 'rotate(45deg)';
-          }
+        btn.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); }
         });
       });
 
-      btn.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); }
-      });
-    });
+      window.toggleFAQ = function (i) {
+        var b = document.getElementById('faq-question-' + i);
+        if (b) b.click();
+      };
+    }
 
-    window.toggleFAQ = function (i) {
-      var b = document.getElementById('faq-question-' + i);
-      if (b) b.click();
-    };
+    if ('IntersectionObserver' in window) {
+      var faqObs = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            attachFAQListeners();
+            observer.disconnect();
+          }
+        });
+      }, { rootMargin: '300px' });
+      faqObs.observe(faqSection);
+    } else {
+      attachFAQListeners();
+    }
   }
 
   /* ============================================================
@@ -248,14 +266,23 @@
     initBodyLoaded();
     initScrollListeners();
 
-    var idle = 'requestIdleCallback' in window ? requestIdleCallback : function (cb) { setTimeout(cb, 1); };
+    var idle = 'requestIdleCallback' in window
+      ? requestIdleCallback
+      : function (cb, opts) { setTimeout(cb, opts && opts.timeout ? Math.min(opts.timeout, 50) : 50); };
+
     idle(function () {
       initFooterAccordion();
-      initFAQ();
+      initCookieConsent();
+    }, { timeout: 300 });
+
+    idle(function () {
       initSectionAnimations();
       initLazyImages();
-      initCookieConsent();
-    });
+    }, { timeout: 600 });
+
+    idle(function () {
+      initFAQ();
+    }, { timeout: 1000 });
   });
 
 })();
