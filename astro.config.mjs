@@ -120,8 +120,14 @@ export default defineConfig({
     },
   },
 
+  // FIX: was 'astro/assets/services/noop' which DISABLED all image optimisation.
+  // sharp is Astro's built-in service — automatically converts to WebP/AVIF,
+  // generates responsive srcset, and resizes images at build time.
+  // Run: npm install sharp   (one-time, already in most Astro installs)
   image: {
-    service: { entrypoint: 'astro/assets/services/noop' },
+    service: { entrypoint: 'astro/assets/services/sharp' },
+    // Default formats in order of preference: AVIF (best), then WebP, then original
+    defaultFormat: 'webp',
   },
 
   markdown: {
