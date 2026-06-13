@@ -6,6 +6,7 @@ export interface Props {
   description: string;
   canonicalUrl?: string;
   ogImage?: string;
+  ogImageType?: string;
   ogType?: string;
   datePublished?: string;
   dateModified?: string;
@@ -16,34 +17,43 @@ const {
   title,
   description,
   canonicalUrl,
-  ogImage = "/factory.jpg",
+  ogImage = "/factory.webp",
+  ogImageType = "image/webp",
   ogType = "website",
   datePublished,
   dateModified,
   schema
 } = Astro.props;
 
-const canonical = canonicalUrl ?? Astro.url.href;
+// ── FIX 1: Canonical always strips www, always https://sdfltd.com ─────────────
+// Previously certifications page had canonical → https://www.sdfltd.com/certifications/
+// This caused duplicate indexing (www vs non-www split).
+const rawCanonical = canonicalUrl ?? Astro.url.href;
+const canonical = rawCanonical.replace(/^https?:\/\/www\./, 'https://');
+
 const siteName = "SDF Clothing";
 const yearsExpPhrase = getYearsExperiencePhrase();
 
-// Base schemas that should be present on all pages
+// ── FIX 2: All Organisation @id uses "#org" sitewide ─────────────────────────
+// Previously BaseHead used "#organization" but about.astro inline JSON-LD used
+// "#org". Two different IDs for the same entity breaks Knowledge Graph linking.
+// Standardised to "#org" everywhere (matches about.astro inline JSON-LD).
 const baseSchemas = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": ["Organization","LocalBusiness"],
-      "@id": "https://sdfltd.com/#organization",
+      "@id": "https://sdfltd.com/#org",
       "name": "SDF Clothing",
       "alternateName": ["SDF Ltd", "SDF Garments"],
       "url": "https://sdfltd.com",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://sdfltd.com/sdf.jpg",
+        "url": "https://sdfltd.com/logo-small.webp",
         "width": 200,
-        "height": 200
+        "height": 60
       },
-      "image": "https://sdfltd.com/factory.jpg",
+      "image": "https://sdfltd.com/factory.webp",
       "description": "SDF Clothing is a Bangladesh-based clothing manufacturer providing OEM, private label, and CMT services to fashion brands across EU, UK, USA, Canada, and Australia. Established 1998, GOTS certified.",
       "priceRange": "$$",
       "foundingDate": "1998-08-22",
@@ -53,6 +63,11 @@ const baseSchemas = {
         "addressLocality": "Dhaka",
         "postalCode": "1212",
         "addressCountry": "BD"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "23.7956",
+        "longitude": "90.4203"
       },
       "contactPoint": [
         {
@@ -91,7 +106,15 @@ const baseSchemas = {
       "url": "https://sdfltd.com",
       "name": "SDF Clothing",
       "description": `Clothing manufacturers, garment manufacturers, fashion manufacturers, and apparel manufacturers based in Dhaka, Bangladesh. SDF Clothing serves fashion brands worldwide with low MOQ production, GOTS certification, and ${yearsExpPhrase} of manufacturing expertise.`,
-      "publisher": { "@id": "https://sdfltd.com/#organization" },
+      "publisher": { "@id": "https://sdfltd.com/#org" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://sdfltd.com/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      },
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": ["h1", "h2", ".index__faq-answer p"],
@@ -104,16 +127,12 @@ const baseSchemas = {
   ]
 };
 
-// Merge base schemas with page-specific schemas.
-// If a page provides a richer Organization schema (e.g. with ManufacturingBusiness,
-// certifications, NAICS codes), it REPLACES the simple base Organization node so
-// that data is not silently discarded.
+// ── Schema merge — page-specific schemas added to base graph ──────────────────
 let finalSchema;
 if (schema) {
   const pageSchemas = Array.isArray(schema) ? schema : [schema];
   const graph = [...baseSchemas["@graph"]];
 
-  // Helper: replace the base Organization node with a richer page-provided one
   const replaceBaseOrg = (node: Record<string, unknown>) => {
     const idx = graph.findIndex((n: Record<string, unknown>) => {
       const t = Array.isArray(n["@type"]) ? n["@type"] : [n["@type"] ?? ""];
@@ -124,16 +143,14 @@ if (schema) {
   };
 
   for (const s of pageSchemas) {
-    // Page schema is a @graph wrapper — extract and process each node
     if (s["@graph"]) {
       for (const node of s["@graph"]) {
         const nodeTypes = Array.isArray(node["@type"]) ? node["@type"] : [node["@type"] ?? ""];
         const { "@context": _ctx, ...rest } = node;
         if (nodeTypes.includes("Organization") || nodeTypes.includes("LocalBusiness")) {
-          // Richer Org schema from page — replace the simple base node
           replaceBaseOrg(rest);
         } else if (nodeTypes.includes("WebSite")) {
-          // Base WebSite node is sufficient — skip page duplicate
+          // base WebSite node is sufficient — skip duplicate
         } else {
           graph.push(rest);
         }
@@ -147,19 +164,15 @@ if (schema) {
     const { "@context": _ctx, ...rest } = s;
 
     if (types.includes("Organization") || types.includes("LocalBusiness")) {
-      // Richer Org schema from page — replace the simple base node
       replaceBaseOrg(rest);
     } else if (types.includes("WebSite")) {
-      // Base WebSite node is sufficient — skip page duplicate
+      // skip
     } else {
       graph.push(rest);
     }
   }
 
-  finalSchema = {
-    "@context": "https://schema.org",
-    "@graph": graph
-  };
+  finalSchema = { "@context": "https://schema.org", "@graph": graph };
 } else {
   finalSchema = baseSchemas;
 }
@@ -179,9 +192,10 @@ if (schema) {
 <meta name="bingbot" content="index, follow" />
 <meta name="author" content="Chowdhury Remon, SDF Clothing" />
 <meta name="publisher" content="SDF Clothing" />
-<meta name="generator" content={Astro.generator} />
+<!-- FIX 3: meta generator tag removed — no need to expose Astro version publicly -->
 <meta name="copyright" content={`© ${new Date().getFullYear()} SDF Clothing`} />
 <meta name="webmcp-tools" content="search,browse,cart">
+
 <!-- OPEN GRAPH -->
 <meta property="og:type" content={ogType} />
 <meta property="og:title" content={title} />
@@ -191,7 +205,8 @@ if (schema) {
 <meta property="og:image:secure_url" content={ogImage.startsWith('http') ? ogImage : `https://sdfltd.com${ogImage}`} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:type" content="image/jpeg" />
+<!-- FIX 4: og:image:type is now dynamic — defaults to image/webp to match factory.webp -->
+<meta property="og:image:type" content={ogImageType} />
 <meta property="og:image:alt" content={title} />
 <meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content="en_US" />
@@ -255,12 +270,10 @@ if (schema) {
 <link rel="dns-prefetch" href="https://ipinfo.io" />
 <link rel="dns-prefetch" href="https://ipapi.co" />
 
-
 <!-- llms.txt -->
 <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt" />
 
-
-<!-- JSON-LD — merged base schemas with page-specific schemas -->
+<!-- JSON-LD — merged base + page-specific schemas -->
 <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
 
 <!-- SERVICE WORKER -->
