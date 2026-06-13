@@ -42,29 +42,21 @@
 
     var isOpen = list.classList.contains('open');
 
-    // Read scrollHeight BEFORE any write — prevents forced reflow
-    batchRead(function () {
-      var targetHeight = isOpen ? 0 : list.scrollHeight;
-
-      batchWrite(function () {
-        document.querySelectorAll('[data-section]').forEach(function (sec) {
-          var b = sec.querySelector('button');
-          var l = sec.querySelector('.footer-links-list, ul');
-          var a = sec.querySelector('.footer-arrow');
-          if (l) { l.classList.remove('open'); l.style.maxHeight = '0'; }
-          if (b) b.setAttribute('aria-expanded', 'false');
-          if (a) a.style.transform = 'rotate(0deg)';
-        });
-
-        if (!isOpen) {
-          list.classList.add('open');
-          list.style.maxHeight = targetHeight + 'px';
-          btn.setAttribute('aria-expanded', 'true');
-          var arrow = btn.querySelector('.footer-arrow');
-          if (arrow) arrow.style.transform = 'rotate(180deg)';
-        }
-      });
+    document.querySelectorAll('[data-section]').forEach(function (sec) {
+      var b = sec.querySelector('button');
+      var l = sec.querySelector('.footer-links-list, ul');
+      var a = sec.querySelector('.footer-arrow');
+      if (l) { l.classList.remove('open'); }
+      if (b) b.setAttribute('aria-expanded', 'false');
+      if (a) a.style.transform = 'rotate(0deg)';
     });
+
+    if (!isOpen) {
+      list.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      var arrow = btn.querySelector('.footer-arrow');
+      if (arrow) arrow.style.transform = 'rotate(180deg)';
+    }
   };
 
   function initFooterAccordion() {
