@@ -5,9 +5,12 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Certified Clothing Manufacturer | 9 Standards SDF Clothing",
-    "description": "Your certified clothing manufacturer with 9 international standards. Fully compliant for EU, UK, USA markets. GOTS, OEKO-TEX, ISO certified factory.",
-    "url": "https://www.sdfltd.com/certifications/",
+    // FIX: was "9 Standards" — page actually lists 13 certifications
+    "name": "Certified Clothing Manufacturer | 13 International Certifications | SDF Clothing",
+    // FIX: was "9 international standards"
+    "description": "SDF Clothing holds 13 international certifications — GOTS, OEKO-TEX, ISO 9001, ISO 14001, BSCI, SEDEX, WRAP, GRS, BCI, SA8000, ZDHC, C-TPAT, and LEED. Fully compliant for EU, UK, USA markets.",
+    // FIX: was https://www.sdfltd.com/certifications/ (www) — now canonical non-www
+    "url": "https://sdfltd.com/certifications/",
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
@@ -15,6 +18,61 @@ const schema = [
         { "@type": "ListItem", "position": 2, "name": "Certifications", "item": "https://sdfltd.com/certifications/" }
       ]
     }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://sdfltd.com/certifications/#faq",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What certifications does a certified clothing manufacturer need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A certified clothing manufacturer typically needs GOTS for organic products, OEKO-TEX for chemical safety, ISO 9001 for quality management, BSCI for social compliance, and WRAP for ethical manufacturing. These certifications ensure compliance with EU, UK, and USA market requirements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is GOTS certification important for clothing manufacturers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GOTS certification is required for brands selling organic clothing in EU and US markets. It verifies organic fiber content from farm to final product, ensuring traceability and environmental compliance throughout the supply chain. Verify at global-standard.org."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does OEKO-TEX certification mean for garment production?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OEKO-TEX Standard 100 certification means every garment component is tested for harmful substances. It is a legal requirement for children's wear in the EU and trusted globally by consumers seeking safe, chemical-free clothing production."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do ISO certifications benefit clothing buyers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ISO 9001 certification guarantees consistent quality management, while ISO 14001 ensures environmental compliance. These standards help buyers reduce defects, improve workflows, and ensure product consistency across production runs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which certifications are required for EU and UK markets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For EU and UK markets, GOTS (for organic), OEKO-TEX (for chemical safety), BSCI or SEDEX (for social compliance), and ISO 14001 are typically required. ZDHC is mandated by major brands including Adidas and H&M. These certifications ensure compliance with EU EPR 2026 and UK Modern Slavery Act requirements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I verify a manufacturer's certifications?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Verify certifications by checking certificate numbers directly with issuing bodies: GOTS at global-standard.org, OEKO-TEX at oeko-tex.com, ISO at iso.org, WRAP at wrapcompliance.org, and SA8000 at sa-intl.org. Request audit reports and current validity periods to confirm active compliance."
+        }
+      }
+    ]
   }
 ];
 
@@ -99,8 +157,43 @@ const certifications = [
     ifNot: "Cannot supply premium ethical brands or participate in advanced sustainability programs. Risk of negative publicity from NGOs targeting non-certified suppliers. May face exclusion from B Corp supply chain requirements.",
     audit: "Annual surveillance audits by SAAS-accredited certification bodies. Full recertification every 3 years. Unannounced audits possible. Quarterly reporting on corrective action progress required.",
     benefit: "SA8000 requires living wage verification, ensuring your products support worker livelihoods rather than merely meeting legal minimums - a powerful story for conscious consumers."
+  },
+  {
+    icon: "🌍",
+    name: "ISO 14001 Environmental Management",
+    what: "ISO 14001 is the international standard for Environmental Management Systems (EMS). It certifies that our factory has a systematic approach to managing environmental responsibilities — covering waste reduction, energy use, water consumption, chemical handling, and carbon footprint. Certification requires setting measurable environmental targets and demonstrating continuous improvement.",
+    country: "Required by German supply chain due diligence legislation for high-risk supplier categories. Mandated by UK procurement frameworks under Greening Government Commitments. Recognized by EU Taxonomy Regulation for sustainable finance classification. Required by major retailers including M&S, ASOS, and Next for supplier environmental compliance.",
+    ifNot: "Cannot supply major UK and EU retailers with environmental procurement policies. Risk of failing EU CSRD (Corporate Sustainability Reporting Directive) supply chain assessments. Excluded from sustainable investment indices and ESG-rated supply chains.",
+    audit: "Annual surveillance audits by ISO-accredited certification bodies (SGS, TÜV, Bureau Veritas). Full recertification every 3 years. Internal EMS audits required at least annually. Environmental performance data reviewed in management review meetings.",
+    benefit: "ISO 14001 documentation provides quantified environmental data — energy consumption, water usage, waste diversion rates — that brands can include directly in their own sustainability reporting and EU CSRD disclosures."
+  },
+  {
+    icon: "♻️",
+    name: "GRS - Global Recycled Standard",
+    what: "GRS (Global Recycled Standard) certifies the recycled content of materials and products, and tracks the chain of custody from raw material processing to the final product. It applies to all recycled materials including recycled polyester (rPET from plastic bottles), recycled cotton, and recycled nylon. Minimum 20% recycled content required for partial GRS certification; 50% for full certification.",
+    country: "Required by EU Ecodesign for Sustainable Products Regulation (ESPR) for recycled content claims. Mandated by major brands including H&M, Adidas, Nike, and Patagonia for recycled material sourcing. Required by UK retailer sustainability programs including M&S Plan A and ASOS Responsible Edit.",
+    ifNot: "Cannot legally claim 'recycled' material content on product labels in EU markets. Risk of greenwashing allegations from consumer authorities. Excluded from major brand sustainable sourcing programs requiring certified recycled content.",
+    audit: "Annual transaction certificates (TCs) issued for each GRS shipment. Annual scope certificate audits by GOTS-approved certification bodies. Recycled material percentage verified at each production stage in the supply chain.",
+    benefit: "GRS certification allows your brand to use legally defensible recycled content claims — 'made from X% recycled polyester' — that EU consumers and regulators now expect and verify."
+  },
+  {
+    icon: "🌱",
+    name: "BCI - Better Cotton Initiative",
+    what: "BCI (Better Cotton Initiative) is the world's largest cotton sustainability programme, covering over 2.5 million cotton farmers across 23 countries. BCI-licensed producers commit to better environmental and social practices — reducing water and chemical use, improving soil health, and ensuring fair labour conditions. BCI cotton is not physically traced but sourced through a mass balance system.",
+    country: "Required by major EU retailers under voluntary sustainability commitments. Recognized by the EU Sustainable Cotton Challenge. Adopted by fashion brands including H&M, IKEA, Levi's, Gap, and Marks & Spencer as part of their responsible sourcing targets.",
+    ifNot: "Cannot supply BCI member brands' sustainable cotton programs. Risk of exclusion from retailer preferred supplier lists that mandate BCI or equivalent standards. Reduced access to sustainability-focused buyer relationships.",
+    audit: "Annual self-assessment reports submitted to BCI. Field-level verification conducted by BCI field facilitators. Mass balance accounting audited through the supply chain via BCI's online traceability platform.",
+    benefit: "BCI certification demonstrates commitment to responsible cotton sourcing across the supply chain — supporting brand claims about sustainable sourcing and meeting major retailer supplier requirements without the cost premium of GOTS organic cotton."
+  },
+  {
+    icon: "🛃",
+    name: "C-TPAT - Customs Trade Partnership Against Terrorism",
+    what: "C-TPAT (Customs-Trade Partnership Against Terrorism) is a US Customs and Border Protection (CBP) voluntary supply chain security programme. C-TPAT certified factories have implemented minimum security criteria covering physical security, access controls, personnel security, procedural security, cargo security, and information technology security. Membership provides documented evidence that factory security meets US CBP standards.",
+    country: "Required for priority processing by US Customs and Border Protection. Mandatory for suppliers to major US retailers including Walmart, Target, and JCPenney. Required by US Department of Defense procurement contracts for textile and apparel items. Recognized under the Container Security Initiative for reduced inspection rates at US ports.",
+    ifNot: "Higher inspection rates at US ports — typically 5-15% inspection rate vs below 1% for C-TPAT certified exporters. Slower customs clearance adding 2-5 days to delivery timelines. Risk of exclusion from US retailer preferred supplier programmes requiring C-TPAT or equivalent certification.",
+    audit: "Initial application and security profile submission to CBP. Periodic validation visits from CBP Supply Chain Security Specialists. Annual self-assessment revalidation. Risk-based escalation to enhanced validation for non-compliant findings.",
+    benefit: "C-TPAT membership provides your US customers with documented cargo security assurance — reducing the risk of shipment holds, customs examinations, and delivery delays that affect your brand's retail launch timelines."
   }
-];
 
 const verificationSteps = [
   {
@@ -206,10 +299,11 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="Certified Clothing Manufacturer | 9 Standards SDF Clothing"
-  description="Your certified clothing manufacturer with 9 international standards. Fully compliant for EU, UK, USA markets. GOTS, OEKO-TEX, ISO certified factory."
-  canonicalUrl="https://www.sdfltd.com/certifications/"
-  ogImage="https://sdfltd.com/factory.jpg"
+  title="Certified Clothing Manufacturer | 13 International Certifications | SDF Clothing"
+  description="SDF Clothing holds 13 international certifications — GOTS, OEKO-TEX, ISO 9001, ISO 14001, BSCI, SEDEX, WRAP, GRS, BCI, SA8000, ZDHC, C-TPAT, and LEED. Compliant for EU, UK, and USA markets."
+  canonicalUrl="https://sdfltd.com/certifications/"
+  ogImage="https://sdfltd.com/factory.webp"
+  ogImageType="image/webp"
   schema={schema}
 >
 
@@ -233,7 +327,7 @@ const faqs = [
           <span class="section-label">Excellence</span>
           <div class="accent-line"></div>
           <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;margin-bottom:1.5rem;">
-            Certified Clothing Manufacturer With 9 International Standards
+            Certified Clothing Manufacturer With 13 International Certifications
           </h1>
           <p style="color:rgba(255,255,255,0.75);font-size:1rem;line-height:1.8;max-width:700px;">
             We provide compliant apparel production with verified standards. Our GOTS certified factory and OEKO-TEX certified manufacturer status ensure chemical-free clothing production for EU, UK, USA markets. We are an ethical clothing manufacturer with social compliance certification and sustainable certified factory operations.
