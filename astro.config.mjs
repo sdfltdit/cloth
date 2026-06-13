@@ -7,10 +7,7 @@ export default defineConfig({
   output: 'static',
   compressHTML: true,
 
-  prefetch: {
-    prefetchAll: false,
-    defaultStrategy: 'hover'
-  },
+  prefetch: false,
 
   integrations: [
     sitemap({
