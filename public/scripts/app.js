@@ -71,6 +71,12 @@
     document.querySelectorAll('[data-section]').forEach(function (sec) {
       var btn = sec.querySelector('button');
       if (!btn) return;
+
+      btn.addEventListener('click', function () {
+        var sectionName = sec.getAttribute('data-section');
+        if (sectionName) window.toggleFooter(sectionName);
+      });
+
       btn.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
