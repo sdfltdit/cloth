@@ -150,13 +150,13 @@
       var moqCta = document.getElementById('moq-cta');
       if (pieces >= 300) {
         moqMessage.textContent = 'Yes — your order qualifies. Get your free quote.';
-        moqCta.innerHTML = '<a href="/contact" class="index__btn index__btn--primary" style="flex:1;">Get Free Quote</a><a href="https://wa.me/8801911733226" target="_blank" rel="noopener noreferrer" class="index__btn index__btn--secondary" style="flex:1;">WhatsApp Us</a>';
+        moqCta.innerHTML = '<a href="/contact" class="index__btn index__btn--primary" style="flex:1;">Get Free Quote</a><a href="https://wa.me/8801819172080" target="_blank" rel="noopener noreferrer" class="index__btn index__btn--secondary" style="flex:1;">WhatsApp Us</a>';
       } else if (pieces >= 100) {
         moqMessage.textContent = 'Possibly — contact us to discuss your specific requirements.';
-        moqCta.innerHTML = '<a href="/contact" class="index__btn index__btn--primary" style="flex:1;">Contact Us</a><a href="https://wa.me/8801911733226" target="_blank" rel="noopener noreferrer" class="index__btn index__btn--secondary" style="flex:1;">WhatsApp Us</a>';
+        moqCta.innerHTML = '<a href="/contact" class="index__btn index__btn--primary" style="flex:1;">Contact Us</a><a href="https://wa.me/8801819172080" target="_blank" rel="noopener noreferrer" class="index__btn index__btn--secondary" style="flex:1;">WhatsApp Us</a>';
       } else {
         moqMessage.textContent = 'Our standard MOQ is 300 pieces per style. Let us help you plan your order.';
-        moqCta.innerHTML = '<a href="/contact" class="index__btn index__btn--primary" style="flex:1;">Plan Your Order</a><a href="https://wa.me/8801911733226" target="_blank" rel="noopener noreferrer" class="index__btn index__btn--secondary" style="flex:1;">WhatsApp Us</a>';
+        moqCta.innerHTML = '<a href="/contact" class="index__btn index__btn--primary" style="flex:1;">Plan Your Order</a><a href="https://wa.me/8801819172080" target="_blank" rel="noopener noreferrer" class="index__btn index__btn--secondary" style="flex:1;">WhatsApp Us</a>';
       }
       document.getElementById('moq-result').style.display = 'block';
     });
