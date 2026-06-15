@@ -1,4 +1,4 @@
-export const PHONE = "+8801911733226";
+export const PHONE = "+8801819172080";
 export const WHATSAPP_NUMBER = "8801911733226";
 export const EMAIL = "contact@sdfltd.com";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
