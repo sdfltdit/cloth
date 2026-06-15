@@ -42,10 +42,33 @@ const baseSchemas = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["Organization","LocalBusiness"],
+      "@type": ["Organization","LocalBusiness","ManufacturingBusiness"],
       "@id": "https://sdfltd.com/#org",
       "name": "SDF Clothing",
-      "alternateName": ["SDF Ltd", "SDF Garments"],
+      "alternateName": ["SDF Ltd", "SDF Garments", "SDF Clothing Manufacturers", "SDF Clothing Manufacturer Bangladesh"],
+      "naics": "315",
+      "isicV4": "1410",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "value": 500
+      },
+      "knowsAbout": [
+        "Clothing Manufacturing",
+        "Garment Manufacturing Bangladesh",
+        "Private Label Clothing Manufacturing",
+        "OEM Apparel Manufacturing",
+        "CMT Garment Services",
+        "GOTS Certified Organic Cotton Production",
+        "Sustainable Clothing Manufacturing",
+        "Ethical Clothing Manufacturing",
+        "Low MOQ Clothing Production",
+        "T-Shirt Manufacturing",
+        "Hoodie Manufacturing",
+        "Activewear Manufacturing",
+        "Knitwear Manufacturing Bangladesh",
+        "Cut and Sew Manufacturing",
+        "Custom Apparel Manufacturing"
+      ],
       "url": "https://sdfltd.com",
       "logo": {
         "@type": "ImageObject",
@@ -181,11 +204,6 @@ if (schema) {
 <!-- CORE -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- FONT PRELOAD: must be immediately after charset+viewport for earliest browser discovery -->
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-regular.woff2" crossorigin fetchpriority="high" />
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-300.woff2" crossorigin fetchpriority="high" />
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-500.woff2" crossorigin />
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-600.woff2" crossorigin />
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -242,7 +260,11 @@ if (schema) {
 {dateModified && <meta property="article:modified_time" content={dateModified} />}
 {datePublished && <meta property="article:author" content="https://sdfltd.com/about/" />}
 
-
+<!-- FONT PRELOAD — only above-fold weights get fetchpriority=high -->
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-regular.woff2" crossorigin fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-300.woff2" crossorigin fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-500.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-600.woff2" crossorigin />
 
 <!-- FAVICONS -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -265,7 +287,11 @@ if (schema) {
 <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
 <meta name="msapplication-config" content="none" />
 
-
+<!-- PRECONNECT -->
+<link rel="dns-prefetch" href="https://api.web3forms.com" />
+<link rel="dns-prefetch" href="https://wa.me" />
+<link rel="dns-prefetch" href="https://ipinfo.io" />
+<link rel="dns-prefetch" href="https://ipapi.co" />
 
 <!-- llms.txt -->
 <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt" />
@@ -273,5 +299,14 @@ if (schema) {
 <!-- JSON-LD — merged base + page-specific schemas -->
 <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
 
-
+<!-- SERVICE WORKER -->
 <script src="/scripts/sw-register.js" defer data-cfasync="false"></script>
+
+<!-- CLS Prevention -->
+<style>
+  .index__hero { min-height: 90vh; }
+  .index__hero-title { font-size: clamp(2rem,5vw,4rem); font-weight: 300; line-height: 1.15; }
+  .index__hero-subtitle { font-size: clamp(1rem,2vw,1.25rem); line-height: 1.8; max-width: 700px; }
+  .hero-image-container { aspect-ratio: 16/9; width: 100%; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
