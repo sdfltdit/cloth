@@ -167,7 +167,7 @@ const canonicalUrl = "https://sdfltd.com/contact";
 
           <div style="margin-bottom:0.6rem;">
             <label for="contact-quantity" style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:#FFFFFF;display:block;margin-bottom:0.25rem;">Estimated Quantity</label>
-            <input type="text" id="contact-quantity" name="quantity" placeholder="e.g. 500 pieces, 3 styles" style="background:#000;border:1px solid #e00;color:#fff;padding:0.5rem 0.75rem;font-size:0.85rem;width:100%;outline:none;font-family:inherit;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e00'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+            <input type="number" id="contact-quantity" name="quantity" min="1" placeholder="e.g. 500" style="background:#000;border:1px solid #e00;color:#fff;padding:0.5rem 0.75rem;font-size:0.85rem;width:100%;outline:none;font-family:inherit;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e00'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
           </div>
 
           <div style="margin-bottom:0.6rem;">
@@ -871,21 +871,22 @@ document.addEventListener('DOMContentLoaded', function() {
     overlay.style.cssText = [
       'position:fixed;top:0;left:0;right:0;bottom:0',
       'background:rgba(8,8,8,0.97)',
-      'display:flex;align-items:' + (isMob ? 'flex-start' : 'center') + ';justify-content:center',
+      'display:flex;align-items:flex-start;justify-content:center',
       'z-index:9999',
       'overflow-y:auto;-webkit-overflow-scrolling:touch',
-      'padding:' + (isMob ? '0' : '1.5rem'),
+      'padding:' + (isMob ? '0' : '1rem'),
       'animation:sdfFadeIn 0.3s ease forwards',
     ].join(';');
 
     overlay.innerHTML =
       '<div style="' +
-        'max-width:' + (isMob ? '100%' : '400px') + ';width:100%;' +
+        'max-width:' + (isMob ? '100%' : '390px') + ';width:100%;' +
         'background:#111;' +
         'border:' + (isMob ? 'none' : '0.5px solid #2a2a2a') + ';' +
         'border-radius:' + (isMob ? '0' : '10px') + ';' +
-        'overflow:hidden;' +
-        (isMob ? 'min-height:100vh;min-height:100dvh;' : '') +
+        'overflow-y:auto;' +
+        'max-height:' + (isMob ? 'none' : 'calc(100vh - 2rem)') + ';' +
+        (isMob ? 'min-height:100vh;min-height:100dvh;' : 'margin:auto 0;') +
         'animation:sdfSlideUp 0.35s ease forwards;' +
       '">' +
 
