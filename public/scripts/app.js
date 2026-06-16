@@ -40,22 +40,22 @@
     var list = el.querySelector('.footer-links-list, ul');
     if (!btn || !list) return;
 
-    var isOpen = list.classList.contains('open');
+    var isOpen = list.classList.contains('expanded');
 
     document.querySelectorAll('[data-section]').forEach(function (sec) {
       var b = sec.querySelector('button');
       var l = sec.querySelector('.footer-links-list, ul');
       var a = sec.querySelector('.footer-arrow');
-      if (l) { l.classList.remove('open'); }
+      if (l) { l.classList.remove('expanded'); }
       if (b) b.setAttribute('aria-expanded', 'false');
-      if (a) a.style.transform = 'rotate(0deg)';
+      if (a) a.classList.remove('rotated');
     });
 
     if (!isOpen) {
-      list.classList.add('open');
+      list.classList.add('expanded');
       btn.setAttribute('aria-expanded', 'true');
       var arrow = btn.querySelector('.footer-arrow');
-      if (arrow) arrow.style.transform = 'rotate(180deg)';
+      if (arrow) arrow.classList.add('rotated');
     }
   };
 
