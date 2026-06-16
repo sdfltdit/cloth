@@ -1,80 +1,222 @@
-# ============================================================
-# GZIP COMPRESSION
-# ============================================================
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/css
-  AddOutputFilterByType DEFLATE application/javascript
-  AddOutputFilterByType DEFLATE application/json
-  AddOutputFilterByType DEFLATE image/svg+xml
-  AddOutputFilterByType DEFLATE font/woff2 font/woff
-</IfModule>
+# ================================================================
+# SDF CLOTHING — sdfltd.com
+# Complete .htaccess — Security + Performance + Speed
+# Last updated: June 2026
+# ================================================================
 
-# ============================================================
-# BROWSER CACHING
-# ============================================================
-<IfModule mod_expires.c>
-  ExpiresActive On
-  ExpiresByType text/html                "access plus 1 hour"
-  ExpiresByType text/css                 "access plus 1 year"
-  ExpiresByType application/javascript   "access plus 1 year"
-  ExpiresByType image/webp               "access plus 1 year"
-  ExpiresByType image/jpeg               "access plus 1 year"
-  ExpiresByType image/png                "access plus 1 year"
-  ExpiresByType image/svg+xml            "access plus 1 year"
-  ExpiresByType font/woff2               "access plus 1 year"
-  ExpiresByType font/woff                "access plus 1 year"
-</IfModule>
 
-# ============================================================
-# SECURITY HEADERS
-# ============================================================
-<IfModule mod_headers.c>
-
-  # --- আগে থেকে আছে (ঠিক আছে) ---
-  Header always set X-Content-Type-Options "nosniff"
-  Header always set X-Frame-Options "DENY"
-  Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
-
-  # --- নতুন: X-XSS-Protection (পুরনো browser-এর জন্য) ---
-  Header always set X-XSS-Protection "1; mode=block"
-
-  # --- নতুন: Strict Transport Security (HTTPS enforce করে) ---
-  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-
-  # --- নতুন: Cross-Origin headers (safe values) ---
-  Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
-  Header always set Cross-Origin-Resource-Policy "cross-origin"
-  # COEP: "unsafe-none" রাখলাম কারণ আপনার site-এ
-  # WhatsApp widget, external images আছে — "require-corp" দিলে ভাঙতে পারে
-  Header always set Cross-Origin-Embedder-Policy "unsafe-none"
-
-  # --- নতুন: Content Security Policy ---
-  # safe-mode: 'unsafe-inline' রাখা হয়েছে কারণ আপনার site-এ
-  # inline JS/CSS আছে। ভবিষ্যতে nonce-based CSP-তে upgrade করতে পারবেন।
-  Header always set Content-Security-Policy "\
-    default-src 'self'; \
-    script-src 'self' 'unsafe-inline' https://wa.me https://cdn.jsdelivr.net; \
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
-    font-src 'self' data: https://fonts.gstatic.com; \
-    img-src 'self' data: https: blob:; \
-    connect-src 'self' https://wa.me; \
-    frame-src https://www.youtube.com https://www.google.com; \
-    object-src 'none'; \
-    base-uri 'self'; \
-    form-action 'self' https://wa.me"
-
-  # --- নতুন: Cookie hardening ---
-  # আপনার site যদি PHP session ব্যবহার করে, এটা cookie সুরক্ষিত করে
-  Header always edit Set-Cookie ^(.*)$ "$1; HttpOnly; Secure; SameSite=Strict"
-
-</IfModule>
-
-# ============================================================
-# CANONICAL DOMAIN — www redirect (আগে থেকেই ঠিক আছে)
-# ============================================================
+# ================================================================
+# SECTION 1 — HTTP → HTTPS + WWW → NON-WWW REDIRECT
+# ================================================================
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+
+# ================================================================
+# SECTION 2 — GZIP / BROTLI COMPRESSION
+# ================================================================
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript application/json
+  AddOutputFilterByType BROTLI_COMPRESS image/svg+xml
+  AddOutputFilterByType BROTLI_COMPRESS font/woff2 font/woff font/ttf
+  AddOutputFilterByType BROTLI_COMPRESS application/xml application/rss+xml
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE font/woff2 font/woff font/ttf
+  AddOutputFilterByType DEFLATE application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE text/xml text/javascript
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+</IfModule>
+
+
+# ================================================================
+# SECTION 3 — BROWSER CACHING (Cache-Control + Expires)
+# ================================================================
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault                         "access plus 1 month"
+
+  # HTML — short cache
+  ExpiresByType text/html                "access plus 1 hour"
+
+  # CSS & JavaScript — long cache (versioned files)
+  ExpiresByType text/css                 "access plus 1 year"
+  ExpiresByType application/javascript   "access plus 1 year"
+  ExpiresByType text/javascript          "access plus 1 year"
+
+  # Images
+  ExpiresByType image/webp               "access plus 1 year"
+  ExpiresByType image/jpeg               "access plus 1 year"
+  ExpiresByType image/jpg                "access plus 1 year"
+  ExpiresByType image/png                "access plus 1 year"
+  ExpiresByType image/gif                "access plus 1 year"
+  ExpiresByType image/svg+xml            "access plus 1 year"
+  ExpiresByType image/x-icon             "access plus 1 year"
+  ExpiresByType image/vnd.microsoft.icon "access plus 1 year"
+
+  # Fonts
+  ExpiresByType font/woff2               "access plus 1 year"
+  ExpiresByType font/woff                "access plus 1 year"
+  ExpiresByType font/ttf                 "access plus 1 year"
+  ExpiresByType font/otf                 "access plus 1 year"
+  ExpiresByType application/font-woff    "access plus 1 year"
+  ExpiresByType application/font-woff2   "access plus 1 year"
+
+  # Data / API
+  ExpiresByType application/json         "access plus 0 seconds"
+  ExpiresByType application/xml          "access plus 0 seconds"
+  ExpiresByType text/xml                 "access plus 0 seconds"
+</IfModule>
+
+# Cache-Control headers
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(webp|jpg|jpeg|png|gif|svg|ico|woff2|woff|ttf|otf)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+
+# ================================================================
+# SECTION 4 — SECURITY HEADERS
+# ================================================================
+<IfModule mod_headers.c>
+
+
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
+  Header always set Cross-Origin-Resource-Policy "cross-origin"
+  Header always set Cross-Origin-Embedder-Policy "unsafe-none"
+  Header always set Content-Security-Policy "\
+default-src 'self'; \
+script-src 'self' 'unsafe-inline' 'unsafe-eval' \
+  https://cdn.jsdelivr.net \
+  https://cdnjs.cloudflare.com \
+  https://www.googletagmanager.com \
+  https://www.google-analytics.com \
+  https://ssl.google-analytics.com \
+  https://www.google.com \
+  https://maps.googleapis.com; \
+style-src 'self' 'unsafe-inline' \
+  https://fonts.googleapis.com \
+  https://cdn.jsdelivr.net \
+  https://cdnjs.cloudflare.com; \
+font-src 'self' data: \
+  https://fonts.gstatic.com \
+  https://cdn.jsdelivr.net \
+  https://cdnjs.cloudflare.com; \
+img-src 'self' data: blob: https: \
+  https://www.google-analytics.com \
+  https://www.googletagmanager.com; \
+connect-src 'self' \
+  https://www.google-analytics.com \
+  https://analytics.google.com \
+  https://stats.g.doubleclick.net \
+  https://api.whatsapp.com \
+  https://wa.me; \
+frame-src \
+  https://www.youtube.com \
+  https://www.youtube-nocookie.com \
+  https://www.google.com \
+  https://maps.google.com \
+  https://maps.googleapis.com; \
+media-src 'self' https://www.youtube.com; \
+object-src 'none'; \
+base-uri 'self'; \
+form-action 'self' https://wa.me https://api.whatsapp.com; \
+upgrade-insecure-requests"
+
+  Header always edit Set-Cookie ^(.*)$ "$1; HttpOnly; Secure; SameSite=Lax"
+  Header always unset X-Powered-By
+  Header always unset Server
+
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set Connection keep-alive
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+FileETag None
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_REFERER} !^$
+  RewriteCond %{HTTP_REFERER} !^https://(www\.)?sdfltd\.com [NC]
+  RewriteCond %{HTTP_REFERER} !^https://search\.google\.com [NC]
+  RewriteCond %{HTTP_REFERER} !^https://(www\.)?google\. [NC]
+  RewriteCond %{HTTP_REFERER} !^https://(www\.)?bing\.com [NC]
+  RewriteCond %{HTTP_REFERER} !^https://(www\.)?pinterest\. [NC]
+  RewriteCond %{HTTP_REFERER} !^https://(www\.)?linkedin\. [NC]
+  RewriteRule \.(jpg|jpeg|png|webp|gif|svg)$ - [F,NC]
+</IfModule>
+
+<FilesMatch "(^#.*#|\.(bak|conf|dist|fla|inc|ini|log|psd|sh|sql|sw[op])|~)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+</FilesMatch>
+
+<Files ".htaccess">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+</Files>
+
+<Files "wp-config.php">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+</Files>
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_USER_AGENT} (archive\.org|binlar|casper|checkpriv|choppy|clshttp|cmsworld|diavol|dotbot|extract|feedfinder|flicky|g00g1e|harvest|heritrix|httrack|kmccrew|loader|miner|nikto|planetwork|postrank|purebot|pycurl|python|rsync|shacker|siteexplorer|skygrid|sucker|turnit|vikspider|winhttp|xxxyy|youda|zmeu|zune) [NC,OR]
+  RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
+  RewriteCond %{HTTP_USER_AGENT} ^(java|curl|wget) [NC]
+  RewriteRule ^ - [F,L]
+</IfModule>
+
+# ErrorDocument 404 /404.html
+# ErrorDocument 500 /500.html
+
+
+# ================================================================
+# SECTION 12 — MIME TYPES (correct file type serving)
+# ================================================================
+<IfModule mod_mime.c>
+  AddType font/woff2                          .woff2
+  AddType font/woff                           .woff
+  AddType font/ttf                            .ttf
+  AddType font/otf                            .otf
+  AddType image/webp                          .webp
+  AddType image/svg+xml                       .svg
+  AddType application/javascript              .js
+  AddType application/json                    .json
+  AddType text/css                            .css
 </IfModule>
