@@ -839,10 +839,6 @@ document.addEventListener('DOMContentLoaded', function() {
     for(let i=8;i<cells-8;i++){if(i%2===0){ctx.fillRect(i*cell,6*cell,cell-1,cell-1);ctx.fillRect(6*cell,i*cell,cell-1,cell-1);}}
   }
 
-  /* ─────────────────────────────────────────────────────────────
-     showThanks — fully responsive via CSS classes + media queries
-     Only this function was changed. Nothing else was touched.
-  ───────────────────────────────────────────────────────────── */
   function showThanks(geo, device, fillDuration, referenceId) {
     const waText = encodeURIComponent('Hi, my reference ID is ' + referenceId);
     const waUrl  = 'https://wa.me/8801819172080?text=' + waText;
@@ -855,142 +851,127 @@ document.addEventListener('DOMContentLoaded', function() {
       if(c.effectiveType) return c.effectiveType.toUpperCase();
       return 'Unknown';
     })();
-    const tz       = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
-    const lang     = navigator.language || 'Unknown';
-    const scr      = window.screen.width + ' x ' + window.screen.height;
-    const loc      = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
-    const referrer = document.referrer || window.location.hostname + '/';
-    const timeStr  = new Date().toLocaleString('en-GB', {day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
-    const TOTAL    = 48 * 3600;
+    const tz      = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
+    const lang    = navigator.language || 'Unknown';
+    const scr     = window.screen.width + ' x ' + window.screen.height;
+    const loc     = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
+    const referrer= document.referrer || window.location.hostname + '/';
+    const timeStr = new Date().toLocaleString('en-GB', {day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    const TOTAL   = 48 * 3600;
+    const vw      = window.innerWidth;
+    const isMob   = vw < 480;
+    const isSmall = vw < 360;
+    const p       = isSmall ? '0.65rem' : isMob ? '0.75rem 0.9rem' : '0.9rem 1.25rem';
+    const pSm     = isSmall ? '0.6rem'  : isMob ? '0.65rem 0.9rem' : '0.75rem 1.25rem';
+    const fsBig   = isSmall ? '0.68rem' : '0.75rem';
+    const fsLabel = isSmall ? '0.5rem'  : '0.56rem';
 
     const overlay = document.createElement('div');
     overlay.id = 'sdf-thankyou';
+    overlay.style.cssText = [
+      'position:fixed;top:0;left:0;right:0;bottom:0',
+      'background:rgba(8,8,8,0.97)',
+      'display:flex;align-items:flex-start;justify-content:center',
+      'z-index:9999',
+      'overflow-y:auto;-webkit-overflow-scrolling:touch',
+      'padding:' + (isMob ? '0' : '0.75rem'),
+      'animation:sdfFadeIn 0.3s ease forwards',
+    ].join(';');
 
     overlay.innerHTML =
-      '<style>' +
-        '@keyframes sdfFadeIn{from{opacity:0}to{opacity:1}}' +
-        '@keyframes sdfSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}' +
-        '#sdf-thankyou{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(8,8,8,0.97);display:flex;align-items:flex-start;justify-content:center;z-index:9999;padding:1rem;overflow-y:auto;-webkit-overflow-scrolling:touch;animation:sdfFadeIn 0.3s ease forwards;}' +
-        '#sdf-thankyou *{box-sizing:border-box;}' +
-        '.sdf-card{max-width:460px;width:100%;background:#111;border:0.5px solid #2a2a2a;border-radius:12px;overflow:hidden;animation:sdfSlideUp 0.35s ease forwards;margin:auto;}' +
-        '.sdf-header{background:#cc0000;padding:1rem 1.25rem;display:flex;align-items:center;gap:10px;}' +
-        '.sdf-icon{width:32px;height:32px;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.45);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;}' +
-        '.sdf-ref{text-align:right;flex-shrink:0;max-width:140px;}' +
-        '.sdf-section{padding:1rem 1.25rem;border-bottom:0.5px solid #1e1e1e;}' +
-        '.sdf-grid{display:grid;grid-template-columns:1fr 1fr;border:0.5px solid #1e1e1e;border-radius:8px;overflow:hidden;}' +
-        '.sdf-meta{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;}' +
-        '.sdf-meta-item{padding:0.45rem 0.65rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;min-width:0;}' +
-        '.sdf-qr-row{padding:1rem 1.25rem;border-bottom:0.5px solid #1e1e1e;display:flex;gap:1rem;align-items:center;}' +
-        '.sdf-wa{padding:0.85rem 1.25rem;border-bottom:0.5px solid #1e1e1e;}' +
-        '.sdf-footer{padding:0.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}' +
-        /* ── tablet / large phone ── */
-        '@media(max-width:520px){' +
-          '#sdf-thankyou{padding:0;}' +
-          '.sdf-card{max-width:100%;border-radius:0;border:none;min-height:100dvh;}' +
-          '.sdf-header{padding:0.85rem 1rem;}' +
-          '.sdf-section{padding:0.75rem 1rem;}' +
-          '.sdf-qr-row{padding:0.75rem 1rem;}' +
-          '.sdf-wa{padding:0.65rem 1rem;}' +
-          '.sdf-footer{padding:0.65rem 1rem;}' +
-        '}' +
-        /* ── small phone ── */
-        '@media(max-width:380px){' +
-          '.sdf-header{padding:0.75rem 0.85rem;gap:8px;}' +
-          '.sdf-ref{max-width:110px;}' +
-          '.sdf-section{padding:0.65rem 0.85rem;}' +
-          '.sdf-grid{grid-template-columns:1fr;}' +
-          '.sdf-meta{grid-template-columns:1fr;}' +
-          '.sdf-qr-row{padding:0.65rem 0.85rem;flex-direction:column;align-items:flex-start;}' +
-          '.sdf-wa{padding:0.6rem 0.85rem;}' +
-          '.sdf-footer{padding:0.6rem 0.85rem;}' +
-        '}' +
-        /* ── very small phone (320px) ── */
-        '@media(max-width:320px){' +
-          '.sdf-header{flex-wrap:wrap;}' +
-          '.sdf-ref{max-width:100%;text-align:left;margin-top:4px;}' +
-        '}' +
-      '</style>' +
+      '<div style="' +
+        'max-width:460px;width:100%;' +
+        'background:#111;' +
+        'border:' + (isMob ? 'none' : '0.5px solid #2a2a2a') + ';' +
+        'border-radius:' + (isMob ? '0' : '10px') + ';' +
+        'overflow:hidden;' +
+        (isMob ? 'min-height:100vh;min-height:100dvh;' : 'margin:auto;') +
+        'animation:sdfSlideUp 0.35s ease forwards;' +
+      '">' +
 
-      '<div class="sdf-card">' +
-
-      /* ── Header ── */
-      '<div class="sdf-header">' +
-        '<div class="sdf-icon">✓</div>' +
+      /* HEADER */
+      '<div style="background:#cc0000;padding:' + p + ';display:flex;align-items:center;gap:10px;">' +
+        '<div style="width:30px;height:30px;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.45);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.95rem;color:#fff;">✓</div>' +
         '<div style="flex:1;min-width:0;">' +
-          '<p style="font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin:0 0 1px;">Submission confirmed</p>' +
-          '<p style="font-size:0.9rem;font-weight:600;color:#fff;margin:0;">Message Received</p>' +
+          '<p style="font-size:' + fsLabel + ';letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin:0 0 1px;">Submission confirmed</p>' +
+          '<p style="font-size:' + (isSmall ? '0.82rem' : '0.9rem') + ';font-weight:600;color:#fff;margin:0;">Message Received</p>' +
         '</div>' +
-        '<div class="sdf-ref">' +
-          '<p style="font-size:0.55rem;color:rgba(255,255,255,0.45);margin:0 0 1px;letter-spacing:0.08em;text-transform:uppercase;">Reference</p>' +
-          '<p style="font-size:0.62rem;font-family:monospace;color:#fff;margin:0;word-break:break-all;">' + referenceId + '</p>' +
+        '<div style="text-align:right;flex-shrink:0;max-width:' + (isSmall ? '100px' : '140px') + ';">' +
+          '<p style="font-size:' + fsLabel + ';color:rgba(255,255,255,0.45);margin:0 0 1px;letter-spacing:0.08em;text-transform:uppercase;">Ref</p>' +
+          '<p style="font-size:' + (isSmall ? '0.55rem' : '0.62rem') + ';font-family:monospace;color:#fff;margin:0;word-break:break-all;">' + referenceId + '</p>' +
         '</div>' +
       '</div>' +
 
-      /* ── Countdown ── */
-      '<div class="sdf-section">' +
-        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;">' +
-          '<span style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Expected response in</span>' +
-          '<span id="sdf-cd" style="font-family:monospace;font-size:0.9rem;color:#fff;margin-left:auto;flex-shrink:0;">48:00:00</span>' +
+      /* COUNTDOWN */
+      '<div style="padding:' + p + ';border-bottom:0.5px solid #1e1e1e;">' +
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">' +
+          '<span style="font-size:' + (isSmall ? '0.62rem' : '0.68rem') + ';color:rgba(255,255,255,0.4);">Expected response in</span>' +
+          '<span id="sdf-cd" style="font-family:monospace;font-size:' + (isSmall ? '0.82rem' : '0.9rem') + ';color:#fff;margin-left:auto;flex-shrink:0;">48:00:00</span>' +
         '</div>' +
         '<div style="height:3px;background:#1e1e1e;border-radius:2px;overflow:hidden;">' +
           '<div id="sdf-bar" style="height:100%;width:100%;background:#cc0000;border-radius:2px;transition:width 1s linear;"></div>' +
         '</div>' +
-        '<p style="font-size:0.6rem;color:rgba(255,255,255,0.25);margin:5px 0 0;line-height:1.5;">Typically within 2 hours · Max 48 hours · Mon–Sat, 9 AM – 6 PM BST</p>' +
+        '<p style="font-size:' + (isSmall ? '0.55rem' : '0.6rem') + ';color:rgba(255,255,255,0.25);margin:5px 0 0;line-height:1.5;">Typically within 2 hours · Max 48 hours · Mon–Sat 9AM–6PM BST</p>' +
       '</div>' +
 
-      /* ── Session Details ── */
-      '<div class="sdf-section">' +
-        '<p style="font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.75rem;">Session Details</p>' +
-        '<div class="sdf-grid">' +
-          _cell('Device',     device,              true,  true)  +
-          _cell('Browser',    browser,             false, true)  +
-          _cell('Screen',     scr,                 true,  true)  +
-          _cell('Connection', conn,                false, true)  +
-          _cell('Timezone',   tz,                  true,  true)  +
-          _cell('Language',   lang,                false, true)  +
-          _cell('Location',   loc||'Unknown',      true,  true)  +
-          _cell('ISP',        geo.isp||'Unknown',  false, true)  +
-          _cell('IP Address', geo.ip,              true,  false, true) +
-          _cell('Fill Time',  fillDuration + 's',  false, false) +
+      /* SESSION DETAILS */
+      '<div style="padding:' + p + ';border-bottom:0.5px solid #1e1e1e;">' +
+        '<p style="font-size:' + fsLabel + ';letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.65rem;">Session Details</p>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;border:0.5px solid #1e1e1e;border-radius:8px;overflow:hidden;">' +
+          _cell('Device',     device,             true,  true,  false, fsBig, fsLabel) +
+          _cell('Browser',    browser,            false, true,  false, fsBig, fsLabel) +
+          _cell('Screen',     scr,                true,  true,  false, fsBig, fsLabel) +
+          _cell('Connection', conn,               false, true,  false, fsBig, fsLabel) +
+          _cell('Timezone',   tz,                 true,  true,  false, fsBig, fsLabel) +
+          _cell('Language',   lang,               false, true,  false, fsBig, fsLabel) +
+          _cell('Location',   loc||'Unknown',     true,  true,  false, fsBig, fsLabel) +
+          _cell('ISP',        geo.isp||'Unknown', false, true,  false, fsBig, fsLabel) +
+          _cell('IP Address', geo.ip,             true,  false, true,  fsBig, fsLabel) +
+          _cell('Fill Time',  fillDuration + 's', false, false, false, fsBig, fsLabel) +
         '</div>' +
-        '<div class="sdf-meta">' +
-          '<div class="sdf-meta-item">' +
-            '<p style="font-size:0.55rem;color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Submitted</p>' +
-            '<p style="font-size:0.68rem;color:rgba(255,255,255,0.6);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + timeStr + '</p>' +
+        '<div style="margin-top:7px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">' +
+          '<div style="padding:0.4rem 0.6rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;min-width:0;">' +
+            '<p style="font-size:' + fsLabel + ';color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Submitted</p>' +
+            '<p style="font-size:' + (isSmall ? '0.6rem' : '0.66rem') + ';color:rgba(255,255,255,0.6);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + timeStr + '</p>' +
           '</div>' +
-          '<div class="sdf-meta-item">' +
-            '<p style="font-size:0.55rem;color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Referrer</p>' +
-            '<p style="font-size:0.68rem;color:rgba(255,255,255,0.6);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + referrer + '</p>' +
+          '<div style="padding:0.4rem 0.6rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;min-width:0;">' +
+            '<p style="font-size:' + fsLabel + ';color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Referrer</p>' +
+            '<p style="font-size:' + (isSmall ? '0.6rem' : '0.66rem') + ';color:rgba(255,255,255,0.6);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + referrer + '</p>' +
           '</div>' +
         '</div>' +
       '</div>' +
 
-      /* ── QR ── */
-      '<div class="sdf-qr-row">' +
+      /* QR */
+      '<div style="padding:' + p + ';border-bottom:0.5px solid #1e1e1e;display:flex;gap:0.85rem;align-items:center;">' +
         '<div style="flex:1;min-width:0;">' +
-          '<p style="font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.35rem;">Scan to follow up</p>' +
-          '<p style="font-size:0.68rem;color:rgba(255,255,255,0.35);margin:0 0 4px;line-height:1.5;">Opens WhatsApp with your reference ID pre-filled.</p>' +
-          '<p style="font-size:0.6rem;font-family:monospace;color:rgba(255,255,255,0.2);margin:0;word-break:break-all;">' + referenceId + '</p>' +
+          '<p style="font-size:' + fsLabel + ';letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.3rem;">Scan to follow up</p>' +
+          '<p style="font-size:' + (isSmall ? '0.62rem' : '0.67rem') + ';color:rgba(255,255,255,0.35);margin:0 0 4px;line-height:1.5;">Opens WhatsApp with reference ID pre-filled.</p>' +
+          '<p style="font-size:' + (isSmall ? '0.55rem' : '0.6rem') + ';font-family:monospace;color:rgba(255,255,255,0.2);margin:0;word-break:break-all;">' + referenceId + '</p>' +
         '</div>' +
-        '<canvas id="sdf-qr" width="80" height="80" style="display:block;flex-shrink:0;border:3px solid #fff;border-radius:4px;"></canvas>' +
+        '<canvas id="sdf-qr" width="' + (isSmall ? '68' : '78') + '" height="' + (isSmall ? '68' : '78') + '" style="display:block;flex-shrink:0;border:3px solid #fff;border-radius:4px;"></canvas>' +
       '</div>' +
 
-      /* ── WhatsApp ── */
-      '<div class="sdf-wa">' +
-        '<a href="' + waUrl + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:#128C7E;border-radius:8px;padding:0.65rem 1rem;text-decoration:none;">' +
+      /* WHATSAPP */
+      '<div style="padding:' + pSm + ';border-bottom:0.5px solid #1e1e1e;">' +
+        '<a href="' + waUrl + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:#128C7E;border-radius:8px;padding:0.65rem 0.9rem;text-decoration:none;min-height:44px;">' +
           '<span style="font-size:1.1rem;line-height:1;flex-shrink:0;">💬</span>' +
-          '<span style="font-size:0.75rem;font-weight:600;color:#fff;letter-spacing:0.05em;text-transform:uppercase;">Chat on WhatsApp</span>' +
-          '<span style="font-size:0.6rem;color:rgba(255,255,255,0.5);margin-left:auto;white-space:nowrap;flex-shrink:0;">Replies fast</span>' +
+          '<span style="font-size:' + (isSmall ? '0.68rem' : '0.74rem') + ';font-weight:600;color:#fff;letter-spacing:0.04em;text-transform:uppercase;">Chat on WhatsApp</span>' +
+          '<span style="font-size:' + (isSmall ? '0.55rem' : '0.6rem') + ';color:rgba(255,255,255,0.55);margin-left:auto;white-space:nowrap;flex-shrink:0;">Replies fast</span>' +
         '</a>' +
       '</div>' +
 
-      /* ── Footer ── */
-      '<div class="sdf-footer">' +
-        '<p style="font-size:0.58rem;color:rgba(255,255,255,0.18);margin:0;line-height:1.5;">SDF Clothing Ltd · Since 1998</p>' +
-        '<button id="sdf-close" style="background:#cc0000;color:#fff;border:none;padding:0.5rem 1.1rem;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;border-radius:6px;white-space:nowrap;min-height:36px;flex-shrink:0;">Close</button>' +
+      /* FOOTER */
+      '<div style="padding:' + pSm + ';display:flex;align-items:center;justify-content:space-between;gap:0.75rem;">' +
+        '<p style="font-size:' + (isSmall ? '0.52rem' : '0.58rem') + ';color:rgba(255,255,255,0.18);margin:0;line-height:1.4;">SDF Clothing Ltd<br>Trusted since 1998</p>' +
+        '<button id="sdf-close" style="background:#cc0000;color:#fff;border:none;padding:0.5rem 1rem;font-size:' + (isSmall ? '0.62rem' : '0.68rem') + ';letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:6px;white-space:nowrap;min-height:44px;min-width:80px;flex-shrink:0;">Close</button>' +
       '</div>' +
 
-      '</div>';
+      '</div>' +
+      '<style>' +
+        '@keyframes sdfFadeIn{from{opacity:0}to{opacity:1}}' +
+        '@keyframes sdfSlideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}' +
+        '#sdf-thankyou,#sdf-thankyou *{box-sizing:border-box;}' +
+      '</style>';
 
     document.body.appendChild(overlay);
 
@@ -1009,16 +990,17 @@ document.addEventListener('DOMContentLoaded', function() {
       },1000);
     }
 
+    var qrSize = isSmall ? 68 : 78;
     var qrEl = document.getElementById('sdf-qr');
-    if(qrEl) drawQR(qrEl, waUrl);
+    if(qrEl){ qrEl.width = qrSize; qrEl.height = qrSize; drawQR(qrEl, waUrl); }
   }
 
-  function _cell(label, value, borderRight, borderBottom, mono) {
-    return '<div style="padding:0.55rem 0.75rem;' +
+  function _cell(label, value, borderRight, borderBottom, mono, fsBig, fsLabel) {
+    return '<div style="padding:0.45rem 0.6rem;' +
       (borderBottom ? 'border-bottom:0.5px solid #1e1e1e;' : '') +
       (borderRight  ? 'border-right:0.5px solid #1e1e1e;'  : '') + '">' +
-      '<p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">' + label + '</p>' +
-      '<p style="font-size:0.73rem;color:#fff;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;' + (mono ? 'font-family:monospace;' : '') + '">' + value + '</p>' +
+      '<p style="font-size:' + (fsLabel||'0.56rem') + ';color:rgba(255,255,255,0.3);margin:0 0 2px;letter-spacing:0.07em;text-transform:uppercase;">' + label + '</p>' +
+      '<p style="font-size:' + (fsBig||'0.72rem') + ';color:#fff;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;' + (mono ? 'font-family:monospace;' : '') + '">' + value + '</p>' +
       '</div>';
   }
 
