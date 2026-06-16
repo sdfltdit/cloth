@@ -861,37 +861,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const vw      = window.innerWidth;
     const isMob   = vw < 480;
     const isSmall = vw < 360;
-    const p       = isSmall ? '0.65rem' : isMob ? '0.75rem 0.9rem' : '0.9rem 1.25rem';
-    const pSm     = isSmall ? '0.6rem'  : isMob ? '0.65rem 0.9rem' : '0.75rem 1.25rem';
-    const fsBig   = isSmall ? '0.68rem' : '0.75rem';
-    const fsLabel = isSmall ? '0.5rem'  : '0.56rem';
+    const p       = isSmall ? '0.65rem' : isMob ? '0.75rem 0.9rem' : '0.7rem 1rem';
+    const pSm     = isSmall ? '0.6rem'  : isMob ? '0.65rem 0.9rem' : '0.6rem 1rem';
+    const fsBig   = isSmall ? '0.68rem' : isMob ? '0.75rem' : '0.7rem';
+    const fsLabel = isSmall ? '0.5rem'  : isMob ? '0.56rem' : '0.52rem';
 
     const overlay = document.createElement('div');
     overlay.id = 'sdf-thankyou';
     overlay.style.cssText = [
       'position:fixed;top:0;left:0;right:0;bottom:0',
       'background:rgba(8,8,8,0.97)',
-      'display:flex;align-items:flex-start;justify-content:center',
+      'display:flex;align-items:' + (isMob ? 'flex-start' : 'center') + ';justify-content:center',
       'z-index:9999',
       'overflow-y:auto;-webkit-overflow-scrolling:touch',
-      'padding:' + (isMob ? '0' : '0.75rem'),
+      'padding:' + (isMob ? '0' : '1.5rem'),
       'animation:sdfFadeIn 0.3s ease forwards',
     ].join(';');
 
     overlay.innerHTML =
       '<div style="' +
-        'max-width:460px;width:100%;' +
+        'max-width:' + (isMob ? '100%' : '400px') + ';width:100%;' +
         'background:#111;' +
         'border:' + (isMob ? 'none' : '0.5px solid #2a2a2a') + ';' +
         'border-radius:' + (isMob ? '0' : '10px') + ';' +
         'overflow:hidden;' +
-        (isMob ? 'min-height:100vh;min-height:100dvh;' : 'margin:auto;') +
+        (isMob ? 'min-height:100vh;min-height:100dvh;' : '') +
         'animation:sdfSlideUp 0.35s ease forwards;' +
       '">' +
 
       /* HEADER */
-      '<div style="background:#cc0000;padding:' + p + ';display:flex;align-items:center;gap:10px;">' +
-        '<div style="width:30px;height:30px;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.45);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.95rem;color:#fff;">✓</div>' +
+      '<div style="background:#1a7a3c;padding:' + p + ';display:flex;align-items:center;gap:10px;">' +
+        '<div style="width:30px;height:30px;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.55);border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:0.95rem;color:#fff;">✓</div>' +
         '<div style="flex:1;min-width:0;">' +
           '<p style="font-size:' + fsLabel + ';letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin:0 0 1px;">Submission confirmed</p>' +
           '<p style="font-size:' + (isSmall ? '0.82rem' : '0.9rem') + ';font-weight:600;color:#fff;margin:0;">Message Received</p>' +
@@ -908,8 +908,8 @@ document.addEventListener('DOMContentLoaded', function() {
           '<span style="font-size:' + (isSmall ? '0.62rem' : '0.68rem') + ';color:rgba(255,255,255,0.4);">Expected response in</span>' +
           '<span id="sdf-cd" style="font-family:monospace;font-size:' + (isSmall ? '0.82rem' : '0.9rem') + ';color:#fff;margin-left:auto;flex-shrink:0;">48:00:00</span>' +
         '</div>' +
-        '<div style="height:3px;background:#1e1e1e;border-radius:2px;overflow:hidden;">' +
-          '<div id="sdf-bar" style="height:100%;width:100%;background:#cc0000;border-radius:2px;transition:width 1s linear;"></div>' +
+        '<div style="height:4px;background:#1e1e1e;border-radius:2px;overflow:hidden;">' +
+          '<div id="sdf-bar" style="height:100%;width:100%;background:#22c55e;border-radius:2px;transition:width 1s linear;animation:sdfBarColor 172800s linear forwards;"></div>' +
         '</div>' +
         '<p style="font-size:' + (isSmall ? '0.55rem' : '0.6rem') + ';color:rgba(255,255,255,0.25);margin:5px 0 0;line-height:1.5;">Typically within 2 hours · Max 48 hours · Mon–Sat 9AM–6PM BST</p>' +
       '</div>' +
@@ -970,6 +970,13 @@ document.addEventListener('DOMContentLoaded', function() {
       '<style>' +
         '@keyframes sdfFadeIn{from{opacity:0}to{opacity:1}}' +
         '@keyframes sdfSlideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}' +
+        '@keyframes sdfBarColor{' +
+          '0%{background:#22c55e}' +
+          '60%{background:#22c55e}' +
+          '75%{background:#eab308}' +
+          '90%{background:#f97316}' +
+          '100%{background:#cc0000}' +
+        '}' +
         '#sdf-thankyou,#sdf-thankyou *{box-sizing:border-box;}' +
       '</style>';
 
@@ -982,10 +989,18 @@ document.addEventListener('DOMContentLoaded', function() {
     var barEl = document.getElementById('sdf-bar');
     function fmt(s){return[Math.floor(s/3600),Math.floor((s%3600)/60),s%60].map(function(n){return String(n).padStart(2,'0');}).join(':');}
     if(cdEl&&barEl){
+      function getBarColor(rem, total) {
+        var pct = rem / total;
+        if (pct > 0.40) return '#22c55e';
+        if (pct > 0.25) return '#eab308';
+        if (pct > 0.10) return '#f97316';
+        return '#cc0000';
+      }
       var iv=setInterval(function(){
         remaining=Math.max(0,remaining-1);
         cdEl.textContent=fmt(remaining);
         barEl.style.width=((remaining/TOTAL)*100).toFixed(3)+'%';
+        barEl.style.background=getBarColor(remaining,TOTAL);
         if(remaining===0)clearInterval(iv);
       },1000);
     }
