@@ -1,32 +1,78 @@
-# Gzip compression
+# ============================================================
+# GZIP COMPRESSION
+# ============================================================
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css
   AddOutputFilterByType DEFLATE application/javascript
   AddOutputFilterByType DEFLATE application/json
   AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE font/woff2 font/woff
 </IfModule>
 
-# Browser caching
+# ============================================================
+# BROWSER CACHING
+# ============================================================
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType text/html "access plus 1 hour"
-  ExpiresByType text/css "access plus 1 year"
-  ExpiresByType application/javascript "access plus 1 year"
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/html                "access plus 1 hour"
+  ExpiresByType text/css                 "access plus 1 year"
+  ExpiresByType application/javascript   "access plus 1 year"
+  ExpiresByType image/webp               "access plus 1 year"
+  ExpiresByType image/jpeg               "access plus 1 year"
+  ExpiresByType image/png                "access plus 1 year"
+  ExpiresByType image/svg+xml            "access plus 1 year"
+  ExpiresByType font/woff2               "access plus 1 year"
+  ExpiresByType font/woff                "access plus 1 year"
 </IfModule>
 
-# Security headers
+# ============================================================
+# SECURITY HEADERS
+# ============================================================
 <IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
-  Header set X-Frame-Options "DENY"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
-  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # --- আগে থেকে আছে (ঠিক আছে) ---
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # --- নতুন: X-XSS-Protection (পুরনো browser-এর জন্য) ---
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # --- নতুন: Strict Transport Security (HTTPS enforce করে) ---
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # --- নতুন: Cross-Origin headers (safe values) ---
+  Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
+  Header always set Cross-Origin-Resource-Policy "cross-origin"
+  # COEP: "unsafe-none" রাখলাম কারণ আপনার site-এ
+  # WhatsApp widget, external images আছে — "require-corp" দিলে ভাঙতে পারে
+  Header always set Cross-Origin-Embedder-Policy "unsafe-none"
+
+  # --- নতুন: Content Security Policy ---
+  # safe-mode: 'unsafe-inline' রাখা হয়েছে কারণ আপনার site-এ
+  # inline JS/CSS আছে। ভবিষ্যতে nonce-based CSP-তে upgrade করতে পারবেন।
+  Header always set Content-Security-Policy "\
+    default-src 'self'; \
+    script-src 'self' 'unsafe-inline' https://wa.me https://cdn.jsdelivr.net; \
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
+    font-src 'self' data: https://fonts.gstatic.com; \
+    img-src 'self' data: https: blob:; \
+    connect-src 'self' https://wa.me; \
+    frame-src https://www.youtube.com https://www.google.com; \
+    object-src 'none'; \
+    base-uri 'self'; \
+    form-action 'self' https://wa.me"
+
+  # --- নতুন: Cookie hardening ---
+  # আপনার site যদি PHP session ব্যবহার করে, এটা cookie সুরক্ষিত করে
+  Header always edit Set-Cookie ^(.*)$ "$1; HttpOnly; Secure; SameSite=Strict"
+
 </IfModule>
 
-# Canonical domain (www redirect)
+# ============================================================
+# CANONICAL DOMAIN — www redirect (আগে থেকেই ঠিক আছে)
+# ============================================================
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
