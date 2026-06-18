@@ -1,0 +1,408 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+export const prerender = false;
+
+const pageTitle = "Schedule a Factory Visit | SDF Clothing Bangladesh";
+const pageDescription = "Book an in-person factory visit at SDF Clothing, Dhaka & Narayanganj. Tour production lines, review samples, conduct audits or hold business discussions. B2B visits only. Minimum 5 working days notice.";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  datePublished="2026-06-18"
+  dateModified={new Date().toISOString().split("T")[0]}
+>
+
+<div id="sdf-booking-root"></div>
+
+<script type="module">
+const G = "#C9A84C";
+const BG = "#0A0A0A";
+const S1 = "#111111";
+const S2 = "#181818";
+const S3 = "#222222";
+const BD = "#2C2C2C";
+const T1 = "#FFFFFF";
+const T2 = "#888888";
+const T3 = "#404040";
+const GREEN = "#22c55e";
+
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const DAY_LABELS = ["Su","Mo","Tu","We","Th","Fr","Sa"];
+
+const VISIT_TYPES = [
+  { id:"tour",     label:"Factory Tour",               dur:"3–4 hrs",   desc:"Walk through production lines — knitting, dyeing, CMT, QC & certifications" },
+  { id:"business", label:"Business Discussion",        dur:"1.5–2 hrs", desc:"Pricing, MOQ, lead times, supply terms & capacity planning" },
+  { id:"sample",   label:"Sample Review",              dur:"2–3 hrs",   desc:"Review samples, discuss tech packs, materials & finishing options" },
+  { id:"audit",    label:"Quality / Compliance Audit", dur:"Full day",  desc:"BSCI, GOTS, ISO or WRAP audit — book 7 days ahead for audit team availability" },
+  { id:"partner",  label:"Partnership Meeting",        dur:"2 hrs",     desc:"Volume planning, long-term supply agreements & exclusivity discussions" },
+  { id:"inspect",  label:"Production Inspection",      dur:"Half day",  desc:"In-process or final AQL inspection for an active or upcoming order" },
+];
+
+const TIMEZONES = [
+  "UTC−08 Los Angeles (PST)","UTC−05 New York (EST)","UTC+00 London (GMT)",
+  "UTC+01 Paris / Berlin (CET)","UTC+02 Cairo / Johannesburg (EET)",
+  "UTC+03 Moscow / Riyadh (MSK)","UTC+04 Dubai (GST)",
+  "UTC+05:30 Dhaka / Kolkata (BST/IST)","UTC+07 Bangkok / Jakarta (ICT)",
+  "UTC+08 Singapore / Beijing (SGT)","UTC+09 Tokyo / Seoul (JST)",
+  "UTC+10 Sydney (AEST)","UTC+12 Auckland (NZST)","Other",
+];
+
+const TIMES = ["09:00","09:30","10:00","10:30","11:00","11:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00"];
+const BIZ_TYPES = ["Fashion Brand / Label","Wholesale Buyer","Sourcing Agent / Buying House","E-commerce Brand","Retail Business","Trade Buyer","Other"];
+const ORDER_RANGES = ["300 – 500 pieces","500 – 2,000 pieces","2,000 – 10,000 pieces","10,000 – 50,000 pieces","50,000+ pieces","Not sure yet"];
+const PRODUCTS = ["T-Shirts & Basics","Hoodies & Sweatshirts","Activewear / Sportswear","Dresses & Blouses","Jackets & Outerwear","Polo Shirts","Workwear","Accessories (Hats, Bags)","Other"];
+const REFERRALS = ["Google Search","LinkedIn","Trade Show / Exhibition","Industry Referral","Social Media","Other"];
+const CERTS = ["GOTS","OEKO-TEX","ISO 9001","BSCI","SEDEX","SA8000","WRAP","ISO 14001","GRS","OCS","C-TPAT","BCI","RCS"];
+
+function formatTime(t) {
+  if (!t) return "";
+  const [h, m] = t.split(":").map(Number);
+  const p = h >= 12 ? "PM" : "AM";
+  return `${h > 12 ? h - 12 : h || 12}:${String(m).padStart(2, "0")} ${p}`;
+}
+function formatDate(sd) {
+  if (!sd) return "";
+  return new Date(sd.y, sd.m, sd.d).toLocaleDateString("en-US", {
+    weekday: "long", year: "numeric", month: "long", day: "numeric",
+  });
+}
+
+const css = `
+  .sdf-booking * { box-sizing: border-box; }
+  .sdf-booking { background: ${BG}; min-height: 100vh; font-family: system-ui,-apple-system,sans-serif; color: ${T1}; }
+  .sdf-inp { width: 100%; background: ${S2}; border: 1px solid ${BD}; border-radius: 8px; color: ${T1}; padding: 10px 12px; font-size: 13px; outline: none; font-family: inherit; }
+  .sdf-inp:focus { border-color: ${G}; }
+  .sdf-lbl { color: ${T3}; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 6px; }
+  .sdf-btn-vtype { background: transparent; border: 1px solid ${BD}; border-radius: 10px; padding: 12px; cursor: pointer; text-align: left; transition: all 0.12s; width: 100%; }
+  .sdf-btn-vtype.active { background: rgba(201,168,76,0.08); border-color: ${G}; }
+  .sdf-btn-day { background: transparent; border: 1px solid transparent; border-radius: 7px; padding: 8px 3px; font-size: 12px; cursor: pointer; text-align: center; transition: all 0.1s; color: ${T1}; width: 100%; }
+  .sdf-btn-day:disabled { color: ${T3}; cursor: not-allowed; }
+  .sdf-btn-day.today { border-color: rgba(201,168,76,0.25); color: ${G}; }
+  .sdf-btn-day.selected { background: ${G}; color: #000; font-weight: 700; }
+  .sdf-btn-day:hover:not(:disabled):not(.selected) { background: ${S3}; }
+  .sdf-btn-time { background: ${S2}; border: 1px solid ${BD}; border-radius: 8px; padding: 9px 6px; font-size: 12px; cursor: pointer; color: ${T2}; transition: all 0.12s; width: 100%; }
+  .sdf-btn-time.active { background: ${G}; color: #000; border-color: ${G}; font-weight: 600; }
+  .sdf-btn-product { background: transparent; color: ${T2}; border: 1px solid ${BD}; border-radius: 6px; padding: 6px 12px; font-size: 12px; cursor: pointer; transition: all 0.12s; }
+  .sdf-btn-product.active { background: rgba(201,168,76,0.1); color: ${G}; border-color: ${G}; }
+  .sdf-btn-primary { background: ${G}; color: #000; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; width: 100%; }
+  .sdf-btn-primary:disabled { background: ${S3}; color: ${T3}; cursor: not-allowed; }
+  .sdf-btn-back { background: transparent; border: 1px solid ${BD}; border-radius: 12px; color: ${T2}; padding: 12px; font-size: 14px; cursor: pointer; flex: 1; }
+  .sdf-step-active { font-size: 13px; color: ${T1}; font-weight: 500; }
+  .sdf-step-done { font-size: 13px; color: ${T2}; }
+  .sdf-step-todo { font-size: 13px; color: ${T3}; }
+`;
+
+const styleEl = document.createElement("style");
+styleEl.textContent = css;
+document.head.appendChild(styleEl);
+
+let state = {
+  step: 1,
+  month: new Date().getMonth(),
+  year: new Date().getFullYear(),
+  selDate: null,
+  selTime: null,
+  visitType: "tour",
+  timezone: "UTC+05:30 Dhaka / Kolkata (BST/IST)",
+  products: [],
+  submitted: false,
+  loading: false,
+  apiError: false,
+  form: {
+    name: "", company: "", website: "", bizType: "Fashion Brand / Label",
+    country: "", email: "", phone: "", whatsapp: "",
+    orderRange: "Not sure yet", referral: "Google Search", nda: false, notes: "",
+  }
+};
+
+function vt() { return VISIT_TYPES.find(v => v.id === state.visitType); }
+function canConfirm() { return state.form.name && state.form.company && state.form.email && state.form.country && state.form.nda; }
+
+function render() {
+  const root = document.getElementById("sdf-booking-root");
+  if (!root) return;
+
+  const now = new Date();
+  const firstDay = new Date(state.year, state.month, 1).getDay();
+  const daysInMonth = new Date(state.year, state.month + 1, 0).getDate();
+
+  function isDisabled(d) {
+    const date = new Date(state.year, state.month, d);
+    const t = new Date(); t.setHours(0,0,0,0);
+    return date <= t || date.getDay() === 0 || date.getDay() === 6;
+  }
+  function isToday(d) { return d === now.getDate() && state.month === now.getMonth() && state.year === now.getFullYear(); }
+  function isSelected(d) { return state.selDate?.d === d && state.selDate?.m === state.month && state.selDate?.y === state.year; }
+
+  if (state.submitted) {
+    root.innerHTML = `
+    <div class="sdf-booking" style="display:flex;align-items:center;justify-content:center;padding:40px 20px;">
+      <div style="background:${S1};border:1px solid ${BD};border-radius:20px;padding:48px 40px;max-width:560px;width:100%;text-align:center;">
+        <div style="width:60px;height:60px;background:rgba(201,168,76,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:2px solid ${G};">
+          <span style="color:${G};font-size:24px;font-weight:700;">✓</span>
+        </div>
+        <h2 style="color:${T1};margin:0 0 6px;font-size:22px;font-weight:600;">Visit Request Confirmed</h2>
+        <p style="color:${T2};margin:0 0 28px;font-size:14px;">Confirmation sent to <span style="color:${G};">${state.form.email}</span></p>
+        <div style="background:${S2};border-radius:14px;padding:22px;text-align:left;margin-bottom:18px;">
+          <div style="color:${T3};font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;border-bottom:1px solid ${BD};padding-bottom:10px;">Booking Summary</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            ${[
+              ["Date", `${MONTHS[state.selDate.m].slice(0,3)} ${state.selDate.d}, ${state.selDate.y}`],
+              ["Time", formatTime(state.selTime)],
+              ["Visit Type", vt().label + " · " + vt().dur],
+              ["Timezone", state.timezone.split(" ").slice(0,2).join(" ")],
+              ["Contact", state.form.name],
+              ["Company", state.form.company],
+              ["Business Type", state.form.bizType],
+              ["Est. Order", state.form.orderRange],
+            ].map(([k,v]) => `<div><div style="color:${T3};font-size:11px;margin-bottom:3px;">${k}</div><div style="color:${T1};font-size:13px;font-weight:500;">${v}</div></div>`).join("")}
+          </div>
+        </div>
+        <div style="background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:16px;text-align:left;margin-bottom:16px;">
+          <div style="color:${G};font-size:12px;font-weight:600;margin-bottom:10px;">Automated follow-up schedule</div>
+          ${["Confirmation email with factory address — sent now","NDA + pre-visit questionnaire — 5 business days before","Visit reminder with directions — 48 hours before","Final reminder + contact number — 2 hours before"].map(r=>`<div style="display:flex;gap:8px;margin-bottom:6px;"><span style="color:${T3};font-size:12px;">→</span><span style="color:${T2};font-size:12px;">${r}</span></div>`).join("")}
+        </div>
+        <p style="color:${T3};font-size:11px;margin:0;line-height:1.6;">Our team reviews requests within 2 business hours (9am–6pm BST+5:30).<br>WhatsApp: <span style="color:${G};">+880 1819 172080</span> · visits@sdfltd.com</p>
+      </div>
+    </div>`;
+    return;
+  }
+
+  const stepsHTML = `
+  <div style="display:flex;align-items:center;margin-bottom:28px;">
+    ${["Visit type & date","Your details","Confirmation"].map((l,i) => `
+      <div style="display:flex;align-items:center;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;background:${state.step >= i+1 ? G : "transparent"};border:1px solid ${state.step >= i+1 ? G : BD};color:${state.step >= i+1 ? "#000" : T3};">${state.step > i+1 ? "✓" : i+1}</div>
+          <span class="${state.step === i+1 ? "sdf-step-active" : state.step > i+1 ? "sdf-step-done" : "sdf-step-todo"}">${l}</span>
+        </div>
+        ${i < 2 ? `<div style="width:36px;height:1px;background:${state.step > i+1 ? G : BD};margin:0 12px;"></div>` : ""}
+      </div>`).join("")}
+  </div>`;
+
+  let contentHTML = "";
+
+  if (state.step === 1) {
+    const calDays = Array(firstDay).fill('<div></div>').join("") +
+      Array.from({length: daysInMonth}, (_,i) => {
+        const d = i+1;
+        const dis = isDisabled(d);
+        const cls = isSelected(d) ? "selected" : isToday(d) ? "today" : "";
+        return `<button class="sdf-btn-day ${cls}" ${dis?"disabled":""} data-day="${d}">${d}</button>`;
+      }).join("");
+
+    contentHTML = `
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start;">
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div style="background:${S1};border:1px solid ${BD};border-radius:16px;padding:24px;">
+          <div class="sdf-lbl">Visit type</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            ${VISIT_TYPES.map(v => `
+              <button class="sdf-btn-vtype ${state.visitType===v.id?"active":""}" data-vtype="${v.id}">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+                  <span style="color:${state.visitType===v.id?G:T1};font-size:13px;font-weight:500;">${v.label}</span>
+                  <span style="background:${S3};border-radius:4px;padding:2px 6px;font-size:10px;color:${T2};white-space:nowrap;margin-left:6px;">${v.dur}</span>
+                </div>
+                <div style="color:${T3};font-size:11px;line-height:1.5;">${v.desc}</div>
+              </button>`).join("")}
+          </div>
+        </div>
+        <div style="background:${S1};border:1px solid ${BD};border-radius:16px;padding:24px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+            <button id="cal-prev" style="background:transparent;border:1px solid ${BD};border-radius:8px;color:${T2};cursor:pointer;padding:5px 11px;font-size:15px;">‹</button>
+            <span style="color:${T1};font-weight:500;font-size:15px;">${MONTHS[state.month]} ${state.year}</span>
+            <button id="cal-next" style="background:transparent;border:1px solid ${BD};border-radius:8px;color:${T2};cursor:pointer;padding:5px 11px;font-size:15px;">›</button>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:6px;">
+            ${DAY_LABELS.map(d=>`<div style="text-align:center;color:${T3};font-size:10px;font-weight:500;padding:3px 0;text-transform:uppercase;letter-spacing:0.06em;">${d}</div>`).join("")}
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;">${calDays}</div>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid ${BD};">
+            <div class="sdf-lbl">Your timezone</div>
+            <select id="tz-select" class="sdf-inp" style="cursor:pointer;">
+              ${TIMEZONES.map(z=>`<option ${state.timezone===z?"selected":""}>${z}</option>`).join("")}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="background:${S1};border:1px solid ${BD};border-radius:16px;padding:20px;">
+          <div class="sdf-lbl" style="margin-bottom:12px;">${state.selDate ? `${MONTHS[state.selDate.m].slice(0,3)} ${state.selDate.d} — available times` : "Select a date first"}</div>
+          ${state.selDate ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+            ${TIMES.map(t=>`<button class="sdf-btn-time ${state.selTime===t?"active":""}" data-time="${t}">${formatTime(t)}</button>`).join("")}
+          </div>` : `<div style="text-align:center;padding:24px 0;color:${T3};font-size:13px;">Pick a date to see available slots</div>`}
+        </div>
+        ${state.selDate && state.selTime ? `
+        <div style="background:${S1};border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:14px;">
+          <div style="color:${G};font-size:11px;font-weight:600;margin-bottom:6px;">Selected</div>
+          <div style="color:${T1};font-size:13px;font-weight:500;margin-bottom:2px;">${formatDate(state.selDate)}</div>
+          <div style="color:${T2};font-size:12px;margin-bottom:2px;">${formatTime(state.selTime)} · ${vt().label}</div>
+          <div style="color:${T3};font-size:11px;">${state.timezone.split(" ").slice(0,2).join(" ")} · ${vt().dur}</div>
+        </div>` : ""}
+        <button id="btn-step2" class="sdf-btn-primary" ${!state.selDate||!state.selTime?"disabled":""}>Continue → Your details</button>
+        <div style="background:${S1};border:1px solid ${BD};border-radius:12px;padding:16px;">
+          <div style="color:${T3};font-size:10px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">Before your visit</div>
+          ${["Bring a valid passport or national ID — required for all factory visitors as part of our BSCI compliance visitor log. A business card is also recommended.","Factory address confirmed after booking — shared via email for security.","NDA required for production floor access — we email it 5 days in advance.","Interpreter available on request — mention in notes if needed.","Minimum 5 working days notice required for all visits."].map(t=>`<div style="display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;"><span style="color:${T3};font-size:12px;margin-top:1px;">—</span><span style="color:${T2};font-size:11px;line-height:1.6;">${t}</span></div>`).join("")}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  if (state.step === 2) {
+    contentHTML = `
+    <div style="max-width:640px;">
+      <div style="background:${S1};border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+        <div>
+          <div style="color:${G};font-size:11px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">Scheduled Visit</div>
+          <div style="color:${T1};font-weight:500;font-size:13px;">${formatDate(state.selDate)} · ${formatTime(state.selTime)} · ${vt().label} (${vt().dur})</div>
+          <div style="color:${T2};font-size:11px;margin-top:2px;">${state.timezone}</div>
+        </div>
+        <button id="btn-change" style="background:transparent;border:1px solid ${BD};border-radius:8px;color:${T2};padding:6px 12px;font-size:12px;cursor:pointer;white-space:nowrap;">Change</button>
+      </div>
+      <div style="background:${S1};border:1px solid ${BD};border-radius:16px;padding:28px;">
+        <h3 style="color:${T1};font-size:15px;font-weight:500;margin:0 0 22px;">Contact & Company Details</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div><div class="sdf-lbl">Full name <span style="color:${G};">*</span></div><input class="sdf-inp" type="text" id="f-name" placeholder="e.g. James Liu" value="${state.form.name}"></div>
+          <div><div class="sdf-lbl">Company / Organization <span style="color:${G};">*</span></div><input class="sdf-inp" type="text" id="f-company" placeholder="e.g. Nordic Apparel AB" value="${state.form.company}"></div>
+          <div><div class="sdf-lbl">Company website</div><input class="sdf-inp" type="url" id="f-website" placeholder="https://yourcompany.com" value="${state.form.website}"></div>
+          <div><div class="sdf-lbl">Business type <span style="color:${G};">*</span></div><select class="sdf-inp" id="f-biztype" style="cursor:pointer;">${BIZ_TYPES.map(b=>`<option ${state.form.bizType===b?"selected":""}>${b}</option>`).join("")}</select></div>
+          <div><div class="sdf-lbl">Country <span style="color:${G};">*</span></div><input class="sdf-inp" type="text" id="f-country" placeholder="e.g. Sweden" value="${state.form.country}"></div>
+          <div><div class="sdf-lbl">Business email <span style="color:${G};">*</span></div><input class="sdf-inp" type="email" id="f-email" placeholder="james@company.com" value="${state.form.email}"></div>
+          <div><div class="sdf-lbl">Phone (with country code)</div><input class="sdf-inp" type="tel" id="f-phone" placeholder="+46 8 555 1234" value="${state.form.phone}"></div>
+          <div><div class="sdf-lbl">WhatsApp (if different)</div><input class="sdf-inp" type="tel" id="f-whatsapp" placeholder="+46 70 555 1234" value="${state.form.whatsapp}"></div>
+          <div style="grid-column:1/-1;">
+            <div class="sdf-lbl">Products of interest</div>
+            <div style="display:flex;flex-wrap:wrap;gap:7px;">
+              ${PRODUCTS.map(p=>`<button class="sdf-btn-product ${state.products.includes(p)?"active":""}" data-product="${p}">${p}</button>`).join("")}
+            </div>
+          </div>
+          <div><div class="sdf-lbl">Estimated order quantity</div><select class="sdf-inp" id="f-order" style="cursor:pointer;">${ORDER_RANGES.map(r=>`<option ${state.form.orderRange===r?"selected":""}>${r}</option>`).join("")}</select></div>
+          <div><div class="sdf-lbl">How did you find us?</div><select class="sdf-inp" id="f-referral" style="cursor:pointer;">${REFERRALS.map(r=>`<option ${state.form.referral===r?"selected":""}>${r}</option>`).join("")}</select></div>
+          <div style="grid-column:1/-1;">
+            <div class="sdf-lbl">Additional notes / special requirements</div>
+            <textarea class="sdf-inp" id="f-notes" rows="3" placeholder="Specific production lines, interpreter language, accessibility, certification documents needed..." style="resize:vertical;line-height:1.6;">${state.form.notes}</textarea>
+          </div>
+          <div style="grid-column:1/-1;background:${S2};border:1px solid ${BD};border-radius:10px;padding:16px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div id="nda-check" style="width:18px;height:18px;border-radius:4px;flex-shrink:0;margin-top:1px;background:${state.form.nda?G:"transparent"};border:1px solid ${state.form.nda?G:T3};display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.12s;">
+                ${state.form.nda?`<span style="color:#000;font-size:11px;font-weight:700;">✓</span>`:""}
+              </div>
+              <span style="color:${T2};font-size:12px;line-height:1.6;">I understand that a Non-Disclosure Agreement (NDA) is required for factory floor access and will be sent to my email prior to the visit. I agree to SDF Clothing's visitor policy. <span style="color:${G};">*</span></span>
+            </div>
+          </div>
+        </div>
+        ${state.apiError ? `<div style="background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.25);border-radius:8px;padding:12px 16px;margin-top:16px;color:#f87171;font-size:13px;">Something went wrong. Please try again or WhatsApp us at +880 1819 172080.</div>` : ""}
+        <div style="margin-top:22px;padding-top:18px;border-top:1px solid ${BD};display:flex;gap:12px;">
+          <button id="btn-back" class="sdf-btn-back">← Back</button>
+          <button id="btn-confirm" class="sdf-btn-primary" style="flex:2;" ${!canConfirm()||state.loading?"disabled":""}>${state.loading?"Sending...":"Confirm Visit Request"}</button>
+        </div>
+        <p style="color:${T3};font-size:11px;text-align:center;margin:14px 0 0;line-height:1.5;">Our team reviews all requests within 2 business hours (9am–6pm Dhaka time). Factory address is shared only upon confirmation.</p>
+      </div>
+    </div>`;
+  }
+
+  root.innerHTML = `
+  <div class="sdf-booking">
+    <div style="background:${S1};border-bottom:1px solid ${BD};padding:14px 40px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="background:#000;border:1px solid ${BD};border-radius:8px;padding:6px 10px;"><span style="color:${T1};font-weight:700;font-size:16px;letter-spacing:-0.02em;">SDF</span></div>
+        <div>
+          <div style="color:${T1};font-weight:500;font-size:14px;line-height:1.2;">SDF Clothing</div>
+          <div style="color:${T3};font-size:11px;">Garment Manufacturers · Dhaka, Bangladesh · Est. 1998</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;">
+        <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;max-width:340px;">
+          ${CERTS.slice(0,6).map(c=>`<span style="background:${S3};border:1px solid ${BD};border-radius:4px;color:${T2};font-size:10px;padding:2px 6px;">${c}</span>`).join("")}
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span style="width:7px;height:7px;background:${GREEN};border-radius:50%;display:inline-block;"></span>
+          <span style="color:${T2};font-size:12px;white-space:nowrap;">Mon–Fri · 9am–5pm</span>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1000px;margin:0 auto;padding:36px 24px;">
+      <div style="margin-bottom:28px;">
+        <h1 style="color:${T1};font-size:22px;font-weight:600;margin:0 0 6px;">Schedule a Factory Visit</h1>
+        <p style="color:${T2};font-size:14px;margin:0;">In-person B2B visits only · Factory floor, Dhaka & Narayanganj · Minimum 5 working days notice</p>
+      </div>
+      ${stepsHTML}
+      ${contentHTML}
+    </div>
+  </div>`;
+
+  // Event listeners
+  document.querySelectorAll(".sdf-btn-vtype").forEach(btn => {
+    btn.addEventListener("click", () => { state.visitType = btn.dataset.vtype; render(); });
+  });
+  document.querySelectorAll(".sdf-btn-day").forEach(btn => {
+    btn.addEventListener("click", () => {
+      state.selDate = { d: parseInt(btn.dataset.day), m: state.month, y: state.year };
+      state.selTime = null;
+      render();
+    });
+  });
+  document.querySelectorAll(".sdf-btn-time").forEach(btn => {
+    btn.addEventListener("click", () => { state.selTime = btn.dataset.time; render(); });
+  });
+  document.querySelectorAll(".sdf-btn-product").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const p = btn.dataset.product;
+      state.products = state.products.includes(p) ? state.products.filter(x=>x!==p) : [...state.products, p];
+      render();
+    });
+  });
+  document.getElementById("cal-prev")?.addEventListener("click", () => {
+    if (state.month === 0) { state.month = 11; state.year--; } else { state.month--; }
+    render();
+  });
+  document.getElementById("cal-next")?.addEventListener("click", () => {
+    if (state.month === 11) { state.month = 0; state.year++; } else { state.month++; }
+    render();
+  });
+  document.getElementById("tz-select")?.addEventListener("change", e => { state.timezone = e.target.value; render(); });
+  document.getElementById("btn-step2")?.addEventListener("click", () => { state.step = 2; render(); });
+  document.getElementById("btn-change")?.addEventListener("click", () => { state.step = 1; render(); });
+  document.getElementById("btn-back")?.addEventListener("click", () => { state.step = 1; render(); });
+  document.getElementById("nda-check")?.addEventListener("click", () => { state.form.nda = !state.form.nda; render(); });
+
+  ["name","company","website","country","email","phone","whatsapp","notes"].forEach(field => {
+    document.getElementById(`f-${field}`)?.addEventListener("input", e => { state.form[field] = e.target.value; });
+  });
+  document.getElementById("f-biztype")?.addEventListener("change", e => { state.form.bizType = e.target.value; });
+  document.getElementById("f-order")?.addEventListener("change", e => { state.form.orderRange = e.target.value; });
+  document.getElementById("f-referral")?.addEventListener("change", e => { state.form.referral = e.target.value; });
+
+  document.getElementById("btn-confirm")?.addEventListener("click", async () => {
+    if (!canConfirm() || state.loading) return;
+    state.loading = true;
+    state.apiError = false;
+    render();
+    try {
+      const res = await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...state.form,
+          selDate: state.selDate,
+          selTime: state.selTime,
+          visitType: vt().label,
+          visitDuration: vt().dur,
+          timezone: state.timezone,
+          products: state.products,
+          formattedDate: formatDate(state.selDate),
+          formattedTime: formatTime(state.selTime),
+        }),
+      });
+      if (res.ok) { state.submitted = true; } else { state.apiError = true; }
+    } catch { state.apiError = true; }
+    state.loading = false;
+    render();
+  });
+}
+
+render();
+</script>
+
+</BaseLayout>
