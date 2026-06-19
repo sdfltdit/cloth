@@ -11,9 +11,7 @@ const pageDescription = "Securely submit your visit supporting documents to SDF 
   datePublished="2026-06-18"
   dateModified={new Date().toISOString().split("T")[0]}
 >
-<Fragment slot="head">
-    <meta name="robots" content="noindex, nofollow" />
-  </Fragment>
+
 <div id="sdf-docs-root"></div>
 
 <script type="module">
@@ -83,6 +81,7 @@ let state = {
   submitted: false,
   loading: false,
   error: null,
+  isCooldown: false,
   files: {},       // { docTypeId: File }
   form: {
     name: "",
@@ -268,8 +267,11 @@ function render() {
           ${["Personal tax identification numbers or national ID numbers","Bank statements or personal financial records","Home address or personal contact details beyond your business email","Any document not directly relevant to your factory visit"].map(t => `<div style="display:flex;gap:8px;margin-bottom:6px;align-items:flex-start;"><span style="color:${T3};font-size:12px;margin-top:1px;">—</span><span style="color:${T3};font-size:12px;line-height:1.5;">${t}</span></div>`).join("")}
         </div>
 
-        <!-- Error -->
-        ${state.error ? `<div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:12px 16px;color:#f87171;font-size:13px;">${state.error}</div>` : ""}
+        <!-- Error / Cooldown notice -->
+        ${state.error ? `<div style="background:${state.isCooldown ? "rgba(201,168,76,0.06)" : "rgba(239,68,68,0.08)"};border:1px solid ${state.isCooldown ? "rgba(201,168,76,0.2)" : "rgba(239,68,68,0.2)"};border-radius:8px;padding:12px 16px;color:${state.isCooldown ? G : "#f87171"};font-size:13px;line-height:1.6;display:flex;gap:8px;align-items:flex-start;">
+          <span style="margin-top:1px;">${state.isCooldown ? "🕐" : "⚠️"}</span>
+          <span>${state.error}</span>
+        </div>` : ""}
 
         <!-- Submit -->
         <button id="btn-submit" class="sdf-btn-primary" ${!canSubmit() || state.loading ? "disabled" : ""}>
@@ -348,7 +350,17 @@ function render() {
         state.submitted = true;
       } else {
         const txt = await res.text();
-        state.error = "Something went wrong. Please try again or email us at contact@sdfltd.com";
+        if (res.status === 429) {
+          // Cooldown limit reached — show the Worker's exact message with remaining days
+          state.isCooldown = true;
+          state.error = txt || "You have reached the maximum number of submissions allowed. Please contact contact@sdfltd.com directly.";
+        } else if (txt && txt.length < 200) {
+          state.isCooldown = false;
+          state.error = txt;
+        } else {
+          state.isCooldown = false;
+          state.error = "Something went wrong. Please try again or email us at contact@sdfltd.com";
+        }
         console.error("Upload error:", txt);
       }
     } catch (err) {
