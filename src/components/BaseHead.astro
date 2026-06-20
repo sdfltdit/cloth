@@ -260,11 +260,11 @@ if (schema) {
 {dateModified && <meta property="article:modified_time" content={dateModified} />}
 {datePublished && <meta property="article:author" content="https://sdfltd.com/about/" />}
 
-<!-- FONT PRELOAD — only above-fold weights get fetchpriority=high -->
+<!-- FONT PRELOAD — all four weights used above the fold (h1=300, body/subtitle=400, headings=500, nav-logo=600) -->
 <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-regular.woff2" crossorigin fetchpriority="high" />
 <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-300.woff2" crossorigin fetchpriority="high" />
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-500.woff2" crossorigin />
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-600.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-500.woff2" crossorigin fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-600.woff2" crossorigin fetchpriority="high" />
 
 <!-- FAVICONS -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -296,13 +296,7 @@ if (schema) {
 <!-- llms.txt -->
 <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt" />
 
-<!-- JSON-LD — merged base + page-specific schemas -->
-<script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
-
-<!-- SERVICE WORKER -->
-<script src="/scripts/sw-register.js" defer data-cfasync="false"></script>
-
-<!-- CLS Prevention -->
+<!-- CLS Prevention — placed before JSON-LD so layout-critical CSS for the hero (LCP element) parses first -->
 <style>
   .index__hero { min-height: 90vh; }
   .index__hero-title { font-size: clamp(2rem,5vw,4rem); font-weight: 300; line-height: 1.15; }
@@ -310,3 +304,9 @@ if (schema) {
   .hero-image-container { aspect-ratio: 16/9; width: 100%; }
   @keyframes spin { to { transform: rotate(360deg); } }
 </style>
+
+<!-- JSON-LD — merged base + page-specific schemas -->
+<script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
+
+<!-- SERVICE WORKER -->
+<script src="/scripts/sw-register.js" defer data-cfasync="false"></script>
