@@ -5,20 +5,44 @@ export const prerender = true;
 
 const pageTitle = "OEM vs ODM vs CMT Manufacturing | Production Models";
 const pageDescription = "Manufacture with SDF's production models. We specialize in OEM ODM CMT manufacturing for global fashion brands.";
-const canonicalUrl = "https://sdfltd.com/insights/oem-vs-odm-vs-cmt/"
+const canonicalUrl = "https://sdfltd.com/insights/oem-vs-odm-vs-cmt/";
+const datePublished = "2024-06-01";
+const dateModified = new Date().toISOString().split("T")[0];
+
+// Article schema — passed to BaseLayout → BaseHead where it is merged
+// into the single @graph using set:html (correct Astro pattern).
+// Previously this was an inline <script is:inline>{JSON.stringify(...)}
+// block which HTML-encoded the JSON output, breaking Google's parser.
+const articleSchema = {
+  "@type": "Article",
+  "@id": canonicalUrl + "#article",
+  "headline": "OEM vs ODM vs CMT Manufacturing — Complete Guide for Fashion Brands",
+  "description": pageDescription,
+  "datePublished": datePublished,
+  "dateModified": dateModified,
+  "author": { "@type": "Organization", "@id": "https://sdfltd.com/#org", "name": "SDF Clothing" },
+  "publisher": { "@id": "https://sdfltd.com/#org" },
+  "url": canonicalUrl,
+  "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalUrl },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://sdfltd.com/insights/" },
+      { "@type": "ListItem", "position": 3, "name": "OEM vs ODM vs CMT", "item": canonicalUrl }
+    ]
+  }
+};
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
-
-  <script type="application/ld+json" is:inline>{JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "OEM vs ODM vs CMT Manufacturing — Complete Guide for Fashion Brands",
-    "description": pageDescription,
-    "author": { "@type": "Organization", "name": "SDF Clothing" },
-    "publisher": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
-    "url": canonicalUrl
-  })}</script>
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  datePublished={datePublished}
+  dateModified={dateModified}
+  schema={articleSchema}
+>
 
   <div class="container" style="padding: 3rem 1.5rem 5rem;">
 
@@ -92,11 +116,7 @@ const canonicalUrl = "https://sdfltd.com/insights/oem-vs-odm-vs-cmt/"
       </div>
 
       <p style="font-size: 0.85rem; color: #aaa; margin-top: 1.5rem; line-height: 1.8;">
-        For a complete overview of clothing manufacturers in Bangladesh — including factory types, MOQ ranges, certifications, and sourcing guide — read our <a href="/clothing-manufacturers" style="color: #e00; text-decoration: none;">complete clothing manufacturers guide</a>.
-      </p>
-
-      <p style="font-size:0.85rem; color:#aaa; margin-top:1.75rem; line-height:1.85;">
-        For a complete overview of clothing manufacturers in Bangladesh — including factory types, MOQ ranges, certifications, sourcing methods, and product categories — read our <a href="/clothing-manufacturers" style="color:#e00; text-decoration:none;">complete clothing manufacturers guide</a>.
+        For a complete overview of clothing manufacturers in Bangladesh — including factory types, MOQ ranges, certifications, sourcing methods, and product categories — read our <a href="/clothing-manufacturers" style="color: #e00; text-decoration: none;">complete clothing manufacturers guide</a>.
       </p>
 
     </article>
@@ -105,7 +125,3 @@ const canonicalUrl = "https://sdfltd.com/insights/oem-vs-odm-vs-cmt/"
 
     
     </BaseLayout>
-
-
-
-
