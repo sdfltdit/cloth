@@ -1,33 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCompanyAge } from '../utils/companyAge';
-import { schemaOrganization, schemaPerson, SITE_URL as SITE } from '../data/schema';
 export const prerender = true;
 
 const yearsExp = getCompanyAge();
 
 const pageTitle = "Apparel Manufacturer Bangladesh | SDF Clothing | Since 1998";
 const pageDescription = "SDF Clothing — full-package apparel manufacturer in Dhaka, Bangladesh since 1998. OEM & private label apparel production for international brands. MOQ 300 pieces, GOTS certified, 13 certifications, 0% EU import duty. 200+ global brands served.";
----
 
-<BaseLayout
-  title={pageTitle}
-  description={pageDescription}
-  schema={[schemaOrganization, schemaPerson]}
-  datePublished="1998-08-22"
-  dateModified={new Date().toISOString().split("T")[0]}
->
+// today evaluated at build time — used for dateModified in AboutPage schema
+const today = new Date().toISOString().split("T")[0];
 
-<!-- ============================================================
-  CANONICAL & ROBOTS (Google indexing check)
-  - prerender = true ensures static HTML at build time
-  - No noindex anywhere on this page
-  - Canonical is set via BaseLayout using the page URL
-  - datePublished + dateModified passed for freshness signals
-============================================================ -->
-
-<script type="application/ld+json">
-{
+// All page-specific schemas in one @graph object.
+// Passed via schema prop → BaseLayout → BaseHead → set:html (correct Astro pattern).
+// Previously these lived in a raw <script type="application/ld+json"> block where
+// new Date().toISOString() appeared as literal JS text, breaking Google's JSON parser.
+const aboutSchemas = {
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -71,8 +59,10 @@ const pageDescription = "SDF Clothing — full-package apparel manufacturer in D
         "hoursAvailable": "Mo-Sa 08:00-18:00"
       },
       "sameAs": [
-        "https://linkedin.com/company/sdfclothing",
-        "https://twitter.com/sdfclothing"
+        "https://www.linkedin.com/company/clothing-manufacturers",
+        "https://www.facebook.com/ClothingManufacturers/",
+        "https://x.com/clothing_makers",
+        "https://www.wikidata.org/wiki/Q139678386"
       ],
       "hasCredential": [
         { "@type": "EducationalOccupationalCredential", "name": "GOTS — Global Organic Textile Standard" },
@@ -113,7 +103,7 @@ const pageDescription = "SDF Clothing — full-package apparel manufacturer in D
       "mainEntity": { "@id": "https://sdfltd.com/#org" },
       "author": { "@id": "https://sdfltd.com/#founder" },
       "datePublished": "1998-08-22",
-      "dateModified": new Date().toISOString().split("T")[0],
+      "dateModified": today,
       "inLanguage": "en",
       "isPartOf": { "@id": "https://sdfltd.com/#org" }
     },
@@ -159,8 +149,25 @@ const pageDescription = "SDF Clothing — full-package apparel manufacturer in D
       ]
     }
   ]
-}
-</script>
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={aboutSchemas}
+  datePublished="1998-08-22"
+  dateModified={today}
+>
+
+<!-- ============================================================
+  CANONICAL & ROBOTS (Google indexing check)
+  - prerender = true ensures static HTML at build time
+  - No noindex anywhere on this page
+  - Canonical is set via BaseLayout using the page URL
+  - datePublished + dateModified passed for freshness signals
+============================================================ -->
+
 
 <style>
   /* ============================================================
