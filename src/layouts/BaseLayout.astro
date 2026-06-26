@@ -96,12 +96,13 @@ const currentUrl = Astro.url.href;
     <!-- Cloudflare Rocket Loader Disable -->
     <meta name="cf-2fa-verify" content="off" />
 
-    <!-- Global stylesheet (Tailwind utilities + site CSS) — loaded non-blocking.
-         Critical above-the-fold CSS is already inline above, so the LCP element
-         (hero subtitle) paints without waiting on this file. media="print" trick
-         downloads it at high priority but does not block rendering; the onload
-         swap applies it the instant it's ready. -->
-    <link rel="stylesheet" href={globalCssUrl} media="print" onload="this.media='all'" fetchpriority="high" />
+    <!-- Global stylesheet (Tailwind utilities + site CSS) — loaded non-blocking
+         using the standard preload-and-swap pattern. Critical above-the-fold
+         CSS is already inline above (hero title/subtitle sizing, layout), so
+         this file can finish loading after first paint without affecting the
+         LCP element. Fonts are preloaded separately above and take priority. -->
+    <link rel="preload" as="style" href={globalCssUrl} />
+    <link rel="stylesheet" href={globalCssUrl} media="print" onload="this.media='all'; this.onload=null;" />
     <noscript><link rel="stylesheet" href={globalCssUrl} /></noscript>
 
     <!-- Non-critical scripts: defer, no type=module (avoids extra parse microtask) -->
