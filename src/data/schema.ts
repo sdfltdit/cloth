@@ -7,7 +7,7 @@ export const SITE_URL = "https://sdfltd.com";
 
 export const schemaOrganization = {
   "@context": "https://schema.org",
-  "@type": ["Organization", "LocalBusiness", "ManufacturingBusiness"],
+  "@type": ["Corporation", "ManufacturingBusiness"],
   "@id": SITE_URL + "/#org",
   "name": "SDF Clothing",
   "legalName": "SDF Clothing Ltd",
@@ -29,7 +29,7 @@ export const schemaOrganization = {
     "height": 630
   },
 
-  "description": "SDF Clothing is a vertically integrated B2B clothing manufacturer based in Dhaka, Bangladesh. Founded in 1998 by Chowdhury Remon, we are a direct factory — not an agent, trader, or buying house. We operate yarn spinning, fabric knitting, weaving, dyeing, cutting, sewing, finishing, and warehousing under one ownership. We serve startup and established fashion brands worldwide with low MOQ from 300 pieces, GOTS certification, and 13 international quality certifications. B2B manufacturing only — no retail, no stock garments. Exporting to USA, EU, UK, Canada, Australia, Japan, and UAE.",
+  "description": "SDF Clothing is a world-class, vertically integrated B2B apparel manufacturing factory serving global fashion brands in the USA, UK, and European Union. As a direct clothing manufacturer established in 1998, we offer OEM, ODM, and Private Label production with a low MOQ of 300 pieces. Our facilities include in-house yarn spinning, fabric knitting, dyeing, and high-capacity cut-and-sew lines. We hold 13 international certifications including GOTS and OEKO-TEX, ensuring ethical and sustainable production for the global market.",
 
   "additionalType": [
     "https://schema.org/TextileMill"
@@ -302,7 +302,7 @@ export const schemaOrganization = {
 
   "knowsAbout": [
     "Clothing Manufacturing",
-    "Garment Manufacturing Bangladesh",
+    "Garment Manufacturing",
     "OEM Clothing Manufacturing",
     "ODM Clothing Manufacturing",
     "Private Label Apparel Production",
@@ -327,10 +327,13 @@ export const schemaOrganization = {
     "Pre-Shipment Inspection",
     "Screen Printing and Embroidery",
     "Garment Washing and Finishing",
-    "FOB Export Bangladesh",
+    "FOB Export",
     "EU GSP Duty-Free Compliance",
     "UK DCTS Trade Compliance",
-    "EU Digital Product Passport Compliance"
+    "EU Digital Product Passport Compliance",
+    "B2B Apparel Sourcing",
+    "Supply Chain Transparency",
+    "Circular Fashion Manufacturing"
   ],
 
   // NOTE: "award" array below intentionally lists certification short names as industry recognition signals.
@@ -481,7 +484,7 @@ export const schemaOrganization = {
       "itemOffered": {
         "@type": "Service",
         "name": "Low MOQ Clothing Manufacturing",
-        "description": "Custom clothing manufacturing from 300 pieces per style. B2B only — for fashion brands, not individual buyers.",
+        "description": "Premium custom clothing manufacturing from 300 pieces per style. Direct factory B2B production for USA, UK, and EU markets.",
         "provider": { "@id": SITE_URL + "/#org" }
       },
       "eligibleQuantity": {
@@ -490,17 +493,30 @@ export const schemaOrganization = {
         "unitCode": "C62",
         "unitText": "pieces per style (MOQ)"
       },
-      "eligibleCustomerType": "http://schema.org/Business"
+      "eligibleCustomerType": "http://schema.org/Business",
+      "areaServed": ["US", "GB", "EU"]
     },
     {
       "@type": "Offer",
       "itemOffered": {
         "@type": "Service",
-        "name": "GOTS Certified Organic Cotton Manufacturing",
-        "description": "Organic cotton garment production with GOTS chain-of-custody certification for eco-conscious fashion brands.",
+        "name": "Sustainable Garments Manufacturing",
+        "description": "GOTS and OEKO-TEX certified sustainable garment production using organic cotton and recycled materials.",
         "provider": { "@id": SITE_URL + "/#org" }
       },
-      "eligibleCustomerType": "http://schema.org/Business"
+      "eligibleCustomerType": "http://schema.org/Business",
+      "areaServed": ["US", "GB", "EU"]
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "OEM/ODM Garment Manufacturing",
+        "description": "Full-package OEM and ODM apparel production from design to export.",
+        "provider": { "@id": SITE_URL + "/#org" }
+      },
+      "eligibleCustomerType": "http://schema.org/Business",
+      "areaServed": ["US", "GB", "EU"]
     }
   ]
 };
