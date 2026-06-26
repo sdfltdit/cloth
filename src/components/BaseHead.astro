@@ -268,11 +268,56 @@ if (schema) {
 {dateModified && <meta property="article:modified_time" content={dateModified} />}
 {datePublished && <meta property="article:author" content="https://sdfltd.com/about/" />}
 
-<!-- FONT PRELOAD — all four weights used above the fold (h1=300, body/subtitle=400, headings=500, nav-logo=600) -->
+<!-- FONT PRELOAD — regular (400) is the LCP-blocking weight: it's what the
+     hero subtitle (.index__hero-subtitle) actually renders in, since that
+     selector declares no font-weight override and falls back to body's
+     default 400. It gets fetchpriority="high" alone so it doesn't compete
+     for bandwidth with the other three weights, which matter for elements
+     below/after the LCP node (h1=300, headings=500, nav-logo=600) and load
+     at the browser's default priority instead. -->
 <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-regular.woff2" crossorigin fetchpriority="high" />
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-300.woff2" crossorigin fetchpriority="high" />
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-500.woff2" crossorigin fetchpriority="high" />
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-600.woff2" crossorigin fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-300.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-500.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-600.woff2" crossorigin />
+
+<!-- CRITICAL FONT-FACE — declared inline in <head> so the font-family mapping
+     is available immediately, without waiting on global.css (which now loads
+     non-blocking). Preloading the font file alone is not enough: the browser
+     also needs this @font-face rule before it can paint text in Inter rather
+     than the fallback font, which is what was driving the LCP render delay.
+     Safe to declare here even if the same rule also exists in another
+     stylesheet — duplicate @font-face rules do not conflict or error; the
+     browser simply uses whichever resolves first, which is now this one. -->
+<style is:inline>
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/inter-v13-latin-regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('/fonts/inter-v13-latin-300.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/inter-v13-latin-500.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/inter-v13-latin-600.woff2') format('woff2');
+  }
+</style>
 
 <!-- FAVICONS -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
