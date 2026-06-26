@@ -228,23 +228,21 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
       document.getElementById('metaTimezone').textContent = timezone;
       document.getElementById('metaDateTime').textContent = dateTimeStr;
 
-      // Fetch public IP
-      fetch('https://api.ipify.org?format=json')
-        .then(r => r.json())
-        .then(data => { document.getElementById('metaIP').textContent = data.ip; })
-        .catch(() => { document.getElementById('metaIP').textContent = 'Unavailable'; });
-
       // ── Store metadata for PDF use ─────────────────────────────
       window.ndaMetadata = {
-        ip: 'Fetching...', browser: browserName, os: osName,
+        ip: 'Detecting...', browser: browserName, os: osName,
         device: deviceType, screen: screenRes, language, timezone,
         dateTime: dateTimeStr
       };
-      fetch('https://api.ipify.org?format=json')
-        .then(r => r.json())
-        .then(data => {
-          window.ndaMetadata.ip = data.ip;
-          document.getElementById('metaIP').textContent = data.ip;
+
+      // Use Cloudflare trace for instant IP (no external API needed)
+      fetch('https://cloudflare.com/cdn-cgi/trace')
+        .then(r => r.text())
+        .then(text => {
+          const ipMatch = text.match(/ip=([\d\.a-fA-F:]+)/);
+          const ip = ipMatch ? ipMatch[1] : 'Unavailable';
+          window.ndaMetadata.ip = ip;
+          document.getElementById('metaIP').textContent = ip;
         })
         .catch(() => {
           window.ndaMetadata.ip = 'Unavailable';
