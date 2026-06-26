@@ -1,0 +1,175 @@
+---
+---
+
+<section class="index__section" id="production-matrix">
+  <div class="index__container">
+    <header class="index__section-header">
+      <span class="index__section-label">Proprietary Utility</span>
+      <h2 class="index__section-title">B2B Production Lead-Time & GSM Estimator</h2>
+      <p class="index__section-subtitle">A hyper-accurate forecasting tool for global fashion buyers to estimate technical specifications and delivery windows from our factory floor.</p>
+    </header>
+
+    <div class="matrix-container">
+      <div class="matrix-input-grid">
+        <div class="matrix-field">
+          <label for="matrix-fabric" class="matrix-label">Technical Fabric Category</label>
+          <select id="matrix-fabric" class="matrix-select">
+            <option value="jersey" data-gsm="140-220">Single Jersey (Organic/Pima)</option>
+            <option value="terry" data-gsm="240-450">French Terry / Fleece</option>
+            <option value="pique" data-gsm="180-240">Pique (Polo Specification)</option>
+            <option value="interlock" data-gsm="200-300">Interlock / Rib Knit</option>
+            <option value="performance" data-gsm="120-180">Performance Synthetics (Recycled)</option>
+          </select>
+        </div>
+        <div class="matrix-field">
+          <label for="matrix-qty" class="matrix-label">Order Volume (Pieces)</label>
+          <select id="matrix-qty" class="matrix-select">
+            <option value="300" data-days="14-20">Low MOQ (300 - 1,000)</option>
+            <option value="5000" data-days="25-35">Mid Volume (1,001 - 10,000)</option>
+            <option value="50000" data-days="45-60">Enterprise Bulk (10,000+)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="matrix-results-grid">
+        <div class="matrix-result-card">
+          <div class="matrix-result-label">Recommended GSM Range</div>
+          <div id="result-gsm" class="matrix-result-value">140 - 220 GSM</div>
+          <div class="matrix-result-desc">Optimized for target market climate & durability.</div>
+        </div>
+        <div class="matrix-result-card">
+          <div class="matrix-result-label">Est. Factory Exit (Days)</div>
+          <div id="result-lead" class="matrix-result-value">14 - 20 Days</div>
+          <div class="matrix-result-desc">Post-sampling approval to FOB shipment.</div>
+        </div>
+        <div class="matrix-result-card">
+          <div class="matrix-result-label">Logistics Route: EU/USA</div>
+          <div id="result-shipping" class="matrix-result-value">22 - 28 Days (Sea)</div>
+          <div class="matrix-result-desc">Direct export from Chittagong/Dhaka.</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <p style="font-size: 0.8rem; color: var(--color-text-subtle); margin-bottom: 1.5rem; font-style: italic;">Note: Lead times include technical AQL 2.5 inspection phases. GOTS certification adds 3-5 days for TC documentation.</p>
+        <a href="/contact" class="index__btn index__btn--primary" style="min-height: 48px; padding: 0.75rem 2rem;">Unlock Technical Pricing Matrix</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .matrix-container {
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .matrix-input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .matrix-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .matrix-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-red);
+  }
+
+  .matrix-select {
+    background: #111;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+
+  .matrix-select:focus {
+    outline: none;
+    border-color: var(--color-red);
+  }
+
+  .matrix-results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .matrix-result-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+  }
+
+  .matrix-result-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-subtle);
+    margin-bottom: 0.75rem;
+  }
+
+  .matrix-result-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .matrix-result-desc {
+    font-size: 0.8rem;
+    color: var(--color-text-subtle);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 768px) {
+    .matrix-input-grid, .matrix-results-grid {
+      grid-template-columns: 1fr;
+    }
+    .matrix-container {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  function updateMatrix() {
+    const fabricSelect = document.getElementById('matrix-fabric') as HTMLSelectElement;
+    const qtySelect = document.getElementById('matrix-qty') as HTMLSelectElement;
+
+    const gsmResult = document.getElementById('result-gsm');
+    const leadResult = document.getElementById('result-lead');
+
+    if (fabricSelect && qtySelect && gsmResult && leadResult) {
+      const selectedFabric = fabricSelect.options[fabricSelect.selectedIndex];
+      const selectedQty = qtySelect.options[qtySelect.selectedIndex];
+
+      gsmResult.textContent = selectedFabric.getAttribute('data-gsm') + ' GSM';
+      leadResult.textContent = selectedQty.getAttribute('data-days') + ' Days';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const fabricSelect = document.getElementById('matrix-fabric');
+    const qtySelect = document.getElementById('matrix-qty');
+
+    fabricSelect?.addEventListener('change', updateMatrix);
+    qtySelect?.addEventListener('change', updateMatrix);
+  });
+</script>

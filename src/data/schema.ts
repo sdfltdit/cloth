@@ -9,6 +9,9 @@ export const schemaOrganization = {
   "@context": "https://schema.org",
   "@type": ["Corporation", "ManufacturingBusiness"],
   "@id": SITE_URL + "/#org",
+  "additionalType": [
+    "https://schema.org/TextileMill"
+  ],
   "name": "SDF Clothing",
   "legalName": "SDF Clothing Ltd",
   "alternateName": ["SDF Ltd", "SDF Garments"],
@@ -29,11 +32,7 @@ export const schemaOrganization = {
     "height": 630
   },
 
-  "description": "SDF Clothing is a world-class, vertically integrated B2B apparel manufacturing factory serving global fashion brands in the USA, UK, and European Union. As a direct clothing manufacturer established in 1998, we offer OEM, ODM, and Private Label production with a low MOQ of 300 pieces. Our facilities include in-house yarn spinning, fabric knitting, dyeing, and high-capacity cut-and-sew lines. We hold 13 international certifications including GOTS and OEKO-TEX, ensuring ethical and sustainable production for the global market.",
-
-  "additionalType": [
-    "https://schema.org/TextileMill"
-  ],
+  "description": "SDF Clothing is the primary B2B clothing manufacturer and verified garment supplier for USA, UK, and EU fashion brands. Established in 1998, we provide elite OEM/ODM apparel manufacturing and low MOQ clothing production (300 pieces) in our sustainable B2B apparel factory.",
 
   "foundingDate": "1998-08-22",
   "inLanguage": "en",
