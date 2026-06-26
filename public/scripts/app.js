@@ -79,67 +79,7 @@
   }
 
   /* ============================================================
-     3. FAQ ACCORDION
-  ============================================================ */
-  function initFAQ() {
-    var faqSection = document.querySelector('[id^="faq-question-"]');
-    if (!faqSection) return;
-
-    function attachFAQListeners() {
-      var buttons = document.querySelectorAll('[id^="faq-question-"]');
-      if (!buttons.length) return;
-
-      buttons.forEach(function (btn, i) {
-        btn.addEventListener('click', function () {
-          var answer = document.getElementById('faq-answer-' + i);
-          var icon   = document.getElementById('faq-icon-' + i);
-          var isOpen = this.getAttribute('aria-expanded') === 'true';
-
-          batchWrite(function () {
-            buttons.forEach(function (b, j) {
-              b.setAttribute('aria-expanded', 'false');
-              var a  = document.getElementById('faq-answer-' + j);
-              var ic = document.getElementById('faq-icon-' + j);
-              if (a)  { a.classList.remove('open'); a.style.display = 'none'; }
-              if (ic) ic.style.transform = 'rotate(0deg)';
-            });
-
-            if (!isOpen) {
-              btn.setAttribute('aria-expanded', 'true');
-              if (answer)  { answer.classList.add('open'); answer.style.display = 'block'; }
-              if (icon) icon.style.transform = 'rotate(45deg)';
-            }
-          });
-        });
-
-        btn.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); }
-        });
-      });
-
-      window.toggleFAQ = function (i) {
-        var b = document.getElementById('faq-question-' + i);
-        if (b) b.click();
-      };
-    }
-
-    if ('IntersectionObserver' in window) {
-      var faqObs = new IntersectionObserver(function (entries, observer) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            attachFAQListeners();
-            observer.disconnect();
-          }
-        });
-      }, { rootMargin: '300px' });
-      faqObs.observe(faqSection);
-    } else {
-      attachFAQListeners();
-    }
-  }
-
-  /* ============================================================
-     4. SECTION HEADER SCROLL ANIMATIONS
+     3. SECTION HEADER SCROLL ANIMATIONS
   ============================================================ */
   function initSectionAnimations() {
     var headers = document.querySelectorAll('.section-header');
@@ -166,7 +106,7 @@
   }
 
   /* ============================================================
-     5. LAZY IMAGE LOADING
+     4. LAZY IMAGE LOADING
   ============================================================ */
   function initLazyImages() {
     var imgs = document.querySelectorAll('img[data-src]');
@@ -194,7 +134,7 @@
   }
 
   /* ============================================================
-     6. COOKIE CONSENT
+     5. COOKIE CONSENT
   ============================================================ */
   function initCookieConsent() {
     var banner = document.getElementById('cookie-consent');
@@ -221,7 +161,7 @@
   }
 
   /* ============================================================
-     7. SCROLL LISTENER — passive for performance
+     6. SCROLL LISTENER — passive for performance
   ============================================================ */
   function initScrollListeners() {
     var stickyBar = document.getElementById('sticky-bar');
@@ -249,7 +189,7 @@
   }
 
   /* ============================================================
-     8. BODY LOADED CLASS
+     7. BODY LOADED CLASS
   ============================================================ */
   function initBodyLoaded() {
     requestAnimationFrame(function () {
@@ -258,7 +198,9 @@
   }
 
   /* ============================================================
-     INIT — DOMContentLoaded → idle callback for non-critical
+     INIT — DOMContentLoaded → staggered idle work (avoids one
+     long task by spreading non-critical init across separate
+     idle/timeout slices instead of batching them together)
   ============================================================ */
   document.addEventListener('DOMContentLoaded', function () {
     initBodyLoaded();
@@ -268,19 +210,13 @@
       ? requestIdleCallback
       : function (cb, opts) { setTimeout(cb, opts && opts.timeout ? Math.min(opts.timeout, 50) : 50); };
 
-    idle(function () {
-      initFooterAccordion();
-      initCookieConsent();
-    }, { timeout: 300 });
-
-    idle(function () {
-      initSectionAnimations();
-      initLazyImages();
-    }, { timeout: 600 });
-
-    idle(function () {
-      initFAQ();
-    }, { timeout: 1000 });
+    // Each init runs in its own idle slice so the browser can yield
+    // back to the main thread between them instead of running all
+    // four in a single uninterrupted block.
+    idle(function () { initFooterAccordion(); }, { timeout: 200 });
+    idle(function () { initCookieConsent(); }, { timeout: 300 });
+    idle(function () { initSectionAnimations(); }, { timeout: 500 });
+    idle(function () { initLazyImages(); }, { timeout: 600 });
   });
 
 })();
