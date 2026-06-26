@@ -12,7 +12,7 @@ const faqs = [
   {
     category: "Pricing & Payment",
     question: "What is your minimum order quantity for apparel manufacturing?",
-    answer: "Our MOQ is 300 pieces per style with flexible size and colour combinations. Most factories require 500 to 1,000 pieces — our 300-piece minimum is one reason startup brands and boutique labels work with us."
+    answer: "Our MOQ is 300 pieces per style with flexible size and colour combinations. Most factories require 500 to 1,000 pieces per style — our 300-piece minimum allows startup brands and boutique labels to begin production without overcommitting capital."
   },
   {
     category: "Pricing & Payment",
@@ -106,7 +106,7 @@ const faqs = [
   },
   {
     category: "Getting Started",
-    question: "What makes SDF Clothing the right Low MOQ clothing manufacturer for startup fashion brands?",
+    question: "Why do startup fashion brands choose SDF Clothing for low MOQ manufacturing?",
     answer: "300 pieces MOQ. GOTS certified since 1998. FOB shipping to EU, UK, USA, Canada, and Australia. Full-package production covers fabric sourcing, sampling, cutting, sewing, AQL inspection, labels, and branded packaging — everything a first-time brand owner needs without coordinating multiple vendors."
   },
   {
@@ -136,18 +136,11 @@ const schemaWebSite = {
   "@type": "WebSite",
   "@id": SITE + "/#website",
   "name": "SDF Clothing",
+  "alternateName": ["SDF", "SDF Ltd", "SDF Clothing Ltd", "SDF Clothing Bangladesh"],
   "url": SITE,
   "description": pageDescription,
   "publisher": { "@id": SITE + "/#org" },
-  "inLanguage": "en",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": SITE + "/?s={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
+  "inLanguage": "en"
 };
 
 const schemaWebPage = {
@@ -159,19 +152,25 @@ const schemaWebPage = {
   "url": SITE,
   "isPartOf": { "@id": SITE + "/#website" },
   "about": { "@id": SITE + "/#org" },
-  "datePublished": "1998-08-22",
+  "mainEntity": { "@id": SITE + "/#org" },
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": SITE + "/logo.svg",
+    "description": "SDF Clothing — clothing manufacturers Dhaka, Bangladesh"
+  },
+  "datePublished": "2012-11-27",
   "dateModified": new Date().toISOString().split("T")[0],
   "inLanguage": "en",
-  "author": {
-    "@type": "Person",
-    "name": "Chowdhury Remon",
-    "jobTitle": "Founder & CEO, SDF Clothing"
-  },
+  "author": { "@id": SITE + "/#founder" },
   "breadcrumb": {
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE }
     ]
+  },
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".index__hero-title", ".index__hero-subtitle", ".index__section-title"]
   }
 };
 
@@ -196,14 +195,14 @@ const schemaHowTo = {
   "totalTime": "P45D",
   "provider": { "@id": SITE + "/#org" },
   "step": [
-    { "@type": "HowToStep", "position": "1", "name": "Send Your Brief", "text": "Email or WhatsApp your design sketch photo or description. We accept rough sketches, photos, or tech packs." },
-    { "@type": "HowToStep", "position": "2", "name": "Quote and Consultation", "text": "We send pricing, lead time, fabric options, and certifications within 48 hours. No hidden costs. MOQ is 300 pieces per style." },
-    { "@type": "HowToStep", "position": "3", "name": "Tech Pack and Fabric Sourcing", "text": "We develop or review your design. We find and confirm fabric. You approve before we start. Days 3 to 7." },
-    { "@type": "HowToStep", "position": "4", "name": "Sample Development", "text": "30 percent deposit required to start sampling. Samples ready in 14 days. Free for confirmed orders. We remake up to 10 times if needed." },
-    { "@type": "HowToStep", "position": "5", "name": "Order Confirmation", "text": "70 percent balance secures your production slot. We do not outsource. Orders up to 5000 pieces finish in 20 days or less." },
-    { "@type": "HowToStep", "position": "6", "name": "Bulk Production", "text": "We cut, sew, finish, embroider, and print in-house. AQL 2.5 quality checks at every step. 20 days for up to 5,000 pieces. 40 to 60 days for 20,000 plus pieces." },
-    { "@type": "HowToStep", "position": "7", "name": "AQL Inspection", "text": "Final inspection before packing. AQL 2.5 standard. Third-party inspection available via SGS, Bureau Veritas, and Intertek." },
-    { "@type": "HowToStep", "position": "8", "name": "FOB Shipment", "text": "We pack and document your order. We load at Chittagong or Dhaka port. All export documents provided." }
+    { "@type": "HowToStep", "position": 1, "name": "Send Your Brief", "text": "Email or WhatsApp your design sketch photo or description. We accept rough sketches, photos, or tech packs." },
+    { "@type": "HowToStep", "position": 2, "name": "Quote and Consultation", "text": "We send pricing, lead time, fabric options, and certifications within 48 hours. No hidden costs. MOQ is 300 pieces per style." },
+    { "@type": "HowToStep", "position": 3, "name": "Tech Pack and Fabric Sourcing", "text": "We develop or review your design. We find and confirm fabric. You approve before we start. Days 3 to 7." },
+    { "@type": "HowToStep", "position": 4, "name": "Sample Development", "text": "30 percent deposit required to start sampling. Samples ready in 14 days. Free for confirmed orders. We remake up to 10 times if needed." },
+    { "@type": "HowToStep", "position": 5, "name": "Order Confirmation", "text": "70 percent balance secures your production slot. We do not outsource. Orders up to 5000 pieces finish in 20 days or less." },
+    { "@type": "HowToStep", "position": 6, "name": "Bulk Production", "text": "We cut, sew, finish, embroider, and print in-house. AQL 2.5 quality checks at every step. 20 days for up to 5,000 pieces. 40 to 60 days for 20,000 plus pieces." },
+    { "@type": "HowToStep", "position": 7, "name": "AQL Inspection", "text": "Final inspection before packing. AQL 2.5 standard. Third-party inspection available via SGS, Bureau Veritas, and Intertek." },
+    { "@type": "HowToStep", "position": 8, "name": "FOB Shipment", "text": "We pack and document your order. We load at Chittagong or Dhaka port. All export documents provided." }
   ]
 };
 
@@ -277,25 +276,12 @@ const schemaToolsList = {
   ]
 };
 
-const schemaAggregateRating = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": SITE + "/#org",
-  "name": "SDF Clothing",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "47",
-    "bestRating": "5",
-    "worstRating": "1"
-  }
-};
-
 const schemaManufacturingService = {
   "@context": "https://schema.org",
   "@type": "Service",
   "@id": SITE + "/#manufacturing-service",
   "name": "Custom Clothing Manufacturing Services Bangladesh",
+  "url": SITE + "/products/",
   "alternateName": ["Garment Manufacturing", "Apparel Production", "B2B Clothing Factory"],
   "provider": { "@id": SITE + "/#org" },
   "serviceType": "Clothing Manufacturing",
@@ -331,6 +317,7 @@ const schemaOEMService = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "B2B Clothing Manufacturing Services — OEM ODM Private Label CMT",
+  "url": SITE + "/clothing-manufacturers/",
   "provider": { "@id": SITE + "/#org" },
   "serviceType": "Garment Manufacturing",
   "description": "SDF Clothing offers four core B2B manufacturing models for fashion brands: OEM, ODM, Private Label, and CMT. All production handled in-house at our Dhaka, Bangladesh facility.",
@@ -367,23 +354,32 @@ const schemaBangladeshArticle = {
   "datePublished": "2024-01-01",
   "dateModified": new Date().toISOString().split("T")[0],
   "about": { "@id": SITE + "/#org" },
+  "image": {
+    "@type": "ImageObject",
+    "url": SITE + "/factory.jpg",
+    "description": "SDF Clothing garment factory — Bangladesh clothing manufacturer since 1998"
+  },
   "description": "Bangladesh is the world's second-largest apparel exporter. Sourcing from a Bangladesh clothing manufacturer offers 30–40% cost savings over China and Vietnam, EU and UK duty-free access under GSP, and the highest concentration of GOTS certified garment factories globally."
 };
 
-const combinedSchema = [
-  schemaOrganization,
-  schemaWebSite,
-  schemaWebPage,
-  schemaFAQ,
-  schemaPerson,
-  schemaHowTo,
-  schemaToolsList,
-  schemaAggregateRating,
-  schemaManufacturingService,
-  schemaOEMService,
-  schemaClientEligibility,
-  schemaBangladeshArticle
-];
+const combinedSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    schemaOrganization,
+    schemaWebSite,
+    schemaWebPage,
+    schemaFAQ,
+    schemaPerson,
+    schemaHowTo,
+    schemaToolsList,
+    schemaManufacturingService,
+    schemaOEMService,
+    schemaClientEligibility,
+    schemaBangladeshArticle,
+    schemaProductList,
+    schemaAccessoryList
+  ]
+};
 ---
 
 <BaseLayout
@@ -1506,57 +1502,26 @@ const combinedSchema = [
   </section>
 
   <div class="index__container" style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); text-align:center;">
-    <p style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin:0;">Trusted by fashion brands, apparel producers, wholesale buyers, and garment sourcing teams across 36 countries — <a href="/clothing-exporter" style="color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.2);text-decoration:none;" title="Clothing exporter Bangladesh">clothing exporter since 1998</a> · <a href="/bulk-clothing-manufacturer" style="color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.2);text-decoration:none;" title="Bulk clothing manufacturer Bangladesh">bulk clothing manufacturer</a> · Operating since 1998</p>
+    <p style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin:0;">Supplying fashion brands, apparel producers, wholesale buyers, and garment sourcing teams across 60 countries — <a href="/clothing-exporter" style="color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.2);text-decoration:none;" title="Clothing exporter Bangladesh">clothing exporter since 1998</a> · <a href="/bulk-clothing-manufacturer" style="color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.2);text-decoration:none;" title="Bulk clothing manufacturer Bangladesh">bulk clothing manufacturer</a> · Operating since 1998</p>
   </div>
 
-  <section class="index__section" aria-label="Client testimonials — what fashion brands say about working with SDF Clothing" itemscope itemtype="https://schema.org/ItemList">
+  <section class="index__section" aria-label="Client testimonials — what fashion brands say about working with SDF Clothing">
     <div class="index__container">
-      <meta itemprop="name" content="Client Testimonials — SDF Clothing Manufacturers" />
       <header class="index__section-header">
         <span class="index__section-label">CLIENT VOICE</span>
         <h2 class="index__section-title">What Fashion Brands Say About Working With Our Factory</h2>
         <p class="index__section-subtitle">From first-time brand founders to established labels switching manufacturers — here is what our clients say.</p>
       </header>
       <div class="index__grid index__grid--3">
-        <div class="index__card" itemscope itemtype="https://schema.org/Review" itemprop="itemListElement">
-          <meta itemprop="reviewBody" content="We switched from a China garment factory to SDF after our third delayed shipment. The 40-day lead time is consistent. Samples came back in 12 days." />
-          <meta itemprop="datePublished" content="2025-09-01" />
-          <div itemprop="itemReviewed" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="SDF Clothing" /><meta itemprop="url" content="https://sdfltd.com/" /></div>
-          <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
-            <meta itemprop="ratingValue" content="5" />
-            <meta itemprop="bestRating" content="5" />
-          </div>
-          <div itemprop="author" itemscope itemtype="https://schema.org/Organization">
-            <meta itemprop="name" content="Womenswear Label, United Kingdom" />
-          </div>
+        <div class="index__card">
           <p class="index__card-text" style="font-style:italic;margin-bottom:var(--space-sm);">"We switched from a China garment factory to SDF after our third delayed shipment. The 40-day lead time is consistent. Samples came back in 12 days. Their merchandising team actually flagged a tech pack error before we went to bulk — saved us weeks."</p>
           <p style="font-size:0.78rem;color:rgba(255,255,255,0.6);">— Womenswear Label, United Kingdom</p>
         </div>
-        <div class="index__card" itemscope itemtype="https://schema.org/Review" itemprop="itemListElement">
-          <meta itemprop="reviewBody" content="As a startup clothing brand, the 300-piece MOQ made this possible. Most clothing manufacturers we contacted wanted 1,000 minimum. SDF produced our first hoodie run in 38 days." />
-          <meta itemprop="datePublished" content="2025-11-01" />
-          <div itemprop="itemReviewed" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="SDF Clothing" /><meta itemprop="url" content="https://sdfltd.com/" /></div>
-          <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
-            <meta itemprop="ratingValue" content="5" />
-            <meta itemprop="bestRating" content="5" />
-          </div>
-          <div itemprop="author" itemscope itemtype="https://schema.org/Organization">
-            <meta itemprop="name" content="Streetwear Brand Founder, United States" />
-          </div>
+        <div class="index__card">
           <p class="index__card-text" style="font-style:italic;margin-bottom:var(--space-sm);">"As a startup clothing brand, the 300-piece MOQ made this possible. Most clothing manufacturers we contacted wanted 1,000 minimum before they would talk to us. SDF produced our first hoodie run in 38 days and the GOTS certification meant we could market organic without getting questioned."</p>
           <p style="font-size:0.78rem;color:rgba(255,255,255,0.6);">— Streetwear Brand Founder, United States</p>
         </div>
-        <div class="index__card" itemscope itemtype="https://schema.org/Review" itemprop="itemListElement">
-          <meta itemprop="reviewBody" content="We source private label activewear across five styles per season. The EU duty-free advantage alone saves us roughly €18,000 per year versus our previous China supplier." />
-          <meta itemprop="datePublished" content="2026-01-01" />
-          <div itemprop="itemReviewed" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="SDF Clothing" /><meta itemprop="url" content="https://sdfltd.com/" /></div>
-          <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
-            <meta itemprop="ratingValue" content="5" />
-            <meta itemprop="bestRating" content="5" />
-          </div>
-          <div itemprop="author" itemscope itemtype="https://schema.org/Organization">
-            <meta itemprop="name" content="Activewear Brand, Germany" />
-          </div>
+        <div class="index__card">
           <p class="index__card-text" style="font-style:italic;margin-bottom:var(--space-sm);">"We source private label activewear across five styles per season. The EU duty-free advantage alone saves us roughly €18,000 per year versus our previous China supplier. The BSCI and OEKO-TEX documentation is clean and arrives with the shipment every time."</p>
           <p style="font-size:0.78rem;color:rgba(255,255,255,0.6);">— Activewear Brand, Germany</p>
         </div>
@@ -1565,28 +1530,24 @@ const combinedSchema = [
     </div>
   </section>
 
-  <div class="index__container">
-    <div style="display:none;">
-      <img src="/sdf.jpg" alt="Chowdhury Remon — Founder, SDF Clothing" width="28" height="28"
-        style="border-radius:50%;object-fit:cover;filter:grayscale(1);opacity:0.7;" loading="eager" />
-      <span>By <strong style="color:rgba(255,255,255,0.75);">Chowdhury Remon</strong></span>
+  <div class="index__container" style="padding:0.6rem 0; border-bottom:1px solid rgba(255,255,255,0.07);">
+    <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;flex-wrap:wrap;font-size:0.72rem;color:rgba(255,255,255,0.45);">
+      <img src="/sdf.jpg" alt="Chowdhury Remon — Founder, SDF Clothing" width="22" height="22"
+        style="border-radius:50%;object-fit:cover;filter:grayscale(1);opacity:0.6;flex-shrink:0;" loading="lazy" />
+      <span>By <a href="/about/" style="color:rgba(255,255,255,0.6);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);"><strong style="font-weight:500;">Chowdhury Remon</strong></a></span>
       <span style="opacity:0.3;">·</span>
       <span>Founder &amp; CEO, SDF Clothing</span>
       <span style="opacity:0.3;">·</span>
       <span>Garment Manufacturing Expert Since 1998</span>
       <span style="opacity:0.3;">·</span>
-      <time datetime={new Date().toISOString().split("T")[0]}
-        style="color:rgba(255,255,255,0.70);">
+      <time datetime={new Date().toISOString().split("T")[0]} style="color:rgba(255,255,255,0.45);">
         Updated: {new Date().toLocaleDateString("en-US", { month:"long", year:"numeric" })}
       </time>
     </div>
   </div>
 
-  <section class="index__section" aria-label="What we offer — clothing manufacturing services" itemscope itemtype="https://schema.org/Service">
+  <section class="index__section" aria-label="What we offer — clothing manufacturing services">
     <div class="index__container">
-      <meta itemprop="name" content="Full-Service Clothing Manufacturing" />
-      <meta itemprop="serviceType" content="Clothing Manufacturing" />
-      <meta itemprop="provider" content="SDF Clothing" />
       <header class="index__section-header">
         <span class="index__section-label">Capabilities</span>
         <h2 class="index__section-title">What We Offer as Full-Service Clothing Manufacturers</h2>
@@ -1810,119 +1771,116 @@ const combinedSchema = [
     </div>
   </section>
 
-  <section class="timeline-section" aria-label="How our clothing manufacturing process works — 8 step order guide" itemscope itemtype="https://schema.org/HowTo">
+  <section class="timeline-section" aria-label="How our clothing manufacturing process works — 8 step order guide">
     <div class="index__container">
-      <meta itemprop="name" content="How to Order Custom Clothing Manufacturing with SDF Clothing" />
-      <meta itemprop="description" content="Complete B2B clothing manufacturing process from design brief to FOB shipment. All production in-house at our Dhaka factory." />
-      <meta itemprop="totalTime" content="P45D" />
       <header class="timeline-header">
         <span class="timeline-label">HOW YOUR ORDER WORKS</span>
-        <h2 class="timeline-title" itemprop="name">How Our Clothing Manufacturing Process Works</h2>
+        <h2 class="timeline-title">How Our Clothing Manufacturing Process Works</h2>
         <p class="timeline-subtitle">Our complete clothing manufacturing process covers every stage — from initial brief to finished garments ready for shipment to your warehouse.</p>
       </header>
 
       <div class="timeline-grid">
-        <div class="timeline-card" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+        <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
-            <div class="timeline-card-title" itemprop="name">Send Your Brief</div>
+            <div class="timeline-card-title">Send Your Brief</div>
             <div class="timeline-card-time">Day 1</div>
-            <div class="timeline-card-detail" itemprop="text">Email or WhatsApp your design sketch, photo, or description. We accept rough sketches, reference samples, or full tech packs. No brief is too early.</div>
+            <div class="timeline-card-detail">Email or WhatsApp your design sketch, photo, or description. We accept rough sketches, reference samples, or full tech packs. No brief is too early.</div>
           </div>
         </div>
 
-        <div class="timeline-card" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+        <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
-            <div class="timeline-card-title" itemprop="name">Quote & Consultation</div>
+            <div class="timeline-card-title">Quote & Consultation</div>
             <div class="timeline-card-time">Within 48 hours</div>
-            <div class="timeline-card-detail" itemprop="text">We send pricing lead time fabric options and certifications. No hidden costs. We explain MOQ clearly. MOQ means minimum order quantity.</div>
+            <div class="timeline-card-detail">We send pricing lead time fabric options and certifications. No hidden costs. We explain MOQ clearly. MOQ means minimum order quantity.</div>
           </div>
         </div>
 
-        <div class="timeline-card" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+        <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
-            <div class="timeline-card-title" itemprop="name">Tech Pack & Fabric</div>
+            <div class="timeline-card-title">Tech Pack & Fabric</div>
             <div class="timeline-card-time">Days 3 to 7</div>
-            <div class="timeline-card-detail" itemprop="text">We develop or review your design. Fabric is sourced, tested, and confirmed by our team. You approve the spec sheet before a single meter gets cut.</div>
+            <div class="timeline-card-detail">We develop or review your design. Fabric is sourced, tested, and confirmed by our team. You approve the spec sheet before a single meter gets cut.</div>
           </div>
         </div>
 
-        <div class="timeline-card" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+        <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
-            <div class="timeline-card-title" itemprop="name">Sample Development</div>
+            <div class="timeline-card-title">Sample Development</div>
             <div class="timeline-card-time">7 to 14 days</div>
-            <div class="timeline-card-detail" itemprop="text">30% deposit required to start sampling. This ensures we work with serious brands. We make samples in 14 days. Samples are free. We remake up to 10 times if needed. You approve before bulk production.</div>
+            <div class="timeline-card-detail">30% deposit required to start sampling. This ensures we work with serious brands. We make samples in 14 days. Samples are free. We remake up to 10 times if needed. You approve before bulk production.</div>
           </div>
         </div>
 
-        <div class="timeline-card" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+        <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
-            <div class="timeline-card-title" itemprop="name">Order Confirmation</div>
+            <div class="timeline-card-title">Order Confirmation</div>
             <div class="timeline-card-time">After sample approval</div>
-            <div class="timeline-card-detail" itemprop="text">70% balance secures your production slot. We do everything in our facility. We do not outsource. Orders up to 5000 pieces finish in 20 days or less.</div>
+            <div class="timeline-card-detail">70% balance secures your production slot. We do everything in our facility. We do not outsource. Orders up to 5000 pieces finish in 20 days or less.</div>
           </div>
         </div>
 
-        <div class="timeline-card" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+        <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
-            <div class="timeline-card-title" itemprop="name">Bulk Production</div>
+            <div class="timeline-card-title">Bulk Production</div>
             <div class="timeline-card-time">20 days up to 5,000 pcs  40 to 60 days for 20,000+ pcs</div>
-            <div class="timeline-card-detail" itemprop="text">We have dedicated production lines. We cut sew finish embroider and print in-house. We check quality at every step. AQL means acceptable quality level which is 2.5 percent. We send updates throughout.</div>
+            <div class="timeline-card-detail">We have dedicated production lines. We cut sew finish embroider and print in-house. We check quality at every step. AQL means acceptable quality level which is 2.5 percent. We send updates throughout.</div>
           </div>
         </div>
 
-        <div class="timeline-card" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+        <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
-            <div class="timeline-card-title" itemprop="name">AQL Inspection</div>
+            <div class="timeline-card-title">AQL Inspection</div>
             <div class="timeline-card-time">Days 40 to 43</div>
-            <div class="timeline-card-detail" itemprop="text">Final inspection before packing. We check quality. Third-party inspection available. SGS Bureau Veritas and Intertek can inspect for you.</div>
+            <div class="timeline-card-detail">Final inspection before packing. We check quality. Third-party inspection available. SGS Bureau Veritas and Intertek can inspect for you.</div>
           </div>
         </div>
 
-        <div class="timeline-card" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+        <div class="timeline-card">
           <div class="timeline-card-icon-wrapper">
             <div class="timeline-card-icon-container">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16.5" y1="9.4" x2="7.55" y2="4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
             </div>
           </div>
           <div class="timeline-card-content">
-            <div class="timeline-card-title" itemprop="name">FOB Shipment</div>
+            <div class="timeline-card-title">FOB Shipment</div>
             <div class="timeline-card-time">Days 43 to 45</div>
-            <div class="timeline-card-detail" itemprop="text">We pack and document your order. We load at Chittagong or Dhaka port. We provide all export documents. 70% balance before shipment. FOB means free on board which covers costs to the port.</div>
+            <div class="timeline-card-detail">We pack and document your order. We load at Chittagong or Dhaka port. We provide all export documents. 70% balance before shipment. FOB means free on board which covers costs to the port.</div>
           </div>
         </div>
       </div>
@@ -2376,7 +2334,7 @@ const combinedSchema = [
   <!-- ====================================================
        NEW SECTION: Manufacturing Types (B2B Signal + JSON-LD)
        ==================================================== -->
-  <section class="index__section" aria-label="Types of clothing manufacturing — OEM, ODM, private label and CMT" itemscope itemtype="https://schema.org/Service">
+  <section class="index__section" aria-label="Types of clothing manufacturing — OEM, ODM, private label and CMT">
     <div class="index__container">
 
       <header class="index__section-header">
@@ -2386,7 +2344,7 @@ const combinedSchema = [
       </header>
 
       <div class="index__grid index__grid--2" style="margin-bottom:1px;">
-        <div class="index__card" itemprop="hasOfferCatalog">
+        <div class="index__card">
           <h3 class="index__card-title">OEM — Original Equipment Manufacturing</h3>
           <p class="index__card-text">You provide the design — whether a full tech pack, a reference sample, or a detailed brief — and we produce to your exact specification. Cutting, sewing, embellishment, quality inspection, and packaging all happen inside our <a href="/garments-factory" class="index__link" title="Garments factory Dhaka Bangladesh">apparel factory</a> in Dhaka. Your brand label is sewn in. The factory floor remains ours; the intellectual property and branding remain yours. This is the most common model for established fashion brands scaling production without building their own factory.</p>
           <p style="margin-top:var(--space-sm);font-size:0.8rem;color:rgba(255,255,255,0.6);">Best for: Brands with confirmed designs ready for bulk production.</p>
@@ -2822,9 +2780,8 @@ const combinedSchema = [
       Founder &amp; CEO, SDF Clothing — 
       Garment manufacturing expert since 1998.
     </p>
-    <p style="font-size:0.65rem; color:rgba(255,255,255,0.7); text-align:center; margin:0;" itemscope itemtype="https://schema.org/Organization">
-      <span itemprop="name">SDF Clothing</span> is a <span itemprop="description">B2B garment manufacturer in Dhaka, Bangladesh. We are clothing manufacturers</span> producing custom apparel exclusively for fashion brands — minimum 300 pieces per style. 
-      <span itemprop="foundingDate">Founded 1998</span>. Certified garment manufacturer — GOTS, OEKO-TEX, ISO 9001, BSCI and 9 further standards.
+    <p style="font-size:0.65rem; color:rgba(255,255,255,0.7); text-align:center; margin:0;">
+      SDF Clothing is a B2B garment manufacturer in Dhaka, Bangladesh. We are clothing manufacturers producing custom apparel exclusively for fashion brands — minimum 300 pieces per style. Founded 1998. Certified garment manufacturer — GOTS, OEKO-TEX, ISO 9001, BSCI and 9 further standards.
     </p>
   </div>
 
