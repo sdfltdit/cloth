@@ -89,8 +89,8 @@ const baseSchemas = {
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "23.7956",
-        "longitude": "90.4203"
+        "latitude": 23.7956,
+        "longitude": 90.4203
       },
       "contactPoint": [
         {
@@ -102,14 +102,26 @@ const baseSchemas = {
         }
       ],
       "sameAs": [
-        "https://www.linkedin.com/company/clothing-manufacturers",
+        "https://www.instagram.com/clothing_manufacturerss",
         "https://www.facebook.com/ClothingManufacturers/",
         "https://x.com/clothing_makers",
-        "https://www.wikidata.org/wiki/Q139678386",
+        "https://www.linkedin.com/company/clothing-manufacturers",
+        "https://www.pinterest.com/clothing1manufacturers/",
         "https://au.pinterest.com/sdfltdclothingnsw/",
+        "https://clothing-manufacturers.tumblr.com/",
+        "https://medium.com/@stonedeadfashion",
         "https://www.reddit.com/user/clothing-mmakers/",
         "https://www.slideshare.net/sdfashion1",
-        "https://www.quora.com/profile/SDF-Clothing-1"
+        "https://www.quora.com/profile/SDF-Clothing-1",
+        "https://www.wikidata.org/wiki/Q139678386",
+        "https://clutch.co/profile/sdf-clothing",
+        "https://theorg.com/org/clothing-manufacturer-sdf",
+        "https://brandfetch.com/sdfltd.com",
+        "https://www.salary.com/research/company/sdf-clothing-ltd-salary",
+        "https://biz.prlog.org/sdf-clothing/",
+        "https://thetextilenetwork.com/company/sdf-clothing",
+        "https://yourstory.com/companies/sdf-clothing",
+        "https://siachen.com/sdfclothing/"
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
@@ -128,24 +140,9 @@ const baseSchemas = {
       "@id": "https://sdfltd.com/#website",
       "url": "https://sdfltd.com",
       "name": "SDF Clothing",
-      "description": `Clothing manufacturers, garment manufacturers, fashion manufacturers, and apparel manufacturers based in Dhaka, Bangladesh. SDF Clothing serves fashion brands worldwide with low MOQ production, GOTS certification, and ${yearsExpPhrase} of manufacturing expertise.`,
-      "publisher": { "@id": "https://sdfltd.com/#org" },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": "https://sdfltd.com/?s={search_term_string}"
-        },
-        "query-input": "required name=search_term_string"
-      },
-      "speakable": {
-        "@type": "SpeakableSpecification",
-        "cssSelector": ["h1", "h2", ".index__faq-answer p"],
-        "xpath": [
-          "/html/head/title",
-          "/html/head/meta[@name='description']/@content"
-        ]
-      }
+      "alternateName": ["SDF", "SDF Ltd", "SDF Clothing Ltd", "SDF Clothing Bangladesh"],
+      "description": "SDF Clothing manufactures custom apparel for fashion brands worldwide from our factory in Dhaka, Bangladesh. OEM, private label, and CMT production with GOTS certification since 1998.",
+      "publisher": { "@id": "https://sdfltd.com/#org" }
     }
   ]
 };
@@ -173,7 +170,13 @@ if (schema) {
         if (nodeTypes.includes("Organization") || nodeTypes.includes("LocalBusiness")) {
           replaceBaseOrg(rest);
         } else if (nodeTypes.includes("WebSite")) {
-          // base WebSite node is sufficient — skip duplicate
+          // Replace base WebSite with page-specific version if provided
+          const wsIdx = graph.findIndex((n: Record<string, unknown>) => {
+            const t = Array.isArray(n["@type"]) ? n["@type"] : [n["@type"] ?? ""];
+            return t.includes("WebSite");
+          });
+          if (wsIdx >= 0) graph.splice(wsIdx, 1, rest);
+          else graph.push(rest);
         } else {
           graph.push(rest);
         }
@@ -189,7 +192,12 @@ if (schema) {
     if (types.includes("Organization") || types.includes("LocalBusiness")) {
       replaceBaseOrg(rest);
     } else if (types.includes("WebSite")) {
-      // skip
+      const wsIdx = graph.findIndex((n: Record<string, unknown>) => {
+        const t = Array.isArray(n["@type"]) ? n["@type"] : [n["@type"] ?? ""];
+        return t.includes("WebSite");
+      });
+      if (wsIdx >= 0) graph.splice(wsIdx, 1, rest);
+      else graph.push(rest);
     } else {
       graph.push(rest);
     }
