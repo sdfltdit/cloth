@@ -80,7 +80,6 @@ export const schemaOrganization = {
     "jobTitle": "Founder & CEO",
     "url": SITE_URL + "/about/",
     "sameAs": [
-      "https://www.linkedin.com/in/hubfacebok",
       "https://www.wikidata.org/wiki/Q139678426",
       "https://x.com/clothing_makers"
     ]
@@ -179,9 +178,15 @@ export const schemaOrganization = {
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Sunday"],
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Saturday","Sunday"],
       "opens": "09:00",
       "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Friday"],
+      "opens": "00:00",
+      "closes": "00:00"
     }
   ],
 
@@ -382,6 +387,22 @@ export const schemaOrganization = {
       "@type": "Article",
       "url": "https://www.salary.com/research/company/sdf-clothing-ltd-overview",
       "name": "SDF Clothing Ltd Company Overview"
+    },
+    {
+      "@type": "Article",
+      "url": "https://www.issuewire.com/how-to-start-a-fashion-business-with-a-clothing-manufacturer-1767218657179484",
+      "name": "How to Start a Fashion Business with a Clothing Manufacturer"
+    },
+    {
+      "@type": "Article",
+      "url": "https://world.einnews.com/pr_news/630706300/clothing-manufacturer-sdf-reduces-minimum-order-quantity-to-300-pieces",
+      "name": "Clothing Manufacturer SDF Reduces Minimum Order Quantity to 300 Pieces"
+    },
+    {
+      "@type": "Article",
+      "url": "https://medium.com/@stonedeadfashion/clothing-manufacturers-355ac3c57bf0",
+      "name": "Clothing Manufacturers — SDF Clothing",
+      "author": { "@id": "https://sdfltd.com/#founder" }
     }
   ],
 
@@ -419,14 +440,33 @@ export const schemaOrganization = {
   ],
 
   "sameAs": [
-    "https://www.linkedin.com/company/clothing-manufacturers",
+    // ── SOCIAL MEDIA PROFILES ─────────────────────────────────────────
+    "https://www.instagram.com/clothing_manufacturerss",
     "https://www.facebook.com/ClothingManufacturers/",
     "https://x.com/clothing_makers",
-    "https://www.wikidata.org/wiki/Q139678386",
+    "https://www.linkedin.com/company/clothing-manufacturers",
+    "https://www.pinterest.com/clothing1manufacturers/",
     "https://au.pinterest.com/sdfltdclothingnsw/",
+    "https://clothing-manufacturers.tumblr.com/",
+    "https://medium.com/@stonedeadfashion",
     "https://www.reddit.com/user/clothing-mmakers/",
     "https://www.slideshare.net/sdfashion1",
-    "https://www.quora.com/profile/SDF-Clothing-1"
+    "https://www.quora.com/profile/SDF-Clothing-1",
+
+    // ── ENTITY VERIFICATION ───────────────────────────────────────────
+    "https://www.wikidata.org/wiki/Q139678386",
+
+    // ── B2B DIRECTORIES & REVIEW PLATFORMS ───────────────────────────
+    "https://clutch.co/profile/sdf-clothing",
+    "https://theorg.com/org/clothing-manufacturer-sdf",
+    "https://brandfetch.com/sdfltd.com",
+    "https://www.salary.com/research/company/sdf-clothing-ltd-salary",
+    "https://biz.prlog.org/sdf-clothing/",
+
+    // ── INDUSTRY DIRECTORIES ─────────────────────────────────────────
+    "https://thetextilenetwork.com/company/sdf-clothing",
+    "https://yourstory.com/companies/sdf-clothing",
+    "https://siachen.com/sdfclothing/"
   ],
 
   "publishingPrinciples": SITE_URL + "/editorial-policy/",
@@ -444,11 +484,11 @@ export const schemaOrganization = {
         "description": "Custom clothing manufacturing from 300 pieces per style. B2B only — for fashion brands, not individual buyers.",
         "provider": { "@id": SITE_URL + "/#org" }
       },
-      "priceSpecification": {
-        "@type": "PriceSpecification",
-        "priceCurrency": "USD",
-        "price": "300",
-        "description": "Starting MOQ — 300 pieces per style"
+      "eligibleQuantity": {
+        "@type": "QuantitativeValue",
+        "minValue": 300,
+        "unitCode": "C62",
+        "unitText": "pieces per style (MOQ)"
       },
       "eligibleCustomerType": "http://schema.org/Business"
     },
@@ -526,7 +566,6 @@ export const schemaPerson = {
     }
   ],
   "sameAs": [
-    "https://www.linkedin.com/in/hubfacebok",
     "https://chowdhury-remon.pages.dev",
     "https://www.wikidata.org/wiki/Q139678426",
     "https://en.wikiquote.org/wiki/Chowdhury_Remon",
