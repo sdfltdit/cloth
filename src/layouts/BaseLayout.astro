@@ -1,6 +1,6 @@
 ---
-import '../styles/global.css';
 import BaseHead from '../components/BaseHead.astro';
+import globalCssUrl from '../styles/global.css?url';
 
 export interface Props {
   title: string;
@@ -95,6 +95,14 @@ const currentUrl = Astro.url.href;
 
     <!-- Cloudflare Rocket Loader Disable -->
     <meta name="cf-2fa-verify" content="off" />
+
+    <!-- Global stylesheet (Tailwind utilities + site CSS) — loaded non-blocking.
+         Critical above-the-fold CSS is already inline above, so the LCP element
+         (hero subtitle) paints without waiting on this file. media="print" trick
+         downloads it at high priority but does not block rendering; the onload
+         swap applies it the instant it's ready. -->
+    <link rel="stylesheet" href={globalCssUrl} media="print" onload="this.media='all'" fetchpriority="high" />
+    <noscript><link rel="stylesheet" href={globalCssUrl} /></noscript>
 
     <!-- Non-critical scripts: defer, no type=module (avoids extra parse microtask) -->
     <script src="/scripts/app.js" defer data-cfasync="false"></script>
