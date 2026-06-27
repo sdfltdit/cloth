@@ -32,7 +32,9 @@ export const schemaOrganization = {
   "description": "SDF Clothing is a vertically integrated B2B clothing manufacturer based in Dhaka, Bangladesh. Founded in 1998 by Chowdhury Remon, we are a direct factory — not an agent, trader, or buying house. We operate yarn spinning, fabric knitting, weaving, dyeing, cutting, sewing, finishing, and warehousing under one ownership. We serve startup and established fashion brands worldwide with low MOQ from 300 pieces, GOTS certification, and 13 international quality certifications. B2B manufacturing only — no retail, no stock garments. Exporting to USA, EU, UK, Canada, Australia, Japan, and UAE.",
 
   "additionalType": [
-    "https://schema.org/TextileMill"
+    "https://schema.org/TextileMill",
+    "https://www.wikidata.org/wiki/Q28823",
+    "https://www.wikidata.org/wiki/Q157675"
   ],
 
   "foundingDate": "1998-08-22",
@@ -44,6 +46,7 @@ export const schemaOrganization = {
   },
 
   "naics": [
+    "315250",
     "313110",
     "313210",
     "313230",
@@ -156,7 +159,7 @@ export const schemaOrganization = {
   "currenciesAccepted": "USD, GBP, EUR, AUD, CAD",
   "paymentAccepted": "Bank Transfer, Letter of Credit, T/T",
   "priceRange": "$$",
-  "slogan": "Low MOQ Clothing Manufacturing for Startup Fashion Brands",
+  "slogan": "Custom clothing manufacturers since 1998. Low MOQ from 300 pieces.",
 
   "contactPoint": [
     {
@@ -285,6 +288,15 @@ export const schemaOrganization = {
     }
   ],
 
+  "hasCredential": [
+    { "@type": "EducationalOccupationalCredential", "name": "GOTS Certification" },
+    { "@type": "EducationalOccupationalCredential", "name": "OEKO-TEX Certification" },
+    { "@type": "EducationalOccupationalCredential", "name": "ISO 9001" },
+    { "@type": "EducationalOccupationalCredential", "name": "BSCI" },
+    { "@type": "EducationalOccupationalCredential", "name": "SEDEX" },
+    { "@type": "EducationalOccupationalCredential", "name": "SA8000" }
+  ],
+
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "B2B Clothing Manufacturing Services",
@@ -301,21 +313,30 @@ export const schemaOrganization = {
   },
 
   "knowsAbout": [
-    "Clothing Manufacturing",
+    "Cut and Sew Apparel Manufacturing",
+    "Custom Clothing Manufacturing",
     "Garment Manufacturing Bangladesh",
     "OEM Clothing Manufacturing",
+    "Private Label Apparel Manufacturing",
+    "CMT Garment Service",
+    "Sustainable Fashion Manufacturing",
+    "GOTS Certified Organic Cotton Apparel",
+    "Low MOQ Clothing Manufacturing",
+    "Activewear Manufacturing",
+    "Knitwear Manufacturing",
+    "Fabric Dyeing and Finishing",
+    "Garment Embroidery and Printing",
+    "Woven Fabric Manufacturing",
+    "Clothing Manufacturing",
     "ODM Clothing Manufacturing",
     "Private Label Apparel Production",
     "CMT Garment Services",
     "Full Package Production",
-    "Low MOQ Clothing Manufacturing",
     "Sustainable Clothing Manufacturing",
     "GOTS Certified Organic Cotton Production",
-    "Knitwear Manufacturing",
     "Woven Garment Manufacturing",
     "T-Shirt Manufacturing",
     "Hoodie Manufacturing",
-    "Activewear Manufacturing",
     "Swimwear Manufacturing",
     "Denim Manufacturing",
     "Streetwear Manufacturing",
