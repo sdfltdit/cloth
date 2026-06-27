@@ -288,14 +288,6 @@ export const schemaOrganization = {
     }
   ],
 
-  "hasCredential": [
-    { "@type": "EducationalOccupationalCredential", "name": "GOTS Certification" },
-    { "@type": "EducationalOccupationalCredential", "name": "OEKO-TEX Certification" },
-    { "@type": "EducationalOccupationalCredential", "name": "ISO 9001" },
-    { "@type": "EducationalOccupationalCredential", "name": "BSCI" },
-    { "@type": "EducationalOccupationalCredential", "name": "SEDEX" },
-    { "@type": "EducationalOccupationalCredential", "name": "SA8000" }
-  ],
 
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
