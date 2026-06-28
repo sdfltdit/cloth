@@ -6,7 +6,6 @@ export interface Props {
   description: string;
   canonicalUrl?: string;
   ogImage?: string;
-  ogImageType?: string;
   ogType?: string;
   datePublished?: string;
   dateModified?: string;
@@ -18,7 +17,6 @@ const {
   description,
   canonicalUrl,
   ogImage = "/factory.jpg",
-  ogImageType = "image/jpeg",
   ogType = "website",
   datePublished,
   dateModified,
@@ -232,11 +230,11 @@ if (schema) {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
-<meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `https://sdfltd.com${ogImage}`} />
-<meta property="og:image:secure_url" content={ogImage.startsWith('http') ? ogImage : `https://sdfltd.com${ogImage}`} />
+<meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
+<meta property="og:image:secure_url" content={new URL(ogImage, Astro.site).toString()} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:type" content={ogImageType} />
+<meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:alt" content="SDF Clothing — clothing manufacturers Bangladesh since 1998" />
 <meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content="en_US" />
@@ -247,7 +245,7 @@ if (schema) {
 <meta name="twitter:creator" content="@clothing_makers" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `https://sdfltd.com${ogImage}`} />
+<meta name="twitter:image" content={new URL(ogImage, Astro.site).toString()} />
 <meta name="twitter:image:alt" content="SDF Clothing — clothing manufacturers Bangladesh since 1998" />
 
 <!-- APPLE -->
