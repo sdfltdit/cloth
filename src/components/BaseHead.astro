@@ -4,7 +4,6 @@ import { getYearsExperiencePhrase } from '../data/company';
 export interface Props {
   title: string;
   description: string;
-  canonicalUrl?: string;
   ogImage?: string;
   ogType?: string;
   datePublished?: string;
@@ -15,7 +14,6 @@ export interface Props {
 const {
   title,
   description,
-  canonicalUrl,
   ogImage = "/factory.jpg",
   ogType = "website",
   datePublished,
@@ -23,11 +21,8 @@ const {
   schema
 } = Astro.props;
 
-// ── FIX 1: Canonical always strips www, always https://sdfltd.com ─────────────
-// Previously certifications page had canonical → https://www.sdfltd.com/certifications/
-// This caused duplicate indexing (www vs non-www split).
-const rawCanonical = canonicalUrl ?? Astro.url.href;
-const canonical = rawCanonical.replace(/^https?:\/\/www\./, 'https://');
+// ── FIX 1: Canonical always auto-generated, strips www, adds trailing slash ──
+const canonical = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).toString();
 
 const siteName = "SDF Clothing";
 const yearsExpPhrase = getYearsExperiencePhrase();
