@@ -1,15 +1,14 @@
 /**
  * SDF Clothing — Contact Form Handler
- * Primary: Web3Forms | Backup: Formcarry
+ * Web3Forms only (no backup service)
  * Overlay: Corporate design with QR, countdown, WhatsApp
  */
 
 (function () {
   'use strict';
 
-  const WEB3_KEY      = '6cdc0c73-5cd1-4d25-a4c8-562a46b623ae';
-  const FORMCARRY_URL = 'https://formcarry.com/s/46IEwVrAjO_';
-  const WA_NUMBER     = '8801819172080';
+  const WEB3_KEY  = '028983eb-bca7-4bbc-be4f-7db2873903aa';
+  const WA_NUMBER = '8801819172080';
 
   /* ─────────────────────────────────────────
    * 1. Reference ID
@@ -376,20 +375,7 @@
   }
 
   /* ─────────────────────────────────────────
-   * 9. Formcarry backup
-   * ───────────────────────────────────────── */
-  async function submitFormcarry(data) {
-    const res = await fetch(FORMCARRY_URL, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body:    JSON.stringify(data),
-    });
-    const json = await res.json();
-    return json.code === 200 || res.ok;
-  }
-
-  /* ─────────────────────────────────────────
-   * 10. Main submit handler
+   * 9. Main submit handler
    * ───────────────────────────────────────── */
   async function handleSubmit(e) {
     e.preventDefault();
@@ -428,13 +414,7 @@
     data['_fill_time']    = fillSeconds.toFixed(1) + 's';
 
     let success = false;
-    try { success = await submitWeb3(data); } catch { /* backup */ }
-
-    if (success) {
-      submitFormcarry(data).catch(function () {});
-    } else {
-      try { success = await submitFormcarry(data); } catch { /* both failed */ }
-    }
+    try { success = await submitWeb3(data); } catch { /* network/parse error */ }
 
     submit.disabled    = false;
     submit.textContent = orig;
@@ -443,12 +423,12 @@
       form.reset();
       showThankYou(geo, device, fillSeconds);
     } else {
-      alert('Something went wrong. Please try our WhatsApp contact button.');
+      alert('Something went wrong. Please try our WhatsApp contact button, or email us directly at contact@sdfltd.com');
     }
   }
 
   /* ─────────────────────────────────────────
-   * 11. Page load time + init
+   * 10. Page load time + init
    * ───────────────────────────────────────── */
   window._sdfPageLoad = Date.now();
 
