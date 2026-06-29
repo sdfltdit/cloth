@@ -110,6 +110,16 @@ const canonical = canonicalUrl
     <!-- Non-critical scripts: defer, no type=module (avoids extra parse microtask) -->
     <script src="/scripts/app.js" defer data-cfasync="false"></script>
     <script src="/scripts/mobile-menu.js" defer data-cfasync="false"></script>
+    <!-- FIX: contact-form.js handles the contact page's form submission
+         (Web3Forms + thank-you overlay). It was missing this script tag,
+         which meant nothing ever attached a submit listener to the form,
+         so the browser fell back to a native HTML GET submit — visible as
+         the form fields appearing in the URL bar and no email ever
+         arriving. Loaded sitewide (same pattern as app.js / mobile-menu.js)
+         since BaseLayout is shared across all pages; the script itself
+         only attaches to forms matching #contactForm / [data-contact], so
+         it's a safe no-op on pages without a contact form. -->
+    <script src="/scripts/contact-form.js" defer data-cfasync="false"></script>
 
     <!-- Mobile Menu Styles -->
     <style>
