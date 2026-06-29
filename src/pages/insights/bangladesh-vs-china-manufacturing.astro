@@ -5,7 +5,6 @@ export const prerender = true;
 
 const pageTitle = "Bangladesh vs China Clothing Manufacturing | Full Cost Co...";
 const pageDescription = "Detailed comparison of clothing manufacturing in Bangladesh vs China. Covers cost, MOQ, lead time, certifications, quality.";
-const canonicalUrl = "https://sdfltd.com/insights/bangladesh-vs-china-manufacturing/";
 const datePublished = "2024-06-01";
 const dateModified = new Date().toISOString().split("T")[0];
 
@@ -15,21 +14,21 @@ const dateModified = new Date().toISOString().split("T")[0];
 // HTML-encoded the JSON output, causing Google's "Missing '}'" parse error.
 const articleSchema = {
   "@type": "Article",
-  "@id": canonicalUrl + "#article",
+  "@id": Astro.url.href + "#article",
   "headline": "Bangladesh vs China Clothing Manufacturing | Full Cost Comparison 2026",
   "description": pageDescription,
   "datePublished": datePublished,
   "dateModified": dateModified,
   "author": { "@type": "Organization", "@id": "https://sdfltd.com/#org", "name": "SDF Clothing" },
   "publisher": { "@id": "https://sdfltd.com/#org" },
-  "url": canonicalUrl,
-  "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalUrl },
+  "url": Astro.url.href,
+  "mainEntityOfPage": { "@type": "WebPage", "@id": Astro.url.href },
   "breadcrumb": {
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
       { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://sdfltd.com/insights/" },
-      { "@type": "ListItem", "position": 3, "name": "Bangladesh vs China Manufacturing", "item": canonicalUrl }
+      { "@type": "ListItem", "position": 3, "name": "Bangladesh vs China Manufacturing", "item": Astro.url.href }
     ]
   }
 };
@@ -38,7 +37,7 @@ const articleSchema = {
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  canonicalUrl={canonicalUrl}
+
   datePublished={datePublished}
   dateModified={dateModified}
   schema={articleSchema}

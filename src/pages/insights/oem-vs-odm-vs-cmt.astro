@@ -5,7 +5,6 @@ export const prerender = true;
 
 const pageTitle = "OEM vs ODM vs CMT Manufacturing | Production Models";
 const pageDescription = "Manufacture with SDF's production models. We specialize in OEM ODM CMT manufacturing for global fashion brands.";
-const canonicalUrl = "https://sdfltd.com/insights/oem-vs-odm-vs-cmt/";
 const datePublished = "2024-06-01";
 const dateModified = new Date().toISOString().split("T")[0];
 
@@ -15,21 +14,21 @@ const dateModified = new Date().toISOString().split("T")[0];
 // block which HTML-encoded the JSON output, breaking Google's parser.
 const articleSchema = {
   "@type": "Article",
-  "@id": canonicalUrl + "#article",
+  "@id": Astro.url.href + "#article",
   "headline": "OEM vs ODM vs CMT Manufacturing — Complete Guide for Fashion Brands",
   "description": pageDescription,
   "datePublished": datePublished,
   "dateModified": dateModified,
   "author": { "@type": "Organization", "@id": "https://sdfltd.com/#org", "name": "SDF Clothing" },
   "publisher": { "@id": "https://sdfltd.com/#org" },
-  "url": canonicalUrl,
-  "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalUrl },
+  "url": Astro.url.href,
+  "mainEntityOfPage": { "@type": "WebPage", "@id": Astro.url.href },
   "breadcrumb": {
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
       { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://sdfltd.com/insights/" },
-      { "@type": "ListItem", "position": 3, "name": "OEM vs ODM vs CMT", "item": canonicalUrl }
+      { "@type": "ListItem", "position": 3, "name": "OEM vs ODM vs CMT", "item": Astro.url.href }
     ]
   }
 };
@@ -38,7 +37,7 @@ const articleSchema = {
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  canonicalUrl={canonicalUrl}
+
   datePublished={datePublished}
   dateModified={dateModified}
   schema={articleSchema}

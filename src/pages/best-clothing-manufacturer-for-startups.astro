@@ -7,15 +7,14 @@ export const prerender = true;
 const pageTitle = "Best Clothing Manufacturer for Startups 2026 | SDF";
 const pageDescription = "Find the best clothing manufacturer for your startup brand. Covers what to look for, red flags, MOQ, certifications and why Bangladesh leads for startup brands.";
 const companyAge = getCompanyAgeString();
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 const pageSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": canonicalUrl.href,
-      "url": canonicalUrl.href,
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
       "name": pageTitle,
       "description": pageDescription,
       "isPartOf": {
@@ -58,7 +57,7 @@ const pageSchema = {
             "@type": "ListItem",
             "position": 2,
             "name": "Best Clothing Manufacturer for Startups",
-            "item": canonicalUrl.href
+            "item": Astro.url.href
           }
         ]
       }
@@ -181,7 +180,7 @@ const pageSchema = {
 <BaseLayout 
   title={pageTitle} 
   description={pageDescription} 
-  canonicalUrl={canonicalUrl.href}
+
   schema={pageSchema}
 >
   <div class="container">

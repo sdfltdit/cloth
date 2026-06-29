@@ -4,13 +4,12 @@ import { schemaOrganization } from '../data/schema';
 
 const pageTitle = "Polo Shirt Manufacturer | Custom & Corporate | SDF Clothing";
 const pageDescription = "Custom polo shirt manufacturer in Bangladesh. Corporate, performance and private label polos from 300 pieces. GOTS certified. Get a free factory quote.";
-const canonicalUrl = "https://sdfltd.com/polo-shirt-manufacturer";
 
 const schemaWebPage = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "@id": canonicalUrl + "#webpage",
-  url: canonicalUrl,
+  "@id": Astro.url.href + "#webpage",
+  url: Astro.url.href,
   name: pageTitle,
   description: pageDescription,
   inLanguage: "en",
@@ -31,7 +30,7 @@ const schemaWebPage = {
         "@type": "ListItem",
         position: 2,
         name: "Polo Shirt Manufacturer",
-        item: canonicalUrl
+        item: Astro.url.href
       }
     ]
   }
@@ -238,7 +237,7 @@ const schemaItemList = {
 <BaseLayout 
   title={pageTitle} 
   description={pageDescription}
-  canonicalUrl={canonicalUrl}
+
 >
 
 <script type="application/ld+json" set:html={JSON.stringify(schemaOrganization)} />

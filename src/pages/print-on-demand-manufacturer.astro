@@ -7,15 +7,14 @@ export const prerender = true;
 const pageTitle = "Print-on-Demand Clothing Manufacturer for E-commerce"
 const pageDescription = "Print-on-demand clothing manufacturer from Bangladesh. POD partnership, drop shipping integration and small quantity printing. E-commerce fulfillment from 50 pieces."
 const companyAge = getCompanyAgeString();
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 const pageSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": canonicalUrl.href,
-      "url": canonicalUrl.href,
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
       "name": pageTitle,
       "description": pageDescription,
       "inLanguage": "en-GB",
@@ -99,7 +98,7 @@ const pageSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "Print-on-Demand Manufacturer",
-          "item": canonicalUrl.href
+          "item": Astro.url.href
         }
       ]
     },
@@ -170,7 +169,7 @@ const pageSchema = {
 };
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href}>
+<BaseLayout title={pageTitle} description={pageDescription}>
 
 <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
 

@@ -7,15 +7,14 @@ export const prerender = true;
 const pageTitle = "Cashmere Clothing Manufacturer Bangladesh | Luxury Cashme...";
 const pageDescription = "Cashmere clothing manufacturer from Bangladesh. Custom luxury cashmere apparel with sourcing, gauge options, sweater construction. Get a free quote.";
 const companyAge = getCompanyAgeString();
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 const pageSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": canonicalUrl.href,
-      "url": canonicalUrl.href,
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
       "name": pageTitle,
       "description": pageDescription,
       "inLanguage": "en-GB",
@@ -99,7 +98,7 @@ const pageSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "Cashmere Clothing Manufacturer",
-          "item": canonicalUrl.href
+          "item": Astro.url.href
         }
       ]
     },
@@ -170,7 +169,7 @@ const pageSchema = {
 };
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href}>
+<BaseLayout title={pageTitle} description={pageDescription}>
 
 <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
 
