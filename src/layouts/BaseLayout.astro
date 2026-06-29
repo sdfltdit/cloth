@@ -5,7 +5,6 @@ import globalCssUrl from '../styles/global.css?url';
 export interface Props {
   title: string;
   description: string;
-  canonicalUrl?: string;
   ogImage?: string;
   ogType?: string;
   datePublished?: string;
@@ -13,8 +12,8 @@ export interface Props {
   schema?: object | object[];
 }
 
-const { title, description, canonicalUrl, ogImage, ogType, datePublished, dateModified, schema } = Astro.props;
-const currentUrl = Astro.url.href;
+const { title, description, ogImage, ogType, datePublished, dateModified, schema } = Astro.props;
+const canonical = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).toString();
 ---
 
 <!DOCTYPE html>
@@ -23,7 +22,6 @@ const currentUrl = Astro.url.href;
     <BaseHead
       title={title}
       description={description}
-      canonicalUrl={canonicalUrl}
       ogImage={ogImage}
       ogType={ogType}
       datePublished={datePublished}
@@ -32,12 +30,12 @@ const currentUrl = Astro.url.href;
     />
 
     <!-- Hreflang: single URL for all regions — no country-specific pages -->
-    <link rel="alternate" hreflang="x-default" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en-US" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en-GB" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en-AU" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en-CA" href={canonicalUrl ?? currentUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <link rel="alternate" hreflang="en" href={canonical} />
+    <link rel="alternate" hreflang="en-US" href={canonical} />
+    <link rel="alternate" hreflang="en-GB" href={canonical} />
+    <link rel="alternate" hreflang="en-AU" href={canonical} />
+    <link rel="alternate" hreflang="en-CA" href={canonical} />
 
     <link rel="alternate" type="text/plain" title="SDF Clothing AI Reference" href="/llms.txt" />
     <link rel="alternate" type="text/plain" title="SDF Clothing AI Reference Full" href="/llms-full.txt" />
