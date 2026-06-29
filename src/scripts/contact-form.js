@@ -85,11 +85,9 @@
   }
 
   /* ─────────────────────────────────────────
-   * 5. Geo — CF trace for IP, ip-api.com for
-   *    city / country / ISP (parallel fetch)
+   * 5. Geo
    * ───────────────────────────────────────── */
   async function getGeoInfo() {
-    // Step A: get real IP from Cloudflare trace (instant, no limit)
     let ip = 'Unknown';
     try {
       const res  = await fetch('/cdn-cgi/trace');
@@ -102,7 +100,6 @@
       if (map.ip) ip = map.ip;
     } catch { /* fall through */ }
 
-    // Step B: enrich with city + ISP from ip-api.com (free, no key needed)
     try {
       const fields = 'status,city,regionName,country,countryCode,isp,org';
       const res    = await fetch(
@@ -122,7 +119,6 @@
       }
     } catch { /* fall through */ }
 
-    // Fallback: IP only
     return { ip, city: '', region: '', country: 'Unknown', cc: '', isp: 'Unknown' };
   }
 
@@ -177,7 +173,7 @@
   }
 
   /* ─────────────────────────────────────────
-   * 7. Show thank-you overlay
+   * 7. Show thank-you overlay (fully responsive)
    * ───────────────────────────────────────── */
   function showThankYou(geo, device, fillSeconds) {
     const refId   = generateRefId();
@@ -192,7 +188,6 @@
       day: 'numeric', month: 'short', year: 'numeric',
       hour: '2-digit', minute: '2-digit',
     });
-    const pageUrl  = window.location.href;
     const referrer = document.referrer || window.location.hostname + '/';
     const fillStr  = fillSeconds > 0 ? fillSeconds.toFixed(1) + 's' : '-';
     const location = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
@@ -200,144 +195,222 @@
 
     const overlay = document.createElement('div');
     overlay.id = 'sdf-thankyou';
-    overlay.style.cssText = [
-      'position:fixed;top:0;left:0;right:0;bottom:0',
-      'background:rgba(8,8,8,0.97)',
-      'display:flex;align-items:center;justify-content:center',
-      'z-index:9999;padding:1.25rem;overflow-y:auto',
-      'animation:sdfFadeIn 0.35s ease forwards',
-    ].join(';');
 
     overlay.innerHTML = `
-<div style="max-width:460px;width:100%;background:#111;border:0.5px solid #2a2a2a;border-radius:12px;overflow:hidden;animation:sdfSlideUp 0.4s ease forwards;">
+<style>
+  @keyframes sdfFadeIn  { from { opacity:0 } to { opacity:1 } }
+  @keyframes sdfSlideUp { from { opacity:0;transform:translateY(16px) } to { opacity:1;transform:translateY(0) } }
+
+  #sdf-thankyou {
+    position:fixed;top:0;left:0;right:0;bottom:0;
+    background:rgba(8,8,8,0.97);
+    display:flex;align-items:center;justify-content:center;
+    z-index:9999;
+    padding:1rem;
+    overflow-y:auto;
+    box-sizing:border-box;
+    animation:sdfFadeIn 0.3s ease forwards;
+  }
+
+  #sdf-thankyou .sdf-card {
+    max-width:460px;
+    width:100%;
+    background:#111;
+    border:0.5px solid #2a2a2a;
+    border-radius:12px;
+    overflow:hidden;
+    animation:sdfSlideUp 0.35s ease forwards;
+    box-sizing:border-box;
+    margin:auto;
+  }
+
+  #sdf-thankyou .sdf-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border:0.5px solid #1e1e1e;
+    border-radius:8px;
+    overflow:hidden;
+  }
+
+  #sdf-thankyou .sdf-cell {
+    padding:0.5rem 0.65rem;
+    border-bottom:0.5px solid #1e1e1e;
+    box-sizing:border-box;
+    min-width:0;
+  }
+
+  #sdf-thankyou .sdf-cell-label {
+    font-size:0.57rem;
+    color:rgba(255,255,255,0.3);
+    margin:0 0 3px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+
+  #sdf-thankyou .sdf-cell-value {
+    font-size:0.72rem;
+    color:#fff;
+    margin:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    word-break:break-all;
+  }
+
+  #sdf-thankyou .sdf-cell-right {
+    border-left:0.5px solid #1e1e1e;
+  }
+
+  #sdf-thankyou .sdf-cell-last {
+    border-bottom:none;
+  }
+
+  /* Small phones: single column */
+  @media (max-width:380px) {
+    #sdf-thankyou { padding:0.5rem; align-items:flex-start; padding-top:1.5rem; }
+    #sdf-thankyou .sdf-grid { grid-template-columns:1fr !important; }
+    #sdf-thankyou .sdf-cell-right { border-left:none !important; border-top:0.5px solid #1e1e1e; }
+    #sdf-thankyou .sdf-header-ref { display:none; }
+    #sdf-thankyou .sdf-cell { padding:0.45rem 0.6rem; }
+  }
+
+  /* Short screens: ensure scrolling */
+  @media (max-height:680px) {
+    #sdf-thankyou { align-items:flex-start; padding-top:0.75rem; }
+  }
+
+  /* Tablet and up */
+  @media (min-width:520px) {
+    #sdf-thankyou .sdf-cell { padding:0.55rem 0.75rem; }
+    #sdf-thankyou .sdf-cell-value { font-size:0.75rem; }
+  }
+</style>
+
+<div class="sdf-card">
 
   <!-- Header -->
-  <div style="background:#cc0000;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px;">
-    <div style="width:34px;height:34px;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.45);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff;">✓</div>
+  <div style="background:#cc0000;padding:0.85rem 1.1rem;display:flex;align-items:center;gap:10px;">
+    <div style="width:32px;height:32px;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.45);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;">✓</div>
     <div style="flex:1;min-width:0;">
-      <p style="font-size:0.6rem;letter-spacing:0.13em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin:0 0 2px;">Submission confirmed</p>
-      <p style="font-size:0.95rem;font-weight:600;color:#fff;margin:0;letter-spacing:0.03em;">Message Received</p>
+      <p style="font-size:0.58rem;letter-spacing:0.13em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin:0 0 2px;">Submission confirmed</p>
+      <p style="font-size:0.9rem;font-weight:600;color:#fff;margin:0;letter-spacing:0.02em;">Message Received</p>
     </div>
-    <div style="text-align:right;flex-shrink:0;">
-      <p style="font-size:0.58rem;color:rgba(255,255,255,0.45);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Reference</p>
-      <p style="font-size:0.7rem;font-family:monospace;color:#fff;margin:0;">${refId}</p>
+    <div class="sdf-header-ref" style="text-align:right;flex-shrink:0;">
+      <p style="font-size:0.57rem;color:rgba(255,255,255,0.45);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Reference</p>
+      <p style="font-size:0.65rem;font-family:monospace;color:#fff;margin:0;">${refId}</p>
     </div>
   </div>
 
   <!-- Countdown -->
-  <div style="padding:1rem 1.25rem;border-bottom:0.5px solid #1e1e1e;">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-      <span style="font-size:0.72rem;color:rgba(255,255,255,0.4);">Expected response in</span>
-      <span id="sdf-cd" style="font-family:monospace;font-size:0.95rem;color:#fff;margin-left:auto;">48:00:00</span>
+  <div style="padding:0.85rem 1.1rem;border-bottom:0.5px solid #1e1e1e;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;">
+      <span style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Expected response in</span>
+      <span id="sdf-cd" style="font-family:monospace;font-size:0.9rem;color:#fff;margin-left:auto;">48:00:00</span>
     </div>
     <div style="height:3px;background:#1e1e1e;border-radius:2px;overflow:hidden;">
       <div id="sdf-bar" style="height:100%;width:100%;background:#cc0000;border-radius:2px;transition:width 1s linear;"></div>
     </div>
-    <p style="font-size:0.63rem;color:rgba(255,255,255,0.25);margin:6px 0 0;line-height:1.5;">Typically within 2 hours &nbsp;·&nbsp; Max 48 hours &nbsp;·&nbsp; Mon–Sat, 9 AM – 6 PM BST</p>
+    <p style="font-size:0.62rem;color:rgba(255,255,255,0.25);margin:5px 0 0;line-height:1.5;">Typically within 2 hours &nbsp;·&nbsp; Max 48 hours &nbsp;·&nbsp; Mon–Sat, 9 AM – 6 PM BST</p>
   </div>
 
   <!-- Session Details -->
-  <div style="padding:1rem 1.25rem;border-bottom:0.5px solid #1e1e1e;">
-    <p style="font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.85rem;">Session Details</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;border:0.5px solid #1e1e1e;border-radius:8px;overflow:hidden;">
+  <div style="padding:0.85rem 1.1rem;border-bottom:0.5px solid #1e1e1e;">
+    <p style="font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.7rem;">Session Details</p>
 
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;border-right:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Device</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${device}</p>
+    <div class="sdf-grid">
+      <div class="sdf-cell">
+        <p class="sdf-cell-label">Device</p>
+        <p class="sdf-cell-value">${device}</p>
       </div>
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Browser</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;">${browser}</p>
+      <div class="sdf-cell sdf-cell-right">
+        <p class="sdf-cell-label">Browser</p>
+        <p class="sdf-cell-value">${browser}</p>
       </div>
-
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;border-right:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Screen</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;">${scr}</p>
+      <div class="sdf-cell">
+        <p class="sdf-cell-label">Screen</p>
+        <p class="sdf-cell-value">${scr}</p>
       </div>
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Connection</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;">${conn}</p>
+      <div class="sdf-cell sdf-cell-right">
+        <p class="sdf-cell-label">Connection</p>
+        <p class="sdf-cell-value">${conn}</p>
       </div>
-
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;border-right:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Timezone</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;">${tz}</p>
+      <div class="sdf-cell">
+        <p class="sdf-cell-label">Timezone</p>
+        <p class="sdf-cell-value">${tz}</p>
       </div>
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Language</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;">${lang}</p>
+      <div class="sdf-cell sdf-cell-right">
+        <p class="sdf-cell-label">Language</p>
+        <p class="sdf-cell-value">${lang}</p>
       </div>
-
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;border-right:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Location</p>
-        <p style="font-size:0.73rem;color:#fff;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${location || 'Unknown'}</p>
+      <div class="sdf-cell">
+        <p class="sdf-cell-label">Location</p>
+        <p class="sdf-cell-value">${location || 'Unknown'}</p>
       </div>
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">ISP</p>
-        <p style="font-size:0.73rem;color:#fff;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${geo.isp}</p>
+      <div class="sdf-cell sdf-cell-right">
+        <p class="sdf-cell-label">ISP</p>
+        <p class="sdf-cell-value">${geo.isp}</p>
       </div>
-
-      <div style="padding:0.55rem 0.75rem;border-right:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">IP Address</p>
-        <p style="font-size:0.73rem;color:#fff;font-family:monospace;margin:0;">${geo.ip}</p>
+      <div class="sdf-cell sdf-cell-last">
+        <p class="sdf-cell-label">IP Address</p>
+        <p class="sdf-cell-value" style="font-family:monospace;">${geo.ip}</p>
       </div>
-      <div style="padding:0.55rem 0.75rem;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Fill Time</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;">${fillStr}</p>
+      <div class="sdf-cell sdf-cell-right sdf-cell-last">
+        <p class="sdf-cell-label">Fill Time</p>
+        <p class="sdf-cell-value">${fillStr}</p>
       </div>
-
     </div>
 
-    <!-- Submitted time + referrer -->
-    <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-      <div style="padding:0.5rem 0.75rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Submitted</p>
-        <p style="font-size:0.7rem;color:rgba(255,255,255,0.6);margin:0;">${timeStr}</p>
+    <!-- Submitted + Referrer -->
+    <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+      <div style="padding:0.45rem 0.65rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;min-width:0;">
+        <p style="font-size:0.57rem;color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Submitted</p>
+        <p style="font-size:0.68rem;color:rgba(255,255,255,0.6);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${timeStr}</p>
       </div>
-      <div style="padding:0.5rem 0.75rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;min-width:0;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Referrer</p>
-        <p style="font-size:0.7rem;color:rgba(255,255,255,0.6);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${referrer}</p>
+      <div style="padding:0.45rem 0.65rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;min-width:0;">
+        <p style="font-size:0.57rem;color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Referrer</p>
+        <p style="font-size:0.68rem;color:rgba(255,255,255,0.6);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${referrer}</p>
       </div>
     </div>
   </div>
 
   <!-- QR -->
-  <div style="padding:1rem 1.25rem;border-bottom:0.5px solid #1e1e1e;display:flex;gap:1rem;align-items:center;">
+  <div style="padding:0.85rem 1.1rem;border-bottom:0.5px solid #1e1e1e;display:flex;gap:0.85rem;align-items:center;">
     <div style="flex:1;min-width:0;">
-      <p style="font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.4rem;">Scan to follow up</p>
-      <p style="font-size:0.7rem;color:rgba(255,255,255,0.35);margin:0 0 5px;line-height:1.5;">Opens WhatsApp with your reference ID pre-filled.</p>
-      <p style="font-size:0.63rem;font-family:monospace;color:rgba(255,255,255,0.2);margin:0;">${refId}</p>
+      <p style="font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.35rem;">Scan to follow up</p>
+      <p style="font-size:0.68rem;color:rgba(255,255,255,0.35);margin:0 0 4px;line-height:1.5;">Opens WhatsApp with your reference ID pre-filled.</p>
+      <p style="font-size:0.6rem;font-family:monospace;color:rgba(255,255,255,0.2);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${refId}</p>
     </div>
-    <canvas id="sdf-qr" width="90" height="90" style="display:block;flex-shrink:0;border:3px solid #fff;border-radius:4px;"></canvas>
+    <canvas id="sdf-qr" width="80" height="80" style="display:block;flex-shrink:0;border:3px solid #fff;border-radius:4px;"></canvas>
   </div>
 
   <!-- WhatsApp -->
-  <div style="padding:0.85rem 1.25rem;border-bottom:0.5px solid #1e1e1e;">
-    <a href="${waUrl}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:#128C7E;border-radius:8px;padding:0.7rem 1rem;text-decoration:none;">
-      <span style="font-size:1.15rem;line-height:1;">💬</span>
-      <span style="font-size:0.78rem;font-weight:600;color:#fff;letter-spacing:0.06em;text-transform:uppercase;">Chat on WhatsApp</span>
-      <span style="font-size:0.63rem;color:rgba(255,255,255,0.5);margin-left:auto;white-space:nowrap;">Replies in minutes</span>
+  <div style="padding:0.75rem 1.1rem;border-bottom:0.5px solid #1e1e1e;">
+    <a href="${waUrl}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:#128C7E;border-radius:8px;padding:0.65rem 0.9rem;text-decoration:none;">
+      <span style="font-size:1.1rem;line-height:1;">💬</span>
+      <span style="font-size:0.75rem;font-weight:600;color:#fff;letter-spacing:0.06em;text-transform:uppercase;">Chat on WhatsApp</span>
+      <span style="font-size:0.62rem;color:rgba(255,255,255,0.5);margin-left:auto;white-space:nowrap;">Replies in minutes</span>
     </a>
   </div>
 
   <!-- Footer -->
-  <div style="padding:0.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;">
-    <p style="font-size:0.6rem;color:rgba(255,255,255,0.18);margin:0;line-height:1.5;">SDF Clothing Ltd · Trusted manufacturer since 1998</p>
-    <button id="sdf-close" style="background:#cc0000;color:#fff;border:none;padding:0.55rem 1.25rem;font-size:0.7rem;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer;border-radius:6px;white-space:nowrap;min-height:36px;transition:background 0.2s;flex-shrink:0;">
+  <div style="padding:0.75rem 1.1rem;display:flex;align-items:center;justify-content:space-between;gap:0.75rem;">
+    <p style="font-size:0.58rem;color:rgba(255,255,255,0.18);margin:0;line-height:1.5;">SDF Clothing Ltd · Trusted manufacturer since 1998</p>
+    <button id="sdf-close" style="background:#cc0000;color:#fff;border:none;padding:0.5rem 1.1rem;font-size:0.68rem;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer;border-radius:6px;white-space:nowrap;min-height:36px;flex-shrink:0;">
       Close
     </button>
   </div>
 
-</div>
-<style>
-  @keyframes sdfFadeIn  { from { opacity:0 } to { opacity:1 } }
-  @keyframes sdfSlideUp { from { opacity:0;transform:translateY(20px) } to { opacity:1;transform:translateY(0) } }
-</style>`;
+</div>`;
 
     document.body.appendChild(overlay);
 
     document.getElementById('sdf-close').addEventListener('click', function () {
       overlay.remove();
+    });
+
+    // Close on backdrop click
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) overlay.remove();
     });
 
     // Countdown
