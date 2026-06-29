@@ -399,6 +399,7 @@
     const fillSeconds = (Date.now() - pageLoad) / 1000;
 
     data['_reference_id'] = generateRefId();
+    data['subject']       = 'Inquiry [' + data['_reference_id'] + '] \u2014 SDF Clothing';
     data['_device']       = device;
     data['_browser']      = getBrowserInfo();
     data['_screen']       = window.screen.width + 'x' + window.screen.height;
