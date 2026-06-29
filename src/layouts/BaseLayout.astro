@@ -7,13 +7,16 @@ export interface Props {
   description: string;
   ogImage?: string;
   ogType?: string;
+  canonicalUrl?: string;
   datePublished?: string;
   dateModified?: string;
   schema?: object | object[];
 }
 
-const { title, description, ogImage, ogType, datePublished, dateModified, schema } = Astro.props;
-const canonical = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).toString();
+const { title, description, ogImage, ogType, canonicalUrl, datePublished, dateModified, schema } = Astro.props;
+const canonical = canonicalUrl
+  ? new URL(canonicalUrl, Astro.site).toString()
+  : new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).toString();
 ---
 
 <!DOCTYPE html>
@@ -24,6 +27,7 @@ const canonical = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).t
       description={description}
       ogImage={ogImage}
       ogType={ogType}
+      canonicalUrl={canonicalUrl}
       datePublished={datePublished}
       dateModified={dateModified}
       schema={schema}

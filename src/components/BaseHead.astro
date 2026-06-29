@@ -6,6 +6,7 @@ export interface Props {
   description: string;
   ogImage?: string;
   ogType?: string;
+  canonicalUrl?: string;
   datePublished?: string;
   dateModified?: string;
   schema?: object | object[];
@@ -16,13 +17,16 @@ const {
   description,
   ogImage = "/factory.jpg",
   ogType = "website",
+  canonicalUrl,
   datePublished,
   dateModified,
   schema
 } = Astro.props;
 
-// ── FIX 1: Canonical always auto-generated, strips www, adds trailing slash ──
-const canonical = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).toString();
+// ── FIX 1: Canonical auto-generated if not provided, strips www, adds trailing slash ──
+const canonical = canonicalUrl
+  ? new URL(canonicalUrl, Astro.site).toString()
+  : new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).toString();
 
 const siteName = "SDF Clothing";
 const yearsExpPhrase = getYearsExperiencePhrase();
