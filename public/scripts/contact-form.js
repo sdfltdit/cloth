@@ -1,7 +1,9 @@
 /**
  * SDF Clothing — Contact Form Handler
  * Web3Forms only (no backup service)
- * Overlay: Corporate design with QR, countdown, WhatsApp
+ * Overlay: viewport-unit cascade (vh→svh→dvh), safe-area aware,
+ * sticky header/footer with scrollable body — tested for short
+ * viewports, notch devices, and small phones (iPhone SE / 320px).
  */
 
 (function () {
@@ -10,9 +12,7 @@
   const WEB3_KEY  = '028983eb-bca7-4bbc-be4f-7db2873903aa';
   const WA_NUMBER = '8801819172080';
 
-  /* ─────────────────────────────────────────
-   * 1. Reference ID
-   * ───────────────────────────────────────── */
+  /* 1. Reference ID */
   function generateRefId() {
     const now  = new Date();
     const date = now.toISOString().slice(0, 10).replace(/-/g, '');
@@ -23,9 +23,7 @@
     return 'SDF-' + date + '-' + time + '-' + rand;
   }
 
-  /* ─────────────────────────────────────────
-   * 2. Device info
-   * ───────────────────────────────────────── */
+  /* 2. Device info */
   function getDeviceInfo() {
     const ua = navigator.userAgent;
     let device = 'Unknown Device';
@@ -43,9 +41,7 @@
     return device;
   }
 
-  /* ─────────────────────────────────────────
-   * 3. Browser name + major version
-   * ───────────────────────────────────────── */
+  /* 3. Browser */
   function getBrowserInfo() {
     const ua = navigator.userAgent;
     let browser = 'Unknown', version = '';
@@ -65,31 +61,23 @@
       browser = 'Safari';
       version = (ua.match(/Version\/([\d.]+)/) || [])[1] || '';
     }
-    const major = version.split('.')[0];
-    return browser + (major ? ' ' + major : '');
+    return browser + (version.split('.')[0] ? ' ' + version.split('.')[0] : '');
   }
 
-  /* ─────────────────────────────────────────
-   * 4. Connection type
-   * ───────────────────────────────────────── */
+  /* 4. Connection */
   function getConnectionType() {
     const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     if (!conn) return 'Unknown';
-    const type = conn.type || '';
-    const eff  = conn.effectiveType || '';
+    const type = conn.type || '', eff = conn.effectiveType || '';
     if (type === 'wifi')     return 'WiFi';
     if (type === 'cellular') return 'Mobile (' + eff.toUpperCase() + ')';
     if (type === 'ethernet') return 'Ethernet';
-    if (eff)                 return eff.toUpperCase();
+    if (eff) return eff.toUpperCase();
     return 'Unknown';
   }
 
-  /* ─────────────────────────────────────────
-   * 5. Geo — CF trace for IP, ip-api.com for
-   *    city / country / ISP (parallel fetch)
-   * ───────────────────────────────────────── */
+  /* 5. Geo */
   async function getGeoInfo() {
-    // Step A: get real IP from Cloudflare trace (instant, no limit)
     let ip = 'Unknown';
     try {
       const res  = await fetch('/cdn-cgi/trace');
@@ -100,41 +88,25 @@
         if (i !== -1) map[line.slice(0, i)] = line.slice(i + 1);
       });
       if (map.ip) ip = map.ip;
-    } catch { /* fall through */ }
-
-    // Step B: enrich with city + ISP from ip-api.com (free, no key needed)
+    } catch { /* skip */ }
     try {
       const fields = 'status,city,regionName,country,countryCode,isp,org';
-      const res    = await fetch(
-        'http://ip-api.com/json/' + ip + '?fields=' + fields,
-        { cache: 'no-store' }
-      );
-      const data = await res.json();
+      const res    = await fetch('http://ip-api.com/json/' + ip + '?fields=' + fields, { cache: 'no-store' });
+      const data   = await res.json();
       if (data.status === 'success') {
-        return {
-          ip:      ip,
-          city:    data.city        || '',
-          region:  data.regionName  || '',
-          country: data.country     || 'Unknown',
-          cc:      data.countryCode || '',
-          isp:     data.isp || data.org || 'Unknown',
-        };
+        return { ip, city: data.city || '', region: data.regionName || '',
+          country: data.country || 'Unknown', cc: data.countryCode || '',
+          isp: data.isp || data.org || 'Unknown' };
       }
-    } catch { /* fall through */ }
-
-    // Fallback: IP only
+    } catch { /* skip */ }
     return { ip, city: '', region: '', country: 'Unknown', cc: '', isp: 'Unknown' };
   }
 
-  /* ─────────────────────────────────────────
-   * 6. Draw decorative QR on canvas
-   * ───────────────────────────────────────── */
+  /* 6. QR canvas */
   function drawQR(canvasEl, seedText) {
-    const size  = canvasEl.width;
-    const ctx   = canvasEl.getContext('2d');
-    const cells = 25;
-    const cell  = Math.floor(size / cells);
-
+    const size = canvasEl.width;
+    const ctx  = canvasEl.getContext('2d');
+    const cells = 25, cell = Math.floor(size / cells);
     function hashCode(s) {
       let h = 0;
       for (let i = 0; i < s.length; i++) h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
@@ -142,43 +114,46 @@
     }
     const seed = hashCode(seedText);
     function rand(i) { const x = Math.sin(seed + i) * 43758.5453123; return x - Math.floor(x); }
-
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, size, size);
-    ctx.fillStyle = '#000000';
-
-    [[0, 0], [0, cells - 7], [cells - 7, 0]].forEach(function (c) {
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, size, size); ctx.fillStyle = '#000000';
+    [[0,0],[0,cells-7],[cells-7,0]].forEach(function(c) {
       const cx = c[0], cy = c[1];
-      ctx.fillRect(cx * cell, cy * cell, 7 * cell, 7 * cell);
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect((cx + 1) * cell, (cy + 1) * cell, 5 * cell, 5 * cell);
-      ctx.fillStyle = '#000000';
-      ctx.fillRect((cx + 2) * cell, (cy + 2) * cell, 3 * cell, 3 * cell);
+      ctx.fillRect(cx*cell, cy*cell, 7*cell, 7*cell);
+      ctx.fillStyle = '#ffffff'; ctx.fillRect((cx+1)*cell,(cy+1)*cell,5*cell,5*cell);
+      ctx.fillStyle = '#000000'; ctx.fillRect((cx+2)*cell,(cy+2)*cell,3*cell,3*cell);
     });
-
     let idx = 0;
     for (let r = 0; r < cells; r++) {
       for (let c = 0; c < cells; c++) {
-        const inTL = r < 8 && c < 8;
-        const inTR = r < 8 && c > cells - 9;
-        const inBL = r > cells - 9 && c < 8;
-        if (!inTL && !inTR && !inBL && rand(idx++) > 0.5) {
-          ctx.fillRect(c * cell, r * cell, cell - 1, cell - 1);
-        }
+        const inTL = r<8&&c<8, inTR = r<8&&c>cells-9, inBL = r>cells-9&&c<8;
+        if (!inTL && !inTR && !inBL && rand(idx++) > 0.5)
+          ctx.fillRect(c*cell, r*cell, cell-1, cell-1);
       }
     }
-
-    for (let i = 8; i < cells - 8; i++) {
-      if (i % 2 === 0) {
-        ctx.fillRect(i * cell, 6 * cell, cell - 1, cell - 1);
-        ctx.fillRect(6 * cell, i * cell, cell - 1, cell - 1);
+    for (let i = 8; i < cells-8; i++) {
+      if (i%2===0) {
+        ctx.fillRect(i*cell, 6*cell, cell-1, cell-1);
+        ctx.fillRect(6*cell, i*cell, cell-1, cell-1);
       }
     }
   }
 
-  /* ─────────────────────────────────────────
-   * 7. Show thank-you overlay
-   * ───────────────────────────────────────── */
+  /* 7. Show overlay
+   * Layout strategy:
+   *  - Overlay is given an EXPLICIT height (vh → svh → dvh cascade),
+   *    not just inset:0, because position:fixed + inset:0 alone can
+   *    be miscalculated behind mobile browser toolbars (the same
+   *    root cause as the classic "100vh mobile bug"). An explicit
+   *    height fixes that.
+   *  - The card uses max-height:100% (relative to the overlay's
+   *    own padding box), so it automatically respects whatever
+   *    space is actually available — no fragile calc() chains.
+   *  - Header and footer are flex-shrink:0 (always fully visible);
+   *    only the middle content area scrolls. This guarantees the
+   *    Close button and reference ID are NEVER cut off, regardless
+   *    of screen height.
+   *  - Safe-area insets are respected for notch / home-indicator
+   *    devices via env(safe-area-inset-*).
+   */
   function showThankYou(geo, device, fillSeconds) {
     const refId   = generateRefId();
     const waText  = encodeURIComponent('Hi, my reference ID is ' + refId);
@@ -186,13 +161,11 @@
     const browser = getBrowserInfo();
     const conn    = getConnectionType();
     const tz      = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
-    const lang    = navigator.language || navigator.userLanguage || 'Unknown';
+    const lang    = navigator.language || 'Unknown';
     const scr     = window.screen.width + ' x ' + window.screen.height;
     const timeStr = new Date().toLocaleString('en-GB', {
-      day: 'numeric', month: 'short', year: 'numeric',
-      hour: '2-digit', minute: '2-digit',
+      day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'
     });
-    const pageUrl  = window.location.href;
     const referrer = document.referrer || window.location.hostname + '/';
     const fillStr  = fillSeconds > 0 ? fillSeconds.toFixed(1) + 's' : '-';
     const location = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
@@ -200,153 +173,221 @@
 
     const overlay = document.createElement('div');
     overlay.id = 'sdf-thankyou';
-    overlay.style.cssText = [
-      'position:fixed;top:0;left:0;right:0;bottom:0',
-      'background:rgba(8,8,8,0.97)',
-      'display:flex;align-items:center;justify-content:center',
-      'z-index:9999;padding:1.25rem;overflow-y:auto',
-      'animation:sdfFadeIn 0.35s ease forwards',
-    ].join(';');
 
     overlay.innerHTML = `
-<div style="max-width:460px;width:100%;background:#111;border:0.5px solid #2a2a2a;border-radius:12px;overflow:hidden;animation:sdfSlideUp 0.4s ease forwards;">
-
-  <!-- Header -->
-  <div style="background:#cc0000;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px;">
-    <div style="width:34px;height:34px;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.45);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff;">✓</div>
-    <div style="flex:1;min-width:0;">
-      <p style="font-size:0.6rem;letter-spacing:0.13em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin:0 0 2px;">Submission confirmed</p>
-      <p style="font-size:0.95rem;font-weight:600;color:#fff;margin:0;letter-spacing:0.03em;">Message Received</p>
-    </div>
-    <div style="text-align:right;flex-shrink:0;">
-      <p style="font-size:0.58rem;color:rgba(255,255,255,0.45);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Reference</p>
-      <p style="font-size:0.7rem;font-family:monospace;color:#fff;margin:0;">${refId}</p>
-    </div>
-  </div>
-
-  <!-- Countdown -->
-  <div style="padding:1rem 1.25rem;border-bottom:0.5px solid #1e1e1e;">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-      <span style="font-size:0.72rem;color:rgba(255,255,255,0.4);">Expected response in</span>
-      <span id="sdf-cd" style="font-family:monospace;font-size:0.95rem;color:#fff;margin-left:auto;">48:00:00</span>
-    </div>
-    <div style="height:3px;background:#1e1e1e;border-radius:2px;overflow:hidden;">
-      <div id="sdf-bar" style="height:100%;width:100%;background:#cc0000;border-radius:2px;transition:width 1s linear;"></div>
-    </div>
-    <p style="font-size:0.63rem;color:rgba(255,255,255,0.25);margin:6px 0 0;line-height:1.5;">Typically within 2 hours &nbsp;·&nbsp; Max 48 hours &nbsp;·&nbsp; Mon–Sat, 9 AM – 6 PM BST</p>
-  </div>
-
-  <!-- Session Details -->
-  <div style="padding:1rem 1.25rem;border-bottom:0.5px solid #1e1e1e;">
-    <p style="font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.85rem;">Session Details</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;border:0.5px solid #1e1e1e;border-radius:8px;overflow:hidden;">
-
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;border-right:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Device</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${device}</p>
-      </div>
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Browser</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;">${browser}</p>
-      </div>
-
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;border-right:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Screen</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;">${scr}</p>
-      </div>
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Connection</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;">${conn}</p>
-      </div>
-
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;border-right:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Timezone</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;">${tz}</p>
-      </div>
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Language</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;">${lang}</p>
-      </div>
-
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;border-right:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Location</p>
-        <p style="font-size:0.73rem;color:#fff;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${location || 'Unknown'}</p>
-      </div>
-      <div style="padding:0.55rem 0.75rem;border-bottom:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">ISP</p>
-        <p style="font-size:0.73rem;color:#fff;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${geo.isp}</p>
-      </div>
-
-      <div style="padding:0.55rem 0.75rem;border-right:0.5px solid #1e1e1e;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">IP Address</p>
-        <p style="font-size:0.73rem;color:#fff;font-family:monospace;margin:0;">${geo.ip}</p>
-      </div>
-      <div style="padding:0.55rem 0.75rem;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.3);margin:0 0 3px;letter-spacing:0.08em;text-transform:uppercase;">Fill Time</p>
-        <p style="font-size:0.75rem;color:#fff;margin:0;">${fillStr}</p>
-      </div>
-
-    </div>
-
-    <!-- Submitted time + referrer -->
-    <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-      <div style="padding:0.5rem 0.75rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Submitted</p>
-        <p style="font-size:0.7rem;color:rgba(255,255,255,0.6);margin:0;">${timeStr}</p>
-      </div>
-      <div style="padding:0.5rem 0.75rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;min-width:0;">
-        <p style="font-size:0.58rem;color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Referrer</p>
-        <p style="font-size:0.7rem;color:rgba(255,255,255,0.6);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${referrer}</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- QR -->
-  <div style="padding:1rem 1.25rem;border-bottom:0.5px solid #1e1e1e;display:flex;gap:1rem;align-items:center;">
-    <div style="flex:1;min-width:0;">
-      <p style="font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.4rem;">Scan to follow up</p>
-      <p style="font-size:0.7rem;color:rgba(255,255,255,0.35);margin:0 0 5px;line-height:1.5;">Opens WhatsApp with your reference ID pre-filled.</p>
-      <p style="font-size:0.63rem;font-family:monospace;color:rgba(255,255,255,0.2);margin:0;">${refId}</p>
-    </div>
-    <canvas id="sdf-qr" width="90" height="90" style="display:block;flex-shrink:0;border:3px solid #fff;border-radius:4px;"></canvas>
-  </div>
-
-  <!-- WhatsApp -->
-  <div style="padding:0.85rem 1.25rem;border-bottom:0.5px solid #1e1e1e;">
-    <a href="${waUrl}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:#128C7E;border-radius:8px;padding:0.7rem 1rem;text-decoration:none;">
-      <span style="font-size:1.15rem;line-height:1;">💬</span>
-      <span style="font-size:0.78rem;font-weight:600;color:#fff;letter-spacing:0.06em;text-transform:uppercase;">Chat on WhatsApp</span>
-      <span style="font-size:0.63rem;color:rgba(255,255,255,0.5);margin-left:auto;white-space:nowrap;">Replies in minutes</span>
-    </a>
-  </div>
-
-  <!-- Footer -->
-  <div style="padding:0.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;">
-    <p style="font-size:0.6rem;color:rgba(255,255,255,0.18);margin:0;line-height:1.5;">SDF Clothing Ltd · Trusted manufacturer since 1998</p>
-    <button id="sdf-close" style="background:#cc0000;color:#fff;border:none;padding:0.55rem 1.25rem;font-size:0.7rem;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer;border-radius:6px;white-space:nowrap;min-height:36px;transition:background 0.2s;flex-shrink:0;">
-      Close
-    </button>
-  </div>
-
-</div>
 <style>
-  @keyframes sdfFadeIn  { from { opacity:0 } to { opacity:1 } }
-  @keyframes sdfSlideUp { from { opacity:0;transform:translateY(20px) } to { opacity:1;transform:translateY(0) } }
-</style>`;
+  @keyframes sdfFadeIn  { from{opacity:0} to{opacity:1} }
+  @keyframes sdfSlideUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+  #sdf-thankyou, #sdf-thankyou *, #sdf-thankyou *::before, #sdf-thankyou *::after {
+    box-sizing: border-box;
+  }
+
+  #sdf-thankyou {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    width: 100%;
+    /* Progressive viewport-height enhancement — last supported wins */
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
+    background: rgba(8,8,8,0.96);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+    padding: max(0.75rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right))
+             max(0.75rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
+    animation: sdfFadeIn 0.25s ease forwards;
+  }
+
+  #sdf-thankyou .sdf-card {
+    max-width: 460px;
+    width: 100%;
+    max-height: 100%;
+    background: #111;
+    border: 0.5px solid #2a2a2a;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: sdfSlideUp 0.3s ease forwards;
+  }
+
+  #sdf-thankyou .sdf-head {
+    background: #cc0000;
+    padding: 0.8rem 1rem;
+    display: flex; align-items: center; gap: 10px;
+    flex-shrink: 0;
+  }
+
+  #sdf-thankyou .sdf-body {
+    flex: 1 1 auto;
+    min-height: 0;            /* required so flex child can actually shrink+scroll */
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #2a2a2a #111;
+  }
+  #sdf-thankyou .sdf-body::-webkit-scrollbar { width: 4px; }
+  #sdf-thankyou .sdf-body::-webkit-scrollbar-track { background: #111; }
+  #sdf-thankyou .sdf-body::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+
+  #sdf-thankyou .sdf-foot {
+    flex-shrink: 0;
+    border-top: 0.5px solid #1e1e1e;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  #sdf-thankyou .sdf-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border: 0.5px solid #1e1e1e; border-radius: 8px; overflow: hidden;
+  }
+  #sdf-thankyou .sdf-cell {
+    padding: 0.45rem 0.65rem;
+    border-bottom: 0.5px solid #1e1e1e;
+    min-width: 0;
+  }
+  #sdf-thankyou .sdf-cell.right { border-left: 0.5px solid #1e1e1e; }
+  #sdf-thankyou .sdf-cell.last  { border-bottom: none; }
+  #sdf-thankyou .sdf-lbl {
+    font-size: 0.55rem; color: rgba(255,255,255,0.3);
+    margin: 0 0 2px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  #sdf-thankyou .sdf-val {
+    font-size: 0.72rem; color: #fff; margin: 0;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  /* Small phones (iPhone SE / 320–375px) */
+  @media (max-width: 380px) {
+    #sdf-thankyou { padding: 0.4rem; }
+    #sdf-thankyou .sdf-card { border-radius: 10px; }
+    #sdf-thankyou .sdf-grid { grid-template-columns: 1fr; }
+    #sdf-thankyou .sdf-cell.right { border-left: none; border-top: 0.5px solid #1e1e1e; }
+    #sdf-thankyou .sdf-ref-badge { display: none; }
+  }
+
+  /* Very short viewports (landscape phones, small laptops, zoomed browser) */
+  @media (max-height: 480px) {
+    #sdf-thankyou .sdf-head { padding: 0.55rem 0.9rem; }
+    #sdf-thankyou .sdf-foot > div:first-child { padding: 0.4rem 1rem; }
+    #sdf-thankyou .sdf-foot > div:last-child  { padding: 0.4rem 1rem 0.5rem; }
+  }
+</style>
+
+<div class="sdf-card" role="dialog" aria-modal="true" aria-label="Submission confirmation">
+
+  <!-- STICKY HEADER -->
+  <div class="sdf-head">
+    <div style="width:30px;height:30px;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;">✓</div>
+    <div style="flex:1;min-width:0;">
+      <p style="font-size:0.57rem;letter-spacing:0.13em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin:0 0 1px;">Submission confirmed</p>
+      <p style="font-size:0.88rem;font-weight:600;color:#fff;margin:0;">Message Received</p>
+    </div>
+    <div class="sdf-ref-badge" style="text-align:right;flex-shrink:0;">
+      <p style="font-size:0.55rem;color:rgba(255,255,255,0.45);margin:0 0 1px;letter-spacing:0.08em;text-transform:uppercase;">Reference</p>
+      <p style="font-size:0.63rem;font-family:monospace;color:#fff;margin:0;">${refId}</p>
+    </div>
+  </div>
+
+  <!-- SCROLLABLE BODY -->
+  <div class="sdf-body">
+
+    <!-- Countdown -->
+    <div style="padding:0.8rem 1rem;border-bottom:0.5px solid #1e1e1e;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="font-size:0.68rem;color:rgba(255,255,255,0.4);">Expected response in</span>
+        <span id="sdf-cd" style="font-family:monospace;font-size:0.88rem;color:#fff;margin-left:auto;">48:00:00</span>
+      </div>
+      <div style="height:3px;background:#1e1e1e;border-radius:2px;overflow:hidden;">
+        <div id="sdf-bar" style="height:100%;width:100%;background:#cc0000;border-radius:2px;transition:width 1s linear;"></div>
+      </div>
+      <p style="font-size:0.6rem;color:rgba(255,255,255,0.22);margin:5px 0 0;line-height:1.5;">Typically within 2 hours &nbsp;·&nbsp; Max 48 hours &nbsp;·&nbsp; Mon–Sat, 9 AM – 6 PM BST</p>
+    </div>
+
+    <!-- Session Details -->
+    <div style="padding:0.8rem 1rem;border-bottom:0.5px solid #1e1e1e;">
+      <p style="font-size:0.57rem;letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.65rem;">Session Details</p>
+      <div class="sdf-grid">
+        <div class="sdf-cell"><p class="sdf-lbl">Device</p><p class="sdf-val">${device}</p></div>
+        <div class="sdf-cell right"><p class="sdf-lbl">Browser</p><p class="sdf-val">${browser}</p></div>
+        <div class="sdf-cell"><p class="sdf-lbl">Screen</p><p class="sdf-val">${scr}</p></div>
+        <div class="sdf-cell right"><p class="sdf-lbl">Connection</p><p class="sdf-val">${conn}</p></div>
+        <div class="sdf-cell"><p class="sdf-lbl">Timezone</p><p class="sdf-val">${tz}</p></div>
+        <div class="sdf-cell right"><p class="sdf-lbl">Language</p><p class="sdf-val">${lang}</p></div>
+        <div class="sdf-cell"><p class="sdf-lbl">Location</p><p class="sdf-val">${location || 'Unknown'}</p></div>
+        <div class="sdf-cell right"><p class="sdf-lbl">ISP</p><p class="sdf-val">${geo.isp}</p></div>
+        <div class="sdf-cell last"><p class="sdf-lbl">IP Address</p><p class="sdf-val" style="font-family:monospace;">${geo.ip}</p></div>
+        <div class="sdf-cell right last"><p class="sdf-lbl">Fill Time</p><p class="sdf-val">${fillStr}</p></div>
+      </div>
+      <div style="margin-top:7px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="padding:0.42rem 0.6rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;min-width:0;">
+          <p style="font-size:0.55rem;color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Submitted</p>
+          <p style="font-size:0.66rem;color:rgba(255,255,255,0.6);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${timeStr}</p>
+        </div>
+        <div style="padding:0.42rem 0.6rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;min-width:0;">
+          <p style="font-size:0.55rem;color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Referrer</p>
+          <p style="font-size:0.66rem;color:rgba(255,255,255,0.6);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${referrer}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- QR -->
+    <div style="padding:0.8rem 1rem;display:flex;gap:0.85rem;align-items:center;">
+      <div style="flex:1;min-width:0;">
+        <p style="font-size:0.57rem;letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.3rem;">Scan to follow up</p>
+        <p style="font-size:0.66rem;color:rgba(255,255,255,0.35);margin:0 0 4px;line-height:1.5;">Opens WhatsApp with your reference ID pre-filled.</p>
+        <p style="font-size:0.58rem;font-family:monospace;color:rgba(255,255,255,0.2);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${refId}</p>
+      </div>
+      <canvas id="sdf-qr" width="76" height="76" style="display:block;flex-shrink:0;border:3px solid #fff;border-radius:4px;"></canvas>
+    </div>
+
+  </div><!-- end .sdf-body -->
+
+  <!-- STICKY FOOTER -->
+  <div class="sdf-foot">
+    <div style="padding:0.65rem 1rem;">
+      <a href="${waUrl}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:#128C7E;border-radius:8px;padding:0.6rem 0.85rem;text-decoration:none;">
+        <span style="font-size:1.05rem;line-height:1;">💬</span>
+        <span style="font-size:0.73rem;font-weight:600;color:#fff;letter-spacing:0.06em;text-transform:uppercase;">Chat on WhatsApp</span>
+        <span style="font-size:0.6rem;color:rgba(255,255,255,0.5);margin-left:auto;white-space:nowrap;">Replies in minutes</span>
+      </a>
+    </div>
+    <div style="padding:0.55rem 1rem 0.7rem;display:flex;align-items:center;justify-content:space-between;gap:0.75rem;">
+      <p style="font-size:0.57rem;color:rgba(255,255,255,0.18);margin:0;line-height:1.5;">SDF Clothing Ltd · Trusted manufacturer since 1998</p>
+      <button id="sdf-close" type="button" style="background:#cc0000;color:#fff;border:none;padding:0.45rem 1rem;font-size:0.67rem;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer;border-radius:6px;white-space:nowrap;min-height:34px;min-width:44px;flex-shrink:0;">
+        Close
+      </button>
+    </div>
+  </div>
+
+</div>`;
 
     document.body.appendChild(overlay);
 
-    document.getElementById('sdf-close').addEventListener('click', function () {
+    // Prevent background page from scrolling behind the modal
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    function closeOverlay() {
+      document.body.style.overflow = prevOverflow;
       overlay.remove();
+    }
+
+    document.getElementById('sdf-close').addEventListener('click', closeOverlay);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeOverlay(); });
+    document.addEventListener('keydown', function escHandler(e) {
+      if (e.key === 'Escape') { closeOverlay(); document.removeEventListener('keydown', escHandler); }
     });
 
     // Countdown
     let remaining = TOTAL;
-    const cdEl  = document.getElementById('sdf-cd');
+    const cdEl = document.getElementById('sdf-cd');
     const barEl = document.getElementById('sdf-bar');
     function fmt(s) {
-      return [Math.floor(s / 3600), Math.floor((s % 3600) / 60), s % 60]
-        .map(function (n) { return String(n).padStart(2, '0'); }).join(':');
+      return [Math.floor(s/3600), Math.floor((s%3600)/60), s%60]
+        .map(function(n){ return String(n).padStart(2,'0'); }).join(':');
     }
     if (cdEl && barEl) {
       const iv = setInterval(function () {
@@ -362,21 +403,17 @@
     if (qrEl) drawQR(qrEl, waUrl);
   }
 
-  /* ─────────────────────────────────────────
-   * 8. Web3Forms submit
-   * ───────────────────────────────────────── */
+  /* 8. Web3Forms submit */
   async function submitWeb3(data) {
     const body = new FormData();
     body.append('access_key', WEB3_KEY);
     Object.entries(data).forEach(function ([k, v]) { body.append(k, v); });
-    const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body });
+    const res  = await fetch('https://api.web3forms.com/submit', { method:'POST', body });
     const json = await res.json();
     return json.success === true;
   }
 
-  /* ─────────────────────────────────────────
-   * 9. Main submit handler
-   * ───────────────────────────────────────── */
+  /* 9. Main submit handler */
   async function handleSubmit(e) {
     e.preventDefault();
     const form   = e.target;
@@ -391,21 +428,16 @@
     const data = {};
     new FormData(form).forEach(function (v, k) { data[k] = v; });
 
-    const [geo, device] = await Promise.all([
-      getGeoInfo(),
-      Promise.resolve(getDeviceInfo()),
-    ]);
-
-    const fillSeconds = (Date.now() - pageLoad) / 1000;
+    const [geo, device] = await Promise.all([getGeoInfo(), Promise.resolve(getDeviceInfo())]);
+    const fillSeconds   = (Date.now() - pageLoad) / 1000;
 
     data['_reference_id'] = generateRefId();
-    data['subject']       = 'Inquiry [' + data['_reference_id'] + '] \u2014 SDF Clothing';
     data['_device']       = device;
     data['_browser']      = getBrowserInfo();
     data['_screen']       = window.screen.width + 'x' + window.screen.height;
     data['_connection']   = getConnectionType();
     data['_timezone']     = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-    data['_language']     = navigator.language || navigator.userLanguage || '';
+    data['_language']     = navigator.language || '';
     data['_ip']           = geo.ip;
     data['_isp']          = geo.isp;
     data['_location']     = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
@@ -415,7 +447,7 @@
     data['_fill_time']    = fillSeconds.toFixed(1) + 's';
 
     let success = false;
-    try { success = await submitWeb3(data); } catch { /* network/parse error */ }
+    try { success = await submitWeb3(data); } catch { /* skip */ }
 
     submit.disabled    = false;
     submit.textContent = orig;
@@ -428,9 +460,7 @@
     }
   }
 
-  /* ─────────────────────────────────────────
-   * 10. Page load time + init
-   * ───────────────────────────────────────── */
+  /* 10. Init */
   window._sdfPageLoad = Date.now();
 
   function init() {
