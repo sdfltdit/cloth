@@ -7,15 +7,14 @@ export const prerender = true;
 const pageTitle = "Print on Demand vs Private Label | Which Model Fits Brand";
 const pageDescription = "Compare print on demand vs private label clothing manufacturing. Understand costs, pros, cons, and which model fits your brand goals and objectives now.";
 const companyAge = getCompanyAgeString();
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 const pageSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": canonicalUrl.href,
-      "url": canonicalUrl.href,
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
       "name": pageTitle,
       "description": pageDescription,
       "isPartOf": {
@@ -58,7 +57,7 @@ const pageSchema = {
             "@type": "ListItem",
             "position": 2,
             "name": "Print on Demand vs Private Label",
-            "item": canonicalUrl.href
+            "item": Astro.url.href
           }
         ]
       }
@@ -181,7 +180,7 @@ const pageSchema = {
 <BaseLayout 
   title={pageTitle} 
   description={pageDescription} 
-  canonicalUrl={canonicalUrl.href}
+
   schema={pageSchema}
 >
   <div class="container">

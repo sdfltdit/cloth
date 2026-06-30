@@ -7,7 +7,6 @@ export const prerender = true;
 
 const pageTitle = "Overseas vs Local Clothing Manufacturer | 2026 Guide";
 const pageDescription = "Overseas vs local clothing manufacturer compared: real costs, quality, lead times and risks. Honest 2026 guide to help brands choose the right strategy.";
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20clothing%20manufacturing`;
 
@@ -16,8 +15,8 @@ const schema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": canonicalUrl.href,
-      "url": canonicalUrl.href,
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
       "name": pageTitle,
       "description": pageDescription,
       "datePublished": "2026-05-23",
@@ -42,7 +41,7 @@ const schema = {
             "@type": "ListItem",
             "position": 2,
             "name": pageTitle,
-            "item": canonicalUrl.href
+            "item": Astro.url.href
           }
         ]
       },
@@ -122,7 +121,7 @@ const schema = {
 };
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href} schema={schema}>
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 

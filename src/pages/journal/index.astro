@@ -12,7 +12,6 @@ function hexToRgb(hex: string): string {
 // ─── page meta ──────────────────────────────────────────────────────────────
 const pageTitle = "Textile Industry News & Manufacturing Insights — SDF Clothing Journal";
 const pageDesc  = "Bangladesh garment manufacturer SDF Clothing documents textile industry news, RMG sector developments, GOTS and BSCI certification updates, EU regulatory changes, and supply chain insights from our Dhaka production facility.";
-const canonical = "https://sdfltd.com/journal/";
 
 // ─── inline SVG icon map ─────────────────────────────────────────────────────
 const ICONS: Record<string, string> = {
@@ -170,7 +169,7 @@ const jsonLD = {
     {
       "@type": "CollectionPage",
       "@id": "https://sdfltd.com/journal/#webpage",
-      "url": canonical,
+      "url": Astro.url.href,
       "name": pageTitle,
       "description": pageDesc,
       "isPartOf": { "@id": "https://sdfltd.com/#website" },
@@ -184,14 +183,14 @@ const jsonLD = {
       "@id": "https://sdfltd.com/journal/#breadcrumb",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home",    "item": "https://sdfltd.com" },
-        { "@type": "ListItem", "position": 2, "name": "Journal", "item": canonical }
+        { "@type": "ListItem", "position": 2, "name": "Journal", "item": Astro.url.href }
       ]
     },
     {
       "@type": "Blog",
       "@id": "https://sdfltd.com/journal/#blog",
       "name": "SDF Clothing Industry Journal",
-      "url": canonical,
+      "url": Astro.url.href,
       "description": "Textile industry news, Bangladesh RMG sector updates, sustainability certifications, EU compliance preparation, and supply chain transparency insights from SDF Clothing.",
       "publisher": { "@id": "https://sdfltd.com/#organization" },
       "blogPost": posts.map(p => ({
@@ -217,16 +216,16 @@ const jsonLD = {
 
   <!-- ── head injections ─────────────────────────────────────────────── -->
 
-  <link rel="alternate"  hreflang="en" href={canonical} />
-
+  <link rel="alternate"  hreflang="en" href={Astro.url.href} />
+  <meta name="robots"    content="index, follow, max-snippet:-1, max-image-preview:large" />
 
   <!-- Open Graph -->
 
 
 
 
-
-
+  <meta property="og:site_name"   content="SDF Clothing" />
+  <meta property="og:locale"      content="en_US" />
 
   <!-- Twitter Card -->
 

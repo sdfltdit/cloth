@@ -7,15 +7,14 @@ export const prerender = true;
 const pageTitle = "Plus Size Clothing Manufacturer Bangladesh | 300 MOQ | SDF";
 const pageDescription = "Leading plus size clothing manufacturer in Bangladesh. 300 piece MOQ, specialized grading 1X-5X, fit testing. Inclusive sizing. Get free quote for plus size.";
 const companyAge = getCompanyAgeString();
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 const pageSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": canonicalUrl.href,
-      "url": canonicalUrl.href,
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
       "name": pageTitle,
       "description": pageDescription,
       "inLanguage": "en-GB",
@@ -115,7 +114,7 @@ const pageSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "Plus Size Clothing Manufacturer",
-          "item": canonicalUrl.href
+          "item": Astro.url.href
         }
       ]
     },
@@ -183,7 +182,7 @@ const pageSchema = {
 };
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href}>
+<BaseLayout title={pageTitle} description={pageDescription}>
 
 <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
 

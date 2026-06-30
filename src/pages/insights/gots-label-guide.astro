@@ -4,15 +4,14 @@ export const prerender = true;
 
 const pageTitle = "GOTS Label Guide | Organic Textile Certification";
 const pageDescription = "GOTS certification guide for clothing brands. Learn organic grade labeling, certification requirements, and how SDF Clothing implements textile standards.";
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 const pageSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": canonicalUrl.href,
-      "url": canonicalUrl.href,
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
       "name": pageTitle,
       "description": pageDescription,
       "isPartOf": {
@@ -40,7 +39,7 @@ const pageSchema = {
             "@type": "ListItem",
             "position": 3,
             "name": "GOTS Label Guide",
-            "item": canonicalUrl.href
+            "item": Astro.url.href
           }
         ]
       }
@@ -105,7 +104,7 @@ const pageSchema = {
 <BaseLayout 
   title={pageTitle} 
   description={pageDescription} 
-  canonicalUrl={canonicalUrl.href}
+
   schema={pageSchema}
 >
   <div class="container">

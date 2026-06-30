@@ -7,15 +7,14 @@ export const prerender = true;
 const pageTitle = "Clothing Manufacturer for Small Business | Low MOQ 300 pcs";
 const pageDescription = "Find clothing manufacturers for small business with low MOQ from 300 pieces. Full package production, sampling, and full support for startup brands today.";
 const companyAge = getCompanyAgeString();
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 const pageSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": canonicalUrl.href,
-      "url": canonicalUrl.href,
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
       "name": pageTitle,
       "description": pageDescription,
       "isPartOf": {
@@ -58,7 +57,7 @@ const pageSchema = {
             "@type": "ListItem",
             "position": 2,
             "name": "Clothing Manufacturer for Small Business",
-            "item": canonicalUrl.href
+            "item": Astro.url.href
           }
         ]
       }
@@ -181,7 +180,7 @@ const pageSchema = {
 <BaseLayout 
   title={pageTitle} 
   description={pageDescription} 
-  canonicalUrl={canonicalUrl.href}
+
   schema={pageSchema}
 >
   <div class="container">

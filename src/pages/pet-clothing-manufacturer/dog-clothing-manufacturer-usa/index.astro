@@ -8,15 +8,14 @@ export const prerender = true;
 const pageTitle = "Dog Clothing Manufacturer USA | Pet Apparel SDF";
 const pageDescription = "Dog clothing manufacturer for USA brands. Custom pet apparel, offshore production, import guidance, and full brand support. Low MOQ. Free quote.";
 const companyAge = getCompanyAgeString();
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 const pageSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": canonicalUrl.href,
-      "url": canonicalUrl.href,
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
       "name": pageTitle,
       "description": pageDescription,
       "isPartOf": {
@@ -65,7 +64,7 @@ const pageSchema = {
             "@type": "ListItem",
             "position": 3,
             "name": "Dog Clothing Manufacturer USA",
-            "item": canonicalUrl.href
+            "item": Astro.url.href
           }
         ]
       }
@@ -130,7 +129,7 @@ const pageSchema = {
 <BaseLayout 
   title={pageTitle} 
   description={pageDescription} 
-  canonicalUrl={canonicalUrl.href}
+
   schema={pageSchema}
 >
   <div class="container">

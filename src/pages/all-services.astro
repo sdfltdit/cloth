@@ -4,10 +4,9 @@ export const prerender = true;
 
 const pageTitle = "All Services | Complete Clothing Manufacturing Capabilities";
 const pageDescription = "Complete clothing manufacturing services from SDF Clothing | fabric sourcing, OEM, ODM, CMT, printing, embroidery, dyeing, and 40+ services. Get a free quote.";
-const canonicalUrl = new URL("https://sdfltd.com/all-services/");
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl.href}>
+<BaseLayout title={pageTitle} description={pageDescription}>
 
 <script type="application/ld+json">
 {
@@ -15,8 +14,8 @@ const canonicalUrl = new URL("https://sdfltd.com/all-services/");
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": canonicalUrl.href,
-      "url": canonicalUrl.href,
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
       "name": pageTitle,
       "description": pageDescription,
       "inLanguage": "en-GB",
@@ -40,7 +39,7 @@ const canonicalUrl = new URL("https://sdfltd.com/all-services/");
           "@type": "ListItem",
           "position": 2,
           "name": "All Services",
-          "item": canonicalUrl.href
+          "item": Astro.url.href
         }
       ]
     }
