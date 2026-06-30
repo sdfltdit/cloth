@@ -362,19 +362,11 @@ const talentAreas = [
         <div class="c-form-box">
           <form
             id="cv-upload-form"
-            action="https://formsubmit.co/eb2b97eab10fc6a7a2d8fa97f25631cb"
-            method="POST"
-            enctype="multipart/form-data"
             novalidate
             aria-label="CV submission form"
           >
-            <!-- FormSubmit.co configuration -->
-            <input type="hidden" name="_subject" value="New CV Submission — SDF Clothing Careers" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="https://sdfltd.com/careers?submitted=1" />
             <!-- Honeypot -->
-            <input type="text" name="_honey" class="c-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input type="text" name="_honey" class="c-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;" />
 
             <div class="c-field">
               <label for="f-name" class="c-label">Full Name <span class="c-req-star" aria-label="required">*</span></label>
@@ -392,6 +384,20 @@ const talentAreas = [
                 <label for="f-phone" class="c-label">Phone Number</label>
                 <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="+1 555 000 0000" class="c-input" aria-describedby="h-phone" />
                 <span id="h-phone" class="c-field-hint">Include country code</span>
+              </div>
+            </div>
+
+            <div class="c-field-row">
+              <div class="c-field">
+                <label for="f-nid" class="c-label">National ID Number <span class="c-req-star" aria-label="required">*</span></label>
+                <input type="text" id="f-nid" name="nid" required placeholder="Your national ID number" class="c-input" aria-required="true" aria-describedby="h-nid e-nid" />
+                <span id="h-nid" class="c-field-hint">Used solely to maintain your candidate record and prevent duplicate applications. Stored securely and never shared.</span>
+                <span id="e-nid" class="c-field-error" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="c-field">
+                <label for="f-salary" class="c-label">Expected Salary (USD/month)</label>
+                <input type="text" id="f-salary" name="expected_salary" placeholder="e.g. 800" class="c-input" aria-describedby="h-salary" />
+                <span id="h-salary" class="c-field-hint">Optional — helps us match you to the right opportunity</span>
               </div>
             </div>
 
@@ -455,10 +461,29 @@ const talentAreas = [
               <span id="e-cv" class="c-field-error" role="alert" aria-live="polite"></span>
             </div>
 
+            <div class="c-field-row">
+              <div class="c-field">
+                <label for="f-linkedin" class="c-label">LinkedIn Profile URL</label>
+                <input type="url" id="f-linkedin" name="linkedin_url" placeholder="https://linkedin.com/in/yourname" class="c-input" aria-describedby="h-linkedin" />
+                <span id="h-linkedin" class="c-field-hint">Optional — helpful for design and marketing roles</span>
+              </div>
+              <div class="c-field">
+                <label for="f-portfolio" class="c-label">Portfolio / Work Samples</label>
+                <input type="url" id="f-portfolio" name="portfolio_url" placeholder="https://yourportfolio.com" class="c-input" aria-describedby="h-portfolio" />
+                <span id="h-portfolio" class="c-field-hint">Optional — Behance, Dribbble, personal site, or Drive link</span>
+              </div>
+            </div>
+
             <div class="c-field">
-              <label for="f-linkedin" class="c-label">LinkedIn Profile URL</label>
-              <input type="url" id="f-linkedin" name="linkedin_url" placeholder="https://linkedin.com/in/yourname" class="c-input" aria-describedby="h-linkedin" />
-              <span id="h-linkedin" class="c-field-hint">Optional — helpful for design and marketing roles</span>
+              <label for="f-reference" class="c-label">Professional Reference</label>
+              <input type="text" id="f-reference" name="reference" placeholder="Name, Company, Phone — e.g. John Smith, ABC Garments, +880 1711 000000" class="c-input" aria-describedby="h-reference" />
+              <span id="h-reference" class="c-field-hint">Optional — a previous supervisor or manager we can contact if needed</span>
+            </div>
+
+            <div class="c-field">
+              <label for="f-employer" class="c-label">Current / Last Employer</label>
+              <input type="text" id="f-employer" name="current_employer" placeholder="e.g. ABC Fashion Ltd" class="c-input" aria-describedby="h-employer" />
+              <span id="h-employer" class="c-field-hint">Optional — helps us understand your background</span>
             </div>
 
             <div class="c-field">
@@ -472,9 +497,10 @@ const talentAreas = [
             </div>
 
             <div class="c-field">
-              <label class="c-checkbox-label">
-                <input type="checkbox" id="f-consent" name="gdpr_consent" value="yes" required class="c-checkbox" aria-required="true" aria-describedby="e-consent" />
-                <span class="c-checkbox-text">I agree that SDF Clothing may store my details and CV for up to six months for recruitment purposes. I can request removal at any time by <a href="/contact" class="c-link">contacting the team</a>.</span>
+              <label class="c-checkbox-label c-checkbox-label--custom">
+                <input type="checkbox" id="f-consent" name="gdpr_consent" value="yes" required class="c-checkbox-input" aria-required="true" aria-describedby="e-consent" />
+                <span class="c-checkbox-custom" aria-hidden="true"></span>
+                <span class="c-checkbox-text">I agree that SDF Clothing may retain my details, CV, and National ID number for up to six months for recruitment and candidate identification purposes. My NID is used solely to maintain my candidate record and prevent duplicate applications — it is stored securely and never shared with third parties. I can request removal at any time by <a href="/contact" class="c-link">contacting the team</a>. All data is processed in accordance with applicable data protection laws.</span>
               </label>
               <span id="e-consent" class="c-field-error" role="alert" aria-live="polite"></span>
             </div>
@@ -751,52 +777,202 @@ const talentAreas = [
       if (el) el.addEventListener('change', function () { clearErr(id); });
     });
 
-    /* ─── Form submit — fully native POST to Basin ─── */
+    /* ─── AI / Paste Detection ─── */
+    var _pasteDetected = false;
+    var _keystrokeCount = 0;
+    var _backspaceCount = 0;
+    var _fieldFocusTime = 0;
+    var _tabSwitches = 0;
+
+    var noteField = document.getElementById('f-note');
+    if (noteField) {
+      noteField.addEventListener('focus', function () {
+        if (!_fieldFocusTime) _fieldFocusTime = Date.now();
+      });
+      noteField.addEventListener('keydown', function (e) {
+        _keystrokeCount++;
+        if (e.key === 'Backspace' || e.key === 'Delete') _backspaceCount++;
+      });
+      noteField.addEventListener('paste', function (e) {
+        _pasteDetected = true;
+      });
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) _tabSwitches++;
+    });
+
+    function calcAIScore(text) {
+      var score = 0;
+
+      /* Paste / speed signals */
+      if (_pasteDetected) score += 35;
+      if (_fieldFocusTime) {
+        var mins = (Date.now() - _fieldFocusTime) / 60000;
+        var words = text.trim().split(/\s+/).filter(function(w){return w.length>0;}).length;
+        var wpm = mins > 0 ? Math.round(words / mins) : 0;
+        if (wpm > 130) score += 20;
+      }
+      if (_backspaceCount < 3 && text.length > 400) score += 15;
+      if (_fieldFocusTime && Math.round((Date.now() - _fieldFocusTime) / 1000) < 20 && text.length > 300) score += 15;
+      if (_tabSwitches >= 3) score += 10;
+
+      /* Linguistic signals */
+      var aiCliches = ['furthermore', 'moreover', 'in conclusion', 'to summarize', 'it is worth noting',
+        'i am passionate about', 'i am a highly motivated', 'i thrive in', 'leveraging my expertise',
+        'in addition to', 'as a result', 'it is important to note', 'i am excited to', 'dynamic environment'];
+      var lower = text.toLowerCase();
+      var clicherCount = 0;
+      aiCliches.forEach(function(c){ if (lower.indexOf(c) !== -1) clicherCount++; });
+      if (clicherCount >= 2) score += 10;
+      if (clicherCount >= 4) score += 10;
+
+      /* Sentence uniformity check */
+      var sentences = text.split(/[.!?]+/).filter(function(s){return s.trim().length > 10;});
+      if (sentences.length >= 4) {
+        var lens = sentences.map(function(s){return s.trim().split(/\s+/).length;});
+        var avg = lens.reduce(function(a,b){return a+b;},0) / lens.length;
+        var variance = lens.reduce(function(a,b){return a+Math.pow(b-avg,2);},0) / lens.length;
+        if (variance < 5 && sentences.length >= 5) score += 10;
+      }
+
+      return Math.min(score, 100);
+    }
+
+    /* ─── Form submit → /api/careers ─── */
     var form = document.getElementById('cv-upload-form');
     var submitBtn = document.getElementById('cv-submit');
     var submitLabelEl = document.getElementById('submit-label');
     var spinner = document.getElementById('submit-spinner');
     var statusEl = document.getElementById('submit-status');
 
-    /* If FormSubmit.co redirected back here after processing, show success */
-    if (window.location.search.indexOf('submitted=1') !== -1) {
-      showSuccess();
-      if (window.history && window.history.replaceState) {
-        window.history.replaceState({}, '', window.location.pathname);
-      }
-    }
-
     if (form && submitBtn) {
       form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        /* honeypot */
+        var honey = form.querySelector('input[name="_honey"]');
+        if (honey && honey.value) return;
+
         if (!validate()) {
-          e.preventDefault();
           var firstErr = form.querySelector('.c-input--err');
           if (firstErr) firstErr.focus();
           return;
         }
 
-        /* honeypot check */
-        var honey = form.querySelector('input[name="_honey"]');
-        if (honey && honey.value) { e.preventDefault(); return; }
-
-        /* Save applicant summary for the success message after redirect */
-        try {
-          var nameField = document.getElementById('f-name');
-          var emailField = document.getElementById('f-email');
-          var areaField = document.getElementById('f-area');
-          sessionStorage.setItem('sdf_cv_name', nameField ? nameField.value : '');
-          sessionStorage.setItem('sdf_cv_email', emailField ? emailField.value : '');
-          sessionStorage.setItem('sdf_cv_area', areaField ? areaField.value : '');
-        } catch (err) { /* sessionStorage unavailable — meta will show placeholders */ }
-
-        /* loading state — form submits natively; FormSubmit.co will
-           redirect back to ?submitted=1 once processed */
+        /* loading state */
         submitBtn.disabled = true;
         if (submitLabelEl) submitLabelEl.textContent = 'Submitting…';
         if (spinner) spinner.hidden = false;
-        if (statusEl) statusEl.textContent = 'Sending your CV — please wait, you will be redirected back automatically.';
-        /* do not call preventDefault — let the browser submit normally */
+        if (statusEl) statusEl.textContent = 'Sending your CV — please wait…';
+
+        /* Collect form data */
+        var nameVal  = (document.getElementById('f-name')      || {}).value || '';
+        var emailVal = (document.getElementById('f-email')     || {}).value || '';
+        var phoneVal = (document.getElementById('f-phone')     || {}).value || '';
+        var nidVal   = (document.getElementById('f-nid')       || {}).value || '';
+        var countryVal  = (document.getElementById('f-country')  || {}).value || '';
+        var expVal      = (document.getElementById('f-experience')|| {}).value || '';
+        var areaVal     = (document.getElementById('f-area')      || {}).value || '';
+        var workVal     = (document.getElementById('f-work')      || {}).value || '';
+        var linkedinVal = (document.getElementById('f-linkedin')  || {}).value || '';
+        var portfolioVal= (document.getElementById('f-portfolio') || {}).value || '';
+        var referenceVal= (document.getElementById('f-reference') || {}).value || '';
+        var employerVal = (document.getElementById('f-employer')  || {}).value || '';
+        var salaryVal   = (document.getElementById('f-salary')    || {}).value || '';
+        var noteVal     = (document.getElementById('f-note')      || {}).value || '';
+
+        /* AI Score */
+        var aiScore = calcAIScore(noteVal);
+        var timeInField = _fieldFocusTime ? Math.round((Date.now() - _fieldFocusTime) / 1000) : null;
+        var words = noteVal.trim().split(/\s+/).filter(function(w){return w.length>0;}).length;
+        var wpm = (_fieldFocusTime && (Date.now()-_fieldFocusTime)>0)
+          ? Math.round(words / ((Date.now()-_fieldFocusTime)/60000)) : 0;
+
+        /* CV file → base64 */
+        var cvFile = document.getElementById('f-cv');
+        if (!cvFile || !cvFile.files || !cvFile.files[0]) {
+          submitBtn.disabled = false;
+          if (submitLabelEl) submitLabelEl.textContent = 'Submit Your CV';
+          if (spinner) spinner.hidden = true;
+          return;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function (ev) {
+          var base64 = ev.target.result.split(',')[1];
+          var filename = cvFile.files[0].name;
+
+          var payload = {
+            name: nameVal, email: emailVal, phone: phoneVal, nid: nidVal,
+            country: countryVal, experience: expVal, area: areaVal,
+            workPreference: workVal, linkedin: linkedinVal, portfolio: portfolioVal,
+            reference: referenceVal, currentEmployer: employerVal,
+            expectedSalary: salaryVal, note: noteVal,
+            cvBase64: base64, cvFilename: filename,
+            aiScore: aiScore, pasteDetected: _pasteDetected,
+            avgWpm: wpm, backspaceCount: _backspaceCount,
+            tabSwitches: _tabSwitches,
+            timeInField: timeInField
+          };
+
+          fetch('https://sdfltd.com/api/careers', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          })
+          .then(function(r){ return r.json(); })
+          .then(function(d){
+            submitBtn.disabled = false;
+            if (submitLabelEl) submitLabelEl.textContent = 'Submit Your CV';
+            if (spinner) spinner.hidden = true;
+            if (d.ok) {
+              /* Store for success screen */
+              try {
+                sessionStorage.setItem('sdf_cv_name',  nameVal);
+                sessionStorage.setItem('sdf_cv_email', emailVal);
+                sessionStorage.setItem('sdf_cv_area',  areaVal);
+                sessionStorage.setItem('sdf_cv_ref',   d.referenceId || '');
+              } catch(err){}
+              if (d.duplicate) {
+                showDuplicate(d.previousRef, d.previousDate, d.previousArea);
+              } else {
+                showSuccess();
+              }
+            } else {
+              if (statusEl) statusEl.textContent = 'Something went wrong. Please try again or email jobs@sdfltd.com directly.';
+            }
+          })
+          .catch(function(){
+            submitBtn.disabled = false;
+            if (submitLabelEl) submitLabelEl.textContent = 'Submit Your CV';
+            if (spinner) spinner.hidden = true;
+            if (statusEl) statusEl.textContent = 'Network error. Please try again or email jobs@sdfltd.com directly.';
+          });
+        };
+        reader.readAsDataURL(cvFile.files[0]);
       });
+    }
+
+    function showDuplicate(prevRef, prevDate, prevArea) {
+      var formEl = document.getElementById('cv-upload-form');
+      var successEl = document.getElementById('cv-success');
+      var titleEl = successEl ? successEl.querySelector('.c-success__title') : null;
+      var textEls = successEl ? successEl.querySelectorAll('.c-success__text') : [];
+      if (formEl) formEl.hidden = true;
+      if (successEl) successEl.hidden = false;
+      if (successEl) successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (titleEl) titleEl.textContent = 'Your profile is already on file';
+      if (textEls[0]) textEls[0].textContent = 'Our records show you have previously submitted an application to SDF Clothing. Your original profile remains on file and our team will be in touch should a suitable opportunity arise.';
+      if (textEls[1]) textEls[1].textContent = 'If your circumstances have changed significantly — such as a new qualification or area of expertise — please contact us directly at jobs@sdfltd.com and we will update your file accordingly.';
+      /* Show previous ref in meta */
+      var metaEl = document.getElementById('submission-meta');
+      if (metaEl && prevRef) {
+        metaEl.innerHTML =
+          '<div class="c-success__meta-row c-success__meta-row--highlight"><span>🆔 Previous Reference</span><span>' + prevRef + '</span></div>' +
+          (prevDate ? '<div class="c-success__meta-row"><span>📅 Originally Submitted</span><span>' + prevDate + '</span></div>' : '') +
+          (prevArea ? '<div class="c-success__meta-row"><span>🗂️ Area Applied For</span><span>' + prevArea + '</span></div>' : '');
+      }
     }
 
     function showSuccess() {
@@ -1418,6 +1594,54 @@ const talentAreas = [
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
     }
-  </style>
+  
+  /* ── Custom checkbox ── */
+  .c-checkbox-label--custom {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+  }
+  .c-checkbox-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .c-checkbox-custom {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #444;
+    border-radius: 4px;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    transition: border-color .15s, background .15s;
+  }
+  .c-checkbox-input:checked + .c-checkbox-custom {
+    background: #cc0000;
+    border-color: #cc0000;
+  }
+  .c-checkbox-input:checked + .c-checkbox-custom::after {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 9px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg) translateY(-1px);
+  }
+  .c-checkbox-input:focus + .c-checkbox-custom {
+    outline: 2px solid #cc0000;
+    outline-offset: 2px;
+  }
+  .c-checkbox-label--custom:hover .c-checkbox-custom {
+    border-color: #cc0000;
+  }
+</style>
 
 </BaseLayout>

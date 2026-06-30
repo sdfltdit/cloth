@@ -5,16 +5,18 @@ import globalCssUrl from '../styles/global.css?url';
 export interface Props {
   title: string;
   description: string;
-  canonicalUrl?: string;
   ogImage?: string;
   ogType?: string;
+  canonicalUrl?: string;
   datePublished?: string;
   dateModified?: string;
   schema?: object | object[];
 }
 
-const { title, description, canonicalUrl, ogImage, ogType, datePublished, dateModified, schema } = Astro.props;
-const currentUrl = Astro.url.href;
+const { title, description, ogImage, ogType, canonicalUrl, datePublished, dateModified, schema } = Astro.props;
+const canonical = canonicalUrl
+  ? new URL(canonicalUrl, Astro.site).toString()
+  : new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).toString();
 ---
 
 <!DOCTYPE html>
@@ -23,21 +25,21 @@ const currentUrl = Astro.url.href;
     <BaseHead
       title={title}
       description={description}
-      canonicalUrl={canonicalUrl}
       ogImage={ogImage}
       ogType={ogType}
+      canonicalUrl={canonicalUrl}
       datePublished={datePublished}
       dateModified={dateModified}
       schema={schema}
     />
 
     <!-- Hreflang: single URL for all regions — no country-specific pages -->
-    <link rel="alternate" hreflang="x-default" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en-US" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en-GB" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en-AU" href={canonicalUrl ?? currentUrl} />
-    <link rel="alternate" hreflang="en-CA" href={canonicalUrl ?? currentUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <link rel="alternate" hreflang="en" href={canonical} />
+    <link rel="alternate" hreflang="en-US" href={canonical} />
+    <link rel="alternate" hreflang="en-GB" href={canonical} />
+    <link rel="alternate" hreflang="en-AU" href={canonical} />
+    <link rel="alternate" hreflang="en-CA" href={canonical} />
 
     <link rel="alternate" type="text/plain" title="SDF Clothing AI Reference" href="/llms.txt" />
     <link rel="alternate" type="text/plain" title="SDF Clothing AI Reference Full" href="/llms-full.txt" />
@@ -108,6 +110,16 @@ const currentUrl = Astro.url.href;
     <!-- Non-critical scripts: defer, no type=module (avoids extra parse microtask) -->
     <script src="/scripts/app.js" defer data-cfasync="false"></script>
     <script src="/scripts/mobile-menu.js" defer data-cfasync="false"></script>
+    <!-- FIX: contact-form.js handles the contact page's form submission
+         (Web3Forms + thank-you overlay). It was missing this script tag,
+         which meant nothing ever attached a submit listener to the form,
+         so the browser fell back to a native HTML GET submit — visible as
+         the form fields appearing in the URL bar and no email ever
+         arriving. Loaded sitewide (same pattern as app.js / mobile-menu.js)
+         since BaseLayout is shared across all pages; the script itself
+         only attaches to forms matching #contactForm / [data-contact], so
+         it's a safe no-op on pages without a contact form. -->
+    <script src="/scripts/contact-form.js" defer data-cfasync="false"></script>
 
     <!-- Mobile Menu Styles -->
     <style>

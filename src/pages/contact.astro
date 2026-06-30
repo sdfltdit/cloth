@@ -8,7 +8,6 @@ const pageDescription = "Get a free FOB quote from SDF Clothing — ethical garm
 
 <BaseLayout title={pageTitle} description={pageDescription}>
 
-<meta name="robots" content="index, follow" />
 
 
 
@@ -473,12 +472,33 @@ const pageDescription = "Get a free FOB quote from SDF Clothing — ethical garm
   </div>
 </section>
 
-<!-- THANK YOU OVERLAY — injected by showThanks() in JS below -->
+<!-- ====================================================================
+     FORM SUBMISSION HANDLING:
+     This used to live in an inline <script> here, but that caused a bug —
+     src/scripts/contact-form.js ALSO attaches a submit listener to this
+     same form (id="contactForm", data-contact), so the form was firing
+     TWO submit handlers at once, sending two separate requests to
+     Web3Forms with two different access keys. That race condition is
+     what caused the "Something went wrong" error.
 
-<!-- FORM SCRIPT -->
+     contact-form.js already handles: Web3Forms submission, Formcarry
+     backup, geo/device/browser detection, reference ID generation, and
+     the thank-you overlay. It's loaded sitewide via BaseLayout, so do NOT
+     re-add a duplicate inline submit handler here — only the calculator
+     tools below (which contact-form.js does not handle) belong on this
+     page.
+     ==================================================================== -->
+
+<!-- CALCULATOR TOOLS SCRIPT (FOB Estimator, Shipment Calculator, Sustainability Score) -->
 <script is:inline>
 document.addEventListener('DOMContentLoaded', function() {
-  const pageLoadTime = Date.now();
+
+  function populatePhoneDropdown(selectedCode) {
+    // kept for compatibility — country/phone dropdown population now also
+    // handled by contact-form.js init flow if present; safe no-op guard below
+    const sel = document.getElementById('phone-code-select');
+    if (!sel) return;
+  }
 
   const COUNTRIES = [
     {code:"AF",name:"Afghanistan",phone:"+93",flag:"🇦🇫"},
@@ -676,20 +696,6 @@ document.addEventListener('DOMContentLoaded', function() {
     {code:"ZW",name:"Zimbabwe",phone:"+263",flag:"🇿🇼"},
   ];
 
-  function populatePhoneDropdown(selectedCode) {
-    const sel = document.getElementById('phone-code-select');
-    if (!sel) return;
-    sel.innerHTML = '';
-    COUNTRIES.forEach(c => {
-      const opt = document.createElement('option');
-      opt.value = c.phone;
-      opt.textContent = c.flag + ' ' + c.phone;
-      opt.dataset.code = c.code;
-      if (c.code === selectedCode) opt.selected = true;
-      sel.appendChild(opt);
-    });
-  }
-
   function populateCountryDropdown(selectedCode) {
     const sel = document.getElementById('contact-country');
     if (!sel) return;
@@ -703,48 +709,39 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  async function getGeo() {
+  function populatePhoneCodeDropdown(selectedCode) {
+    const sel = document.getElementById('phone-code-select');
+    if (!sel) return;
+    sel.innerHTML = '';
+    COUNTRIES.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.phone;
+      opt.textContent = c.flag + ' ' + c.phone;
+      opt.dataset.code = c.code;
+      if (c.code === selectedCode) opt.selected = true;
+      sel.appendChild(opt);
+    });
+  }
+
+  async function getGeoForDropdowns() {
     try {
       const r = await fetch('https://ipinfo.io/json');
       const d = await r.json();
-      if (d.ip) return { ip: d.ip, city: d.city||'', region: d.region||'', country: d.country||'Unknown', countryCode: d.country||'', isp: d.org||'Unknown' };
+      if (d.ip) return { countryCode: d.country || '' };
     } catch {}
     try {
       const r = await fetch('https://ipapi.co/json/');
       const d = await r.json();
-      if (d.ip) return { ip: d.ip, city: d.city||'', region: d.region||'', country: d.country_name||'Unknown', countryCode: d.country_code||'', isp: d.org||'Unknown' };
+      if (d.ip) return { countryCode: d.country_code || '' };
     } catch {}
-    try {
-      const r = await fetch('https://ip-api.com/json/');
-      const d = await r.json();
-      if (d.query) return { ip: d.query, city: d.city||'', region: d.regionName||'', country: d.country||'Unknown', countryCode: d.countryCode||'', isp: d.isp||'Unknown' };
-    } catch {}
-    try {
-      const r = await fetch('https://api.ipify.org?format=json');
-      const d = await r.json();
-      return { ip: d.ip||'–', city: '', region: '', country: 'Unknown', countryCode: '', isp: 'Unknown' };
-    } catch {}
-    return { ip: '–', city: '', region: '', country: 'Unknown', countryCode: '', isp: 'Unknown' };
+    return { countryCode: '' };
   }
 
-  async function autoDetect() {
-    const geo = await getGeo();
-    if (geo.countryCode && geo.countryCode !== '') {
-      populateCountryDropdown(geo.countryCode);
-      populatePhoneDropdown(geo.countryCode);
-    } else {
-      populateCountryDropdown('');
-      populatePhoneDropdown('');
-      const wrapper = document.getElementById('phone-wrapper');
-      if (wrapper) {
-        const warn = document.createElement('p');
-        warn.style.cssText = 'font-size:0.72rem;color:#e00;margin-top:0.3rem;';
-        warn.textContent = '⚠ Location not detected. Please select your country and phone code manually.';
-        wrapper.parentNode.insertBefore(warn, wrapper.nextSibling);
-      }
-    }
-    return geo;
-  }
+  (async function autoDetectDropdowns() {
+    const geo = await getGeoForDropdowns();
+    populateCountryDropdown(geo.countryCode);
+    populatePhoneCodeDropdown(geo.countryCode);
+  })();
 
   function combinePhone() {
     const code = document.getElementById('phone-code-select')?.value || '';
@@ -752,424 +749,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const hidden = document.getElementById('whatsapp');
     if (hidden) hidden.value = code + num;
   }
-
-  autoDetect();
-
-  function getDevice() {
-    const ua = navigator.userAgent;
-    if (/iPhone/.test(ua)) return 'iPhone';
-    if (/iPad/.test(ua)) return 'iPad';
-    if (/Android/.test(ua)) return 'Android Device';
-    if (/Mac/.test(ua)) return 'Mac';
-    if (/Windows/.test(ua)) return 'Windows PC';
-    return 'Unknown Device';
-  }
-
-  function getBrowser() {
-    const ua = navigator.userAgent;
-    let browser = 'Unknown';
-    let version = '';
-    if (ua.indexOf('Chrome') > -1 && ua.indexOf('Edg') === -1 && ua.indexOf('OPR') === -1) {
-      browser = 'Chrome';
-      const m = ua.match(/Chrome\/(\d+\.\d+\.\d+\.\d+)/);
-      if (m) version = m[1];
-    } else if (ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') === -1) {
-      browser = 'Safari';
-      const m = ua.match(/Version\/(\d+\.\d+)/);
-      if (m) version = m[1];
-    } else if (ua.indexOf('Firefox') > -1) {
-      browser = 'Firefox';
-      const m = ua.match(/Firefox\/(\d+\.\d+)/);
-      if (m) version = m[1];
-    } else if (ua.indexOf('Edg') > -1) {
-      browser = 'Edge';
-      const m = ua.match(/Edg\/(\d+\.\d+\.\d+\.\d+)/);
-      if (m) version = m[1];
-    } else if (ua.indexOf('OPR') > -1) {
-      browser = 'Opera';
-      const m = ua.match(/OPR\/(\d+\.\d+\.\d+\.\d+)/);
-      if (m) version = m[1];
-    }
-    return version ? browser + ' ' + version : browser;
-  }
-
-  function generateReferenceId(ip) {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth()+1).padStart(2,'0');
-    const day = String(now.getDate()).padStart(2,'0');
-    const hours = String(now.getHours()).padStart(2,'0');
-    const minutes = String(now.getMinutes()).padStart(2,'0');
-    const seconds = String(now.getSeconds()).padStart(2,'0');
-    const hhmm = hours + minutes;
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl');
-    const debugInfo = gl ? gl.getExtension('WEBGL_debug_renderer_info') : null;
-    const gpuHash = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL).slice(0,4).replace(/\s/g,'') : Math.random().toString(36).slice(2,6).toUpperCase();
-    let ipSuffix = '0000';
-    if (ip && ip !== '–' && ip !== 'Unknown') {
-      const parts = ip.split('.');
-      if (parts.length === 4) {
-        ipSuffix = (parts[2].padStart(2,'0') + parts[3].padStart(2,'0')).slice(0,4);
-      }
-    } else {
-      ipSuffix = Math.floor(1000 + Math.random() * 9000).toString();
-    }
-    return 'SDF-' + year + month + day + '-' + hhmm + seconds + '-' + ipSuffix;
-  }
-
-  function drawQR(canvasEl, seedText) {
-    const size = canvasEl.width, ctx = canvasEl.getContext('2d'), cells = 25, cell = Math.floor(size/cells);
-    function hc(s){let h=0;for(let i=0;i<s.length;i++)h=(Math.imul(31,h)+s.charCodeAt(i))|0;return h;}
-    const seed=hc(seedText);
-    function rnd(i){const x=Math.sin(seed+i)*43758.5453123;return x-Math.floor(x);}
-    ctx.fillStyle='#fff';ctx.fillRect(0,0,size,size);ctx.fillStyle='#000';
-    [[0,0],[0,cells-7],[cells-7,0]].forEach(function(c){
-      const cx=c[0],cy=c[1];
-      ctx.fillRect(cx*cell,cy*cell,7*cell,7*cell);
-      ctx.fillStyle='#fff';ctx.fillRect((cx+1)*cell,(cy+1)*cell,5*cell,5*cell);
-      ctx.fillStyle='#000';ctx.fillRect((cx+2)*cell,(cy+2)*cell,3*cell,3*cell);
-    });
-    let idx=0;
-    for(let r=0;r<cells;r++){for(let c=0;c<cells;c++){
-      const inTL=r<8&&c<8,inTR=r<8&&c>cells-9,inBL=r>cells-9&&c<8;
-      if(!inTL&&!inTR&&!inBL&&rnd(idx++)>0.5)ctx.fillRect(c*cell,r*cell,cell-1,cell-1);
-    }}
-    for(let i=8;i<cells-8;i++){if(i%2===0){ctx.fillRect(i*cell,6*cell,cell-1,cell-1);ctx.fillRect(6*cell,i*cell,cell-1,cell-1);}}
-  }
-
-  function showThanks(geo, device, fillDuration, referenceId) {
-    const waText = encodeURIComponent('Hi, my reference ID is ' + referenceId);
-    const waUrl  = 'https://wa.me/8801819172080?text=' + waText;
-    const browser = getBrowser();
-    const conn = (function(){
-      const c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
-      if(!c) return 'Unknown';
-      if(c.type==='wifi') return 'WiFi';
-      if(c.type==='cellular') return 'Mobile ('+(c.effectiveType||'').toUpperCase()+')';
-      if(c.effectiveType) return c.effectiveType.toUpperCase();
-      return 'Unknown';
-    })();
-    const tz      = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
-    const lang    = navigator.language || 'Unknown';
-    const scr     = window.screen.width + ' x ' + window.screen.height;
-    const loc     = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
-    const referrer= document.referrer || window.location.hostname + '/';
-    const timeStr = new Date().toLocaleString('en-GB', {day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
-    const TOTAL   = 48 * 3600;
-    const vw      = window.innerWidth;
-    const isMob   = vw < 480;
-    const isSmall = vw < 360;
-    const p       = isSmall ? '0.65rem' : isMob ? '0.75rem 0.9rem' : '0.7rem 1rem';
-    const pSm     = isSmall ? '0.6rem'  : isMob ? '0.65rem 0.9rem' : '0.6rem 1rem';
-    const fsBig   = isSmall ? '0.68rem' : isMob ? '0.75rem' : '0.7rem';
-    const fsLabel = isSmall ? '0.5rem'  : isMob ? '0.56rem' : '0.52rem';
-
-    const overlay = document.createElement('div');
-    overlay.id = 'sdf-thankyou';
-    overlay.style.cssText = [
-      'position:fixed;top:0;left:0;right:0;bottom:0',
-      'background:rgba(8,8,8,0.97)',
-      'display:flex;align-items:flex-start;justify-content:center',
-      'z-index:9999',
-      'overflow-y:auto;-webkit-overflow-scrolling:touch',
-      'padding:' + (isMob ? '0' : '1rem'),
-      'animation:sdfFadeIn 0.3s ease forwards',
-    ].join(';');
-
-    overlay.innerHTML =
-      '<div style="' +
-        'max-width:' + (isMob ? '100%' : '390px') + ';width:100%;' +
-        'background:#111;' +
-        'border:' + (isMob ? 'none' : '0.5px solid #2a2a2a') + ';' +
-        'border-radius:' + (isMob ? '0' : '10px') + ';' +
-        'overflow-y:auto;' +
-        'max-height:' + (isMob ? 'none' : 'calc(100vh - 2rem)') + ';' +
-        (isMob ? 'min-height:100vh;min-height:100dvh;' : 'margin:auto 0;') +
-        'animation:sdfSlideUp 0.35s ease forwards;' +
-      '">' +
-
-      /* HEADER */
-      '<div style="background:#1a7a3c;padding:' + p + ';display:flex;align-items:center;gap:10px;">' +
-        '<div style="width:30px;height:30px;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.55);border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:0.95rem;color:#fff;">✓</div>' +
-        '<div style="flex:1;min-width:0;">' +
-          '<p style="font-size:' + fsLabel + ';letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin:0 0 1px;">Submission confirmed</p>' +
-          '<p style="font-size:' + (isSmall ? '0.82rem' : '0.9rem') + ';font-weight:600;color:#fff;margin:0;">Message Received</p>' +
-        '</div>' +
-        '<div style="text-align:right;flex-shrink:0;max-width:' + (isSmall ? '100px' : '140px') + ';">' +
-          '<p style="font-size:' + fsLabel + ';color:rgba(255,255,255,0.45);margin:0 0 1px;letter-spacing:0.08em;text-transform:uppercase;">Ref</p>' +
-          '<p style="font-size:' + (isSmall ? '0.55rem' : '0.62rem') + ';font-family:monospace;color:#fff;margin:0;word-break:break-all;">' + referenceId + '</p>' +
-        '</div>' +
-      '</div>' +
-
-      /* COUNTDOWN */
-      '<div style="padding:' + p + ';border-bottom:0.5px solid #1e1e1e;">' +
-        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">' +
-          '<span style="font-size:' + (isSmall ? '0.62rem' : '0.68rem') + ';color:rgba(255,255,255,0.4);">Expected response in</span>' +
-          '<span id="sdf-cd" style="font-family:monospace;font-size:' + (isSmall ? '0.82rem' : '0.9rem') + ';color:#fff;margin-left:auto;flex-shrink:0;">48:00:00</span>' +
-        '</div>' +
-        '<div style="height:4px;background:#1e1e1e;border-radius:2px;overflow:hidden;">' +
-          '<div id="sdf-bar" style="height:100%;width:100%;background:#22c55e;border-radius:2px;transition:width 1s linear;animation:sdfBarColor 172800s linear forwards;"></div>' +
-        '</div>' +
-        '<p style="font-size:' + (isSmall ? '0.55rem' : '0.6rem') + ';color:rgba(255,255,255,0.25);margin:5px 0 0;line-height:1.5;">Typically within 2 hours · Max 48 hours · Mon–Sat 9AM–6PM BST</p>' +
-      '</div>' +
-
-      /* SESSION DETAILS */
-      '<div style="padding:' + p + ';border-bottom:0.5px solid #1e1e1e;">' +
-        '<p style="font-size:' + fsLabel + ';letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.65rem;">Session Details</p>' +
-        '<div style="display:grid;grid-template-columns:1fr 1fr;border:0.5px solid #1e1e1e;border-radius:8px;overflow:hidden;">' +
-          _cell('Device',     device,             true,  true,  false, fsBig, fsLabel) +
-          _cell('Browser',    browser,            false, true,  false, fsBig, fsLabel) +
-          _cell('Screen',     scr,                true,  true,  false, fsBig, fsLabel) +
-          _cell('Connection', conn,               false, true,  false, fsBig, fsLabel) +
-          _cell('Timezone',   tz,                 true,  true,  false, fsBig, fsLabel) +
-          _cell('Language',   lang,               false, true,  false, fsBig, fsLabel) +
-          _cell('Location',   loc||'Unknown',     true,  true,  false, fsBig, fsLabel) +
-          _cell('ISP',        geo.isp||'Unknown', false, true,  false, fsBig, fsLabel) +
-          _cell('IP Address', geo.ip,             true,  false, true,  fsBig, fsLabel) +
-          _cell('Fill Time',  fillDuration + 's', false, false, false, fsBig, fsLabel) +
-        '</div>' +
-        '<div style="margin-top:7px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">' +
-          '<div style="padding:0.4rem 0.6rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;min-width:0;">' +
-            '<p style="font-size:' + fsLabel + ';color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Submitted</p>' +
-            '<p style="font-size:' + (isSmall ? '0.6rem' : '0.66rem') + ';color:rgba(255,255,255,0.6);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + timeStr + '</p>' +
-          '</div>' +
-          '<div style="padding:0.4rem 0.6rem;background:#0d0d0d;border:0.5px solid #1e1e1e;border-radius:6px;min-width:0;">' +
-            '<p style="font-size:' + fsLabel + ';color:rgba(255,255,255,0.25);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Referrer</p>' +
-            '<p style="font-size:' + (isSmall ? '0.6rem' : '0.66rem') + ';color:rgba(255,255,255,0.6);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + referrer + '</p>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-
-      /* QR */
-      '<div style="padding:' + p + ';border-bottom:0.5px solid #1e1e1e;display:flex;gap:0.85rem;align-items:center;">' +
-        '<div style="flex:1;min-width:0;">' +
-          '<p style="font-size:' + fsLabel + ';letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.3rem;">Scan to follow up</p>' +
-          '<p style="font-size:' + (isSmall ? '0.62rem' : '0.67rem') + ';color:rgba(255,255,255,0.35);margin:0 0 4px;line-height:1.5;">Opens WhatsApp with reference ID pre-filled.</p>' +
-          '<p style="font-size:' + (isSmall ? '0.55rem' : '0.6rem') + ';font-family:monospace;color:rgba(255,255,255,0.2);margin:0;word-break:break-all;">' + referenceId + '</p>' +
-        '</div>' +
-        '<canvas id="sdf-qr" width="' + (isSmall ? '68' : '78') + '" height="' + (isSmall ? '68' : '78') + '" style="display:block;flex-shrink:0;border:3px solid #fff;border-radius:4px;"></canvas>' +
-      '</div>' +
-
-      /* WHATSAPP */
-      '<div style="padding:' + pSm + ';border-bottom:0.5px solid #1e1e1e;">' +
-        '<a href="' + waUrl + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:#128C7E;border-radius:8px;padding:0.65rem 0.9rem;text-decoration:none;min-height:44px;">' +
-          '<span style="font-size:1.1rem;line-height:1;flex-shrink:0;">💬</span>' +
-          '<span style="font-size:' + (isSmall ? '0.68rem' : '0.74rem') + ';font-weight:600;color:#fff;letter-spacing:0.04em;text-transform:uppercase;">Chat on WhatsApp</span>' +
-          '<span style="font-size:' + (isSmall ? '0.55rem' : '0.6rem') + ';color:rgba(255,255,255,0.55);margin-left:auto;white-space:nowrap;flex-shrink:0;">Replies fast</span>' +
-        '</a>' +
-      '</div>' +
-
-      /* FOOTER */
-      '<div style="padding:' + pSm + ';display:flex;align-items:center;justify-content:space-between;gap:0.75rem;">' +
-        '<p style="font-size:' + (isSmall ? '0.52rem' : '0.58rem') + ';color:rgba(255,255,255,0.18);margin:0;line-height:1.4;">SDF Clothing Ltd<br>Trusted since 1998</p>' +
-        '<button id="sdf-close" style="background:#cc0000;color:#fff;border:none;padding:0.5rem 1rem;font-size:' + (isSmall ? '0.62rem' : '0.68rem') + ';letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:6px;white-space:nowrap;min-height:44px;min-width:80px;flex-shrink:0;">Close</button>' +
-      '</div>' +
-
-      '</div>' +
-      '<style>' +
-        '@keyframes sdfFadeIn{from{opacity:0}to{opacity:1}}' +
-        '@keyframes sdfSlideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}' +
-        '@keyframes sdfBarColor{' +
-          '0%{background:#22c55e}' +
-          '60%{background:#22c55e}' +
-          '75%{background:#eab308}' +
-          '90%{background:#f97316}' +
-          '100%{background:#cc0000}' +
-        '}' +
-        '#sdf-thankyou,#sdf-thankyou *{box-sizing:border-box;}' +
-      '</style>';
-
-    document.body.appendChild(overlay);
-
-    document.getElementById('sdf-close').addEventListener('click', function(){ overlay.remove(); });
-
-    var remaining = TOTAL;
-    var cdEl = document.getElementById('sdf-cd');
-    var barEl = document.getElementById('sdf-bar');
-    function fmt(s){return[Math.floor(s/3600),Math.floor((s%3600)/60),s%60].map(function(n){return String(n).padStart(2,'0');}).join(':');}
-    if(cdEl&&barEl){
-      function getBarColor(rem, total) {
-        var pct = rem / total;
-        if (pct > 0.40) return '#22c55e';
-        if (pct > 0.25) return '#eab308';
-        if (pct > 0.10) return '#f97316';
-        return '#cc0000';
-      }
-      var iv=setInterval(function(){
-        remaining=Math.max(0,remaining-1);
-        cdEl.textContent=fmt(remaining);
-        barEl.style.width=((remaining/TOTAL)*100).toFixed(3)+'%';
-        barEl.style.background=getBarColor(remaining,TOTAL);
-        if(remaining===0)clearInterval(iv);
-      },1000);
-    }
-
-    var qrSize = isSmall ? 68 : 78;
-    var qrEl = document.getElementById('sdf-qr');
-    if(qrEl){ qrEl.width = qrSize; qrEl.height = qrSize; drawQR(qrEl, waUrl); }
-  }
-
-  function _cell(label, value, borderRight, borderBottom, mono, fsBig, fsLabel) {
-    return '<div style="padding:0.45rem 0.6rem;' +
-      (borderBottom ? 'border-bottom:0.5px solid #1e1e1e;' : '') +
-      (borderRight  ? 'border-right:0.5px solid #1e1e1e;'  : '') + '">' +
-      '<p style="font-size:' + (fsLabel||'0.56rem') + ';color:rgba(255,255,255,0.3);margin:0 0 2px;letter-spacing:0.07em;text-transform:uppercase;">' + label + '</p>' +
-      '<p style="font-size:' + (fsBig||'0.72rem') + ';color:#fff;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;' + (mono ? 'font-family:monospace;' : '') + '">' + value + '</p>' +
-      '</div>';
-  }
-
-  function withTimeout(promise, ms) {
-    return Promise.race([
-      promise,
-      new Promise(function(_, reject) { setTimeout(function() { reject(new Error('Timeout')); }, ms); })
-    ]);
-  }
-
-  async function submitToWeb3Forms(data) {
-    try {
-      const formData = new FormData();
-      formData.append('access_key',  '028983eb-bca7-4bbc-be4f-7db2873903aa');
-      formData.append('subject',     '[SDF] New Contact Inquiry — ' + (data.name || 'Unknown'));
-      formData.append('from_name',   'SDF Clothing Website');
-      formData.append('name',        data.name    || '');
-      formData.append('email',       data.email   || '');
-      formData.append('phone',       data.whatsapp || data.phone || '');
-      formData.append('company',     data.company  || '');
-      formData.append('country',     data.country  || '');
-      formData.append('category',    data.category || '');
-      formData.append('quantity',    data.quantity || '');
-      formData.append('message',     data.message  || '');
-      formData.append('device',      data._device        || '');
-      formData.append('browser',     data._browser       || '');
-      formData.append('location',    data._location      || '');
-      formData.append('ip',          data._ip            || '');
-      formData.append('isp',         data._isp           || '');
-      formData.append('reference_id', data._reference_id || '');
-      formData.append('screen',      data._screen        || '');
-      formData.append('timezone',    data._timezone      || '');
-      formData.append('language',    data._language      || '');
-      formData.append('connection',  data._connection    || '');
-      formData.append('page_url',    data._page_url      || '');
-      formData.append('referrer',    data._referrer      || '');
-      formData.append('fill_time',   data._fill_time     || '');
-      const r = await withTimeout(
-        fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData }),
-        8000
-      );
-      const j = await r.json();
-      if (j.success === true) return true;
-    } catch {}
-    return false;
-  }
-
-  function setButtonLoading(btn, loading) {
-    if (!btn) return;
-    btn.disabled = loading;
-    if (loading) {
-      btn.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;"></span>';
-    } else {
-      btn.textContent = 'Send Inquiry';
-    }
-  }
-
-  const form = document.getElementById('contactForm');
-  const btn  = document.getElementById('form-submit-btn');
-  if (!form) return;
-
-  const ipSubmissionCount = {};
-
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!btn) return;
-
-    combinePhone();
-
-    const data = {};
-    new FormData(form).forEach(function(v, k) { data[k] = v; });
-    data['_replyto'] = data.email || '';
-    data['_subject'] = 'New Inquiry — SDF Clothing';
-
-    const fillDuration = ((Date.now() - pageLoadTime) / 1000).toFixed(1);
-
-    if (data._honey) {
-      form.reset();
-      const geo = await getGeo();
-      const referenceId = generateReferenceId(geo.ip);
-      showThanks(geo, getDevice(), fillDuration, referenceId);
-      return;
-    }
-
-    if (parseFloat(fillDuration) < 3) {
-      form.reset();
-      const geo = await getGeo();
-      const referenceId = generateReferenceId(geo.ip);
-      showThanks(geo, getDevice(), fillDuration, referenceId);
-      return;
-    }
-
-    const phoneNum = document.getElementById('phone-number-input')?.value.trim() || '';
-    if (!phoneNum || phoneNum.replace(/[\s\-\(\)]/g,'').length < 5) {
-      alert('Please enter your phone number.');
-      return;
-    }
-
-    setButtonLoading(btn, true);
-
-    const geo = await getGeo();
-    const device = getDevice();
-
-    const deviceFingerprint = {
-      screen: window.screen.width + 'x' + window.screen.height,
-      colorDepth: window.screen.colorDepth,
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      language: navigator.language,
-      platform: navigator.platform,
-      cookieEnabled: navigator.cookieEnabled,
-      touchPoints: navigator.maxTouchPoints || 0,
-      deviceMemory: navigator.deviceMemory || 'unknown',
-      hardwareConcurrency: navigator.hardwareConcurrency || 'unknown',
-    };
-
-    if (geo.ip && geo.ip !== '–') {
-      ipSubmissionCount[geo.ip] = (ipSubmissionCount[geo.ip] || 0) + 1;
-      if (ipSubmissionCount[geo.ip] > 3) {
-        setButtonLoading(btn, false);
-        alert('Too many submissions. Please contact us directly.');
-        return;
-      }
-    }
-
-    const referenceId = generateReferenceId(geo.ip);
-    data['_device']       = device;
-    data['_browser']      = getBrowser();
-    data['_location']     = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
-    data['_ip']           = geo.ip;
-    data['_isp']          = geo.isp || '';
-    data['_reference_id'] = referenceId;
-    data['_screen']       = deviceFingerprint.screen;
-    data['_timezone']     = deviceFingerprint.timezone;
-    data['_language']     = deviceFingerprint.language;
-    data['_connection']   = (function(){const c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;if(!c)return 'Unknown';if(c.type==='wifi')return 'WiFi';if(c.type==='cellular')return 'Mobile ('+(c.effectiveType||'').toUpperCase()+')';if(c.effectiveType)return c.effectiveType.toUpperCase();return 'Unknown';})();
-    data['_page_url']     = window.location.href;
-    data['_referrer']     = document.referrer || window.location.hostname + '/';
-    data['_fill_time']    = fillDuration + 's';
-
-    let success = false;
-    try { success = await submitToWeb3Forms(data); } catch {}
-
-    setButtonLoading(btn, false);
-
-    if (success) {
-      form.reset();
-      showThanks(geo, device, fillDuration, referenceId);
-    } else {
-      btn.disabled = false;
-      btn.textContent = 'Send Inquiry';
-      alert('Something went wrong. Please email us directly at info@sdfltd.com');
-    }
-  });
+  document.getElementById('phone-number-input')?.addEventListener('input', combinePhone);
+  document.getElementById('phone-code-select')?.addEventListener('change', combinePhone);
 
   // ==================== CALCULATOR SCRIPTS ====================
 
