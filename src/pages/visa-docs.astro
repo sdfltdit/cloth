@@ -3,11 +3,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const pageTitle = "Visitor Document Submission | SDF Clothing";
 const pageDescription = "Securely submit your visit supporting documents to SDF Clothing's factory visit coordination team.";
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": pageTitle,
+    "description": pageDescription,
+    "url": "https://sdfltd.com/visa-docs/",
+    "isPartOf": { "@id": "https://sdfltd.com/#website" }
+  }
+];
+
 ---
 
 <BaseLayout
   title={pageTitle}
-  description={pageDescription}
+  description={pageDescription} schema={schema}
   datePublished="2026-06-18"
   dateModified={new Date().toISOString().split("T")[0]}
 >
@@ -181,7 +192,7 @@ function render() {
       <div style="margin-bottom:32px;">
         <h1 style="color:${T1};font-size:22px;font-weight:600;margin:0 0 8px;">Visitor Document Submission</h1>
         <p style="color:${T2};font-size:14px;margin:0;line-height:1.7;">
-          If you require an invitation letter or visa support for your visit to Bangladesh,
+          If you require an invitation letter or visa support for your visit to our clothing manufacturer in Bangladesh,
           please submit the relevant documents below. Our team will review and follow up within 1–2 business days.
         </p>
       </div>

@@ -5,9 +5,27 @@ export const prerender = true;
 
 const pageTitle = "Philanthropy | SDF Clothing";
 const pageDescription = "SDF Clothing's philanthropy initiatives - tree plantation program, water recycling technology, and community development projects in Bangladesh.";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "SDF Clothing Philanthropy",
+    "description": pageDescription,
+    "url": "https://sdfltd.com/philanthropy",
+    "about": { "@id": "https://sdfltd.com/#org" },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Philanthropy", "item": "https://sdfltd.com/philanthropy" }
+      ]
+    }
+  }
+];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
 	<div class="container">
 		<!-- Breadcrumb -->
 		<nav aria-label="Breadcrumb" style="margin: 2rem 0;">

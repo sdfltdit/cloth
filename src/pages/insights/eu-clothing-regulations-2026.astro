@@ -5,20 +5,24 @@ export const prerender = true;
 
 const pageTitle = "EU Clothing Regulations 2026 | SDF Clothing";
 const pageDescription = "Complete guide to EU clothing regulations 2026 - EPR, Ecodesign, DPP, and compliance requirements for fashion brands sourcing from Bangladesh.";
----
-
-<BaseLayout title={pageTitle} description={pageDescription}>
-
-  <!-- Schema.org Article markup -->
-  <script type="application/ld+json" is:inline>{JSON.stringify({
+const schema = [
+  {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "EU Clothing Regulations 2026",
+    "headline": pageTitle,
     "description": pageDescription,
-    "author": { "@type": "Organization", "name": "SDF Clothing" },
-    "publisher": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
-    "url": Astro.url.href
-  })}</script>
+    "author": { "@id": "https://sdfltd.com/#org" },
+    "publisher": { "@id": "https://sdfltd.com/#org" },
+    "url": "https://sdfltd.com/insights/eu-clothing-regulations-2026/",
+    "mainEntityOfPage": "https://sdfltd.com/insights/eu-clothing-regulations-2026/"
+  }
+];
+
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+
+  <!-- Schema.org Article markup -->
 
   <div class="container" style="padding: 3rem 1.5rem 5rem;">
 
@@ -42,7 +46,7 @@ const pageDescription = "Complete guide to EU clothing regulations 2026 - EPR, E
           EU Clothing Regulations 2026
         </h1>
         <p style="font-size: 1rem; color: #aaa; line-height: 1.9; margin: 0;">
-          Comprehensive guide to EU clothing regulations taking effect in 2025–2026. Essential for fashion brands sourcing from Bangladesh  understand EPR, Ecodesign, and Digital Product Passport requirements.
+          Comprehensive guide to EU clothing regulations taking effect in 2025–2026. Essential for fashion brands and their clothing manufacturer in Bangladesh to understand EPR, Ecodesign, and Digital Product Passport requirements.
         </p>
       </header>
 

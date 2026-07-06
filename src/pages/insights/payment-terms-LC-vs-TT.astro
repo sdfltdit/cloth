@@ -5,19 +5,22 @@ export const prerender = true;
 
 const pageTitle = "L/C vs T/T Payment Terms for Clothing Imports | SDF Clothing";
 const pageDescription = "Compare letter of credit vs T/T payment for clothing imports. Costs, risks, when to use each, hybrid options for new and established buyers."
----
 
-<BaseLayout title={pageTitle} description={pageDescription}>
-
-  <script type="application/ld+json" is:inline>{JSON.stringify({
+const schema = [
+  {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Letter of Credit vs T/T | Which Payment Term Is Right for Your Brand?",
+    "headline": pageTitle,
     "description": pageDescription,
-    "author": { "@type": "Organization", "name": "SDF Clothing" },
-    "publisher": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
-    "url": Astro.url.href
-  })}</script>
+    "author": { "@id": "https://sdfltd.com/#org" },
+    "publisher": { "@id": "https://sdfltd.com/#org" },
+    "url": "https://sdfltd.com/insights/payment-terms-LC-vs-TT/",
+    "mainEntityOfPage": "https://sdfltd.com/insights/payment-terms-LC-vs-TT/"
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
 
   <div class="container" style="padding: 3rem 1.5rem 5rem;">
 
@@ -39,7 +42,7 @@ const pageDescription = "Compare letter of credit vs T/T payment for clothing im
           Letter of Credit vs T/T | Which Payment Term Is Right for Your Brand?
         </h1>
         <p style="font-size: 1rem; color: #aaa; line-height: 1.9; margin: 0;">
-          Payment terms determine when and how you pay for clothing imports. The two most common methods are Letter of Credit (L/C) and Telegraphic Transfer (T/T). Each has advantages depending on order size, relationship, and risk tolerance.
+          Payment terms determine when and how you pay for clothing imports. The two most common methods are Letter of Credit (L/C) and Telegraphic Transfer (T/T). Each has advantages depending on order size, your relationship with the clothing manufacturer, and risk tolerance.
         </p>
       </header>
 

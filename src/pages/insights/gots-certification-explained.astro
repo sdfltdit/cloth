@@ -5,19 +5,22 @@ export const prerender = true;
 
 const pageTitle = "GOTS Certification Explained | What It Means for Your Fas...";
 const pageDescription = "Plain English guide to GOTS certification for fashion brands. Learn what it means, requirements, benefits, and how to get certified."
----
 
-<BaseLayout title={pageTitle} description={pageDescription}>
-
-  <script type="application/ld+json" is:inline>{JSON.stringify({
+const schema = [
+  {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "GOTS Certification Explained | Complete Guide for Fashion Brands",
+    "headline": pageTitle,
     "description": pageDescription,
-    "author": { "@type": "Organization", "name": "SDF Clothing" },
-    "publisher": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
-    "url": Astro.url.href
-  })}</script>
+    "author": { "@id": "https://sdfltd.com/#org" },
+    "publisher": { "@id": "https://sdfltd.com/#org" },
+    "url": "https://sdfltd.com/insights/gots-certification-explained/",
+    "mainEntityOfPage": "https://sdfltd.com/insights/gots-certification-explained/"
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
 
   <div class="container" style="padding: 3rem 1.5rem 5rem;">
 
@@ -39,7 +42,7 @@ const pageDescription = "Plain English guide to GOTS certification for fashion b
           GOTS Certification Explained | What It Means for Your Fashion Brand
         </h1>
         <p style="font-size: 1rem; color: #aaa; line-height: 1.9; margin: 0;">
-          GOTS stands for Global Organic Textile Standard. It is the world's leading certification for organic textiles. If your fashion brand wants to use the word "organic" on your garments or marketing in the EU, UK, or USA, you need GOTS-certified production.
+          GOTS stands for Global Organic Textile Standard. It is the world's leading certification for organic textiles. If your fashion brand wants to use the word "organic" on your garments or marketing in the EU, UK, or USA, you need a GOTS-certified clothing manufacturer.
         </p>
       </header>
 

@@ -5,19 +5,22 @@ export const prerender = true;
 
 const pageTitle = "How to Calculate Landed Cost for Imported Clothing";
 const pageDescription = "Complete formula for landed cost: FOB + freight + duty + insurance + handling. Real examples and hidden costs you must know before importing.";
----
-
-<BaseLayout title={pageTitle} description={pageDescription}>
-
-  <script type="application/ld+json" is:inline>{JSON.stringify({
+const schema = [
+  {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "How to Calculate Landed Cost for Clothing Imports",
+    "headline": pageTitle,
     "description": pageDescription,
-    "author": { "@type": "Organization", "name": "SDF Clothing" },
-    "publisher": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
-    "url": Astro.url.href
-  })}</script>
+    "author": { "@id": "https://sdfltd.com/#org" },
+    "publisher": { "@id": "https://sdfltd.com/#org" },
+    "url": "https://sdfltd.com/insights/how-to-calculate-landed-cost/",
+    "mainEntityOfPage": "https://sdfltd.com/insights/how-to-calculate-landed-cost/"
+  }
+];
+
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
 
   <div class="container" style="padding: 3rem 1.5rem 5rem;">
 
@@ -39,7 +42,7 @@ const pageDescription = "Complete formula for landed cost: FOB + freight + duty 
           How to Calculate Landed Cost for Clothing Imports
         </h1>
         <p style="font-size: 1rem; color: #aaa; line-height: 1.9; margin: 0;">
-          Landed cost is the total cost to get goods to your warehouse. It includes FOB price, freight, insurance, duty, and handling. Calculating landed cost accurately is essential for pricing your products profitably.
+          Landed cost is the total cost to get goods to your warehouse. It includes FOB price, freight, insurance, duty, and handling. Calculating landed cost accurately — factoring in your clothing manufacturer's FOB price plus freight and duty — is essential for pricing your products profitably.
         </p>
       </header>
 

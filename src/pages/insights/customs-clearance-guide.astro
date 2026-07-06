@@ -5,19 +5,22 @@ export const prerender = true;
 
 const pageTitle = "Garment Customs Clearance Guide for Importers | SDF Clothing";
 const pageDescription = "Complete guide to customs clearance for imported clothing. Required documents, HTS codes, duty rates, common delays, broker tips."
----
 
-<BaseLayout title={pageTitle} description={pageDescription}>
-
-  <script type="application/ld+json" is:inline>{JSON.stringify({
+const schema = [
+  {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Garment Customs Clearance Guide | Smooth Import Process",
+    "headline": pageTitle,
     "description": pageDescription,
-    "author": { "@type": "Organization", "name": "SDF Clothing" },
-    "publisher": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
-    "url": Astro.url.href
-  })}</script>
+    "author": { "@id": "https://sdfltd.com/#org" },
+    "publisher": { "@id": "https://sdfltd.com/#org" },
+    "url": "https://sdfltd.com/insights/customs-clearance-guide/",
+    "mainEntityOfPage": "https://sdfltd.com/insights/customs-clearance-guide/"
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
 
   <div class="container" style="padding: 3rem 1.5rem 5rem;">
 
@@ -39,7 +42,7 @@ const pageDescription = "Complete guide to customs clearance for imported clothi
           Garment Customs Clearance Guide | Smooth Import Process
         </h1>
         <p style="font-size: 1rem; color: #aaa; line-height: 1.9; margin: 0;">
-          Customs clearance is the process of getting goods through customs. Proper documentation and preparation prevent delays. This guide explains what you need for smooth garment imports.
+          Customs clearance is the process of getting goods through customs. Proper documentation and preparation prevent delays. This guide explains what you and your clothing manufacturer need to prepare for smooth garment imports.
         </p>
       </header>
 
