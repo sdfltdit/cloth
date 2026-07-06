@@ -4,6 +4,38 @@ export const prerender = true;
 
 const pageTitle = "Clothing Manufacturing Lead Time Calculator | Bangladesh to EU UK USA Australia";
 const pageDescription = "Free lead time calculator for clothing manufacturing from Bangladesh. Get accurate delivery dates for sea and air freight to EU, UK, USA, Australia. SDF Clothing.";
+
+const toolFaqs = [
+  {
+    question: "How accurate is this lead time calculator?",
+    answer: "Estimates are based on typical Bangladesh factory timelines and are accurate within ±3–5 days for most orders. Actual dates depend on fabric availability, customs clearance, and public holidays in Bangladesh."
+  },
+  {
+    question: "Does the lead time include sampling?",
+    answer: "Yes. The calculator includes proto/fit sampling and approval time before bulk production starts. If you already have an approved sample, production can start sooner than shown."
+  },
+  {
+    question: "Why is air freight so much more expensive than sea freight?",
+    answer: "Air freight typically costs 3–5 times more than sea freight, but cuts transit time by 20–30 days. It's usually only worth it for urgent reorders or small top-up shipments, not full bulk orders."
+  },
+  {
+    question: "Can rush production shorten these timelines?",
+    answer: "Some factories, including SDF, offer rush production for urgent orders at a premium, which can shorten the bulk production window shown here. Contact us directly to check rush availability for your order."
+  },
+  {
+    question: "Does order quantity affect the lead time shown?",
+    answer: "Yes. Larger orders (5,000+ pieces) add production days because they run across more cutting and sewing lines. The calculator adjusts the production estimate automatically based on the quantity you select."
+  }
+];
+const toolFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": toolFaqs.map(f => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+  }))
+};
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -20,6 +52,7 @@ const pageDescription = "Free lead time calculator for clothing manufacturing fr
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
 }
 </script>
+<script type="application/ld+json" set:html={JSON.stringify(toolFaqSchema)} />
 
 <!-- HERO -->
 <section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
@@ -129,6 +162,35 @@ const pageDescription = "Free lead time calculator for clothing manufacturing fr
           </a>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO USE THIS TOOL (static, server-rendered) -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <h2 style="font-size:1.4rem;font-weight:400;color:#fff;margin-bottom:1.5rem;">How to Use This Tool</h2>
+    <ol style="color:#ffffff;line-height:1.9;font-size:0.9rem;max-width:700px;padding-left:1.2rem;">
+      <li style="margin-bottom:0.6rem;">Select your order quantity — the calculator adjusts production days for larger runs automatically.</li>
+      <li style="margin-bottom:0.6rem;">Choose garment complexity. Simple basics (t-shirts) sample faster than detailed, multi-process garments.</li>
+      <li style="margin-bottom:0.6rem;">Pick your shipping destination and method — sea freight is cheaper, air freight is faster.</li>
+      <li style="margin-bottom:0.6rem;">Set your order start date and click "Calculate Delivery Date" to see sampling, production, QC, and shipping milestones.</li>
+    </ol>
+    <p style="color:#ffffff;line-height:1.8;font-size:0.9rem;max-width:700px;margin-top:1rem;">This tool models SDF Clothing's actual production stages — sampling and approval, bulk production with inline quality control, AQL 2.5 final inspection, then sea or air freight — so the dates reflect a realistic factory timeline rather than a generic estimate.</p>
+  </div>
+</section>
+
+<!-- FAQ (static, server-rendered) -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <h2 style="font-size:1.4rem;font-weight:400;color:#fff;margin-bottom:1.5rem;">Lead Time FAQ</h2>
+    <div style="display:flex;flex-direction:column;gap:1px;background:#000000;max-width:800px;">
+      {toolFaqs.map(faq => (
+        <div style="background:#000;padding:1.25rem;">
+          <div style="font-size:0.9rem;color:#fff;margin-bottom:0.4rem;font-weight:500;">{faq.question}</div>
+          <div style="font-size:0.85rem;color:#ffffff;line-height:1.7;">{faq.answer}</div>
+        </div>
+      ))}
     </div>
   </div>
 </section>

@@ -5,6 +5,34 @@ export const prerender = true;
 
 const pageTitle = "MOQ Calculator | Clothing Manufacturing Minimum Order Quantity";
 const pageDescription = "Calculate minimum order quantities for clothing manufacturing in Bangladesh. Instant MOQ estimates for startups and established brands.";
+
+const toolFaqs = [
+  {
+    question: "What is MOQ and why do manufacturers require it?",
+    answer: "MOQ (Minimum Order Quantity) is the smallest quantity a factory will produce per style. Manufacturers set MOQs because fabric is bought by the roll and production lines are set up per style, so very small runs aren't cost-efficient to produce."
+  },
+  {
+    question: "Can I mix sizes and colors within the MOQ?",
+    answer: "Yes. At SDF, the MOQ applies per style, not per size or color — you can typically mix sizes and up to 4 colors within your 300-piece minimum, as shown in the calculator results."
+  },
+  {
+    question: "Why does complex embroidery or all-over print raise the MOQ?",
+    answer: "Complex decoration (heavy embroidery, all-over prints) requires more setup time and higher minimums from trim and print suppliers, which the calculator reflects with its complexity multiplier."
+  },
+  {
+    question: "Is the MOQ different for organic or bamboo fabric?",
+    answer: "Yes. Organic cotton, bamboo, and modal fabrics are produced in smaller batches by mills, so factories often need a higher minimum order to justify sourcing them — the calculator's fabric multiplier accounts for this."
+  }
+];
+const toolFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": toolFaqs.map(f => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+  }))
+};
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -25,6 +53,7 @@ const pageDescription = "Calculate minimum order quantities for clothing manufac
 		}
 	}
 	</script>
+	<script type="application/ld+json" set:html={JSON.stringify(toolFaqSchema)} />
 
 	<section class="py-20 px-4">
 		<div class="container mx-auto max-w-4xl">
@@ -86,6 +115,30 @@ const pageDescription = "Calculate minimum order quantities for clothing manufac
 				<p class="text-white/70 mb-4">
 					Need a custom quote for larger quantities? <a href="/contact" class="text-[#e00] hover:text-[#e00]">Contact us</a> for bulk pricing.
 				</p>
+			</div>
+
+			<!-- HOW TO USE THIS TOOL (static, server-rendered) -->
+			<div class="mt-16 max-w-2xl mx-auto">
+				<h2 class="text-2xl font-bold text-white mb-4">How to Use This Tool</h2>
+				<ol style="color:rgba(255,255,255,0.85);line-height:1.9;font-size:0.9rem;padding-left:1.2rem;">
+					<li style="margin-bottom:0.6rem;">Choose your garment category — different garment types have different base minimums.</li>
+					<li style="margin-bottom:0.6rem;">Select complexity level. Basic solid-color garments carry the lowest MOQ; heavy embroidery or all-over prints raise it.</li>
+					<li style="margin-bottom:0.6rem;">Pick your fabric type. Standard cotton and polyester keep MOQ lowest; organic, bamboo, and modal fabrics need larger minimums.</li>
+					<li style="margin-bottom:0.6rem;">Click "Calculate MOQ" to see your estimated minimum order quantity, size/color flexibility, and production time.</li>
+				</ol>
+			</div>
+
+			<!-- FAQ (static, server-rendered) -->
+			<div class="mt-16 max-w-2xl mx-auto">
+				<h2 class="text-2xl font-bold text-white mb-4">MOQ FAQ</h2>
+				<div style="display:flex;flex-direction:column;gap:1px;background:#000000;">
+					{toolFaqs.map(faq => (
+						<div style="background:#000;padding:1.25rem;">
+							<div style="font-size:0.9rem;color:#fff;margin-bottom:0.4rem;font-weight:500;">{faq.question}</div>
+							<div style="font-size:0.85rem;color:rgba(255,255,255,0.85);line-height:1.7;">{faq.answer}</div>
+						</div>
+					))}
+				</div>
 			</div>
 		</div>
 	</section>

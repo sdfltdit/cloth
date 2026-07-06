@@ -5,6 +5,38 @@ export const prerender = true;
 
 const pageTitle = "Sample Request | Free Clothing Manufacturing Samples";
 const pageDescription = "Request free clothing manufacturing samples from SDF Clothing. Get quality samples for your apparel production in Bangladesh.";
+
+const toolFaqs = [
+  {
+    question: "Are the samples really free?",
+    answer: "Yes, sample development is free for confirmed bulk orders. For a standalone sample request with no order commitment, a small fabric and courier cost may apply depending on garment complexity — we confirm this with you before starting."
+  },
+  {
+    question: "How long does it take to receive a sample?",
+    answer: "Samples are dispatched within 48 hours of confirming your specs, with worldwide delivery typically taking 7–14 days depending on your location and courier."
+  },
+  {
+    question: "Will the bulk order match the sample exactly?",
+    answer: "Yes. We use the same fabric batch, construction method, and quality checkpoints for bulk production as we do for the approved sample, so what you approve is what you receive at scale."
+  },
+  {
+    question: "Can I request multiple sample variations?",
+    answer: "Yes, you can request a few color or fabric variations in one sample round. For extensive design iteration, we recommend narrowing to your top 2–3 options first to keep sample lead time short."
+  },
+  {
+    question: "What information do I need to provide for a sample request?",
+    answer: "At minimum: garment type, fabric preference, sizing, and any reference images or tech pack. The more detail you provide upfront, the closer the first sample will be to your final vision."
+  }
+];
+const toolFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": toolFaqs.map(f => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+  }))
+};
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -23,6 +55,7 @@ const pageDescription = "Request free clothing manufacturing samples from SDF Cl
 		}
 	}
 	</script>
+	<script type="application/ld+json" set:html={JSON.stringify(toolFaqSchema)} />
 
 	<section class="py-20 px-4">
 		<div class="container mx-auto max-w-4xl">
@@ -145,6 +178,30 @@ const pageDescription = "Request free clothing manufacturing samples from SDF Cl
 					<h3 class="text-xl font-bold text-white mb-2">Production Sample Match</h3>
 					<p class="text-white/70 text-sm">Production samples match final bulk order quality</p>
 				</div>
+			</div>
+		</div>
+
+		<!-- HOW TO USE THIS TOOL (static, server-rendered) -->
+		<div class="max-w-2xl mx-auto mt-16">
+			<h2 class="text-2xl font-bold text-white mb-4">How to Use This Tool</h2>
+			<ol style="color:rgba(255,255,255,0.85);line-height:1.9;font-size:0.9rem;padding-left:1.2rem;">
+				<li style="margin-bottom:0.6rem;">Fill in your garment type, fabric preference, and sizing details in the form above.</li>
+				<li style="margin-bottom:0.6rem;">Attach or describe any reference images, tech pack, or design notes so we can match your vision closely.</li>
+				<li style="margin-bottom:0.6rem;">Submit the request — our team confirms specs and cost (if any) within 48 hours.</li>
+				<li style="margin-bottom:0.6rem;">Receive your sample by courier in 7–14 days, then approve it or request adjustments before bulk production.</li>
+			</ol>
+		</div>
+
+		<!-- FAQ (static, server-rendered) -->
+		<div class="max-w-2xl mx-auto mt-16">
+			<h2 class="text-2xl font-bold text-white mb-4">Sample Request FAQ</h2>
+			<div style="display:flex;flex-direction:column;gap:1px;background:#000000;">
+				{toolFaqs.map(faq => (
+					<div style="background:#000;padding:1.25rem;">
+						<div style="font-size:0.9rem;color:#fff;margin-bottom:0.4rem;font-weight:500;">{faq.question}</div>
+						<div style="font-size:0.85rem;color:rgba(255,255,255,0.85);line-height:1.7;">{faq.answer}</div>
+					</div>
+				))}
 			</div>
 		</div>
 	</section>
