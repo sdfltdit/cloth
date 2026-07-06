@@ -5,19 +5,22 @@ export const prerender = true;
 
 const pageTitle = "CPSIA Compliance Guide for Children's Clothing | SDF";
 const pageDescription = "Complete CPSIA compliance guide for children's clothing imported to USA. Lead testing, phthalate testing, tracking labels, certificates needed."
----
 
-<BaseLayout title={pageTitle} description={pageDescription}>
-
-  <script type="application/ld+json" is:inline>{JSON.stringify({
+const schema = [
+  {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "CPSIA Compliance Guide for Children's Clothing in the USA",
+    "headline": pageTitle,
     "description": pageDescription,
-    "author": { "@type": "Organization", "name": "SDF Clothing" },
-    "publisher": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
-    "url": Astro.url.href
-  })}</script>
+    "author": { "@id": "https://sdfltd.com/#org" },
+    "publisher": { "@id": "https://sdfltd.com/#org" },
+    "url": "https://sdfltd.com/insights/CPSIA-compliance-guide/",
+    "mainEntityOfPage": "https://sdfltd.com/insights/CPSIA-compliance-guide/"
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
 
   <div class="container" style="padding: 3rem 1.5rem 5rem;">
 

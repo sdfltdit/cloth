@@ -5,19 +5,22 @@ export const prerender = true;
 
 const pageTitle = "FOB vs CIF vs DDP | Incoterms Explained for Fashion Brands";
 const pageDescription = "Plain English guide to Incoterms | FOB, CIF, DDP, EXW, DAP. Cost responsibility, risk transfer points, and which is best for new clothing brand buyers.";
----
-
-<BaseLayout title={pageTitle} description={pageDescription}>
-
-  <script type="application/ld+json" is:inline>{JSON.stringify({
+const schema = [
+  {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "FOB vs CIF vs DDP | Incoterms Explained for Fashion Brand Buyers",
+    "headline": pageTitle,
     "description": pageDescription,
-    "author": { "@type": "Organization", "name": "SDF Clothing" },
-    "publisher": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
-    "url": Astro.url.href
-  })}</script>
+    "author": { "@id": "https://sdfltd.com/#org" },
+    "publisher": { "@id": "https://sdfltd.com/#org" },
+    "url": "https://sdfltd.com/insights/incoterms-explained/",
+    "mainEntityOfPage": "https://sdfltd.com/insights/incoterms-explained/"
+  }
+];
+
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
 
   <div class="container" style="padding: 3rem 1.5rem 5rem;">
 

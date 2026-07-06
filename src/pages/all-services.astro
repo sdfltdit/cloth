@@ -4,48 +4,23 @@ export const prerender = true;
 
 const pageTitle = "All Services | Complete Clothing Manufacturing Capabilities";
 const pageDescription = "Complete clothing manufacturing services from SDF Clothing | fabric sourcing, OEM, ODM, CMT, printing, embroidery, dyeing, and 40+ services. Get a free quote.";
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": pageTitle,
+    "provider": { "@id": "https://sdfltd.com/#org" },
+    "serviceType": "All Services",
+    "areaServed": "Worldwide",
+    "description": pageDescription,
+    "url": "https://sdfltd.com/all-services/"
+  }
+];
+
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": Astro.url.href,
-      "url": Astro.url.href,
-      "name": pageTitle,
-      "description": pageDescription,
-      "inLanguage": "en-GB",
-      "isPartOf": {
-        "@type": "WebSite",
-        "@id": "https://sdfltd.com/#website",
-        "url": "https://sdfltd.com",
-        "name": "SDF Clothing"
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://sdfltd.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "All Services",
-          "item": Astro.url.href
-        }
-      ]
-    }
-  ]
-}
-</script>
 
 <meta name="keywords" content="all clothing manufacturing services, complete clothing manufacturer services, full service clothing manufacturer, end-to-end garment manufacturing, all apparel production services, complete fashion brand manufacturing services" />
 

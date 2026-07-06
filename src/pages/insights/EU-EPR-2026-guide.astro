@@ -5,19 +5,22 @@ export const prerender = true;
 
 const pageTitle = "EU EPR 2026 Textile Guide for Fashion Brands | SDF Clothing";
 const pageDescription = "Complete guide to EU Extended Producer Responsibility 2026 for textiles. What brands must do, documentation needed, fees, compliance timeline."
----
 
-<BaseLayout title={pageTitle} description={pageDescription}>
-
-  <script type="application/ld+json" is:inline>{JSON.stringify({
+const schema = [
+  {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "EU EPR 2026 Textile Guide | What Fashion Brands Must Do",
+    "headline": pageTitle,
     "description": pageDescription,
-    "author": { "@type": "Organization", "name": "SDF Clothing" },
-    "publisher": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
-    "url": Astro.url.href
-  })}</script>
+    "author": { "@id": "https://sdfltd.com/#org" },
+    "publisher": { "@id": "https://sdfltd.com/#org" },
+    "url": "https://sdfltd.com/insights/EU-EPR-2026-guide/",
+    "mainEntityOfPage": "https://sdfltd.com/insights/EU-EPR-2026-guide/"
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
 
   <div class="container" style="padding: 3rem 1.5rem 5rem;">
 

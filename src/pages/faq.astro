@@ -149,61 +149,44 @@ const allFaqs = [
     ]
   }
 ];
----
-
-<BaseLayout title={pageTitle} description={pageDescription}>
-
-<script type="application/ld+json">
-{
+const faqPageUrl = "https://sdfltd.com/faq/";
+const faqSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": Astro.url.href,
-      "url": Astro.url.href,
+      "@id": faqPageUrl,
+      "url": faqPageUrl,
       "name": pageTitle,
       "description": pageDescription,
       "inLanguage": "en-GB",
-      "isPartOf": {
-        "@type": "WebSite",
-        "@id": "https://sdfltd.com/#website",
-        "url": "https://sdfltd.com",
-        "name": "SDF Clothing"
-      }
+      "isPartOf": { "@id": "https://sdfltd.com/#website" }
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://sdfltd.com/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "FAQ",
-          "item": Astro.url.href
-        }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+        { "@type": "ListItem", "position": 2, "name": "FAQ", "item": faqPageUrl }
       ]
     },
     {
       "@type": "FAQPage",
-      "mainEntity": [
-        {allFaqs.map(category => category.questions.map(faq => ({
-          "@type": "Question",
-          "name": faq.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.answer
-          }
-        })))}
-      ]
+      "mainEntity": allFaqs.flatMap(category => category.questions.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      })))
     }
   ]
-}
-</script>
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <!-- Hero Section -->
 <section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">

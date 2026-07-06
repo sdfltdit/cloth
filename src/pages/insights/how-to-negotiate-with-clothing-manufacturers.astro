@@ -5,19 +5,22 @@ export const prerender = true;
 
 const pageTitle = "How to Negotiate with Clothing Manufacturers | Pricing & ...";
 const pageDescription = "Practical guide to negotiating price, MOQ, payment terms, and lead time with clothing manufacturers. What's negotiable and what is not.";
----
-
-<BaseLayout title={pageTitle} description={pageDescription}>
-
-  <script type="application/ld+json" is:inline>{JSON.stringify({
+const schema = [
+  {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "How to Negotiate with Clothing Manufacturers",
+    "headline": pageTitle,
     "description": pageDescription,
-    "author": { "@type": "Organization", "name": "SDF Clothing" },
-    "publisher": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
-    "url": Astro.url.href
-  })}</script>
+    "author": { "@id": "https://sdfltd.com/#org" },
+    "publisher": { "@id": "https://sdfltd.com/#org" },
+    "url": "https://sdfltd.com/insights/how-to-negotiate-with-clothing-manufacturers/",
+    "mainEntityOfPage": "https://sdfltd.com/insights/how-to-negotiate-with-clothing-manufacturers/"
+  }
+];
+
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
 
   <div class="container" style="padding: 3rem 1.5rem 5rem;">
 
