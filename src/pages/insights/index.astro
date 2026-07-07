@@ -8,7 +8,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import AqlTool from '../../components/AqlTool.astro';
 import LeadTimeEstimator from '../../components/LeadTimeEstimator.astro';
 import Glossary from '../../components/Glossary.astro';
-import { articles, sectors, learningPaths, downloadables } from '../../data/learning-hub.ts';
+import { articles, sectors, learningPaths } from '../../data/learning-hub.ts';
 
 export const prerender = true;
 
@@ -305,34 +305,6 @@ const allArticles = articles;
         </div>
         <div id="tool-leadtime" class="tool-panel" style="display:none;">
           <LeadTimeEstimator />
-        </div>
-      </section>
-
-      <!-- DOWNLOADABLE RESOURCES -->
-      <section class="hub-section" id="downloads" aria-labelledby="downloads-title">
-        <div class="section-header-inner section-header">
-          <span class="section-label">Free Downloads</span>
-          <div class="accent-line"></div>
-          <h2 id="downloads-title">Templates &amp; Checklists</h2>
-          <p>Ready-to-use documents for sourcing, compliance, and quality management.</p>
-        </div>
-        <div class="downloads-grid">
-          {downloadables.map(dl => (
-            <a href={dl.href} class="download-card" aria-label={`Download ${dl.title}`} download>
-              <div class="dl-top">
-                <span class="dl-format">{dl.format}</span>
-                <span class="dl-size">{dl.size}</span>
-              </div>
-              <h3 class="dl-title">{dl.title}</h3>
-              <p class="dl-desc">{dl.description}</p>
-              <div class="dl-action">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                Download Free
-              </div>
-            </a>
-          ))}
         </div>
       </section>
 

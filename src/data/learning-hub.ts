@@ -198,10 +198,3 @@ export const articles = [
     isFeatured: false,
   },
 ];
-
-export const downloadables = [
-  { title: "Factory Audit Checklist", description: "Complete checklist for auditing Bangladesh garment factories — 48 quality, compliance, and capacity checkpoints.", format: "PDF", size: "180 KB", sector: "manufacturing", href: "/downloads/factory-audit-checklist.pdf" },
-  { title: "RFQ Template", description: "Structured Request for Quotation template for apparel sourcing — includes tech pack fields, compliance requirements, and MOQ terms.", format: "DOCX", size: "95 KB", sector: "sourcing", href: "/downloads/rfq-template.docx" },
-  { title: "EU Compliance Timeline 2026–2027", description: "Visual timeline of EU textile regulations — ESPR, DPP, EPR deadlines mapped by category and enforcement date.", format: "PDF", size: "210 KB", sector: "compliance", href: "/downloads/eu-compliance-timeline.pdf" },
-  { title: "Vendor Scorecard Template", description: "Weighted scoring matrix for evaluating and comparing garment manufacturers across quality, compliance, capacity, and communication.", format: "XLSX", size: "120 KB", sector: "sourcing", href: "/downloads/vendor-scorecard.xlsx" },
-];
