@@ -37,3 +37,14 @@ While auditing schema, found `faq.astro` and 40 other pages had a **second, comp
   - **Bonus finds while doing this item** (pre-existing bugs, not introduced by this work): a genuinely broken CTA button (missing opening `<a>` tag) in `guides/clothing-manufacturing-cost-bangladesh.astro`; `color-converter.astro` had 13 links to non-existent sub-tool pages; **30+ files** across the site linked to `/insights/index`, `/nda/index`, `/case-studies/index`, and pet-clothing sub-pages with an incorrect trailing `/index` (all real 404s) — all fixed. 10 more individually broken links fixed (about.astro, careers.astro, hoodie-manufacturers.astro, top-apparel-manufacturers.astro, aql-calculator.astro, shrinkage-calculator.astro, dog-coat-manufacturer).
   - **Full site-wide broken-link crawl of all 302 pages after fixes: 1 broken link remains** — `/guides/choosing-manufacturer` linked from the homepage — left untouched per instruction not to modify the homepage in this pass.
   - **Fixed (not just flagged)**: `insights/index.astro` had an entire "Free Downloads" section referencing 4 files (`factory-audit-checklist.pdf`, `rfq-template.docx`, `eu-compliance-timeline.pdf`, `vendor-scorecard.xlsx`) — none of which exist anywhere in the repo, so every download link 404'd. Rather than fabricate placeholder business documents, removed the entire section cleanly (plus the now-unused `downloadables` import/data array, no dead code left). If these are real lead-magnets the business wants, the actual files need to be supplied and the section can be re-added.
+
+## Phase 5 — Tool architecture
+- [x] FAQPage schema on tools (item 10) — `price-calculator.astro` was the one tool page missing it; added static FAQ + FAQPage schema. All 15 tool pages now confirmed to have valid FAQPage schema.
+- [x] Component-without-route check (item 11) — the literal case described (AqlTool as a stray page under `/insights/`) was already resolved in Phase 1, when the 6 accidental duplicate files were deleted. Verified no other tool exists only as a component without its own dedicated `/tools/` page. Bonus: deleted 2 fully unused duplicate component files (`src/components/FobCalculator.astro`, `src/components/PriceCalculator.astro`) as dead-code cleanup.
+
+## FINAL STATUS: All phases complete.
+- Final clean build: 302 pages, 0 errors.
+- JSON-LD validity: 0 broken across all 302 pages (was 41 broken pre-existing bugs, all fixed).
+- Internal link crawl: 1 broken link remains (`/guides/choosing-manufacturer`, homepage only) — left untouched, homepage out of scope for this work.
+- Bangladesh check across the full combined diff (253 files): 0 new mentions.
+- Homepage (`index.astro`) and `booking.astro` meta description: intentionally untouched throughout, per instruction — follow-up pass needed separately.
