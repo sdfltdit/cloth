@@ -4,6 +4,34 @@ export const prerender = true;
 
 const pageTitle = "Clothing Manufacturing Price Calculator | Free FOB Cost Estimator Bangladesh";
 const pageDescription = "Free clothing manufacturing price calculator — instant FOB cost estimates for t-shirts, hoodies, denim and more from Bangladesh. No registration.";
+
+const toolFaqs = [
+  {
+    question: "How accurate is this price calculator?",
+    answer: "Estimates are based on current Bangladesh factory rates and are a good ballpark for early budgeting, typically within 10-15% of a confirmed quote. The final FOB price depends on your exact tech pack, fabric composition, and trims, so always confirm with a real quote before committing to an order."
+  },
+  {
+    question: "Does the price include shipping and duty?",
+    answer: "No. This calculator shows the FOB (Free on Board) price only — the factory-gate cost before freight, insurance, and import duty. Use our Garment Cost Calculator to add freight and duty on top for a full landed cost."
+  },
+  {
+    question: "Why does fabric GSM affect the price?",
+    answer: "Heavier fabric (higher GSM) uses more raw material per garment, which directly increases fabric cost. Use the bonus GSM Calculator below to check whether your target GSM is typical for your garment type before finalizing your spec."
+  },
+  {
+    question: "Does order quantity change the price per piece?",
+    answer: "Yes. Larger orders spread fixed costs (sampling, cutting setup) across more units, lowering the per-piece price. Small orders under 300 pieces may also carry a small-batch surcharge depending on garment complexity."
+  }
+];
+const toolFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": toolFaqs.map(f => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+  }))
+};
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -20,6 +48,7 @@ const pageDescription = "Free clothing manufacturing price calculator — instan
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
 }
 </script>
+<script type="application/ld+json" set:html={JSON.stringify(toolFaqSchema)} />
 
 <!-- HERO -->
 <section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
@@ -247,6 +276,21 @@ const pageDescription = "Free clothing manufacturing price calculator — instan
           ))}
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ (static, server-rendered) -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <h2 style="font-size:1.4rem;font-weight:400;color:#fff;margin-bottom:1.5rem;">Price Calculator FAQ</h2>
+    <div style="display:flex;flex-direction:column;gap:1px;background:#000000;max-width:800px;">
+      {toolFaqs.map(faq => (
+        <div style="background:#000;padding:1.25rem;">
+          <div style="font-size:0.9rem;color:#fff;margin-bottom:0.4rem;font-weight:500;">{faq.question}</div>
+          <div style="font-size:0.85rem;color:#ffffff;line-height:1.7;">{faq.answer}</div>
+        </div>
+      ))}
     </div>
   </div>
 </section>
