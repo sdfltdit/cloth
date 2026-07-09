@@ -11,12 +11,14 @@ export interface Props {
   datePublished?: string;
   dateModified?: string;
   schema?: object | object[];
+  hreflangRegion?: string;
 }
 
-const { title, description, ogImage, ogType, canonicalUrl, datePublished, dateModified, schema } = Astro.props;
+const { title, description, ogImage, ogType, canonicalUrl, datePublished, dateModified, schema, hreflangRegion } = Astro.props;
 const canonical = canonicalUrl
   ? new URL(canonicalUrl, Astro.site).toString()
   : new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).toString();
+const hreflangFallback = new URL('/clothing-manufacturers/', Astro.site).toString();
 ---
 
 <!DOCTYPE html>
@@ -33,13 +35,23 @@ const canonical = canonicalUrl
       schema={schema}
     />
 
-    <!-- Hreflang: single URL for all regions — no country-specific pages -->
-    <link rel="alternate" hreflang="x-default" href={canonical} />
-    <link rel="alternate" hreflang="en" href={canonical} />
-    <link rel="alternate" hreflang="en-US" href={canonical} />
-    <link rel="alternate" hreflang="en-GB" href={canonical} />
-    <link rel="alternate" hreflang="en-AU" href={canonical} />
-    <link rel="alternate" hreflang="en-CA" href={canonical} />
+    <!-- Hreflang -->
+    {hreflangRegion ? (
+      <Fragment>
+        <link rel="alternate" hreflang="x-default" href={hreflangFallback} />
+        <link rel="alternate" hreflang="en" href={hreflangFallback} />
+        <link rel="alternate" hreflang={`en-${hreflangRegion}`} href={canonical} />
+      </Fragment>
+    ) : (
+      <Fragment>
+        <link rel="alternate" hreflang="x-default" href={canonical} />
+        <link rel="alternate" hreflang="en" href={canonical} />
+        <link rel="alternate" hreflang="en-US" href={canonical} />
+        <link rel="alternate" hreflang="en-GB" href={canonical} />
+        <link rel="alternate" hreflang="en-AU" href={canonical} />
+        <link rel="alternate" hreflang="en-CA" href={canonical} />
+      </Fragment>
+    )}
 
     <link rel="alternate" type="text/plain" title="SDF Clothing AI Reference" href="/llms.txt" />
     <link rel="alternate" type="text/plain" title="SDF Clothing AI Reference Full" href="/llms-full.txt" />
@@ -401,7 +413,7 @@ const canonical = canonicalUrl
               <li style="margin-bottom:0.6rem;"><a href="https://au.pinterest.com/sdfltdclothingnsw/" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on Pinterest" style="font-size:0.8rem;color:#fff;" title="Follow us on Pinterest">Pinterest</a></li>
               <li style="margin-bottom:0.6rem;"><a href="https://x.com/clothing_makers/" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on X" style="font-size:0.8rem;color:#fff;" title="Follow us on X">X</a></li>
               <li style="margin-bottom:0.6rem;"><a href="https://www.linkedin.com/company/clothing-manufacturers" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on LinkedIn" style="font-size:0.8rem;color:#fff;" title="Follow us on LinkedIn">LinkedIn</a></li>
-              <li style="margin-bottom:0.6rem;"><a href="https://www.reddit.com/user/clothing-mmakers/" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on Reddit" style="font-size:0.8rem;color:#fff;" title="Join us on Reddit">Reddit</a></li>
+              <li style="margin-bottom:0.6rem;"><a href="https://www.reddit.com/user/clothing-makers/" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on Reddit" style="font-size:0.8rem;color:#fff;" title="Join us on Reddit">Reddit</a></li>
               <li style="margin-bottom:0.6rem;"><a href="https://www.slideshare.net/sdfashion1" target="_blank" rel="noopener noreferrer" aria-label="View SDF Clothing presentations on SlideShare" style="font-size:0.8rem;color:#fff;" title="View our presentations on SlideShare">SlideShare</a></li>
               <li><a href="https://www.quora.com/profile/SDF-Clothing-1" target="_blank" rel="noopener noreferrer" aria-label="Follow SDF Clothing on Quora" style="font-size:0.8rem;color:#fff;" title="Find us on Quora">Quora</a></li>
             </ul>
