@@ -462,7 +462,7 @@ export const schemaOrganization = {
     "https://au.pinterest.com/sdfltdclothingnsw/",
     "https://clothing-manufacturers.tumblr.com/",
     "https://medium.com/@stonedeadfashion",
-    "https://www.reddit.com/user/clothing-mmakers/",
+    "https://www.reddit.com/user/clothing-makers/",
     "https://www.slideshare.net/sdfashion1",
     "https://www.quora.com/profile/SDF-Clothing-1",
 
