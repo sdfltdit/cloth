@@ -12,9 +12,10 @@ export interface Props {
   dateModified?: string;
   schema?: object | object[];
   hreflangRegion?: string;
+  noindex?: boolean;
 }
 
-const { title, description, ogImage, ogType, canonicalUrl, datePublished, dateModified, schema, hreflangRegion } = Astro.props;
+const { title, description, ogImage, ogType, canonicalUrl, datePublished, dateModified, schema, hreflangRegion, noindex } = Astro.props;
 const canonical = canonicalUrl
   ? new URL(canonicalUrl, Astro.site).toString()
   : new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).toString();
@@ -33,6 +34,7 @@ const hreflangFallback = new URL('/clothing-manufacturers/', Astro.site).toStrin
       datePublished={datePublished}
       dateModified={dateModified}
       schema={schema}
+      noindex={noindex}
     />
 
     <!-- Hreflang -->
