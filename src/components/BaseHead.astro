@@ -315,6 +315,23 @@ if (schema) {
     font-display: swap;
     src: url('/fonts/inter-v13-latin-600.woff2') format('woff2');
   }
+
+  /* Metric-matched fallback: makes the local Arial/system fallback occupy
+     the exact same box as Inter (values from @capsizecss/metrics, the same
+     table Next.js's next/font uses), so when Inter finishes loading and
+     swaps in there's no text reflow. This was an open gap — PageSpeed was
+     flagging the Inter woff2 file itself as a layout-shift culprit
+     (hero-subtitle CLS ~0.035) because no override existed anywhere in the
+     codebase before this. Add 'Inter Fallback' after 'Inter' wherever the
+     font-family is declared (done for body/.index below) to use it. */
+  @font-face {
+    font-family: 'Inter Fallback';
+    src: local('Arial');
+    ascent-override: 90.49%;
+    descent-override: 22.56%;
+    line-gap-override: 0%;
+    size-adjust: 107.06%;
+  }
 </style>
 
 <!-- FAVICONS -->

@@ -137,6 +137,23 @@ const faqs = [
   }
 ];
 
+// Groups the 25 FAQ entries above by category so the FAQ list renders as a
+// handful of category sections instead of one flat container with 25+
+// direct children (PageSpeed "Optimize DOM size" > Most children). Purely a
+// visual/DOM grouping — each item keeps its original array index for
+// data-faq/data-answer (and for the FAQPage schema below, which maps over
+// `faqs` directly and is unaffected by this).
+const faqsByCategory = faqs.reduce((groups, faq, index) => {
+  const group = groups.find(g => g.category === faq.category);
+  const entry = { ...faq, index };
+  if (group) {
+    group.items.push(entry);
+  } else {
+    groups.push({ category: faq.category, items: [entry] });
+  }
+  return groups;
+}, []);
+
 const schemaWebSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -446,7 +463,7 @@ const combinedSchema = {
   .index {
     background-color: var(--color-bg);
     color: var(--color-text);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.7;
   }
 
@@ -1591,6 +1608,7 @@ const combinedSchema = {
       <div class="faq-grid">
         <div class="faq-left">
           <div class="index__card">
+            <div class="index__faq-group">
             <div class="index__faq-item">
               <span class="index__faq-category">Getting Started</span>
               <button type="button" class="index__faq-question" data-faq="new-0" aria-expanded="false" aria-controls="faq-answer-new-0">
@@ -1652,16 +1670,6 @@ const combinedSchema = {
               </div>
             </div>
             <div class="index__faq-item">
-              <span class="index__faq-category">Quality & Certifications</span>
-              <button type="button" class="index__faq-question" data-faq="new-8" aria-expanded="false" aria-controls="faq-answer-new-8">
-                What is your defect and rejection rate?
-                <span class="index__faq-icon" aria-hidden="true">+</span>
-              </button>
-              <div class="index__faq-answer" data-answer="new-8" id="faq-answer-new-8">
-                <p>We follow AQL 2.5 inspection standards on every order. Our actual rejection rate runs below 0.8% — well within international garment industry norms. Every order goes through in-line quality checks during production and a final inspection before packing. Third-party inspection by SGS, Bureau Veritas, or Intertek is available on request.</p>
-              </div>
-            </div>
-            <div class="index__faq-item">
               <span class="index__faq-category">Getting Started</span>
               <button type="button" class="index__faq-question" data-faq="new-9" aria-expanded="false" aria-controls="faq-answer-new-9">
                 Are you a vertically integrated clothing manufacturer?
@@ -1691,16 +1699,33 @@ const combinedSchema = {
                 <p>Bangladesh offers 30 to 40 percent lower production costs than China and 20 to 30 percent lower than Vietnam for equivalent quality. EU and UK buyers benefit from GSP duty-free access on Bangladesh-origin garments, which is not available on China-origin goods. SDF Clothing holds 13 international certifications including GOTS, OEKO-TEX, ISO 9001, and BSCI — a compliance profile that matches or exceeds most China and Vietnam alternatives at a lower FOB price.</p>
               </div>
             </div>
-            {faqs.map((faq, index) => (
-              <div class="index__faq-item">
-                <span class="index__faq-category">{faq.category}</span>
-                <button type="button" class="index__faq-question" data-faq={index} aria-expanded="false" aria-controls={`faq-answer-${index}`}>
-                  {faq.question}
-                  <span class="index__faq-icon" aria-hidden="true">+</span>
-                </button>
-                <div class="index__faq-answer" data-answer={index} id={`faq-answer-${index}`}>
-                  <p>{faq.answer}</p>
-                </div>
+            </div>
+            <div class="index__faq-group">
+            <div class="index__faq-item">
+              <span class="index__faq-category">Quality & Certifications</span>
+              <button type="button" class="index__faq-question" data-faq="new-8" aria-expanded="false" aria-controls="faq-answer-new-8">
+                What is your defect and rejection rate?
+                <span class="index__faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="index__faq-answer" data-answer="new-8" id="faq-answer-new-8">
+                <p>We follow AQL 2.5 inspection standards on every order. Our actual rejection rate runs below 0.8% — well within international garment industry norms. Every order goes through in-line quality checks during production and a final inspection before packing. Third-party inspection by SGS, Bureau Veritas, or Intertek is available on request.</p>
+              </div>
+            </div>
+            </div>
+            {faqsByCategory.map((group) => (
+              <div class="index__faq-group">
+                {group.items.map(({ index, question, answer }) => (
+                  <div class="index__faq-item">
+                    <span class="index__faq-category">{group.category}</span>
+                    <button type="button" class="index__faq-question" data-faq={index} aria-expanded="false" aria-controls={`faq-answer-${index}`}>
+                      {question}
+                      <span class="index__faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="index__faq-answer" data-answer={index} id={`faq-answer-${index}`}>
+                      <p>{answer}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             ))}
           </div>
