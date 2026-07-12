@@ -143,10 +143,18 @@ const pageSchema = {
 <BaseLayout title={pageTitle} description={pageDescription}>
 
 <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is Bangladesh always cheaper than China for clothing manufacturing?","acceptedAnswer":{"@type":"Answer","text":"Not universally — Bangladesh has a clear cost edge on basic, high-volume knitwear and simple woven garments, but the gap narrows or can reverse on complex, low-volume, or highly technical styles where China's denser local supply chain reduces sourcing time and cost."}},
+{"@type":"Question","name":"Why does Bangladesh have lower MOQs than many Chinese factories?","acceptedAnswer":{"@type":"Answer","text":"It varies by factory in both countries, but a meaningful share of Bangladesh's export-oriented factories built their production model specifically around serving smaller and mid-sized international brands, which naturally leads to lower per-style minimums than factories built primarily around large-volume programs."}},
+{"@type":"Question","name":"Does the EU/UK duty-free advantage apply to all garment categories from Bangladesh?","acceptedAnswer":{"@type":"Answer","text":"EBA and equivalent UK preferences cover most garment categories, but exact eligibility depends on the specific product code and rules-of-origin compliance. We confirm HS code and duty treatment for your exact product as part of every quote."}},
+{"@type":"Question","name":"Can I split an order between Bangladesh and China for different products?","acceptedAnswer":{"@type":"Answer","text":"Yes, many brands do exactly this — sourcing basics and high-volume knitwear from Bangladesh while keeping complex or low-volume technical pieces with a China-based supplier. There's no requirement to source your entire range from one country."}}
+]}
+</script>
 
 <meta name="keywords" content="Bangladesh vs China clothing manufacturing, clothing manufacturing comparison, tariff calculator, import duty calculator, MOQ comparison, sourcing strategy" />
 
-<script>
+<script is:inline>
   function calculateTariff() {
     const fobPrice = parseFloat(document.getElementById('fob-price').value) || 0;
     const quantity = parseFloat(document.getElementById('quantity').value) || 0;
@@ -379,7 +387,7 @@ const pageSchema = {
     
     <div style="overflow-x:auto;">
       
-<script>
+<script is:inline>
 // Calculator inputs
 document.getElementById('fob-price').addEventListener('input', calculateTariff);
 document.getElementById('quantity').addEventListener('input', calculateTariff);
@@ -392,6 +400,39 @@ document.getElementById('filter-moq').addEventListener('click', () => filterComp
 document.getElementById('filter-quality').addEventListener('click', () => filterComparison('quality'));
 document.getElementById('filter-logistics').addEventListener('click', () => filterComparison('logistics'));
 </script>
+
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container" style="max-width:900px;margin:0 auto;padding:0 2rem;">
+    <p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Deeper Look</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1.5rem;">How the Two Really Compare</h2>
+    <p style="color:#FFFFFF;font-size:0.9rem;line-height:1.9;margin-bottom:1.25rem;">Cost is the headline reason brands compare Bangladesh and China, but the gap isn't uniform across every product. Bangladesh's cost advantage is strongest on basic, high-volume categories — t-shirts, hoodies, and simple woven items — where labor makes up a large share of the total. On complex, technical garments (structured outerwear, tailored pieces, garments needing specialized trims), China's more developed supporting-industry ecosystem can partly close that gap, since sourcing every component locally is faster there.</p>
+    <p style="color:#FFFFFF;font-size:0.9rem;line-height:1.9;margin-bottom:1.25rem;">MOQ is the other major differentiator. Bangladesh factories serving international brands, including SDF, commonly offer MOQs from 300 pieces per style. Many Chinese factories — especially larger, established ones — set higher minimums, often 1,000+ pieces per style per color, reflecting a supply base built more around large-volume programs. This matters most for startup and DTC brands testing a new style before committing to volume.</p>
+    <p style="color:#FFFFFF;font-size:0.9rem;line-height:1.9;">Trade terms shift the calculation further. Bangladesh's Least Developed Country status currently grants EU EBA and UK duty-free access on most garment categories, while China faces standard tariff rates (commonly 10-17% depending on the category and destination market) in the same markets. On a landed-cost basis, this duty gap can offset a meaningful part of any per-unit price difference — which is why the calculator above models duty alongside FOB price rather than FOB price alone.</p>
+  </div>
+</section>
+
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container" style="max-width:900px;margin:0 auto;padding:0 2rem;">
+    <p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Common Questions</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1.5rem;">Bangladesh vs China FAQ</h2>
+    <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+      <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Is Bangladesh always cheaper than China for clothing manufacturing?</h3>
+      <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Not universally — Bangladesh has a clear cost edge on basic, high-volume knitwear and simple woven garments, but the gap narrows or can reverse on complex, low-volume, or highly technical styles where China's denser local supply chain reduces sourcing time and cost.</p>
+    </div>
+    <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+      <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Why does Bangladesh have lower MOQs than many Chinese factories?</h3>
+      <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">It varies by factory in both countries, but a meaningful share of Bangladesh's export-oriented factories, SDF included, built their production model specifically around serving smaller and mid-sized international brands, which naturally leads to lower per-style minimums than factories built primarily around large-volume programs.</p>
+    </div>
+    <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+      <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Does the EU/UK duty-free advantage apply to all garment categories from Bangladesh?</h3>
+      <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">EBA and equivalent UK preferences cover most garment categories, but exact eligibility depends on the specific product code and rules-of-origin compliance. We confirm HS code and duty treatment for your exact product as part of every quote.</p>
+    </div>
+    <div style="padding:1.5rem 0;">
+      <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can I split an order between Bangladesh and China for different products?</h3>
+      <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes, many brands do exactly this — sourcing basics and high-volume knitwear from Bangladesh while keeping complex or low-volume technical pieces with a China-based supplier. There's no requirement to source your entire range from one country.</p>
+    </div>
+  </div>
+</section>
 </BaseLayout>
 
 <style>
