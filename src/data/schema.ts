@@ -526,7 +526,7 @@ export const schemaPerson = {
   "jobTitle": "Founder & CEO",
   "worksFor": { "@id": SITE_URL + "/#org" },
   "url": SITE_URL + "/about/",
-  "description": "Founder and CEO of SDF Clothing, Bangladeshi entrepreneur with 25+ years in garment manufacturing. Industrialist, philanthropist, and disability rights advocate.",
+  "description": "Founder and CEO of SDF Clothing, Bangladeshi entrepreneur with 27+ years in garment manufacturing. Industrialist, philanthropist, and disability rights advocate.",
   "nationality": "Bangladeshi",
   "alumniOf": [
     {
