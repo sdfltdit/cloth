@@ -13,6 +13,23 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
+      // Exclude noindex pages from the sitemap. Submitting a URL in the
+      // sitemap while its <meta name="robots" content="noindex"> tag says
+      // not to index it sends Google a mixed signal (found via
+      // 2026-07-22 GSC Coverage audit: sitemap included several
+      // noindex=true pages, which likely caused at least one of them to
+      // surface as "Excluded by noindex tag" in Page Indexing).
+      filter: (page) => {
+        const noindexPaths = [
+          '/booking/',
+          '/visa-docs/',
+          '/public-notice/',
+          '/philanthropy/',
+          '/editorial-policy/',
+          '/case-studies/',
+        ];
+        return !noindexPaths.some((p) => page.endsWith(p));
+      },
       serialize(item) {
         const url = item.url;
         const today = new Date().toISOString().split('T')[0];
