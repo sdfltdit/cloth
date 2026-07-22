@@ -225,19 +225,35 @@
 
 # ------------------------------------------------------------
 # WHATSAPP TRACKING URLs — specific paths
-# (template literal ${WHATSAPP_URL} got into URLs by mistake)
+# (template literal ${WHATSAPP_URL} got into URLs by mistake —
+#  source paths below must include the literal ${...} wrapper,
+#  since that is exactly what appears in the broken live URLs
+#  and what Google crawled. Previous version of this file was
+#  missing the ${} characters, so none of these rules matched.)
 # ------------------------------------------------------------
-/private-label-manufacturer/WHATSAPP_URL /contact/ 301
-/wholesale-hoodie-supplier/WHATSAPP_URL /contact/ 301
-/pet-clothing-manufacturer/private-label-pet-clothing/WHATSAPP_URL /contact/ 301
-/sustainable-clothing-manufacturer/WHATSAPP_URL /contact/ 301
-/clothing-manufacturer-france/WHATSAPP_URL /contact/ 301
-/clothing-manufacturer-australia/WHATSAPP_URL /contact/ 301
-/clothing-manufacturer-norway/WHATSAPP_URL /contact/ 301
+/private-label-manufacturer/${WHATSAPP_URL} /contact/ 301
+/wholesale-hoodie-supplier/${WHATSAPP_URL} /contact/ 301
+/pet-clothing-manufacturer/private-label-pet-clothing/${WHATSAPP_URL} /contact/ 301
+/sustainable-clothing-manufacturer/${WHATSAPP_URL} /contact/ 301
+/clothing-manufacturer-france/${WHATSAPP_URL} /contact/ 301
+/clothing-manufacturer-germany/${WHATSAPP_URL} /contact/ 301
+/clothing-manufacturer-australia/${WHATSAPP_URL} /contact/ 301
+/clothing-manufacturer-norway/${WHATSAPP_URL} /contact/ 301
 
 # Wildcard catch-all for Norway WhatsApp template literal (${WHATSAPP_URL} encoded)
 # Must come AFTER specific static rules above
 /clothing-manufacturer-norway/* /contact/ 301
+
+# ------------------------------------------------------------
+# ADDITIONAL FIXES — found via 2026-07-22 Coverage Drilldown
+# cross-check against this file; these 404 URLs were not
+# covered by any existing rule above
+# ------------------------------------------------------------
+/account/sample/ /sampling-service/ 301
+/guides/eu-clothing-regulations-2026-2028 /insights/eu-clothing-regulations-2026-2028/ 301
+/eu-clothing-regulations-2026-2028 /insights/eu-clothing-regulations-2026-2028/ 301
+/eu-epr-explained /insights/eu-epr-explained/ 301
+/skirts-manufacturer/"/clothing-manufacturers-for-startups" /skirts-manufacturer/ 301
 
 # ------------------------------------------------------------
 # HTTP → HTTPS and WWW → non-WWW redirects
