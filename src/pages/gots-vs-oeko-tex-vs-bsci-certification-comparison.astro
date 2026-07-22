@@ -10,66 +10,52 @@ const companyAge = getCompanyAgeString();
 const certRows = [
   {
     name: "GOTS",
-    proves: "Organic fibre content (minimum 70%) traced from farm to finished garment through transaction certificates, plus baseline social and environmental criteria along the way",
-    doesNot: "Chemical safety of the finished product on its own, and it says nothing about garments made from synthetic fibre — a polyester hoodie can't be GOTS certified no matter how clean the factory is",
-    scope: "Fibre sourcing + full supply chain",
-    who: "Brands using the word \"organic\" in the EU or USA",
-    audit: "Annual on-site audit",
-    sdfStatus: "Held, audited under SDF's own name — third consecutive recertification completed in 2026, against the newer GOTS 7.0 standard"
+    proves: "Organic fibre traced farm-to-garment (min. 70%)",
+    doesNot: "Chemical safety; doesn't cover synthetic fibres at all",
+    who: "Organic-claim brands (EU/USA)",
+    sdfStatus: "Held — GOTS 7.0, 3rd recertification (2026)"
   },
   {
-    name: "OEKO-TEX Standard 100",
-    proves: "Every component of the finished product — fabric, thread, buttons, prints — has been lab-tested against a list of regulated and non-regulated harmful substances",
-    doesNot: "Anything about where the fibre came from, how workers were treated, or whether the fabric is organic. A completely conventional cotton t-shirt can carry this label",
-    scope: "Finished product / component",
-    who: "Anyone selling children's wear in the EU (it's a legal requirement there)",
-    audit: "Retested annually, certificate valid 12 months",
-    sdfStatus: "Held — current certificate verifiable through the OEKO-TEX certificate checker using our certificate number, available on request"
+    name: "OEKO-TEX Std 100",
+    proves: "Finished product lab-tested for harmful substances",
+    doesNot: "Fibre origin, labour conditions, or organic status",
+    who: "EU children's wear (legally required)",
+    sdfStatus: "Held — verify via OEKO-TEX certificate checker"
   },
   {
     name: "BSCI (amfori)",
-    proves: "An accredited auditor visited the factory and scored it A through E on labour conditions, working hours, and health and safety",
-    doesNot: "Pass or fail anything — BSCI isn't a certificate you either hold or don't, it's a rating. A factory can score a D and still technically be \"BSCI audited\"",
-    scope: "Labour and social compliance only",
-    who: "EU retailers, especially under Germany's Supply Chain Act",
-    audit: "A/B grades valid 2 years, C/D/E grades valid 1 year with a mandatory follow-up audit",
-    sdfStatus: "Held — ask us directly for our current rating and audit date rather than taking the badge at face value; we'd rather you verify it"
+    proves: "Factory audited, graded A–E on labour and safety",
+    doesNot: "Pass or fail anything — a rating, not a certificate",
+    who: "EU retailers (Germany's Supply Chain Act)",
+    sdfStatus: "Held — ask us for current grade and audit date"
   },
   {
     name: "SEDEX / SMETA",
-    proves: "A SMETA audit (2-pillar or 4-pillar) was carried out and the findings were uploaded to the Sedex platform for member buyers to pull",
-    doesNot: "Certify anything by itself — Sedex is a membership platform for sharing audit data, not a standards body, so there's no pass/fail threshold to point to",
-    scope: "Labour, health & safety, optionally environment and ethics",
-    who: "UK retailers under the Modern Slavery Act",
-    audit: "Every 12–24 months, buyer-dependent",
-    sdfStatus: "Held — Sedex membership number available on request for buyers with platform access"
+    proves: "SMETA audit done, shared on the Sedex platform",
+    doesNot: "Certify anything — Sedex is a data-sharing platform",
+    who: "UK retailers (Modern Slavery Act)",
+    sdfStatus: "Held — Sedex membership number on request"
   },
   {
     name: "WRAP",
-    proves: "A real pass/fail Certificate of Compliance against 12 defined principles specific to the sewn-goods industry. Note: as of March 1, 2026, WRAP retired its old Gold/Silver/Platinum tiers in favour of one single annual certificate — if you see a factory citing \"Platinum,\" that's either a legacy certificate issued before the change (still valid until its original expiry) or outdated",
-    doesNot: "Touch fibre origin, chemical safety, or environmental performance beyond the compliance basics baked into the 12 principles",
-    scope: "Factory-level, sewn products specifically",
-    who: "US retailers — Walmart, Target, Disney set this as their default",
-    audit: "Annual — one Certificate of Compliance per year, with unannounced post-certification checks",
-    sdfStatus: "Held — relevant mainly if you're targeting US big-box retail specifically; ask us for our current certificate date"
+    proves: "Pass/fail Certificate of Compliance, 12 principles",
+    doesNot: "Fibre origin, chemicals, or environmental impact",
+    who: "US big-box retail (Walmart, Target, Disney)",
+    sdfStatus: "Held — single-tier cert since the March 2026 change"
   },
   {
     name: "SA8000",
-    proves: "The deepest social-compliance commitment on this list — living wage verification and an embedded management system, not just a point-in-time check",
-    doesNot: "Say anything about the product itself, and — important update — it no longer automatically satisfies an amfori BSCI requirement either. amfori discontinued system recognition of SA8000 (along with Equalitas and GlobalGAP) from February 3, 2026, so a factory can no longer point to SA8000 alone to skip a BSCI-member buyer's own audit",
-    scope: "Labour and social, management-systems depth",
-    who: "Premium ethical brands and Germany's Green Button 2.0 programme",
-    audit: "Annual surveillance, full recertification every 3 years",
-    sdfStatus: "Held — our deepest social-compliance credential; useful if your buyer explicitly asks for it, but as of 2026 it won't substitute for a BSCI audit with amfori-member buyers"
+    proves: "Deepest social standard — living wage, management systems",
+    doesNot: "Product safety; no longer a BSCI substitute (Feb 2026)",
+    who: "Premium ethical brands, Germany's Green Button 2.0",
+    sdfStatus: "Held — won't cover a separate BSCI ask anymore"
   },
   {
     name: "GRS",
-    proves: "The recycled content percentage in the shipment, tracked through the chain of custody with a transaction certificate for that batch",
-    doesNot: "Verify organic content, chemical safety, or labour conditions. A recycled-polyester jacket can hold GRS and absolutely nothing else",
-    scope: "Recycled material tracking only",
-    who: "Brands making a \"made from X% recycled\" claim",
-    audit: "Annual scope audit, transaction certificate per shipment",
-    sdfStatus: "Held — only actually matters for your order if you're sourcing recycled-content fabric from us; irrelevant otherwise"
+    proves: "Recycled content %, tracked via chain of custody",
+    doesNot: "Organic content, chemical safety, or labour conditions",
+    who: "Brands claiming recycled material content",
+    sdfStatus: "Held — only relevant for recycled-content orders"
   }
 ];
 
@@ -175,21 +161,26 @@ const breadcrumbSchema = {
 </section>
 
 <section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
-  <div class="container cert-table-container" style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;">
+  <div class="container cert-table-container" style="max-width: 1000px; margin: 0 auto; padding: 0 1.5rem;">
     <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">What Each Certification Actually Proves — and Doesn't</h2>
 
-    <!-- Desktop/tablet: full table -->
+    <!-- Desktop/tablet: fixed-layout table, short scannable cells -->
     <div class="cert-table-scroll">
       <table class="cert-table">
+        <colgroup>
+          <col style="width:15%;" />
+          <col style="width:26%;" />
+          <col style="width:27%;" />
+          <col style="width:18%;" />
+          <col style="width:14%;" />
+        </colgroup>
         <thead>
           <tr>
             <th>Certification</th>
-            <th>Actually Proves</th>
-            <th>Does NOT Prove</th>
-            <th>Scope</th>
-            <th>Who Usually Requires It</th>
-            <th>Audit Cycle</th>
-            <th>SDF's Status</th>
+            <th>Proves</th>
+            <th>Does NOT prove</th>
+            <th>Who requires it</th>
+            <th>SDF's status</th>
           </tr>
         </thead>
         <tbody>
@@ -198,9 +189,7 @@ const breadcrumbSchema = {
               <td class="cert-name">{row.name}</td>
               <td>{row.proves}</td>
               <td>{row.doesNot}</td>
-              <td>{row.scope}</td>
               <td>{row.who}</td>
-              <td class="nowrap">{row.audit}</td>
               <td>{row.sdfStatus}</td>
             </tr>
           ))}
@@ -213,40 +202,43 @@ const breadcrumbSchema = {
       {certRows.map(row => (
         <div class="cert-card">
           <p class="cert-card-name">{row.name}</p>
-          <p class="cert-card-row"><span>Actually proves:</span> {row.proves}</p>
-          <p class="cert-card-row"><span>Does NOT prove:</span> {row.doesNot}</p>
-          <p class="cert-card-row"><span>Scope:</span> {row.scope}</p>
-          <p class="cert-card-row"><span>Who usually requires it:</span> {row.who}</p>
-          <p class="cert-card-row"><span>Audit cycle:</span> {row.audit}</p>
-          <p class="cert-card-row"><span>SDF's status:</span> {row.sdfStatus}</p>
+          <p class="cert-card-row"><span>Proves</span>{row.proves}</p>
+          <p class="cert-card-row"><span>Does NOT prove</span>{row.doesNot}</p>
+          <p class="cert-card-row"><span>Who requires it</span>{row.who}</p>
+          <p class="cert-card-row"><span>SDF's status</span>{row.sdfStatus}</p>
         </div>
       ))}
     </div>
 
-    <p style="color:#888;font-size:0.8rem;margin-top:1rem;">Last reviewed {lastReviewed}. Certification requirements shift — verify current scope directly with the issuing body before making a sourcing decision based on this table alone.</p>
+    <p style="color:#888;font-size:0.8rem;margin-top:1rem;">Last reviewed {lastReviewed}. Certification requirements shift — verify current scope and audit cycle directly with the issuing body before making a sourcing decision based on this table alone.</p>
   </div>
 </section>
 
 <style>
-  .cert-table-scroll { overflow-x: auto; }
+  .cert-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .cert-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     color: #ddd;
     margin-bottom: 1rem;
-    min-width: 1000px;
   }
   .cert-table thead tr { border-bottom: 1px solid #e00; }
-  .cert-table th { text-align: left; padding: 0.6rem; color: #fff; }
+  .cert-table th { text-align: left; padding: 0.55rem 0.5rem; color: #fff; font-size: 0.72rem; letter-spacing: 0.02em; }
   .cert-table tbody tr { border-bottom: 1px solid #1a1a1a; }
-  .cert-table td { padding: 0.6rem; vertical-align: top; }
-  .cert-table td.cert-name { color: #fff; font-weight: 600; white-space: nowrap; }
-  .cert-table td.nowrap { white-space: nowrap; }
+  .cert-table td {
+    padding: 0.6rem 0.5rem;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+  }
+  .cert-table td.cert-name { color: #fff; font-weight: 600; }
 
   .cert-cards { display: none; }
 
-  @media (max-width: 860px) {
+  @media (max-width: 700px) {
     .cert-table-scroll { display: none; }
     .cert-cards { display: block; }
     .cert-card {
@@ -277,7 +269,29 @@ const breadcrumbSchema = {
       margin-bottom: 0.15rem;
     }
   }
+
+  @media (min-width: 701px) and (max-width: 900px) {
+    .cert-table { font-size: 0.72rem; }
+    .cert-table th { font-size: 0.65rem; padding: 0.5rem 0.4rem; }
+    .cert-table td { padding: 0.5rem 0.4rem; }
+  }
 </style>
+
+<section style="padding: 0 0 4rem; background:#000;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <div style="border:1px solid #1a1a1a;border-left:2px solid #e00;background:#050505;padding:1.5rem 1.75rem;">
+      <p style="color:#888;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">In plain terms</p>
+      <p style="color:#ddd;font-size:0.9rem;line-height:2;margin:0;">
+        <strong style="color:#fff;">GOTS</strong> is the organic passport — it tracks the fibre's whole journey, farm to garment.<br/>
+        <strong style="color:#fff;">OEKO-TEX</strong> is the safety test report — it checks the finished product, not where it came from.<br/>
+        <strong style="color:#fff;">BSCI / SEDEX SMETA</strong> is the factory conduct report — how workers are treated, nothing about the fabric.<br/>
+        <strong style="color:#fff;">WRAP</strong> is the same conduct report, in the format US big-box retailers ask for.<br/>
+        <strong style="color:#fff;">SA8000</strong> is the deepest version of that conduct report.<br/>
+        <strong style="color:#fff;">GRS</strong> is the same idea as GOTS, but for recycled material instead of organic.
+      </p>
+    </div>
+  </div>
+</section>
 
 <section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
   <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
@@ -302,10 +316,55 @@ const breadcrumbSchema = {
       </table>
     </div>
 
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">When You Genuinely Don't Need It</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">Just as important as knowing what to ask for — not chasing a certification you don't actually need:</p>
+    <ul style="color:#ddd;font-size:0.9rem;line-height:2;padding-left:1.2rem;margin-bottom:1.5rem;">
+      <li><strong style="color:#fff;">Skip GOTS</strong> if you're not making an organic claim — <a href="/oeko-tex-certification-guide" style="color:#e00;text-decoration:none;">OEKO-TEX</a> alone covers chemical safety fine on its own.</li>
+      <li><strong style="color:#fff;">Skip WRAP</strong> if you're not selling into US big-box retail — a European buyer asking for BSCI or SEDEX SMETA won't accept it as a substitute.</li>
+      <li><strong style="color:#fff;">Skip GRS</strong> if there's no recycled content anywhere in the order — it only tracks recycled-material chain of custody, nothing else about the garment.</li>
+      <li><strong style="color:#fff;">Skip SA8000</strong> if your buyer hasn't specifically named it — it's the slowest and most demanding certification on this page to earn, not a default ask.</li>
+    </ul>
+
     <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">Does One Certification Ever Remove the Need for Another?</h3>
     <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">Sometimes, but not automatically, and this is where most confusion comes from. GOTS does include baseline social criteria as part of its own audit, and factories holding both GOTS and GRS tend to satisfy a large share of what a standalone brand audit would otherwise check. But "large share" isn't "all of it" — plenty of buyers still ask for a separate BSCI or SEDEX SMETA report even from a GOTS-certified factory, because their own compliance policy names that audit specifically, not just "some social compliance evidence."</p>
     <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">This is genuinely a moving target, not a fixed rulebook. As a recent, concrete example: amfori (the body behind BSCI) discontinued recognising SA8000 as an equivalent standard from February 3, 2026. Before that date, a factory could sometimes point to a valid SA8000 certificate and skip an amfori-member buyer's own audit requirement. That's no longer the case — SA8000 and BSCI now have to be treated as separate asks, even though they both cover labour conditions. If a supplier tells you SA8000 covers their BSCI requirement, ask when they last checked.</p>
     <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">The safest approach: don't assume one certification covers another's job, and don't assume today's substitution rules will still hold next year. Ask the retailer or buyer which specific certification their compliance team names in writing, and work backwards from there rather than guessing.</p>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Two Real Sourcing Scenarios</h2>
+
+    <h3 style="font-size:1.05rem;color:#fff;margin-bottom:0.75rem;">Scenario 1: launching organic baby clothing into Germany</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1.5rem;">You're a new brand making <a href="/organic-cotton-clothing-manufacturer" style="color:#e00;text-decoration:none;">organic cotton</a> onesies and sleepwear, launching direct-to-consumer in Germany. You'll need GOTS to back the "organic" claim itself — nothing else on this page proves fibre origin. OEKO-TEX Standard 100 isn't optional here either, since it's a legal requirement for children's wear sold in the EU, not just a nice-to-have. Whether you need BSCI or SEDEX SMETA on top depends on whether you're selling direct or through a retailer — a retailer's own compliance policy will usually name one specifically, so ask before assuming GOTS's baseline social criteria are enough.</p>
+
+    <h3 style="font-size:1.05rem;color:#fff;margin-bottom:0.75rem;">Scenario 2: becoming a private-label supplier to a US big-box retailer</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">You're supplying basics — t-shirts, hoodies — as a private-label partner to a large US retailer. GOTS and OEKO-TEX are irrelevant here unless your specific product line is marketed as organic or targets EU children's wear. What actually matters is WRAP, since it's the sewn-goods standard most US big-box retailers default to for their own compliance file. If any part of the range uses <a href="/recycled-clothing-manufacturer" style="color:#e00;text-decoration:none;">recycled polyester</a>, GRS gets added to back that specific claim — but only for that material, not the whole order.</p>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Common Mistakes — and the Myths Behind Them</h2>
+    <div style="border:1px solid #1a1a1a;">
+      <div style="padding:1.25rem 1.5rem;border-bottom:1px solid #1a1a1a;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> OEKO-TEX means the garment is organic</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> OEKO-TEX only tests for harmful substances in the finished product. A completely conventional, non-organic cotton t-shirt can carry an OEKO-TEX label — the two claims are unrelated.</p>
+      </div>
+      <div style="padding:1.25rem 1.5rem;border-bottom:1px solid #1a1a1a;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> BSCI is a pass/fail certificate, like WRAP</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> BSCI produces a graded audit report (A through E), not a certificate you hold or don't. A factory rated D is still technically "BSCI audited" — always ask for the actual grade, not just whether the audit happened.</p>
+      </div>
+      <div style="padding:1.25rem 1.5rem;border-bottom:1px solid #1a1a1a;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> GOTS means the fabric is free of all chemicals</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> GOTS restricts certain inputs and requires baseline environmental management, but chemical-safety testing of the finished product is OEKO-TEX's job, not GOTS's. The two check different things.</p>
+      </div>
+      <div style="padding:1.25rem 1.5rem;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> One certificate covers every product a factory makes</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> Depends on scope. GOTS and GRS certify specific transaction certificates per batch, not the whole factory forever — a factory can be GOTS-certified for one fabric run and not another. Always check the certificate covers the actual order, not just the factory's name.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -342,6 +401,25 @@ const breadcrumbSchema = {
   <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
     <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Verify Any Certification Before You Trust It</h2>
     <p style="color:#ddd;line-height:1.8;font-size:0.92rem;margin-bottom:1rem;">Whatever certificate a factory shows you, check it against the issuing body's own database rather than the PDF they send — global-standard.org for GOTS, the OEKO-TEX certificate checker for OEKO-TEX, wrapcompliance.org for WRAP. A genuine certificate holder won't hesitate to give you the license or certificate number to look up yourself.</p>
+
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:0.75rem;">When you pull up that record, check these five things specifically, not just whether a result appears at all:</p>
+    <ul style="color:#ddd;font-size:0.9rem;line-height:2;padding-left:1.2rem;margin-bottom:1.5rem;">
+      <li><strong style="color:#fff;">Scope certificate vs. transaction certificate</strong> — a scope certificate covers the factory's general capability; a transaction certificate covers one specific shipment. Ask which one applies to your order.</li>
+      <li><strong style="color:#fff;">Expiry date</strong> — most of these run 12 months (some, like WRAP historically, up to 2 years for legacy tiers). An expired certificate is not a current one, whatever the factory says.</li>
+      <li><strong style="color:#fff;">License or certificate number</strong> — this is what you actually search on the issuing body's site, not the factory's name.</li>
+      <li><strong style="color:#fff;">Certifying body named on the document</strong> — cross-check it's an accredited body for that standard, not an unfamiliar name attached to a real-looking template.</li>
+      <li><strong style="color:#fff;">Site or scope match</strong> — an audit at one production line or one legal entity doesn't automatically cover a sister facility or a subcontractor used for part of the order.</li>
+    </ul>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">How Certifications Get Misused (Greenwashing)</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">A surprising amount of "certified" marketing language doesn't hold up under the checks above. A few patterns worth knowing:</p>
+    <ul style="color:#ddd;font-size:0.9rem;line-height:2;padding-left:1.2rem;margin-bottom:1rem;">
+      <li>"Made with GOTS-certified cotton" is not the same claim as "this finished garment is GOTS-certified" — the fibre can be certified while the cut-and-sew stage isn't.</li>
+      <li>A supplier holding a certificate doesn't mean every product they make is covered — check the transaction certificate matches your specific order, not just the factory's general reputation.</li>
+      <li>"OEKO-TEX certified fabric" inside a garment doesn't mean the whole finished garment (trims, prints, thread) has been tested — components can slip through if the label only covers the base fabric.</li>
+    </ul>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">For a deeper look at how to spot these patterns and vet a supplier's paperwork properly, see our guides on <a href="/insights/ethical-manufacturing-verification" style="color:#e00;text-decoration:none;">verifying ethical manufacturing claims</a> and <a href="/insights/avoiding-clothing-manufacturer-scams" style="color:#e00;text-decoration:none;">avoiding clothing manufacturer scams</a>.</p>
+
     <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 2rem;">
       <p style="color:#fff;font-size:1rem;margin-bottom:1rem;">Want to see SDF's certificates for yourself?</p>
       <a href="/certifications" style="color:#e00;text-decoration:none;margin-right:1.5rem;">View our full certification portfolio →</a>
