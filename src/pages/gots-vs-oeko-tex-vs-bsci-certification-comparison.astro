@@ -10,66 +10,52 @@ const companyAge = getCompanyAgeString();
 const certRows = [
   {
     name: "GOTS",
-    proves: "Organic fibre content (minimum 70%) traced from farm to finished garment through transaction certificates, plus baseline social and environmental criteria along the way",
-    doesNot: "Chemical safety of the finished product on its own, and it says nothing about garments made from synthetic fibre — a polyester hoodie can't be GOTS certified no matter how clean the factory is",
-    scope: "Fibre sourcing + full supply chain",
-    who: "Brands using the word \"organic\" in the EU or USA",
-    audit: "Annual on-site audit",
-    sdfStatus: "Held, audited under SDF's own name — third consecutive recertification completed in 2026, against the newer GOTS 7.0 standard"
+    proves: "Organic fibre traced farm-to-garment (min. 70%)",
+    doesNot: "Chemical safety; doesn't cover synthetic fibres at all",
+    who: "Organic-claim brands (EU/USA)",
+    sdfStatus: "Held — GOTS 7.0, 3rd recertification (2026)"
   },
   {
-    name: "OEKO-TEX Standard 100",
-    proves: "Every component of the finished product — fabric, thread, buttons, prints — has been lab-tested against a list of regulated and non-regulated harmful substances",
-    doesNot: "Anything about where the fibre came from, how workers were treated, or whether the fabric is organic. A completely conventional cotton t-shirt can carry this label",
-    scope: "Finished product / component",
-    who: "Anyone selling children's wear in the EU (it's a legal requirement there)",
-    audit: "Retested annually, certificate valid 12 months",
-    sdfStatus: "Held — current certificate verifiable through the OEKO-TEX certificate checker using our certificate number, available on request"
+    name: "OEKO-TEX Std 100",
+    proves: "Finished product lab-tested for harmful substances",
+    doesNot: "Fibre origin, labour conditions, or organic status",
+    who: "EU children's wear (legally required)",
+    sdfStatus: "Held — verify via OEKO-TEX certificate checker"
   },
   {
     name: "BSCI (amfori)",
-    proves: "An accredited auditor visited the factory and scored it A through E on labour conditions, working hours, and health and safety",
-    doesNot: "Pass or fail anything — BSCI isn't a certificate you either hold or don't, it's a rating. A factory can score a D and still technically be \"BSCI audited\"",
-    scope: "Labour and social compliance only",
-    who: "EU retailers, especially under Germany's Supply Chain Act",
-    audit: "A/B grades valid 2 years, C/D/E grades valid 1 year with a mandatory follow-up audit",
-    sdfStatus: "Held — ask us directly for our current rating and audit date rather than taking the badge at face value; we'd rather you verify it"
+    proves: "Factory audited, graded A–E on labour and safety",
+    doesNot: "Pass or fail anything — a rating, not a certificate",
+    who: "EU retailers (Germany's Supply Chain Act)",
+    sdfStatus: "Held — ask us for current grade and audit date"
   },
   {
     name: "SEDEX / SMETA",
-    proves: "A SMETA audit (2-pillar or 4-pillar) was carried out and the findings were uploaded to the Sedex platform for member buyers to pull",
-    doesNot: "Certify anything by itself — Sedex is a membership platform for sharing audit data, not a standards body, so there's no pass/fail threshold to point to",
-    scope: "Labour, health & safety, optionally environment and ethics",
-    who: "UK retailers under the Modern Slavery Act",
-    audit: "Every 12–24 months, buyer-dependent",
-    sdfStatus: "Held — Sedex membership number available on request for buyers with platform access"
+    proves: "SMETA audit done, shared on the Sedex platform",
+    doesNot: "Certify anything — Sedex is a data-sharing platform",
+    who: "UK retailers (Modern Slavery Act)",
+    sdfStatus: "Held — Sedex membership number on request"
   },
   {
     name: "WRAP",
-    proves: "A real pass/fail Certificate of Compliance against 12 defined principles specific to the sewn-goods industry. Note: as of March 1, 2026, WRAP retired its old Gold/Silver/Platinum tiers in favour of one single annual certificate — if you see a factory citing \"Platinum,\" that's either a legacy certificate issued before the change (still valid until its original expiry) or outdated",
-    doesNot: "Touch fibre origin, chemical safety, or environmental performance beyond the compliance basics baked into the 12 principles",
-    scope: "Factory-level, sewn products specifically",
-    who: "US retailers — Walmart, Target, Disney set this as their default",
-    audit: "Annual — one Certificate of Compliance per year, with unannounced post-certification checks",
-    sdfStatus: "Held — relevant mainly if you're targeting US big-box retail specifically; ask us for our current certificate date"
+    proves: "Pass/fail Certificate of Compliance, 12 principles",
+    doesNot: "Fibre origin, chemicals, or environmental impact",
+    who: "US big-box retail (Walmart, Target, Disney)",
+    sdfStatus: "Held — single-tier cert since the March 2026 change"
   },
   {
     name: "SA8000",
-    proves: "The deepest social-compliance commitment on this list — living wage verification and an embedded management system, not just a point-in-time check",
-    doesNot: "Say anything about the product itself, and — important update — it no longer automatically satisfies an amfori BSCI requirement either. amfori discontinued system recognition of SA8000 (along with Equalitas and GlobalGAP) from February 3, 2026, so a factory can no longer point to SA8000 alone to skip a BSCI-member buyer's own audit",
-    scope: "Labour and social, management-systems depth",
-    who: "Premium ethical brands and Germany's Green Button 2.0 programme",
-    audit: "Annual surveillance, full recertification every 3 years",
-    sdfStatus: "Held — our deepest social-compliance credential; useful if your buyer explicitly asks for it, but as of 2026 it won't substitute for a BSCI audit with amfori-member buyers"
+    proves: "Deepest social standard — living wage, management systems",
+    doesNot: "Product safety; no longer a BSCI substitute (Feb 2026)",
+    who: "Premium ethical brands, Germany's Green Button 2.0",
+    sdfStatus: "Held — won't cover a separate BSCI ask anymore"
   },
   {
     name: "GRS",
-    proves: "The recycled content percentage in the shipment, tracked through the chain of custody with a transaction certificate for that batch",
-    doesNot: "Verify organic content, chemical safety, or labour conditions. A recycled-polyester jacket can hold GRS and absolutely nothing else",
-    scope: "Recycled material tracking only",
-    who: "Brands making a \"made from X% recycled\" claim",
-    audit: "Annual scope audit, transaction certificate per shipment",
-    sdfStatus: "Held — only actually matters for your order if you're sourcing recycled-content fabric from us; irrelevant otherwise"
+    proves: "Recycled content %, tracked via chain of custody",
+    doesNot: "Organic content, chemical safety, or labour conditions",
+    who: "Brands claiming recycled material content",
+    sdfStatus: "Held — only relevant for recycled-content orders"
   }
 ];
 
@@ -175,21 +161,26 @@ const breadcrumbSchema = {
 </section>
 
 <section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
-  <div class="container cert-table-container" style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;">
+  <div class="container cert-table-container" style="max-width: 1000px; margin: 0 auto; padding: 0 1.5rem;">
     <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">What Each Certification Actually Proves — and Doesn't</h2>
 
-    <!-- Desktop/tablet: full table -->
+    <!-- Desktop/tablet: fixed-layout table, short scannable cells -->
     <div class="cert-table-scroll">
       <table class="cert-table">
+        <colgroup>
+          <col style="width:15%;" />
+          <col style="width:26%;" />
+          <col style="width:27%;" />
+          <col style="width:18%;" />
+          <col style="width:14%;" />
+        </colgroup>
         <thead>
           <tr>
             <th>Certification</th>
-            <th>Actually Proves</th>
-            <th>Does NOT Prove</th>
-            <th>Scope</th>
-            <th>Who Usually Requires It</th>
-            <th>Audit Cycle</th>
-            <th>SDF's Status</th>
+            <th>Proves</th>
+            <th>Does NOT prove</th>
+            <th>Who requires it</th>
+            <th>SDF's status</th>
           </tr>
         </thead>
         <tbody>
@@ -198,9 +189,7 @@ const breadcrumbSchema = {
               <td class="cert-name">{row.name}</td>
               <td>{row.proves}</td>
               <td>{row.doesNot}</td>
-              <td>{row.scope}</td>
               <td>{row.who}</td>
-              <td class="nowrap">{row.audit}</td>
               <td>{row.sdfStatus}</td>
             </tr>
           ))}
@@ -213,40 +202,43 @@ const breadcrumbSchema = {
       {certRows.map(row => (
         <div class="cert-card">
           <p class="cert-card-name">{row.name}</p>
-          <p class="cert-card-row"><span>Actually proves:</span> {row.proves}</p>
-          <p class="cert-card-row"><span>Does NOT prove:</span> {row.doesNot}</p>
-          <p class="cert-card-row"><span>Scope:</span> {row.scope}</p>
-          <p class="cert-card-row"><span>Who usually requires it:</span> {row.who}</p>
-          <p class="cert-card-row"><span>Audit cycle:</span> {row.audit}</p>
-          <p class="cert-card-row"><span>SDF's status:</span> {row.sdfStatus}</p>
+          <p class="cert-card-row"><span>Proves</span>{row.proves}</p>
+          <p class="cert-card-row"><span>Does NOT prove</span>{row.doesNot}</p>
+          <p class="cert-card-row"><span>Who requires it</span>{row.who}</p>
+          <p class="cert-card-row"><span>SDF's status</span>{row.sdfStatus}</p>
         </div>
       ))}
     </div>
 
-    <p style="color:#888;font-size:0.8rem;margin-top:1rem;">Last reviewed {lastReviewed}. Certification requirements shift — verify current scope directly with the issuing body before making a sourcing decision based on this table alone.</p>
+    <p style="color:#888;font-size:0.8rem;margin-top:1rem;">Last reviewed {lastReviewed}. Certification requirements shift — verify current scope and audit cycle directly with the issuing body before making a sourcing decision based on this table alone.</p>
   </div>
 </section>
 
 <style>
-  .cert-table-scroll { overflow-x: auto; }
+  .cert-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .cert-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     color: #ddd;
     margin-bottom: 1rem;
-    min-width: 1000px;
   }
   .cert-table thead tr { border-bottom: 1px solid #e00; }
-  .cert-table th { text-align: left; padding: 0.6rem; color: #fff; }
+  .cert-table th { text-align: left; padding: 0.55rem 0.5rem; color: #fff; font-size: 0.72rem; letter-spacing: 0.02em; }
   .cert-table tbody tr { border-bottom: 1px solid #1a1a1a; }
-  .cert-table td { padding: 0.6rem; vertical-align: top; }
-  .cert-table td.cert-name { color: #fff; font-weight: 600; white-space: nowrap; }
-  .cert-table td.nowrap { white-space: nowrap; }
+  .cert-table td {
+    padding: 0.6rem 0.5rem;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+  }
+  .cert-table td.cert-name { color: #fff; font-weight: 600; }
 
   .cert-cards { display: none; }
 
-  @media (max-width: 860px) {
+  @media (max-width: 700px) {
     .cert-table-scroll { display: none; }
     .cert-cards { display: block; }
     .cert-card {
@@ -276,6 +268,12 @@ const breadcrumbSchema = {
       display: block;
       margin-bottom: 0.15rem;
     }
+  }
+
+  @media (min-width: 701px) and (max-width: 900px) {
+    .cert-table { font-size: 0.72rem; }
+    .cert-table th { font-size: 0.65rem; padding: 0.5rem 0.4rem; }
+    .cert-table td { padding: 0.5rem 0.4rem; }
   }
 </style>
 
