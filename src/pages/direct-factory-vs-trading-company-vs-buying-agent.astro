@@ -34,24 +34,18 @@ const sourcingFaqs = [
   }
 ];
 const lastReviewed = "July 22, 2026";
----
 
-<BaseLayout title={pageTitle} description={pageDescription} ogType="website">
-
-<script type="application/ld+json">
-{
+const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": sourcingFaqs.map(f => ({
+  "mainEntity": sourcingFaqs.map((f) => ({
     "@type": "Question",
     "name": f.question,
     "acceptedAnswer": { "@type": "Answer", "text": f.answer }
   }))
-}
-</script>
+};
 
-<script type="application/ld+json">
-{
+const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Direct Factory vs. Trading Company vs. Buying Agent",
@@ -69,11 +63,9 @@ const lastReviewed = "July 22, 2026";
   "datePublished": "2026-07-21",
   "dateModified": "2026-07-22",
   "mainEntityOfPage": "https://sdfltd.com/direct-factory-vs-trading-company-vs-buying-agent/"
-}
-</script>
+};
 
-<script type="application/ld+json">
-{
+const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
@@ -81,8 +73,14 @@ const lastReviewed = "July 22, 2026";
     { "@type": "ListItem", "position": 2, "name": "Clothing Manufacturers", "item": "https://sdfltd.com/clothing-manufacturers" },
     { "@type": "ListItem", "position": 3, "name": "Direct Factory vs Trading Company vs Buying Agent", "item": "https://sdfltd.com/direct-factory-vs-trading-company-vs-buying-agent/" }
   ]
-}
-</script>
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website">
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
 <section style="padding: 6rem 0 3rem; background:#000;">
   <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;">
