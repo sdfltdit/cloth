@@ -7,6 +7,111 @@
 # ============================================================
 
 # ------------------------------------------------------------
+# HTTP → HTTPS and WWW → non-WWW redirects
+# MUST BE FIRST — "first match wins" means these need to fire
+# before any path-specific rule below, otherwise a request like
+# www.sdfltd.com/about hits a later rule first and gets bounced
+# through a second hop instead of going straight to the final
+# https://sdfltd.com/about/ URL. This was the root cause of the
+# 191 "Page with redirect — Validation failed" errors in GSC.
+# ------------------------------------------------------------
+http://sdfltd.com/* https://sdfltd.com/:splat 301
+https://www.sdfltd.com/* https://sdfltd.com/:splat 301
+http://www.sdfltd.com/* https://sdfltd.com/:splat 301
+
+# ------------------------------------------------------------
+# TRAILING SLASH CONSISTENCY — FULL COVERAGE
+# Every canonical page needs an explicit /path -> /path/ rule.
+# The previous version of this file only covered ~13 pages here,
+# leaving 85 real pages with no rule, so those requests fell
+# through to Astro's own routing and produced a second hop.
+# Generated from the 2026-07-22 Coverage Validation export.
+# ------------------------------------------------------------
+/about /about/ 301
+/bamboo-clothing-manufacturer /bamboo-clothing-manufacturer/ 301
+/bangladesh-vs-india-clothing-manufacturing /bangladesh-vs-india-clothing-manufacturing/ 301
+/bikini-manufacturer /bikini-manufacturer/ 301
+/blazer-manufacturer /blazer-manufacturer/ 301
+/careers /careers/ 301
+/cargo-pants-manufacturer /cargo-pants-manufacturer/ 301
+/case-studies /case-studies/ 301
+/cashmere-clothing-manufacturer /cashmere-clothing-manufacturer/ 301
+/clothing-brand-startup-costs /clothing-brand-startup-costs/ 301
+/clothing-manufacturer-argentina /clothing-manufacturer-argentina/ 301
+/clothing-manufacturer-austria /clothing-manufacturer-austria/ 301
+/clothing-manufacturer-cambodia /clothing-manufacturer-cambodia/ 301
+/clothing-manufacturer-egypt /clothing-manufacturer-egypt/ 301
+/clothing-manufacturer-for-small-business /clothing-manufacturer-for-small-business/ 301
+/clothing-manufacturer-greece /clothing-manufacturer-greece/ 301
+/clothing-manufacturer-israel /clothing-manufacturer-israel/ 301
+/clothing-manufacturer-poland /clothing-manufacturer-poland/ 301
+/clothing-manufacturer-saudi-arabia /clothing-manufacturer-saudi-arabia/ 301
+/clothing-manufacturer-south-africa /clothing-manufacturer-south-africa/ 301
+/clothing-manufacturer-switzerland /clothing-manufacturer-switzerland/ 301
+/clothing-manufacturers-for-women /clothing-manufacturers-for-women/ 301
+/coat-manufacturer /coat-manufacturer/ 301
+/confidentiality /confidentiality/ 301
+/corporate-uniform-manufacturer /corporate-uniform-manufacturer/ 301
+/dance-wear-manufacturer /dance-wear-manufacturer/ 301
+/dress-manufacturer /dress-manufacturer/ 301
+/dye-house-service /dye-house-service/ 301
+/eco-friendly-clothing-manufacturer /eco-friendly-clothing-manufacturer/ 301
+/editorial-policy /editorial-policy/ 301
+/ethical-clothing-manufacturer /ethical-clothing-manufacturer/ 301
+/faq /faq/ 301
+/fashion-manufacturers /fashion-manufacturers/ 301
+/garment-exporter /garment-exporter/ 301
+/hemp-clothing-manufacturer /hemp-clothing-manufacturer/ 301
+/hoodie-manufacturer /hoodie-manufacturer/ 301
+/hoodie-manufacturers /hoodie-manufacturers/ 301
+/insights /insights/ 301
+/knitting-service /knitting-service/ 301
+/knitwear-exporter /knitwear-exporter/ 301
+/lab-dip-service /lab-dip-service/ 301
+/leggings-manufacturer /leggings-manufacturer/ 301
+/linen-clothing-manufacturer /linen-clothing-manufacturer/ 301
+/maternity-clothing-manufacturer /maternity-clothing-manufacturer/ 301
+/medical-uniform-manufacturer /medical-uniform-manufacturer/ 301
+/modal-clothing-manufacturer /modal-clothing-manufacturer/ 301
+/modest-fashion-manufacturer /modest-fashion-manufacturer/ 301
+/organic-cotton-clothing-manufacturer /organic-cotton-clothing-manufacturer/ 301
+/overseas-vs-local-clothing-manufacturer /overseas-vs-local-clothing-manufacturer/ 301
+/pants-manufacturer /pants-manufacturer/ 301
+/petite-clothing-manufacturer /petite-clothing-manufacturer/ 301
+/philanthropy /philanthropy/ 301
+/pleated-skirt-manufacturer /pleated-skirt-manufacturer/ 301
+/print-on-demand-manufacturer /print-on-demand-manufacturer/ 301
+/printing-service /printing-service/ 301
+/public-notice /public-notice/ 301
+/recycled-clothing-manufacturer /recycled-clothing-manufacturer/ 301
+/shorts-manufacturer /shorts-manufacturer/ 301
+/silk-clothing-manufacturer /silk-clothing-manufacturer/ 301
+/skirts-manufacturer /skirts-manufacturer/ 301
+/sleepwear-manufacturer /sleepwear-manufacturer/ 301
+/small-batch-activewear-manufacturer /small-batch-activewear-manufacturer/ 301
+/small-batch-t-shirt-manufacturer /small-batch-t-shirt-manufacturer/ 301
+/socks-manufacturer /socks-manufacturer/ 301
+/sports-bra-manufacturer /sports-bra-manufacturer/ 301
+/sustainability /sustainability/ 301
+/sustainable-clothing-manufacturer /sustainable-clothing-manufacturer/ 301
+/sweater-manufacturer /sweater-manufacturer/ 301
+/sweatshirt-manufacturer /sweatshirt-manufacturer/ 301
+/tank-top-manufacturer /tank-top-manufacturer/ 301
+/tech-pack-guide /tech-pack-guide/ 301
+/tencel-clothing-manufacturer /tencel-clothing-manufacturer/ 301
+/terms /terms/ 301
+/underwear-manufacturer /underwear-manufacturer/ 301
+/wedding-dress-manufacturer /wedding-dress-manufacturer/ 301
+/white-label-manufacturer /white-label-manufacturer/ 301
+/wholesale-activewear-supplier /wholesale-activewear-supplier/ 301
+/wool-clothing-manufacturer /wool-clothing-manufacturer/ 301
+/work-process /work-process/ 301
+/workwear-manufacturer /workwear-manufacturer/ 301
+/yarn-sourcing /yarn-sourcing/ 301
+/yoga-pants-manufacturer /yoga-pants-manufacturer/ 301
+/yoga-wear-manufacturer /yoga-wear-manufacturer/ 301
+
+# ------------------------------------------------------------
 # KEYWORD CANNIBALIZATION CONSOLIDATION
 # (two pages were competing for the same primary keyword/intent;
 #  merged into one canonical page, redirecting the other here)
@@ -256,17 +361,10 @@
 /skirts-manufacturer/"/clothing-manufacturers-for-startups" /skirts-manufacturer/ 301
 
 # ------------------------------------------------------------
-# HTTP → HTTPS and WWW → non-WWW redirects
-# (Cloudflare handles domain-level via proxy; keep these as
-#  fallback for any edge cases — must stay near end of file)
-# ------------------------------------------------------------
-http://sdfltd.com/* https://sdfltd.com/:splat 301
-https://www.sdfltd.com/* https://sdfltd.com/:splat 301
-http://www.sdfltd.com/* https://sdfltd.com/:splat 301
-
-# ------------------------------------------------------------
-# TRAILING SLASH CONSISTENCY
-# (keep at end — these are catch-alls for existing pages)
+# TRAILING SLASH — remaining country/core pages
+# (merged with the full list at the top of this file; kept here
+#  too since Cloudflare Pages matches top-to-bottom and either
+#  position works — listed once at the top is the source of truth)
 # ------------------------------------------------------------
 /clothing-manufacturers /clothing-manufacturers/ 301
 /clothing-manufacturer-australia /clothing-manufacturer-australia/ 301
