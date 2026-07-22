@@ -7,17 +7,25 @@
 # ============================================================
 
 # ------------------------------------------------------------
-# HTTP → HTTPS and WWW → non-WWW redirects
-# MUST BE FIRST — "first match wins" means these need to fire
-# before any path-specific rule below, otherwise a request like
-# www.sdfltd.com/about hits a later rule first and gets bounced
-# through a second hop instead of going straight to the final
-# https://sdfltd.com/about/ URL. This was the root cause of the
-# 191 "Page with redirect — Validation failed" errors in GSC.
+# HTTP -> HTTPS and WWW -> non-WWW redirects
+# IMPORTANT: Cloudflare Pages' _redirects file only accepts
+# RELATIVE paths as the source (e.g. /about). Absolute-URL
+# sources like "https://www.sdfltd.com/*" are INVALID here and
+# will cause Cloudflare to silently skip the rest of the file
+# past the first invalid line (confirmed in deploy log,
+# 2026-07-22: "Skipping remaining 295 lines of file" - meaning
+# every rule below the old line 19 was NOT being applied).
+#
+# Domain-level http->https and www->non-www redirects must be
+# configured in the Cloudflare dashboard instead:
+#   - SSL/TLS -> Edge Certificates -> "Always Use HTTPS" (ON)
+#   - Rules -> Redirect Rules (or the legacy "Custom Pages" /
+#     domain redirect for www -> apex), OR add www.sdfltd.com
+#     as a second custom domain with a redirect rule pointing
+#     to the apex domain.
+# Verify both are active in the dashboard - this file cannot
+# enforce them.
 # ------------------------------------------------------------
-http://sdfltd.com/* https://sdfltd.com/:splat 301
-https://www.sdfltd.com/* https://sdfltd.com/:splat 301
-http://www.sdfltd.com/* https://sdfltd.com/:splat 301
 
 # ------------------------------------------------------------
 # TRAILING SLASH CONSISTENCY — FULL COVERAGE
