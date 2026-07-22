@@ -14,7 +14,8 @@ const certRows = [
     doesNot: "Chemical safety of the finished product on its own, and it says nothing about garments made from synthetic fibre — a polyester hoodie can't be GOTS certified no matter how clean the factory is",
     scope: "Fibre sourcing + full supply chain",
     who: "Brands using the word \"organic\" in the EU or USA",
-    audit: "Annual on-site audit"
+    audit: "Annual on-site audit",
+    sdfStatus: "Held, audited under SDF's own name — third consecutive recertification completed in 2026, against the newer GOTS 7.0 standard"
   },
   {
     name: "OEKO-TEX Standard 100",
@@ -22,7 +23,8 @@ const certRows = [
     doesNot: "Anything about where the fibre came from, how workers were treated, or whether the fabric is organic. A completely conventional cotton t-shirt can carry this label",
     scope: "Finished product / component",
     who: "Anyone selling children's wear in the EU (it's a legal requirement there)",
-    audit: "Retested annually, certificate valid 12 months"
+    audit: "Retested annually, certificate valid 12 months",
+    sdfStatus: "Held — current certificate verifiable through the OEKO-TEX certificate checker using our certificate number, available on request"
   },
   {
     name: "BSCI (amfori)",
@@ -30,7 +32,8 @@ const certRows = [
     doesNot: "Pass or fail anything — BSCI isn't a certificate you either hold or don't, it's a rating. A factory can score a D and still technically be \"BSCI audited\"",
     scope: "Labour and social compliance only",
     who: "EU retailers, especially under Germany's Supply Chain Act",
-    audit: "Every 12–24 months depending on the score"
+    audit: "A/B grades valid 2 years, C/D/E grades valid 1 year with a mandatory follow-up audit",
+    sdfStatus: "Held — ask us directly for our current rating and audit date rather than taking the badge at face value; we'd rather you verify it"
   },
   {
     name: "SEDEX / SMETA",
@@ -38,23 +41,26 @@ const certRows = [
     doesNot: "Certify anything by itself — Sedex is a membership platform for sharing audit data, not a standards body, so there's no pass/fail threshold to point to",
     scope: "Labour, health & safety, optionally environment and ethics",
     who: "UK retailers under the Modern Slavery Act",
-    audit: "Every 12–24 months, buyer-dependent"
+    audit: "Every 12–24 months, buyer-dependent",
+    sdfStatus: "Held — Sedex membership number available on request for buyers with platform access"
   },
   {
     name: "WRAP",
-    proves: "A real pass/fail certificate — Silver, Gold, or Platinum — against 12 defined principles specific to the sewn-goods industry",
+    proves: "A real pass/fail Certificate of Compliance against 12 defined principles specific to the sewn-goods industry. Note: as of March 1, 2026, WRAP retired its old Gold/Silver/Platinum tiers in favour of one single annual certificate — if you see a factory citing \"Platinum,\" that's either a legacy certificate issued before the change (still valid until its original expiry) or outdated",
     doesNot: "Touch fibre origin, chemical safety, or environmental performance beyond the compliance basics baked into the 12 principles",
     scope: "Factory-level, sewn products specifically",
     who: "US retailers — Walmart, Target, Disney set this as their default",
-    audit: "Annual surveillance, full recertification every 3 years"
+    audit: "Annual — one Certificate of Compliance per year, with unannounced post-certification checks",
+    sdfStatus: "Held — relevant mainly if you're targeting US big-box retail specifically; ask us for our current certificate date"
   },
   {
     name: "SA8000",
     proves: "The deepest social-compliance commitment on this list — living wage verification and an embedded management system, not just a point-in-time check",
-    doesNot: "Say anything about the product itself. It's entirely about how people are treated, not what's in the fabric",
+    doesNot: "Say anything about the product itself, and — important update — it no longer automatically satisfies an amfori BSCI requirement either. amfori discontinued system recognition of SA8000 (along with Equalitas and GlobalGAP) from February 3, 2026, so a factory can no longer point to SA8000 alone to skip a BSCI-member buyer's own audit",
     scope: "Labour and social, management-systems depth",
     who: "Premium ethical brands and Germany's Green Button 2.0 programme",
-    audit: "Annual surveillance, full recertification every 3 years"
+    audit: "Annual surveillance, full recertification every 3 years",
+    sdfStatus: "Held — our deepest social-compliance credential; useful if your buyer explicitly asks for it, but as of 2026 it won't substitute for a BSCI audit with amfori-member buyers"
   },
   {
     name: "GRS",
@@ -62,7 +68,8 @@ const certRows = [
     doesNot: "Verify organic content, chemical safety, or labour conditions. A recycled-polyester jacket can hold GRS and absolutely nothing else",
     scope: "Recycled material tracking only",
     who: "Brands making a \"made from X% recycled\" claim",
-    audit: "Annual scope audit, transaction certificate per shipment"
+    audit: "Annual scope audit, transaction certificate per shipment",
+    sdfStatus: "Held — only actually matters for your order if you're sourcing recycled-content fabric from us; irrelevant otherwise"
   }
 ];
 
@@ -99,6 +106,14 @@ const certFaqs = [
   {
     question: "Which certification do big US retailers actually require?",
     answer: "For social compliance specifically, WRAP is the one that keeps coming up with Walmart, Target, Disney, and similar big-box US retailers — it's a sewn-goods-specific standard built around their supply chains. That's separate from OEKO-TEX or GOTS, which are about the product itself rather than factory labour conditions, so a factory serious about the US big-box market usually needs more than one certification, not a single all-purpose one."
+  },
+  {
+    question: "Does WRAP still use Gold, Silver, and Platinum levels?",
+    answer: "Not anymore. As of March 1, 2026, WRAP retired that tiered system entirely — every factory that passes now receives the same single annual Certificate of Compliance, with unannounced checks during the year. If a factory or a sourcing agent is still marketing a \"Platinum\" WRAP status, ask when that certificate was issued; a Platinum certificate issued before the change is still valid until its original expiry, but any certification issued after March 2026 won't have a tier at all."
+  },
+  {
+    question: "Can a factory use SA8000 to avoid a BSCI audit?",
+    answer: "Not since early 2026. amfori, the organisation behind BSCI, discontinued formally recognising SA8000 (along with a couple of other schemes) as of February 3, 2026. Before that, a factory could sometimes present a valid SA8000 certificate and skip a separate BSCI audit for amfori-member buyers. That workaround is gone now — the two are treated as fully separate requirements going forward."
   }
 ];
 
@@ -160,60 +175,137 @@ const breadcrumbSchema = {
 </section>
 
 <section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
-  <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; overflow-x:auto;">
+  <div class="container cert-table-container" style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;">
     <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">What Each Certification Actually Proves — and Doesn't</h2>
-    <table style="width:100%;border-collapse:collapse;font-size:0.82rem;color:#ddd;margin-bottom:1rem;min-width:900px;">
-      <thead>
-        <tr style="border-bottom:1px solid #e00;">
-          <th style="text-align:left;padding:0.6rem;color:#fff;">Certification</th>
-          <th style="text-align:left;padding:0.6rem;color:#fff;">Actually Proves</th>
-          <th style="text-align:left;padding:0.6rem;color:#fff;">Does NOT Prove</th>
-          <th style="text-align:left;padding:0.6rem;color:#fff;">Scope</th>
-          <th style="text-align:left;padding:0.6rem;color:#fff;">Who Usually Requires It</th>
-          <th style="text-align:left;padding:0.6rem;color:#fff;">Audit Cycle</th>
-        </tr>
-      </thead>
-      <tbody>
-        {certRows.map(row => (
-          <tr style="border-bottom:1px solid #1a1a1a;">
-            <td style="padding:0.6rem;color:#fff;font-weight:600;white-space:nowrap;">{row.name}</td>
-            <td style="padding:0.6rem;">{row.proves}</td>
-            <td style="padding:0.6rem;">{row.doesNot}</td>
-            <td style="padding:0.6rem;">{row.scope}</td>
-            <td style="padding:0.6rem;">{row.who}</td>
-            <td style="padding:0.6rem;white-space:nowrap;">{row.audit}</td>
+
+    <!-- Desktop/tablet: full table -->
+    <div class="cert-table-scroll">
+      <table class="cert-table">
+        <thead>
+          <tr>
+            <th>Certification</th>
+            <th>Actually Proves</th>
+            <th>Does NOT Prove</th>
+            <th>Scope</th>
+            <th>Who Usually Requires It</th>
+            <th>Audit Cycle</th>
+            <th>SDF's Status</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-    <p style="color:#888;font-size:0.8rem;">Last reviewed {lastReviewed}. Certification requirements shift — verify current scope directly with the issuing body before making a sourcing decision based on this table alone.</p>
+        </thead>
+        <tbody>
+          {certRows.map(row => (
+            <tr>
+              <td class="cert-name">{row.name}</td>
+              <td>{row.proves}</td>
+              <td>{row.doesNot}</td>
+              <td>{row.scope}</td>
+              <td>{row.who}</td>
+              <td class="nowrap">{row.audit}</td>
+              <td>{row.sdfStatus}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile: stacked cards, same data -->
+    <div class="cert-cards">
+      {certRows.map(row => (
+        <div class="cert-card">
+          <p class="cert-card-name">{row.name}</p>
+          <p class="cert-card-row"><span>Actually proves:</span> {row.proves}</p>
+          <p class="cert-card-row"><span>Does NOT prove:</span> {row.doesNot}</p>
+          <p class="cert-card-row"><span>Scope:</span> {row.scope}</p>
+          <p class="cert-card-row"><span>Who usually requires it:</span> {row.who}</p>
+          <p class="cert-card-row"><span>Audit cycle:</span> {row.audit}</p>
+          <p class="cert-card-row"><span>SDF's status:</span> {row.sdfStatus}</p>
+        </div>
+      ))}
+    </div>
+
+    <p style="color:#888;font-size:0.8rem;margin-top:1rem;">Last reviewed {lastReviewed}. Certification requirements shift — verify current scope directly with the issuing body before making a sourcing decision based on this table alone.</p>
   </div>
 </section>
+
+<style>
+  .cert-table-scroll { overflow-x: auto; }
+  .cert-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    color: #ddd;
+    margin-bottom: 1rem;
+    min-width: 1000px;
+  }
+  .cert-table thead tr { border-bottom: 1px solid #e00; }
+  .cert-table th { text-align: left; padding: 0.6rem; color: #fff; }
+  .cert-table tbody tr { border-bottom: 1px solid #1a1a1a; }
+  .cert-table td { padding: 0.6rem; vertical-align: top; }
+  .cert-table td.cert-name { color: #fff; font-weight: 600; white-space: nowrap; }
+  .cert-table td.nowrap { white-space: nowrap; }
+
+  .cert-cards { display: none; }
+
+  @media (max-width: 860px) {
+    .cert-table-scroll { display: none; }
+    .cert-cards { display: block; }
+    .cert-card {
+      border: 1px solid #1a1a1a;
+      border-top: 2px solid #e00;
+      background: #050505;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .cert-card-name {
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .cert-card-row {
+      color: #ccc;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      margin-bottom: 0.6rem;
+    }
+    .cert-card-row span {
+      color: #e00;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+  }
+</style>
 
 <section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
   <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
     <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Which One Do You Actually Need?</h2>
     <p style="color:#ddd;line-height:1.8;font-size:0.92rem;margin-bottom:1.5rem;">Most buyers don't need all seven. They need the one or two that match what they're actually claiming or who they're actually selling to:</p>
-    <table style="width:100%;border-collapse:collapse;font-size:0.85rem;color:#ddd;margin-bottom:1.5rem;">
-      <thead>
-        <tr style="border-bottom:1px solid #e00;">
-          <th style="text-align:left;padding:0.6rem;color:#fff;">If your situation is...</th>
-          <th style="text-align:left;padding:0.6rem;color:#fff;">You need</th>
-        </tr>
-      </thead>
-      <tbody>
-        {scenarioRows.map(row => (
-          <tr style="border-bottom:1px solid #1a1a1a;">
-            <td style="padding:0.6rem;">{row.situation}</td>
-            <td style="padding:0.6rem;">{row.need}</td>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem;color:#ddd;margin-bottom:1.5rem;min-width:480px;">
+        <thead>
+          <tr style="border-bottom:1px solid #e00;">
+            <th style="text-align:left;padding:0.6rem;color:#fff;">If your situation is...</th>
+            <th style="text-align:left;padding:0.6rem;color:#fff;">You need</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {scenarioRows.map(row => (
+            <tr style="border-bottom:1px solid #1a1a1a;">
+              <td style="padding:0.6rem;">{row.situation}</td>
+              <td style="padding:0.6rem;">{row.need}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
 
     <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">Does One Certification Ever Remove the Need for Another?</h3>
     <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">Sometimes, but not automatically, and this is where most confusion comes from. GOTS does include baseline social criteria as part of its own audit, and factories holding both GOTS and GRS tend to satisfy a large share of what a standalone brand audit would otherwise check. But "large share" isn't "all of it" — plenty of buyers still ask for a separate BSCI or SEDEX SMETA report even from a GOTS-certified factory, because their own compliance policy names that audit specifically, not just "some social compliance evidence."</p>
-    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">The safest approach: don't assume one certification covers another's job. Ask the retailer or buyer which specific certification their compliance team names in writing, and work backwards from there rather than guessing.</p>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">This is genuinely a moving target, not a fixed rulebook. As a recent, concrete example: amfori (the body behind BSCI) discontinued recognising SA8000 as an equivalent standard from February 3, 2026. Before that date, a factory could sometimes point to a valid SA8000 certificate and skip an amfori-member buyer's own audit requirement. That's no longer the case — SA8000 and BSCI now have to be treated as separate asks, even though they both cover labour conditions. If a supplier tells you SA8000 covers their BSCI requirement, ask when they last checked.</p>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">The safest approach: don't assume one certification covers another's job, and don't assume today's substitution rules will still hold next year. Ask the retailer or buyer which specific certification their compliance team names in writing, and work backwards from there rather than guessing.</p>
   </div>
 </section>
 
@@ -230,12 +322,19 @@ const breadcrumbSchema = {
 <section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
   <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
     <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:2rem;">Questions Buyers Actually Ask About These Certifications</h2>
-    {certFaqs.map(faq => (
-      <div style="margin-bottom:1.75rem;">
-        <p style="color:#fff;font-weight:600;font-size:0.92rem;margin-bottom:0.5rem;">{faq.question}</p>
-        <p style="color:#bbb;line-height:1.8;font-size:0.9rem;">{faq.answer}</p>
-      </div>
-    ))}
+    <div style="background:#000;border:1px solid rgba(255,255,255,0.1);">
+      {certFaqs.map((faq, index) => (
+        <details style="border-bottom:1px solid rgba(255,255,255,0.1);" open={index === 0}>
+          <summary style="padding:1.5rem;cursor:pointer;color:#fff;font-size:0.95rem;font-weight:500;display:flex;justify-content:space-between;align-items:center;list-style:none;gap:1rem;">
+            {faq.question}
+            <span style="font-size:1.5rem;color:#e00;flex-shrink:0;">+</span>
+          </summary>
+          <div style="padding:0 1.5rem 1.5rem;">
+            <p style="color:#bbb;line-height:1.8;font-size:0.9rem;margin:0;">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
   </div>
 </section>
 
