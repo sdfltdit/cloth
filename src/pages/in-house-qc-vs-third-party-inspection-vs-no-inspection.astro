@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 export const prerender = true;
 
 const pageTitle = "In-House QC vs Third-Party Inspection vs No Inspection";
-const pageDescription = "The honest cost-and-trust tradeoff: when factory self-inspection is genuinely enough, and when you should pay for independent inspection regardless.";
+const pageDescription = "In-house QC vs. third-party pre-shipment inspection vs. no inspection at all — the honest cost-and-risk tradeoff for garment buyers, explained plainly.";
 const lastReviewed = "July 23, 2026";
 
 const approachRows = [
@@ -34,11 +34,11 @@ const approachRows = [
 ];
 
 const scenarioRows = [
-  { situation: "This is your first order with a new factory", need: "Third-party inspection — no exceptions, however good the factory looks on paper" },
-  { situation: "You've ordered from this factory successfully for years", need: "In-house QC is usually reasonable, with occasional third-party spot-checks" },
-  { situation: "The order is for children's wear or another regulated category", need: "Third-party inspection, regardless of the relationship — the stakes are higher than usual" },
-  { situation: "The shipment is unusually high-value or high-volume for you", need: "Third-party inspection — the cost is small next to what's at risk" },
-  { situation: "Your factory seems reluctant to schedule a third-party visit", need: "Treat that reluctance itself as information, not as a scheduling inconvenience" }
+  { situation: "This is your first order with a new factory", need: "Third-party inspection — no exceptions, however good the factory looks on paper", risk: "Very high" },
+  { situation: "You've ordered from this factory successfully for years", need: "In-house QC is usually reasonable, with occasional third-party spot-checks", risk: "Medium" },
+  { situation: "The order is for children's wear or another regulated category", need: "Third-party inspection, regardless of the relationship — the stakes are higher than usual", risk: "Very high" },
+  { situation: "The shipment is unusually high-value or high-volume for you", need: "Third-party inspection — the cost is small next to what's at risk", risk: "High" },
+  { situation: "Your factory seems reluctant to schedule a third-party visit", need: "Treat that reluctance itself as information, not as a scheduling inconvenience", risk: "High" }
 ];
 
 const mistakeFaqs = [
@@ -227,11 +227,12 @@ const breadcrumbSchema = {
   <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
     <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Which One Do You Actually Need?</h2>
     <div style="overflow-x:auto;">
-      <table style="width:100%;border-collapse:collapse;font-size:0.85rem;color:#ddd;margin-bottom:1.5rem;min-width:480px;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem;color:#ddd;margin-bottom:1.5rem;min-width:560px;">
         <thead>
           <tr style="border-bottom:1px solid #e00;">
             <th style="text-align:left;padding:0.6rem;color:#fff;">If your situation is...</th>
             <th style="text-align:left;padding:0.6rem;color:#fff;">You need</th>
+            <th style="text-align:left;padding:0.6rem;color:#fff;">Risk if skipped</th>
           </tr>
         </thead>
         <tbody>
@@ -239,11 +240,16 @@ const breadcrumbSchema = {
             <tr style="border-bottom:1px solid #1a1a1a;">
               <td style="padding:0.6rem;">{row.situation}</td>
               <td style="padding:0.6rem;">{row.need}</td>
+              <td style="padding:0.6rem;white-space:nowrap;">{row.risk}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">Two Real Sourcing Scenarios</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">A new seller places a first order of a few hundred pieces with a factory they found online, with no prior relationship. Skipping inspection here is the highest-risk version of this decision — there's no track record to fall back on, and a bad batch discovered after it reaches customers is far more expensive to fix than the inspection would have cost. Third-party inspection isn't optional here, whatever the factory's photos and promises look like.</p>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">Compare that to a buyer placing their twentieth reorder of the same basic style with a factory that's never had a serious issue. In-house QC is a reasonable default here, with an occasional third-party spot-check to confirm nothing's drifted — a proportionate response to genuinely lower risk, not a shortcut.</p>
 
     <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">Why a Good Factory Still Deserves Third-Party Inspection</h3>
     <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">Reputation reduces risk — it doesn't eliminate it. Even at a well-run, honest factory, the person doing in-house inspection reports to the factory, not to you, and is under real pressure to keep production moving and get paid on time. That's a structural conflict of interest, not a comment on anyone's integrity. Third-party inspection isn't there because you distrust the factory specifically — it's there because independence produces a different kind of report than self-interest does, regardless of how good the underlying work is.</p>
@@ -263,7 +269,20 @@ const breadcrumbSchema = {
     <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">Quality Control vs. Quality Assurance — Another Pair People Mix Up</h3>
     <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">One more distinction worth having straight, since it comes up often: quality assurance (QA) is about the systems and processes that prevent defects from happening in the first place — things like approved fabric sourcing, standardized cutting procedures, and trained operators. Quality control (QC) — everything this page has covered — is about catching defects that occur during or after production, whichever of the three approaches does the catching. A factory can have strong QA and still benefit from QC, and vice versa; they're complementary, not substitutes for each other.</p>
 
-    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">One more thing worth knowing: inspection isn't just a single pre-shipment event. It typically happens at multiple stages — during production (often called DUPRO), a final check before shipment (pre-shipment inspection, or PSI), and sometimes a last check as the shipment is loaded into the container (container loading inspection, or CLI). Our <a href="/quality-inspection-service" style="color:#e00;text-decoration:none;">quality inspection process</a> page walks through each stage in detail.</p>
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">Inspection Stages Explained: DUPRO, PSI, IPC, and Container Loading Inspection (CLI)</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">Inspection isn't a single pre-shipment event — it typically happens at multiple stages of production. An initial production check (IPC) happens early, once the first units come off the line. During production inspection (DUPRO, sometimes called inline inspection) checks mid-run. Pre-shipment inspection (PSI), also called final random inspection (FRI), happens once the order is finished and packed. Some buyers add a container loading inspection (CLI) as the shipment is actually loaded, confirming the right goods, quantity, and condition go into the container. Our <a href="/quality-inspection-service" style="color:#e00;text-decoration:none;">quality inspection process</a> page walks through each stage in detail.</p>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">First-Party, Second-Party, and Third-Party Inspection — the Actual Industry Terms</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">If you've seen these labels and weren't sure what they meant: first-party inspection is the factory checking its own work — what this page calls in-house or factory QC. Second-party inspection is the buyer's own team doing the checking, covered above. Third-party inspection is an independent agency with no stake in either side. Same three approaches this page compares, just the formal terms used across the industry.</p>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">The Hidden Cost of Skipping Inspection</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">The $0 upfront cost of no inspection is real, but it's rarely where the story ends. When a defect surfaces after shipment instead of before, the costs that follow tend to be larger and less predictable: rework or sorting at destination, expedited air freight to replace a bad batch in time, customer returns and chargebacks if it reaches end buyers, and the harder-to-quantify cost of a damaged relationship with your own customers. None of this means no inspection is always wrong — for a small, low-risk reorder from a proven supplier, the math can still favor skipping it. It just means the $0 figure is the starting cost, not the total one.</p>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">If an Inspection Fails, What Actually Happens?</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">A failed inspection isn't usually the end of the conversation — it's the start of one. Depending on what's found and how serious it is, outcomes typically include: sorting and reworking the defective units before reshipping, a full re-inspection once corrections are made, shipping the passing portion of the order while the rest gets fixed, or in serious cases, rejecting the batch outright. Which path makes sense depends on the severity of the defects and how much time is left before your shipping deadline — worth agreeing on upfront, not improvising under pressure.</p>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">Buyer-Side Mistakes That Undermine Any Inspection</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">Even the right inspection approach can fail if a few basics slip. Booking the inspection only after production is already finished leaves no time to fix what's found. Skipping an approved reference sample means the inspector has nothing concrete to measure the shipment against. Missing a measurement specification sheet turns "does it fit right" into a guess. And treating packaging as an afterthought misses a category of defects — wrong barcodes, damaged cartons, missing care labels — that inspectors specifically check for and buyers specifically get burned by.</p>
 
     <div style="border:1px solid #1a1a1a;border-left:2px solid #e00;background:#050505;padding:1.5rem 1.75rem;">
       <p style="color:#888;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Key takeaways</p>
