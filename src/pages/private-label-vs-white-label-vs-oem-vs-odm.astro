@@ -1,0 +1,421 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Private Label vs White Label vs OEM vs ODM Compared";
+const pageDescription = "The four most confused terms in clothing manufacturing, clarified — who designs it, who owns the brand, and which model fits your stage.";
+const lastReviewed = "July 22, 2026";
+
+const modelRows = [
+  {
+    name: "OEM",
+    designs: "You — your own tech pack and spec sheet",
+    exclusivity: "Usually exclusive since it's your design, but tooling and full IP ownership still need confirming in writing",
+    moq: "300 pcs at SDF",
+    lead: "60–90 days",
+    bestFor: "Brands with an in-house design or product team"
+  },
+  {
+    name: "ODM",
+    designs: "The factory — you customize an existing base",
+    exclusivity: "Shared by default, unless you pay for exclusivity on that style",
+    moq: "300 pcs at SDF",
+    lead: "Faster sampling (5–7 days) than a from-scratch OEM design",
+    bestFor: "Fast launch, no in-house design team yet"
+  },
+  {
+    name: "Private Label",
+    designs: "Either — usually your spec, sometimes an adapted factory base",
+    exclusivity: "Meant to be exclusive to your brand — but that only holds if the agreement actually says so in writing",
+    moq: "300 pcs; 5,000+ for full exclusive-development protection at SDF",
+    lead: "70–95 days",
+    bestFor: "Building a differentiated, defensible brand"
+  },
+  {
+    name: "White Label",
+    designs: "The factory — pre-existing, ready-made styles",
+    exclusivity: "Shared — the same style is sold to other buyers too",
+    moq: "300 pcs at SDF",
+    lead: "20–30 days",
+    bestFor: "Fastest market entry, testing demand before investing in a unique product"
+  }
+];
+
+const scenarioRows = [
+  { situation: "You have your own designs and want the product locked to your brand", need: "OEM, sold as your private label" },
+  { situation: "You want to launch fast with no design team of your own", need: "ODM — customize a factory base instead of starting from zero" },
+  { situation: "You're testing a new market before committing to a unique product", need: "White label — lowest MOQ, fastest turnaround" },
+  { situation: "You want something unique but don't have design resources", need: "ODM, with paid exclusivity on that specific style" },
+  { situation: "You want the lowest possible upfront risk", need: "White label first, move to ODM or OEM once demand is proven" }
+];
+
+const mistakeFaqs = [
+  {
+    question: "Is private label the same thing as OEM?",
+    answer: "No, and this is the single most common mix-up in the space. OEM and ODM describe who designs the product — you, or the factory. Private label and white label describe something completely different: who else can buy that same product. A private label item can be produced either the OEM way or the ODM way; \"private label\" just means it's exclusive to your brand either way."
+  },
+  {
+    question: "Can a private label product also be ODM?",
+    answer: "Yes, and it's actually a common combination. You customize one of the factory's existing base styles (that's the ODM part), then pay for exclusivity so no one else can buy that exact customized version (that's the private label part). It doesn't have to start from your own from-scratch design to count as private label."
+  },
+  {
+    question: "What's the real difference between ODM and white label?",
+    answer: "Both start from a factory's existing style rather than your own design, but they differ on exclusivity. White label stays shared — the same style ships to multiple buyers, just relabeled. ODM can go either way: you can customize a shared base (still not exclusive) or pay to lock in a customized version just for your brand, which pushes it toward private label territory."
+  },
+  {
+    question: "Which model has the lowest minimum order quantity?",
+    answer: "At SDF, OEM, ODM, private label, and white label all start from the same 300-piece minimum. Where they actually diverge is on getting exclusive rights to a specific design — that protection typically requires a larger commitment, around 5,000+ pieces at SDF — not the base MOQ to get an order started at all."
+  },
+  {
+    question: "Can I start with white label and move to OEM later?",
+    answer: "Yes, and it's a genuinely common growth path — test demand cheaply with a white label product, then move to ODM once you know what sells, then to full OEM once you have the volume and design direction to justify your own from-scratch product. Nothing about starting with white label locks you out of the other models later."
+  },
+  {
+    question: "Does private label always mean the design is 100% original?",
+    answer: "No. Private label is about who else can buy the product, not where the design originated. A private label item can be built from your own original tech pack (the OEM route) or from a customized factory base you've locked in exclusively (the ODM route) — both count as private label as long as no one else can buy that exact product."
+  },
+  {
+    question: "Does my exclusivity agreement still apply if I stop ordering for a while?",
+    answer: "Ask this before you sign, because the honest answer is usually no, not automatically. Exclusivity is generally tied to an active ordering relationship — if you stop placing orders for an extended period, most factories treat that design as available again rather than holding it indefinitely on your behalf. Get the specific terms in writing rather than assuming a one-time agreement protects you forever."
+  },
+  {
+    question: "How many sample rounds are usually included before extra charges apply?",
+    answer: "It varies by model and by factory, so ask upfront rather than after the second revision arrives with a bill attached. OEM samples typically need at least one revision round since they're built from scratch; ODM and white label samples usually need fewer, since they start from an existing base. Get the included-rounds number confirmed in writing before development starts."
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": mistakeFaqs.map((f) => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+  }))
+};
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Private Label vs. White Label vs. OEM vs. ODM: The Two Axes Everyone Confuses",
+  "author": {
+    "@type": "Person",
+    "name": "Chowdhury Remon",
+    "jobTitle": "Founder & CEO, SDF Clothing",
+    "url": "https://sdfltd.com/about"
+  },
+  "publisher": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
+  "datePublished": "2026-07-22",
+  "dateModified": "2026-07-22",
+  "mainEntityOfPage": "https://sdfltd.com/private-label-vs-white-label-vs-oem-vs-odm/"
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Sourcing Models", "item": "https://sdfltd.com/private-label-clothing-manufacturer" },
+    { "@type": "ListItem", "position": 3, "name": "Private Label vs White Label vs OEM vs ODM", "item": "https://sdfltd.com/private-label-vs-white-label-vs-oem-vs-odm/" }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website">
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<section style="padding: 6rem 0 3rem; background:#000;">
+  <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;">
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.5rem;">Sourcing Model Decision Guide</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1.25rem;line-height:1.2;">
+      Private Label vs. White Label vs. OEM vs. ODM: The Two Axes Everyone Confuses
+    </h1>
+    <p style="color:#ccc;max-width:760px;line-height:1.8;font-size:0.95rem;">
+      Most explanations of these four terms line them up as if they're four points on the same scale. They're not. OEM and ODM answer one question — who designs the product. Private label and white label answer a completely different question — who else can buy it. Mixing these two questions together is exactly why this corner of sourcing is so confusing, even for people who've been in the industry a while.
+    </p>
+    <p style="color:#888;max-width:760px;line-height:1.7;font-size:0.8rem;margin-top:1rem;">A note on scope: this page reflects how these terms are commonly used in apparel and garment manufacturing specifically. Other industries — electronics, cosmetics, supplements — sometimes use the same words slightly differently, so don't assume a definition carries over exactly if you're sourcing outside clothing.</p>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 4rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <div style="border:1px solid #1a1a1a;border-left:2px solid #e00;background:#050505;padding:1.5rem 1.75rem;">
+      <p style="color:#888;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Why even industry people mix this up</p>
+      <p style="color:#ddd;font-size:0.9rem;line-height:1.9;margin:0;">
+        Search around and you'll find sourcing blogs flatly stating "private label is essentially the same as ODM," or listing all four terms as if a buyer picks exactly one. Neither is quite right. <strong style="color:#fff;">Design origin</strong> (OEM = you design it, ODM = the factory designs it, you adapt it) and <strong style="color:#fff;">brand exclusivity</strong> (private label = locked to your brand, white label = shared with other buyers) are two independent decisions. A private label product can be produced the OEM way or the ODM way. Once you separate the two questions, the confusion mostly disappears.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0 0 5rem; background:#000;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">The Two Axes, Side by Side</h2>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem;color:#ddd;min-width:480px;">
+        <thead>
+          <tr style="border-bottom:1px solid #e00;">
+            <th style="text-align:left;padding:0.6rem;color:#fff;"></th>
+            <th style="text-align:left;padding:0.6rem;color:#fff;">You design it (OEM)</th>
+            <th style="text-align:left;padding:0.6rem;color:#fff;">Factory designs it (ODM)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a1a1a;">
+            <td style="padding:0.6rem;color:#fff;font-weight:600;">Exclusive to your brand<br/>(Private Label)</td>
+            <td style="padding:0.6rem;">Original design, locked to you — the most common private label setup</td>
+            <td style="padding:0.6rem;">Customized factory base, paid exclusivity — still counts as private label</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;color:#fff;font-weight:600;">Shared with other buyers<br/>(White Label)</td>
+            <td style="padding:0.6rem;color:#888;">Rare — if it's your original design, there's little reason to let others buy it</td>
+            <td style="padding:0.6rem;">Ready-made factory style, unmodified — the classic white label setup</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Quick Reference: All Four Models</h2>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1.5rem;">For the mechanics of OEM, ODM, and CMT in more depth than this table covers, see our <a href="/insights/oem-vs-odm-vs-cmt" style="color:#e00;text-decoration:none;">OEM vs ODM vs CMT breakdown</a>.</p>
+
+    <div class="model-table-scroll">
+      <table class="model-table">
+        <colgroup>
+          <col style="width:14%;" />
+          <col style="width:24%;" />
+          <col style="width:24%;" />
+          <col style="width:14%;" />
+          <col style="width:24%;" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Who designs it</th>
+            <th>Brand exclusivity</th>
+            <th>MOQ / lead time</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          {modelRows.map(row => (
+            <tr>
+              <td class="model-name">{row.name}</td>
+              <td>{row.designs}</td>
+              <td>{row.exclusivity}</td>
+              <td>{row.moq} · {row.lead}</td>
+              <td>{row.bestFor}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="model-cards">
+      {modelRows.map(row => (
+        <div class="model-card">
+          <p class="model-card-name">{row.name}</p>
+          <p class="model-card-row"><span>Who designs it</span>{row.designs}</p>
+          <p class="model-card-row"><span>Brand exclusivity</span>{row.exclusivity}</p>
+          <p class="model-card-row"><span>MOQ at SDF</span>{row.moq}</p>
+          <p class="model-card-row"><span>Lead time</span>{row.lead}</p>
+          <p class="model-card-row"><span>Best for</span>{row.bestFor}</p>
+        </div>
+      ))}
+    </div>
+    <p style="color:#888;font-size:0.8rem;margin-top:1rem;">Last reviewed {lastReviewed}. MOQs and lead times are SDF's own figures — confirm current numbers directly, as they vary by product complexity.</p>
+  </div>
+</section>
+
+<style>
+  .model-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .model-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    color: #ddd;
+  }
+  .model-table thead tr { border-bottom: 1px solid #e00; }
+  .model-table th { text-align: left; padding: 0.55rem 0.5rem; color: #fff; font-size: 0.72rem; }
+  .model-table tbody tr { border-bottom: 1px solid #1a1a1a; }
+  .model-table td {
+    padding: 0.6rem 0.5rem;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+  }
+  .model-table td.model-name { color: #fff; font-weight: 600; }
+
+  .model-cards { display: none; }
+
+  @media (max-width: 700px) {
+    .model-table-scroll { display: none; }
+    .model-cards { display: block; }
+    .model-card {
+      border: 1px solid #1a1a1a;
+      border-top: 2px solid #e00;
+      background: #050505;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .model-card-name { color: #fff; font-weight: 600; font-size: 1rem; margin-bottom: 0.75rem; }
+    .model-card-row { color: #ccc; font-size: 0.85rem; line-height: 1.7; margin-bottom: 0.6rem; }
+    .model-card-row span {
+      color: #e00; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
+      display: block; margin-bottom: 0.15rem;
+    }
+  }
+
+  @media (min-width: 701px) and (max-width: 900px) {
+    .model-table { font-size: 0.7rem; }
+    .model-table th { font-size: 0.62rem; padding: 0.45rem 0.35rem; }
+    .model-table td { padding: 0.45rem 0.35rem; }
+  }
+</style>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Which One Do You Actually Need?</h2>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem;color:#ddd;margin-bottom:1.5rem;min-width:480px;">
+        <thead>
+          <tr style="border-bottom:1px solid #e00;">
+            <th style="text-align:left;padding:0.6rem;color:#fff;">If your situation is...</th>
+            <th style="text-align:left;padding:0.6rem;color:#fff;">You need</th>
+          </tr>
+        </thead>
+        <tbody>
+          {scenarioRows.map(row => (
+            <tr style="border-bottom:1px solid #1a1a1a;">
+              <td style="padding:0.6rem;">{row.situation}</td>
+              <td style="padding:0.6rem;">{row.need}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">Who Owns the Design — and Can the Factory Resell It?</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">This is the practical question buyers actually lose sleep over, more than the terminology itself. With OEM, since the tech pack is yours, ownership is straightforward — get it in writing that the factory won't reuse your spec for another client. With ODM and white label, the base design started as the factory's, so the default assumption should be that it can be sold to others unless you've specifically paid for and documented exclusivity on that style. Always ask directly: "can this exact product, in this exact form, be sold to anyone else?" — and get the answer in writing rather than assuming "private label" alone settles it.</p>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">What "in writing" should actually mean: a dated agreement naming the specific style or SKU, not just your company name in general. A vague line like "we work exclusively with your brand" protects nothing if it doesn't name the product. Ask what happens if you stop ordering — does exclusivity lapse after a gap, or does it hold indefinitely? A factory that's thought this through will have a straight answer already, not a pause while they figure out what to tell you.</p>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">A Common Growth Path</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">A pattern we see often: a new brand starts with <a href="/white-label-manufacturer" style="color:#e00;text-decoration:none;">white label</a> products to test demand cheaply and quickly, without committing to a unique design. Once a style proves itself, the brand moves to ODM — customizing that same base rather than starting from zero — and locks in exclusivity so competitors can't sell the identical item. As the brand matures and has its own design direction, it shifts to full <a href="/oem-clothing-manufacturer" style="color:#e00;text-decoration:none;">OEM</a>, building original products under a <a href="/private-label-clothing-manufacturer" style="color:#e00;text-decoration:none;">private label</a> arrangement. None of these stages lock you out of the next one — it's a common progression, not a one-time choice.</p>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">From Sample to Bulk: What Actually Changes</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">Sample speed is where these models genuinely diverge, and it's worth knowing before you commit. A white label sample is usually just a stock item pulled and shipped — days, not weeks, since nothing needs to be built. ODM sampling means adjusting an existing pattern, so it's quick but not instant. OEM sampling starts from your tech pack, which means a first sample, a round of corrections, and often a second sample before it's right — that back-and-forth is normal, not a sign something's gone wrong, but budget the extra time for it. Whichever model you pick, ask upfront how many sample rounds are included before extra charges kick in.</p>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">If You Need to Switch or Walk Away</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">Worth asking before you sign anything, not after: if you switch models mid-relationship — say, from white label into your own OEM design — does the factory carry over anything from the earlier arrangement, or does it start fresh? And if you walk away entirely, what happens to any exclusivity you paid for? In most cases it simply lapses, meaning the factory is free to sell that design elsewhere once you're no longer ordering it — reasonable from their side, but worth knowing rather than assuming your design stays locked forever.</p>
+
+    <div style="border:1px solid #1a1a1a;border-left:2px solid #e00;background:#050505;padding:1.5rem 1.75rem;margin-bottom:2rem;">
+      <p style="color:#888;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">In apparel terms, plainly</p>
+      <p style="color:#ddd;font-size:0.9rem;line-height:2;margin:0;">
+        <strong style="color:#fff;">OEM</strong> — you hand over a tech pack, the factory builds exactly that.<br/>
+        <strong style="color:#fff;">ODM</strong> — the factory already has a base style; you change the fabric, colorway, trims, or print.<br/>
+        <strong style="color:#fff;">Private Label</strong> — either route above, but agreed in writing that it's made only for your brand.<br/>
+        <strong style="color:#fff;">White Label</strong> — the same finished garment, unmodified, sold to several brands with different labels sewn in.
+      </p>
+    </div>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">Before You Sign: Questions Worth Asking</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">We're not lawyers, and this isn't legal advice — but regardless of which model you choose, get clear written answers on these before committing to a factory:</p>
+    <ul style="color:#ddd;font-size:0.9rem;line-height:2;padding-left:1.2rem;margin-bottom:1rem;">
+      <li>Who owns the design, the tech pack, and any tooling or pattern files — not just "who thought of it first"</li>
+      <li>Whether exclusivity applies, to which specific style or SKU, and whether it lapses if you stop ordering</li>
+      <li>The actual MOQ per style, and whether it changes for reorders versus a first order</li>
+      <li>What quality standard the product is checked against, and who inspects it</li>
+      <li>Who's responsible if a batch arrives defective — replacement, refund, or something else</li>
+    </ul>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">A factory that's done this before will have straightforward answers to all five already, in writing, without needing to check with someone else first.</p>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Common Mistakes — and the Myths Behind Them</h2>
+    <div style="border:1px solid #1a1a1a;">
+      <div style="padding:1.25rem 1.5rem;border-bottom:1px solid #1a1a1a;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> Private label and OEM are the same thing</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> OEM describes who designed the product. Private label describes who else can buy it. A private label product can be OEM or ODM — the terms answer different questions entirely.</p>
+      </div>
+      <div style="padding:1.25rem 1.5rem;border-bottom:1px solid #1a1a1a;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> ODM means you can't customize anything</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> ODM still allows changing colorways, trims, prints, and labels — you're adapting an existing base pattern, not accepting it unchanged. What you're not doing is building the pattern from scratch.</p>
+      </div>
+      <div style="padding:1.25rem 1.5rem;border-bottom:1px solid #1a1a1a;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> White label products can never be made exclusive</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> It's rare, but not impossible — a factory can sometimes lock a specific colorway or print to one buyer even on an otherwise shared style. Never assume; get exclusivity confirmed in writing regardless of which model you're using.</p>
+      </div>
+      <div style="padding:1.25rem 1.5rem;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> OEM is always more expensive than ODM</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> Not necessarily. A heavily customized ODM style with paid exclusivity can end up costing more than a simple, straightforward OEM design. Cost tracks complexity and exclusivity, not just who drew the pattern first.</p>
+      </div>
+      <div style="padding:1.25rem 1.5rem;border-top:1px solid #1a1a1a;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> Doing OEM means you automatically own the full IP</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> Supplying the tech pack means the design started as yours, but that's not the same as owning tooling, molds, or the finished pattern file the factory builds from it. If full IP transfer matters to you, it needs to be written into the agreement explicitly — it isn't automatic just because you supplied the spec.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Where SDF Stands — An Honest Self-Assessment</h2>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:0.75rem;"><strong>What we can back up:</strong> we run all four models at the same 300-piece starting MOQ, with lead times ranging from 20–30 days for white label up to 70–95 days for full private label development. Full detail on each is on our <a href="/private-label-clothing-manufacturer" style="color:#e00;text-decoration:none;">private label</a>, <a href="/white-label-manufacturer" style="color:#e00;text-decoration:none;">white label</a>, and <a href="/oem-clothing-manufacturer" style="color:#e00;text-decoration:none;">OEM</a> pages, plus the mechanics of ODM and CMT in our <a href="/insights/oem-vs-odm-vs-cmt" style="color:#e00;text-decoration:none;">OEM vs ODM vs CMT guide</a>.</p>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">
+      <strong>Where we fall short:</strong> the 300-piece MOQ gets an order started, but full exclusive-development protection on a design — the guarantee that we won't reuse or adapt it for anyone else — currently requires a larger commitment, around 5,000+ pieces. If you need exclusivity locked in at a smaller volume, that's a real limit worth knowing before you commit, not something we'll paper over after the fact.
+    </p>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:2rem;">Questions Buyers Actually Ask</h2>
+    <div style="background:#000;border:1px solid rgba(255,255,255,0.1);">
+      {mistakeFaqs.map((faq, index) => (
+        <details style="border-bottom:1px solid rgba(255,255,255,0.1);" open={index === 0}>
+          <summary style="padding:1.5rem;cursor:pointer;color:#fff;font-size:0.95rem;font-weight:500;display:flex;justify-content:space-between;align-items:center;list-style:none;gap:1rem;">
+            {faq.question}
+            <span style="font-size:1.5rem;color:#e00;flex-shrink:0;">+</span>
+          </summary>
+          <div style="padding:0 1.5rem 1.5rem;">
+            <p style="color:#bbb;line-height:1.8;font-size:0.9rem;margin:0;">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 6rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505;">
+      <p style="color:#fff;font-size:1rem;margin-bottom:1rem;">Not sure which model fits your product yet?</p>
+      <a href="/contact" style="color:#e00;text-decoration:none;margin-right:1.5rem;">Talk it through with us →</a>
+      <a href="/private-label-clothing-manufacturer" style="color:#e00;text-decoration:none;">Explore private label at SDF →</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0 0 5rem; background:#000;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <div style="padding:2rem;border:1px solid #1a1a1a;background:#050505;">
+      <div>
+        <p style="color:#fff;font-weight:600;font-size:0.92rem;margin-bottom:0.25rem;">Chowdhury Remon</p>
+        <p style="color:#888;font-size:0.8rem;margin-bottom:0.75rem;">Founder & CEO, SDF Clothing — running the factory floor since 1998</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;">These four terms come up in nearly every first call with a new brand, usually tangled together. <a href="/editorial-policy" style="color:#e00;text-decoration:none;">Read our editorial policy</a> or <a href="/about" style="color:#e00;text-decoration:none;">more about SDF</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>

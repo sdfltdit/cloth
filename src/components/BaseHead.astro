@@ -11,6 +11,7 @@ export interface Props {
   dateModified?: string;
   schema?: object | object[];
   noindex?: boolean;
+  includeContactHints?: boolean;
 }
 
 const {
@@ -22,7 +23,8 @@ const {
   noindex = false,
   datePublished,
   dateModified,
-  schema
+  schema,
+  includeContactHints = false
 } = Astro.props;
 
 // ── FIX 1: Canonical auto-generated if not provided, strips www, adds trailing slash ──
@@ -275,8 +277,6 @@ if (schema) {
      at the browser's default priority instead. -->
 <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-regular.woff2" crossorigin fetchpriority="high" />
 <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-300.woff2" crossorigin />
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-500.woff2" crossorigin />
-<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-600.woff2" crossorigin />
 
 <!-- CRITICAL FONT-FACE — declared inline in <head> so the font-family mapping
      is available immediately, without waiting on global.css (which now loads
@@ -356,10 +356,14 @@ if (schema) {
 <meta name="msapplication-config" content="none" />
 
 <!-- PRECONNECT -->
-<link rel="dns-prefetch" href="https://api.web3forms.com" />
 <link rel="dns-prefetch" href="https://wa.me" />
-<link rel="dns-prefetch" href="https://ipinfo.io" />
-<link rel="dns-prefetch" href="https://ipapi.co" />
+{includeContactHints && (
+  <Fragment>
+    <link rel="dns-prefetch" href="https://api.web3forms.com" />
+    <link rel="dns-prefetch" href="https://ipinfo.io" />
+    <link rel="dns-prefetch" href="https://ipapi.co" />
+  </Fragment>
+)}
 
 <!-- llms.txt -->
 <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt" />
