@@ -35,7 +35,8 @@ const scenarioRows = [
   { situation: "You've done a handful of orders and want to control cost", need: "Your own freight forwarder under FOB terms — the standard recommended setup for growing brands" },
   { situation: "You're shipping frequently and at real volume", need: "Consider fully in-house logistics — the overhead starts paying for itself" },
   { situation: "You want the factory to bear responsibility if the shipment is delayed or damaged in transit", need: "Factory-arranged shipping under DDP — risk stays with the factory until it reaches your door" },
-  { situation: "You want to negotiate your own freight rates and choose your own broker", need: "Your own freight forwarder — factory-arranged shipping takes that control away" }
+  { situation: "You want to negotiate your own freight rates and choose your own broker", need: "Your own freight forwarder — factory-arranged shipping takes that control away" },
+  { situation: "The order is urgent and sea freight's transit time won't work", need: "Air freight, arranged either way — but note this is a separate freight-mode decision from who arranges it, and air freight costs substantially more than ocean regardless of who books it" }
 ];
 
 const mistakeFaqs = [
@@ -58,6 +59,18 @@ const mistakeFaqs = [
   {
     question: "At what order volume does in-house logistics actually start making sense?",
     answer: "There's no single universal threshold — it depends on how many shipments you're running per year and how much internal expertise you're willing to build. As a rough signal, once you're shipping frequently enough that forwarder and broker fees are becoming a meaningful line item, and you have someone capable of managing customs compliance directly, it's worth running the numbers. For most growing brands, that point comes well after the first dozen or so orders, not before."
+  },
+  {
+    question: "What's the difference between demurrage and detention, and who pays them?",
+    answer: "Both are daily penalty fees, but for different things. Demurrage is charged by the shipping line if your container sits at the port past its free period without being picked up. Detention is charged if the container itself isn't returned to the shipping line after being unloaded at your facility. Whoever is responsible for customs clearance and delivery under your Incoterm — you or the factory — is generally the one exposed to these charges if delays happen on their end."
+  },
+  {
+    question: "Do I need cargo insurance if I'm arranging my own freight forwarder?",
+    answer: "It's not automatically included, so yes, you should arrange it yourself unless your Incoterm already covers it. CIF includes a minimum level of insurance by definition; FOB and most other terms leave that decision to you. Given that the premium is small relative to a full container's value, most experienced importers treat it as a default, not an optional extra."
+  },
+  {
+    question: "Should I use air freight instead of ocean freight, and does that change who arranges shipping?",
+    answer: "Air freight versus ocean freight is a separate decision from who books the logistics — you can arrange air freight yourself or have the factory arrange it, the same as with ocean freight. The real tradeoff is cost versus speed: air freight typically costs several times more per unit but can cut transit time from weeks to days, which matters for urgent or time-sensitive orders regardless of which party is doing the booking."
   }
 ];
 
@@ -161,6 +174,30 @@ const breadcrumbSchema = {
       ))}
     </div>
     <p style="color:#888;font-size:0.8rem;margin-top:1rem;">Last reviewed {lastReviewed}. SDF quotes FOB Chittagong as standard and can arrange CIF or DDP shipping on request — see our <a href="/insights/incoterms-explained" style="color:#e00;text-decoration:none;">Incoterms guide</a> for exact risk-transfer points under each term.</p>
+    <p style="color:#888;font-size:0.8rem;margin-top:0.5rem;">Risk-transfer definitions referenced throughout this page follow Incoterms® 2020, published by the International Chamber of Commerce (ICC) and current through at least 2026, with the next scheduled revision expected around 2030.</p>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">The Honest Pros and Cons of Each</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;">
+      <div style="border:1px solid #1a1a1a;border-top:2px solid #e00;background:#050505;padding:1.25rem;">
+        <p style="color:#fff;font-weight:600;margin-bottom:0.75rem;">Your Own Freight Forwarder</p>
+        <p style="color:#8f8;font-size:0.82rem;margin-bottom:0.4rem;">+ Best cost control, direct relationship and leverage if something goes wrong, freedom to shop rates</p>
+        <p style="color:#f88;font-size:0.82rem;">− One more relationship to manage, requires enough experience to evaluate forwarder quality yourself</p>
+      </div>
+      <div style="border:1px solid #1a1a1a;border-top:2px solid #e00;background:#050505;padding:1.25rem;">
+        <p style="color:#fff;font-weight:600;margin-bottom:0.75rem;">Factory-Arranged Shipping</p>
+        <p style="color:#8f8;font-size:0.82rem;margin-bottom:0.4rem;">+ Simplest for a first order, one point of contact, no forwarder research required</p>
+        <p style="color:#f88;font-size:0.82rem;">− Real cost premium, less direct leverage since the forwarder answers to the factory, not you</p>
+      </div>
+      <div style="border:1px solid #1a1a1a;border-top:2px solid #e00;background:#050505;padding:1.25rem;">
+        <p style="color:#fff;font-weight:600;margin-bottom:0.75rem;">Fully In-House Logistics</p>
+        <p style="color:#8f8;font-size:0.82rem;margin-bottom:0.4rem;">+ Lowest potential cost per shipment once volume justifies it, full control end to end</p>
+        <p style="color:#f88;font-size:0.82rem;">− Significant overhead to build and maintain, poor fit for anything but high, frequent volume</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -235,7 +272,27 @@ const breadcrumbSchema = {
     </div>
 
     <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">A Common Growth Path</h3>
-    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">A pattern worth knowing: many brands start with factory-arranged DDP shipping for their first order or two, paying the premium to remove logistics from the list of things they're learning at once. Once they understand the process — how customs clearance works, what a forwarder actually does, where delays tend to happen — they switch to FOB terms and arrange their own forwarder, capturing the cost savings once the learning curve is behind them. Very few buyers start with fully in-house logistics; it's usually where high-volume importers end up, not where anyone begins.</p>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">A pattern worth knowing: many brands start with factory-arranged DDP shipping for their first order or two, paying the premium to remove logistics from the list of things they're learning at once. Once they understand the process — how customs clearance works, what a forwarder actually does, where delays tend to happen — they switch to FOB terms and arrange their own forwarder, capturing the cost savings once the learning curve is behind them. Very few buyers start with fully in-house logistics; it's usually where high-volume importers end up, not where anyone begins.</p>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">Liability at Each Stage of the Journey</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">A shipment passes through several distinct stages — factory, pickup, port of origin, ocean or air freight, customs, final delivery — and who's responsible shifts at each one depending on the Incoterm and who's arranged the logistics:</p>
+    <ul style="color:#ddd;font-size:0.9rem;line-height:2;padding-left:1.2rem;margin-bottom:2rem;">
+      <li><strong style="color:#fff;">Factory to pickup:</strong> the factory, under every setup — this part doesn't change</li>
+      <li><strong style="color:#fff;">Loading at origin port:</strong> risk generally transfers to you here under FOB, but stays with the factory under CIF/DDP</li>
+      <li><strong style="color:#fff;">Ocean or air freight:</strong> whoever booked the freight (you or the factory) is the one with direct leverage over the carrier if there's damage or delay</li>
+      <li><strong style="color:#fff;">Customs clearance at destination:</strong> your responsibility under FOB and CIF; the factory's under DDP</li>
+      <li><strong style="color:#fff;">Final delivery to your door:</strong> yours to arrange under FOB and CIF; included under DDP</li>
+    </ul>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">Hidden Costs That Don't Show Up in the Headline Quote</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">Whichever setup you choose, watch for these — they rarely appear in an initial quote:</p>
+    <ul style="color:#ddd;font-size:0.9rem;line-height:2;padding-left:1.2rem;">
+      <li><strong style="color:#fff;">Demurrage</strong> — a daily fee charged by the shipping line if your container isn't picked up from the port within the free period</li>
+      <li><strong style="color:#fff;">Detention</strong> — a separate daily fee if the container itself isn't returned to the shipping line on time after being unloaded</li>
+      <li><strong style="color:#fff;">Port and terminal handling charges</strong> — often not itemized in an initial freight quote, but real and billed separately</li>
+      <li><strong style="color:#fff;">Documentation fees</strong> — charged by forwarders or brokers for preparing bills of lading, certificates of origin, and customs paperwork</li>
+      <li><strong style="color:#fff;">Cargo insurance</strong> — not automatically included unless the Incoterm requires it (CIF includes minimum coverage; FOB and most others don't)</li>
+    </ul>
   </div>
 </section>
 
@@ -255,6 +312,14 @@ const breadcrumbSchema = {
         <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> A cheaper freight quote is always the better choice</p>
         <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> A forwarder or broker with genuine garment-import experience and familiarity with your specific HTS codes can prevent costly clearance delays — sometimes worth more than the cheapest quoted rate. Cost and reliability aren't the same thing.</p>
       </div>
+      <div style="padding:1.25rem 1.5rem;border-top:1px solid #1a1a1a;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Mistake:</span> Skipping cargo insurance to save a small fee</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Reality:</span> Insurance isn't automatic under most Incoterms — FOB and DDP don't require it, only CIF does, and even then often at minimum coverage. A few hundred dollars in premium against the full value of a container is rarely the place to cut costs.</p>
+      </div>
+      <div style="padding:1.25rem 1.5rem;border-top:1px solid #1a1a1a;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Mistake:</span> Signing a purchase order before confirming which Incoterm applies</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Reality:</span> The Incoterm determines who's paying for freight, insurance, and customs, and where risk actually transfers — confirm it in writing before the order is placed, not after a dispute makes the ambiguity expensive.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -266,6 +331,7 @@ const breadcrumbSchema = {
     <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">
       <strong>Where the honest caveat sits:</strong> if you ask us to arrange CIF or DDP shipping, that convenience comes at a real premium over arranging your own forwarder — we're not going to pretend it's the same price. If you're comfortable managing that piece yourself, FOB will generally save you money.
     </p>
+    <p style="color:#888;font-size:0.8rem;margin-top:1rem;">This page is general guidance, not customs or legal advice — confirm specific duty rates, documentation requirements, and contractual terms with your own broker, forwarder, or trade counsel before finalizing an order.</p>
   </div>
 </section>
 
