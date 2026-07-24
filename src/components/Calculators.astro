@@ -177,14 +177,14 @@ function p1(){
   if(!g||!q){err('c1r','Please select garment type and quantity.');return}
   var p=PR[g][q];var m=QM[q];
   var lo=Math.round(p[0]*m);var hi=Math.round(p[1]*m);
-  show('c1r',row('Price per piece (FOB)','$'+p[0].toFixed(2)+' to $'+p[1].toFixed(2))+row('Est. order value','$'+lo.toLocaleString()+' to $'+hi.toLocaleString())+'<p class="cn">FOB Chittagong. Excludes shipping and import duty. Final price depends on exact fabric, construction, and finishing.</p><a href="/contact" class="clk">Request formal quote</a>')
+  show('c1r',row('Price per piece (FOB)','$'+p[0].toFixed(2)+' to $'+p[1].toFixed(2))+row('Est. order value','$'+lo.toLocaleString()+' to $'+hi.toLocaleString())+'<p class="cn">FOB Chittagong. Excludes shipping and import duty. Final price depends on exact fabric, construction, and finishing.</p><a href="/contact/" class="clk">Request formal quote</a>')
 }
 
 function p2(){
   var g=document.getElementById('c2g').value;
   if(!g){err('c2r','Please select a garment type.');return}
   var t=TL[g];
-  show('c2r',row('Sample ready in',t.s+' days')+row('Free remakes','Up to 10 times')+row('Bulk starts after','Your approval only')+row('Bulk production time',t.b+' days')+'<p class="cn">Timelines are estimates. Exact dates confirmed at order placement.</p><a href="/contact" class="clk">Start your sample</a>')
+  show('c2r',row('Sample ready in',t.s+' days')+row('Free remakes','Up to 10 times')+row('Bulk starts after','Your approval only')+row('Bulk production time',t.b+' days')+'<p class="cn">Timelines are estimates. Exact dates confirmed at order placement.</p><a href="/contact/" class="clk">Start your sample</a>')
 }
 
 function p3(){
@@ -192,18 +192,18 @@ function p3(){
   var p=parseInt(document.getElementById('c3p').value);
   if(!s||!p||s<1||p<1){err('c3r','Please enter number of styles and pieces per style.');return}
   var total=s*p;
-  if(p>=300){show('c3r',row('Status','<span style="color:#4ade80;font-weight:700">Your order qualifies</span>')+row('Total pieces',total.toLocaleString()+' pieces across '+s+' styles')+'<p class="cn">Multiple colorways within one style count toward your MOQ.</p><a href="/contact" class="clk">Get your quote now</a>')}
-  else if(p>=100){show('c3r',row('Status','<span style="color:#fff;font-weight:700">May qualify</span>')+'<p class="cn">Orders below 300 pieces per style are considered case by case. Contact us with your full brief.</p><a href="/contact" class="clk">Discuss your order</a>')}
-  else{show('c3r',row('Status','<span style="color:#e00;font-weight:700">Below our standard MOQ</span>')+'<p class="cn">Our minimum is 300 pieces per style. Consider combining styles or colorways.</p><a href="/contact" class="clk">Talk to us anyway</a>')}
+  if(p>=300){show('c3r',row('Status','<span style="color:#4ade80;font-weight:700">Your order qualifies</span>')+row('Total pieces',total.toLocaleString()+' pieces across '+s+' styles')+'<p class="cn">Multiple colorways within one style count toward your MOQ.</p><a href="/contact/" class="clk">Get your quote now</a>')}
+  else if(p>=100){show('c3r',row('Status','<span style="color:#fff;font-weight:700">May qualify</span>')+'<p class="cn">Orders below 300 pieces per style are considered case by case. Contact us with your full brief.</p><a href="/contact/" class="clk">Discuss your order</a>')}
+  else{show('c3r',row('Status','<span style="color:#e00;font-weight:700">Below our standard MOQ</span>')+'<p class="cn">Our minimum is 300 pieces per style. Consider combining styles or colorways.</p><a href="/contact/" class="clk">Talk to us anyway</a>')}
 }
 
 function p4(){
   var d=document.getElementById('c4d').value;
   var s=document.getElementById('c4s').value;
   if(!d||!s){err('c4r','Please select destination and order size.');return}
-  if(d==='other'){show('c4r','<p class="cn">Freight to your destination requires a custom quote.</p><a href="/contact" class="clk">Contact us for freight estimate</a>');return}
+  if(d==='other'){show('c4r','<p class="cn">Freight to your destination requires a custom quote.</p><a href="/contact/" class="clk">Contact us for freight estimate</a>');return}
   var f=FR[d];var ak=s.replace('s','a');
-  show('c4r',row('Sea freight (est.)','$'+f[s][0]+' to $'+f[s][1])+row('Air freight (est.)','$'+f[ak][0]+' to $'+f[ak][1])+'<p class="cn">Estimates based on current Chittagong port rates. Actual costs depend on cargo weight, volume, and market conditions.</p><a href="/contact" class="clk">Request freight quote</a>')
+  show('c4r',row('Sea freight (est.)','$'+f[s][0]+' to $'+f[s][1])+row('Air freight (est.)','$'+f[ak][0]+' to $'+f[ak][1])+'<p class="cn">Estimates based on current Chittagong port rates. Actual costs depend on cargo weight, volume, and market conditions.</p><a href="/contact/" class="clk">Request freight quote</a>')
 }
 
 function p5(){
@@ -220,7 +220,7 @@ function p5(){
   var dlo=Math.round(plo*dt);var dhi=Math.round(phi*dt);
   var tlo=plo+f[sk][0]+dlo;var thi=phi+f[sk][1]+dhi;
   var dp=Math.round(dt*100);
-  show('c5r',row('Production cost (FOB)','$'+plo.toLocaleString()+' to $'+phi.toLocaleString())+row('Est. sea freight','$'+f[sk][0]+' to $'+f[sk][1])+row('Est. import duty ('+dp+'%)','$'+dlo.toLocaleString()+' to $'+dhi.toLocaleString())+'<div style="border-top:1px solid #1a1a1a;margin:0.5rem 0;padding-top:0.5rem">'+row('<span style="color:#fff;font-weight:700">Total landed cost</span>','<span style="font-size:14px;font-weight:700">$'+tlo.toLocaleString()+' to $'+thi.toLocaleString()+'</span>')+'</div><p class="cn">'+DN[d]+'</p><p class="cn">This estimate is for planning only. Always verify with your supplier, freight forwarder, and customs broker.</p><a href="/contact" class="clk">Get a formal quote</a>')
+  show('c5r',row('Production cost (FOB)','$'+plo.toLocaleString()+' to $'+phi.toLocaleString())+row('Est. sea freight','$'+f[sk][0]+' to $'+f[sk][1])+row('Est. import duty ('+dp+'%)','$'+dlo.toLocaleString()+' to $'+dhi.toLocaleString())+'<div style="border-top:1px solid #1a1a1a;margin:0.5rem 0;padding-top:0.5rem">'+row('<span style="color:#fff;font-weight:700">Total landed cost</span>','<span style="font-size:14px;font-weight:700">$'+tlo.toLocaleString()+' to $'+thi.toLocaleString()+'</span>')+'</div><p class="cn">'+DN[d]+'</p><p class="cn">This estimate is for planning only. Always verify with your supplier, freight forwarder, and customs broker.</p><a href="/contact/" class="clk">Get a formal quote</a>')
 }
 
 document.addEventListener('DOMContentLoaded', function() {
