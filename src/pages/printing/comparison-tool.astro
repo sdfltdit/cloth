@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Printing Method Comparison Tool | Screen Print vs DTF vs DTG";
+const pageDescription = "Select 2-3 garment printing methods and compare cost by volume, durability, fabric fit, MOQ, and design limits side by side.";
+
+// ─────────────────────────────────────────────────────────────
+// Data source: this mirrors the content already published on each
+// method's own page (src/pages/printing/*.astro), kept as a single
+// structured object here so the comparison stays consistent with
+// the long-form pages rather than drifting into a second copy of
+// the facts. When a new method page is added, add one entry here.
+// [VERIFY] tags carry over from the source pages — still SDF-
+// specific numbers to confirm, not verified production data.
+// ─────────────────────────────────────────────────────────────
+const methods = {
+  "screen-printing": {
+    name: "Screen Printing",
+    url: "/printing/screen-printing/",
+    bestDesign: "Spot-color, 1–6 solid colors, bold shapes",
+    bestFabric: "100% cotton, cotton-poly blends up to ~50/50",
+    moq: "[VERIFY] Not cost-effective below ~24–50 pcs per design",
+    costLow: "Expensive per piece under ~50 pcs — fixed screen setup cost",
+    costHigh: "Cheapest per piece at 300+ pcs for simple, low-color designs",
+    durability: "High if fully cured — cracking is the main long-term failure mode, usually from under-curing",
+    handFeel: "Heavier / stiffer — ink sits on top of fabric, more so with thick or multi-layer prints",
+    colorLimit: "Practical range 1–6 solid colors; each color = one more screen and setup cost",
+    gradientSupport: "Poor native fit — separates art into flat color layers, not built for continuous tone",
+  },
+  "dtf-printing": {
+    name: "DTF Printing",
+    url: "/printing/dtf-printing/",
+    bestDesign: "Full-color, gradients, photo-realistic art — any color count",
+    bestFabric: "Cotton, polyester, blends, nylon — broadest fabric range of the two",
+    moq: "None — cost-effective down to a single piece",
+    costLow: "[VERIFY] Often the cheapest option at 1–24 pcs — no per-color or screen setup cost",
+    costHigh: "[VERIFY] Usually overtaken by screen printing at 300+ pcs for simple, low-color designs",
+    durability: "Good with correct press settings — edge lift at corners is the main long-term failure mode, usually from under-pressing",
+    handFeel: "Distinct film-and-powder layer — can feel and occasionally look slightly different at the edges",
+    colorLimit: "No practical limit — full CMYK plus white in one pass, cost doesn't scale with color count",
+    gradientSupport: "Strong native fit — continuous-tone digital print, no color separation needed",
+  },
+};
+
+const methodKeys = Object.keys(methods);
+
+const compareRows = [
+  { key: "bestDesign", label: "Best Design Type" },
+  { key: "bestFabric", label: "Best Fabric" },
+  { key: "moq", label: "Minimum Order Quantity" },
+  { key: "costLow", label: "Cost at Low Volume" },
+  { key: "costHigh", label: "Cost at High Volume" },
+  { key: "durability", label: "Wash Durability" },
+  { key: "handFeel", label: "Hand Feel" },
+  { key: "colorLimit", label: "Color Count Limit" },
+  { key: "gradientSupport", label: "Gradient / Photo Support" },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Printing Method Comparison Tool",
+  "description": pageDescription,
+  "url": "https://sdfltd.com/printing/comparison-tool/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+
+  <div class="container mx-auto max-w-4xl px-4">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/printing/">Printing</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Comparison Tool</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="py-16 px-4">
+    <div class="container mx-auto max-w-4xl">
+      <div class="text-center mb-10">
+        <div class="hero__label">Printing Methods · Compare</div>
+        <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">Compare Garment Printing Methods</h1>
+        <p class="text-white/80 text-lg">Select 2–3 methods to see cost, durability, fabric fit, and design limits side by side.</p>
+      </div>
+
+      <div class="snake-card p-6 md:p-8">
+        <div class="mb-2 text-xs uppercase tracking-widest text-[#e00] font-semibold">Select methods to compare (2–3)</div>
+        <div id="methodCheckboxes" class="flex flex-wrap gap-3 mb-2">
+          {methodKeys.map((key) => (
+            <label class="method-checkbox">
+              <input type="checkbox" class="method-checkbox__input" value={key} checked />
+              <span>{methods[key].name}</span>
+            </label>
+          ))}
+        </div>
+        <p id="selectHint" class="text-xs text-white/50 mt-2">Choose at least 2 methods to compare.</p>
+      </div>
+
+      <div id="comparisonWrapper" class="mt-8 overflow-x-auto">
+        <table id="comparisonTable" class="comparison-table">
+          <thead>
+            <tr id="comparisonHeadRow">
+              <th>Factor</th>
+            </tr>
+          </thead>
+          <tbody id="comparisonBody">
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-12 text-center">
+        <p class="text-white/70 mb-4">Not sure which method fits your order? <a href="/#contact" class="text-[#e00] hover:text-[#e00]">Get a free printing consultation</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:3rem 0;">
+    <div class="container mx-auto max-w-4xl px-4">
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#000000;">
+        <a href="/printing/screen-printing/" style="background:#000;padding:1.5rem;text-decoration:none;display:block;transition:background 0.2s;" onmouseover="this.style.background='#0a0a0a'" onmouseout="this.style.background='#000'">
+          <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.4rem;">Guide</div>
+          <div style="font-size:0.85rem;color:#fff;">Screen Printing — Full Guide</div>
+        </a>
+        <a href="/printing/dtf-printing/" style="background:#000;padding:1.5rem;text-decoration:none;display:block;transition:background 0.2s;" onmouseover="this.style.background='#0a0a0a'" onmouseout="this.style.background='#000'">
+          <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.4rem;">Guide</div>
+          <div style="font-size:0.85rem;color:#fff;">DTF Printing — Full Guide</div>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container { max-width: 1200px; }
+  .breadcrumb { padding: 1rem 0; }
+  .breadcrumb__list { display: flex; list-style: none; gap: 0.5rem; padding: 0; margin: 0; font-size: 0.875rem; color: #ccc; flex-wrap: wrap; }
+  .breadcrumb__item:not(:last-child)::after { content: "/"; margin-left: 0.5rem; color: #333; }
+  .breadcrumb__item a { color: #ccc; text-decoration: none; }
+  .breadcrumb__item a:hover { color: #e00; }
+  .breadcrumb__item--current { color: #fff; }
+  .hero__label { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #e00; margin-bottom: 0.75rem; font-weight: 600; }
+
+  .method-checkbox {
+    display: flex; align-items: center; gap: 0.5rem; background: #000; border: 1px solid #333;
+    border-radius: 4px; padding: 0.6rem 1rem; cursor: pointer; font-size: 0.85rem; color: #ccc;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .method-checkbox:has(.method-checkbox__input:checked) { border-color: #e00; color: #fff; }
+  .method-checkbox.is-checked { border-color: #e00; color: #fff; }
+  .method-checkbox__input { accent-color: #e00; width: 1rem; height: 1rem; }
+
+  .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .comparison-table th, .comparison-table td { padding: 0.9rem 1rem; text-align: left; border-bottom: 1px solid #333; vertical-align: top; }
+  .comparison-table thead th { background: #111; color: #fff; font-weight: 600; white-space: nowrap; }
+  .comparison-table thead th:first-child { color: #e00; }
+  .comparison-table tbody td:first-child { color: #e00; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+  .comparison-table tbody td:not(:first-child) { color: #ccc; line-height: 1.6; }
+  .comparison-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+  #selectHint.is-error { color: #e00; }
+</style>
+
+<script define:vars={{ methods, methodKeys, compareRows }}>
+  const checkboxContainer = document.getElementById('methodCheckboxes');
+  const headRow = document.getElementById('comparisonHeadRow');
+  const body = document.getElementById('comparisonBody');
+  const hint = document.getElementById('selectHint');
+  const wrapper = document.getElementById('comparisonWrapper');
+
+  function getSelected() {
+    return Array.from(checkboxContainer.querySelectorAll('.method-checkbox__input:checked')).map((el) => el.value);
+  }
+
+  function updateCheckboxStyles() {
+    checkboxContainer.querySelectorAll('.method-checkbox').forEach((label) => {
+      const input = label.querySelector('.method-checkbox__input');
+      label.classList.toggle('is-checked', input.checked);
+    });
+  }
+
+  function render() {
+    updateCheckboxStyles();
+    let selected = getSelected();
+
+    // Cap at 3 selections — uncheck the earliest-checked extra rather than silently ignoring the click
+    if (selected.length > 3) {
+      const checkboxes = Array.from(checkboxContainer.querySelectorAll('.method-checkbox__input'));
+      const toUncheck = checkboxes.find((el) => el.checked && el.value !== selected[selected.length - 1] && selected.slice(0, -1).includes(el.value));
+      if (toUncheck) toUncheck.checked = false;
+      selected = getSelected();
+    }
+
+    if (selected.length < 2) {
+      hint.textContent = 'Choose at least 2 methods to compare.';
+      hint.classList.add('is-error');
+      wrapper.style.display = 'none';
+      return;
+    }
+
+    hint.classList.remove('is-error');
+    hint.textContent = `Comparing ${selected.length} methods.`;
+    wrapper.style.display = '';
+
+    headRow.innerHTML = '<th>Factor</th>' + selected.map((key) => `<th>${methods[key].name}</th>`).join('');
+    body.innerHTML = compareRows.map((row) => {
+      const cells = selected.map((key) => `<td>${methods[key][row.key]}</td>`).join('');
+      return `<tr><td>${row.label}</td>${cells}</tr>`;
+    }).join('');
+  }
+
+  checkboxContainer.addEventListener('change', render);
+  render();
+</script>
