@@ -13,6 +13,8 @@ const labelTypes = [
     function: "Identifies the brand and functions as the first physical brand touchpoint a customer sees after purchase.",
     material: "Woven damask, satin, or printed cotton, depending on the brand's positioning and budget.",
     placement: "Center back neck, most commonly. Some brands move it to the side seam or waistband for a cleaner neckline.",
+    typicalSize: "Roughly 2 x 5 cm to 3 x 8 cm, depending on logo complexity and garment scale.",
+    legallyRequired: "No — branding choice",
     note: "This is almost always the highest-visibility label on the garment, so material and print quality directly affect perceived product quality.",
   },
   {
@@ -22,6 +24,8 @@ const labelTypes = [
     function: "Helps the customer and retailer identify the correct fit quickly, especially important for online returns processing.",
     material: "Printed satin or cotton tape, sometimes combined with the main or care label to reduce the number of separate labels.",
     placement: "Side seam or inside the main label, positioned for quick visual scanning.",
+    typicalSize: "Roughly 1.5 x 3 cm, small enough to sit unobtrusively at a seam.",
+    legallyRequired: "No — retailer/buyer convention, not law",
     note: "Size labels must match the sizing standard the brand publishes elsewhere — a mismatch between the label and the size chart is a common source of return disputes.",
   },
   {
@@ -31,6 +35,8 @@ const labelTypes = [
     function: "Tells the wearer how to maintain the garment without damaging fabric, print, or structure.",
     material: "Printed satin or nylon tape, chosen for softness against the skin since it usually sits directly on the neckline.",
     placement: "Center back neck, either as a separate label below the main label or combined with it.",
+    typicalSize: "Roughly 2 x 6 cm, sized to fit five care symbols in a row.",
+    legallyRequired: "Yes — US, Australia; recommended in EU/UK/Canada",
     note: "Care symbols follow the ISO 3758 standard internationally, while the US uses text-based instructions under the FTC Care Labeling Rule instead of symbols alone.",
   },
   {
@@ -40,6 +46,8 @@ const labelTypes = [
     function: "Legally required disclosure in most major markets, and a key input for how the customer expects the garment to feel, stretch, and wear.",
     material: "Printed satin, cotton, or woven tape — must remain legible for the life of the garment in most jurisdictions.",
     placement: "Center back neck, usually combined with the care label into a single tag.",
+    typicalSize: "Roughly 2 x 6 cm, often sharing a single tag with the care label.",
+    legallyRequired: "Yes — US, EU, UK, Canada; not federally mandated in Australia",
     note: "Fiber names must match the official regulatory generic names — only fiber names permitted under the applicable regulation may be used, not marketing terms.",
   },
   {
@@ -49,6 +57,8 @@ const labelTypes = [
     function: "Legally mandated customs and consumer-disclosure requirement in the US, EU, and most import markets.",
     material: "Printed satin or cotton tape, usually combined with the fiber content and care label.",
     placement: "Center back neck, grouped with fiber content and care information.",
+    typicalSize: "Roughly 1.5 x 4 cm, often the smallest line on a shared care/fiber/origin tag.",
+    legallyRequired: "Yes — US (customs); not required on-label in Canada; recommended in EU/UK",
     note: "Country of origin is determined by where the garment underwent its last 'substantial transformation,' not simply where fabric was sourced — this matters for multi-country supply chains.",
   },
   {
@@ -57,7 +67,9 @@ const labelTypes = [
     definition: "The warning label communicates safety hazards, most commonly flammability risk, choking hazards from small parts, or drawstring safety notices for children's wear.",
     function: "Reduces liability and protects the wearer, particularly critical for children's sleepwear and infant garments.",
     material: "Printed satin or heat transfer, chosen for high-contrast readability.",
-    placement: "Center back neck for general warnings; hangtag or hem for point-of-sale flammability notices.",
+    placement: "Center back neck for general warnings; hem or a supplementary point-of-sale label for flammability notices.",
+    typicalSize: "Varies by regulation — the UK's children's nightwear warning specifically mandates 10-point bold red Arial text, which sets a practical minimum size.",
+    legallyRequired: "Yes — for specific categories (children's sleepwear, drawstrings) in US, UK, EU",
     note: "Children's sleepwear in the US falls under CPSC flammability standards (16 CFR Part 1615/1616), which carry specific warning label language requirements distinct from general apparel.",
   },
   {
@@ -67,6 +79,8 @@ const labelTypes = [
     function: "Delivers a soft, tag-free feel — popular for activewear, underwear, and children's wear where a stitched label could cause skin irritation.",
     material: "Vinyl, PU, or silicone-based transfer film.",
     placement: "Inside back neck or waistband, applied flat against the fabric.",
+    typicalSize: "Comparable to a sewn main label, roughly 2 x 5 cm, since it usually replaces one rather than adding a new element.",
+    legallyRequired: "No — a construction method choice, not a distinct legal category",
     note: "Heat transfer labels avoid the itch factor of a woven label but are generally less durable under high-heat industrial laundering than a sewn label.",
   },
   {
@@ -76,6 +90,8 @@ const labelTypes = [
     function: "Adds a distinctive branding detail visible even when the garment is folded or displayed on a hanger.",
     material: "Woven or printed satin, folded and sewn along a seam.",
     placement: "Side seam, typically at the hem or underarm.",
+    typicalSize: "Roughly 1 x 4 cm, with about half the length protruding from the seam.",
+    legallyRequired: "No — branding choice",
     note: "Flag labels are a design accent more than a compliance label — brands use them for shelf differentiation rather than required disclosure.",
   },
   {
@@ -85,6 +101,8 @@ const labelTypes = [
     function: "Functional hanging point on some garment categories, and a recognizable branding element on others.",
     material: "Woven or twill tape.",
     placement: "Center back neck or side seam, folded into a loop shape.",
+    typicalSize: "Roughly 1 x 6 cm before folding, forming a loop of about 2 cm.",
+    legallyRequired: "No — branding/functional choice",
     note: "Loop labels have become more of a heritage branding signal than a functional necessity, since most garments today are displayed on hangers rather than hooks.",
   },
   {
@@ -93,7 +111,9 @@ const labelTypes = [
     definition: "An RFID or smart label embeds a radio-frequency identification chip into the label substrate, allowing the garment to be scanned electronically for inventory, authentication, or supply chain tracking.",
     function: "Enables retail inventory automation, loss prevention, and — increasingly — digital product passport compliance for EU-bound apparel.",
     material: "Woven or printed label with an embedded RFID inlay, or a separate adhesive RFID tag.",
-    placement: "Center back neck or a dedicated hangtag, depending on whether it needs to survive laundering.",
+    placement: "Center back neck or waistband, chosen based on whether the chip needs to survive repeated laundering.",
+    typicalSize: "The visible label matches standard main-label dimensions (roughly 2 x 5 cm); the embedded RFID inlay itself is typically under 1 cm.",
+    legallyRequired: "Not yet — but moving toward mandatory for EU-bound textiles from 2027",
     note: "The EU's Digital Product Passport requirement, phasing in for textiles from 2027 under the Ecodesign for Sustainable Products Regulation, is accelerating RFID and QR-based smart label adoption ahead of the mandate.",
   },
 ];
@@ -125,6 +145,14 @@ const pageSchema = {
     {
       "@type": "FAQPage",
       "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between a label and a hangtag?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A label is sewn or bonded permanently into the garment and stays with it for the item's life. A hangtag is a removable paper or card attached with a string or plastic barb, meant to be cut off after purchase. Mandatory disclosures like fiber content and country of origin must legally appear on a permanent label in most markets — a hangtag can repeat that information for marketing purposes but cannot substitute for it."
+          }
+        },
         {
           "@type": "Question",
           "name": "What is the difference between a main label and a care label?",
@@ -201,9 +229,27 @@ const pageSchema = {
   <section class="section">
     <div class="section__container">
       <div class="section__header">
+        <span class="section__label">Common Confusion</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Label vs. Hangtag: They Are Not the Same Thing</h2>
+      </div>
+      <div class="section__text">
+        <p>Before the ten types below, one distinction resolves most first-time confusion: a label is sewn permanently into the garment and stays with it for the item's lifetime; a hangtag is a removable paper or card attached with a string, ribbon, or plastic barb, meant to be cut off after purchase. This isn't just a materials difference — it's a legal one. In the US, EU, Canada, UK, and most other markets, mandatory disclosures like fiber content, care instructions, and country of origin must appear on a permanent label. A hangtag can repeat that information for marketing purposes, but it cannot legally substitute for it, because a removable tag doesn't travel with the garment through its use.</p>
+
+        <p>This guide covers the ten permanent, sewn or bonded label types below. Hangtags — while an important branding and packaging decision — are a separate spec entirely, typically ordered through packaging rather than trim, and are not covered in this cluster.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
         <span class="section__label">Quick Reference</span>
         <div class="accent-line"></div>
         <h2 class="section__title">The 10 Garment Label Types at a Glance</h2>
+      </div>
+      <div class="section__text">
+        <p>Not every type below is legally required — some are purely branding decisions. The "Legally Required" column shows which ones carry a compliance obligation in at least one major market (see the <a href="/garment-labels/compliance-and-certification/">Compliance & Certification guide</a> for exactly which market requires which field).</p>
       </div>
       <div class="table-wrapper">
         <table class="reference-table">
@@ -212,6 +258,7 @@ const pageSchema = {
               <th>Label Type</th>
               <th>Primary Purpose</th>
               <th>Typical Placement</th>
+              <th>Legally Required?</th>
             </tr>
           </thead>
           <tbody>
@@ -220,6 +267,7 @@ const pageSchema = {
                 <td><a href={`#${label.id}`}>{label.name}</a></td>
                 <td>{label.function}</td>
                 <td>{label.placement}</td>
+                <td>{label.legallyRequired}</td>
               </tr>
             ))}
           </tbody>
@@ -251,6 +299,14 @@ const pageSchema = {
           <div class="detail-card">
             <h3 class="detail-card__title">Placement</h3>
             <p class="detail-card__text">{label.placement}</p>
+          </div>
+          <div class="detail-card">
+            <h3 class="detail-card__title">Typical Size</h3>
+            <p class="detail-card__text">{label.typicalSize}</p>
+          </div>
+          <div class="detail-card">
+            <h3 class="detail-card__title">Legally Required?</h3>
+            <p class="detail-card__text">{label.legallyRequired}</p>
           </div>
         </div>
         <p class="section__text section__text--note">{label.note}</p>
@@ -520,7 +576,7 @@ const pageSchema = {
 
   .detail-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: var(--spacing-sm);
     margin: var(--spacing-md) 0;
   }
@@ -580,12 +636,6 @@ const pageSchema = {
 
   .section__cta--secondary:hover {
     border-color: var(--color-primary);
-  }
-
-  @media (max-width: 900px) {
-    .detail-grid {
-      grid-template-columns: 1fr;
-    }
   }
 
   @media (max-width: 480px) {
