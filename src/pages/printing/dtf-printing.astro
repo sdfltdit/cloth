@@ -1,0 +1,600 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "DTF Printing on Garments: Process, Cost, Durability & When to Use It";
+const pageDescription = "How DTF (Direct to Film) printing works step by step, which fabrics it suits, real cost behavior by order volume, wash durability, and when screen printing or DTG beats it instead.";
+
+const lastUpdated = "July 25, 2026";
+const lastUpdatedISO = "2026-07-25";
+
+// ─────────────────────────────────────────────────────────────
+// NOTE FOR SDF TEAM — READ BEFORE PUBLISHING:
+// Every value marked [VERIFY] is a widely-documented industry-
+// standard figure, not an SDF production number. Per the content
+// cluster plan's "Fact-accuracy rules," these must be checked
+// against SDF's actual DTF line data — powder type/weight, dryer
+// temp/time, real cost-per-piece — before this page goes live.
+// ─────────────────────────────────────────────────────────────
+
+const quickFacts = [
+  { label: "Best design type", value: "Full-color, gradients, photo-realistic art — any color count" },
+  { label: "Best fabric", value: "Cotton, polyester, blends, nylon — broader range than screen printing" },
+  { label: "Cost curve", value: "[VERIFY] Flat-ish per piece across volume; no screen setup cost to amortize" },
+  { label: "Wash durability", value: "Good with correct powder cure; edge lift is the main long-term failure mode" },
+];
+
+const processSteps = [
+  {
+    id: "print-film",
+    title: "1. Print the design onto film",
+    text: "The design is printed in reverse (mirrored) onto a special PET transfer film using a DTF printer, which lays down CMYK color plus a white ink layer. The white layer prints first in reverse order — meaning it ends up as the base layer against the fabric — so the color sits on top of an opaque white backing regardless of what color garment it's applied to.",
+  },
+  {
+    id: "powder-application",
+    title: "2. Adhesive powder application",
+    text: "While the ink is still wet, a hot-melt adhesive powder is applied evenly across the printed film and the excess is shaken or vacuumed off, leaving powder stuck only to the wet ink. This powder is what bonds the transfer to fabric later — it's the defining ingredient that separates DTF from a plain inkjet transfer.",
+  },
+  {
+    id: "curing-film",
+    title: "3. Curing the powder onto the film",
+    text: "The powder-coated film passes through a curing oven or under a heat press briefly — [VERIFY] enough to melt the adhesive powder into the ink without fully activating its bonding strength yet. This leaves a stable, storable transfer sheet that can sit for later use, which is part of why DTF suits small and unpredictable orders well — transfers can be printed ahead and pressed on demand.",
+  },
+  {
+    id: "heat-press-application",
+    title: "4. Heat pressing onto the garment",
+    text: "The cured film is placed ink-side down on the garment and pressed under heat and firm, even pressure for a set time. [VERIFY] This is typically in the range of 15–30 seconds at roughly 300–325°F (150–163°C), though exact time/temp/pressure varies by powder type and press. The heat fully melts the adhesive powder into the fabric fibers, bonding the transfer permanently.",
+  },
+  {
+    id: "cold-peel",
+    title: "5. Peeling the film",
+    text: "Once pressed, the PET film is peeled away — most DTF films are designed as a cold peel, meaning the transfer needs to cool to room temperature first, or the design can lift with the film. Peeling too early is one of the most common causes of a patchy or incomplete transfer on an otherwise correctly pressed print.",
+  },
+  {
+    id: "post-press",
+    title: "6. Post-press (optional second press)",
+    text: "Many shops run a brief second press over the finished print, sometimes with a Teflon or parchment sheet on top, to fully set the adhesive and give the surface a slightly matte, more fabric-like finish rather than the glossier look straight off the film.",
+  },
+];
+
+const equipment = [
+  { name: "DTF printer", role: "A specialized inkjet printer with a white-ink channel, printing CMYK plus white in reverse onto PET film." },
+  { name: "Powder shaker / applicator", role: "Applies hot-melt adhesive powder evenly onto wet ink and removes excess before curing." },
+  { name: "Curing oven or pre-press unit", role: "[VERIFY] Melts the powder into a stable, storable film layer without fully bonding it yet — a separate step from final application." },
+  { name: "Heat press", role: "Applies controlled heat and even pressure to bond the cured transfer permanently to the garment." },
+  { name: "PET transfer film", role: "The carrier film the design is printed on; peeled away after the transfer bonds to fabric." },
+];
+
+const designLimits = [
+  { factor: "Color count", note: "No practical limit — DTF prints full CMYK plus white in one pass, so a one-color logo and a 20-color photo cost roughly the same to produce, unlike screen printing." },
+  { factor: "Gradients / photo-realism", note: "A natural strength. Because DTF is a continuous-tone digital print rather than separated spot colors, gradients, shading, and photographic detail reproduce directly without special separation work." },
+  { factor: "Fine detail / small text", note: "[VERIFY] Generally good, limited more by printer resolution than by the process itself; extremely fine hairline detail can still soften slightly once powder and heat are applied." },
+  { factor: "One-off / highly variable designs", note: "A strength rather than a limitation — each transfer is printed independently, so a batch of completely different one-off designs costs the same per-piece as a batch of identical ones." },
+];
+
+const fabricFit = [
+  { fabric: "100% Cotton", fit: "Ideal", note: "Bonds cleanly with standard press settings; among the most forgiving fabrics for DTF." },
+  { fabric: "100% Polyester / Performance Fabric", fit: "Good", note: "One of DTF's real advantages over screen printing — handles poly and blends without the dye-migration workarounds screen printing needs." },
+  { fabric: "Cotton-Poly Blends", fit: "Ideal", note: "No blend-ratio penalty the way screen printing has; DTF's adhesive bond isn't dependent on fiber absorption the same way." },
+  { fabric: "Nylon / Ripstop", fit: "Good", note: "[VERIFY] Generally works with adjusted press time/temperature, whereas screen printing struggles with adhesion on smooth nylon surfaces." },
+  { fabric: "Stretch / Spandex-heavy Fabric", fit: "Caution", note: "The film-and-powder layer is less flexible than the fabric underneath; heavy stretch can eventually crack the print at stress points if not tested first." },
+];
+
+const costBehavior = [
+  { tier: "Small (1–24 pcs)", behavior: "[VERIFY] Often the cheapest method at this volume — no screen setup, no per-color cost, works economically even for single pieces or samples." },
+  { tier: "Mid (25–150 pcs)", behavior: "[VERIFY] Cost per piece stays fairly flat since there's no fixed setup to spread out; DTF and screen printing are often close here depending on color count." },
+  { tier: "Large (300+ pcs simple design)", behavior: "[VERIFY] Screen printing usually overtakes DTF on cost at this volume for simple, low-color designs, since screen printing's fixed setup cost becomes negligible per unit while DTF's per-piece film/ink cost stays roughly constant." },
+  { tier: "Large volume, full-color/complex design", behavior: "DTF often still wins here even at high volume, because a complex or photo-realistic design would require many expensive screens, while DTF's cost doesn't scale with color count at all." },
+];
+
+const prosAndCons = {
+  pros: [
+    "No minimum order quantity — cost-effective down to a single piece",
+    "No per-color cost — full-color and photo-realistic designs cost the same to produce as a one-color logo",
+    "Works across a wider range of fabrics than screen printing, including poly and blends, without special ink formulations",
+    "Transfers can be printed ahead of time and pressed on demand, useful for pre-order or on-demand business models",
+    "Faster turnaround for small, urgent, or highly variable orders",
+  ],
+  cons: [
+    "[VERIFY] At high volume with a simple design, screen printing is usually cheaper per piece",
+    "The print sits as a distinct film-and-powder layer on the fabric, which can be felt and, on close inspection, sometimes seen as a slight edge or sheen",
+    "Edge lift over time is a real failure mode, especially with incomplete pressing or on high-stretch fabric",
+    "Quality depends heavily on consistent press time, temperature, and pressure — more press-technique-sensitive than some methods",
+    "Full-coverage or all-over prints can feel stiffer than an equivalent screen-printed or sublimated design",
+  ],
+};
+
+const durability = {
+  intro: "DTF's durability story is different from screen printing's — the failure mode isn't cracking ink, it's the transfer lifting at the edges.",
+  points: [
+    { label: "Press settings are the real durability variable", text: "[VERIFY] A transfer pressed at the correct time, temperature, and pressure typically holds through dozens of home wash cycles with minimal edge wear; under-pressing is the most common cause of a transfer that starts peeling at the corners within the first several washes." },
+    { label: "Edge lift vs. cracking", text: "Where an under-cured screen print cracks across the printed area, a poorly applied DTF transfer tends to lift starting at the edges or corners first, since that's where adhesive contact is easiest to disturb." },
+    { label: "Wash testing protocol", text: "The same basic approach used for screen printing applies here — a set number of home-machine wash-and-dry cycles, then a visual check, but specifically watching corners and edges of the design rather than the interior of large fill areas." },
+  ],
+};
+
+const useCases = [
+  { garment: "Small or one-off orders", why: "No screen setup and no MOQ make DTF the practical choice below the volume where screen printing becomes cost-competitive." },
+  { garment: "Full-color or photo-realistic designs, any volume", why: "Cost doesn't scale with color count, so complex artwork that would need many expensive screens costs the same as a simple design in DTF." },
+  { garment: "Mixed-fabric or polyester-heavy orders", why: "Avoids the dye-migration workarounds screen printing needs on poly-heavy fabric." },
+  { garment: "Print-on-demand or made-to-order businesses", why: "Transfers can be produced in advance and pressed only when an order comes in, without inventory of pre-printed blanks per design." },
+  { garment: "Very high volume, simple 1–2 color logo", why: "Usually not the cheapest option here — screen printing typically overtakes DTF on cost once fixed setup is spread across enough identical pieces." },
+];
+
+const faqs = [
+  {
+    q: "Does DTF printing crack after washing?",
+    a: "Not in the same way screen printing does. DTF's more common long-term issue is edge lift — the transfer starting to peel at corners or edges — rather than cracking across the printed area, and it's almost always tied to under-pressing (wrong time, temperature, or pressure) during application rather than a flaw in the film or powder itself.",
+  },
+  {
+    q: "What's the minimum order quantity for DTF printing?",
+    a: "Effectively none. DTF has no per-color screen setup, so a single transfer can be printed and pressed cost-effectively — this is one of its core advantages over screen printing, which needs enough volume to justify screen-making costs.",
+  },
+  {
+    q: "Is DTF printing cheaper than screen printing?",
+    a: "[VERIFY] It depends on volume and color count. At low volume or with complex, multi-color designs, DTF is usually cheaper because there's no per-color setup cost. At high volume with a simple, low-color design, screen printing usually becomes cheaper per piece because its fixed setup cost gets spread across enough units.",
+  },
+  {
+    q: "Can DTF be used on polyester and blended fabrics?",
+    a: "Yes, and this is one of DTF's practical advantages — it handles polyester and cotton-poly blends without the dye-migration risk that screen printing faces on higher-poly fabrics, since the adhesive-powder bond doesn't depend on fiber absorption the same way ink does.",
+  },
+  {
+    q: "Why does a DTF print feel different from a screen print?",
+    a: "DTF applies ink onto a separate film, then bonds that whole printed layer — ink plus adhesive powder — onto the fabric as one unit. That's a distinct layer sitting on top of the fibers, which can feel and occasionally look slightly different at the edges compared to plastisol ink printed and cured directly into the fabric surface.",
+  },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "dateModified": lastUpdatedISO,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Printing", "item": "https://sdfltd.com/printing/" },
+          { "@type": "ListItem", "position": 3, "name": "DTF Printing", "item": Astro.url.href },
+        ],
+      },
+    },
+    {
+      "@type": "Article",
+      "@id": Astro.url.href + "#article",
+      "headline": pageTitle,
+      "description": pageDescription,
+      "author": { "@id": "https://sdfltd.com/#founder" },
+      "publisher": { "@id": "https://sdfltd.com/#org" },
+      "dateModified": lastUpdatedISO,
+      "mainEntityOfPage": { "@id": Astro.url.href },
+      "inLanguage": "en",
+    },
+    {
+      "@type": "HowTo",
+      "name": "How DTF Printing Works on Garments",
+      "step": processSteps.map((s) => ({
+        "@type": "HowToStep",
+        "name": s.title,
+        "text": s.text,
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={pageSchema} dateModified={lastUpdatedISO}>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/printing/">Printing</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">DTF Printing</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__label">Printing Methods · DTF Printing</div>
+      <h1 class="hero__title">DTF (Direct to Film) Printing on Garments</h1>
+      <p class="hero__description">
+        DTF prints a full-color design onto a special film, coats it with adhesive powder, then heat-presses the whole layer onto the garment. No screens, no per-color setup, and no fabric-type restriction the way screen printing has — which is why it's become the default choice for small orders and complex, full-color designs.
+      </p>
+      <div class="byline">
+        <div class="byline__dot" aria-hidden="true">CR</div>
+        <div>
+          <div class="byline__name">Chowdhury Remon — Founder &amp; CEO, SDF Clothing</div>
+          <div class="byline__sub">27+ years in Bangladesh apparel manufacturing · Reviewed for technical accuracy · Last updated {lastUpdated}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="quick-answer">
+        <span class="quick-answer__label">Quick Answer</span>
+        <p>DTF printing prints a design in reverse onto PET film, coats it with hot-melt adhesive powder, then heat-presses the whole layer onto the garment before peeling the film away. It handles full-color and photo-realistic designs on almost any fabric — cotton, polyester, blends — with no minimum order quantity, but usually costs more per piece than screen printing once an order reaches high volume with a simple design.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">At a Glance</span>
+        <div class="accent-line"></div>
+      </div>
+      <div class="detail-grid detail-grid--4">
+        {quickFacts.map((f) => (
+          <div class="detail-card">
+            <h3 class="detail-card__title">{f.label}</h3>
+            <p class="detail-card__text">{f.value}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Process</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How DTF Printing Actually Works</h2>
+        <p class="section__text">Six steps, from a printed film to a heat-bonded, peeled transfer.</p>
+      </div>
+      {processSteps.map((s) => (
+        <div class="step-block" id={s.id}>
+          <h3 class="step-block__title">{s.title}</h3>
+          <p class="section__text">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Equipment</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Machines & Equipment Used</h2>
+      </div>
+      <div class="detail-grid detail-grid--3">
+        {equipment.map((e) => (
+          <div class="detail-card">
+            <h3 class="detail-card__title">{e.name}</h3>
+            <p class="detail-card__text">{e.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Fabric Fit</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Which Fabrics DTF Printing Works Best On</h2>
+      </div>
+      <div class="table-wrapper">
+        <table class="reference-table">
+          <thead>
+            <tr><th>Fabric</th><th>Fit</th><th>Why</th></tr>
+          </thead>
+          <tbody>
+            {fabricFit.map((f) => (
+              <tr>
+                <td>{f.fabric}</td>
+                <td><span class={`fit-badge fit-badge--${f.fit.toLowerCase()}`}>{f.fit}</span></td>
+                <td>{f.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Design Complexity</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Design Complexity Limits</h2>
+        <p class="section__text">What DTF handles natively, and where its real limits still are.</p>
+      </div>
+      <div class="detail-grid detail-grid--2">
+        {designLimits.map((d) => (
+          <div class="detail-card">
+            <h3 class="detail-card__title">{d.factor}</h3>
+            <p class="detail-card__text">{d.note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Cost Economics</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How Cost Actually Behaves by Volume</h2>
+        <p class="section__text">DTF's cost curve is almost the inverse of screen printing's — it has no fixed screen-setup cost to spread out, so per-piece cost stays fairly flat regardless of quantity or color count. That flatness is an advantage at low volume and a disadvantage at very high volume with simple designs.</p>
+      </div>
+      <div class="cost-list">
+        {costBehavior.map((c) => (
+          <div class="cost-item">
+            <h3 class="cost-item__tier">{c.tier}</h3>
+            <p class="section__text">{c.behavior}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Durability</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wash Durability & Testing</h2>
+        <p class="section__text">{durability.intro}</p>
+      </div>
+      <div class="detail-grid detail-grid--3">
+        {durability.points.map((p) => (
+          <div class="detail-card">
+            <h3 class="detail-card__title">{p.label}</h3>
+            <p class="detail-card__text">{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Trade-offs</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Pros & Cons</h2>
+      </div>
+      <div class="pc-grid">
+        <div class="pc-col">
+          <h3 class="pc-col__title pc-col__title--pro">Pros</h3>
+          <ul class="pc-list">
+            {prosAndCons.pros.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h3 class="pc-col__title pc-col__title--con">Cons</h3>
+          <ul class="pc-list">
+            {prosAndCons.cons.map((c) => <li>{c}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Use Cases</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Best (and Worst) Uses for DTF Printing</h2>
+      </div>
+      <div class="table-wrapper">
+        <table class="reference-table">
+          <thead>
+            <tr><th>Garment / Order Type</th><th>Why It Fits (or Doesn't)</th></tr>
+          </thead>
+          <tbody>
+            {useCases.map((u) => (
+              <tr>
+                <td>{u.garment}</td>
+                <td>{u.why}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-heading">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">FAQ</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title" id="faq-heading">Common Questions About DTF Printing</h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item">
+            <summary class="faq-q">
+              <span>{f.q}</span>
+              <svg class="faq-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+                <path d="M2 5 L7 9 L12 5"/>
+              </svg>
+            </summary>
+            <div class="faq-a"><p>{f.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Not Sure If DTF Fits Your Order?</h2>
+      <p class="section__text">SDF's production team can tell you within a day whether DTF, screen printing, or DTG makes the most sense for your fabric, quantity, and design.</p>
+      <div class="section__ctas">
+        <a href="/#contact" class="section__cta section__cta--primary">Get a Free Printing Consultation</a>
+        <a href="/printing/" class="section__cta section__cta--secondary">See All Printing Methods →</a>
+      </div>
+      <p class="editorial-link"><a href="/editorial-policy/">Editorial Policy</a> · How we fact-check and review technical content</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-md); }
+  .breadcrumb { padding: var(--spacing-sm) 0; }
+  .breadcrumb__list {
+    display: flex; list-style: none; gap: var(--spacing-xs); padding: 0; margin: 0;
+    font-size: 0.875rem; color: var(--color-text-muted); flex-wrap: wrap;
+  }
+  .breadcrumb__item:not(:last-child)::after { content: "/"; margin-left: var(--spacing-xs); color: var(--color-border); }
+  .breadcrumb__item a { color: var(--color-text-muted); text-decoration: none; }
+  .breadcrumb__item a:hover { color: var(--color-primary); }
+  .breadcrumb__item--current { color: var(--color-text); }
+
+  .hero { padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md); max-width: 900px; margin: 0 auto; }
+  .hero__label {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-primary);
+    margin-bottom: var(--spacing-sm); font-weight: 600;
+  }
+  .hero__title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; color: var(--color-text); margin-bottom: var(--spacing-md); line-height: 1.2; }
+  .hero__description { font-size: clamp(1rem, 1.5vw, 1.125rem); color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--spacing-sm); }
+
+  .byline { display: flex; gap: 0.9rem; align-items: center; margin-top: var(--spacing-md); background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 4px; padding: 0.85rem 1.2rem; }
+  .byline__dot { width: 2.1rem; height: 2.1rem; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .byline__name { font-size: 0.85rem; font-weight: 600; color: var(--color-text); }
+  .byline__sub { font-size: 0.75rem; color: #888; margin-top: 0.15rem; line-height: 1.4; }
+  @media (max-width: 500px) { .byline { flex-direction: column; text-align: center; } }
+
+  .quick-answer {
+    background: var(--color-bg-alt); border-left: 3px solid var(--color-primary);
+    padding: var(--spacing-md); border-radius: 4px;
+  }
+  .quick-answer__label {
+    display: block; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--color-primary); font-weight: 700; margin-bottom: 0.6rem;
+  }
+  .quick-answer p { font-size: 1rem; color: var(--color-text); line-height: 1.75; margin: 0; }
+
+  .section { padding: var(--spacing-xl) 0; scroll-margin-top: 2rem; }
+  .section--alt { background: var(--color-bg-alt); }
+  .section--cta { background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%); text-align: center; }
+  .section__container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-md); }
+  .section--cta .section__container { max-width: 700px; }
+  .section__header { margin-bottom: var(--spacing-md); }
+  .section__label {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-primary);
+    margin-bottom: var(--spacing-sm); font-weight: 600;
+  }
+  .accent-line { width: 60px; height: 3px; background: var(--color-primary); margin-bottom: var(--spacing-sm); }
+  .section__title { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 600; color: var(--color-text); margin-bottom: var(--spacing-md); line-height: 1.3; }
+  .section__text { font-size: clamp(1rem, 1.5vw, 1.125rem); color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--spacing-sm); }
+
+  .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-sm); margin: var(--spacing-md) 0; }
+  .detail-grid--4 { grid-template-columns: repeat(4, 1fr); }
+  .detail-grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .detail-grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .detail-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; padding: var(--spacing-sm); }
+  .detail-card__title {
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-primary);
+    margin-bottom: var(--spacing-xs); font-weight: 600;
+  }
+  .detail-card__text { font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.6; }
+
+  .step-block { margin-bottom: var(--spacing-lg); }
+  .step-block:last-child { margin-bottom: 0; }
+  .step-block__title { font-size: 1.25rem; font-weight: 600; color: var(--color-text); margin-bottom: var(--spacing-xs); }
+
+  .table-wrapper { overflow-x: auto; margin-top: var(--spacing-md); }
+  .reference-table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .reference-table th, .reference-table td { padding: var(--spacing-sm); text-align: left; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+  .reference-table th { background: var(--color-bg-alt); font-weight: 600; color: var(--color-text); }
+  .reference-table td { color: var(--color-text-muted); }
+  .fit-badge { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+  .fit-badge--ideal { background: rgba(63,185,80,0.15); color: #3fb950; }
+  .fit-badge--good { background: rgba(88,166,255,0.15); color: #58a6ff; }
+  .fit-badge--caution { background: rgba(210,153,34,0.15); color: #d29922; }
+  .fit-badge--poor { background: rgba(224,0,0,0.15); color: var(--color-primary); }
+
+  .cost-list { display: flex; flex-direction: column; gap: var(--spacing-md); }
+  .cost-item__tier { font-size: 1.05rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.4rem; }
+
+  .pc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); }
+  .pc-col__title { font-size: 1.1rem; font-weight: 600; margin-bottom: var(--spacing-sm); }
+  .pc-col__title--pro { color: #3fb950; }
+  .pc-col__title--con { color: var(--color-primary); }
+  .pc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--spacing-xs); }
+  .pc-list li { font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.6; padding-left: 1.25rem; position: relative; }
+  .pc-list li::before { content: "—"; position: absolute; left: 0; color: var(--color-border); }
+
+  .faq-list { border: 1px solid var(--color-border); border-radius: 4px; overflow: hidden; }
+  .faq-item { border-bottom: 1px solid var(--color-border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    width: 100%; background: none; border: none; display: flex; justify-content: space-between;
+    align-items: center; gap: 1rem; padding: 1.1rem 1.4rem; cursor: pointer; text-align: left;
+    font-size: 0.95rem; font-weight: 600; color: var(--color-text); list-style: none; transition: background 0.2s;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q:hover { background: rgba(255,255,255,0.03); }
+  .faq-item[open] > .faq-q { background: rgba(255,255,255,0.03); }
+  .faq-item[open] .faq-chevron { transform: rotate(180deg); }
+  .faq-chevron { flex-shrink: 0; color: var(--color-text-muted); transition: transform 0.25s ease; }
+  .faq-a { padding: 0 1.4rem 1.3rem; }
+  .faq-a p { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.8; margin: 0; }
+
+  .section__ctas { display: flex; gap: var(--spacing-sm); justify-content: center; flex-wrap: wrap; }
+  .section__cta { display: inline-block; padding: 1rem 2rem; font-weight: 600; text-decoration: none; border-radius: 4px; transition: all 0.2s; }
+  .section__cta--primary { background: var(--color-primary); color: white; }
+  .section__cta--primary:hover { background: var(--color-primary-dark); }
+  .section__cta--secondary { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
+  .section__cta--secondary:hover { border-color: var(--color-primary); }
+  .editorial-link { font-size: 0.8rem; color: #777; margin-top: var(--spacing-md); }
+  .editorial-link a { color: #cc5555; text-decoration: none; }
+  .editorial-link a:hover { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .detail-grid, .detail-grid--4, .detail-grid--3, .detail-grid--2, .pc-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a; --color-text-muted: #666; --color-bg: #fff;
+      --color-bg-alt: #f5f5f5; --color-border: #e0e0e0;
+    }
+  }
+</style>
