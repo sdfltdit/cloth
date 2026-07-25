@@ -1,0 +1,500 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Yarn Quality Testing & Common Defects Explained";
+const pageDescription = "Evenness, imperfection index, hairiness, and tenacity testing with Uster benchmarks, plus the most common yarn defects and what causes them.";
+
+const qualityTests = [
+  { name: "Evenness (U% / CV%)", text: "Measures how consistently uniform the yarn's diameter is along its length, typically tested on a Uster Evenness Tester. Results are expressed as U% (mean deviation) or CV% (coefficient of variation) — lower numbers mean more uniform yarn. Uneven yarn produces visible thick-and-thin streaking or 'barré' effects in finished fabric, especially noticeable in solid-color knits under certain lighting." },
+  { name: "Imperfection Index", text: "Counts thin places, thick places, and neps (small fiber tangles) per kilometer of yarn, each counted separately against a sensitivity threshold. A high imperfection count doesn't just look bad microscopically — thin places are weak points prone to breaking during knitting or weaving, and neps show up as small visible dots in the finished fabric, particularly in lighter or solid colors." },
+  { name: "Hairiness", text: "Measures the number and length of fiber ends protruding from the yarn's main body, typically expressed as a Hairiness Index (H). Higher hairiness increases pilling risk and can create a fuzzy fabric surface, but some hairiness is desirable in certain yarns for a softer hand feel — the right level depends on the end product, not a universal minimum." },
+  { name: "Tenacity & Elongation", text: "Tenacity measures the force a yarn withstands before breaking, typically expressed in grams per tex (g/tex) or centinewtons per tex (cN/tex), tested to standards like ASTM D2256 or ISO 2062. Elongation measures how much the yarn stretches before breaking. As a reference point, raw cotton fiber typically tests at 20-40 cN/tex, wool at 12-20 cN/tex, and polyester at 35-60 cN/tex — but finished yarn tenacity runs lower than raw fiber strength, since spinning efficiency (how well individual fiber strength translates into yarn strength) is roughly 65-70% for ring-spun yarn versus 50-55% for rotor-spun, meaning a rotor-spun yarn is typically 10-20% weaker than an equivalent ring-spun yarn from the same fiber." },
+];
+
+const defects = [
+  { name: "Slubs", text: "Thick, uneven lumps in the yarn caused by fiber bunching during drafting or roving. Some fashion yarns intentionally use controlled slubs for a textured look, but unintentional slubs from process inconsistency create random, uncontrolled irregularities in fabric appearance." },
+  { name: "Neps", text: "Small, tightly tangled knots of fiber that resist straightening during drafting, most common with immature or short-staple cotton fiber. Neps appear as tiny dots in finished fabric, especially visible in lighter dyed colors." },
+  { name: "Contamination", text: "Foreign matter — polypropylene fiber, colored cotton fiber, or other non-yarn material — trapped inside the yarn during ginning or spinning. Contamination is a serious defect because it often resists dye absorption, leaving a visible white or off-color speck in an otherwise evenly dyed fabric, and is difficult to detect before dyeing." },
+  { name: "Barré (Barre)", text: "Visible periodic streaks or bands running across knitted fabric, caused by yarn from different lots, machines, or spinning batches having slightly different properties — count, twist, dye affinity, or luster — despite nominally matching the same spec. This is a lot-management defect as much as a spinning one, and is a common reason mills insist on using yarn from a single dye lot across an entire cutting order." },
+  { name: "Broken Filament / Weak Spots", text: "Localized weak points where individual fibers or filaments have broken within the yarn, often from mechanical stress during spinning or excessive tension during winding. These create irregular thin spots that behave like a defect even when the yarn's average evenness measurement looks acceptable." },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://sdfltd.com/insights/" },
+          { "@type": "ListItem", "position": 3, "name": "Yarn Guide", "item": "https://sdfltd.com/insights/yarn/" },
+          { "@type": "ListItem", "position": 4, "name": "Quality Testing & Defects", "item": Astro.url.href }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Uster Statistics and how is it used in yarn testing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Uster Statistics is a globally referenced benchmarking database, published periodically by Uster Technologies, that ranks yarn quality test results into percentile tiers for a given fiber type, count, and spinning method. A yarn tested at the Uster 5% level means it ranks among the best 5% of comparable yarns worldwide; Uster 50% is an average result. Mills and buyers use these percentile levels as a shared quality-tier vocabulary instead of negotiating raw evenness numbers from scratch."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What causes barré in knitted fabric?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Barré is caused by knitting fabric from yarn drawn from different lots, machines, or spinning batches that have slightly different count, twist, dye affinity, or luster despite meeting the same nominal spec, producing visible periodic streaks or bands. It's a lot-management issue as much as a spinning quality issue, which is why mills typically require yarn from a single dye lot for an entire cutting order rather than mixing lots that individually pass quality tests."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a yarn imperfection index?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The imperfection index counts thin places, thick places, and neps per kilometer of yarn against a set sensitivity threshold, typically measured alongside evenness on a Uster Evenness Tester. Thin places are weak points prone to breaking during knitting or weaving, while thick places and neps tend to show up as visible irregularities or small dots in finished fabric."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much yarn count variation is considered acceptable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A commonly used acceptance threshold in buyer QC protocols is plus or minus 3% deviation from the ordered count. Beyond that range, fabric weight, dye uptake, and machine tension behavior during knitting or weaving start to shift noticeably, even though the yarn still nominally carries the ordered count designation."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/insights/">Insights</a></li>
+        <li class="breadcrumb__item"><a href="/insights/yarn/">Yarn Guide</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Quality Testing & Defects</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__label">Yarn Guide • Quality & Defects</div>
+      <h1 class="hero__title">Yarn Quality Testing and Common Defects</h1>
+      <p class="hero__description">
+        A yarn defect rarely stays contained to the yarn — it becomes a fabric defect, a production stoppage, or a finished-garment complaint. Here is how quality is measured, and where yarn most often goes wrong.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Quality Tests</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Core Yarn Quality Tests</h2>
+      </div>
+      <div class="test-grid">
+        {qualityTests.map((test) => (
+          <div class="test-card">
+            <h3 class="test-card__title">{test.name}</h3>
+            <p class="test-card__text">{test.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Benchmarking</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How Yarn Quality Gets Benchmarked: Uster Statistics</h2>
+      </div>
+      <div class="section__text">
+        <p>Raw test numbers only mean something in context — an evenness result that's excellent for a coarse rotor-spun yarn would be poor for a fine ring-spun yarn. Uster Statistics, published periodically by Uster Technologies, solves this by ranking test results into percentile tiers specific to fiber type, count, and spinning method.</p>
+
+        <p>A yarn quoted at "Uster 5%" ranks among the best-performing 5% of comparable yarn tested worldwide for that spec — a premium tier. "Uster 25%" is a solid, above-average tier common in good commercial-grade yarn. "Uster 50%" is the statistical average. This percentile language lets a buyer in one country and a mill in another agree on a quality tier without either side needing to interpret raw U% or imperfection-count numbers from scratch — it's worth asking a supplier which Uster percentile tier their yarn is quoted against, not just whether it "passes testing."</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Count Tolerance</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How Much Count Variation Is Acceptable?</h2>
+      </div>
+      <div class="section__text">
+        <p>A yarn spec is never hit with mathematical precision — mills work within a tolerance band, and ±3% deviation from the ordered count is a commonly used acceptance threshold in buyer QC protocols. This isn't an arbitrary number: count drift beyond that range starts to visibly shift fabric weight, dye uptake, and how the yarn behaves on knitting or weaving machine tension settings, even though the yarn still nominally carries the ordered count. Testing typically requires at least 20 single-strand samples per lot to get a reliable average, since count can vary meaningfully within a single cone or bobbin, not just between production lots.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Standards Reference</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Test Method Standards at a Glance</h2>
+      </div>
+      <div class="table-wrapper">
+        <table class="reference-table">
+          <thead>
+            <tr>
+              <th>Test</th>
+              <th>Common Standard</th>
+              <th>What It Measures</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tenacity & elongation</td>
+              <td>ASTM D2256, ISO 2062</td>
+              <td>Breaking force and stretch, tested on a constant-rate-of-extension (CRE) machine</td>
+            </tr>
+            <tr>
+              <td>Evenness & imperfections</td>
+              <td>ASTM D1425, ISO 16549</td>
+              <td>Diameter consistency, thin/thick places, and neps per kilometer</td>
+            </tr>
+            <tr>
+              <td>Count verification</td>
+              <td>ASTM D1907, ISO 2060</td>
+              <td>Actual weight-per-length measurement against the ordered count</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Defect Prevention</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Common Yarn Defects</h2>
+      </div>
+      <div class="section__text">
+        <p>Five defects account for most yarn-related fabric quality issues. Each has a specific, traceable cause in the fiber, spinning, or lot-management process.</p>
+      </div>
+      <div class="defect-list">
+        {defects.map((defect) => (
+          <div class="defect-item">
+            <h3 class="defect-item__title">{defect.name}</h3>
+            <p class="defect-item__text">{defect.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Need a Yarn Quality Tier Set for Your Product?</h2>
+      <p class="section__text">SDF Clothing specifies yarn quality by Uster percentile tier matched to your fabric's end use — not a generic "good quality" claim.</p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Get a Free Yarn Consultation</a>
+        <a href="/insights/yarn/sustainability-and-certification/" class="section__cta section__cta--secondary">See Sustainability Guide →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-xs);
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: "/";
+    margin-left: var(--spacing-xs);
+    color: var(--color-border);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .hero__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section--cta .section__container {
+    max-width: 700px;
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .test-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+
+  .test-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+  }
+
+  .test-card__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .test-card__text {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .defect-list {
+    margin-top: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .defect-item {
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .defect-item:last-child {
+    border-bottom: none;
+  }
+
+  .defect-item__title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .defect-item__text {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  @media (max-width: 900px) {
+    .test-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
