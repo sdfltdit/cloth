@@ -6,10 +6,10 @@ const pageTitle = "Garment Label Quality Testing & Common Defects";
 const pageDescription = "Color fastness, wash durability, and attachment strength testing for garment labels — plus the 6 most common label defects and how factories prevent them.";
 
 const qualityTests = [
-  { name: "Color Fastness", text: "Tests whether label colors resist bleeding, fading, or transferring onto the garment fabric during washing, rubbing, and exposure to light. A failed color fastness test on a label can stain the surrounding fabric — a defect that ruins the entire garment, not just the label." },
+  { name: "Color Fastness", text: "Tests whether label colors resist bleeding, fading, or transferring onto the garment fabric during washing, rubbing, and exposure to light. A failed color fastness test on a label can stain the surrounding fabric — a defect that ruins the entire garment, not just the label. Wash fastness is commonly tested to ISO 105-C06 or the US equivalent AATCC 61; rubbing/crocking fastness to ISO 105-X12 or AATCC 8; and light fastness to ISO 105-B02 or AATCC 16. Results are rated on a 1-5 grey scale, where a rating of 4-5 is considered a pass and 3 or below signals a visible, buyer-noticeable problem." },
   { name: "Wash Durability", text: "Simulates the number of industrial or home wash cycles a label survives before text becomes illegible, edges fray, or the print begins to lift. Care labels are held to the highest wash durability standard since they need to remain legible for the functional life of the garment." },
   { name: "Print Quality", text: "Checks registration accuracy, text sharpness, and consistency of ink density across a production run. Print quality issues often only surface at scale — a design that looks correct on a first proof can drift out of register once a press runs thousands of repeats." },
-  { name: "Attachment Strength", text: "Measures the force required to pull a label loose from the garment, whether sewn, heat-applied, or adhesive-bonded. A pull test below the required threshold signals a stitching or bonding process that will fail in a customer's hands, not just in the lab." },
+  { name: "Attachment Strength", text: "Measures the force required to pull a label loose from the garment, whether sewn, heat-applied, or adhesive-bonded. Apparel QC inspectors commonly apply a manual pull test in the range of 5 to 7 pounds of force — roughly the effort of pulling the tab on a can — as a pass/fail check during finishing inspection, with lab-based tensile testing used for more precise verification on higher-risk categories like children's wear. A label that releases below the required threshold signals a stitching or bonding process that will fail in a customer's hands, not just in the lab." },
 ];
 
 const defects = [
@@ -71,6 +71,14 @@ const pageSchema = {
             "@type": "Answer",
             "text": "Wrong information on a label — such as fiber content that does not match the actual fabric used — is typically prevented through a documented change-control process that flags any fabric or trim substitution and requires label content to be re-verified before production continues, rather than relying on the original label order staying correct by default."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What standard is used to test label attachment strength?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Apparel QC inspectors commonly apply a manual pull test in the range of 5 to 7 pounds of force during finishing inspection as a pass/fail check, roughly equivalent to the force needed to pull the tab on a can. Higher-risk categories, such as children's wear, are often verified more precisely with lab-based tensile testing rather than the manual check alone."
+          }
         }
       ]
     }
@@ -124,6 +132,48 @@ const pageSchema = {
   <section class="section section--alt">
     <div class="section__container">
       <div class="section__header">
+        <span class="section__label">Standards Reference</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Test Method Standards at a Glance</h2>
+      </div>
+      <div class="section__text">
+        <p>Buyers in different regions tend to specify different standards bodies for the same underlying test. Knowing both names helps when a tech pack from a US retailer and a spec sheet from a European brand reference the same requirement differently.</p>
+      </div>
+      <div class="table-wrapper">
+        <table class="reference-table">
+          <thead>
+            <tr>
+              <th>Test</th>
+              <th>ISO Standard</th>
+              <th>AATCC Standard (US)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Colorfastness to washing</td>
+              <td>ISO 105-C06</td>
+              <td>AATCC 61</td>
+            </tr>
+            <tr>
+              <td>Colorfastness to rubbing (crocking)</td>
+              <td>ISO 105-X12</td>
+              <td>AATCC 8</td>
+            </tr>
+            <tr>
+              <td>Colorfastness to light</td>
+              <td>ISO 105-B02</td>
+              <td>AATCC 16</td>
+            </tr>
+          </tbody>
+          <caption>Results for these tests are typically reported on a 1-5 grey scale for staining and color change, where 4-5 is a pass and scores of 3 or below indicate a visible defect risk.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
         <span class="section__label">Defect Prevention</span>
         <div class="accent-line"></div>
         <h2 class="section__title">Common Garment Label Defects</h2>
@@ -142,7 +192,7 @@ const pageSchema = {
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--alt">
     <div class="section__container">
       <div class="section__header">
         <span class="section__label">Our Process</span>
