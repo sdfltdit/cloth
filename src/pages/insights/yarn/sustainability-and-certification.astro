@@ -1,0 +1,433 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Sustainable Yarn & Certification Guide";
+const pageDescription = "Organic cotton (GOTS), recycled fiber (GRS/RCS), and Better Cotton compared — what each yarn certification verifies, and what changed in 2026.";
+
+const certifications = [
+  { name: "GOTS (Global Organic Textile Standard)", covers: "Organic fiber content plus full supply-chain chemical, water, and labor standards", threshold: "≥95% organic fiber for an 'organic' label claim; ≥70% for 'made with organic' claim", verifies: "Genuinely organic-grown fiber, verified from farm through finished product, not just at the yarn stage" },
+  { name: "GRS (Global Recycled Standard)", covers: "Recycled fiber content plus chain-of-custody tracking through the supply chain", threshold: "Minimum recycled content thresholds verified through transaction certificates at every stage", verifies: "That recycled content claims on a yarn are real and traceable, not just plausible" },
+  { name: "RCS (Recycled Claim Standard)", covers: "Recycled input material tracking, a lighter version of GRS without GRS's social and chemical criteria", threshold: "Chain-of-custody tracking of recycled content, no minimum social/chemical requirement", verifies: "Recycled content traceability only — does not verify labor or chemical safety practices the way GRS does" },
+  { name: "Better Cotton", covers: "Farm-level sustainable cotton growing practices — water use, pesticide reduction, farmer welfare", threshold: "As of May 2026, only Physical (traceable) Better Cotton — not Mass Balance-sourced cotton — qualifies for the on-product Better Cotton label", verifies: "That cotton was grown under improved farming practices; a 2025 shift to third-party certification (audited to ISO 17065) replaced the earlier self-declared licensing model" },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://sdfltd.com/insights/" },
+          { "@type": "ListItem", "position": 3, "name": "Yarn Guide", "item": "https://sdfltd.com/insights/yarn/" },
+          { "@type": "ListItem", "position": 4, "name": "Sustainability & Certification", "item": Astro.url.href }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between GOTS and GRS for yarn?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GOTS certifies organic fiber content — requiring at least 70% certified organic fiber, or 95% for a full 'organic' claim — and audits chemical, water, and labor practices across the full supply chain. GRS certifies recycled fiber content specifically, tracking it through chain-of-custody transaction certificates at every supply chain stage. A yarn can carry one, both, or neither depending on whether it's grown organically, made from recycled material, or conventional."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What changed with Better Cotton certification in 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Better Cotton shifted from a self-declared licensing and mass-balance model to genuine third-party certification, audited to the ISO 17065 standard, starting in January 2025. As of May 2026, only Physical Better Cotton — cotton that is actually traceable through the supply chain — qualifies for the on-product Better Cotton label; cotton sourced under the older mass-balance model, where sustainable and conventional cotton could be mixed and accounted for on paper, no longer qualifies for the label."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a recycled polyester yarn be GOTS certified?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. GOTS applies specifically to organic natural fibers and does not cover synthetic or recycled materials. A recycled polyester yarn would instead be certified under GRS (Global Recycled Standard) or RCS (Recycled Claim Standard), which are the appropriate certifications for verifying recycled content rather than organic origin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is recycled cotton yarn as strong as virgin cotton yarn?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, not at high recycled content. Mechanically recycled cotton has shorter, weaker fibers than virgin cotton due to the shredding process, and yarn tenacity typically drops by roughly 7-9% for every 10% increase in recycled cotton content. This is different from recycled polyester, which is chemically reprocessed rather than mechanically shredded and can be close to indistinguishable from virgin polyester in strength — most commercial 'recycled cotton' yarns blend in significant virgin cotton or recycled polyester specifically to offset this strength loss."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/insights/">Insights</a></li>
+        <li class="breadcrumb__item"><a href="/insights/yarn/">Yarn Guide</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Sustainability & Certification</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__label">Yarn Guide • Sustainability</div>
+      <h1 class="hero__title">Sustainable Yarn and Certification Explained</h1>
+      <p class="hero__description">
+        Organic, recycled, and Better Cotton claims all verify different things, and one of them changed meaningfully in 2026. Here is what each certification actually checks — and what a brand needs to know before making a sustainability claim on a finished garment.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Certification Comparison</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">GOTS, GRS, RCS, and Better Cotton Compared</h2>
+      </div>
+      <div class="table-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Certification</th>
+              <th>What It Covers</th>
+              <th>Key Threshold</th>
+              <th>What It Verifies</th>
+            </tr>
+          </thead>
+          <tbody>
+            {certifications.map((cert) => (
+              <tr>
+                <td>{cert.name}</td>
+                <td>{cert.covers}</td>
+                <td>{cert.threshold}</td>
+                <td>{cert.verifies}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Quality Tradeoffs</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Recycled Cotton vs. Recycled Polyester: A Real Quality Difference</h2>
+      </div>
+      <div class="section__text">
+        <p>Not all recycled yarn carries the same quality tradeoff, and this is a genuine distinction a buyer should understand before specifying recycled content. Recycled polyester (rPET) is typically produced by chemically breaking down PET plastic and re-extruding it into new filament — the resulting fiber can be close to indistinguishable from virgin polyester in strength and consistency, since the chemical process rebuilds the polymer rather than mechanically damaging existing fiber.</p>
+
+        <p>Recycled cotton works differently, and the quality impact is more significant. Mechanically recycled cotton is produced by shredding fabric waste back into fiber, a process that inevitably shortens the fiber's staple length — from roughly 26mm for virgin cotton down to around 15mm at a 30% recycled content blend — and increases the proportion of short, weak fibers. Research on recycled cotton blends shows a roughly linear quality decline: each 10% increase in recycled cotton content typically reduces yarn tenacity by about 7-9%, and blends above 10-15% recycled content start showing significantly degraded strength and higher defect rates unless mitigated with techniques like combing (which removes the shortest, most damaging fibers) or blending with longer-staple virgin cotton or recycled polyester to compensate.</p>
+
+        <p>The practical implication: a "recycled cotton" yarn is very rarely 100% recycled cotton in commercial production — most blend in 50-90% virgin cotton or recycled polyester specifically to offset this strength loss, and a buyer asking for high recycled-cotton content should expect a real conversation about the resulting yarn's durability tradeoff, not just a percentage on a spec sheet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">2026 Update</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What Changed With Better Cotton in 2026</h2>
+      </div>
+      <div class="section__text">
+        <p>Better Cotton (formerly widely known as the Better Cotton Initiative) moved to a genuinely audited, third-party certification model starting in January 2025, replacing an earlier self-declared licensing system. The bigger practical change landed in May 2026: only Physical Better Cotton — cotton that is actually traceable through the supply chain via segregation or controlled blending — now qualifies for the on-product Better Cotton label. Cotton sourced under the older Mass Balance model, where certified and conventional cotton volumes could be mixed and accounted for on paper rather than physically traced, no longer qualifies for the label.</p>
+
+        <p>The practical impact for a brand: if a yarn or fabric supplier is still describing their cotton as "Better Cotton" without specifying Physical Chain of Custody, ask directly which sourcing model was used, since the label claim itself is no longer valid for Mass Balance-sourced cotton as of this rule change. This kind of certification detail matters more than it used to, since claims that don't hold up to scrutiny are increasingly a regulatory risk, not just a reputational one — the EU's Green Claims Directive and similar rules in other markets are tightening what unsubstantiated sustainability language is legally permitted on a product.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Making a Claim</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What a Brand Needs Before Claiming "Organic" or "Recycled" Yarn</h2>
+      </div>
+      <div class="section__text">
+        <p>A sustainability claim on a finished garment is only as strong as the weakest link in its documentation chain. For an organic claim, that means a valid GOTS transaction certificate covering the specific yarn lot used — not just a general statement that the supplier "works with organic cotton." For a recycled claim, it means a GRS or RCS chain-of-custody certificate tracing the recycled content back through each processing stage, since recycled fiber content can otherwise be diluted or substituted without visual detection at the yarn or fabric stage.</p>
+
+        <p>Brands sourcing yarn for a sustainability-marketed product line should request certificate copies at the yarn purchase stage, not after the garment is already in production — a documentation gap discovered late is far more expensive to fix than one caught before cutting begins.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Sourcing Certified Sustainable Yarn?</h2>
+      <p class="section__text">SDF Clothing is GOTS-certified and sources GRS-certified recycled and Physical Better Cotton yarn with full chain-of-custody documentation.</p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Talk to Our Sourcing Team</a>
+        <a href="/insights/yarn/buyer-guidelines/" class="section__cta section__cta--secondary">See Buyer Guidelines →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-xs);
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: "/";
+    margin-left: var(--spacing-xs);
+    color: var(--color-border);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .hero__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section--cta .section__container {
+    max-width: 700px;
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    margin-top: var(--spacing-md);
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
