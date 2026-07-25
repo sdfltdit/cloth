@@ -1,0 +1,584 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "DTG Printing on Garments: Process, Cost, Durability & When to Use It";
+const pageDescription = "How DTG (Direct to Garment) printing works step by step, which fabrics it suits, real cost behavior by order volume, wash durability, and when screen printing or DTF beats it instead.";
+
+const lastUpdated = "July 25, 2026";
+const lastUpdatedISO = "2026-07-25";
+
+// ─────────────────────────────────────────────────────────────
+// NOTE FOR SDF TEAM — READ BEFORE PUBLISHING:
+// Every value marked [VERIFY] is a widely-documented industry-
+// standard figure, not an SDF production number — confirm against
+// SDF's actual DTG line before publishing, if SDF runs DTG at all.
+// UNLIKE screen-printing.astro and dtf-printing.astro, DTG is NOT
+// mentioned anywhere else on sdfltd.com (about.astro lists screen
+// printing, DTF, sublimation, and heat transfer as in-house methods
+// — DTG is absent from that list). Confirm whether SDF actually
+// offers DTG before publishing this page, and if not, either mark
+// it clearly as an educational-only page with no service claim, or
+// don't publish it as part of the in-house method set.
+// ─────────────────────────────────────────────────────────────
+
+const quickFacts = [
+  { label: "Best design type", value: "Full-color, gradients, photo-realistic art — any color count" },
+  { label: "Best fabric", value: "100% cotton — the strongest fit of any method in this cluster" },
+  { label: "Cost curve", value: "[VERIFY] Flat-ish per piece; no screen setup, but slower print speed than screen or DTF" },
+  { label: "Wash durability", value: "Good on cotton with correct pre-treatment and cure; fading is the main long-term concern, not cracking" },
+];
+
+const processSteps = [
+  {
+    id: "pretreatment",
+    title: "1. Pre-treatment (dark garments and some light ones)",
+    text: "A pre-treatment liquid is sprayed evenly onto the print area before printing. It helps the ink — particularly the white ink used as a base on dark garments — bond to the fabric and print with proper opacity instead of soaking in unevenly. Pre-treatment is heat-set briefly before printing begins.",
+  },
+  {
+    id: "white-underbase",
+    title: "2. White underbase (dark garments)",
+    text: "On dark or colored fabric, the printer lays down a white ink layer in the exact shape of the design first, so the colors printed on top read true rather than muddied by the garment's base color. Light-colored garments often skip this layer entirely, since the fabric itself already provides a light base.",
+  },
+  {
+    id: "cmyk-printing",
+    title: "3. CMYK color printing",
+    text: "The DTG printer — a specialized inkjet built for garments rather than paper — lays down the full-color design directly onto the fabric using water-based textile ink, printing continuous tone and gradients natively rather than separating the design into solid color layers the way screen printing does.",
+  },
+  {
+    id: "curing",
+    title: "4. Curing",
+    text: "The printed garment passes through a heat press or conveyor dryer to cure the ink — [VERIFY] typically requiring the ink to reach a set temperature for a set dwell time so the water-based ink binds permanently into the fabric fibers rather than sitting as a removable surface layer. Under-curing here behaves similarly to screen printing: the print can look finished but fail to hold up to washing.",
+  },
+];
+
+const equipment = [
+  { name: "Pre-treatment machine", role: "Sprays and evenly distributes pre-treatment liquid across the print area before printing, especially for white-ink underbase work." },
+  { name: "DTG printer", role: "A garment-specific inkjet printer with white and CMYK ink channels, printing directly onto fabric rather than onto a transfer film." },
+  { name: "Heat press or conveyor dryer", role: "Cures the printed ink so it bonds permanently into the fabric rather than sitting as a removable layer." },
+];
+
+const designLimits = [
+  { factor: "Color count", note: "No practical limit — like DTF, a full-color photographic design and a one-color logo print at similar cost, since DTG lays down continuous color rather than separated spot layers." },
+  { factor: "Gradients / photo-realism", note: "A core strength — DTG is a native continuous-tone printer, arguably the strongest fit in this cluster for genuinely photographic artwork." },
+  { factor: "Print speed per piece", note: "[VERIFY] Slower than screen printing or DTF per piece, since each garment is printed individually rather than pressed from a pre-made transfer or stamped through a fast mechanical press." },
+  { factor: "Fine detail", note: "Generally strong, limited mainly by printer resolution and fabric texture rather than the method itself." },
+];
+
+const fabricFit = [
+  { fabric: "100% Cotton", fit: "Ideal", note: "The strongest, most reliable substrate for DTG — ink absorbs cleanly into natural fiber for the best color and hand-feel result." },
+  { fabric: "Cotton-Poly Blends", fit: "Caution", note: "[VERIFY] Higher poly content reduces ink absorption and can affect color vibrancy and wash durability compared to 100% cotton." },
+  { fabric: "100% Polyester", fit: "Poor", note: "Standard water-based DTG ink is formulated for natural fiber absorption; polyester's low absorbency generally makes this a poor fit without specialized ink systems." },
+  { fabric: "Dark / Black Garments", fit: "Good", note: "Achievable with a proper white underbase and pre-treatment, though it adds a processing step and cost compared to printing on light garments." },
+];
+
+const costBehavior = [
+  { tier: "Small (1–24 pcs)", behavior: "[VERIFY] Competitive with DTF here — no screen setup cost, works economically for single pieces and small runs." },
+  { tier: "Mid (25–150 pcs)", behavior: "[VERIFY] Cost stays fairly flat since there's no fixed setup to amortize, similar to DTF's cost curve." },
+  { tier: "Large (300+ pcs, simple design)", behavior: "[VERIFY] Screen printing usually wins on cost here, same as it does against DTF, since screen printing's fixed setup gets spread thin at high volume." },
+  { tier: "Large volume, full-color/complex design on cotton", behavior: "DTG can remain competitive here specifically on 100% cotton, where it has no color-count cost penalty and produces genuinely photographic results — though per-piece print speed is slower than DTF at real production scale." },
+];
+
+const prosAndCons = {
+  pros: [
+    "No minimum order quantity and no per-color cost, same advantage DTF has over screen printing",
+    "Best photo-realistic and gradient reproduction of any method in this cluster",
+    "Ink prints and cures directly into the fabric rather than as a separate applied layer, giving a softer hand-feel than DTF on cotton",
+    "No film, no powder, no peeling step — one fewer production stage than DTF",
+  ],
+  cons: [
+    "Best results are largely limited to cotton and high-cotton blends — a real fabric restriction compared to DTF",
+    "[VERIFY] Slower print speed per piece than screen printing or DTF, which matters at real production volume",
+    "Dark-garment printing needs a white underbase and pre-treatment step, adding cost and process time",
+    "[VERIFY] At high volume with a simple design, screen printing usually costs less per piece",
+  ],
+};
+
+const durability = {
+  intro: "DTG's durability profile centers on fading and ink penetration rather than the cracking or edge-lift seen in screen printing and DTF.",
+  points: [
+    { label: "Cure quality is the real durability variable", text: "[VERIFY] Ink that's fully cured into the fabric fiber holds color and wash resistance well over repeated washing; under-cured DTG ink is more prone to premature fading and a rougher hand-feel developing over time." },
+    { label: "Fabric composition affects durability directly", text: "Because DTG ink relies on absorbing into natural fiber, a high-poly blend doesn't just affect print quality up front — it can also mean the ink holds less securely over the life of the garment compared to 100% cotton." },
+    { label: "Wash testing protocol", text: "The same basic wash-cycle test used for screen printing and DTF applies, with particular attention to color fading and any dulling of fine detail rather than cracking or edge lift." },
+  ],
+};
+
+const useCases = [
+  { garment: "Photo-realistic or gradient designs on cotton t-shirts", why: "DTG's strongest use case — continuous-tone printing on the fabric it performs best on." },
+  { garment: "Small or one-off cotton garment orders", why: "No MOQ and no per-color cost, similar to DTF, but with a softer hand-feel on cotton specifically." },
+  { garment: "Polyester or heavy-blend activewear", why: "Generally a poor fit — DTF or sublimation handle synthetic fabrics far more reliably." },
+  { garment: "Very high volume, simple 1–2 color logo", why: "Screen printing usually wins here on both cost and print speed at scale." },
+];
+
+const faqs = [
+  {
+    q: "Does DTG printing fade faster than screen printing?",
+    a: "Not inherently, but the risk profile is different. Screen printing's common failure is cracking from under-curing; DTG's common failure is fading, which is more likely on fabric blends with higher polyester content or when the ink wasn't fully cured into the fiber during production.",
+  },
+  {
+    q: "Can DTG print on polyester?",
+    a: "Not reliably with standard water-based DTG ink, which is formulated to absorb into natural fiber. DTG's strongest results are on 100% cotton; for polyester-heavy garments, DTF or sublimation are generally a better technical fit.",
+  },
+  {
+    q: "Is DTG cheaper than screen printing?",
+    a: "[VERIFY] At low volume or with complex, full-color designs, DTG is often cheaper because there's no per-color screen setup cost. At high volume with a simple design, screen printing usually costs less per piece and prints faster.",
+  },
+  {
+    q: "What's the minimum order quantity for DTG printing?",
+    a: "Effectively none — like DTF, DTG has no screen-making step, so a single garment can be printed cost-effectively, which is one of its main advantages for small or custom orders.",
+  },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "dateModified": lastUpdatedISO,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Printing", "item": "https://sdfltd.com/printing/" },
+          { "@type": "ListItem", "position": 3, "name": "DTG Printing", "item": Astro.url.href },
+        ],
+      },
+    },
+    {
+      "@type": "Article",
+      "@id": Astro.url.href + "#article",
+      "headline": pageTitle,
+      "description": pageDescription,
+      "author": { "@id": "https://sdfltd.com/#founder" },
+      "publisher": { "@id": "https://sdfltd.com/#org" },
+      "dateModified": lastUpdatedISO,
+      "mainEntityOfPage": { "@id": Astro.url.href },
+      "inLanguage": "en",
+    },
+    {
+      "@type": "HowTo",
+      "name": "How DTG Printing Works on Garments",
+      "step": processSteps.map((s) => ({
+        "@type": "HowToStep",
+        "name": s.title,
+        "text": s.text,
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={pageSchema} dateModified={lastUpdatedISO}>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/printing/">Printing</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">DTG Printing</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__label">Printing Methods · DTG Printing</div>
+      <h1 class="hero__title">DTG (Direct to Garment) Printing on Garments</h1>
+      <p class="hero__description">
+        DTG prints a full-color design directly onto fabric using a specialized inkjet printer — no screens, no transfer film, ink goes straight onto the garment. It's the strongest fit in this cluster for photo-realistic art on cotton, and one of the weakest for polyester.
+      </p>
+      <div class="byline">
+        <div class="byline__dot" aria-hidden="true">CR</div>
+        <div>
+          <div class="byline__name">Chowdhury Remon — Founder &amp; CEO, SDF Clothing</div>
+          <div class="byline__sub">27+ years in Bangladesh apparel manufacturing · Reviewed for technical accuracy · Last updated {lastUpdated}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="quick-answer">
+        <span class="quick-answer__label">Quick Answer</span>
+        <p>DTG printing sprays full-color, water-based ink directly onto fabric with a specialized inkjet printer, curing it into the fibers with heat. It produces the most photo-realistic results of any method here, works best on 100% cotton, and struggles on polyester — where DTF or sublimation are a better fit.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">At a Glance</span>
+        <div class="accent-line"></div>
+      </div>
+      <div class="detail-grid detail-grid--4">
+        {quickFacts.map((f) => (
+          <div class="detail-card">
+            <h3 class="detail-card__title">{f.label}</h3>
+            <p class="detail-card__text">{f.value}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Process</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How DTG Printing Actually Works</h2>
+        <p class="section__text">Four steps — fewer than DTF, since there's no film or powder stage.</p>
+      </div>
+      {processSteps.map((s) => (
+        <div class="step-block" id={s.id}>
+          <h3 class="step-block__title">{s.title}</h3>
+          <p class="section__text">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Equipment</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Machines & Equipment Used</h2>
+      </div>
+      <div class="detail-grid detail-grid--3">
+        {equipment.map((e) => (
+          <div class="detail-card">
+            <h3 class="detail-card__title">{e.name}</h3>
+            <p class="detail-card__text">{e.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Fabric Fit</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Which Fabrics DTG Printing Works Best On</h2>
+      </div>
+      <div class="table-wrapper">
+        <table class="reference-table">
+          <thead>
+            <tr><th>Fabric</th><th>Fit</th><th>Why</th></tr>
+          </thead>
+          <tbody>
+            {fabricFit.map((f) => (
+              <tr>
+                <td>{f.fabric}</td>
+                <td><span class={`fit-badge fit-badge--${f.fit.toLowerCase()}`}>{f.fit}</span></td>
+                <td>{f.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Design Complexity</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Design Complexity Limits</h2>
+      </div>
+      <div class="detail-grid detail-grid--2">
+        {designLimits.map((d) => (
+          <div class="detail-card">
+            <h3 class="detail-card__title">{d.factor}</h3>
+            <p class="detail-card__text">{d.note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Cost Economics</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How Cost Actually Behaves by Volume</h2>
+        <p class="section__text">Like DTF, DTG has no fixed screen-setup cost, so its cost curve stays fairly flat by volume — the real variable at scale is print speed, not per-piece pricing.</p>
+      </div>
+      <div class="cost-list">
+        {costBehavior.map((c) => (
+          <div class="cost-item">
+            <h3 class="cost-item__tier">{c.tier}</h3>
+            <p class="section__text">{c.behavior}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Durability</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wash Durability & Testing</h2>
+        <p class="section__text">{durability.intro}</p>
+      </div>
+      <div class="detail-grid detail-grid--3">
+        {durability.points.map((p) => (
+          <div class="detail-card">
+            <h3 class="detail-card__title">{p.label}</h3>
+            <p class="detail-card__text">{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Trade-offs</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Pros & Cons</h2>
+      </div>
+      <div class="pc-grid">
+        <div class="pc-col">
+          <h3 class="pc-col__title pc-col__title--pro">Pros</h3>
+          <ul class="pc-list">
+            {prosAndCons.pros.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h3 class="pc-col__title pc-col__title--con">Cons</h3>
+          <ul class="pc-list">
+            {prosAndCons.cons.map((c) => <li>{c}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Use Cases</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Best (and Worst) Uses for DTG Printing</h2>
+      </div>
+      <div class="table-wrapper">
+        <table class="reference-table">
+          <thead>
+            <tr><th>Garment / Order Type</th><th>Why It Fits (or Doesn't)</th></tr>
+          </thead>
+          <tbody>
+            {useCases.map((u) => (
+              <tr>
+                <td>{u.garment}</td>
+                <td>{u.why}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-heading">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">FAQ</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title" id="faq-heading">Common Questions About DTG Printing</h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item">
+            <summary class="faq-q">
+              <span>{f.q}</span>
+              <svg class="faq-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+                <path d="M2 5 L7 9 L12 5"/>
+              </svg>
+            </summary>
+            <div class="faq-a"><p>{f.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Not Sure If DTG Fits Your Order?</h2>
+      <p class="section__text">SDF's production team can tell you within a day whether DTG, DTF, or screen printing makes the most sense for your fabric, quantity, and design.</p>
+      <div class="section__ctas">
+        <a href="/#contact" class="section__cta section__cta--primary">Get a Free Printing Consultation</a>
+        <a href="/printing/comparison-tool/" class="section__cta section__cta--secondary">Compare vs Other Methods →</a>
+      </div>
+      <p class="editorial-link"><a href="/editorial-policy/">Editorial Policy</a> · How we fact-check and review technical content</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-md); }
+  .breadcrumb { padding: var(--spacing-sm) 0; }
+  .breadcrumb__list {
+    display: flex; list-style: none; gap: var(--spacing-xs); padding: 0; margin: 0;
+    font-size: 0.875rem; color: var(--color-text-muted); flex-wrap: wrap;
+  }
+  .breadcrumb__item:not(:last-child)::after { content: "/"; margin-left: var(--spacing-xs); color: var(--color-border); }
+  .breadcrumb__item a { color: var(--color-text-muted); text-decoration: none; }
+  .breadcrumb__item a:hover { color: var(--color-primary); }
+  .breadcrumb__item--current { color: var(--color-text); }
+
+  .hero { padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md); max-width: 900px; margin: 0 auto; }
+  .hero__label {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-primary);
+    margin-bottom: var(--spacing-sm); font-weight: 600;
+  }
+  .hero__title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; color: var(--color-text); margin-bottom: var(--spacing-md); line-height: 1.2; }
+  .hero__description { font-size: clamp(1rem, 1.5vw, 1.125rem); color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--spacing-sm); }
+
+  .byline { display: flex; gap: 0.9rem; align-items: center; margin-top: var(--spacing-md); background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 4px; padding: 0.85rem 1.2rem; }
+  .byline__dot { width: 2.1rem; height: 2.1rem; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .byline__name { font-size: 0.85rem; font-weight: 600; color: var(--color-text); }
+  .byline__sub { font-size: 0.75rem; color: #888; margin-top: 0.15rem; line-height: 1.4; }
+  @media (max-width: 500px) { .byline { flex-direction: column; text-align: center; } }
+
+  .quick-answer {
+    background: var(--color-bg-alt); border-left: 3px solid var(--color-primary);
+    padding: var(--spacing-md); border-radius: 4px;
+  }
+  .quick-answer__label {
+    display: block; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--color-primary); font-weight: 700; margin-bottom: 0.6rem;
+  }
+  .quick-answer p { font-size: 1rem; color: var(--color-text); line-height: 1.75; margin: 0; }
+
+  .section { padding: var(--spacing-xl) 0; scroll-margin-top: 2rem; }
+  .section--alt { background: var(--color-bg-alt); }
+  .section--cta { background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%); text-align: center; }
+  .section__container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-md); }
+  .section--cta .section__container { max-width: 700px; }
+  .section__header { margin-bottom: var(--spacing-md); }
+  .section__label {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-primary);
+    margin-bottom: var(--spacing-sm); font-weight: 600;
+  }
+  .accent-line { width: 60px; height: 3px; background: var(--color-primary); margin-bottom: var(--spacing-sm); }
+  .section__title { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 600; color: var(--color-text); margin-bottom: var(--spacing-md); line-height: 1.3; }
+  .section__text { font-size: clamp(1rem, 1.5vw, 1.125rem); color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--spacing-sm); }
+
+  .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-sm); margin: var(--spacing-md) 0; }
+  .detail-grid--4 { grid-template-columns: repeat(4, 1fr); }
+  .detail-grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .detail-grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .detail-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; padding: var(--spacing-sm); }
+  .detail-card__title {
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-primary);
+    margin-bottom: var(--spacing-xs); font-weight: 600;
+  }
+  .detail-card__text { font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.6; }
+
+  .step-block { margin-bottom: var(--spacing-lg); }
+  .step-block:last-child { margin-bottom: 0; }
+  .step-block__title { font-size: 1.25rem; font-weight: 600; color: var(--color-text); margin-bottom: var(--spacing-xs); }
+
+  .table-wrapper { overflow-x: auto; margin-top: var(--spacing-md); }
+  .reference-table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .reference-table th, .reference-table td { padding: var(--spacing-sm); text-align: left; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+  .reference-table th { background: var(--color-bg-alt); font-weight: 600; color: var(--color-text); }
+  .reference-table td { color: var(--color-text-muted); }
+  .fit-badge { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+  .fit-badge--ideal { background: rgba(63,185,80,0.15); color: #3fb950; }
+  .fit-badge--good { background: rgba(88,166,255,0.15); color: #58a6ff; }
+  .fit-badge--caution { background: rgba(210,153,34,0.15); color: #d29922; }
+  .fit-badge--poor { background: rgba(224,0,0,0.15); color: var(--color-primary); }
+
+  .cost-list { display: flex; flex-direction: column; gap: var(--spacing-md); }
+  .cost-item__tier { font-size: 1.05rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.4rem; }
+
+  .pc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); }
+  .pc-col__title { font-size: 1.1rem; font-weight: 600; margin-bottom: var(--spacing-sm); }
+  .pc-col__title--pro { color: #3fb950; }
+  .pc-col__title--con { color: var(--color-primary); }
+  .pc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--spacing-xs); }
+  .pc-list li { font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.6; padding-left: 1.25rem; position: relative; }
+  .pc-list li::before { content: "—"; position: absolute; left: 0; color: var(--color-border); }
+
+  .faq-list { border: 1px solid var(--color-border); border-radius: 4px; overflow: hidden; }
+  .faq-item { border-bottom: 1px solid var(--color-border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    width: 100%; background: none; border: none; display: flex; justify-content: space-between;
+    align-items: center; gap: 1rem; padding: 1.1rem 1.4rem; cursor: pointer; text-align: left;
+    font-size: 0.95rem; font-weight: 600; color: var(--color-text); list-style: none; transition: background 0.2s;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q:hover { background: rgba(255,255,255,0.03); }
+  .faq-item[open] > .faq-q { background: rgba(255,255,255,0.03); }
+  .faq-item[open] .faq-chevron { transform: rotate(180deg); }
+  .faq-chevron { flex-shrink: 0; color: var(--color-text-muted); transition: transform 0.25s ease; }
+  .faq-a { padding: 0 1.4rem 1.3rem; }
+  .faq-a p { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.8; margin: 0; }
+
+  .section__ctas { display: flex; gap: var(--spacing-sm); justify-content: center; flex-wrap: wrap; }
+  .section__cta { display: inline-block; padding: 1rem 2rem; font-weight: 600; text-decoration: none; border-radius: 4px; transition: all 0.2s; }
+  .section__cta--primary { background: var(--color-primary); color: white; }
+  .section__cta--primary:hover { background: var(--color-primary-dark); }
+  .section__cta--secondary { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
+  .section__cta--secondary:hover { border-color: var(--color-primary); }
+  .editorial-link { font-size: 0.8rem; color: #777; margin-top: var(--spacing-md); }
+  .editorial-link a { color: #cc5555; text-decoration: none; }
+  .editorial-link a:hover { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .detail-grid, .detail-grid--4, .detail-grid--3, .detail-grid--2, .pc-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a; --color-text-muted: #666; --color-bg: #fff;
+      --color-bg-alt: #f5f5f5; --color-border: #e0e0e0;
+    }
+  }
+</style>
