@@ -1,0 +1,460 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Garment Label Compliance: US, EU & Legal Rules";
+const pageDescription = "FTC, EU Textile Regulation, RN/CA numbers, GOTS, GRS and OEKO-TEX labeling rules explained — what's legally required vs. optional for apparel brands.";
+
+const certifications = [
+  { name: "GOTS", covers: "Certified organic fiber content + full supply chain (chemical, water, labor)", threshold: "≥70% organic fiber for 'made with organic' claim; ≥95% for 'organic' claim", verifies: "Organic status only — does not test finished-product chemical safety independently of its own chemical criteria" },
+  { name: "GRS", covers: "Recycled fiber content + chain-of-custody tracking", threshold: "Minimum recycled content thresholds verified through transaction certificates at every supply chain stage", verifies: "Recycled content claims — increasingly required by brands like Nike and Adidas for recycled-material product lines" },
+  { name: "OEKO-TEX Standard 100", covers: "Chemical safety testing of the finished product, including trims, thread, and buttons", threshold: "Product-level chemical residue limits, not a supply-chain or organic-content standard", verifies: "That the finished garment is safe for human contact — says nothing about whether materials are organic or recycled" },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Garment Labels", "item": "https://sdfltd.com/garment-labels/" },
+          { "@type": "ListItem", "position": 3, "name": "Compliance & Certification", "item": Astro.url.href }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is a care label legally required in the US?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The FTC Care Labeling Rule, 16 CFR Part 423, requires most apparel sold in the United States to carry permanent care instructions covering washing, bleaching, drying, ironing, and dry cleaning. Manufacturers and importers are legally responsible for the accuracy of these instructions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is an RN number and do I need one?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An RN, or Registered Identification Number, is issued free by the US Federal Trade Commission and identifies the business responsible for a product. It is not strictly required — a company can use its full legal name on labels instead — but most brands register for one because it is shorter and does not need updating if the company's legal name changes. Each company holds one RN covering all of its products."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is fiber content labeling mandatory in the EU?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Regulation (EU) No 1007/2011 makes fiber content labeling mandatory for textile products sold in the European Union, requiring the use of specific approved generic fiber names and accurate percentage disclosure. Care labeling and country of origin, by contrast, are recommended under EU-level guidance but not mandated by this specific regulation, though individual member states and retailers often require them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between GOTS, GRS, and OEKO-TEX?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GOTS certifies organic fiber content across the full supply chain, requiring at least 70% certified organic fiber. GRS certifies recycled fiber content and tracks it through chain-of-custody documentation. OEKO-TEX Standard 100 tests the finished product for harmful chemical residues but does not certify organic or recycled content on its own. Brands often use more than one certification together because each covers a different claim."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/garment-labels/">Garment Labels</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Compliance & Certification</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__label">Garment Labels • Compliance</div>
+      <h1 class="hero__title">Garment Label Compliance and Legal Requirements</h1>
+      <p class="hero__description">
+        Label compliance rules differ by destination market, and getting them wrong can mean a customs hold, a retailer chargeback, or a regulatory penalty. Here is what US, EU, and sustainability certification rules actually require.
+      </p>
+      <p class="hero__disclaimer">This page provides general regulatory information and is not legal advice. Requirements change and vary by product category — confirm current obligations with legal counsel or the relevant regulatory body before finalizing label content.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">United States</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">US Labeling Requirements</h2>
+      </div>
+      <div class="section__text">
+        <p>Three federal requirements govern most US apparel labeling. The Textile Fiber Products Identification Act requires accurate fiber content disclosure by percentage. The FTC Care Labeling Rule (16 CFR Part 423) requires permanent care instructions on nearly all garments, covering washing, bleaching, drying, ironing, and professional cleaning — either as text or as care symbols. Country of origin disclosure is separately required for customs purposes, based on where the garment underwent its last substantial transformation during manufacturing.</p>
+
+        <p>Wool and fur products carry additional labeling obligations under the Wool Products Labeling Act and the Fur Products Labeling Act respectively, layered on top of the general textile rules.</p>
+
+        <p>An RN (Registered Identification Number), issued free by the Federal Trade Commission, identifies the business responsible for the product. It is optional in the sense that a company can print its full legal name instead, but registering one is common practice since a single RN covers every product a company sells and does not need updating if the legal business name changes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">European Union</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">EU Labeling Requirements</h2>
+      </div>
+      <div class="section__text">
+        <p>Regulation (EU) No 1007/2011 governs textile fiber naming and content labeling across the EU. Fiber composition disclosure is mandatory, and only the approved generic fiber names listed in the regulation may be used — brands cannot substitute marketing terms for the required generic names. Notably, this specific regulation does not itself mandate care instructions or country of origin labeling at the EU level; those are recommended practice and are often required separately by individual member states or by retailer policy, so brands selling across multiple EU countries typically include them regardless.</p>
+
+        <p>The regulatory landscape is shifting: the EU's Ecodesign for Sustainable Products Regulation (ESPR) is extending sustainability disclosure requirements to textiles, with Digital Product Passport requirements — a scannable data carrier disclosing supply chain and material information — expected to begin phasing in for textiles from 2027. Brands sourcing for EU markets should plan label and data infrastructure with this timeline in mind rather than treating it as a distant concern.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Buyer Requirements</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Buyer-Specific Label Requirements</h2>
+      </div>
+      <div class="section__text">
+        <p>Beyond government regulation, individual retailers and brand customers frequently layer their own label requirements on top of the legal minimum — specific placement tolerances, approved suppliers for security tags, or barcode formatting standards tied to their point-of-sale systems. These requirements are typically documented in a routing guide or vendor manual supplied by the buyer.</p>
+
+        <p>Factories producing for multiple brands need a documented process for tracking which buyer-specific rules apply to which order — see the <a href="/garment-labels/buyer-guidelines/">Buyer Guidelines & Approval Process guide</a> for how label specifications move from brand requirement through to an approved production sample.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Sustainability Labeling</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">GOTS vs. GRS vs. OEKO-TEX</h2>
+      </div>
+      <div class="section__text">
+        <p>These three certifications get confused often because they all appear on sustainability-focused labels, but each verifies something different, and a garment can carry more than one at once.</p>
+      </div>
+      <div class="table-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Certification</th>
+              <th>What It Covers</th>
+              <th>Key Threshold</th>
+              <th>What It Verifies</th>
+            </tr>
+          </thead>
+          <tbody>
+            {certifications.map((cert) => (
+              <tr>
+                <td>{cert.name}</td>
+                <td>{cert.covers}</td>
+                <td>{cert.threshold}</td>
+                <td>{cert.verifies}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="section__text section__text--note">For a deeper walkthrough of GOTS label grades and the certification process specifically, see the existing <a href="/insights/gots-label-guide">GOTS Label Guide</a>. For the broader EU regulatory timeline, see <a href="/insights/eu-clothing-regulations-2026">EU Clothing Regulations 2026</a>.</p>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Sourcing for a Regulated Market?</h2>
+      <p class="section__text">SDF Clothing is GOTS-certified and produces compliant labeling as standard across US, EU, UK, Canadian, and Australian orders. Talk to our compliance team before you finalize label content.</p>
+      <div class="section__ctas">
+        <a href="/#contact" class="section__cta section__cta--primary">Talk to Our Compliance Team</a>
+        <a href="/garment-labels/quality-testing-and-defects/" class="section__cta section__cta--secondary">See Quality Testing Standards →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-xs);
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: "/";
+    margin-left: var(--spacing-xs);
+    color: var(--color-border);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .hero__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .hero__disclaimer {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    opacity: 0.75;
+    font-style: italic;
+    line-height: 1.6;
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section--cta .section__container {
+    max-width: 700px;
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__text--note {
+    font-size: 0.9375rem;
+    margin-top: var(--spacing-md);
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    margin-top: var(--spacing-md);
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

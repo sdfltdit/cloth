@@ -1,0 +1,525 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Screen Printing on Garments: Process, Cost, Durability & When to Use It";
+const pageDescription = "How screen printing works step by step, which fabrics and designs it suits, real cost behavior by order volume, wash durability, and when DTF or DTG beats it instead.";
+
+const lastUpdated = "July 25, 2026";
+const lastUpdatedISO = "2026-07-25";
+
+// ─────────────────────────────────────────────────────────────
+// NOTE FOR SDF TEAM — READ BEFORE PUBLISHING:
+// Every value marked [VERIFY] is a widely-documented industry-
+// standard figure (screen printing trade references), not an
+// SDF production number. Per the content cluster plan's
+// "Fact-accuracy rules," these must be checked against SDF's
+// actual production data — mesh counts you stock, cure profile
+// on your dryers, real cost-per-piece at your pricing — before
+// this page goes live. Do not publish with [VERIFY] still in
+// the copy.
+// ─────────────────────────────────────────────────────────────
+
+const quickFacts = [
+  { label: "Best design type", value: "Spot-color, 1–6 solid colors, bold shapes" },
+  { label: "Best fabric", value: "100% cotton, cotton-poly blends up to ~50/50" },
+  { label: "Cost curve", value: "Cheapest per piece at 100+ units; expensive under ~24–50" },
+  { label: "Wash durability", value: "High if cured correctly — most common failure is under-cure, not the method" },
+];
+
+const processSteps = [
+  {
+    id: "design-separation",
+    title: "1. Design & color separation",
+    text: "A finished design gets split into individual color layers — one film, and eventually one screen, per solid color. A three-color logo needs three screens; a five-color design needs five. This is the structural reason screen printing rewards simple, spot-color artwork and penalizes photographic or gradient-heavy designs: every additional color is another screen, another setup pass, and another chance for misalignment.",
+  },
+  {
+    id: "screen-making",
+    title: "2. Screen and stencil preparation",
+    text: `A polyester mesh is stretched across an aluminum frame and coated evenly with light-sensitive emulsion. Mesh count — threads per inch — determines how much ink passes through and how fine a detail the screen can hold. [VERIFY] Lower counts (around 86–110) pass thick layers of ink fast and suit bold graphics or white underbase on dark garments; higher counts (160–230+) hold fine line art and halftones but pass less ink per pass. Once coated, the screen is exposed to UV light through the film positive — light hardens the emulsion everywhere except where the design blocks it, and the unexposed emulsion washes out with water, leaving an open stencil in the shape of that color layer.`,
+  },
+  {
+    id: "press-setup",
+    title: "3. Press loading and registration",
+    text: "Each screen is locked onto a station of the press and aligned so every color lands exactly where it should relative to the others — this alignment is called registration. On a manual press, the operator rotates the garment pallet by hand between color stations; on an automatic press, rotation and stroke are mechanized, which is what makes high-volume runs fast and repeatable rather than dependent on one operator's consistency. Registration is checked and adjusted before a single production piece is printed, using test prints on scrap fabric.",
+  },
+  {
+    id: "printing",
+    title: "4. Printing",
+    text: "Ink is loaded onto the screen and pulled across the stencil with a squeegee — a rubber blade set at a specific angle and pressure. The squeegee stroke forces ink through the open mesh onto the garment beneath, then the screen lifts and the process repeats for the next color. Squeegee angle, pressure, and speed all affect how much ink deposits and how sharp the edges come out; too little pressure leaves a thin, patchy print, too much can push ink under the stencil edges and blur fine detail.",
+  },
+  {
+    id: "flash-curing",
+    title: "5. Flash curing between colors (multi-color jobs)",
+    text: "When one wet ink layer needs another color printed directly on top of it — common with a white underbase under a bright color on a dark shirt — the shop runs it under a flash cure unit first. A flash dryer partially gels the ink surface just enough to print on top of it cleanly, without fully curing it. This is a separate step from final curing and is easy to under-do, which shows up later as poor layer adhesion.",
+  },
+  {
+    id: "final-curing",
+    title: "6. Final curing",
+    text: `Wet ink on fabric is not a finished, durable print — it has to cure. Plastisol ink needs to reach [VERIFY] roughly 320°F (160°C) throughout the entire ink film — not just the surface — usually by passing through a conveyor dryer at a controlled belt speed. At that temperature the PVC resin and plasticizer in plastisol cross-link into a continuous, wash-resistant film bonded to the fabric. Water-based and discharge inks cure at different temperatures and require their own dryer settings. Under-curing — reaching temperature at the surface but not all the way through the ink deposit — is the single most common cause of a screen print cracking, peeling, or fading faster than it should after washing, and it's a production error, not a limitation of the method itself.`,
+  },
+];
+
+const fabricFit = [
+  { fabric: "100% Cotton", fit: "Ideal", note: "Absorbs plastisol and water-based ink evenly; the industry-default substrate for screen printing." },
+  { fabric: "Cotton-Poly Blends (up to ~50/50)", fit: "Good", note: "[VERIFY] Higher poly content increases risk of dye migration — polyester dye bleeding into light-colored ink over time or under heat — so blends need a migration-blocking ink or low-bleed formulation above a certain poly ratio." },
+  { fabric: "100% Polyester / Performance Fabric", fit: "Caution", note: "Dye migration risk is highest here; shops typically switch to a low-bleed or specialty plastisol, or recommend sublimation/DTF instead for all-poly activewear." },
+  { fabric: "Fleece / Heavyweight Cotton", fit: "Good", note: "Handles thick ink deposits well; puff and high-density prints in particular need a substrate with enough loft." },
+  { fabric: "Nylon / Ripstop", fit: "Poor", note: "Low ink adhesion on nylon's smooth, low-porosity surface; specialty nylon-bonding ink systems exist but are a niche, higher-cost workaround." },
+];
+
+const costBehavior = [
+  { tier: "Small (under ~50 pcs)", behavior: "[VERIFY] Expensive per piece — screen setup cost is fixed regardless of quantity, so it's spread across very few units. DTF or DTG usually beats screen printing here." },
+  { tier: "Mid (roughly 50–300 pcs)", behavior: "[VERIFY] Screen printing starts to close the gap with digital methods and often wins on cost once you're past ~100 pieces of a simple design." },
+  { tier: "Large (300+ pcs)", behavior: "[VERIFY] Screen printing is typically the cheapest per-piece option at this volume for spot-color designs — the fixed setup cost becomes negligible per unit, and print speed per piece drops." },
+  { tier: "Every color adds cost", behavior: "Regardless of volume tier, each additional spot color means another screen, another setup, and another pass through the press — cost scales with color count, not just quantity." },
+];
+
+const prosAndCons = {
+  pros: [
+    "Lowest cost per piece once volume clears roughly 100–300 units for a simple design",
+    "Strong, opaque color — including bright ink on dark garments via a white underbase",
+    "Very durable when cured correctly, holding up to repeated washing better than most other methods",
+    "Fast per-piece print speed on automatic presses once setup is done",
+    "Handles large solid-fill areas cleanly, which digital methods sometimes struggle to lay down evenly",
+  ],
+  cons: [
+    "Each additional color multiplies setup cost and time — poor fit for full-color or photographic designs",
+    "High fixed setup cost makes very small orders expensive per piece",
+    "Registration has to be precise; a shift of even a millimeter between screens is visible on the finished print",
+    "Plastisol ink sits on top of the fabric and can feel noticeably heavier or stiffer than DTF or DTG on thin, lightweight garments",
+    "Not economical for one-off or highly variable designs — that's a digital-printing use case",
+  ],
+};
+
+const durability = {
+  intro: "Wash durability is where screen printing's reputation is best earned — and most often undermined by a curing shortcut rather than the ink itself.",
+  points: [
+    { label: "Cure temperature is the real durability variable", text: "[VERIFY] A plastisol print cured to full temperature through the entire ink film typically survives well beyond 50 home wash cycles before visible cracking; a print that only reached surface temperature can start failing within a handful of washes. The visible print looks identical fresh off the press either way — the difference only shows up after the customer starts washing it." },
+    { label: "Crock testing measures a different failure mode", text: "Crock testing (AATCC 8 / ISO 105-X12) checks how much ink rubs off onto another surface under dry or wet friction, rather than wash survival. A print can pass wash testing and still fail wet crock if the ink film is too thick or under-cured at the surface." },
+    { label: "Wash testing protocol", text: "A basic in-house wash test — a set number of home-machine wash-and-dry cycles at a standard temperature, followed by a visual check for cracking, fading, or edge lift — is the simplest way to catch a curing problem before a bulk order ships, not after a buyer's customer complains." },
+  ],
+};
+
+const useCases = [
+  { garment: "T-shirts, high volume", why: "Classic fit — simple spot-color logos at 300+ pieces are close to the cheapest per-piece printing option available." },
+  { garment: "Hoodies and fleece", why: "Heavier fabric handles thick ink deposits well, including puff or high-build prints." },
+  { garment: "Corporate and uniform orders", why: "Repeat orders of the same 1–2 color logo across many pieces amortize the screen cost across an ongoing relationship, not just one run." },
+  { garment: "Streetwear drops with bold graphics", why: "Strong opacity on dark garments and crisp edges on large graphic elements suit the bold-graphic aesthetic common in streetwear." },
+  { garment: "Full-color or photographic designs", why: "Generally a poor fit — DTG or sublimation handle continuous-tone artwork far more economically than separating it into many screen-printed colors." },
+];
+
+const faqs = [
+  {
+    q: "Does screen printing crack after washing?",
+    a: "Properly cured plastisol screen printing is one of the more wash-durable methods available, but cracking does happen — almost always from under-curing rather than a flaw in the method itself. If the ink film doesn't reach full cure temperature all the way through during production, the plastisol never fully cross-links, and it will crack or flake off after repeated washing well before it should.",
+  },
+  {
+    q: "What's the minimum order quantity for screen printing?",
+    a: "[VERIFY] There's no universal number — it depends on the shop's setup cost — but screen printing generally isn't cost-competitive below roughly 24–50 pieces per design, because the screen-making cost is fixed no matter how many pieces you print. Below that, DTF or DTG typically work out cheaper per piece since they carry no per-color screen setup.",
+  },
+  {
+    q: "Can screen printing handle photo-realistic or gradient designs?",
+    a: "Not economically, and often not visually. Screen printing separates artwork into a small number of solid ink colors, which is built for spot-color and simulated-process work rather than continuous-tone gradients. Photo-realistic designs are much better suited to DTG or sublimation, both of which lay down continuous color rather than discrete layers.",
+  },
+  {
+    q: "Is screen printing cheaper than DTF or DTG?",
+    a: "At higher volume with a simple, low-color-count design, usually yes — the fixed screen setup cost gets spread across enough units that per-piece cost drops below digital methods. At low volume or with complex, full-color designs, DTF or DTG usually cost less per piece because there's no per-color screen setup to amortize.",
+  },
+  {
+    q: "Why does screen printing feel stiffer than other prints?",
+    a: "Plastisol ink sits as a layer on top of the fabric rather than absorbing into it, and thicker deposits — needed for opaque color or a white underbase on dark garments — add to that hand-feel. Water-based and discharge inks, which absorb into the fabric instead of sitting on top, produce a softer feel but come with their own fabric and color limitations.",
+  },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "dateModified": lastUpdatedISO,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Printing", "item": "https://sdfltd.com/printing/" },
+          { "@type": "ListItem", "position": 3, "name": "Screen Printing", "item": Astro.url.href },
+        ],
+      },
+    },
+    {
+      "@type": "HowTo",
+      "name": "How Screen Printing Works on Garments",
+      "step": processSteps.map((s) => ({
+        "@type": "HowToStep",
+        "name": s.title,
+        "text": s.text,
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={pageSchema} dateModified={lastUpdatedISO}>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/printing/">Printing</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Screen Printing</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__label">Printing Methods · Screen Printing</div>
+      <h1 class="hero__title">Screen Printing on Garments</h1>
+      <p class="hero__description">
+        Screen printing pushes ink through a stenciled mesh screen, one solid color at a time, directly onto fabric. It's the oldest industrial garment printing method still in wide commercial use, and at real production volume with a simple design, it's still often the cheapest and most wash-durable option available.
+      </p>
+      <p class="hero__updated">Last updated {lastUpdated}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="quick-answer">
+        <span class="quick-answer__label">Quick Answer</span>
+        <p>Screen printing forces ink through a stenciled mesh screen — one screen per color — onto the garment, then cures it with heat so the ink cross-links permanently into the fabric surface. It works best on cotton and cotton-blend fabrics with simple, 1–6 color designs, and becomes the cheapest printing option once an order clears roughly 100–300 pieces. It's a poor fit for full-color, photographic, or highly variable designs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">At a Glance</span>
+        <div class="accent-line"></div>
+      </div>
+      <div class="detail-grid detail-grid--4">
+        {quickFacts.map((f) => (
+          <div class="detail-card">
+            <h3 class="detail-card__title">{f.label}</h3>
+            <p class="detail-card__text">{f.value}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Process</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How Screen Printing Actually Works</h2>
+        <p class="section__text">Six steps, from separated artwork to a cured, wash-ready print. Multi-color jobs repeat steps 3–5 once per screen.</p>
+      </div>
+      {processSteps.map((s) => (
+        <div class="step-block" id={s.id}>
+          <h3 class="step-block__title">{s.title}</h3>
+          <p class="section__text">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Fabric Fit</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Which Fabrics Screen Printing Works Best On</h2>
+      </div>
+      <div class="table-wrapper">
+        <table class="reference-table">
+          <thead>
+            <tr><th>Fabric</th><th>Fit</th><th>Why</th></tr>
+          </thead>
+          <tbody>
+            {fabricFit.map((f) => (
+              <tr>
+                <td>{f.fabric}</td>
+                <td><span class={`fit-badge fit-badge--${f.fit.toLowerCase()}`}>{f.fit}</span></td>
+                <td>{f.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Cost Economics</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How Cost Actually Behaves by Volume</h2>
+        <p class="section__text">Screen printing's cost curve is driven by one fixed input — screen setup — spread across a variable number of pieces. That's why the same design can be the most expensive option at 20 pieces and the cheapest at 500.</p>
+      </div>
+      <div class="cost-list">
+        {costBehavior.map((c) => (
+          <div class="cost-item">
+            <h3 class="cost-item__tier">{c.tier}</h3>
+            <p class="section__text">{c.behavior}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Durability</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wash Durability & Testing</h2>
+        <p class="section__text">{durability.intro}</p>
+      </div>
+      <div class="detail-grid detail-grid--3">
+        {durability.points.map((p) => (
+          <div class="detail-card">
+            <h3 class="detail-card__title">{p.label}</h3>
+            <p class="detail-card__text">{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Trade-offs</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Pros & Cons</h2>
+      </div>
+      <div class="pc-grid">
+        <div class="pc-col">
+          <h3 class="pc-col__title pc-col__title--pro">Pros</h3>
+          <ul class="pc-list">
+            {prosAndCons.pros.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h3 class="pc-col__title pc-col__title--con">Cons</h3>
+          <ul class="pc-list">
+            {prosAndCons.cons.map((c) => <li>{c}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Use Cases</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Best (and Worst) Uses for Screen Printing</h2>
+      </div>
+      <div class="table-wrapper">
+        <table class="reference-table">
+          <thead>
+            <tr><th>Garment / Order Type</th><th>Why It Fits (or Doesn't)</th></tr>
+          </thead>
+          <tbody>
+            {useCases.map((u) => (
+              <tr>
+                <td>{u.garment}</td>
+                <td>{u.why}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-heading">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">FAQ</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title" id="faq-heading">Common Questions About Screen Printing</h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item">
+            <summary class="faq-q">
+              <span>{f.q}</span>
+              <svg class="faq-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+                <path d="M2 5 L7 9 L12 5"/>
+              </svg>
+            </summary>
+            <div class="faq-a"><p>{f.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Not Sure If Screen Printing Fits Your Order?</h2>
+      <p class="section__text">SDF's production team can tell you within a day whether screen printing, DTF, or DTG makes the most sense for your fabric, quantity, and design — before you commit to setup costs.</p>
+      <div class="section__ctas">
+        <a href="/#contact" class="section__cta section__cta--primary">Get a Free Printing Consultation</a>
+        <a href="/printing/" class="section__cta section__cta--secondary">See All Printing Methods →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-md); }
+  .breadcrumb { padding: var(--spacing-sm) 0; }
+  .breadcrumb__list {
+    display: flex; list-style: none; gap: var(--spacing-xs); padding: 0; margin: 0;
+    font-size: 0.875rem; color: var(--color-text-muted); flex-wrap: wrap;
+  }
+  .breadcrumb__item:not(:last-child)::after { content: "/"; margin-left: var(--spacing-xs); color: var(--color-border); }
+  .breadcrumb__item a { color: var(--color-text-muted); text-decoration: none; }
+  .breadcrumb__item a:hover { color: var(--color-primary); }
+  .breadcrumb__item--current { color: var(--color-text); }
+
+  .hero { padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md); max-width: 900px; margin: 0 auto; }
+  .hero__label {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-primary);
+    margin-bottom: var(--spacing-sm); font-weight: 600;
+  }
+  .hero__title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; color: var(--color-text); margin-bottom: var(--spacing-md); line-height: 1.2; }
+  .hero__description { font-size: clamp(1rem, 1.5vw, 1.125rem); color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--spacing-sm); }
+  .hero__updated { font-size: 0.8rem; color: #777; letter-spacing: 0.04em; }
+
+  .quick-answer {
+    background: var(--color-bg-alt); border-left: 3px solid var(--color-primary);
+    padding: var(--spacing-md); border-radius: 4px;
+  }
+  .quick-answer__label {
+    display: block; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--color-primary); font-weight: 700; margin-bottom: 0.6rem;
+  }
+  .quick-answer p { font-size: 1rem; color: var(--color-text); line-height: 1.75; margin: 0; }
+
+  .section { padding: var(--spacing-xl) 0; scroll-margin-top: 2rem; }
+  .section--alt { background: var(--color-bg-alt); }
+  .section--cta { background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%); text-align: center; }
+  .section__container { max-width: 900px; margin: 0 auto; padding: 0 var(--spacing-md); }
+  .section--cta .section__container { max-width: 700px; }
+  .section__header { margin-bottom: var(--spacing-md); }
+  .section__label {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-primary);
+    margin-bottom: var(--spacing-sm); font-weight: 600;
+  }
+  .accent-line { width: 60px; height: 3px; background: var(--color-primary); margin-bottom: var(--spacing-sm); }
+  .section__title { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 600; color: var(--color-text); margin-bottom: var(--spacing-md); line-height: 1.3; }
+  .section__text { font-size: clamp(1rem, 1.5vw, 1.125rem); color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--spacing-sm); }
+
+  .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-sm); margin: var(--spacing-md) 0; }
+  .detail-grid--4 { grid-template-columns: repeat(4, 1fr); }
+  .detail-grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .detail-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; padding: var(--spacing-sm); }
+  .detail-card__title {
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-primary);
+    margin-bottom: var(--spacing-xs); font-weight: 600;
+  }
+  .detail-card__text { font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.6; }
+
+  .step-block { margin-bottom: var(--spacing-lg); }
+  .step-block:last-child { margin-bottom: 0; }
+  .step-block__title { font-size: 1.25rem; font-weight: 600; color: var(--color-text); margin-bottom: var(--spacing-xs); }
+
+  .table-wrapper { overflow-x: auto; margin-top: var(--spacing-md); }
+  .reference-table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .reference-table th, .reference-table td { padding: var(--spacing-sm); text-align: left; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+  .reference-table th { background: var(--color-bg-alt); font-weight: 600; color: var(--color-text); }
+  .reference-table td { color: var(--color-text-muted); }
+  .fit-badge { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+  .fit-badge--ideal { background: rgba(63,185,80,0.15); color: #3fb950; }
+  .fit-badge--good { background: rgba(88,166,255,0.15); color: #58a6ff; }
+  .fit-badge--caution { background: rgba(210,153,34,0.15); color: #d29922; }
+  .fit-badge--poor { background: rgba(224,0,0,0.15); color: var(--color-primary); }
+
+  .cost-list { display: flex; flex-direction: column; gap: var(--spacing-md); }
+  .cost-item__tier { font-size: 1.05rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.4rem; }
+
+  .pc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); }
+  .pc-col__title { font-size: 1.1rem; font-weight: 600; margin-bottom: var(--spacing-sm); }
+  .pc-col__title--pro { color: #3fb950; }
+  .pc-col__title--con { color: var(--color-primary); }
+  .pc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--spacing-xs); }
+  .pc-list li { font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.6; padding-left: 1.25rem; position: relative; }
+  .pc-list li::before { content: "—"; position: absolute; left: 0; color: var(--color-border); }
+
+  /* FAQ accordion — native <details>/<summary>, matches site-wide FAQ pattern */
+  .faq-list { border: 1px solid var(--color-border); border-radius: 4px; overflow: hidden; }
+  .faq-item { border-bottom: 1px solid var(--color-border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    width: 100%; background: none; border: none; display: flex; justify-content: space-between;
+    align-items: center; gap: 1rem; padding: 1.1rem 1.4rem; cursor: pointer; text-align: left;
+    font-size: 0.95rem; font-weight: 600; color: var(--color-text); list-style: none; transition: background 0.2s;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q:hover { background: rgba(255,255,255,0.03); }
+  .faq-item[open] > .faq-q { background: rgba(255,255,255,0.03); }
+  .faq-item[open] .faq-chevron { transform: rotate(180deg); }
+  .faq-chevron { flex-shrink: 0; color: var(--color-text-muted); transition: transform 0.25s ease; }
+  .faq-a { padding: 0 1.4rem 1.3rem; }
+  .faq-a p { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.8; margin: 0; }
+
+  .section__ctas { display: flex; gap: var(--spacing-sm); justify-content: center; flex-wrap: wrap; }
+  .section__cta { display: inline-block; padding: 1rem 2rem; font-weight: 600; text-decoration: none; border-radius: 4px; transition: all 0.2s; }
+  .section__cta--primary { background: var(--color-primary); color: white; }
+  .section__cta--primary:hover { background: var(--color-primary-dark); }
+  .section__cta--secondary { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
+  .section__cta--secondary:hover { border-color: var(--color-primary); }
+
+  @media (max-width: 900px) {
+    .detail-grid, .detail-grid--4, .detail-grid--3, .pc-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a; --color-text-muted: #666; --color-bg: #fff;
+      --color-bg-alt: #f5f5f5; --color-border: #e0e0e0;
+    }
+  }
+</style>

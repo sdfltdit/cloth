@@ -1,0 +1,509 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Garment Labels Guide: Types, Materials & Rules";
+const pageDescription = "Complete garment label guide for fashion brands — label types, materials, compliance rules, and placement standards from a Bangladesh apparel manufacturer.";
+
+const clusterPages = [
+  {
+    slug: "/garment-labels/types-of-garment-labels/",
+    title: "Types of Garment Labels",
+    description: "Main, size, care, fiber content, country of origin, warning, heat transfer, flag, loop, and RFID labels — what each one does.",
+  },
+  {
+    slug: "/garment-labels/materials-and-manufacturing/",
+    title: "Materials & Manufacturing Methods",
+    description: "Damask, satin, TPU, silicone and more — compared alongside woven, printed, heat transfer, and laser-cut production methods.",
+  },
+  {
+    slug: "/garment-labels/placement-and-required-information/",
+    title: "Placement & Required Information",
+    description: "Where labels go on a garment, and exactly what information — RN number, barcode, fiber %, size — each one must show.",
+  },
+  {
+    slug: "/garment-labels/compliance-and-certification/",
+    title: "Compliance & Certification",
+    description: "US FTC rules, EU Textile Regulation 1007/2011, RN/CA numbers, and GOTS, GRS, and OEKO-TEX labeling requirements.",
+  },
+  {
+    slug: "/garment-labels/quality-testing-and-defects/",
+    title: "Quality Testing & Common Defects",
+    description: "Color fastness, wash durability, and attachment strength testing — plus the most common label defects and how to prevent them.",
+  },
+  {
+    slug: "/garment-labels/buyer-guidelines/",
+    title: "Buyer Guidelines & Approval Process",
+    description: "How to write a label spec sheet, set placement standards, and move a label from first sample to bulk-production approval.",
+  },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Garment Labels", "item": Astro.url.href }
+        ]
+      }
+    },
+    {
+      "@type": "ItemList",
+      "name": "Garment Labels Guide — Topic Cluster",
+      "itemListElement": clusterPages.map((page, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "url": new URL(page.slug, Astro.site).toString(),
+        "name": page.title
+      }))
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a garment label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A garment label is a piece of fabric, printed material, or synthetic substrate attached to a clothing item that carries information such as the brand name, size, fiber content, care instructions, and country of origin. Labels are typically sewn into the neck, side seam, or waistband, and in most countries certain label information is a legal requirement rather than an optional branding choice."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are garment labels important?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Garment labels serve three functions at once: they identify the brand and support customer trust, they give the wearer instructions needed to care for the item correctly, and they satisfy legal disclosure requirements in the countries where the garment is sold, such as fiber content and country of origin rules."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many types of garment labels are there?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most apparel brands work with around 10 core label types: main/brand labels, size labels, care labels, fiber content labels, country of origin labels, warning labels, heat transfer labels, flag labels, loop labels, and RFID or smart labels. A single garment often carries three or more of these at once."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Garment Labels</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Garment Labels • Complete Guide</div>
+        <h1 class="hero__title">Garment Labels: The Complete Guide for Fashion Brands</h1>
+        <p class="hero__description">
+          Everything a fashion brand needs to know about garment labels — from label types and materials to legal compliance and buyer approval — written by a vertically integrated Bangladesh apparel manufacturer that produces and attaches labels in-house.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Overview</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What Is a Garment Label?</h2>
+      </div>
+      <div class="section__text">
+        <p>A garment label is a piece of fabric, printed material, or synthetic substrate attached to a clothing item that carries information about the product. Labels are usually stitched into the neck, side seam, waistband, or hem, though heat-applied and adhesive labels are increasingly common on activewear and outerwear.</p>
+
+        <p>Every garment carries at least two or three labels working together. A main label identifies the brand. A care label explains how to wash and maintain the item. A fiber content label states what the garment is made from. A country of origin label discloses where it was manufactured. Depending on the product category and destination market, additional labels — size, warning, RFID — join this core set.</p>
+
+        <p>For a fashion brand, labels are not a single design decision. They sit at the intersection of branding, manufacturing, and law, and each of those three pulls in a different direction: branding wants a distinctive look, manufacturing wants a durable and cost-effective build, and compliance wants specific, non-negotiable information displayed in a specific way.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Purpose & Importance</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Why Garment Labels Matter</h2>
+      </div>
+      <div class="section__text">
+        <p>Labels do three jobs at once, and brands that treat them as an afterthought usually run into a problem in one of the three.</p>
+      </div>
+      <div class="function-grid">
+        <div class="function-card">
+          <h3 class="function-card__title">Brand Identity</h3>
+          <p class="function-card__text">The main label is often the first physical touchpoint a customer has with a brand after unboxing. Material choice, thread quality, and print sharpness all signal perceived garment quality before the customer even checks the price tag.</p>
+        </div>
+        <div class="function-card">
+          <h3 class="function-card__title">Care Guidance</h3>
+          <p class="function-card__text">Care labels tell the wearer how to wash, dry, iron, and store the garment without damaging it. Incorrect or missing care information is one of the most common causes of customer complaints and returns after a first wash.</p>
+        </div>
+        <div class="function-card">
+          <h3 class="function-card__title">Legal Compliance</h3>
+          <p class="function-card__text">Fiber content, country of origin, and in some cases care instructions are legally mandated disclosures in major markets including the US and EU. Getting this wrong can mean customs holds, retailer chargebacks, or regulatory penalties.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Explore the Cluster</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Everything You Need to Know About Garment Labels</h2>
+      </div>
+      <div class="section__text">
+        <p>This guide is organized into six detailed sections. Each one covers a different stage of the label decision, from choosing a type through to getting it approved for bulk production.</p>
+      </div>
+      <div class="cluster-grid">
+        {clusterPages.map((page) => (
+          <a href={page.slug} class="cluster-card">
+            <h3 class="cluster-card__title">{page.title}</h3>
+            <p class="cluster-card__text">{page.description}</p>
+            <span class="cluster-card__link">Read the guide →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Need Labels Made and Attached In-House?</h2>
+      <p class="section__text">SDF Clothing produces, prints, and attaches garment labels as part of full-package manufacturing — no separate label supplier, no shipping delays waiting on a third party.</p>
+      <div class="section__ctas">
+        <a href="/#contact" class="section__cta section__cta--primary">Get a Free Label & Trim Consultation</a>
+        <a href="/private-label-clothing-manufacturer" class="section__cta section__cta--secondary">Explore Private Label Manufacturing</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-xs);
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: "/";
+    margin-left: var(--spacing-xs);
+    color: var(--color-border);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .hero__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    text-align: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section--cta .section__container {
+    max-width: 700px;
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+    max-width: 900px;
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+    max-width: 900px;
+  }
+
+  .section--cta .section__text {
+    margin: 0 auto var(--spacing-md);
+  }
+
+  .function-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+
+  .function-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+  }
+
+  .function-card__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .function-card__text {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .cluster-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+
+  .cluster-card {
+    display: block;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .cluster-card:hover,
+  .cluster-card:focus-visible {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .cluster-card:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .cluster-card__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .cluster-card__text {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .cluster-card__link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  @media (max-width: 900px) {
+    .function-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cluster-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
