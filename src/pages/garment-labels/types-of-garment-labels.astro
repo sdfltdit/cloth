@@ -156,6 +156,14 @@ const pageSchema = {
             "@type": "Answer",
             "text": "An RFID smart label embeds a radio-frequency chip into the garment label, allowing retailers to scan items electronically for inventory counts, loss prevention, and authentication. Adoption is accelerating ahead of the EU's Digital Product Passport requirement for textiles, which begins phasing in from 2027."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What order do care symbols appear in on a label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Care symbols follow a fixed sequence set by GINETEX: washing, then bleaching, then drying, then ironing, then professional care. Within each symbol, details like dots or numbers typically indicate intensity, such as maximum wash or iron temperature, and an X through any symbol means that process should be avoided."
+          }
         }
       ]
     }
@@ -246,6 +254,51 @@ const pageSchema = {
           </div>
         </div>
         <p class="section__text section__text--note">{label.note}</p>
+
+        {label.id === "care-label" && (
+          <div class="symbol-reference">
+            <h3 class="symbol-reference__title">How Care Symbols Work</h3>
+            <p class="section__text">Care symbols always appear in one fixed sequence set by GINETEX: washing, then bleaching, then drying, then ironing, then professional care. An "X" through any symbol means that process should not be used. Within each symbol, dots or numbers typically indicate intensity — for example, more dots in the iron symbol mean a higher permitted heat setting.</p>
+            <div class="table-wrapper">
+              <table class="reference-table">
+                <thead>
+                  <tr>
+                    <th>Symbol Category</th>
+                    <th>Base Shape</th>
+                    <th>What the Details Mean</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Washing</td>
+                    <td>Tub filled with water</td>
+                    <td>A number or dots inside indicates maximum wash temperature; bars underneath indicate reduced mechanical agitation; a hand in the tub means hand-wash only.</td>
+                  </tr>
+                  <tr>
+                    <td>Bleaching</td>
+                    <td>Triangle</td>
+                    <td>An empty triangle permits any bleach; two diagonal lines inside restrict it to non-chlorine bleach only; an X means do not bleach.</td>
+                  </tr>
+                  <tr>
+                    <td>Drying</td>
+                    <td>Square</td>
+                    <td>A circle inside indicates tumble drying is permitted, with dots showing the allowed heat level; lines inside an empty square indicate line-drying or flat-drying instructions.</td>
+                  </tr>
+                  <tr>
+                    <td>Ironing</td>
+                    <td>Iron outline</td>
+                    <td>Dots indicate maximum heat setting — one dot for the lowest heat, three for the highest; an X means do not iron.</td>
+                  </tr>
+                  <tr>
+                    <td>Professional Care</td>
+                    <td>Circle</td>
+                    <td>A letter inside (typically P or F) indicates the solvent type a dry cleaner should use; a circle with a W indicates professional wet cleaning is appropriate instead.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   ))}
@@ -255,7 +308,7 @@ const pageSchema = {
       <h2 class="section__title">Not Sure Which Label Types Your Product Needs?</h2>
       <p class="section__text">SDF Clothing's technical team reviews your product category and target markets, then recommends the exact label set required for compliance and branding — before your first sample is cut.</p>
       <div class="section__ctas">
-        <a href="/#contact" class="section__cta section__cta--primary">Get a Free Label & Trim Consultation</a>
+        <a href="/contact/" class="section__cta section__cta--primary">Get a Free Label & Trim Consultation</a>
         <a href="/garment-labels/materials-and-manufacturing/" class="section__cta section__cta--secondary">See Label Materials →</a>
       </div>
     </div>
@@ -416,6 +469,19 @@ const pageSchema = {
     border-left: 3px solid var(--color-primary);
     font-size: 0.9375rem;
     margin-top: var(--spacing-sm);
+  }
+
+  .symbol-reference {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .symbol-reference__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
   }
 
   .table-wrapper {

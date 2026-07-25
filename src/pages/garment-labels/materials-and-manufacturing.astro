@@ -20,6 +20,19 @@ const syntheticMaterials = [
   { name: "Leather / PU", text: "Genuine or synthetic leather patches, typically riveted or sewn onto denim, outerwear, and bags. Leather labels signal a premium, rugged brand positioning and are usually embossed or debossed rather than printed." },
 ];
 
+const foldTypes = [
+  { name: "Straight Cut / Flat", text: "No fold at all — edges are heat-sealed or laser-cut to prevent fraying, and the label is sewn around all four sides. Common for branding patches on outerwear or bags." },
+  { name: "End Fold", text: "The two ends are folded inward roughly 6mm and pressed flat, so the label lies flush against the fabric. The standard choice for a main label sewn flat onto a t-shirt's outside back neck or inside a waistband." },
+  { name: "Center Fold", text: "The label is folded in half along its center and sewn into a seam, with the fold forming the visible edge. This is how most care and fiber content labels are set at the back neck." },
+  { name: "Loop Fold", text: "Similar to a center fold but with extra length, leaving a small loop that can be sewn into a seam to form a hanging loop — the construction behind the loop label type." },
+];
+
+const attachmentMethods = [
+  { name: "Machine Sewing", text: "The standard method for woven and printed fabric labels — a straight or zigzag stitch around the label's edges or folds, done in-line during garment assembly. Fast, durable, and the default for most production volumes." },
+  { name: "Heat/Iron Application", text: "Used for heat transfer, TPU, and silicone labels — the label bonds to the fabric surface under calibrated heat and pressure with no stitching. Produces the tag-free feel common in activewear, but generally tolerates fewer industrial wash cycles than a sewn label." },
+  { name: "Adhesive Backing", text: "A pressure-sensitive or iron-activated adhesive layer on the back of the label. More common on printed labels than woven ones, and less durable under repeated washing than sewing or heat-bonding — typically reserved for temporary or promotional labeling rather than permanent garment labels." },
+];
+
 const manufacturingMethods = [
   { name: "Woven", text: "The design is built into the fabric structure itself on a loom — the image is not printed on the surface, it is the fabric. This makes woven labels highly durable; colors will not crack, peel, or fade the way surface ink can. The tradeoff is design complexity: woven labels work best with solid colors and clean vector artwork, since detail depends on thread count, typically 80-100 threads per centimeter for fine damask weaves." },
   { name: "Printed", text: "The design is printed directly onto a fabric or synthetic surface. Printing allows unlimited colors, photographic detail, and gradients that a loom cannot reproduce, and setup cost stays flat regardless of color count — a six-color printed label costs close to the same as a two-color one. Durability is the tradeoff: ink sits on the surface and is more exposed to washing and friction than woven thread." },
@@ -76,6 +89,14 @@ const pageSchema = {
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Embossing raises a design above the surrounding material surface, while debossing presses the design below it. Both use heat and pressure and are most commonly applied to leather or PU patches to create a tactile, premium finish without relying on printed ink for the design."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for woven labels?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most factories set a minimum order quantity of roughly 100 pieces per colorway for woven labels, because the loom setup required to weave a design carries a fixed cost that becomes uneconomical to spread across a smaller run. Printed and heat-transfer labels do not require this loom setup, so they can typically be ordered at lower volumes than woven labels."
           }
         }
       ]
@@ -175,6 +196,50 @@ const pageSchema = {
   <section class="section section--alt">
     <div class="section__container">
       <div class="section__header">
+        <span class="section__label">Fold & Attachment</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Label Fold Types and Attachment Methods</h2>
+      </div>
+      <div class="section__text">
+        <p>Material and manufacturing method determine what a label looks like. Fold type and attachment method determine how it physically sits on the garment — and getting these wrong is a common cause of the fraying and poor-adhesion defects covered in the <a href="/garment-labels/quality-testing-and-defects/">Quality Testing & Defects guide</a>.</p>
+      </div>
+      <div class="material-grid">
+        {foldTypes.map((fold) => (
+          <div class="material-card">
+            <h3 class="material-card__title">{fold.name}</h3>
+            <p class="material-card__text">{fold.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="method-list" style="margin-top: 2rem;">
+        {attachmentMethods.map((method) => (
+          <div class="method-item">
+            <h3 class="method-item__title">{method.name}</h3>
+            <p class="method-item__text">{method.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Cost & MOQ</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What Labels Typically Cost</h2>
+      </div>
+      <div class="section__text">
+        <p>Labels are a small line item relative to fabric, but the setup cost structure behind woven labels specifically affects how small an order a factory can economically accept. A woven label loom carries a fixed setup cost per design, which is why most factories set a minimum order quantity of roughly 100 pieces per colorway for woven labels — below that volume, the setup cost per piece becomes uneconomical. Printed and heat-transfer labels carry no comparable loom setup cost, so they can typically be ordered at lower volumes.</p>
+
+        <p>As a rough reference point, a basic woven label set — main, care, and size label together — commonly runs in the range of $0.10 to $0.50 per set at standard volumes, and total trims including labels, hangtags, and packaging typically add somewhere between $0.30 and $1.00 to a garment's overall unit cost. These figures vary meaningfully by label size, color count, material, and order volume, so treat them as a planning reference rather than a quote — get an actual quote for your specific spec once you have a label design finalized.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
         <span class="section__label">Decision Guide</span>
         <div class="accent-line"></div>
         <h2 class="section__title">Woven vs. Printed: Which One Fits Your Brand?</h2>
@@ -226,7 +291,7 @@ const pageSchema = {
       <h2 class="section__title">Get a Material Recommendation for Your Product</h2>
       <p class="section__text">SDF Clothing produces woven, printed, and heat-transfer labels in-house alongside your garments — one supplier, one timeline, no separate shipment waiting on a trim vendor.</p>
       <div class="section__ctas">
-        <a href="/#contact" class="section__cta section__cta--primary">Get a Free Label & Trim Consultation</a>
+        <a href="/contact/" class="section__cta section__cta--primary">Get a Free Label & Trim Consultation</a>
         <a href="/garment-labels/quality-testing-and-defects/" class="section__cta section__cta--secondary">See Quality Testing Standards →</a>
       </div>
     </div>
