@@ -1,0 +1,605 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Types of Yarn & Spinning Methods Explained";
+const pageDescription = "Natural vs man-made vs blended fibers, staple vs filament yarn, and how Ring, Rotor, Air-jet, and Vortex spinning each shape yarn quality and cost.";
+
+const fiberTypes = [
+  { name: "Cotton", type: "Natural, staple", text: "The most widely used natural fiber for apparel. Breathable, absorbent, and soft, but weaker wet than dry and prone to shrinkage without proper finishing. Fiber length (staple length) directly affects the yarn quality achievable — longer staple cottons like Pima or Egyptian cotton spin into finer, stronger, smoother yarns." },
+  { name: "Wool", type: "Natural, staple", text: "A protein fiber prized for warmth, elasticity, and natural moisture-wicking. Wool fiber has a natural crimp and scale structure that traps air for insulation, but the same scale structure causes felting and shrinkage if washed incorrectly — a major reason wool garments carry specific care label requirements." },
+  { name: "Silk", type: "Natural, filament", text: "The only natural filament fiber, produced by silkworms as a single continuous strand that can run over 1,000 meters. This continuous structure gives silk its characteristic smoothness and sheen without the twisting required to hold staple fibers together." },
+  { name: "Linen (Flax)", type: "Natural, staple", text: "Derived from the flax plant, linen fiber is stronger than cotton and highly breathable, but less elastic — linen fabric wrinkles readily because the fiber itself has low recovery from bending." },
+  { name: "Polyester", type: "Man-made, filament or staple", text: "The most-produced fiber globally, extruded from petroleum-based polymer. Highly durable, quick-drying, and resistant to shrinking and stretching, produced as either continuous filament or cut into staple length to blend with natural fibers." },
+  { name: "Nylon", type: "Man-made, filament or staple", text: "A synthetic fiber valued for exceptional strength, elasticity, and abrasion resistance relative to its weight — the standard choice for hosiery, activewear, and any application needing stretch recovery." },
+  { name: "Viscose / Rayon", type: "Man-made (regenerated cellulose), staple or filament", text: "Produced from wood pulp cellulose through a chemical process, viscose sits between natural and synthetic — it has a soft, silk-like hand feel but is produced industrially. Weaker than cotton when wet, and drapes more fluidly than most synthetics." },
+  { name: "Acrylic", type: "Man-made, staple", text: "A synthetic wool substitute, lightweight and warm with good color retention, commonly used in sweater knits where a wool-like hand is wanted at lower cost or for vegan positioning." },
+];
+
+const spinningMethods = [
+  {
+    name: "Ring Spinning",
+    countRange: "Best for fine to very fine counts (roughly Ne 20-160)",
+    speed: "Slowest of the four — lowest production rate per spindle",
+    quality: "Highest quality benchmark: strongest, softest hand feel, lowest hairiness relative to strength",
+    text: "The oldest and still most widely used spinning system. A roving is drafted, twisted by a rotating traveler on a ring, and wound onto a bobbin in one continuous motion. Ring-spun yarn remains the quality benchmark other systems are measured against, particularly for fine-count yarns used in premium jersey and fine knitwear — but its low production speed keeps it the most expensive method per kilogram.",
+  },
+  {
+    name: "Rotor / Open-End Spinning",
+    countRange: "Best for coarser counts, typically below Ne 20; struggles above Ne 40",
+    speed: "Up to several times faster than ring spinning",
+    quality: "Bulkier, less uniform yarn with more hairiness than ring-spun; adequate strength for its typical end uses",
+    text: "Fibers are separated in an airstream and re-collected in a spinning rotor, skipping the roving step required by ring spinning — which is part of why it's faster and cheaper. Over 95% of denim yarn is rotor-spun, since denim's characteristic texture actually benefits from the bulkier, less uniform yarn structure rather than being hurt by it.",
+  },
+  {
+    name: "Air-Jet Spinning",
+    countRange: "Best for medium counts; struggles with 100% cotton and very fine counts",
+    speed: "Very fast — among the highest production rates of the four methods",
+    quality: "Lower strength than ring or rotor at a given count, particularly limiting for 100% cotton applications",
+    text: "High-velocity air currents wrap outer fibers around a core to bind the yarn, with no mechanical twisting device required. Its main limitation is fiber compatibility — air-jet spinning struggles to produce strong yarn from 100% cotton or other short, weak-cohesion fibers, which is why it's more commonly used for polyester and polyester-blend yarns.",
+  },
+  {
+    name: "Vortex Spinning",
+    countRange: "Best for medium counts (roughly Ne 10-60); not suited to very fine counts",
+    speed: "Fastest of the four — among the highest throughput per spindle available",
+    quality: "Lower hairiness and better pilling resistance than ring or rotor; moderate strength — higher than air-jet, lower than ring",
+    text: "A refinement of air-jet spinning where whirling air currents spin fiber into yarn as it passes through a nozzle. Vortex yarn has notably low hairiness and strong pilling resistance, making it well suited to modern knitwear, though its structure gives fabric a slightly different — often described as crisper — hand feel compared to ring-spun equivalents.",
+  },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://sdfltd.com/insights/" },
+          { "@type": "ListItem", "position": 3, "name": "Yarn Guide", "item": "https://sdfltd.com/insights/yarn/" },
+          { "@type": "ListItem", "position": 4, "name": "Types & Spinning Methods", "item": Astro.url.href }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between staple and filament yarn?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Staple yarn is spun from short fiber lengths — like raw cotton or wool — that are twisted together to form a continuous strand, with the twist itself holding the fibers together. Filament yarn uses one or more continuous strands, as produced naturally by silk or synthetically by extruding polyester or nylon, and does not rely on twist to stay intact, though filament yarns are often twisted or textured for specific surface effects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What spinning method is used for denim yarn?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Over 95% of denim yarn is produced using rotor, or open-end, spinning. Denim's characteristic slightly irregular, bulky texture actually benefits from rotor spinning's less uniform yarn structure, and rotor spinning's higher production speed and lower cost fit denim's typically large order volumes well."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why can't air-jet spinning be used for 100% cotton yarn?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Air-jet spinning binds yarn by wrapping outer fibers around a core using high-velocity air rather than mechanical twisting, which requires strong fiber-to-fiber cohesion to hold together. Cotton's relatively short, low-cohesion fiber structure struggles to form strong yarn under this method, so air-jet spinning is more commonly used for polyester and polyester-blend yarns instead."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is ring-spun yarn always better than rotor-spun yarn?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not for every application. Ring-spun yarn is the recognized quality benchmark for strength and softness, particularly in fine counts for premium knitwear, but rotor-spun yarn is the better fit for products like denim where its bulkier, less uniform texture is a desired characteristic rather than a defect, and its faster, lower-cost production suits denim's typical order volumes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do brands use blended yarn instead of 100% one fiber?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Blending combines properties neither fiber has alone — a common 95% cotton/5% elastane blend adds stretch and recovery to cotton without losing its natural hand feel, while cotton-polyester blends trade some breathability for wrinkle resistance and durability. The exact blend ratio is a meaningful spec decision, since even a small shift, like 95/5 versus 90/10 cotton-elastane, changes stretch recovery and long-term shape retention."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/insights/">Insights</a></li>
+        <li class="breadcrumb__item"><a href="/insights/yarn/">Yarn Guide</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Types & Spinning Methods</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__label">Yarn Guide • Types & Spinning</div>
+      <h1 class="hero__title">Types of Yarn and Spinning Methods Explained</h1>
+      <p class="hero__description">
+        Two decisions set the foundation of every yarn: which fiber, and which spinning method turns that fiber into yarn. Both matter independently — the same cotton fiber produces meaningfully different yarn depending on whether it's ring-spun or rotor-spun.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Staple vs. Filament</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Staple Fiber vs. Filament Fiber</h2>
+      </div>
+      <div class="section__text">
+        <p>Before fiber type, one structural distinction matters more: is the fiber staple (short lengths that must be twisted together) or filament (long, continuous strands)? Cotton, wool, and linen are staple fibers by nature. Silk is the only natural filament fiber. Synthetic fibers like polyester and nylon can be produced as either — continuous filament for a smooth, silk-like yarn, or cut into staple lengths to blend with natural fibers like cotton for a different hand feel and easier processing on cotton-spinning equipment.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Fiber Types</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Natural, Man-Made, and Regenerated Fibers</h2>
+      </div>
+      <div class="fiber-grid">
+        {fiberTypes.map((fiber) => (
+          <div class="fiber-card">
+            <h3 class="fiber-card__title">{fiber.name}</h3>
+            <span class="fiber-card__type">{fiber.type}</span>
+            <p class="fiber-card__text">{fiber.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Blending</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Why Brands Blend Fibers</h2>
+      </div>
+      <div class="section__text">
+        <p>Pure single-fiber yarns are the exception in commercial apparel, not the rule — most yarn is a deliberate blend chosen to combine specific properties. A common cotton-elastane blend around 95% cotton to 5% elastane adds stretch and recovery to an otherwise inelastic fiber without meaningfully changing the fabric's cotton-like hand feel, which is why it dominates fitted t-shirts and casualwear. A roughly 60/40 or 50/50 cotton-polyester blend trades some of cotton's breathability for polyester's wrinkle resistance and durability, a common choice for workwear and budget-tier apparel where easy care matters more than natural-fiber positioning. Poly-viscose blends aim for a different tradeoff — viscose's fluid drape and softer hand combined with polyester's dimensional stability, common in fluid woven dresses and blouses.</p>
+
+        <p>The blend ratio itself is a real spec decision, not just a marketing detail — a 95/5 cotton-elastane behaves distinctly differently from a 90/10 of the same fibers in stretch recovery and long-term shape retention, so the exact ratio belongs on a yarn spec sheet just as explicitly as fiber type and count.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Spinning Methods</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How Fiber Becomes Yarn: 4 Spinning Methods</h2>
+      </div>
+      <div class="section__text">
+        <p>The same fiber spun by two different methods produces meaningfully different yarn — different strength, hand feel, uniformity, and cost. This is the decision that determines what a "cotton yarn" actually behaves like once it's fabric.</p>
+      </div>
+      <div class="method-list">
+        {spinningMethods.map((method) => (
+          <div class="method-item">
+            <h3 class="method-item__title">{method.name}</h3>
+            <p class="method-item__text">{method.text}</p>
+            <div class="method-item__specs">
+              <div class="method-spec"><strong>Count range:</strong> {method.countRange}</div>
+              <div class="method-spec"><strong>Speed:</strong> {method.speed}</div>
+              <div class="method-spec"><strong>Quality profile:</strong> {method.quality}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Decision Guide</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Which Spinning Method Fits Which End Use</h2>
+      </div>
+      <div class="table-wrapper">
+        <table class="reference-table">
+          <thead>
+            <tr>
+              <th>End Use</th>
+              <th>Typical Spinning Method</th>
+              <th>Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Fine-gauge jersey knits</td>
+              <td>Ring spinning</td>
+              <td>Needs the softness and fine-count range ring spinning delivers</td>
+            </tr>
+            <tr>
+              <td>Denim</td>
+              <td>Rotor / open-end</td>
+              <td>Bulkier texture suits denim's character; high volume favors speed and cost</td>
+            </tr>
+            <tr>
+              <td>Polyester-blend performance wear</td>
+              <td>Air-jet</td>
+              <td>Synthetic fibers spin well under air-jet; high speed suits large-volume athletic lines</td>
+            </tr>
+            <tr>
+              <td>Modern knitwear needing low pilling</td>
+              <td>Vortex</td>
+              <td>Low hairiness directly reduces pilling in finished fabric</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Not Sure Which Fiber and Spinning Method Fits Your Product?</h2>
+      <p class="section__text">SDF Clothing's technical team matches fiber and spinning method to your fabric's intended hand feel and durability before the first sample is spun.</p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Get a Free Yarn Consultation</a>
+        <a href="/insights/yarn/count-twist-and-structure/" class="section__cta section__cta--secondary">See Count & Twist Guide →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-xs);
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: "/";
+    margin-left: var(--spacing-xs);
+    color: var(--color-border);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .hero__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section--cta .section__container {
+    max-width: 700px;
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .fiber-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+
+  .fiber-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+  }
+
+  .fiber-card__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+    display: inline-block;
+  }
+
+  .fiber-card__type {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .fiber-card__text {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .method-list {
+    margin-top: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .method-item {
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .method-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .method-item__title {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .method-item__text {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .method-item__specs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    background: var(--color-bg-alt);
+    border-radius: 6px;
+    padding: var(--spacing-sm);
+  }
+
+  .method-spec {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .method-spec strong {
+    color: var(--color-text);
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    margin-top: var(--spacing-md);
+  }
+
+  .reference-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .reference-table th,
+  .reference-table td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .reference-table th {
+    background: var(--color-bg);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  @media (max-width: 900px) {
+    .fiber-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+
+    .reference-table {
+      font-size: 0.8125rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

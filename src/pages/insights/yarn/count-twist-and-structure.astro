@@ -1,0 +1,451 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Yarn Count, Twist & Structure Explained";
+const pageDescription = "Ne, Nm, Tex, and Denier yarn numbering systems explained, plus twist direction, twist level, and single vs plied vs cabled yarn construction.";
+
+const countSystems = [
+  { name: "Ne (English Cotton Count)", system: "Indirect", text: "The standard for cotton and cotton-blend yarns. Ne is indirect, meaning a higher number means a finer yarn — Ne 30 is finer than Ne 20. Defined as the number of 840-yard hanks that weigh one pound; Ne 30 means 30 hanks (25,200 yards) weigh one pound." },
+  { name: "Nm (Metric Count)", system: "Indirect", text: "The metric equivalent of Ne, common in Europe and for wool and worsted yarns. Also indirect — higher number, finer yarn. Defined as the number of 1,000-meter lengths that weigh one kilogram." },
+  { name: "Tex", system: "Direct", text: "An international direct system, increasingly the preferred standard for cross-market specification. Tex is direct — a higher number means a thicker yarn. Defined as the weight in grams of 1,000 meters of yarn; Tex 20 is finer than Tex 40." },
+  { name: "Denier", system: "Direct", text: "Used almost exclusively for filament yarns — silk, polyester, nylon. Also direct: higher denier, thicker yarn. Defined as the weight in grams of 9,000 meters of yarn, a length chosen historically to match silk reeling conventions." },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://sdfltd.com/insights/" },
+          { "@type": "ListItem", "position": 3, "name": "Yarn Guide", "item": "https://sdfltd.com/insights/yarn/" },
+          { "@type": "ListItem", "position": 4, "name": "Count, Twist & Structure", "item": Astro.url.href }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does 'Ne 30/1' mean on a yarn spec?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ne 30/1 means the yarn is English cotton count 30 (fine — 30 hanks of 840 yards weigh one pound) and single-ply (the '/1'). A '30/2' would be the same fineness of base yarn, but two strands twisted together (plied), which roughly doubles the resulting thickness and adds strength."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a higher yarn count always better?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No — count should match the intended fabric weight and hand feel, not be maximized. A higher Ne or Nm count produces finer yarn suited to lightweight, fine-gauge fabric; specifying an unnecessarily fine count for a heavier fabric adds cost and can reduce durability, since finer yarns are generally less robust than coarser ones at the same fiber quality."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between S-twist and Z-twist yarn?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "S-twist and Z-twist describe the direction the fiber spirals during twisting, named for which way the spiral leans compared to the letters S and Z. The direction itself doesn't change yarn strength, but combining opposite twist directions in a fabric's warp and weft, or in plied yarns, is used deliberately to control fabric stability, texture, and how the fabric drapes or resists twisting out of shape."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does yarn count affect fabric GSM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Finer yarn produces lighter fabric and coarser yarn produces heavier fabric at a given stitch density — as a rough example, a fine Ne 30/1 single jersey knit typically runs around 140-160 GSM, while a coarser Ne 20/1 single jersey in the same structure runs closer to 180-200+ GSM. Specifying a target GSM without also confirming the yarn count and stitch density a mill plans to use leaves those variables underdetermined, since different count-and-density combinations can hit the same GSM number while producing noticeably different hand feel and drape."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/insights/">Insights</a></li>
+        <li class="breadcrumb__item"><a href="/insights/yarn/">Yarn Guide</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Count, Twist & Structure</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__label">Yarn Guide • Count, Twist & Structure</div>
+      <h1 class="hero__title">Yarn Count, Twist, and Structure Explained</h1>
+      <p class="hero__description">
+        Count determines how fine a yarn is. Twist determines how strong and textured it is. Structure determines whether it's a single strand or several twisted together. All three are decided independently of fiber and spinning method, and getting any one wrong changes the fabric even when everything else matches the sample.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Numbering Systems</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Yarn Count Systems: Ne, Nm, Tex, Denier</h2>
+      </div>
+      <div class="section__text">
+        <p>Yarn count measures fineness, and four systems dominate global specification — two indirect (higher number = finer yarn) and two direct (higher number = thicker yarn). Knowing which system a spec sheet is using, and whether it's direct or indirect, is the single most common source of confusion between a brand and a mill communicating across regions.</p>
+      </div>
+      <div class="count-grid">
+        {countSystems.map((system) => (
+          <div class="count-card">
+            <h3 class="count-card__title">{system.name}</h3>
+            <span class="count-card__badge">{system.system}</span>
+            <p class="count-card__text">{system.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Reading a Spec</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How to Read a Yarn Count Notation</h2>
+      </div>
+      <div class="section__text">
+        <p>A yarn spec written as "Ne 30/1" or "Ne 20/2" combines the count number with the ply count after the slash. The number before the slash is the count of a single strand; the number after is how many strands are twisted together. "Ne 30/1" is a single 30s-count strand. "Ne 20/2" is two strands of 20s count plied together — note that plying doesn't simply add the count numbers, since count measures fineness of the base strand, not the finished plied yarn's total thickness.</p>
+
+        <p>Direct systems like Tex are read the same way: "Tex 20/2" is two strands of Tex 20 plied together. Whichever system is used, always confirm both the count number and the ply count on a spec sheet — a mismatch in either produces a fabric of noticeably different weight than intended, even when the fiber and spinning method are correct.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Connecting to Fabric</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How Yarn Count Determines Fabric Weight (GSM)</h2>
+      </div>
+      <div class="section__text">
+        <p>Most fabric buyers think in GSM (grams per square meter), not yarn count — but GSM is a downstream result of the yarn count decision, not an independent spec. Finer yarn (higher Ne, lower Tex) knits or weaves into lighter fabric at a given stitch density; coarser yarn produces heavier fabric. As a rough real-world example: a fine Ne 30/1 single jersey knit typically lands around 140-160 GSM, while a coarser Ne 20/1 single jersey in the same stitch structure runs closer to 180-200+ GSM — the count difference alone accounts for most of that weight gap, before stitch density or finishing are even considered.</p>
+
+        <p>This is why specifying a target GSM without also specifying (or confirming) the yarn count leaves a mill with an underdetermined problem — the same GSM target can be hit with a finer yarn at tighter stitch density or a coarser yarn at looser density, and those two fabrics will have meaningfully different hand feel and drape despite matching on paper. If GSM is your primary spec, ask your mill which yarn count and stitch density combination they're planning to use to hit it, rather than leaving that combination to their discretion.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Twist</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Twist Direction and Twist Level</h2>
+      </div>
+      <div class="section__text">
+        <p>Twist is what holds a staple yarn together, and it's specified two ways: direction and level. Twist direction is either S-twist or Z-twist, named for which way the spiral leans relative to the letters S and Z. Direction alone doesn't make one yarn stronger than the other, but mills deliberately combine directions — using opposite twist in a fabric's warp and weft, for example — to control how the finished fabric drapes, resists distortion, or develops a particular surface texture.</p>
+
+        <p>Twist level, measured in turns per inch or turns per meter (TPI or TPM), is the more consequential spec. Higher twist increases yarn strength and reduces hairiness, but also stiffens the fabric's hand feel; lower twist gives a softer hand but weaker yarn, more prone to pilling and breakage during knitting or weaving. Crepe fabrics deliberately use very high twist levels for their characteristic crinkled texture, while soft-hand jersey knits use comparatively low twist. There's no universal "correct" twist level — it's set by the target fabric's hand feel and end-use durability requirement, and should be specified explicitly on a yarn order rather than left to the mill's default.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Structure</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Single, Plied, and Cabled Yarn</h2>
+      </div>
+      <div class="section__text">
+        <p>A single yarn is one strand of twisted fiber — the base unit count and twist specs describe. A plied yarn takes two or more single strands and twists them together in the opposite direction from their individual twist, which increases strength, evens out irregularities between the strands, and typically produces a rounder, smoother yarn than an equivalent-weight single strand. A cabled yarn takes the process a step further, twisting two or more already-plied yarns together, producing an even stronger, bulkier yarn typically reserved for heavier fabrics like outerwear or upholstery-weight textiles rather than apparel jersey.</p>
+
+        <p>The practical tradeoff: single yarns are cheaper and produce a softer, more casual fabric hand; plied and cabled yarns cost more per unit but deliver meaningfully higher strength and more consistent fabric appearance, which is why premium dress shirting and fine knitwear commonly specify plied yarn even at a higher count than the equivalent single-yarn fabric would need.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Need Help Translating a Fabric Spec into a Yarn Spec?</h2>
+      <p class="section__text">SDF Clothing's technical team converts your target fabric weight and hand feel into the exact count, twist, and ply spec needed — before yarn is ordered.</p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Get a Free Yarn Consultation</a>
+        <a href="/insights/yarn/quality-testing-and-defects/" class="section__cta section__cta--secondary">See Quality Testing Guide →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-xs);
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: "/";
+    margin-left: var(--spacing-xs);
+    color: var(--color-border);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .hero__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section--cta .section__container {
+    max-width: 700px;
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .count-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+
+  .count-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+  }
+
+  .count-card__title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+    display: inline-block;
+  }
+
+  .count-card__badge {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .count-card__text {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  @media (max-width: 900px) {
+    .count-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
