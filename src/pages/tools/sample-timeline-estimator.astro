@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Sample Development Timeline Estimator | Free Tool | SDF";
+const pageDescription = "Free tool: estimate total sample development time based on expected rounds and whether you're using digital pre-sampling — built on real published production and shipping figures.";
+const canonicalURL = "https://sdfltd.com/tools/sample-timeline-estimator/";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sample Development Timeline Estimator",
+  "description": "Free tool to estimate total sample development timeline based on the number of physical sample rounds expected and whether digital pre-sampling is used.",
+  "url": "https://sdfltd.com/tools/sample-timeline-estimator/",
+  "inLanguage": "en",
+  "isPartOf": { "@type": "WebSite", "@id": "https://sdfltd.com/#website" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://sdfltd.com/all-services/" },
+      { "@type": "ListItem", "position": 3, "name": "Sample Timeline Estimator", "item": "https://sdfltd.com/tools/sample-timeline-estimator/" }
+    ]
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Sample Development Timeline Estimator",
+  "description": "Estimate total sample development time based on expected physical sample rounds and optional digital pre-sampling, using real production and shipping timeframes.",
+  "url": "https://sdfltd.com/tools/sample-timeline-estimator/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@id": "https://sdfltd.com/#org" }
+}
+</script>
+
+<div class="te-page">
+  <section class="te-section">
+    <div class="te-container" style="text-align:center;">
+      <p class="breadcrumb"><a href="/">Home</a> / <a href="/tools">Tools</a> / Sample Timeline Estimator</p>
+      <span class="section-label">Free Tool</span>
+      <h1 class="page-title">How Long Will Sample Development Actually Take?</h1>
+      <p class="page-subtitle">Estimate total turnaround based on expected sample rounds — built on real production and shipping figures from our <a href="/sample-service" style="color:#e00;">sample service</a>, not vendor marketing estimates.</p>
+    </div>
+  </section>
+
+  <section class="te-section te-section--no-border">
+    <div class="te-container" style="max-width:720px;">
+      <div class="calc-block">
+        <p class="calc-block-title">Your Sampling Plan</p>
+
+        <div class="form-group">
+          <label class="form-label" for="rounds">Expected physical sample rounds (including revisions)</label>
+          <select id="rounds" class="form-select">
+            <option value="1">1 round — approved on first sample</option>
+            <option value="2" selected>2 rounds — one revision expected</option>
+            <option value="3">3 rounds — two revisions expected</option>
+            <option value="4">4 rounds — a more complex or unfamiliar design</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="digital">Using digital 3D pre-sampling first?</label>
+          <select id="digital" class="form-select">
+            <option value="no">No — going straight to physical</option>
+            <option value="yes">Yes — digital first, to catch issues early</option>
+          </select>
+        </div>
+
+        <button id="estimate-btn" class="calc-btn" type="button">Estimate My Timeline</button>
+      </div>
+
+      <div id="result-box" class="result-box">
+        <h2 class="content-h2" style="margin-top:0;">Estimated Timeline</h2>
+        <p id="result-headline" style="font-size:1.6rem;color:#e00;font-weight:600;margin-bottom:1rem;"></p>
+        <p id="result-breakdown" class="content-prose" style="margin-bottom:0.5rem;"></p>
+        <p id="result-note" class="content-prose" style="font-size:0.82rem;color:#888;margin-bottom:0;"></p>
+      </div>
+
+      <p class="content-prose" style="font-size:0.8rem;color:#666;margin-top:1.5rem;">Based on typical production time of 7-10 days plus 3-5 days international shipping for an initial round, and 5-7 days per revision round — figures from our own <a href="/sample-service" style="color:#e00;">sample service</a>, not industry-wide marketing estimates. Actual timing varies by garment complexity and courier — confirm specifics for your order directly.</p>
+    </div>
+  </section>
+</div>
+
+<style>
+  .te-page {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+  }
+  .te-container { width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+  .te-section { padding: 4rem 0 2rem; }
+  .te-section--no-border { padding-top: 1rem; padding-bottom: 4rem; }
+  .breadcrumb { font-size: 0.72rem; color: #888; margin-bottom: 1.5rem; }
+  .breadcrumb a { color: #888; text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .section-label {
+    display: block; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: #e00; margin-bottom: 0.75rem;
+  }
+  .page-title { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 200; color: #fff; margin-bottom: 1rem; line-height: 1.2; }
+  .page-subtitle { font-size: 0.95rem; color: #aaa; max-width: 640px; margin: 0 auto; line-height: 1.8; }
+  .content-h2 { font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 300; color: #fff; margin-bottom: 1.25rem; }
+  .content-prose { font-size: 0.92rem; color: #bbb; line-height: 1.8; }
+  .calc-block { background-color: #0a0a0a; border: 1px solid #1a1a1a; padding: 2rem; margin-bottom: 1.5rem; }
+  .calc-block-title { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #e00; margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group:last-child { margin-bottom: 0; }
+  .form-label { display: block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #aaa; margin-bottom: 0.5rem; }
+  .form-select {
+    width: 100%; padding: 0.75rem; font-size: 0.95rem; font-family: inherit;
+    background-color: #000; color: #fff; border: 1px solid #333; min-height: 44px; cursor: pointer;
+  }
+  .form-select:focus { outline: none; border-color: #e00; }
+  .calc-btn {
+    display: block; width: 100%; max-width: 320px; margin: 1.5rem auto 0;
+    background-color: #e00; color: #fff; padding: 1rem 2.5rem; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase; min-height: 44px; border: 1px solid #e00;
+    cursor: pointer; font-family: inherit; font-weight: 600; transition: background-color 0.2s, color 0.2s;
+  }
+  .calc-btn:hover { background-color: #000; color: #e00; }
+  .result-box {
+    display: none; background-color: #0a0a0a; border: 1px solid #1a1a1a; border-top: 2px solid #e00;
+    padding: 2rem;
+  }
+  .result-box--visible { display: block; }
+</style>
+
+<script>
+  document.getElementById('estimate-btn').addEventListener('click', () => {
+    const rounds = parseInt((document.getElementById('rounds') as HTMLSelectElement).value, 10);
+    const useDigital = (document.getElementById('digital') as HTMLSelectElement).value === 'yes';
+
+    let effectiveRounds = rounds;
+    let digitalLow = 0;
+    let digitalHigh = 0;
+    let digitalNote = "";
+
+    if (useDigital) {
+      effectiveRounds = Math.max(1, rounds - 1);
+      digitalLow = 1;
+      digitalHigh = 3;
+      digitalNote = "Digital pre-sampling typically removes roughly one physical round from the total — it's added into this estimate as one fewer physical revision, plus a day or two upfront for the digital iteration itself.";
+    } else {
+      digitalNote = "This estimate is for physical sampling only. Adding a digital pre-sampling step first could reasonably remove one round from this total.";
+    }
+
+    // First physical round: production 7-10 days + shipping 3-5 days
+    let physicalLow = 7 + 3;
+    let physicalHigh = 10 + 5;
+
+    // Each additional round beyond the first: 5-7 days per revision
+    if (effectiveRounds > 1) {
+      physicalLow += (effectiveRounds - 1) * 5;
+      physicalHigh += (effectiveRounds - 1) * 7;
+    }
+
+    const totalLow = digitalLow + physicalLow;
+    const totalHigh = digitalHigh + physicalHigh;
+
+    (document.getElementById('result-headline') as HTMLElement).textContent = `${totalLow}–${totalHigh} days, roughly`;
+    (document.getElementById('result-breakdown') as HTMLElement).textContent =
+      useDigital
+        ? `That's about ${digitalLow}-${digitalHigh} days for the digital iteration, plus ${physicalLow}-${physicalHigh} days across ${effectiveRounds} physical round${effectiveRounds > 1 ? 's' : ''} (production, shipping, and any revisions).`
+        : `That's ${physicalLow}-${physicalHigh} days across ${effectiveRounds} physical round${effectiveRounds > 1 ? 's' : ''}, including production, international shipping, and any revision rounds.`;
+    (document.getElementById('result-note') as HTMLElement).textContent = digitalNote;
+    document.getElementById('result-box')!.classList.add('result-box--visible');
+  });
+</script>
+
+</BaseLayout>
