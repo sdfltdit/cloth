@@ -26,6 +26,23 @@
     });
   }
 
+  function initCapabilityShowMore() {
+    var buttons = document.querySelectorAll('.capabilities-more-btn');
+    if (!buttons.length) return;
+    buttons.forEach(function (btn) {
+      var targetId = btn.dataset.moreTarget;
+      var target = document.getElementById(targetId);
+      if (!target) return;
+      var totalCount = target.querySelectorAll('.capabilities-card').length;
+      var originalLabel = btn.textContent;
+      btn.addEventListener('click', function () {
+        var expanded = target.classList.toggle('capabilities-more--expanded');
+        btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        btn.textContent = expanded ? 'Show fewer options ↑' : originalLabel;
+      });
+    });
+  }
+
   function initFaqAccordion() {
     var buttons = document.querySelectorAll('.index__faq-question');
     if (!buttons.length) return;
@@ -218,6 +235,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     initCapabilityTabs();
+    initCapabilityShowMore();
     initFaqAccordion();
     initExitBanner();
 
