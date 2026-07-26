@@ -699,7 +699,7 @@ const hsCodes = {
           <p style="font-size:0.9rem;color:#ffffff;">Search above to find HS codes</p>
         </div>
         {Object.entries(hsCodes).map(([category, codes]) => (
-          <div class="hs-category" data-category={category} style="margin-bottom:2rem;display:none;">
+          <div class="hs-category" data-category={category} data-category-id={category.toLowerCase().replace(/[^a-z0-9]+/g, '-')} style="margin-bottom:2rem;display:none;">
             <h2 class="hs-category-title" style="font-size:1.1rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#fff;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid #000000;">{category}</h2>
             <div class="hs-table" style="display:grid;gap:1px;background:#000000;">
               {codes.map((item) => (
@@ -1005,7 +1005,9 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     Object.entries(hsData).forEach(([category, codes]) => {
-      const categoryDiv = document.querySelector(`.hs-category[data-category="${category}"]`);
+      const categoryId = category.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      const categoryDiv = document.querySelector(`.hs-category[data-category-id="${categoryId}"]`);
+      if (!categoryDiv) { return; }
       const rows = categoryDiv.querySelectorAll('.hs-row');
       categoryVisible = false;
 
@@ -1020,7 +1022,7 @@ document.addEventListener('DOMContentLoaded', function(){
         matchesSearch = code.includes(searchTerm) || 
                               description.includes(searchTerm) || 
                               notes.includes(searchTerm) ||
-                              code.includes(constructedCode.toLowerCase());
+                              (constructedCode !== '' && code.includes(constructedCode.toLowerCase()));
         
         if (hasSearchOrFilter && categoryMatches && matchesSearch) {
           row.style.display = 'grid';
