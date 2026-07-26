@@ -1,0 +1,385 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Full-Package (FOB) vs CMT vs CM-Only: Who Pays More?";
+const pageDescription = "A worked cost example showing why the cheapest per-piece factory quote often isn't the cheapest total cost once you factor in who sources fabric and trims.";
+const lastReviewed = "July 23, 2026";
+
+const modelRows = [
+  {
+    name: "Full-Package (FOB / OEM)",
+    factoryQuotes: "$2.80-4.50/pc — highest per-piece invoice from the factory",
+    whoSources: "The factory sources fabric and trims, and bears that sourcing risk",
+    hiddenCost: "Bundled into the price — you're paying for the factory's sourcing expertise and working-capital financing",
+    bestFor: "Buyers who want one point of accountability and don't want to manage fabric or trim supply chains themselves"
+  },
+  {
+    name: "CMT (Cut, Make, Trim)",
+    factoryQuotes: "$1.80-2.50/pc — lower per-piece labor charge, trims usually sourced by the factory",
+    whoSources: "You source and supply the fabric yourself; factory supplies trims and does the labor",
+    hiddenCost: "Your own fabric cost, fabric MOQ risk, quality risk on fabric you sourced, and the working capital to buy fabric upfront",
+    bestFor: "Buyers with an existing fabric relationship or fabric expertise who want to control that specific input"
+  },
+  {
+    name: "CM-Only (Cut & Make)",
+    factoryQuotes: "Below CMT pricing — the lowest per-piece labor charge of the three, since trims aren't included either",
+    whoSources: "You source and supply both the fabric and the trims; the factory only cuts and sews",
+    hiddenCost: "Your own fabric cost, your own trim cost, and now two supply chains to coordinate and time correctly instead of one",
+    bestFor: "Established buyers with real sourcing infrastructure for both fabric and trims — rarely the right starting point for a new brand"
+  }
+];
+
+const scenarioRows = [
+  { situation: "You have no fabric or trim sourcing relationships yet", need: "Full-package — let the factory's sourcing network do the work, even at a higher per-piece price" },
+  { situation: "You already have a fabric mill relationship you trust", need: "CMT — capture the value of that relationship without taking on trim sourcing too" },
+  { situation: "You have both fabric and trim supply chains already running", need: "CM-only — the lowest labor cost, if you can actually manage the coordination" },
+  { situation: "You want the simplest possible order with one point of contact", need: "Full-package, even though it looks more expensive on the invoice" },
+  { situation: "Your fabric MOQ from your mill is larger than your garment order", need: "Full-package or CMT — let the factory absorb that mismatch through their own fabric relationships instead" }
+];
+
+const mistakeFaqs = [
+  {
+    question: "Is CMT always cheaper than full-package in total?",
+    answer: "Not once you add up the full picture. The per-piece labor charge is lower, but you're now paying for fabric yourself, carrying the working capital to buy it before production starts, and taking on the risk if that fabric doesn't perform as expected. For buyers without existing fabric-sourcing relationships or expertise, the total cost — including wasted fabric, mismatched MOQs, and the time spent managing another supplier — can end up close to or even above what full-package would have cost, with meaningfully more risk sitting on your side."
+  },
+  {
+    question: "What's the actual difference between CMT and CM-only?",
+    answer: "One letter, and it matters more than it looks. CMT (Cut, Make, Trim) means the factory sources trims — buttons, zippers, labels, thread — while you supply the fabric. CM-only (Cut & Make) strips trims out too, meaning you supply both the fabric and every trim component, and the factory does pure cut-and-sew labor. CM-only has the lowest factory invoice of the three models, but it also means managing two external supply chains instead of one."
+  },
+  {
+    question: "Why would anyone choose full-package if it costs more per piece?",
+    answer: "Because the higher per-piece price is buying something real: the factory's fabric-sourcing expertise, their existing mill relationships and negotiating leverage, their working capital covering the fabric purchase upfront, and a single point of accountability if something goes wrong. For a first order or a buyer without deep sourcing infrastructure, that bundled risk transfer is usually worth more than the per-piece savings CMT or CM-only appear to offer."
+  },
+  {
+    question: "Can I switch from CMT to full-package later, or vice versa?",
+    answer: "Yes — it's common to start with full-package for a first order while you're still learning the product and the factory relationship, then move to CMT once you've built your own fabric sourcing relationship and want to capture that value directly. The reverse also happens, usually when a buyer's fabric sourcing becomes more hassle than it's worth and they hand that responsibility back to the factory."
+  },
+  {
+    question: "Does a lower CMT quote mean the factory is cutting corners somewhere?",
+    answer: "Not inherently — a lower CMT quote reflects that fabric and trim costs (which are usually 55-85% of total garment cost) aren't in that number at all, not that the factory is doing less work or lower-quality work on what they do handle. Compare quotes on the same basis — ask specifically what's included — rather than assuming a lower number across different models means the same thing."
+  },
+  {
+    question: "If I supply the fabric and it turns out defective, whose fault is that?",
+    answer: "Generally yours, not the factory's, since they cut and sewed what you sent them. This is worth being clear-eyed about before choosing CMT or CM-only to save money — you're taking on the fabric-quality risk along with the sourcing responsibility. If your own fabric supplier is genuinely reliable, that's a reasonable trade. If you're not confident in that relationship yet, full-package shifts that risk back onto the factory sourcing it."
+  },
+  {
+    question: "Does CMT change when I actually have to pay, not just how much?",
+    answer: "Yes, and it's easy to overlook. Full-package usually runs on a single payment schedule with one supplier. Under CMT or CM-only, you're typically paying your fabric mill upfront — often before the garment factory even starts cutting — and then paying the factory separately on its own terms. Your capital ends up tied up earlier and split across two relationships, which is worth planning for even if the per-piece number looks lower."
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": mistakeFaqs.map((f) => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+  }))
+};
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Full-Package (FOB) vs. CMT vs. CM-Only: Who Actually Pays More?",
+  "author": {
+    "@type": "Person",
+    "name": "Chowdhury Remon",
+    "jobTitle": "Founder & CEO, SDF Clothing",
+    "url": "https://sdfltd.com/about"
+  },
+  "publisher": { "@type": "Organization", "name": "SDF Clothing", "url": "https://sdfltd.com" },
+  "datePublished": "2026-07-23",
+  "dateModified": "2026-07-23",
+  "mainEntityOfPage": "https://sdfltd.com/full-package-fob-vs-cmt-vs-cm-only/"
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Cut and Sew Service", "item": "https://sdfltd.com/cut-and-sew-service" },
+    { "@type": "ListItem", "position": 3, "name": "Full-Package vs CMT vs CM-Only", "item": "https://sdfltd.com/full-package-fob-vs-cmt-vs-cm-only/" }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website">
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<section style="padding: 6rem 0 3rem; background:#000;">
+  <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;">
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.5rem;">Manufacturing Model Cost Guide</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1.25rem;line-height:1.2;">
+      Full-Package (FOB) vs. CMT vs. CM-Only: Who Actually Pays More?
+    </h1>
+    <p style="color:#ccc;max-width:760px;line-height:1.8;font-size:0.95rem;">
+      The factory invoice for CM-only always looks like the cheapest number on the page. It usually isn't the cheapest total cost — it just moves fabric and trim sourcing, and the risk that comes with it, onto your side of the table. This page walks through a worked example showing where the real cost actually ends up. For the process mechanics of OEM, ODM, and CMT, see our <a href="/insights/oem-vs-odm-vs-cmt" style="color:#e00;text-decoration:none;">detailed breakdown</a> — this page is specifically about the cost and risk tradeoffs.
+    </p>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">A Worked Example: Same T-Shirt, Three Models</h2>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">Say a basic knit t-shirt costs $3.50 FOB Chittagong as a full-package order, 500 pieces. Fabric and trims typically make up 55-70% of a basic garment's total cost across the industry — here's roughly how that $3.50 breaks down depending on who's sourcing what:</p>
+
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem;color:#ddd;margin-bottom:1rem;min-width:520px;">
+        <thead>
+          <tr style="border-bottom:1px solid #e00;">
+            <th style="text-align:left;padding:0.6rem;color:#fff;">Model</th>
+            <th style="text-align:left;padding:0.6rem;color:#fff;">Factory invoice</th>
+            <th style="text-align:left;padding:0.6rem;color:#fff;">You separately pay for</th>
+            <th style="text-align:left;padding:0.6rem;color:#fff;">Your rough total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a1a1a;">
+            <td style="padding:0.6rem;color:#fff;font-weight:600;">Full-Package</td>
+            <td style="padding:0.6rem;">~$3.50/pc (fabric + trims + labor + margin, all included)</td>
+            <td style="padding:0.6rem;">Nothing extra</td>
+            <td style="padding:0.6rem;">~$3.50/pc</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a1a1a;">
+            <td style="padding:0.6rem;color:#fff;font-weight:600;">CMT</td>
+            <td style="padding:0.6rem;">~$2.20/pc (labor + trims)</td>
+            <td style="padding:0.6rem;">~$1.80/pc fabric, sourced yourself</td>
+            <td style="padding:0.6rem;">~$4.00/pc, plus fabric-sourcing risk and working capital tied up earlier</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;color:#fff;font-weight:600;">CM-Only</td>
+            <td style="padding:0.6rem;">~$1.50/pc (labor only)</td>
+            <td style="padding:0.6rem;">~$1.80/pc fabric + ~$0.35/pc trims, both sourced yourself</td>
+            <td style="padding:0.6rem;">~$3.65/pc, plus two supply chains to manage instead of one</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:#888;font-size:0.8rem;">These are illustrative figures to show where the cost actually sits, not a quote — get an actual <a href="/tools/price-calculator" style="color:#e00;text-decoration:none;">price estimate</a> for your specific product and quantity.</p>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Where the Risk Actually Sits</h2>
+
+    <div class="model-table-scroll">
+      <table class="model-table">
+        <colgroup>
+          <col style="width:18%;" />
+          <col style="width:24%;" />
+          <col style="width:28%;" />
+          <col style="width:30%;" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Factory quotes</th>
+            <th>Who sources what</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          {modelRows.map(row => (
+            <tr>
+              <td class="model-name">{row.name}</td>
+              <td>{row.factoryQuotes}</td>
+              <td>{row.whoSources}</td>
+              <td>{row.bestFor}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="model-cards">
+      {modelRows.map(row => (
+        <div class="model-card">
+          <p class="model-card-name">{row.name}</p>
+          <p class="model-card-row"><span>Factory quotes</span>{row.factoryQuotes}</p>
+          <p class="model-card-row"><span>Who sources what</span>{row.whoSources}</p>
+          <p class="model-card-row"><span>Hidden cost</span>{row.hiddenCost}</p>
+          <p class="model-card-row"><span>Best for</span>{row.bestFor}</p>
+        </div>
+      ))}
+    </div>
+    <p style="color:#888;font-size:0.8rem;margin-top:1rem;">Last reviewed {lastReviewed}. Per-piece figures vary by product complexity, fabric type, and order size — treat these as directional, not exact quotes.</p>
+
+    <div style="border:1px solid #1a1a1a;border-left:2px solid #e00;background:#050505;padding:1.5rem 1.75rem;margin-top:1.5rem;">
+      <p style="color:#888;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">A term that isn't used the same way everywhere</p>
+      <p style="color:#ddd;font-size:0.9rem;line-height:1.9;margin:0;">Worth flagging honestly: "CMT" doesn't mean the exact same thing at every factory. At SDF, CMT means we source and supply the trims while you supply the fabric. At other factories, "CMT" sometimes means the buyer supplies both fabric and trims, and the T just refers to the factory trimming loose threads and finishing the garment — closer to what this page calls CM-only. Don't assume; ask any factory directly and in writing exactly what's included in their CMT quote before comparing it to anyone else's.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .model-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .model-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    color: #ddd;
+  }
+  .model-table thead tr { border-bottom: 1px solid #e00; }
+  .model-table th { text-align: left; padding: 0.55rem 0.5rem; color: #fff; font-size: 0.72rem; }
+  .model-table tbody tr { border-bottom: 1px solid #1a1a1a; }
+  .model-table td {
+    padding: 0.6rem 0.5rem;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+  }
+  .model-table td.model-name { color: #fff; font-weight: 600; }
+
+  .model-cards { display: none; }
+
+  @media (max-width: 760px) {
+    .model-table-scroll { display: none; }
+    .model-cards { display: block; }
+    .model-card {
+      border: 1px solid #1a1a1a;
+      border-top: 2px solid #e00;
+      background: #050505;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .model-card-name { color: #fff; font-weight: 600; font-size: 1rem; margin-bottom: 0.75rem; }
+    .model-card-row { color: #ccc; font-size: 0.85rem; line-height: 1.7; margin-bottom: 0.6rem; }
+    .model-card-row span {
+      color: #e00; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
+      display: block; margin-bottom: 0.15rem;
+    }
+  }
+
+  @media (min-width: 761px) and (max-width: 950px) {
+    .model-table { font-size: 0.7rem; }
+    .model-table th { font-size: 0.62rem; padding: 0.45rem 0.35rem; }
+    .model-table td { padding: 0.45rem 0.35rem; }
+  }
+</style>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Which One Do You Actually Need?</h2>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem;color:#ddd;margin-bottom:1.5rem;min-width:480px;">
+        <thead>
+          <tr style="border-bottom:1px solid #e00;">
+            <th style="text-align:left;padding:0.6rem;color:#fff;">If your situation is...</th>
+            <th style="text-align:left;padding:0.6rem;color:#fff;">You need</th>
+          </tr>
+        </thead>
+        <tbody>
+          {scenarioRows.map(row => (
+            <tr style="border-bottom:1px solid #1a1a1a;">
+              <td style="padding:0.6rem;">{row.situation}</td>
+              <td style="padding:0.6rem;">{row.need}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">The Cash-Flow Timing Nobody Mentions</h2>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;">There's a cost here that doesn't show up in any per-piece number: when you pay. Full-package usually means one payment schedule with one supplier — a deposit, then balance on or after shipment. Under CMT or CM-only, you're typically paying your fabric mill upfront, often weeks before the factory even starts cutting, and then paying the factory separately on its own schedule. That means your money is tied up earlier and split across two relationships instead of one, which matters a lot more for a cash-constrained startup than it does for an established brand with working capital to spare.</p>
+
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Who's Responsible If Your Own Fabric Has a Problem?</h2>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">This is the question that catches CMT and CM-only buyers off guard. If you supply the fabric and it shrinks unexpectedly, bleeds color, or doesn't match the tech pack's original spec, that's generally on you, not the factory — they cut and sewed what you sent them. Under full-package, the factory sourced the fabric, so a fabric-level defect is more clearly their problem to fix. Before choosing CMT or CM-only to save on the per-piece price, make sure you (or your fabric supplier) can actually stand behind the fabric's quality — because the factory won't be the one absorbing that risk.</p>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Common Mistakes — and the Myths Behind Them</h2>
+    <div style="border:1px solid #1a1a1a;">
+      <div style="padding:1.25rem 1.5rem;border-bottom:1px solid #1a1a1a;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> The lowest factory quote is the cheapest way to make the garment</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> A CM-only quote excludes fabric and trims entirely — the two components that typically make up over half a garment's total cost. Compare total landed cost per piece, not just the factory invoice, before assuming one model is cheaper.</p>
+      </div>
+      <div style="padding:1.25rem 1.5rem;border-bottom:1px solid #1a1a1a;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> CMT and CM-only are the same thing</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> CMT includes the factory sourcing trims for you; CM-only doesn't. That's the difference between managing one external supply chain (fabric) and two (fabric and trims).</p>
+      </div>
+      <div style="padding:1.25rem 1.5rem;">
+        <p style="color:#fff;font-size:0.9rem;margin-bottom:0.4rem;"><span style="color:#e00;">Myth:</span> Sourcing your own fabric always saves money</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;margin:0;"><span style="color:#888;">Fact:</span> It can, if you have real mill relationships and volume to negotiate with. Without that, you're often paying retail-adjacent fabric prices the factory's established relationships would have beaten — while also taking on the fabric MOQ mismatch and quality risk yourself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Where SDF Stands — An Honest Self-Assessment</h2>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:0.75rem;"><strong>What we can back up:</strong> we offer all three models from one factory — full detail on our <a href="/cut-and-sew-service" style="color:#e00;text-decoration:none;">cut-and-sew (CMT) service</a> page, including that CMT has no minimum order when you supply your own fabric. If you'd rather we source fabric too, see our <a href="/fabric-sourcing" style="color:#e00;text-decoration:none;">fabric sourcing service</a> — full-package OEM starts at 300 pieces.</p>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">
+      <strong>Where the honest caveat sits:</strong> if you choose CMT or CM-only to save on the per-piece invoice, that only actually saves you money if your own fabric or trim sourcing is genuinely competitive with ours — otherwise you may be trading a lower number on our invoice for a higher one on yours. We'd rather walk through the real numbers with you before you commit than let a lower quote look better than it is.
+    </p>
+
+    <div style="border:1px solid #1a1a1a;border-left:2px solid #e00;background:#050505;padding:1.5rem 1.75rem;margin-top:2rem;">
+      <p style="color:#888;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Key takeaways</p>
+      <ul style="color:#ddd;font-size:0.88rem;line-height:1.9;padding-left:1.2rem;margin:0;">
+        <li>The factory invoice alone doesn't tell you the total cost — fabric and trims are typically 55-70% of a garment's cost, and they're excluded from CMT and CM-only quotes</li>
+        <li>CMT and CM-only shift real risk onto you: fabric quality, MOQ mismatches, and earlier cash outlay</li>
+        <li>"CMT" isn't defined identically everywhere — confirm in writing what's included before comparing quotes across factories</li>
+        <li>Full-package costs more per piece but bundles sourcing risk and financing into one relationship</li>
+        <li>Many buyers start with full-package and move to CMT once they've built real fabric-sourcing relationships of their own</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:2rem;">Questions Buyers Actually Ask</h2>
+    <div style="background:#000;border:1px solid rgba(255,255,255,0.1);">
+      {mistakeFaqs.map((faq, index) => (
+        <details style="border-bottom:1px solid rgba(255,255,255,0.1);" open={index === 0}>
+          <summary style="padding:1.5rem;cursor:pointer;color:#fff;font-size:0.95rem;font-weight:500;display:flex;justify-content:space-between;align-items:center;list-style:none;gap:1rem;">
+            {faq.question}
+            <span style="font-size:1.5rem;color:#e00;flex-shrink:0;">+</span>
+          </summary>
+          <div style="padding:0 1.5rem 1.5rem;">
+            <p style="color:#bbb;line-height:1.8;font-size:0.9rem;margin:0;">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 6rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505;">
+      <p style="color:#fff;font-size:1rem;margin-bottom:1rem;">Want a real, product-specific cost comparison?</p>
+      <a href="/tools/price-calculator" style="color:#e00;text-decoration:none;margin-right:1.5rem;">Try our price calculator →</a>
+      <a href="/contact" style="color:#e00;text-decoration:none;">Talk to us →</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0 0 5rem; background:#000;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <div style="padding:2rem;border:1px solid #1a1a1a;background:#050505;">
+      <div>
+        <p style="color:#fff;font-weight:600;font-size:0.92rem;margin-bottom:0.25rem;">Chowdhury Remon</p>
+        <p style="color:#888;font-size:0.8rem;margin-bottom:0.75rem;">Founder & CEO, SDF Clothing — running the factory floor since 1998</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;">We quote all three models regularly, and walking buyers through where the real cost sits builds more trust than just handing over the lowest number. <a href="/editorial-policy/" style="color:#e00;text-decoration:none;">Read our editorial policy</a> or <a href="/about/" style="color:#e00;text-decoration:none;">more about SDF</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>

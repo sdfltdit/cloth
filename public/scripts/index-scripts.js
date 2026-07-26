@@ -26,6 +26,23 @@
     });
   }
 
+  function initCapabilityShowMore() {
+    var buttons = document.querySelectorAll('.capabilities-more-btn');
+    if (!buttons.length) return;
+    buttons.forEach(function (btn) {
+      var targetId = btn.dataset.moreTarget;
+      var target = document.getElementById(targetId);
+      if (!target) return;
+      var totalCount = target.querySelectorAll('.capabilities-card').length;
+      var originalLabel = btn.textContent;
+      btn.addEventListener('click', function () {
+        var expanded = target.classList.toggle('capabilities-more--expanded');
+        btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        btn.textContent = expanded ? 'Show fewer options ↑' : originalLabel;
+      });
+    });
+  }
+
   function initFaqAccordion() {
     var buttons = document.querySelectorAll('.index__faq-question');
     if (!buttons.length) return;
@@ -52,18 +69,6 @@
         }
       }
     });
-  }
-
-  function initStickyBar() {
-    var stickyBar = document.getElementById('sticky-bar');
-    if (!stickyBar) return;
-    var shown = false;
-    window.addEventListener('scroll', function () {
-      if (!shown && window.scrollY > 500 && window.innerWidth <= 768) {
-        stickyBar.classList.add('index__sticky-bar--visible');
-        shown = true;
-      }
-    }, { passive: true });
   }
 
   function initCostCalculator() {
@@ -230,9 +235,9 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     initCapabilityTabs();
+    initCapabilityShowMore();
     initFaqAccordion();
     initExitBanner();
-    initStickyBar();
 
     var idle = 'requestIdleCallback' in window ? requestIdleCallback : function (cb) { setTimeout(cb, 100); };
     idle(function () {

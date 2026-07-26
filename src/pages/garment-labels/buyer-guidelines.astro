@@ -1,0 +1,480 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Garment Label Buyer Guidelines & Approval Process";
+const pageDescription = "How fashion brands set label requirements, submit specs, and approve labels before bulk production — a step-by-step guide for private label brands.";
+
+const specFields = [
+  { field: "Label type & quantity", text: "Which label types are needed (main, size, care, etc.) and how many pieces per style, size, and color." },
+  { field: "Material & construction", text: "The chosen fabric or synthetic base, and manufacturing method — woven, printed, or heat transfer." },
+  { field: "Dimensions", text: "Exact width and height, with tolerance range, since even small size deviations can affect placement and seam allowance." },
+  { field: "Color reference", text: "A physical swatch or Pantone code — never a screen color alone, since monitor calibration varies and cannot be used as a production color standard." },
+  { field: "Text & compliance content", text: "Exact wording for brand name, fiber content, care instructions, and country of origin, reviewed against destination-market requirements." },
+  { field: "Placement", text: "Precise position on the garment, ideally shown on a tech pack sketch rather than described in text alone." },
+];
+
+const approvalSteps = [
+  { step: "1", title: "Specification Submission", text: "The brand submits a completed label spec sheet covering material, dimensions, color reference, text content, and placement, typically as part of the broader tech pack for the style." },
+  { step: "2", title: "First Sample", text: "The factory produces an initial label sample matching the spec. This is reviewed for color accuracy, text correctness, and construction quality before any garment sampling begins." },
+  { step: "3", title: "Pre-Production (PP) Sample Approval", text: "The approved label is applied to a pre-production garment sample made from actual production fabric. This is the checkpoint where placement, comfort, and compliance content get a final review together with the finished garment — not the label in isolation." },
+  { step: "4", title: "Bulk Production", text: "Once the PP sample is signed off, bulk cutting and label attachment proceed. Any change after this point — fabric substitution, a compliance update, a fit adjustment affecting label placement — requires a documented change request rather than an informal instruction." },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Garment Labels", "item": "https://sdfltd.com/garment-labels/" },
+          { "@type": "ListItem", "position": 3, "name": "Buyer Guidelines", "item": Astro.url.href }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What should be included in a label spec sheet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A complete label spec sheet includes the label type and quantity needed, material and construction method, exact dimensions with tolerance, a physical color reference such as a Pantone code, the precise text content for compliance fields, and placement shown on a tech pack sketch rather than described in words alone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a PP sample in the label approval process?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A PP, or pre-production, sample is a garment made from actual production fabric with the approved label already attached. It is the checkpoint where a brand reviews label placement, comfort, and compliance content together with the finished garment before bulk cutting and production begin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can label content change after bulk production has started?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Changing label content after bulk production has started requires a documented change request rather than an informal instruction, since an undocumented change can create a mismatch between what was legally reviewed at the PP sample stage and what actually ships, creating compliance risk."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/garment-labels/">Garment Labels</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Buyer Guidelines</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__label">Garment Labels • Buyer Guidelines</div>
+      <h1 class="hero__title">Garment Label Buyer Guidelines and Approval Process</h1>
+      <p class="hero__description">
+        A clear label spec sheet at the start saves weeks of back-and-forth later. Here is what a complete spec includes and how it moves through approval to bulk production.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Spec Sheet</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What to Include in Your Label Spec Sheet</h2>
+      </div>
+      <div class="section__text">
+        <p>A spec sheet missing even one of these fields typically means a round-trip delay while the factory requests clarification — building it complete the first time is the single biggest lever a brand has over label lead time.</p>
+      </div>
+      <div class="spec-grid">
+        {specFields.map((spec) => (
+          <div class="spec-card">
+            <h3 class="spec-card__title">{spec.field}</h3>
+            <p class="spec-card__text">{spec.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Placement Standards</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Placement Standards by Garment Category</h2>
+      </div>
+      <div class="section__text">
+        <p>Placement conventions vary by garment category, and brands sourcing multiple product types often maintain a placement standard document per category rather than one universal rule. A t-shirt's neck label sits differently than a jacket's, and activewear placement has to account for seam stress points during movement that a woven top does not experience.</p>
+
+        <p>See the <a href="/garment-labels/placement-and-required-information/">Placement & Required Information guide</a> for placement zones by garment type, and the <a href="/garment-labels/types-of-garment-labels/">Types of Garment Labels guide</a> for which label types apply to which product category.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Approval Workflow</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">The Label Approval Process</h2>
+      </div>
+      <div class="step-list">
+        {approvalSteps.map((item) => (
+          <div class="step-item">
+            <span class="step-item__number">{item.step}</span>
+            <div class="step-item__content">
+              <h3 class="step-item__title">{item.title}</h3>
+              <p class="step-item__text">{item.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Working With SDF</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Working With SDF on Label Sourcing</h2>
+      </div>
+      <div class="section__text">
+        <p>Because SDF Clothing produces labels in-house rather than routing through a separate trim vendor, the approval steps above run on the same timeline as garment sampling instead of adding a parallel, disconnected process. Brands working with us for the first time typically start with the <a href="/private-label-clothing-manufacturer">private label manufacturing</a> process, where label specification is handled as one part of the full tech pack review rather than a separate order.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Start Your Label Spec Sheet?</h2>
+      <p class="section__text">Send us your product category and target markets, and our technical team will help you build a complete, compliant label spec before your first sample.</p>
+      <div class="section__ctas">
+        <a href="/#contact" class="section__cta section__cta--primary">Request a Label & Trim Quote</a>
+        <a href="/garment-labels/faq/" class="section__cta section__cta--secondary">See Garment Label FAQs →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-xs);
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: "/";
+    margin-left: var(--spacing-xs);
+    color: var(--color-border);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .hero__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section--cta .section__container {
+    max-width: 700px;
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .spec-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+
+  .spec-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+  }
+
+  .spec-card__title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .spec-card__text {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .step-list {
+    margin-top: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .step-item {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+  }
+
+  .step-item__number {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+
+  .step-item__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .step-item__text {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  @media (max-width: 900px) {
+    .spec-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+
+    .step-item {
+      gap: var(--spacing-sm);
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
