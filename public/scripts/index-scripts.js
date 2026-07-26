@@ -54,18 +54,6 @@
     });
   }
 
-  function initStickyBar() {
-    var stickyBar = document.getElementById('sticky-bar');
-    if (!stickyBar) return;
-    var shown = false;
-    window.addEventListener('scroll', function () {
-      if (!shown && window.scrollY > 500 && window.innerWidth <= 768) {
-        stickyBar.classList.add('index__sticky-bar--visible');
-        shown = true;
-      }
-    }, { passive: true });
-  }
-
   function initCostCalculator() {
     var btn = document.getElementById('calculate-cost');
     if (!btn) return;
@@ -232,7 +220,6 @@
     initCapabilityTabs();
     initFaqAccordion();
     initExitBanner();
-    initStickyBar();
 
     var idle = 'requestIdleCallback' in window ? requestIdleCallback : function (cb) { setTimeout(cb, 100); };
     idle(function () {
