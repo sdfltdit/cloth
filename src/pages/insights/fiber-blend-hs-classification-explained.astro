@@ -216,10 +216,44 @@ const schema = [
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">Before filing a new request, search the destination country's public rulings database (CBP's CROSS system is the US example) — a near-identical product may already have a published ruling that settles the question without the wait.</p>
 
       <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Fiber Blend Classification FAQ</h2>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>What happens when no single fiber is more than 50% of a blend?</strong> Classification falls to GRI 3(b), the essential character rule. Customs looks beyond the raw percentage at which fiber gives the fabric its defining performance, feel, or appearance — a fact-specific judgment. This is exactly the situation where requesting a binding ruling is worth the wait.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Does the fiber percentage on the care label determine the HS code?</strong> The care label is a starting reference, not the legal basis. If a customs lab tests a shipment and the actual composition differs from the label, the lab result overrides the paperwork — a common cause of post-entry reclassification.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Can changing a blend ratio by a few percent really change the duty rate?</strong> Yes. Because classification often hinges on which fiber holds a bare majority by weight, a shift of just 1-2 percentage points can move a garment into a different tariff chapter carrying a different duty rate.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;"><strong>Should I get lab testing done on blended fabric before shipping?</strong> For any blend close to an even split, yes. Third-party lab testing is inexpensive relative to the cost of a reclassification or shipment delay, and gives you documented evidence if a customs authority later questions your declared classification.</p>
+      <div class="faq-accordion2">
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            What happens when no single fiber is more than 50% of a blend?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Classification falls to GRI 3(b), the essential character rule. Customs looks beyond the raw percentage at which fiber gives the fabric its defining performance, feel, or appearance — a fact-specific judgment. This is exactly the situation where requesting a binding ruling is worth the wait.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Does the fiber percentage on the care label determine the HS code?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>The care label is a starting reference, not the legal basis. If a customs lab tests a shipment and the actual composition differs from the label, the lab result overrides the paperwork — a common cause of post-entry reclassification.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Can changing a blend ratio by a few percent really change the duty rate?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Yes. Because classification often hinges on which fiber holds a bare majority by weight, a shift of just 1-2 percentage points can move a garment into a different tariff chapter carrying a different duty rate.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Should I get lab testing done on blended fabric before shipping?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>For any blend close to an even split, yes. Third-party lab testing is inexpensive relative to the cost of a reclassification or shipment delay, and gives you documented evidence if a customs authority later questions your declared classification.</p>
+          </div>
+        </div>
+      </div>
 
       <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 3rem;">
         <p style="color: #fff; font-size: 1rem; margin-bottom: 1.5rem; font-weight: 300;">
@@ -240,5 +274,30 @@ const schema = [
     </article>
 
   </div>
+
+
+    <style>
+      .faq-item2 { border-bottom: 1px solid #1a1a1a; }
+      .faq-item2:last-child { border-bottom: none; }
+      .faq-question2 { width: 100%; background: none; border: none; color: #fff; text-align: left; cursor: pointer; padding: 1.1rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.95rem; font-weight: 400; font-family: inherit; min-height: 44px; transition: color 0.2s; }
+      .faq-question2:hover { color: #e00; }
+      .faq-icon2 { flex-shrink: 0; font-size: 1.4rem; line-height: 1; color: #e00; transition: transform 0.2s; }
+      .faq-icon2--open { transform: rotate(45deg); }
+      .faq-answer2 { display: none; padding-bottom: 1.1rem; }
+      .faq-answer2--visible { display: block; }
+      .faq-answer2 p { color: #aaa; line-height: 1.8; font-size: 0.92rem; margin: 0; }
+    </style>
+    <script is:inline>
+      document.querySelectorAll('.faq-question2').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const answer = button.nextElementSibling;
+          const icon = button.querySelector('.faq-icon2');
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!isExpanded));
+          answer.classList.toggle('faq-answer2--visible');
+          icon.classList.toggle('faq-icon2--open');
+        });
+      });
+    </script>
 
 </BaseLayout>

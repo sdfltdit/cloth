@@ -148,9 +148,35 @@ const schema = [
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Ask what SPI standard they sew to for your specific fabric and seam type, and whether it's checked as part of in-line quality control — meaning checked continuously during sewing, not just at final inspection after the whole garment is already assembled.</p>
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">If a sample comes back with visible puckering or uneven stitching, don't approve it assuming bulk will naturally be better. Puckering traces back to a tension setting that needs to be corrected on the machine, and an uncorrected setting will repeat across the entire bulk run.</p>
       <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Stitch Quality FAQ</h2>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Does higher SPI always mean better quality?</strong> Not automatically. Too high an SPI on lightweight or stretch fabric can weaken the seam by over-perforating it. The right SPI is matched to the specific fabric and seam type, not simply maximized.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>How is SPI actually checked on the factory floor?</strong> By counting stitches within a measured one-inch section of seam, usually with a ruler or a dedicated stitch-counting gauge, spot-checked during production rather than only at the very end.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;"><strong>Can a customer notice a stitch quality problem before it fails?</strong> Sometimes — visible puckering or uneven stitching is a visual warning sign. Skip stitches and marginal SPI are harder to spot without close inspection, which is exactly why factory-side quality checks matter more than relying on the finished look alone.</p>
+      <div class="faq-accordion2">
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Does higher SPI always mean better quality?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Not automatically. Too high an SPI on lightweight or stretch fabric can weaken the seam by over-perforating it. The right SPI is matched to the specific fabric and seam type, not simply maximized.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            How is SPI actually checked on the factory floor?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>By counting stitches within a measured one-inch section of seam, usually with a ruler or a dedicated stitch-counting gauge, spot-checked during production rather than only at the very end.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Can a customer notice a stitch quality problem before it fails?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Sometimes — visible puckering or uneven stitching is a visual warning sign. Skip stitches and marginal SPI are harder to spot without close inspection, which is exactly why factory-side quality checks matter more than relying on the finished look alone.</p>
+          </div>
+        </div>
+      </div>
 
 
       <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 3rem;">
@@ -170,5 +196,30 @@ const schema = [
     </article>
 
   </div>
+
+
+    <style>
+      .faq-item2 { border-bottom: 1px solid #1a1a1a; }
+      .faq-item2:last-child { border-bottom: none; }
+      .faq-question2 { width: 100%; background: none; border: none; color: #fff; text-align: left; cursor: pointer; padding: 1.1rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.95rem; font-weight: 400; font-family: inherit; min-height: 44px; transition: color 0.2s; }
+      .faq-question2:hover { color: #e00; }
+      .faq-icon2 { flex-shrink: 0; font-size: 1.4rem; line-height: 1; color: #e00; transition: transform 0.2s; }
+      .faq-icon2--open { transform: rotate(45deg); }
+      .faq-answer2 { display: none; padding-bottom: 1.1rem; }
+      .faq-answer2--visible { display: block; }
+      .faq-answer2 p { color: #aaa; line-height: 1.8; font-size: 0.92rem; margin: 0; }
+    </style>
+    <script is:inline>
+      document.querySelectorAll('.faq-question2').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const answer = button.nextElementSibling;
+          const icon = button.querySelector('.faq-icon2');
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!isExpanded));
+          answer.classList.toggle('faq-answer2--visible');
+          icon.classList.toggle('faq-icon2--open');
+        });
+      });
+    </script>
 
 </BaseLayout>

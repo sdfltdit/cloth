@@ -115,9 +115,35 @@ const schema = [
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Beyond the quoted production lead time itself, building in an additional 1-2 weeks of buffer before a hard retail or launch deadline is a reasonable, common practice among experienced buyers, specifically to absorb the kind of small early-stage delays described above without threatening the actual launch date.</p>
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">Asking your factory for a week-by-week production timeline, not just a single final delivery date, makes it possible to spot a delay early — while there's still time to respond — instead of discovering it only when the shipment doesn't arrive on schedule.</p>
       <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Shipment Delay FAQ</h2>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>How much delay is 'normal' versus a real red flag?</strong> A few days of drift is common and usually recoverable. A delay stretching into multiple weeks without clear, specific communication about the cause is the actual red flag — a well-run factory can tell you exactly which stage is behind and why.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Does air freight fix a late shipment?</strong> It can compress the shipping leg significantly, but it doesn't fix a delay that happened during production itself, and it adds meaningful cost. It's a genuine option for the final stretch, not a substitute for keeping production on schedule from the start.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;"><strong>Should I ask for a production timeline before placing an order?</strong> Yes — a week-by-week timeline covering fabric, dyeing, cutting, sewing, and QC lets you see where the real risk sits in your specific order, rather than trusting a single delivery date with no visibility into how it was built.</p>
+      <div class="faq-accordion2">
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            How much delay is 'normal' versus a real red flag?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>A few days of drift is common and usually recoverable. A delay stretching into multiple weeks without clear, specific communication about the cause is the actual red flag — a well-run factory can tell you exactly which stage is behind and why.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Does air freight fix a late shipment?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>It can compress the shipping leg significantly, but it doesn't fix a delay that happened during production itself, and it adds meaningful cost. It's a genuine option for the final stretch, not a substitute for keeping production on schedule from the start.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Should I ask for a production timeline before placing an order?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Yes — a week-by-week timeline covering fabric, dyeing, cutting, sewing, and QC lets you see where the real risk sits in your specific order, rather than trusting a single delivery date with no visibility into how it was built.</p>
+          </div>
+        </div>
+      </div>
 
 
       <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 3rem;">
@@ -137,5 +163,30 @@ const schema = [
     </article>
 
   </div>
+
+
+    <style>
+      .faq-item2 { border-bottom: 1px solid #1a1a1a; }
+      .faq-item2:last-child { border-bottom: none; }
+      .faq-question2 { width: 100%; background: none; border: none; color: #fff; text-align: left; cursor: pointer; padding: 1.1rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.95rem; font-weight: 400; font-family: inherit; min-height: 44px; transition: color 0.2s; }
+      .faq-question2:hover { color: #e00; }
+      .faq-icon2 { flex-shrink: 0; font-size: 1.4rem; line-height: 1; color: #e00; transition: transform 0.2s; }
+      .faq-icon2--open { transform: rotate(45deg); }
+      .faq-answer2 { display: none; padding-bottom: 1.1rem; }
+      .faq-answer2--visible { display: block; }
+      .faq-answer2 p { color: #aaa; line-height: 1.8; font-size: 0.92rem; margin: 0; }
+    </style>
+    <script is:inline>
+      document.querySelectorAll('.faq-question2').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const answer = button.nextElementSibling;
+          const icon = button.querySelector('.faq-icon2');
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!isExpanded));
+          answer.classList.toggle('faq-answer2--visible');
+          icon.classList.toggle('faq-icon2--open');
+        });
+      });
+    </script>
 
 </BaseLayout>

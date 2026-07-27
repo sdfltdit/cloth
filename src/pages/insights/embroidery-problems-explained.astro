@@ -118,9 +118,35 @@ const schema = [
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Ask what backing type is being used for your specific fabric, and why. Request a physical embroidered sample on your actual production fabric before bulk starts — not just a digital mockup — since fabric behavior under stitching tension can't be fully judged from a screen.</p>
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">If your logo has fine detail (small text, thin lines), ask directly whether the stitch density needed to render it cleanly is achievable on your chosen fabric weight, before committing to bulk.</p>
       <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Embroidery FAQ</h2>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Why does my embroidered logo look different on different garments?</strong> Different fabric weights and stretch levels respond differently to the same stitch file. A logo digitized and tested on woven cotton may need adjustment before it embroiders cleanly on a stretch knit.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Is puckering always a backing problem?</strong> It's the most common cause, but tension settings and stitch density also contribute. A factory experienced with your specific fabric type will usually have already solved this combination before, which is worth asking about directly.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;"><strong>Can a puckering problem be fixed after the garment is embroidered?</strong> Rarely, and not reliably. Puckering caused by inadequate backing is largely locked in once stitching is complete. It needs to be prevented with the correct backing choice before production, not corrected afterward.</p>
+      <div class="faq-accordion2">
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Why does my embroidered logo look different on different garments?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Different fabric weights and stretch levels respond differently to the same stitch file. A logo digitized and tested on woven cotton may need adjustment before it embroiders cleanly on a stretch knit.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Is puckering always a backing problem?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>It's the most common cause, but tension settings and stitch density also contribute. A factory experienced with your specific fabric type will usually have already solved this combination before, which is worth asking about directly.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Can a puckering problem be fixed after the garment is embroidered?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Rarely, and not reliably. Puckering caused by inadequate backing is largely locked in once stitching is complete. It needs to be prevented with the correct backing choice before production, not corrected afterward.</p>
+          </div>
+        </div>
+      </div>
 
 
       <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 3rem;">
@@ -140,5 +166,30 @@ const schema = [
     </article>
 
   </div>
+
+
+    <style>
+      .faq-item2 { border-bottom: 1px solid #1a1a1a; }
+      .faq-item2:last-child { border-bottom: none; }
+      .faq-question2 { width: 100%; background: none; border: none; color: #fff; text-align: left; cursor: pointer; padding: 1.1rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.95rem; font-weight: 400; font-family: inherit; min-height: 44px; transition: color 0.2s; }
+      .faq-question2:hover { color: #e00; }
+      .faq-icon2 { flex-shrink: 0; font-size: 1.4rem; line-height: 1; color: #e00; transition: transform 0.2s; }
+      .faq-icon2--open { transform: rotate(45deg); }
+      .faq-answer2 { display: none; padding-bottom: 1.1rem; }
+      .faq-answer2--visible { display: block; }
+      .faq-answer2 p { color: #aaa; line-height: 1.8; font-size: 0.92rem; margin: 0; }
+    </style>
+    <script is:inline>
+      document.querySelectorAll('.faq-question2').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const answer = button.nextElementSibling;
+          const icon = button.querySelector('.faq-icon2');
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!isExpanded));
+          answer.classList.toggle('faq-answer2--visible');
+          icon.classList.toggle('faq-icon2--open');
+        });
+      });
+    </script>
 
 </BaseLayout>

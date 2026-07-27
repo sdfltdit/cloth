@@ -115,9 +115,35 @@ const schema = [
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Ask specifically what percentage of total shrinkage happens during the factory wash step versus what remains for the customer's first home wash. A garment that's fully pre-shrunk in the factory should show minimal additional shrinkage at home — typically under 3%, sometimes close to 1% for well-processed cotton.</p>
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">If this number isn't tracked or known, that's worth flagging directly, because it means shrinkage control is happening informally rather than as a measured, repeatable process.</p>
       <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Garment Washing FAQ</h2>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Does washing weaken the fabric?</strong> Some wash types, particularly stone washing, do add mechanical stress that can slightly reduce fabric strength, which is why a wash-tested pre-production sample should also be checked for strength, not just appearance.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Can garment washing fix a color mismatch from dyeing?</strong> No — washing can soften color slightly or add an intentional worn look, but it can't correct a genuine dye-lot mismatch. That has to be caught and corrected at the lab dip and bulk dyeing stage instead.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;"><strong>Why does the same wash recipe sometimes look different between batches?</strong> Water quality, machine load, and timing can vary slightly between wash runs, similar to how dye lots vary between dyeing runs. This is why a wash-approval swatch or reference garment should be kept and compared against each production batch.</p>
+      <div class="faq-accordion2">
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Does washing weaken the fabric?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Some wash types, particularly stone washing, do add mechanical stress that can slightly reduce fabric strength, which is why a wash-tested pre-production sample should also be checked for strength, not just appearance.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Can garment washing fix a color mismatch from dyeing?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>No — washing can soften color slightly or add an intentional worn look, but it can't correct a genuine dye-lot mismatch. That has to be caught and corrected at the lab dip and bulk dyeing stage instead.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Why does the same wash recipe sometimes look different between batches?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Water quality, machine load, and timing can vary slightly between wash runs, similar to how dye lots vary between dyeing runs. This is why a wash-approval swatch or reference garment should be kept and compared against each production batch.</p>
+          </div>
+        </div>
+      </div>
 
 
       <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 3rem;">
@@ -137,5 +163,30 @@ const schema = [
     </article>
 
   </div>
+
+
+    <style>
+      .faq-item2 { border-bottom: 1px solid #1a1a1a; }
+      .faq-item2:last-child { border-bottom: none; }
+      .faq-question2 { width: 100%; background: none; border: none; color: #fff; text-align: left; cursor: pointer; padding: 1.1rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.95rem; font-weight: 400; font-family: inherit; min-height: 44px; transition: color 0.2s; }
+      .faq-question2:hover { color: #e00; }
+      .faq-icon2 { flex-shrink: 0; font-size: 1.4rem; line-height: 1; color: #e00; transition: transform 0.2s; }
+      .faq-icon2--open { transform: rotate(45deg); }
+      .faq-answer2 { display: none; padding-bottom: 1.1rem; }
+      .faq-answer2--visible { display: block; }
+      .faq-answer2 p { color: #aaa; line-height: 1.8; font-size: 0.92rem; margin: 0; }
+    </style>
+    <script is:inline>
+      document.querySelectorAll('.faq-question2').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const answer = button.nextElementSibling;
+          const icon = button.querySelector('.faq-icon2');
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!isExpanded));
+          answer.classList.toggle('faq-answer2--visible');
+          icon.classList.toggle('faq-icon2--open');
+        });
+      });
+    </script>
 
 </BaseLayout>
