@@ -1,0 +1,244 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { schemaOrganization, schemaPerson } from '../../data/schema';
+
+export const prerender = true;
+
+const pageTitle = "Fiber Blend HS Code Classification: The 50/50 Problem Explained";
+const pageDescription = "Why a 51/49 cotton-poly blend and a 50/50 blend can land in different tariff chapters with different duty rates, and how GRI 3 actually decides it.";
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": pageTitle,
+    "description": pageDescription,
+    "author": { "@id": "https://sdfltd.com/#founder" },
+    "publisher": { "@id": "https://sdfltd.com/#org" },
+    "url": "https://sdfltd.com/insights/fiber-blend-hs-classification-explained/",
+    "mainEntityOfPage": "https://sdfltd.com/insights/fiber-blend-hs-classification-explained/",
+    "about": [
+      { "@type": "Thing", "name": "Harmonized System" },
+      { "@type": "Thing", "name": "General Rules of Interpretation" },
+      { "@type": "Thing", "name": "World Customs Organization" },
+      { "@type": "Thing", "name": "Tariff classification" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com" },
+      { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://sdfltd.com/insights" },
+      { "@type": "ListItem", "position": 3, "name": "Fiber Blend HS Classification Explained", "item": "https://sdfltd.com/insights/fiber-blend-hs-classification-explained/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What happens when no single fiber is more than 50% of a blend?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When no fiber has a clear majority by weight, classification falls to GRI 3(b), the essential character rule. Customs authorities look beyond the raw percentage at which fiber gives the fabric its defining performance, feel, or appearance. This is a fact-specific judgment, and genuinely close cases (such as a 50/50 split) are exactly the situation where requesting a binding ruling is worth the wait, since two customs brokers can reasonably reach different conclusions without one."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the fiber percentage on the care label determine the HS code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The care label is a starting reference, not the legal basis for classification. Customs authorities classify based on verified fiber content, and if a customs laboratory tests a shipment and finds the actual composition differs from the label or commercial invoice, the lab result overrides the paperwork. This is one of the most common causes of a post-entry reclassification."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can changing a blend ratio by a few percent really change the duty rate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Because classification often hinges on which fiber holds a bare majority by weight, a shift of just 1-2 percentage points can move a garment from one tariff chapter to another, and tariff chapters for different fiber types frequently carry different duty rates. This is exactly why fiber content should be locked and verified before bulk production, not estimated."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I get lab testing done on blended fabric before shipping?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For any blend where the split is close to an even split, yes. A third-party fiber content lab test is inexpensive relative to the cost of a customs reclassification, back-duty demand, or shipment delay, and it gives you documented evidence of composition if a customs authority later questions your declared classification."
+        }
+      }
+    ]
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+<script type="application/ld+json" set:html={JSON.stringify(schemaOrganization)} />
+<script type="application/ld+json" set:html={JSON.stringify(schemaPerson)} />
+
+  <div class="container" style="padding: 3rem 1.5rem 5rem;">
+
+    <nav aria-label="Breadcrumb" style="margin-bottom: 2.5rem;">
+      <p style="font-size: 0.72rem; color: #FFFFFF; letter-spacing: 0.1em; text-transform: uppercase;">
+        <a href="/" style="color: #e00; text-decoration: none;">Home</a>
+        <span style="margin: 0 0.5rem; color: #333;">›</span>
+        <a href="/insights" style="color: #aaa; text-decoration: none;">Insights</a>
+        <span style="margin: 0 0.5rem; color: #333;">›</span>
+        <span style="color: #FFFFFF;">Fiber Blend HS Classification</span>
+      </p>
+    </nav>
+
+    <article>
+
+      <header style="max-width: 780px; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid #1a1a1a;">
+        <span style="font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: #e00; display: block; margin-bottom: 1rem;">Compliance Guide · Customs Classification</span>
+        <h1 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 200; color: #fff; line-height: 1.2; margin-bottom: 1.25rem; letter-spacing: 0.01em;">
+          Fiber Blend HS Code Classification: The 50/50 Problem Explained
+        </h1>
+        <p style="font-size: 1rem; color: #aaa; line-height: 1.9; margin: 0;">
+          A 51% cotton / 49% polyester garment and a 50% cotton / 50% polyester garment can be classified under different HS chapters, with different duty rates, even though the fabric is almost physically identical. The rule that decides this is called the chief weight rule, and when no fiber holds a clear majority, a second rule called essential character takes over. Both come from the WCO's General Rules of Interpretation (GRI), the legal framework every customs authority in the world applies to classify goods.
+        </p>
+        <p style="color: #888; font-size: 0.72rem; margin-top: 1rem;">Compiled and reviewed by <a href="/about" style="color: #e00; text-decoration: none;">Chowdhury Remon</a>, Founder &amp; CEO — 27+ years in garment manufacturing · Last verified July 2026</p>
+      </header>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Why This Rule Exists — GRI 1 Through GRI 6</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Every HS classification decision in the world, in every country, is governed by the same six General Rules of Interpretation (GRI), published by the World Customs Organization. They apply in strict order, and a classifier only moves to the next rule if the previous one doesn't resolve the question.</p>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 2rem; font-size: 0.88rem;">
+        <thead>
+          <tr style="border-bottom: 1px solid #333;">
+            <th style="text-align: left; padding: 0.75rem 1rem 0.75rem 0; color: #fff; font-weight: 400;">Rule</th>
+            <th style="text-align: left; padding: 0.75rem 0 0.75rem 1rem; color: #fff; font-weight: 400;">What It Does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 0.75rem 1rem 0.75rem 0; color: #aaa;">GRI 1</td><td style="padding: 0.75rem 0 0.75rem 1rem; color: #aaa;">Start with the plain wording of the heading and any section/chapter notes. If the product is named directly, this settles it.</td></tr>
+          <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 0.75rem 1rem 0.75rem 0; color: #aaa;">GRI 2</td><td style="padding: 0.75rem 0 0.75rem 1rem; color: #aaa;">Covers unfinished or unassembled goods, and mixtures/combinations of materials.</td></tr>
+          <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 0.75rem 1rem 0.75rem 0; color: #aaa;">GRI 3(a)</td><td style="padding: 0.75rem 0 0.75rem 1rem; color: #aaa;">When two headings could both apply, the more specific description wins over a general one.</td></tr>
+          <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 0.75rem 1rem 0.75rem 0; color: #aaa;">GRI 3(b)</td><td style="padding: 0.75rem 0 0.75rem 1rem; color: #aaa;">For mixed-material goods with no single specific description, classify by essential character — usually the fiber present in the greatest weight, or the one giving the fabric its defining performance.</td></tr>
+          <tr style="border-bottom: 1px solid #1a1a1a;"><td style="padding: 0.75rem 1rem 0.75rem 0; color: #aaa;">GRI 4</td><td style="padding: 0.75rem 0 0.75rem 1rem; color: #aaa;">Rarely used fallback for goods that still can't be classified after Rules 1–3.</td></tr>
+          <tr><td style="padding: 0.75rem 1rem 0.75rem 0; color: #aaa;">GRI 5 &amp; 6</td><td style="padding: 0.75rem 0 0.75rem 1rem; color: #aaa;">Cover packaging (5) and apply the same logic one level deeper, at the subheading (6).</td></tr>
+        </tbody>
+      </table>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">Fiber-blend garments almost always come down to GRI 3(b) — the essential character rule — which is where the chief weight principle comes from.</p>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">The Chief Weight Rule, in Plain Terms</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">When one fiber makes up more than 50% of a fabric's weight, that fiber generally determines the classification. A knit shirt that's 60% cotton and 40% polyester is classified as a cotton garment. Flip it to 55% polyester and 45% cotton, and the same garment moves into the man-made fiber chapter — often at a meaningfully different duty rate.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">This is exactly why a small, seemingly cosmetic change to a fabric recipe — a supplier substituting a slightly different yarn mix to hit a price target — can quietly change your landed cost without anyone flagging it, unless someone is specifically checking blend ratio against classification every time a fabric spec changes.</p>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">When No Fiber Has a Majority</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">A genuine tri-blend — say 40% polyester, 35% cotton, 25% rayon — has no fiber over 50%, so the chief weight rule doesn't resolve it on its own. This is where GRI 3(b)'s essential character test takes over, and it becomes a more judgment-based question: which fiber actually defines how the fabric performs, feels, and is marketed?</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">Different customs authorities and different rulings have not always applied identical tie-breaking logic in genuinely close cases — this is a real, acknowledged grey area in trade compliance, not something with one universally memorized answer. For a blend this close, the honest, defensible move is requesting an official ruling (covered further down) rather than guessing.</p>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Try It — Blend Classification Checker</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Enter your fabric's fiber percentages to see which classification principle applies. This tells you which rule governs your fabric — it is not a substitute for an official ruling on a close or high-value shipment.</p>
+
+      <div style="background:#050505;border:1px solid #1a1a1a;padding:1.75rem;margin-bottom:1rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+          <div>
+            <label for="fiberA-name" style="font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:#fff;display:block;margin-bottom:0.4rem;">Fiber 1</label>
+            <select id="fiberA-name" style="background:#000;border:1px solid #333;color:#fff;padding:0.7rem;font-size:16px;width:100%;font-family:inherit;">
+              <option value="Cotton">Cotton</option>
+              <option value="Polyester">Polyester</option>
+              <option value="Nylon">Nylon</option>
+              <option value="Viscose/Rayon">Viscose/Rayon</option>
+              <option value="Wool">Wool</option>
+              <option value="Spandex/Elastane">Spandex/Elastane</option>
+            </select>
+          </div>
+          <div>
+            <label for="fiberA-pct" style="font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:#fff;display:block;margin-bottom:0.4rem;">Fiber 1 %</label>
+            <input type="number" id="fiberA-pct" min="0" max="100" value="60" style="background:#000;border:1px solid #333;color:#fff;padding:0.7rem;font-size:16px;width:100%;font-family:inherit;box-sizing:border-box;" />
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem;">
+          <div>
+            <label for="fiberB-name" style="font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:#fff;display:block;margin-bottom:0.4rem;">Fiber 2</label>
+            <select id="fiberB-name" style="background:#000;border:1px solid #333;color:#fff;padding:0.7rem;font-size:16px;width:100%;font-family:inherit;">
+              <option value="Polyester" selected>Polyester</option>
+              <option value="Cotton">Cotton</option>
+              <option value="Nylon">Nylon</option>
+              <option value="Viscose/Rayon">Viscose/Rayon</option>
+              <option value="Wool">Wool</option>
+              <option value="Spandex/Elastane">Spandex/Elastane</option>
+            </select>
+          </div>
+          <div>
+            <label for="fiberB-pct" style="font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:#fff;display:block;margin-bottom:0.4rem;">Fiber 2 %</label>
+            <input type="number" id="fiberB-pct" min="0" max="100" value="40" style="background:#000;border:1px solid #333;color:#fff;padding:0.7rem;font-size:16px;width:100%;font-family:inherit;box-sizing:border-box;" />
+          </div>
+        </div>
+        <button type="button" id="blend-check-btn" style="background:#e00;color:#fff;border:none;padding:0.85rem 2rem;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;width:100%;">Check Classification Rule</button>
+        <div id="blend-result" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid #1a1a1a;display:none;">
+          <p id="blend-result-text" style="color:#fff;font-size:0.9rem;line-height:1.7;margin:0;"></p>
+        </div>
+      </div>
+      <p style="font-size: 0.72rem; color: #666; margin-bottom: 3rem;">This tool applies the chief-weight and essential-character principles only. It doesn't account for country-specific chapter notes, special program eligibility, or construction (knit vs woven) — confirm your final code with your customs broker or an official ruling.</p>
+
+      <script is:inline>
+        document.getElementById('blend-check-btn')?.addEventListener('click', function () {
+          const nameA = document.getElementById('fiberA-name').value;
+          const nameB = document.getElementById('fiberB-name').value;
+          const pctA = parseFloat(document.getElementById('fiberA-pct').value) || 0;
+          const pctB = parseFloat(document.getElementById('fiberB-pct').value) || 0;
+          const resultBox = document.getElementById('blend-result');
+          const resultText = document.getElementById('blend-result-text');
+          const total = pctA + pctB;
+          let msg = '';
+
+          if (nameA === nameB) {
+            msg = 'Fiber 1 and Fiber 2 are the same — choose two different fibers to compare.';
+          } else if (Math.abs(total - 100) > 0.5) {
+            msg = 'Percentages should add up to 100% (currently ' + total + '%). Adjust and check again — a small rounding gap is fine, but a large one means a third fiber is present and this simple checker won\'t be accurate.';
+          } else if (pctA > 50) {
+            msg = '<strong>' + nameA + '</strong> holds a clear majority (' + pctA + '%). Under the chief weight rule (GRI 3(b)), this fabric is likely classified in the ' + nameA + ' fiber category. Confirm with your customs broker for the exact heading.';
+          } else if (pctB > 50) {
+            msg = '<strong>' + nameB + '</strong> holds a clear majority (' + pctB + '%). Under the chief weight rule (GRI 3(b)), this fabric is likely classified in the ' + nameB + ' fiber category. Confirm with your customs broker for the exact heading.';
+          } else {
+            msg = 'No fiber holds a majority (' + pctA + '% / ' + pctB + '%) — this is genuinely close to an even split. Classification falls to the essential character test under GRI 3(b), which is fact-specific. This is exactly the situation where a binding ruling is worth requesting before committing to bulk production.';
+          }
+          resultText.innerHTML = msg;
+          resultBox.style.display = 'block';
+        });
+      </script>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Why This Matters in Real Duty Terms</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Cotton and man-made-fiber garment chapters frequently carry different US duty rates within the same garment category — sometimes a difference of ten percentage points or more on the exact same style, depending only on which side of 50% the blend falls. On a shipment worth tens of thousands of dollars, a 1-2 percentage-point difference in blend ratio can be the difference between two duty brackets entirely.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">This is also why customs authorities take fiber-content verification seriously. When a customs laboratory tests a sample and finds the actual composition differs meaningfully from the commercial invoice, the lab result — not the paperwork — determines the classification, and the gap can trigger a reclassification and back-duty demand.</p>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Trade Names Don't Determine Classification</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Customs classifies based on actual fiber type, not marketing terminology. Lycra is treated as spandex. Lurex is treated as a metallic fiber. Most "bamboo" fabric is, chemically, a regenerated cellulosic fiber and is classified as rayon, not as a distinct bamboo category — despite how it's marketed on a hangtag.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">If your product spec sheet or a supplier's documentation uses a brand or trade name for a fiber, translate it to the actual fiber type before classification, and keep that translation documented.</p>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">What to Do When a Blend Is Genuinely Close</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Get third-party fiber-content lab testing before bulk production, not after a customs question arises. It's inexpensive relative to the cost of a reclassification, and it gives you documented proof of composition.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">For genuinely close or high-value shipments, request a binding ruling from the destination country's customs authority. In the US this is CBP's eRulings system; the EU offers Binding Tariff Information (BTI); the UK offers an Advance Tariff Ruling (ATaR). All three are free and typically take 30-90 days, and the result legally protects you from a future penalty for that classification as long as your product matches what was described in the request.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">Before filing a new request, search the destination country's public rulings database (CBP's CROSS system is the US example) — a near-identical product may already have a published ruling that settles the question without the wait.</p>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Fiber Blend Classification FAQ</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>What happens when no single fiber is more than 50% of a blend?</strong> Classification falls to GRI 3(b), the essential character rule. Customs looks beyond the raw percentage at which fiber gives the fabric its defining performance, feel, or appearance — a fact-specific judgment. This is exactly the situation where requesting a binding ruling is worth the wait.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Does the fiber percentage on the care label determine the HS code?</strong> The care label is a starting reference, not the legal basis. If a customs lab tests a shipment and the actual composition differs from the label, the lab result overrides the paperwork — a common cause of post-entry reclassification.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Can changing a blend ratio by a few percent really change the duty rate?</strong> Yes. Because classification often hinges on which fiber holds a bare majority by weight, a shift of just 1-2 percentage points can move a garment into a different tariff chapter carrying a different duty rate.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;"><strong>Should I get lab testing done on blended fabric before shipping?</strong> For any blend close to an even split, yes. Third-party lab testing is inexpensive relative to the cost of a reclassification or shipment delay, and gives you documented evidence if a customs authority later questions your declared classification.</p>
+
+      <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 3rem;">
+        <p style="color: #fff; font-size: 1rem; margin-bottom: 1.5rem; font-weight: 300;">
+          Need the correct 6-digit HS code confirmed for your fabric before production? Search our free reference tool, or ask us to confirm the code based on your exact fiber content.
+        </p>
+        <a href="/tools/hs-code" style="display: inline-block; background: #e00; color: #fff; padding: 0.9rem 2.5rem; text-decoration: none; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;">
+          Search the HS Code Reference Tool ›
+        </a>
+      </div>
+
+      <p style="font-size: 0.85rem; color: #aaa; margin-top: 1.5rem; line-height: 1.8;">
+        Want to see the full HS code, category by category? Browse our <a href="/tools/hs-code" style="color: #e00; text-decoration: none;">HS Code Reference tool</a> for clothing and textiles.
+      </p>
+      <p style="font-size: 0.85rem; color: #aaa; margin-top: 0.75rem; line-height: 1.8;">
+        Want your color approved before fabric even reaches the classification stage? Read <a href="/insights/lab-dip-explained" style="color: #e00; text-decoration: none;">Lab Dip Explained</a>.
+      </p>
+
+    </article>
+
+  </div>
+
+</BaseLayout>
