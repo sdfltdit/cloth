@@ -64,6 +64,17 @@ export const glossaryTerms = [
 
 export const articles = [
   {
+    date: "Jul 27, 2026",
+    category: "Compliance",
+    sectorId: "compliance",
+    title: "Fiber Blend HS Code Classification: The 50/50 Problem Explained",
+    excerpt: "Why a 51/49 cotton-poly blend and a 50/50 blend can land in different tariff chapters with different duty rates, and how GRI 3 actually decides it. Includes an interactive blend classification checker.",
+    readTime: "11 min read",
+    slug: "/insights/fiber-blend-hs-classification-explained",
+    isPlaceholder: false,
+    isFeatured: true,
+  },
+  {
     date: "Jul 23, 2026",
     category: "Manufacturing",
     sectorId: "manufacturing",
