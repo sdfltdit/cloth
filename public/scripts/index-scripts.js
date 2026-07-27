@@ -39,6 +39,14 @@
         var expanded = target.classList.toggle('capabilities-more--expanded');
         btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
         btn.textContent = expanded ? 'Show fewer options ↑' : originalLabel;
+        if (expanded) {
+          // Keep the button in view after the extra cards push it down the
+          // page, so the person can see something visibly changed instead
+          // of the button just disappearing off-screen.
+          requestAnimationFrame(function () {
+            btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+        }
       });
     });
   }
