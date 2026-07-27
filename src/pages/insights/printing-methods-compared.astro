@@ -120,9 +120,35 @@ const schema = [
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Sublimation only works with light-colored polyester or high-poly-blend fabric — it can't produce vibrant results on cotton or dark fabric, regardless of the artwork quality. Screen print and DTF work across most fabrics but behave differently on stretch knits, where excess ink stiffness can crack at stress points like underarms and hems if the wrong ink type is used.</p>
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">Requesting a physical printed sample on your actual production fabric, not just a mockup, is the single most reliable way to catch a fabric-method mismatch before it becomes a bulk production problem.</p>
       <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Printing Methods FAQ</h2>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Which printing method is cheapest?</strong> It depends entirely on order volume. Screen printing is cheapest per piece at high volume but has a fixed setup cost per color that makes it expensive for small runs. DTF has no per-color setup cost, making it more efficient for smaller or highly multi-colored orders.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Can I combine printing and embroidery on the same garment?</strong> Yes, and it's common for branded apparel — printing for detailed graphics, embroidery for a durable logo. Just confirm placement doesn't overlap in a way that complicates either process during production.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;"><strong>Why did my print look different on the actual garment than the digital mockup?</strong> Screen and monitor colors don't perfectly match physical ink or dye colors, and fabric color, texture, and absorbency all affect the final printed result. A physical pre-production sample on your actual fabric is the only reliable way to confirm a color match before bulk.</p>
+      <div class="faq-accordion2">
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Which printing method is cheapest?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>It depends entirely on order volume. Screen printing is cheapest per piece at high volume but has a fixed setup cost per color that makes it expensive for small runs. DTF has no per-color setup cost, making it more efficient for smaller or highly multi-colored orders.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Can I combine printing and embroidery on the same garment?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Yes, and it's common for branded apparel — printing for detailed graphics, embroidery for a durable logo. Just confirm placement doesn't overlap in a way that complicates either process during production.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Why did my print look different on the actual garment than the digital mockup?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Screen and monitor colors don't perfectly match physical ink or dye colors, and fabric color, texture, and absorbency all affect the final printed result. A physical pre-production sample on your actual fabric is the only reliable way to confirm a color match before bulk.</p>
+          </div>
+        </div>
+      </div>
 
 
       <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 3rem;">
@@ -142,5 +168,30 @@ const schema = [
     </article>
 
   </div>
+
+
+    <style>
+      .faq-item2 { border-bottom: 1px solid #1a1a1a; }
+      .faq-item2:last-child { border-bottom: none; }
+      .faq-question2 { width: 100%; background: none; border: none; color: #fff; text-align: left; cursor: pointer; padding: 1.1rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.95rem; font-weight: 400; font-family: inherit; min-height: 44px; transition: color 0.2s; }
+      .faq-question2:hover { color: #e00; }
+      .faq-icon2 { flex-shrink: 0; font-size: 1.4rem; line-height: 1; color: #e00; transition: transform 0.2s; }
+      .faq-icon2--open { transform: rotate(45deg); }
+      .faq-answer2 { display: none; padding-bottom: 1.1rem; }
+      .faq-answer2--visible { display: block; }
+      .faq-answer2 p { color: #aaa; line-height: 1.8; font-size: 0.92rem; margin: 0; }
+    </style>
+    <script is:inline>
+      document.querySelectorAll('.faq-question2').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const answer = button.nextElementSibling;
+          const icon = button.querySelector('.faq-icon2');
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!isExpanded));
+          answer.classList.toggle('faq-answer2--visible');
+          icon.classList.toggle('faq-icon2--open');
+        });
+      });
+    </script>
 
 </BaseLayout>

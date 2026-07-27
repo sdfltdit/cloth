@@ -113,9 +113,35 @@ const schema = [
       </table>
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">Approving a fit sample made from a different fabric batch than what bulk will actually use is a common, avoidable mistake — fabric behavior can shift between batches, which is precisely why the PP sample stage exists as a final, fabric-accurate check.</p>
       <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Pattern & Fit FAQ</h2>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Why does the same size fit differently across two brands?</strong> Because size labels (S, M, L) aren't standardized across the industry — they're set by each brand's own size chart and block pattern. Comparing your spec sheet to your factory's block, rather than assuming a shared universal standard, is the only reliable check.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>What's a reasonable number of fit-sample revision rounds?</strong> One to three rounds is typical for a new style. If it's taking more than that, the issue is usually a spec sheet that isn't precise enough at the measurement points that matter most for that garment's fit.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;"><strong>Should I request a PP sample even for a simple, previously-made style?</strong> Yes if it's using a new fabric lot, even on a repeat style. Fabric behavior can shift between batches enough to affect final fit, which is exactly what the PP sample stage is designed to catch before bulk cutting begins.</p>
+      <div class="faq-accordion2">
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Why does the same size fit differently across two brands?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Because size labels (S, M, L) aren't standardized across the industry — they're set by each brand's own size chart and block pattern. Comparing your spec sheet to your factory's block, rather than assuming a shared universal standard, is the only reliable check.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            What's a reasonable number of fit-sample revision rounds?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>One to three rounds is typical for a new style. If it's taking more than that, the issue is usually a spec sheet that isn't precise enough at the measurement points that matter most for that garment's fit.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Should I request a PP sample even for a simple, previously-made style?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Yes if it's using a new fabric lot, even on a repeat style. Fabric behavior can shift between batches enough to affect final fit, which is exactly what the PP sample stage is designed to catch before bulk cutting begins.</p>
+          </div>
+        </div>
+      </div>
 
 
       <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 3rem;">
@@ -135,5 +161,30 @@ const schema = [
     </article>
 
   </div>
+
+
+    <style>
+      .faq-item2 { border-bottom: 1px solid #1a1a1a; }
+      .faq-item2:last-child { border-bottom: none; }
+      .faq-question2 { width: 100%; background: none; border: none; color: #fff; text-align: left; cursor: pointer; padding: 1.1rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.95rem; font-weight: 400; font-family: inherit; min-height: 44px; transition: color 0.2s; }
+      .faq-question2:hover { color: #e00; }
+      .faq-icon2 { flex-shrink: 0; font-size: 1.4rem; line-height: 1; color: #e00; transition: transform 0.2s; }
+      .faq-icon2--open { transform: rotate(45deg); }
+      .faq-answer2 { display: none; padding-bottom: 1.1rem; }
+      .faq-answer2--visible { display: block; }
+      .faq-answer2 p { color: #aaa; line-height: 1.8; font-size: 0.92rem; margin: 0; }
+    </style>
+    <script is:inline>
+      document.querySelectorAll('.faq-question2').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const answer = button.nextElementSibling;
+          const icon = button.querySelector('.faq-icon2');
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!isExpanded));
+          answer.classList.toggle('faq-answer2--visible');
+          icon.classList.toggle('faq-icon2--open');
+        });
+      });
+    </script>
 
 </BaseLayout>

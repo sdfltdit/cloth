@@ -85,9 +85,35 @@ const schema = [
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Softener treatment is what gives finished fabric its handfeel — the difference between a stiff, papery feel straight off the loom and the soft drape customers expect from a t-shirt or hoodie. Different softener chemistries produce different results, from a natural cotton-like hand to a peached, brushed texture.</p>
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">Handfeel is genuinely difficult to specify precisely in a written tech pack. The most reliable way to lock it in is approving a physical finished fabric swatch, then keeping that swatch as the reference standard for bulk approval, rather than relying on a written description alone.</p>
       <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Finishing FAQ</h2>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Does finishing affect fabric color?</strong> It can, subtly — some finishing chemicals and heat treatments slightly shift how dyed color appears. This is one reason color approval should happen on finished fabric, not on unfinished, undyed, or unprocessed swatches.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Why does a garment feel different after the first wash than in the store?</strong> Home washing and drying continues some of the same processes finishing started — further relaxing fabric structure and softening handfeel. A well-finished garment changes only slightly after the first wash; a poorly finished one can change dramatically.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;"><strong>Is peach-skin finish the same as brushing?</strong> They're related but distinct processes — brushing raises fine fibers to create a soft texture, and peach-skin finish typically goes further with an additional treatment for an even softer, suede-like surface. Ask your factory specifically which one they mean when either term comes up.</p>
+      <div class="faq-accordion2">
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Does finishing affect fabric color?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>It can, subtly — some finishing chemicals and heat treatments slightly shift how dyed color appears. This is one reason color approval should happen on finished fabric, not on unfinished, undyed, or unprocessed swatches.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Why does a garment feel different after the first wash than in the store?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Home washing and drying continues some of the same processes finishing started — further relaxing fabric structure and softening handfeel. A well-finished garment changes only slightly after the first wash; a poorly finished one can change dramatically.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Is peach-skin finish the same as brushing?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>They're related but distinct processes — brushing raises fine fibers to create a soft texture, and peach-skin finish typically goes further with an additional treatment for an even softer, suede-like surface. Ask your factory specifically which one they mean when either term comes up.</p>
+          </div>
+        </div>
+      </div>
 
 
       <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 3rem;">
@@ -107,5 +133,30 @@ const schema = [
     </article>
 
   </div>
+
+
+    <style>
+      .faq-item2 { border-bottom: 1px solid #1a1a1a; }
+      .faq-item2:last-child { border-bottom: none; }
+      .faq-question2 { width: 100%; background: none; border: none; color: #fff; text-align: left; cursor: pointer; padding: 1.1rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.95rem; font-weight: 400; font-family: inherit; min-height: 44px; transition: color 0.2s; }
+      .faq-question2:hover { color: #e00; }
+      .faq-icon2 { flex-shrink: 0; font-size: 1.4rem; line-height: 1; color: #e00; transition: transform 0.2s; }
+      .faq-icon2--open { transform: rotate(45deg); }
+      .faq-answer2 { display: none; padding-bottom: 1.1rem; }
+      .faq-answer2--visible { display: block; }
+      .faq-answer2 p { color: #aaa; line-height: 1.8; font-size: 0.92rem; margin: 0; }
+    </style>
+    <script is:inline>
+      document.querySelectorAll('.faq-question2').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const answer = button.nextElementSibling;
+          const icon = button.querySelector('.faq-icon2');
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!isExpanded));
+          answer.classList.toggle('faq-answer2--visible');
+          icon.classList.toggle('faq-icon2--open');
+        });
+      });
+    </script>
 
 </BaseLayout>

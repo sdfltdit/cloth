@@ -105,9 +105,35 @@ const schema = [
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Yarn is spun from cotton or fiber that itself varies slightly by harvest, batch, and even bale within the same shipment. A responsible yarn supplier blends multiple bales together specifically to average out this natural variance before spinning — a step sometimes skipped by lower-cost suppliers to save time, which shows up later as inconsistent yarn strength or slightly uneven fabric.</p>
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">This is one of the reasons a trusted, consistent yarn source matters more over a long-term relationship than chasing the lowest yarn price on any single order.</p>
       <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Yarn Quality FAQ</h2>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Does higher yarn count always mean better quality?</strong> Not automatically — it means finer yarn, which suits lightweight, smooth fabric. A heavier garment like a hoodie may intentionally use a coarser, lower-count yarn, and that's a correct choice for the product, not a lower-quality one.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>How can I tell if yarn quality caused a fabric problem?</strong> Uneven fabric surface, inconsistent stretch, or unusual pilling that appears across an entire batch — rather than isolated spots — often points back to yarn consistency rather than a knitting or finishing issue.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;"><strong>Is recycled cotton yarn lower quality than virgin cotton yarn?</strong> Not inherently lower quality, but it does behave differently — recycled fiber is typically shorter, which can mean slightly lower yarn strength unless blended with some virgin fiber to compensate. This is a normal, manageable tradeoff for a sustainability-focused order, not a defect.</p>
+      <div class="faq-accordion2">
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Does higher yarn count always mean better quality?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Not automatically — it means finer yarn, which suits lightweight, smooth fabric. A heavier garment like a hoodie may intentionally use a coarser, lower-count yarn, and that's a correct choice for the product, not a lower-quality one.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            How can I tell if yarn quality caused a fabric problem?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Uneven fabric surface, inconsistent stretch, or unusual pilling that appears across an entire batch — rather than isolated spots — often points back to yarn consistency rather than a knitting or finishing issue.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Is recycled cotton yarn lower quality than virgin cotton yarn?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Not inherently lower quality, but it does behave differently — recycled fiber is typically shorter, which can mean slightly lower yarn strength unless blended with some virgin fiber to compensate. This is a normal, manageable tradeoff for a sustainability-focused order, not a defect.</p>
+          </div>
+        </div>
+      </div>
 
 
       <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 3rem;">
@@ -127,5 +153,30 @@ const schema = [
     </article>
 
   </div>
+
+
+    <style>
+      .faq-item2 { border-bottom: 1px solid #1a1a1a; }
+      .faq-item2:last-child { border-bottom: none; }
+      .faq-question2 { width: 100%; background: none; border: none; color: #fff; text-align: left; cursor: pointer; padding: 1.1rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.95rem; font-weight: 400; font-family: inherit; min-height: 44px; transition: color 0.2s; }
+      .faq-question2:hover { color: #e00; }
+      .faq-icon2 { flex-shrink: 0; font-size: 1.4rem; line-height: 1; color: #e00; transition: transform 0.2s; }
+      .faq-icon2--open { transform: rotate(45deg); }
+      .faq-answer2 { display: none; padding-bottom: 1.1rem; }
+      .faq-answer2--visible { display: block; }
+      .faq-answer2 p { color: #aaa; line-height: 1.8; font-size: 0.92rem; margin: 0; }
+    </style>
+    <script is:inline>
+      document.querySelectorAll('.faq-question2').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const answer = button.nextElementSibling;
+          const icon = button.querySelector('.faq-icon2');
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!isExpanded));
+          answer.classList.toggle('faq-answer2--visible');
+          icon.classList.toggle('faq-icon2--open');
+        });
+      });
+    </script>
 
 </BaseLayout>

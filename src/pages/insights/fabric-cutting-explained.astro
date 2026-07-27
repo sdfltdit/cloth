@@ -88,9 +88,35 @@ const schema = [
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Ask whether your factory relaxes fabric before cutting and for how long — 24 hours is the standard benchmark. Ask what marker efficiency they're achieving on your style, particularly for higher-value fabrics where wastage has a real cost impact.</p>
       <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">If bowing or skewing shows up in a sample garment, don't approve it hoping bulk production will be better — the same fabric-tension issue that caused it in the sample will repeat at bulk scale unless the relaxation step is fixed first.</p>
       <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Fabric Cutting FAQ</h2>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Is bowing and skewing more common in certain fabrics?</strong> Yes — knit fabrics, especially 100% cotton jersey, are more prone to it than wovens, because knit structures are inherently more elastic and easily distorted under tension during finishing.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;"><strong>Can bowing be fixed after cutting?</strong> No. Once fabric is cut with a bow or skew present, that distortion is locked into the panel shape and will show in the finished garment. It has to be addressed before cutting, through proper relaxation.</p>
-      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;"><strong>Why does marker efficiency matter to me as a buyer?</strong> Lower marker efficiency means more fabric is wasted per garment, which is typically reflected in your fabric cost. Asking about it is a reasonable, normal part of a cost discussion, especially on higher-cost fabrics.</p>
+      <div class="faq-accordion2">
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Is bowing and skewing more common in certain fabrics?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Yes — knit fabrics, especially 100% cotton jersey, are more prone to it than wovens, because knit structures are inherently more elastic and easily distorted under tension during finishing.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Can bowing be fixed after cutting?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>No. Once fabric is cut with a bow or skew present, that distortion is locked into the panel shape and will show in the finished garment. It has to be addressed before cutting, through proper relaxation.</p>
+          </div>
+        </div>
+        <div class="faq-item2">
+          <button type="button" class="faq-question2" aria-expanded="false">
+            Why does marker efficiency matter to me as a buyer?
+            <span class="faq-icon2" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer2">
+            <p>Lower marker efficiency means more fabric is wasted per garment, which is typically reflected in your fabric cost. Asking about it is a reasonable, normal part of a cost discussion, especially on higher-cost fabrics.</p>
+          </div>
+        </div>
+      </div>
 
 
       <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 3rem;">
@@ -113,5 +139,30 @@ const schema = [
     </article>
 
   </div>
+
+
+    <style>
+      .faq-item2 { border-bottom: 1px solid #1a1a1a; }
+      .faq-item2:last-child { border-bottom: none; }
+      .faq-question2 { width: 100%; background: none; border: none; color: #fff; text-align: left; cursor: pointer; padding: 1.1rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.95rem; font-weight: 400; font-family: inherit; min-height: 44px; transition: color 0.2s; }
+      .faq-question2:hover { color: #e00; }
+      .faq-icon2 { flex-shrink: 0; font-size: 1.4rem; line-height: 1; color: #e00; transition: transform 0.2s; }
+      .faq-icon2--open { transform: rotate(45deg); }
+      .faq-answer2 { display: none; padding-bottom: 1.1rem; }
+      .faq-answer2--visible { display: block; }
+      .faq-answer2 p { color: #aaa; line-height: 1.8; font-size: 0.92rem; margin: 0; }
+    </style>
+    <script is:inline>
+      document.querySelectorAll('.faq-question2').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const answer = button.nextElementSibling;
+          const icon = button.querySelector('.faq-icon2');
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!isExpanded));
+          answer.classList.toggle('faq-answer2--visible');
+          icon.classList.toggle('faq-icon2--open');
+        });
+      });
+    </script>
 
 </BaseLayout>
