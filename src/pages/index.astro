@@ -43,7 +43,7 @@ const faqs = [
   {
     category: "Quality & Certifications",
     question: "What certifications do you hold?",
-    answer: "We hold 13 international certifications including GOTS, OEKO-TEX, ISO 9001, BSCI, SEDEX, GRS, OCS, RCS, C-TPAT, WRAP, SA8000, ISO 14001, and BCI."
+    answer: "We hold 13 international certifications including <a href=\"https://global-standard.org\" target=\"_blank\" rel=\"noopener noreferrer\">GOTS</a>, <a href=\"https://www.oeko-tex.com\" target=\"_blank\" rel=\"noopener noreferrer\">OEKO-TEX</a>, ISO 9001, <a href=\"https://www.amfori.org/en/solutions/social/amfori-bsci\" target=\"_blank\" rel=\"noopener noreferrer\">BSCI</a>, SEDEX, GRS, OCS, RCS, C-TPAT, WRAP, SA8000, ISO 14001, and BCI."
   },
   {
     category: "Shipping & Logistics",
@@ -79,6 +79,16 @@ const faqs = [
     category: "Getting Started",
     question: "Is a clothing manufacturer the same as a garments manufacturer, apparel manufacturer, or fashion manufacturer?",
     answer: "Yes, \"clothing manufacturer,\" \"garments manufacturer,\" \"apparel manufacturer,\" and \"fashion manufacturer\" describe the same type of business: a factory that produces finished apparel for brands and retailers. SDF Clothing operates as all four: a full-package clothing and garments manufacturer for everyday apparel, an apparel manufacturer for bulk and corporate orders, and a fashion manufacturer for brands with seasonal, design-led collections. The terminology varies by region and industry, but the in-house capability (fabric sourcing, cutting, sewing, finishing, quality control) is the same."
+  },
+  {
+    category: "Getting Started",
+    question: "What makes a clothing manufacturer one of the top choices for a new brand?",
+    answer: "The strongest signals are a low MOQ that matches your actual order size, direct factory ownership rather than a trading or sourcing agent, certifications you can verify independently (GOTS, OEKO-TEX, BSCI), a stated and consistently met lead time, and transparent FOB pricing with no hidden costs. Rather than relying on any single \"best manufacturer\" ranking, compare a shortlist against these five points for your specific product and volume."
+  },
+  {
+    category: "MOQ & Production",
+    question: "Is there a clothing manufacturer with no MOQ at all?",
+    answer: "Genuine factories producing finished garments almost always set some minimum, since cutting, fabric rolls, and machine setup carry fixed costs regardless of order size. \"No MOQ\" offers are usually print-on-demand blanks or dropshipping, not custom manufacturing. Our 300-piece minimum per style is on the low end for a full factory, letting startup brands test a design without the 500 to 1,000 piece minimums common elsewhere."
   }
 ];
 
@@ -164,7 +174,7 @@ const schemaFAQ = {
     "name": faq.question,
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": faq.answer
+      "text": faq.answer.replace(/<[^>]+>/g, '')
     }
   }))
 };
@@ -618,7 +628,7 @@ const combinedSchema = {
         </div>
         <div class="index__card">
           <h3 class="index__card-title">Sustainable Clothing Manufacturer: GOTS Certified & Ethical Production</h3>
-          <p class="index__card-text">As a certified sustainable clothing manufacturer, our GOTS certification covers the entire production chain, from raw cotton sourcing through spinning, dyeing, and final garment production. We are an ethical clothing manufacturer with BSCI, SEDEX, SA8000, and WRAP social compliance covering fair wages, safe conditions, and no forced or child labour. GRS certified recycled polyester and OEKO-TEX 100 tested materials are available across all product categories. See our <a href="/sustainability/" class="index__link" title="Sustainable clothing manufacturing practices">sustainability practices</a> and <a href="/gots-certified-clothing-manufacturer" class="index__link" title="GOTS certified clothing manufacturer Bangladesh">GOTS certification details</a>.</p>
+          <p class="index__card-text">As a certified sustainable clothing manufacturer, our <a href="https://global-standard.org" target="_blank" rel="noopener noreferrer" class="index__link" title="Global Organic Textile Standard official site">GOTS</a> certification covers the entire production chain, from raw cotton sourcing through spinning, dyeing, and final garment production. We are an ethical clothing manufacturer with BSCI, SEDEX, SA8000, and WRAP social compliance covering fair wages, safe conditions, and no forced or child labour. GRS certified recycled polyester and <a href="https://www.oeko-tex.com" target="_blank" rel="noopener noreferrer" class="index__link" title="OEKO-TEX official site">OEKO-TEX 100</a> tested materials are available across all product categories. See our <a href="/sustainability/" class="index__link" title="Sustainable clothing manufacturing practices">sustainability practices</a> and <a href="/gots-certified-clothing-manufacturer" class="index__link" title="GOTS certified clothing manufacturer Bangladesh">GOTS certification details</a>.</p>
         </div>
         <div class="index__card">
           <h3 class="index__card-title">Garment Samples Ready in 14 Days</h3>
@@ -723,6 +733,20 @@ const combinedSchema = {
         <h2 class="index__section-title">What Fashion Brands Say About Working With Our Factory</h2>
         <p class="index__section-subtitle">From first-time brand founders to established labels switching manufacturers, here is what our clients say.</p>
       </header>
+      <div class="index__grid index__grid--3" style="margin-bottom: 1.5rem;">
+        <div class="index__card" style="text-align:center;">
+          <p style="font-size:2rem;font-weight:600;color:#fff;margin-bottom:0.25rem;">12 days</p>
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.65);">Sample turnaround for a UK womenswear label switching from a China factory</p>
+        </div>
+        <div class="index__card" style="text-align:center;">
+          <p style="font-size:2rem;font-weight:600;color:#fff;margin-bottom:0.25rem;">38 days</p>
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.65);">First bulk hoodie run for a US streetwear startup at 300-piece MOQ</p>
+        </div>
+        <div class="index__card" style="text-align:center;">
+          <p style="font-size:2rem;font-weight:600;color:#fff;margin-bottom:0.25rem;">€18,000/yr</p>
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.65);">EU duty savings for a German activewear brand sourcing private label</p>
+        </div>
+      </div>
       <div class="index__grid index__grid--3">
         <div class="index__card">
           <p class="index__card-text" style="font-style:italic;margin-bottom:var(--space-sm);">"We switched from a China garment factory to SDF after our third delayed shipment. The 40-day lead time is consistent. Samples came back in 12 days. Their merchandising team actually flagged a tech pack error before we went to bulk — saved us weeks."</p>
@@ -1764,7 +1788,7 @@ const combinedSchema = {
                       <span class="index__faq-icon" aria-hidden="true">+</span>
                     </button>
                     <div class="index__faq-answer" data-answer={index} id={`faq-answer-${index}`}>
-                      <p>{answer}</p>
+                      <p set:html={answer} />
                     </div>
                   </div>
                 ))}
