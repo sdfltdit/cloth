@@ -43,7 +43,7 @@ const faqs = [
   {
     category: "Quality & Certifications",
     question: "What certifications do you hold?",
-    answer: "We hold 13 international certifications including GOTS, OEKO-TEX, ISO 9001, BSCI, SEDEX, GRS, OCS, RCS, C-TPAT, WRAP, SA8000, ISO 14001, and BCI."
+    answer: "We hold 13 international certifications including <a href=\"https://global-standard.org\" target=\"_blank\" rel=\"noopener noreferrer\">GOTS</a>, <a href=\"https://www.oeko-tex.com\" target=\"_blank\" rel=\"noopener noreferrer\">OEKO-TEX</a>, ISO 9001, <a href=\"https://www.amfori.org/en/solutions/social/amfori-bsci\" target=\"_blank\" rel=\"noopener noreferrer\">BSCI</a>, SEDEX, GRS, OCS, RCS, C-TPAT, WRAP, SA8000, ISO 14001, and BCI."
   },
   {
     category: "Shipping & Logistics",
@@ -79,6 +79,16 @@ const faqs = [
     category: "Getting Started",
     question: "Is a clothing manufacturer the same as a garments manufacturer, apparel manufacturer, or fashion manufacturer?",
     answer: "Yes, \"clothing manufacturer,\" \"garments manufacturer,\" \"apparel manufacturer,\" and \"fashion manufacturer\" describe the same type of business: a factory that produces finished apparel for brands and retailers. SDF Clothing operates as all four: a full-package clothing and garments manufacturer for everyday apparel, an apparel manufacturer for bulk and corporate orders, and a fashion manufacturer for brands with seasonal, design-led collections. The terminology varies by region and industry, but the in-house capability (fabric sourcing, cutting, sewing, finishing, quality control) is the same."
+  },
+  {
+    category: "Getting Started",
+    question: "What makes a clothing manufacturer one of the top choices for a new brand?",
+    answer: "The strongest signals are a low MOQ that matches your actual order size, direct factory ownership rather than a trading or sourcing agent, certifications you can verify independently (GOTS, OEKO-TEX, BSCI), a stated and consistently met lead time, and transparent FOB pricing with no hidden costs. Rather than relying on any single \"best manufacturer\" ranking, compare a shortlist against these five points for your specific product and volume."
+  },
+  {
+    category: "MOQ & Production",
+    question: "Is there a clothing manufacturer with no MOQ at all?",
+    answer: "Genuine factories producing finished garments almost always set some minimum, since cutting, fabric rolls, and machine setup carry fixed costs regardless of order size. \"No MOQ\" offers are usually print-on-demand blanks or dropshipping, not custom manufacturing. Our 300-piece minimum per style is on the low end for a full factory, letting startup brands test a design without the 500 to 1,000 piece minimums common elsewhere."
   }
 ];
 
@@ -164,7 +174,7 @@ const schemaFAQ = {
     "name": faq.question,
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": faq.answer
+      "text": faq.answer.replace(/<[^>]+>/g, '')
     }
   }))
 };
@@ -341,12 +351,25 @@ const schemaBangladeshArticle = {
   "description": "Bangladesh is the world's second-largest apparel exporter. Sourcing from a Bangladesh clothing manufacturer offers 30–40% cost savings over China and Vietnam, EU and UK duty-free access under GSP, and the highest concentration of GOTS certified garment factories globally."
 };
 
+const schemaBreadcrumb = {
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": SITE + "/"
+    }
+  ]
+};
+
 const combinedSchema = {
   "@context": "https://schema.org",
   "@graph": [
     schemaOrganization,
     schemaWebSite,
     schemaWebPage,
+    schemaBreadcrumb,
     schemaFAQ,
     schemaPerson,
     schemaHowTo,
@@ -572,17 +595,158 @@ const combinedSchema = {
     </div>
   </section>
 
-  <div class="index__container" style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); text-align:center;">
-    <p style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin:0;">SDF Clothing covers all four production models in-house, whether you call us <a href="/clothing-manufacturers/" style="color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.2);text-decoration:none;" title="Clothing Manufacturers Bangladesh">clothing manufacturers</a>, <a href="/garments-manufacturers/" style="color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.2);text-decoration:none;" title="Garments Manufacturers Bangladesh">garments manufacturers</a>, <a href="/apparel-manufacturers/" style="color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.2);text-decoration:none;" title="Apparel Manufacturers Bangladesh">apparel manufacturers</a>, or <a href="/fashion-manufacturers/" style="color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.2);text-decoration:none;" title="Fashion Manufacturers Bangladesh">fashion manufacturers</a>. We supply fashion brands, apparel producers, wholesale buyers, and garment sourcing teams across 60 countries, operating as a <a href="/garment-exporter/" style="color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.2);text-decoration:none;" title="Clothing exporter Bangladesh">clothing exporter since 1998</a> and a <a href="/bulk-clothing-manufacturer" style="color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.2);text-decoration:none;" title="Bulk clothing manufacturer Bangladesh">bulk clothing manufacturer</a>.</p>
-  </div>
+<section class="index__section" aria-label="Key findings — quick summary">
+    <div class="index__container">
+      <div class="index__card">
+        <h2 class="index__card-title" style="font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-red); margin-bottom: var(--space-sm);">Key Findings</h2>
+        <ul style="margin: 0; padding-left: 1.25rem; color: var(--color-text); line-height: 1.9; font-size: 0.92rem;">
+          <li>SDF Clothing is a direct garment factory in Dhaka, Bangladesh, operating since 1998, not an agent or trading company.</li>
+          <li>Minimum order is 300 pieces per style, well below the 1,000+ piece minimums most large factories require.</li>
+          <li>Holds 13 international certifications including GOTS, OEKO-TEX, BSCI, and ISO 9001.</li>
+          <li>Handles the full production chain in-house: fabric sourcing, cutting, sewing, finishing, and quality control, with no outsourcing.</li>
+          <li>Ships to 60+ countries, with EU and UK buyers getting duty-free access under GSP/DCTS on Bangladesh-origin garments.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  <section class="index__section" aria-label="Client testimonials — what fashion brands say about working with SDF Clothing">
+<section class="index__section" aria-label="What we offer — clothing manufacturing services">
+    <div class="index__container">
+      <header class="index__section-header">
+        <span class="index__section-label">Capabilities</span>
+        <h2 class="index__section-title">What We Offer as Full-Service Clothing Manufacturers</h2>
+        <p class="index__section-subtitle">Low minimums, hands-on support for first-time brands, certified sustainable production, and fast sampling. See our <a href="#manufacturing-models" class="index__link" title="Compare OEM, ODM, private label and CMT">OEM, ODM, private label, and CMT models compared below</a>.</p>
+      </header>
+      <div class="index__grid index__grid--2" style="margin-bottom: 1px;">
+        <div class="index__card">
+          <h3 class="index__card-title">Small Batch Clothing from 300 Pieces: No High Minimums</h3>
+          <p class="index__card-text">Most <a href="/clothing-manufacturers/" class="index__link" title="Clothing manufacturers Bangladesh">clothing manufacturers</a> require 500 to 1,000 pieces before they will touch a new style, a barrier that kills most startup launches. Our 300-piece small batch minimum lets fashion brands test a design across multiple colorways before committing to scale. There's no high minimum and no gatekeeping; the minimum applies per style with flexible size distribution.</p>
+        </div>
+        <div class="index__card">
+          <h3 class="index__card-title">Support for First-Time Brand Owners</h3>
+          <p class="index__card-text">Never worked with a <a href="/clothing-manufacturers-for-startups/" class="index__link" title="Clothing manufacturers for startup brands">garment manufacturer</a> before? Many of our clients started the same way. As an ethical clothing manufacturer, we are transparent about costs, lead times, and production limits from day one. Our merchandising team walks you through fabric specs, size grading, trim sourcing, compliance documents, and incoterms, so your first bulk order arrives exactly as intended.</p>
+        </div>
+        <div class="index__card">
+          <h3 class="index__card-title">Sustainable Clothing Manufacturer: GOTS Certified & Ethical Production</h3>
+          <p class="index__card-text">As a certified sustainable clothing manufacturer, our <a href="https://global-standard.org" target="_blank" rel="noopener noreferrer" class="index__link" title="Global Organic Textile Standard official site">GOTS</a> certification covers the entire production chain, from raw cotton sourcing through spinning, dyeing, and final garment production. We are an ethical clothing manufacturer with BSCI, SEDEX, SA8000, and WRAP social compliance covering fair wages, safe conditions, and no forced or child labour. GRS certified recycled polyester and <a href="https://www.oeko-tex.com" target="_blank" rel="noopener noreferrer" class="index__link" title="OEKO-TEX official site">OEKO-TEX 100</a> tested materials are available across all product categories. See our <a href="/sustainability/" class="index__link" title="Sustainable clothing manufacturing practices">sustainability practices</a> and <a href="/gots-certified-clothing-manufacturer" class="index__link" title="GOTS certified clothing manufacturer Bangladesh">GOTS certification details</a>.</p>
+        </div>
+        <div class="index__card">
+          <h3 class="index__card-title">Garment Samples Ready in 14 Days</h3>
+          <p class="index__card-text">Our sampling sequence runs from proto sample for initial fit review through pre-production sample for final approval before bulk cutting. Turnaround is 14 days from confirmed brief. We revise samples up to 10 times at no additional charge, and bulk production does not begin until you sign off. <a href="/sampling-service" class="index__link" title="Garment sampling service 14 days">Learn about our sampling service</a>.</p>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="index__section" id="manufacturing-models" aria-label="Types of clothing manufacturing — OEM, ODM, private label and CMT">
+    <div class="index__container">
+
+      <header class="index__section-header">
+        <span class="index__section-label">MANUFACTURING MODELS</span>
+        <h2 class="index__section-title">Types of Clothing Manufacturing We Offer</h2>
+        <p class="index__section-subtitle">Four B2B production models (OEM, ODM, Private Label, and CMT) each suited to a different stage of brand development. All handled in-house at our Dhaka and Narayanganj facilities. Compare models on our <a href="/clothing-manufacturers/" class="index__link" title="Full clothing manufacturers guide">full manufacturing guide</a>.</p>
+      </header>
+
+      <div style="overflow-x:auto;margin-bottom:2rem;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--color-red);">
+              <th style="text-align:left;padding:0.75rem 1rem;color:#fff;font-weight:500;">Model</th>
+              <th style="text-align:left;padding:0.75rem 1rem;color:#fff;font-weight:500;">Design</th>
+              <th style="text-align:left;padding:0.75rem 1rem;color:#fff;font-weight:500;">Fabric sourcing</th>
+              <th style="text-align:left;padding:0.75rem 1rem;color:#fff;font-weight:500;">MOQ</th>
+              <th style="text-align:left;padding:0.75rem 1rem;color:#fff;font-weight:500;">Labels &amp; packaging</th>
+              <th style="text-align:left;padding:0.75rem 1rem;color:#fff;font-weight:500;">Best for</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #222;">
+              <td style="padding:0.75rem 1rem;color:#fff;">OEM</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Yours (tech pack or sample)</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">We source it</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">300 pcs/style</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Included in FOB price</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Brands with confirmed designs ready for bulk production</td>
+            </tr>
+            <tr style="border-bottom:1px solid #222;">
+              <td style="padding:0.75rem 1rem;color:#fff;">ODM</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Ours, you customise</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">We source it</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">300 pcs/style</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Included in FOB price</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Brands needing market-ready designs without a design team</td>
+            </tr>
+            <tr style="border-bottom:1px solid #222;">
+              <td style="padding:0.75rem 1rem;color:#fff;">Private Label</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Either</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">We source it</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">300 pcs/style</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Included in FOB price</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Startup brands launching their first collection</td>
+            </tr>
+            <tr>
+              <td style="padding:0.75rem 1rem;color:#fff;">CMT</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Yours</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">You supply it</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">300 pcs/style</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Not included, cut-and-sew only</td>
+              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Brands with an existing fabric supplier who need a sewing partner</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.5rem;">CMT pricing runs lower than the other three models because you supply the fabric and carry that material risk yourself.</p>
+      </div>
+
+      <div class="index__grid index__grid--2" style="margin-bottom:1px;">
+        <div class="index__card">
+          <h3 class="index__card-title">OEM — Original Equipment Manufacturing</h3>
+          <p class="index__card-text">You provide the design, whether that's a full tech pack, a reference sample, or just a detailed brief, and we produce to your exact specification. Cutting, sewing, embellishment, quality inspection, and packaging happen inside our <a href="/garments-factory/" class="index__link" title="Garments factory Dhaka Bangladesh">apparel factory</a> in Dhaka. Your brand label goes on the finished garment; the factory floor stays ours, but the intellectual property and branding stay yours. It's the most common model for established fashion brands scaling production without building their own factory.</p>
+          <p style="margin-top:var(--space-sm);font-size:0.8rem;color:rgba(255,255,255,0.6);">Best for: Brands with confirmed designs ready for bulk production.</p>
+        </div>
+        <div class="index__card">
+          <h3 class="index__card-title">ODM — Original Design Manufacturing</h3>
+          <p class="index__card-text">We develop the base designs and you select from our seasonal collections, then customise fabric, colour, print, and trims to align with your brand identity. You get a unique product with your own label on it, without the design development cost. ODM suits buyers who want speed to market without keeping an in-house design team. A minimum of 300 pieces per style applies.</p>
+          <p style="margin-top:var(--space-sm);font-size:0.8rem;color:rgba(255,255,255,0.6);">Best for: Brands that need market-ready designs with custom branding.</p>
+        </div>
+      </div>
+      <div class="index__grid index__grid--2">
+        <div class="index__card">
+          <h3 class="index__card-title">Private Label Apparel Manufacturing</h3>
+          <p class="index__card-text">A complete factory-to-brand service where we handle everything from garment design and fabric sourcing to woven labels, hang tags, poly bag packaging, and final carton packing, all under your brand name. First-time brand founders get a finished product with professional retail presentation without coordinating multiple suppliers. Labels, packaging, and compliance documents included in the FOB price. See our <a href="/private-label-clothing-manufacturer" class="index__link" title="Private label clothing manufacturer Bangladesh">private label manufacturer</a> page for full details.</p>
+          <p style="margin-top:var(--space-sm);font-size:0.8rem;color:rgba(255,255,255,0.6);">Best for: Startup brands launching their first collection.</p>
+        </div>
+        <div class="index__card">
+          <h3 class="index__card-title">CMT — Cut, Make &amp; Trim</h3>
+          <p class="index__card-text">If you have already secured your fabric through your own supply chain, or you work with a specialist textile mill, our <a href="/cut-and-sew-service" class="index__link" title="CMT cut make trim garment service">CMT service</a> provides precision cut-and-sew production without the fabric supply component. You ship the fabric to our Narayanganj or Chittagong facility, our production team follows your tech pack, and finished garments are packed and shipped FOB. CMT rates are lower than full-package pricing because material risk stays with your supply chain.</p>
+          <p style="margin-top:var(--space-sm);font-size:0.8rem;color:rgba(255,255,255,0.6);">Best for: Brands with established fabric suppliers who need a reliable sewing partner.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="index__section" aria-label="Client testimonials — what fashion brands say about working with SDF Clothing">
     <div class="index__container">
       <header class="index__section-header">
         <span class="index__section-label">CLIENT VOICE</span>
         <h2 class="index__section-title">What Fashion Brands Say About Working With Our Factory</h2>
         <p class="index__section-subtitle">From first-time brand founders to established labels switching manufacturers, here is what our clients say.</p>
       </header>
+      <div class="index__grid index__grid--3" style="margin-bottom: 1.5rem;">
+        <div class="index__card" style="text-align:center;">
+          <p style="font-size:2rem;font-weight:600;color:#fff;margin-bottom:0.25rem;">12 days</p>
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.65);">Sample turnaround for a UK womenswear label switching from a China factory</p>
+        </div>
+        <div class="index__card" style="text-align:center;">
+          <p style="font-size:2rem;font-weight:600;color:#fff;margin-bottom:0.25rem;">38 days</p>
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.65);">First bulk hoodie run for a US streetwear startup at 300-piece MOQ</p>
+        </div>
+        <div class="index__card" style="text-align:center;">
+          <p style="font-size:2rem;font-weight:600;color:#fff;margin-bottom:0.25rem;">€18,000/yr</p>
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.65);">EU duty savings for a German activewear brand sourcing private label</p>
+        </div>
+      </div>
       <div class="index__grid index__grid--3">
         <div class="index__card">
           <p class="index__card-text" style="font-style:italic;margin-bottom:var(--space-sm);">"We switched from a China garment factory to SDF after our third delayed shipment. The 40-day lead time is consistent. Samples came back in 12 days. Their merchandising team actually flagged a tech pack error before we went to bulk — saved us weeks."</p>
@@ -601,133 +765,7 @@ const combinedSchema = {
     </div>
   </section>
 
-  <!-- ============================================================
-       BYLINE — FIX: color changed from rgba(255,255,255,0.45)
-       to rgba(255,255,255,0.75) for WCAG AA contrast compliance
-       ============================================================ -->
-  <div class="index__container" style="padding:0.6rem 0; border-bottom:1px solid rgba(255,255,255,0.07);">
-    <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;flex-wrap:wrap;font-size:0.72rem;color:rgba(255,255,255,0.75);">
-      <span>By <a href="/about/" style="color:rgba(255,255,255,0.85);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.3);"><strong style="font-weight:500;">Chowdhury Remon</strong></a></span>
-      <span style="opacity:0.3;">·</span>
-      <span>Founder &amp; CEO, SDF Clothing</span>
-      <span style="opacity:0.3;">·</span>
-      <span>Garment Manufacturing Expert Since 1998</span>
-      <span style="opacity:0.3;">·</span>
-      <time datetime={new Date().toISOString().split("T")[0]} style="color:rgba(255,255,255,0.75);">
-        Updated: {new Date().toLocaleDateString("en-US", { month:"long", year:"numeric" })}
-      </time>
-    </div>
-  </div>
-
-  <!-- ============================================================
-       TL;DR / KEY FINDINGS — added 2026-07 during AI-readiness audit.
-       AI agents preferentially cite pages with a near-top summary
-       section; homepage previously had none.
-       ============================================================ -->
-  <section class="index__section" aria-label="Key findings — quick summary">
-    <div class="index__container">
-      <div class="index__card">
-        <h2 class="index__card-title" style="font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-red); margin-bottom: var(--space-sm);">Key Findings</h2>
-        <ul style="margin: 0; padding-left: 1.25rem; color: var(--color-text); line-height: 1.9; font-size: 0.92rem;">
-          <li>SDF Clothing is a direct garment factory in Dhaka, Bangladesh, operating since 1998, not an agent or trading company.</li>
-          <li>Minimum order is 300 pieces per style, well below the 1,000+ piece minimums most large factories require.</li>
-          <li>Holds 13 international certifications including GOTS, OEKO-TEX, BSCI, and ISO 9001.</li>
-          <li>Handles the full production chain in-house: fabric sourcing, cutting, sewing, finishing, and quality control, with no outsourcing.</li>
-          <li>Ships to 60+ countries, with EU and UK buyers getting duty-free access under GSP/DCTS on Bangladesh-origin garments.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="index__section" aria-label="What we offer — clothing manufacturing services">
-    <div class="index__container">
-      <header class="index__section-header">
-        <span class="index__section-label">Capabilities</span>
-        <h2 class="index__section-title">What We Offer as Full-Service Clothing Manufacturers</h2>
-        <p class="index__section-subtitle">Low minimums, hands-on support for first-time brands, certified sustainable production, and fast sampling. See our <a href="#manufacturing-models" class="index__link" title="Compare OEM, ODM, private label and CMT">OEM, ODM, private label, and CMT models compared below</a>.</p>
-      </header>
-      <div class="index__grid index__grid--2" style="margin-bottom: 1px;">
-        <div class="index__card">
-          <h3 class="index__card-title">Small Batch Clothing from 300 Pieces: No High Minimums</h3>
-          <p class="index__card-text">Most <a href="/clothing-manufacturers/" class="index__link" title="Clothing manufacturers Bangladesh">clothing manufacturers</a> require 500 to 1,000 pieces before they will touch a new style, a barrier that kills most startup launches. Our 300-piece small batch minimum lets fashion brands test a design across multiple colorways before committing to scale. There's no high minimum and no gatekeeping; the minimum applies per style with flexible size distribution.</p>
-        </div>
-        <div class="index__card">
-          <h3 class="index__card-title">Support for First-Time Brand Owners</h3>
-          <p class="index__card-text">Never worked with a <a href="/clothing-manufacturers-for-startups/" class="index__link" title="Clothing manufacturers for startup brands">garment manufacturer</a> before? Many of our clients started the same way. As an ethical clothing manufacturer, we are transparent about costs, lead times, and production limits from day one. Our merchandising team walks you through fabric specs, size grading, trim sourcing, compliance documents, and incoterms, so your first bulk order arrives exactly as intended.</p>
-        </div>
-        <div class="index__card">
-          <h3 class="index__card-title">Sustainable Clothing Manufacturer: GOTS Certified & Ethical Production</h3>
-          <p class="index__card-text">As a certified sustainable clothing manufacturer, our GOTS certification covers the entire production chain, from raw cotton sourcing through spinning, dyeing, and final garment production. We are an ethical clothing manufacturer with BSCI, SEDEX, SA8000, and WRAP social compliance covering fair wages, safe conditions, and no forced or child labour. GRS certified recycled polyester and OEKO-TEX 100 tested materials are available across all product categories. See our <a href="/sustainability/" class="index__link" title="Sustainable clothing manufacturing practices">sustainability practices</a> and <a href="/gots-certified-clothing-manufacturer" class="index__link" title="GOTS certified clothing manufacturer Bangladesh">GOTS certification details</a>.</p>
-        </div>
-        <div class="index__card">
-          <h3 class="index__card-title">Garment Samples Ready in 14 Days</h3>
-          <p class="index__card-text">Our sampling sequence runs from proto sample for initial fit review through pre-production sample for final approval before bulk cutting. Turnaround is 14 days from confirmed brief. We revise samples up to 10 times at no additional charge, and bulk production does not begin until you sign off. <a href="/sampling-service" class="index__link" title="Garment sampling service 14 days">Learn about our sampling service</a>.</p>
-        </div>
-      </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="index__cta-inline">
-    <div class="index__container">
-      <h3 class="index__cta-inline-title">Not sure which low MOQ manufacturing service fits your brand?</h3>
-      <p class="index__cta-inline-text">Answer 3 quick questions and we will tell you if you need OEM private label or CMT services.</p>
-      
-      <div id="service-matcher" style="margin-top: var(--space-lg); background: var(--color-bg); border: 1px solid var(--color-red); padding: 1.5rem;">
-        <p style="font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-red); margin-bottom: var(--space-md);">FIND YOUR MANUFACTURER MATCH</p>
-        
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-sm); align-items: end;">
-          <div>
-            <label for="q1-select" class="sr-only">Your designs</label>
-            <select id="q1-select" class="service-matcher__select" aria-label="Your designs">
-              <option value="">Your designs?</option>
-              <option value="tech-packs">Full tech packs ready</option>
-              <option value="sketches">Rough sketches or ideas</option>
-              <option value="design-help">Need design help</option>
-              <option value="fabric-ready">Have my own fabric</option>
-            </select>
-          </div>
-          <div>
-            <label for="q2-select" class="sr-only">Order size</label>
-            <select id="q2-select" class="service-matcher__select" aria-label="Order size">
-              <option value="">Order size?</option>
-              <option value="under-300">Under 300 pieces</option>
-              <option value="300-1000">300 to 1,000 pieces</option>
-              <option value="1000-10000">1,000 to 10,000 pieces</option>
-              <option value="over-10000">10,000+ pieces</option>
-            </select>
-          </div>
-          <div>
-            <label for="q3-select" class="sr-only">Brand stage</label>
-            <select id="q3-select" class="service-matcher__select" aria-label="Brand stage">
-              <option value="">Brand stage?</option>
-              <option value="starting">First order ever</option>
-              <option value="scaling">Ready to scale</option>
-              <option value="established">Switching supplier</option>
-              <option value="large">High volume brand</option>
-            </select>
-          </div>
-          <div>
-            <button type="button" id="match-me-btn" class="service-matcher__btn">Match Me</button>
-          </div>
-        </div>
-
-        <div id="service-result" style="margin-top: var(--space-md); display: none;">
-          <p style="font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-red); margin-bottom: var(--space-xs);">Recommended</p>
-          <h3 id="result-service" aria-label="Recommended manufacturing service result" style="color: var(--color-text); font-size: 1.2rem; font-weight: 500; margin-bottom: var(--space-xs);">Your recommended service</h3>
-          <p id="result-description" style="color: var(--color-text); font-size: 0.9rem; line-height: 1.5; margin-bottom: var(--space-sm);"></p>
-          <div style="display: flex; gap: var(--space-md);">
-            <a href="/contact/" style="color: var(--color-text); text-decoration: none; font-size: 0.9rem;" title="Request a free quote from our garment manufacturers">Get quote →</a>
-            <a href="https://wa.me/8801819172080" target="_blank" rel="noopener noreferrer" style="color: var(--color-text); text-decoration: none; font-size: 0.9rem;" title="Contact us on WhatsApp for instant response">WhatsApp →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-  <section class="index__section" id="why-our-clothing-factory" aria-label="Why fashion brands choose SDF — cost savings and calculators">
+<section class="index__section" id="why-our-clothing-factory" aria-label="Why fashion brands choose SDF — cost savings and calculators">
     <div class="index__container">
       <header class="index__section-header">
         <span class="index__section-label">WHY OUR CLOTHING FACTORY</span>
@@ -848,7 +886,7 @@ const combinedSchema = {
     </div>
   </section>
 
-  <section class="timeline-section" aria-label="How our clothing manufacturing process works — 8 step order guide">
+<section class="timeline-section" aria-label="How our clothing manufacturing process works — 8 step order guide">
     <div class="index__container">
       <header class="timeline-header">
         <span class="timeline-label">HOW YOUR ORDER WORKS</span>
@@ -977,11 +1015,11 @@ const combinedSchema = {
     </div>
   </section>
 
-  <section class="capabilities-section" aria-label="Clothing factory capabilities — fabrics, print, embroidery, trims, finishing and accessories">
+<section class="capabilities-section" aria-label="Clothing factory capabilities — fabrics, print, embroidery, trims, finishing and accessories">
     <div class="index__container">
       <header class="index__section-header">
         <span class="index__section-label">WHAT WE MAKE</span>
-        <h2 class="index__section-title">Clothing Factory Capabilities: Fabrics, Print & Embroidery</h2>
+        <h2 class="index__section-title">Clothing & Garments Factory Capabilities: Fabrics, Print & Embroidery</h2>
         <p class="index__section-subtitle">Every fabric, print, embroidery, trim, and finish your brand needs  all produced in our facility.</p>
       </header>
 
@@ -1405,12 +1443,7 @@ const combinedSchema = {
     </div>
   </section>
 
-  <!-- MANUFACTURING SERVICES HUB — internal links to keyword pages.
-       Moved up from just above </BaseLayout> (previously sat outside the
-       .index container, right after the sticky bar / script tag) to right
-       after Capabilities, so the four keyword-cluster pages get a stronger,
-       earlier internal-linking signal instead of being buried near the footer. -->
-  <section class="index__section" style="padding:4rem 0;border-top:1px solid #111;">
+<section class="index__section" style="padding:4rem 0;border-top:1px solid #111;">
     <div class="index__container">
       <p style="font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:#e00;margin-bottom:1.25rem;">Manufacturing Services</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:#1a1a1a;">
@@ -1438,14 +1471,7 @@ const combinedSchema = {
     </div>
   </section>
 
-  <!-- ====================================================
-       NEW SECTION: Product & Country Directory (AI/crawl-discovery link hub)
-       Homepage previously had few links to product-category or
-       country pages — added 2026-07 during AI-readiness audit.
-       Uses the site's index__card/index__grid system for visual
-       consistency with the rest of the homepage.
-       ==================================================== -->
-  <section class="index__section" aria-label="Browse clothing manufacturing by product category and country">
+<section class="index__section" aria-label="Browse clothing manufacturing by product category and country">
     <div class="index__container">
       <header class="index__section-header">
         <span class="index__section-label">BROWSE</span>
@@ -1455,179 +1481,87 @@ const combinedSchema = {
 
       <h3 style="font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-red); margin-bottom: var(--space-sm);">By Product</h3>
       <div class="index__grid index__grid--4" style="margin-bottom: var(--space-lg);">
-        <a href="/t-shirt-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/t-shirt-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="T-shirt manufacturer for custom and private label tees">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">T-Shirt</span>
         </a>
-        <a href="/hoodie-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/hoodie-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Hoodie manufacturer for custom fleece and French terry">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Hoodie</span>
         </a>
-        <a href="/polo-shirt-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/polo-shirt-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Polo shirt manufacturer for custom branded polos">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Polo Shirt</span>
         </a>
-        <a href="/sweatshirt-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/sweatshirt-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Sweatshirt manufacturer for custom fleece garments">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Sweatshirt</span>
         </a>
-        <a href="/shirt-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/shirt-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Shirt manufacturer for woven and dress shirts">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Shirt</span>
         </a>
-        <a href="/denim-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/denim-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Denim manufacturer for custom jeans and jackets">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Denim</span>
         </a>
-        <a href="/dress-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/dress-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Dress manufacturer for fashion and occasion wear">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Dress</span>
         </a>
-        <a href="/activewear-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/activewear-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Activewear manufacturer for performance sportswear">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Activewear</span>
         </a>
-        <a href="/streetwear-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/streetwear-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Streetwear manufacturer for custom streetwear brands">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Streetwear</span>
         </a>
-        <a href="/workwear-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/workwear-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Workwear manufacturer for durable corporate uniforms">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Workwear</span>
         </a>
-        <a href="/kids-clothing-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/kids-clothing-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Kids clothing manufacturer for safety-tested childrenswear">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Kids Clothing</span>
         </a>
-        <a href="/sustainable-clothing-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/sustainable-clothing-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Sustainable clothing manufacturer with GOTS certification">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Sustainable</span>
         </a>
-        <a href="/private-label-clothing-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/private-label-clothing-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Private label clothing manufacturer for your own brand">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Private Label</span>
         </a>
-        <a href="/oem-clothing-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/oem-clothing-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="OEM clothing manufacturer for original designs">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">OEM</span>
         </a>
-        <a href="/custom-clothing-manufacturer" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/custom-clothing-manufacturer" class="index__card" style="text-decoration: none; display: block;" title="Custom clothing manufacturer for bespoke apparel">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Custom Clothing</span>
         </a>
-        <a href="/products" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/products" class="index__card" style="text-decoration: none; display: block;" title="Browse all product categories we manufacture">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">All Products →</span>
         </a>
       </div>
 
       <h3 style="font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-red); margin-bottom: var(--space-sm);">By Country</h3>
       <div class="index__grid index__grid--4">
-        <a href="/clothing-manufacturer-usa" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/clothing-manufacturer-usa" class="index__card" style="text-decoration: none; display: block;" title="Clothing manufacturer for USA fashion brands">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">USA</span>
         </a>
-        <a href="/clothing-manufacturer-uk" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/clothing-manufacturer-uk" class="index__card" style="text-decoration: none; display: block;" title="Clothing manufacturer for UK fashion brands">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">UK</span>
         </a>
-        <a href="/clothing-manufacturer-canada" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/clothing-manufacturer-canada" class="index__card" style="text-decoration: none; display: block;" title="Clothing manufacturer for Canadian fashion brands">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Canada</span>
         </a>
-        <a href="/clothing-manufacturer-australia" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/clothing-manufacturer-australia" class="index__card" style="text-decoration: none; display: block;" title="Clothing manufacturer for Australian fashion brands">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Australia</span>
         </a>
-        <a href="/clothing-manufacturer-europe" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/clothing-manufacturer-europe" class="index__card" style="text-decoration: none; display: block;" title="Clothing manufacturer for European fashion brands">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Europe</span>
         </a>
-        <a href="/clothing-manufacturer-germany" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/clothing-manufacturer-germany" class="index__card" style="text-decoration: none; display: block;" title="Garment manufacturer for German fashion brands">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">Germany</span>
         </a>
-        <a href="/clothing-manufacturer-france" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/clothing-manufacturer-france" class="index__card" style="text-decoration: none; display: block;" title="Apparel manufacturer for French fashion brands">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">France</span>
         </a>
-        <a href="/clothing-manufacturers" class="index__card" style="text-decoration: none; display: block;">
+        <a href="/clothing-manufacturers" class="index__card" style="text-decoration: none; display: block;" title="View clothing manufacturing services by country">
           <span class="index__card-title" style="font-size: 1rem; margin-bottom: 0;">All Countries →</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ====================================================
-       NEW SECTION: Manufacturing Types (B2B Signal + JSON-LD)
-       ==================================================== -->
-  <section class="index__section" id="manufacturing-models" aria-label="Types of clothing manufacturing — OEM, ODM, private label and CMT">
-    <div class="index__container">
-
-      <header class="index__section-header">
-        <span class="index__section-label">MANUFACTURING MODELS</span>
-        <h2 class="index__section-title">Types of Clothing Manufacturing We Offer</h2>
-        <p class="index__section-subtitle">Four B2B production models (OEM, ODM, Private Label, and CMT) each suited to a different stage of brand development. All handled in-house at our Dhaka and Narayanganj facilities. Compare models on our <a href="/clothing-manufacturers/" class="index__link" title="Full clothing manufacturers guide">full manufacturing guide</a>.</p>
-      </header>
-
-      <div style="overflow-x:auto;margin-bottom:2rem;">
-        <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--color-red);">
-              <th style="text-align:left;padding:0.75rem 1rem;color:#fff;font-weight:500;">Model</th>
-              <th style="text-align:left;padding:0.75rem 1rem;color:#fff;font-weight:500;">Design</th>
-              <th style="text-align:left;padding:0.75rem 1rem;color:#fff;font-weight:500;">Fabric sourcing</th>
-              <th style="text-align:left;padding:0.75rem 1rem;color:#fff;font-weight:500;">MOQ</th>
-              <th style="text-align:left;padding:0.75rem 1rem;color:#fff;font-weight:500;">Labels &amp; packaging</th>
-              <th style="text-align:left;padding:0.75rem 1rem;color:#fff;font-weight:500;">Best for</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid #222;">
-              <td style="padding:0.75rem 1rem;color:#fff;">OEM</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Yours (tech pack or sample)</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">We source it</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">300 pcs/style</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Included in FOB price</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Brands with confirmed designs ready for bulk production</td>
-            </tr>
-            <tr style="border-bottom:1px solid #222;">
-              <td style="padding:0.75rem 1rem;color:#fff;">ODM</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Ours, you customise</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">We source it</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">300 pcs/style</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Included in FOB price</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Brands needing market-ready designs without a design team</td>
-            </tr>
-            <tr style="border-bottom:1px solid #222;">
-              <td style="padding:0.75rem 1rem;color:#fff;">Private Label</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Either</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">We source it</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">300 pcs/style</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Included in FOB price</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Startup brands launching their first collection</td>
-            </tr>
-            <tr>
-              <td style="padding:0.75rem 1rem;color:#fff;">CMT</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Yours</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">You supply it</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">300 pcs/style</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Not included, cut-and-sew only</td>
-              <td style="padding:0.75rem 1rem;color:rgba(255,255,255,0.75);">Brands with an existing fabric supplier who need a sewing partner</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.5rem;">CMT pricing runs lower than the other three models because you supply the fabric and carry that material risk yourself.</p>
-      </div>
-
-      <div class="index__grid index__grid--2" style="margin-bottom:1px;">
-        <div class="index__card">
-          <h3 class="index__card-title">OEM — Original Equipment Manufacturing</h3>
-          <p class="index__card-text">You provide the design, whether that's a full tech pack, a reference sample, or just a detailed brief, and we produce to your exact specification. Cutting, sewing, embellishment, quality inspection, and packaging happen inside our <a href="/garments-factory/" class="index__link" title="Garments factory Dhaka Bangladesh">apparel factory</a> in Dhaka. Your brand label goes on the finished garment; the factory floor stays ours, but the intellectual property and branding stay yours. It's the most common model for established fashion brands scaling production without building their own factory.</p>
-          <p style="margin-top:var(--space-sm);font-size:0.8rem;color:rgba(255,255,255,0.6);">Best for: Brands with confirmed designs ready for bulk production.</p>
-        </div>
-        <div class="index__card">
-          <h3 class="index__card-title">ODM — Original Design Manufacturing</h3>
-          <p class="index__card-text">We develop the base designs and you select from our seasonal collections, then customise fabric, colour, print, and trims to align with your brand identity. You get a unique product with your own label on it, without the design development cost. ODM suits buyers who want speed to market without keeping an in-house design team. A minimum of 300 pieces per style applies.</p>
-          <p style="margin-top:var(--space-sm);font-size:0.8rem;color:rgba(255,255,255,0.6);">Best for: Brands that need market-ready designs with custom branding.</p>
-        </div>
-      </div>
-      <div class="index__grid index__grid--2">
-        <div class="index__card">
-          <h3 class="index__card-title">Private Label Apparel Manufacturing</h3>
-          <p class="index__card-text">A complete factory-to-brand service where we handle everything from garment design and fabric sourcing to woven labels, hang tags, poly bag packaging, and final carton packing, all under your brand name. First-time brand founders get a finished product with professional retail presentation without coordinating multiple suppliers. Labels, packaging, and compliance documents included in the FOB price. See our <a href="/private-label-clothing-manufacturer" class="index__link" title="Private label clothing manufacturer Bangladesh">private label manufacturer</a> page for full details.</p>
-          <p style="margin-top:var(--space-sm);font-size:0.8rem;color:rgba(255,255,255,0.6);">Best for: Startup brands launching their first collection.</p>
-        </div>
-        <div class="index__card">
-          <h3 class="index__card-title">CMT — Cut, Make &amp; Trim</h3>
-          <p class="index__card-text">If you have already secured your fabric through your own supply chain, or you work with a specialist textile mill, our <a href="/cut-and-sew-service" class="index__link" title="CMT cut make trim garment service">CMT service</a> provides precision cut-and-sew production without the fabric supply component. You ship the fabric to our Narayanganj or Chittagong facility, our production team follows your tech pack, and finished garments are packed and shipped FOB. CMT rates are lower than full-package pricing because material risk stays with your supply chain.</p>
-          <p style="margin-top:var(--space-sm);font-size:0.8rem;color:rgba(255,255,255,0.6);">Best for: Brands with established fabric suppliers who need a reliable sewing partner.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================
-       NEW SECTION: Who We Work With / Who We Don't
-       ==================================================== -->
-  <section class="index__section" aria-label="Who we manufacture for — B2B clothing brands and wholesale buyers">
+<section class="index__section" aria-label="Who we manufacture for — B2B clothing brands and wholesale buyers">
     <div class="index__container">
 
       <header class="index__section-header">
@@ -1660,6 +1594,14 @@ const combinedSchema = {
               <strong style="font-size:0.9rem;display:block;margin-bottom:0.25rem;">Buying Houses and Sourcing Agents</strong>
               <span style="font-size:0.85rem;color:rgba(255,255,255,0.7);">Professional sourcing intermediaries procuring on behalf of retail clients who require fully documented, certification-compliant production.</span>
             </div>
+            <div style="border-left:2px solid var(--color-red);padding-left:var(--space-sm);">
+              <strong style="font-size:0.9rem;display:block;margin-bottom:0.25rem;">Sports and Activewear Brands</strong>
+              <span style="font-size:0.85rem;color:rgba(255,255,255,0.7);">Gym wear, performance activewear, and athleisure labels needing moisture-wicking fabrics and stretch construction. See our <a href="/activewear-manufacturer" class="index__link" title="Activewear manufacturer for gym and performance wear">activewear manufacturing capabilities</a>.</span>
+            </div>
+            <div style="border-left:2px solid var(--color-red);padding-left:var(--space-sm);">
+              <strong style="font-size:0.9rem;display:block;margin-bottom:0.25rem;">Corporate and Promotional Merchandise Buyers</strong>
+              <span style="font-size:0.85rem;color:rgba(255,255,255,0.7);">Branded caps, bags, and apparel for corporate gifting, event merchandise, and company uniform programs, produced alongside our main garment lines.</span>
+            </div>
           </div>
         </div>
 
@@ -1691,10 +1633,7 @@ const combinedSchema = {
     </div>
   </section>
 
-  <!-- ====================================================
-       NEW SECTION: Bangladesh Manufacturing Advantage
-       ==================================================== -->
-  <section class="index__section" aria-label="Why Bangladesh clothing manufacturers — cost, duty and certification advantages">
+<section class="index__section" aria-label="Why Bangladesh clothing manufacturers — cost, duty and certification advantages">
     <div class="index__container">
 
       <header class="index__section-header">
@@ -1734,7 +1673,7 @@ const combinedSchema = {
     </div>
   </section>
 
-  <section class="index__section" aria-label="Clothing manufacturers frequently asked questions">
+<section class="index__section" aria-label="Clothing manufacturers frequently asked questions">
     <div class="index__container">
       <header class="index__section-header">
         <span class="index__section-label">FAQ</span>
@@ -1857,7 +1796,7 @@ const combinedSchema = {
                       <span class="index__faq-icon" aria-hidden="true">+</span>
                     </button>
                     <div class="index__faq-answer" data-answer={index} id={`faq-answer-${index}`}>
-                      <p>{answer}</p>
+                      <p set:html={answer} />
                     </div>
                   </div>
                 ))}
@@ -1867,7 +1806,7 @@ const combinedSchema = {
       </div><!-- end container -->
     </section><!-- end FAQ section -->
 
-    <section class="index__section" aria-label="Free manufacturing calculators and guides for fashion brands">
+<section class="index__section" aria-label="Free manufacturing calculators and guides for fashion brands">
       <div class="index__container">
         <header class="index__section-header">
           <span class="index__section-label">Free Tools & Resources</span>
@@ -1932,10 +1871,12 @@ const combinedSchema = {
     </div>
   </section>
 
+
+
   <div class="index__container" style="padding: 1rem 0; border-top: 1px solid rgba(255,255,255,0.07);">
     <p style="font-size:0.7rem; color:rgba(255,255,255,0.6); text-align:center; margin:0 0 0.5rem;">
       Content verified by 
-      <a href="/about/" style="color:rgba(255,255,255,0.5); text-decoration:none; border-bottom: 1px solid rgba(255,255,255,0.2);">
+      <a href="/about/" style="color:rgba(255,255,255,0.5); text-decoration:none; border-bottom: 1px solid rgba(255,255,255,0.2);" title="About SDF Clothing">
         Chowdhury Remon
       </a>, 
       Founder &amp; CEO, SDF Clothing, 
