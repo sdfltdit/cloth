@@ -1,6 +1,6 @@
 /**
  * SDF Clothing — Contact Form Handler
- * Web3Forms only (no backup service)
+ * Submits to Cloudflare Worker /api/contact (Resend-powered)
  * Overlay: viewport-unit cascade (vh→svh→dvh), safe-area aware,
  * sticky header/footer with scrollable body — tested for short
  * viewports, notch devices, and small phones (iPhone SE / 320px).
@@ -9,7 +9,6 @@
 (function () {
   'use strict';
 
-  const WEB3_KEY  = '028983eb-bca7-4bbc-be4f-7db2873903aa';
   const WA_NUMBER = '8801819172080';
 
   /* 1. Reference ID */
@@ -154,8 +153,8 @@
    *  - Safe-area insets are respected for notch / home-indicator
    *    devices via env(safe-area-inset-*).
    */
-  function showThankYou(geo, device, fillSeconds) {
-    const refId   = generateRefId();
+  function showThankYou(geo, device, fillSeconds, referenceId) {
+    const refId   = referenceId || generateRefId();
     const waText  = encodeURIComponent('Hi, my reference ID is ' + refId);
     const waUrl   = 'https://wa.me/' + WA_NUMBER + '?text=' + waText;
     const browser = getBrowserInfo();
@@ -403,14 +402,16 @@
     if (qrEl) drawQR(qrEl, waUrl);
   }
 
-  /* 8. Web3Forms submit */
-  async function submitWeb3(data) {
-    const body = new FormData();
-    body.append('access_key', WEB3_KEY);
-    Object.entries(data).forEach(function ([k, v]) { body.append(k, v); });
-    const res  = await fetch('https://api.web3forms.com/submit', { method:'POST', body });
+  /* 8. Contact API submit */
+  async function submitContact(data) {
+    const res  = await fetch('https://sdfltd.com/api/contact', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(data),
+    });
+    if (!res.ok) return { success: false, referenceId: null };
     const json = await res.json();
-    return json.success === true;
+    return { success: json.ok === true, referenceId: json.referenceId || null };
   }
 
   /* 9. Main submit handler */
@@ -431,8 +432,14 @@
     const [geo, device] = await Promise.all([getGeoInfo(), Promise.resolve(getDeviceInfo())]);
     const fillSeconds   = (Date.now() - pageLoad) / 1000;
 
-    data['_reference_id'] = generateRefId();
-    data['subject']       = 'Inquiry [' + data['_reference_id'] + '] \u2014 SDF Clothing';
+    // Basic client-side bot check: reject submissions filled in under 3 seconds.
+    // The server also silently rejects anything with the honeypot (_honey) field filled.
+    if (fillSeconds < 3) {
+      submit.disabled    = false;
+      submit.textContent = orig;
+      return;
+    }
+
     data['_device']       = device;
     data['_browser']      = getBrowserInfo();
     data['_screen']       = window.screen.width + 'x' + window.screen.height;
@@ -447,15 +454,15 @@
     data['_referrer']     = document.referrer || window.location.hostname + '/';
     data['_fill_time']    = fillSeconds.toFixed(1) + 's';
 
-    let success = false;
-    try { success = await submitWeb3(data); } catch { /* skip */ }
+    let result = { success: false, referenceId: null };
+    try { result = await submitContact(data); } catch { /* skip */ }
 
     submit.disabled    = false;
     submit.textContent = orig;
 
-    if (success) {
+    if (result.success) {
       form.reset();
-      showThankYou(geo, device, fillSeconds);
+      showThankYou(geo, device, fillSeconds, result.referenceId);
     } else {
       alert('Something went wrong. Please try our WhatsApp contact button, or email us directly at contact@sdfltd.com');
     }
