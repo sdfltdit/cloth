@@ -101,6 +101,22 @@ const durability = {
   ],
 };
 
+const equipment = [
+  { name: "Exposure unit", role: "Burns the film-positive image into light-sensitive emulsion on the mesh screen, hardening everything except the design area." },
+  { name: "Washout booth", role: "Rinses unexposed emulsion out of the screen with water, opening the stencil in the shape of the design." },
+  { name: "Manual or automatic press", role: "[VERIFY] Manual presses suit lower volume or sample runs and depend on operator consistency; automatic (rotary) presses mechanize rotation and squeegee stroke for high-volume, repeatable output." },
+  { name: "Squeegee", role: "Rubber blade pulled across the screen to force ink through the open mesh onto the garment; blade hardness and edge profile affect ink deposit thickness." },
+  { name: "Flash dryer", role: "Partially gels one ink layer just enough to print another color on top of it wet-on-wet, without fully curing it." },
+  { name: "Conveyor dryer (curing oven)", role: "Final cure — passes printed garments through controlled heat on a belt so the ink cross-links all the way through, not just at the surface." },
+];
+
+const designLimits = [
+  { factor: "Color count", note: "Each solid color needs its own screen. Most shops treat 1–6 colors as the practical, cost-sensible range; beyond that, per-color setup cost stacks up fast." },
+  { factor: "Gradients / photo-realism", note: "Screen printing separates artwork into flat color layers. True continuous-tone gradients aren't a natural fit — simulated process printing can approximate them with careful color separation, but it adds cost and skill, and still isn't the same as DTG or sublimation's native gradient handling." },
+  { factor: "Fine detail / small text", note: "[VERIFY] Detail resolution is capped by mesh count — finer mesh holds smaller detail but deposits less ink. Very fine line art or tiny text is closer to the edge of what screen printing reproduces cleanly, and risk of ink bleed increases at small sizes." },
+  { factor: "Multi-color registration", note: "More colors means more chances for one screen to land slightly off from another. A design with tight, adjacent color boundaries is harder to keep in perfect registration than one with color fields spaced apart." },
+];
+
 const useCases = [
   { garment: "T-shirts, high volume", why: "Classic fit — simple spot-color logos at 300+ pieces are close to the cheapest per-piece printing option available." },
   { garment: "Hoodies and fleece", why: "Heavier fabric handles thick ink deposits well, including puff or high-build prints." },
@@ -158,6 +174,17 @@ const pageSchema = {
       },
     },
     {
+      "@type": "Article",
+      "@id": Astro.url.href + "#article",
+      "headline": pageTitle,
+      "description": pageDescription,
+      "author": { "@id": "https://sdfltd.com/#founder" },
+      "publisher": { "@id": "https://sdfltd.com/#org" },
+      "dateModified": lastUpdatedISO,
+      "mainEntityOfPage": { "@id": Astro.url.href },
+      "inLanguage": "en",
+    },
+    {
       "@type": "HowTo",
       "name": "How Screen Printing Works on Garments",
       "step": processSteps.map((s) => ({
@@ -196,7 +223,13 @@ const pageSchema = {
       <p class="hero__description">
         Screen printing pushes ink through a stenciled mesh screen, one solid color at a time, directly onto fabric. It's the oldest industrial garment printing method still in wide commercial use, and at real production volume with a simple design, it's still often the cheapest and most wash-durable option available.
       </p>
-      <p class="hero__updated">Last updated {lastUpdated}</p>
+      <div class="byline">
+        <div class="byline__dot" aria-hidden="true">CR</div>
+        <div>
+          <div class="byline__name">Chowdhury Remon — Founder &amp; CEO, SDF Clothing</div>
+          <div class="byline__sub">27+ years in Bangladesh apparel manufacturing · Reviewed for technical accuracy · Last updated {lastUpdated}</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -246,6 +279,24 @@ const pageSchema = {
   <section class="section section--alt">
     <div class="section__container">
       <div class="section__header">
+        <span class="section__label">Equipment</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Machines & Equipment Used</h2>
+      </div>
+      <div class="detail-grid detail-grid--3">
+        {equipment.map((e) => (
+          <div class="detail-card">
+            <h3 class="detail-card__title">{e.name}</h3>
+            <p class="detail-card__text">{e.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
         <span class="section__label">Fabric Fit</span>
         <div class="accent-line"></div>
         <h2 class="section__title">Which Fabrics Screen Printing Works Best On</h2>
@@ -265,6 +316,25 @@ const pageSchema = {
             ))}
           </tbody>
         </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Design Complexity</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Design Complexity Limits</h2>
+        <p class="section__text">What screen printing can and can't reproduce cleanly, and why.</p>
+      </div>
+      <div class="detail-grid detail-grid--2">
+        {designLimits.map((d) => (
+          <div class="detail-card">
+            <h3 class="detail-card__title">{d.factor}</h3>
+            <p class="detail-card__text">{d.note}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -387,6 +457,7 @@ const pageSchema = {
         <a href="/#contact" class="section__cta section__cta--primary">Get a Free Printing Consultation</a>
         <a href="/printing/" class="section__cta section__cta--secondary">See All Printing Methods →</a>
       </div>
+      <p class="editorial-link"><a href="/editorial-policy/">Editorial Policy</a> · How we fact-check and review technical content</p>
     </div>
   </section>
 </BaseLayout>
@@ -426,7 +497,11 @@ const pageSchema = {
   }
   .hero__title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; color: var(--color-text); margin-bottom: var(--spacing-md); line-height: 1.2; }
   .hero__description { font-size: clamp(1rem, 1.5vw, 1.125rem); color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--spacing-sm); }
-  .hero__updated { font-size: 0.8rem; color: #777; letter-spacing: 0.04em; }
+  .byline { display: flex; gap: 0.9rem; align-items: center; margin-top: var(--spacing-md); background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 4px; padding: 0.85rem 1.2rem; }
+  .byline__dot { width: 2.1rem; height: 2.1rem; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .byline__name { font-size: 0.85rem; font-weight: 600; color: var(--color-text); }
+  .byline__sub { font-size: 0.75rem; color: #888; margin-top: 0.15rem; line-height: 1.4; }
+  @media (max-width: 500px) { .byline { flex-direction: column; text-align: center; } }
 
   .quick-answer {
     background: var(--color-bg-alt); border-left: 3px solid var(--color-primary);
@@ -455,6 +530,7 @@ const pageSchema = {
   .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-sm); margin: var(--spacing-md) 0; }
   .detail-grid--4 { grid-template-columns: repeat(4, 1fr); }
   .detail-grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .detail-grid--2 { grid-template-columns: repeat(2, 1fr); }
   .detail-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; padding: var(--spacing-sm); }
   .detail-card__title {
     font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-primary);
@@ -511,9 +587,12 @@ const pageSchema = {
   .section__cta--primary:hover { background: var(--color-primary-dark); }
   .section__cta--secondary { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
   .section__cta--secondary:hover { border-color: var(--color-primary); }
+  .editorial-link { font-size: 0.8rem; color: #777; margin-top: var(--spacing-md); }
+  .editorial-link a { color: #cc5555; text-decoration: none; }
+  .editorial-link a:hover { text-decoration: underline; }
 
   @media (max-width: 900px) {
-    .detail-grid, .detail-grid--4, .detail-grid--3, .pc-grid { grid-template-columns: 1fr; }
+    .detail-grid, .detail-grid--4, .detail-grid--3, .detail-grid--2, .pc-grid { grid-template-columns: 1fr; }
   }
 
   @media (prefers-color-scheme: light) {
