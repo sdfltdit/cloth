@@ -27,6 +27,7 @@ export default defineConfig({
           '/philanthropy/',
           '/editorial-policy/',
           '/case-studies/',
+          '/agreement/',
         ];
         return !noindexPaths.some((p) => page.endsWith(p));
       },
