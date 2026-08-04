@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { schemaOrganization, schemaPerson } from '../data/schema';
+
+export const prerender = true;
+
+const pageTitle = "Client Agreement | SDF Clothing";
+const pageDescription = "Review and confirm the SDF Clothing manufacturing agreement — MOQ, sampling, payment terms, and certification, in one place.";
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": pageTitle,
+    "description": pageDescription,
+    "url": "https://sdfltd.com/agreement/",
+    "publisher": { "@id": "https://sdfltd.com/#org" }
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema} noindex={true}>
+<script type="application/ld+json" set:html={JSON.stringify(schemaOrganization)} />
+<script type="application/ld+json" set:html={JSON.stringify(schemaPerson)} />
+
+  <div class="container" style="padding: 3rem 1.5rem 5rem; max-width: 800px; margin: 0 auto;">
+
+    <header style="margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid #1a1a1a;">
+      <span style="font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: #e00; display: block; margin-bottom: 1rem;">Client Agreement</span>
+      <h1 style="font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 200; color: #fff; line-height: 1.2; margin-bottom: 1.25rem;">
+        Confirm You've Reviewed Our Terms
+      </h1>
+      <p style="font-size: 1rem; color: #aaa; line-height: 1.9; margin: 0;">
+        Before we begin sample development on your order, we ask every client to confirm they've read our full Terms &amp; Conditions. This takes two minutes and creates a clear, documented record for both sides.
+      </p>
+    </header>
+
+    <div style="border: 1px solid #222; background: #050505; padding: 1.75rem 2rem; margin-bottom: 2.5rem;">
+      <p style="color: #fff; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; margin: 0 0 1rem;">The essentials, before you agree</p>
+      <ul style="margin: 0; padding-left: 1.25rem; color: #aaa; font-size: 0.9rem; line-height: 2;">
+        <li>MOQ: 300 pieces per style (5,000 pieces/style for product-specific certification)</li>
+        <li>Sampling is free; a 30% deposit is required before we start, credited in full to your bulk order</li>
+        <li>Sampling takes about 2 weeks; we remake a non-matching sample up to 10 times at no cost</li>
+        <li>Payment: 30% before sampling, 40% on sample approval, 30% on completion</li>
+        <li>Your designs and tech pack remain your property and stay confidential</li>
+      </ul>
+      <p style="margin: 1.25rem 0 0; font-size: 0.85rem;">
+        <a href="/terms" style="color: #e00; text-decoration: none;">Read the complete Terms &amp; Conditions (10 pages) →</a>
+        &nbsp;&middot;&nbsp;
+        <a href="/documents/SDF-Clothing-Terms-and-Conditions.pdf" download style="color: #e00; text-decoration: none;">Download as PDF ↓</a>
+      </p>
+    </div>
+
+    <form id="agreementForm" novalidate>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+        <div>
+          <label for="agr-name" style="font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; display: block; margin-bottom: 0.5rem;">Full Name *</label>
+          <input type="text" id="agr-name" name="name" required autocomplete="name" style="background:#000;border:1px solid #333;color:#fff;padding:0.75rem;font-size:16px;width:100%;font-family:inherit;box-sizing:border-box;" />
+        </div>
+        <div>
+          <label for="agr-company" style="font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; display: block; margin-bottom: 0.5rem;">Company Name *</label>
+          <input type="text" id="agr-company" name="company" required autocomplete="organization" style="background:#000;border:1px solid #333;color:#fff;padding:0.75rem;font-size:16px;width:100%;font-family:inherit;box-sizing:border-box;" />
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
+        <div>
+          <label for="agr-email" style="font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; display: block; margin-bottom: 0.5rem;">Email *</label>
+          <input type="email" id="agr-email" name="email" required autocomplete="email" style="background:#000;border:1px solid #333;color:#fff;padding:0.75rem;font-size:16px;width:100%;font-family:inherit;box-sizing:border-box;" />
+        </div>
+        <div>
+          <label for="agr-country" style="font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; display: block; margin-bottom: 0.5rem;">Country *</label>
+          <input type="text" id="agr-country" name="country" required autocomplete="country-name" style="background:#000;border:1px solid #333;color:#fff;padding:0.75rem;font-size:16px;width:100%;font-family:inherit;box-sizing:border-box;" />
+        </div>
+      </div>
+
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
+
+      <label style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1.75rem; cursor: pointer;">
+        <input type="checkbox" id="agr-consent" required style="width: 20px; height: 20px; margin-top: 2px; accent-color: #e00; flex-shrink: 0; cursor: pointer;" />
+        <span style="color: #ccc; font-size: 0.88rem; line-height: 1.6;">I have read and agree to SDF Clothing's <a href="/terms" target="_blank" style="color: #e00; text-decoration: underline;">Terms &amp; Conditions</a>, including the sampling deposit, payment schedule, and MOQ/certification policy described above.</span>
+      </label>
+
+      <button type="submit" id="agr-submit-btn" style="background:#e00;color:#fff;border:none;padding:0.9rem 2.5rem;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;width:100%;min-height:44px;">
+        Confirm Agreement
+      </button>
+
+      <div id="agr-error" style="display:none;color:#e00;font-size:0.85rem;margin-top:1rem;text-align:center;"></div>
+    </form>
+
+    <div id="agr-success" style="display:none;text-align:center;padding:3rem 1rem;">
+      <p style="color:#fff;font-size:1.1rem;font-weight:600;margin:0 0 0.75rem;">Thank you — this is confirmed.</p>
+      <p style="color:#aaa;font-size:0.9rem;line-height:1.8;margin:0 0 1rem;">A confirmation with your reference number has been sent to your email. Our team will follow up on your order shortly.</p>
+      <p style="color:#666;font-size:0.8rem;">Reference: <span id="agr-refid" style="color:#e00;"></span></p>
+    </div>
+
+  </div>
+
+  <script is:inline>
+    (function () {
+      const form = document.getElementById('agreementForm');
+      const errorBox = document.getElementById('agr-error');
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        errorBox.style.display = 'none';
+
+        const honeypot = form.querySelector('[name="_honey"]').value;
+        const name = document.getElementById('agr-name').value.trim();
+        const company = document.getElementById('agr-company').value.trim();
+        const email = document.getElementById('agr-email').value.trim();
+        const country = document.getElementById('agr-country').value.trim();
+        const consent = document.getElementById('agr-consent').checked;
+
+        if (!name || !company || !email || !country) {
+          errorBox.textContent = 'Please fill in all required fields.';
+          errorBox.style.display = 'block';
+          return;
+        }
+        if (!consent) {
+          errorBox.textContent = 'Please confirm you have read and agree to the Terms & Conditions.';
+          errorBox.style.display = 'block';
+          return;
+        }
+
+        const btn = document.getElementById('agr-submit-btn');
+        const origText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Submitting…';
+
+        try {
+          const res = await fetch('https://sdfltd.com/api/agreement', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, company, email, country, consent, _honey: honeypot }),
+          });
+          const json = await res.json();
+          if (json.ok) {
+            form.style.display = 'none';
+            document.getElementById('agr-success').style.display = 'block';
+            document.getElementById('agr-refid').textContent = json.referenceId || '';
+          } else {
+            throw new Error('failed');
+          }
+        } catch {
+          errorBox.textContent = 'Something went wrong. Please try again, or email us directly at contact@sdfltd.com.';
+          errorBox.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = origText;
+        }
+      });
+    })();
+  </script>
+
+</BaseLayout>
