@@ -390,7 +390,7 @@ export const articles = [
     title: "Bangladesh Production Lead Times",
     excerpt: "Plan your inventory and product launches with realistic production timelines from Bangladesh's leading clothing manufacturer.",
     readTime: "8 min read",
-    slug: "/insights/clothing-manufacturing-lead-time",
+    slug: "/guides/clothing-manufacturing-lead-time",
     isPlaceholder: false,
     isFeatured: false,
   },
