@@ -1,0 +1,1422 @@
+---
+import { getYearsExperience } from '../data/company';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Ecommerce Clothing Manufacturer | Low MOQ & DTCs | SDF C";
+const pageDescription = "Ecommerce clothing manufacturer for Shopify and DTC brands. Custom garments from 300 pieces, consistent quality and fast reorders. Free factory quote."
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20ecommerce%20clothing%20manufacturing`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2026-05-20",
+      "dateModified": "2026-05-20",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#org" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for an ecommerce clothing brand?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The minimum order quantity for ecommerce clothing brands is typically 300 pieces per style. This quantity allows you to test market demand without excessive inventory risk while maintaining viable production costs. At SDF Clothing, we specialize in 300-piece MOQs specifically designed for Shopify and DTC brands who need to validate products before scaling."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to manufacture clothing for my online store?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Manufacturing clothing for your online store typically takes 12-16 weeks total. This includes 2-3 weeks for tech pack finalization, 1-2 weeks for fabric sourcing, 2-3 weeks for pre-production samples, 1-2 weeks for revisions if needed, 3-4 weeks for bulk production, 3-5 days for quality inspection, and 4-5 weeks for sea freight to your location. Plan your launch date backward from this realistic timeline."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I start with 300 pieces and increase my order later?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, starting with 300 pieces is the smartest approach for ecommerce brands. This lets you validate demand, test different colorways, and minimize financial risk. Once a product sells well, you can reorder at 500+ pieces for better pricing. Most successful Shopify brands start small and scale based on actual sales data rather than guessing demand with large initial orders."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does it cost to manufacture clothing for a Shopify store?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Manufacturing costs for Shopify stores vary by product type and quantity. For 300 pieces, FOB pricing ranges from $6-12 for t-shirts, $10-18 for hoodies, $8-14 for polo shirts, $12-20 for activewear sets, $10-16 for jogger pants, and $14-22 for bomber jackets. Landed costs including freight and duties typically add $2-4 per piece. Your total landed cost for a hoodie selling at $45 might be $11-15, giving you healthy margins for your ecommerce business."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I ensure quality is consistent across multiple orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Consistent quality across orders requires working with the same factory for all production. Different factories use different fabric suppliers, sewing techniques, and quality standards. When you stick with one manufacturer like SDF Clothing, we maintain your approved samples, use the same fabric mills, and follow your exact specifications for every reorder. Request AQL inspection reports for each shipment and document your approved samples to ensure batch-to-batch consistency."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you help with custom packaging for DTC brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we provide comprehensive DTC packaging solutions including woven neck labels ($0.10-0.30 each), hang tags ($0.05-0.15), individual polybags ($0.02-0.08), custom mailer boxes ($0.80-2.50), care labels with QR codes, and branded tissue paper. Packaging is critical for ecommerce unboxing experience and directly impacts customer reviews. We help you design packaging that reinforces your brand while staying within your budget."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I need to reorder quickly after a product sells out?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When a product sells out, fast reorders are essential for ecommerce brands. Established relationships with your manufacturer enable priority production scheduling. At SDF Clothing, we offer expedited reorder timelines for existing clients - typically 6-8 weeks instead of the standard 12-16 weeks because we already have your tech pack, approved samples, and fabric sources on file. Keep fabric in stock for your bestsellers to enable even faster turnaround."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a tech pack to work with your factory?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "While a tech pack is ideal for accurate production, we can work with you if you don't have one. Our team offers tech pack development services to create professional technical specifications from your sketches or reference photos. A good tech pack includes measurements, fabric specifications, construction details, and color references. Well-prepared tech packs reduce sampling rounds and ensure your vision translates accurately to finished garments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do tariffs affect the cost of manufacturing for US ecommerce brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tariffs significantly impact your landed costs and margins. China faces Section 301 tariffs adding 25% to landed costs, while Bangladesh benefits from MFN (Most Favored Nation) status with standard 16.5% duties. For example, a $9 FOB hoodie from China becomes $13.89 landed with tariffs, while the same $9 FOB from Bangladesh lands at $11.64. On 300 units, that's $675 less cost with Bangladesh - directly improving your ecommerce margins."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sell on Amazon using your manufactured clothing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can sell on Amazon using clothing manufactured by SDF. Amazon requires compliant labeling, accurate product descriptions, and adherence to their seller policies. We provide all necessary documentation including certificates of origin, fabric composition reports, and care label compliance. Many of our clients successfully sell on both their Shopify stores and Amazon, using manufacturing from the same production runs across both channels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications do your garments have for selling in the EU?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our garments hold certifications required for EU markets including REACH compliance for chemical safety, OEKO-TEX Standard 100 for harmful substance testing, GOTS for organic cotton, and BSCI for social compliance. We provide transaction certificates and compliance documentation for customs clearance. EU regulations are strict, and our certified manufacturing ensures your products meet all requirements for selling in European markets."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Ecommerce Clothing Manufacturing",
+      "provider": { "@id": SITE + "/#org" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "300",
+          "description": "Starting MOQ | 300 pieces per style for ecommerce brands"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Work with SDF Clothing for Ecommerce Manufacturing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Design Brief or Tech Pack",
+          "text": "Share your design ideas, reference photos, or technical specifications with our team. If you don't have a tech pack, we can help develop one for your ecommerce brand."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive FOB Quote Within 48 Hours",
+          "text": "Get a detailed quote including fabric costs, production, and shipping. Our quotes are transparent with no hidden charges, helping you calculate accurate margins for your Shopify store."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Order and Approve Pre-Production Sample",
+          "text": "Review physical samples before committing to bulk production. Test fit, fabric quality, and construction. Approve samples in writing to ensure production matches your expectations."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production with Inline Quality Checks",
+          "text": "Production begins with your approved sample. We conduct inline quality checks throughout manufacturing and provide regular photo updates. Standard production takes 3-4 weeks."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipment with Full Documentation and Tracking",
+          "text": "Final AQL inspection before shipping. Receive complete documentation including certificates of origin and quality reports. Track your shipment until it arrives at your fulfillment center."
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Ecommerce Clothing Product Categories",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Graphic Tees",
+          "description": "High-margin basics ideal for ecommerce with low return rates"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Hoodies",
+          "description": "Premium streetwear staple with strong Instagram potential"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Activewear Sets",
+          "description": "Niche category with loyal community and high repeat purchase"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Cargo Pants",
+          "description": "Trend-driven streetwear with scarcity model potential"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Loungewear",
+          "description": "Growing category with premium positioning opportunities"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Sustainable Basics",
+          "description": "Eco-conscious segment with dedicated customer base"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Ecommerce Clothing Manufacturer</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Ecommerce Manufacturing | Low MOQ | Fast Reorders</p>
+        <h1 class="hero__title">Ecommerce Clothing Manufacturer | Built for Shopify and DTC Brands Who Need Low MOQ and Reliable Reorders</h1>
+        <p class="hero__description">
+          Finding the right ecommerce clothing manufacturer shouldn't mean guessing with 1,000-piece minimum orders. SDF Clothing provides custom garment manufacturing starting at 300 pieces, specifically designed for Shopify, WooCommerce, and DTC brands in the USA, UK, Australia, Canada, and EU. Test demand with small batches, maintain consistent quality across every order, and scale when you're ready. Hundreds of ecommerce brands have launched with us since 1998.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">300</span>
+            <span class="hero__stat-label">Pieces MOQ</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">6-8</span>
+            <span class="hero__stat-label">Week Reorders</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">AQL</span>
+            <span class="hero__stat-label">Quality Control</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">Section 301</span>
+            <span class="hero__stat-label">Tariff Free</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get a Free Factory Quote
+          </a>
+          <a href="/contact/" class="hero__cta hero__cta--secondary">
+            Request a Sample First
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="SDF Clothing ecommerce manufacturing facility producing garments for Shopify and DTC brands" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Why Ecommerce Brands Have Different Needs -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Why Ecommerce Clothing Brands Have Different Manufacturing Needs</h2>
+      <p class="section__text">
+        Ecommerce clothing brands operate on a completely different business model than wholesale brands, yet most manufacturers treat them the same. This mismatch causes inventory problems, cash flow issues, and quality inconsistencies that tank Shopify reviews. Understanding these differences helps you choose a manufacturing partner who actually understands your business model.
+      </p>
+      <p class="section__text">
+        Wholesale brands typically order 1 style in 1 color at 1,000 pieces. This predictable volume lets factories optimize production lines and offer lower per-unit pricing. But ecommerce brands test 5 styles at 200 pieces each to see what sells before committing. You need flexibility, not volume optimization. The manufacturer who demands 1,000-piece minimums doesn't understand your need to validate demand before scaling.
+      </p>
+      <p class="section__text">
+        Returns in ecommerce average 20-30%, compared to under 5% for wholesale. When a customer returns a hoodie because the fabric feels different than expected, that negative review stays on your Shopify store forever. Wholesale buyers absorb quality issues quietly - consumers post about them publicly. This means quality consistency matters more for ecommerce brands. Your second batch must match your first batch exactly, or your reviews suffer.
+      </p>
+      <p class="section__text">
+        Reorders happen fast in ecommerce. When a product goes viral on TikTok or Instagram, you need inventory within weeks, not months. Wholesale brands plan seasons ahead. Ecommerce brands react to real-time demand. Your manufacturer must prioritize reorder speed and have capacity flexibility. Working with multiple factories kills your ability to react quickly - build a relationship with one factory who can scale with you.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Comparison of wholesale brand needs versus ecommerce brand needs">
+          <caption>Wholesale vs Ecommerce Manufacturing Needs</caption>
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Wholesale Brand Needs</th>
+              <th>Ecommerce Brand Needs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>MOQ Flexibility</strong></td>
+              <td>High volume (1,000+ pcs) per style</td>
+              <td>Low volume (300 pcs) for testing</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Reorder Speed</strong></td>
+              <td>Seasonal planning, 3-4 month lead time</td>
+              <td>Fast turnaround (6-8 weeks) for sellouts</td>
+            </tr>
+            <tr>
+              <td><strong>Quality Consistency</strong></td>
+              <td>Acceptable variation across seasons</td>
+              <td>Exact match across every batch</td>
+            </tr>
+            <tr>
+              <td><strong>Packaging Options</strong></td>
+              <td>Bulk packaging for retail distribution</td>
+              <td>DTC-ready packaging for unboxing experience</td>
+            </tr>
+            <tr>
+              <td><strong>Batch Tracking</strong></td>
+              <td>Season-based tracking sufficient</td>
+              <td>Individual batch tracking for reviews</td>
+            </tr>
+            <tr>
+              <td><strong>Communication Speed</strong></td>
+              <td>Weekly updates acceptable</td>
+              <td>48-hour response requirement</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Sample Policy</strong></td>
+              <td>Samples credited at high volume</td>
+              <td>Low-cost sampling for validation</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: How to Choose a Manufacturer -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">How to Choose a Clothing Manufacturer for Your Online Store</h2>
+      <p class="section__text">
+        Choosing the right manufacturing partner is the most critical decision you'll make for your ecommerce brand. The wrong manufacturer causes endless problems: delayed launches, quality issues that destroy reviews, and communication breakdowns that leave you guessing. The right partner becomes a competitive advantage, enabling fast reorders and consistent quality that builds customer trust.
+      </p>
+      <p class="section__text">
+        Start by evaluating MOQ flexibility. If a manufacturer requires 1,000-piece minimums, they're not built for ecommerce brands. You need a partner who accepts 300-piece orders without penalty pricing. This flexibility lets you test multiple designs and colorways without tying up thousands of dollars in inventory. <a href="/low-moq-clothing-manufacturers/">Low MOQ clothing manufacturers</a> specialize in working with emerging brands who need this flexibility.
+      </p>
+      <p class="section__text">
+        Clear sample processes are non-negotiable. Never commit to bulk production without approving physical samples. The manufacturer should provide pre-production samples within 2-3 weeks of your order. Review samples for fit, fabric quality, stitching, and overall finish. If they resist sampling or charge exorbitant fees, walk away. Sampling is your insurance against production disasters. Our <a href="/sampling-service">sampling service</a> provides professional sample development with clear pricing.
+      </p>
+      <p class="section__text">
+        Ask specifically about reorder turnaround time. Many manufacturers give vague answers like "4-6 weeks." Get specific: "If I place a reorder for an approved style tomorrow, when will it ship?" The answer should be 6-8 weeks for existing clients with approved samples on file. Anything longer means they don't prioritize reorders, which will kill your ability to restock sellouts.
+      </p>
+      <p class="section__text">
+        Quality control documentation separates professional manufacturers from amateurs. Request AQL inspection reports from past shipments. AQL (Acceptable Quality Limit) is the international standard for quality inspection - ask what level they use (2.5 is standard for ecommerce). They should provide photo reports documenting measurements, color consistency, and stitching quality. Without documented QC, you're flying blind. Our <a href="/quality-inspection-service">quality inspection service</a> provides detailed reports for every shipment.
+      </p>
+      <p class="section__text">
+        Communication responsiveness during sales indicates how they'll communicate during production. If they take 5 days to respond to your initial inquiry, they'll take 10 days during production. Set a 48-hour response rule - if they can't meet it during sales, they won't meet it when problems arise. Fast, clear communication prevents small issues from becoming production disasters.
+      </p>
+      <p class="section__text">
+        Payment terms protect your cash flow. Standard terms are 30% deposit to start production and 70% before shipment. Avoid manufacturers demanding 100% upfront - this exposes you to complete loss if they disappear. Payment terms should scale with relationship length. Established clients often negotiate better terms as trust builds. Never wire money without a written contract and clear deliverables.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Warning signs when choosing a clothing manufacturer and what to do instead">
+          <caption>Manufacturer Red Flags | Warning Signs to Avoid</caption>
+          <thead>
+            <tr>
+              <th>Warning Sign</th>
+              <th>What It Means</th>
+              <th>What to Do Instead</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>100% payment upfront</strong></td>
+              <td>Cash flow problems or scam risk</td>
+              <td>Never pay more than 30% deposit</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>No physical address listed</strong></td>
+              <td>Trading company, not direct factory</td>
+              <td>Verify factory location on Google Maps</td>
+            </tr>
+            <tr>
+              <td><strong>No sample before bulk</strong></td>
+              <td>Hiding quality issues</td>
+              <td>Always require pre-production sample</td>
+            </tr>
+            <tr>
+              <td><strong>Vague lead times</strong></td>
+              <td>Unreliable production planning</td>
+              <td>Get specific dates in writing</td>
+            </tr>
+            <tr>
+              <td><strong>No quality inspection reports</strong></td>
+              <td>No systematic QC process</td>
+              <td>Request AQL reports from past shipments</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Changes price after deposit</strong></td>
+              <td>Bait-and-switch tactics</td>
+              <td>Get fixed-price written contract</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Manufacturing Costs -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Manufacturing Costs for Ecommerce Clothing | Real Numbers</h2>
+      <p class="section__text">
+        Most competitors avoid publishing real manufacturing costs, leaving ecommerce brands guessing about margins. This lack of transparency causes pricing mistakes that either lose money or price out customers. Let's break down actual FOB pricing and landed costs so you can calculate accurate margins for your Shopify store. These are real ranges based on current Bangladesh manufacturing costs in 2026.
+      </p>
+      <p class="section__text">
+        FOB (Free On Board) pricing covers production and delivery to the port, but not shipping to your door or import duties. When calculating your landed cost, you must add freight per unit, import duties, and inspection costs. Bangladesh offers significant advantages here - no Section 301 tariffs like China faces, and MFN (Most Favored Nation) status keeps duties at standard rates. This tariff advantage directly improves your ecommerce margins compared to sourcing from China.
+      </p>
+      <p class="section__text">
+        For basic t-shirts, expect FOB pricing of $5-8 for 300 pieces and $4-6 for 500 pieces. Hoodies run $9-14 for 300 pieces and $8-12 for 500 pieces. The quantity discount exists but isn't dramatic - don't over-order just for slightly better pricing. It's smarter to test at 300 pieces and reorder at 500+ once you've validated demand. Your margin comes from retail pricing, not squeezing the last cent out of manufacturing costs.
+      </p>
+      <p class="section__text">
+        Here's the landed cost calculation for a typical hoodie selling at $45 on Shopify: FOB price $9.00, freight per unit $0.90, US import duty 16.5% MFN (no Section 301) adds $1.49, inspection per unit $0.25. Total landed cost: $11.64. Your margin: $33.36, which is 74%. This healthy margin covers Shopify fees, marketing, customer acquisition, and leaves profit. Now compare this to China: same $9 FOB becomes $13.89 landed with the 25% Section 301 tariff. Margin drops to 69%, and on 300 units you lose $1,275 in pure profit per production run.
+      </p>
+      <p class="section__text">
+        According to <a href="https://www.bgmea.com.bd/home" target="_blank" rel="noopener noreferrer">BGMEA export statistics</a>, Bangladesh's garment exports reached $47 billion in 2024, driven by competitive pricing without tariff penalties. For US ecommerce brands, this tariff advantage is substantial. The <a href="https://www.shopify.com/blog/ecommerce-trends" target="_blank" rel="noopener noreferrer">Shopify commerce reports</a> consistently show that successful DTC brands maintain 60-75% gross margins - manufacturing from Bangladesh makes this achievable.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="FOB pricing and landed costs for ecommerce clothing manufacturing">
+          <caption>Manufacturing Cost Comparison | FOB and Landed Pricing</caption>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>300 pcs FOB</th>
+              <th>500 pcs FOB</th>
+              <th>Landed US (incl. duty)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>T-shirt</strong></td>
+              <td>$5-8</td>
+              <td>$4-6</td>
+              <td>$7-10</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Hoodie</strong></td>
+              <td>$9-14</td>
+              <td>$8-12</td>
+              <td>$11-15</td>
+            </tr>
+            <tr>
+              <td><strong>Polo shirt</strong></td>
+              <td>$7-11</td>
+              <td>$6-9</td>
+              <td>$9-12</td>
+            </tr>
+            <tr>
+              <td><strong>Activewear set</strong></td>
+              <td>$11-16</td>
+              <td>$10-14</td>
+              <td>$13-18</td>
+            </tr>
+            <tr>
+              <td><strong>Jogger pants</strong></td>
+              <td>$9-13</td>
+              <td>$8-11</td>
+              <td>$11-14</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Bomber jacket</strong></td>
+              <td>$13-18</td>
+              <td>$12-16</td>
+              <td>$15-20</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p class="section__text" style="margin-top: 2rem;">
+        <em>Note: Prices are ranges based on fabric quality and complexity. Bangladesh avoids Section 301 tariffs, giving US ecommerce brands a 25% cost advantage over China manufacturing. Use our <a href="/tools/price-calculator/">price calculator</a> for detailed landed cost calculations specific to your products.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Low MOQ -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Low MOQ Clothing Manufacturing | Start with 300 Pieces</h2>
+      <p class="section__text">
+        Starting with 300 pieces is the smartest approach for ecommerce clothing brands, yet many founders feel pressured to order 1,000+ pieces to get "better pricing." This is a mistake that kills more brands than it helps. The $2-3 per piece you save by ordering 1,000 pieces disappears instantly when 600 pieces sit unsold in your warehouse. Low MOQ manufacturing isn't about being small - it's about testing intelligently before scaling.
+      </p>
+      <p class="section__text">
+        Three hundred pieces lets you validate demand without catastrophic risk. If you launch 3 styles at 100 pieces each and one flops, you've lost $900 on that style, not $9,000. You can absorb that loss and move on. But if you ordered 1,000 pieces of that same style, you're stuck with inventory that can't sell, tying up cash you need for the winners. Ecommerce is about iteration - test fast, fail small, scale the winners.
+      </p>
+      <p class="section__text">
+        Run 3 colorways at 100 pieces each to see what sells. Your customers will tell you which colors they prefer through their purchases. Order more of the winner on the next run, phase out the losers. This data-driven approach beats guessing what will sell based on trends or personal preference. Many Shopify brands discover their bestsellers are colors they didn't expect - low MOQ lets you find these surprises affordably.
+      </p>
+      <p class="section__text">
+        When a product sells, reorder at 500+ pieces for better pricing. Your second order gets the quantity discount because you've already validated demand. This staged approach | 300 pieces to test, 500+ pieces to scale - optimizes both risk and reward. You never commit large capital to unproven designs, but you do capture volume pricing once you know what works. <a href="/small-batch-clothing-manufacturer">Small batch clothing manufacturers</a> like SDF Clothing are designed specifically for this approach.
+      </p>
+      <p class="section__text">
+        If a product flops, you've lost $3,000 not $15,000. This difference is existential for early-stage brands. $3,000 is recoverable | $15,000 can bankrupt a startup. Low MOQ manufacturing essentially buys you insurance against bad product decisions. It's not about being small forever; it's about surviving long enough to find what works. Once you have proven winners, scaling to 1,000+ pieces makes sense. But start smart.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="MOQ strategy for different stages of ecommerce brand growth">
+          <caption>MOQ Strategy by Brand Stage</caption>
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Recommended MOQ</th>
+              <th>Purpose</th>
+              <th>Risk Level</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Testing (month 1-3)</strong></td>
+              <td>300 pcs per style</td>
+              <td>Validate demand</td>
+              <td>Low</td>
+            </tr>
+            <tr>
+              <td><strong>Scaling (month 4-6)</strong></td>
+              <td>500 pcs per style</td>
+              <td>Optimize pricing</td>
+              <td>Medium</td>
+            </tr>
+            <tr>
+              <td><strong>Established (6+ months)</strong></td>
+              <td>1,000+ pcs per style</td>
+              <td>Maximize margin</td>
+              <td>Low</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p class="section__text" style="margin-top: 2rem;">
+        <em>Internal resources: <a href="/low-moq-clothing-manufacturers/">Low MOQ clothing manufacturers guide</a>, <a href="/small-batch-clothing-manufacturer">Small batch manufacturing overview</a>, and <a href="/tools/moq-calculator/">MOQ calculator tool</a> for planning your production quantities.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Production Timeline -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Production Timeline for Ecommerce Brands | Plan Your Launch</h2>
+      <p class="section__text">
+        Ecommerce brands live and die by launch dates. Miss your holiday launch window and you lose the entire season. Launch too early without inventory ready and you damage customer trust with backorders. Most manufacturers give vague timelines like "8-12 weeks" that leave you guessing. Let's break down the actual timeline with specific durations so you can plan backward from your launch date with confidence.
+      </p>
+      <p class="section__text">
+        Tech pack finalization takes 1-2 weeks. This is where you lock in measurements, fabric specifications, and construction details. Rush this step and you'll pay for it in sampling rounds. Clear, complete tech packs reduce sampling time by 50%. If you don't have a tech pack, our <a href="/tech-pack-service">tech pack service</a> can create professional specifications within this timeframe. Approve your tech pack before moving forward - changes later cause delays.
+      </p>
+      <p class="section__text">
+        Fabric sourcing requires 1-2 weeks. For standard fabrics like cotton jersey or polyester blends, this is straightforward. For custom fabrics with specific weaves or sustainable materials, allow 2-3 weeks. You'll receive lab dips (fabric swatches) for color approval. Approve lab dips promptly - delays here push back your entire production. Keep fabric on file for reorders to skip this step on future runs.
+      </p>
+      <p class="section__text">
+        Pre-production sampling takes 2-3 weeks. This is your first physical sample - the moment your design becomes real. Review it carefully for fit, fabric quality, and construction. Mark up the sample with specific feedback. "Make the sleeve longer" is less helpful than "Increase sleeve length by 2 inches at shoulder seam." Specific feedback reduces revision rounds. Expect 1-2 revision rounds before final approval.
+      </p>
+      <p class="section__text">
+        Revisions if needed add 1-2 weeks. This is where most timelines blow up. Vague feedback causes multiple revision rounds. Be specific in your first revision request. If the sample needs major changes, consider whether your tech pack was clear. Good tech packs minimize revision needs. Once you approve the sample, no more changes - modifications after approval restart the timeline.
+      </p>
+      <p class="section__text">
+        Bulk production lasts 3-4 weeks. This is actual manufacturing of your order. The factory cuts, sews, and finishes your garments. During this period, request photo updates every week. Seeing production progress catches problems early. If issues arise, address them immediately - waiting until the end causes delays. Most problems are fixable if caught mid-production.
+      </p>
+      <p class="section__text">
+        Quality inspection takes 3-5 days. Before shipment, conduct an AQL 2.5 inspection. This statistically valid sampling method checks a representative portion of your order against quality standards. Review the QC report for measurements, color consistency, stitching, and overall finish. If quality fails, don't accept the shipment - it's cheaper to fix it now than deal with returns later.
+      </p>
+      <p class="section__text">
+        Sea freight to the USA requires 4-5 weeks. This is often the longest single component of the timeline. Air freight takes 3-5 days but costs 5-10x more. Use air freight only for urgent reorders or high-value items. For standard production, sea freight keeps costs manageable. Track your container through the shipping line's website - know when it arrives so you can arrange customs clearance promptly.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Production timeline stages with durations and actions">
+          <caption>Complete Production Timeline | 12-16 Weeks Total</caption>
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Duration</th>
+              <th>What Happens</th>
+              <th>Your Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tech pack finalization</strong></td>
+              <td>1-2 weeks</td>
+              <td>Final specs locked</td>
+              <td>Approve technical specifications</td>
+            </tr>
+            <tr>
+              <td><strong>Fabric sourcing</strong></td>
+              <td>1-2 weeks</td>
+              <td>Materials ordered</td>
+              <td>Approve lab dip color sample</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Pre-production sample</strong></td>
+              <td>2-3 weeks</td>
+              <td>First physical sample</td>
+              <td>Review and approve sample</td>
+            </tr>
+            <tr>
+              <td><strong>Revisions if needed</strong></td>
+              <td>1-2 weeks</td>
+              <td>Fix issues</td>
+              <td>Give clear specific feedback</td>
+            </tr>
+            <tr>
+              <td><strong>Bulk production</strong></td>
+              <td>3-4 weeks</td>
+              <td>Manufacturing</td>
+              <td>Monitor updates weekly</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Quality inspection</strong></td>
+              <td>3-5 days</td>
+              <td>AQL check</td>
+              <td>Review QC report</td>
+            </tr>
+            <tr>
+              <td><strong>Sea freight to USA</strong></td>
+              <td>4-5 weeks</td>
+              <td>Shipping</td>
+              <td>Track container</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p class="section__text" style="margin-top: 2rem;">
+        <strong>Planning backward from your launch date:</strong> If you want to launch in October for holiday season, your order must be in production by June, tech pack done by May, and you should start manufacturer conversations in April. This backward planning prevents launch disasters. Use our <a href="/tools/lead-time-calculator">lead time calculator</a> to map your specific timeline.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Product Strategy -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Ecommerce Clothing Brand Product Strategy | What Sells Online</h2>
+      <p class="section__text">
+        Not all clothing products perform equally in ecommerce. Some categories have higher return rates, lower margins, or limited Instagram appeal. Understanding what works online helps you choose products that maximize your chances of success. Competitors completely ignore this topic - they talk about "how to find manufacturers" but never "what should I actually manufacture." This section fills that gap.
+      </p>
+      <p class="section__text">
+        High-margin basics like hoodies, t-shirts, and sweatshirts are ideal for ecommerce. They're easy to photograph clearly, size runs are straightforward, and return rates are lower than complex garments. A hoodie is a hoodie - customers know what they're getting. This predictability reduces returns and negative reviews. These basics also have broad appeal across demographics, giving you a larger potential market.
+      </p>
+      <p class="section__text">
+        Niche activewear including leggings, sports bras, and sets performs exceptionally well online. This category has loyal communities, high repeat purchase rates, and is Instagram-native. Activewear customers follow brands on social media, engage with content, and become repeat buyers. The technical nature of activewear also justifies premium pricing - customers expect to pay more for performance fabrics. This combination of community and margins makes activewear a top ecommerce choice.
+      </p>
+      <p class="section__text">
+        Streetwear staples like cargo pants, bomber jackets, and coord sets work well for trend-driven brands. These products are inherently Instagram-friendly, lend themselves to limited drops, and the scarcity model works in ecommerce. Announce a drop of 200 cargo pants, sell out in 48 hours, and build hype for the next drop. This model creates urgency and FOMO (fear of missing out) that drives sales. Streetwear also allows for higher pricing due to trend value.
+      </p>
+      <p class="section__text">
+        Sustainable basics including organic tees, bamboo loungewear, and recycled fabrics appeal to the growing eco-conscious segment. These customers are willing to pay premium prices for sustainability, giving you higher margins. The sustainability story also provides marketing content - customers share their values through their purchases. This segment has lower competition than mainstream categories and higher customer loyalty once acquired.
+      </p>
+      <p class="section__text">
+        Pet clothing is a fast-growing, low-competition niche with strong ecommerce potential. Pet owners treat their animals like family and spend freely on them. Pet clothing is an impulse purchase, a gifting category, and highly shareable on social media. Who doesn't stop scrolling to see a dog in a cute outfit? The category is underserved by major retailers, leaving room for niche brands to capture market share.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Product category recommendations for ecommerce clothing brands">
+          <caption>Ecommerce Product Category Performance</caption>
+          <thead>
+            <tr>
+              <th>Product Category</th>
+              <th>Avg Sell Price</th>
+              <th>Typical Margin</th>
+              <th>Instagram Potential</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Graphic tees</strong></td>
+              <td>$25-40</td>
+              <td>70-80%</td>
+              <td>High</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Hoodies</strong></td>
+              <td>$45-75</td>
+              <td>70-75%</td>
+              <td>Very High</td>
+            </tr>
+            <tr>
+              <td><strong>Activewear sets</strong></td>
+              <td>$60-100</td>
+              <td>65-75%</td>
+              <td>Very High</td>
+            </tr>
+            <tr>
+              <td><strong>Cargo pants</strong></td>
+              <td>$55-85</td>
+              <td>65-70%</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td><strong>Loungewear</strong></td>
+              <td>$50-80</td>
+              <td>70-75%</td>
+              <td>High</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Sustainable basics</strong></td>
+              <td>$40-70</td>
+              <td>75-80%</td>
+              <td>Medium</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p class="section__text" style="margin-top: 2rem;">
+        <em>Product selection should align with your brand identity and target audience. For detailed manufacturing capabilities by category, explore our <a href="/how-to-start-a-clothing-brand">clothing brand startup guide</a> and <a href="/private-label-clothing-manufacturer">private label manufacturing services</a>.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Packaging -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Packaging and Branding for DTC Ecommerce Brands</h2>
+      <p class="section__text">
+        Packaging is completely ignored by competitor content, yet it's critical for ecommerce success. When a customer opens your package, that moment determines whether they post an unboxing photo on Instagram or quietly return the item. Wholesale packaging - polybags in bulk boxes - doesn't work for DTC. Your packaging is your physical brand touchpoint, and it directly impacts reviews and repeat purchases.
+      </p>
+      <p class="section__text">
+        Woven neck labels are your most visible branding element. These are the tags inside the neck that display your brand name and logo. Costing $0.10-0.30 each, woven labels look premium and last the garment's lifetime. Unlike printed labels that fade after washing, woven labels maintain your brand presence through dozens of washes. Position them at the center back neck for maximum visibility. Include your website URL so customers can find you when others ask where they got the shirt.
+      </p>
+      <p class="section__text">
+        Hang tags cost $0.05-0.15 and serve multiple purposes. They display pricing, product information, and branding. More importantly, hang tags are the first thing customers see when they pull your garment from the package. Design them to make an impression - thick cardstock, embossing, or foil stamping communicates quality. Include a QR code linking to your website or a special offer to drive repeat traffic.
+      </p>
+      <p class="section__text">
+        Individual polybags cost $0.02-0.08 and serve practical and aesthetic purposes. They protect garments during shipping from moisture and dirt. For the customer, a clean polybag creates a professional unboxing experience. Nothing says "amateur" like a wrinkled, dusty shirt arriving loose in a box. Polybags also allow you to include care instructions and size information where the customer will see them.
+      </p>
+      <p class="section__text">
+        Custom mailer boxes cost $0.80-2.50 but deliver disproportionate value. These branded shipping boxes turn delivery into an experience. Customers photograph and share custom boxes on social media - free marketing. The unboxing moment builds emotional connection and increases repeat purchase rates. For premium brands, custom mailers are essential. For budget-conscious startups, start with polybags and upgrade to boxes as you scale.
+      </p>
+      <p class="section__text">
+        Care labels with QR codes are a growing trend. Traditional care labels are boring - QR codes make them interactive. Scan the code to see your brand story, styling tips, or a video of the garment being made. This turns a regulatory requirement into a marketing opportunity. The cost difference is minimal, but the engagement potential is significant. Early adoption positions your brand as innovative.
+      </p>
+      <p class="section__text">
+        Tissue paper with branded stamp adds a premium touch for $0.03-0.08 per package. It's not necessary for every order, but for premium products or first-time customers, the extra effort matters. Tissue paper creates anticipation as the customer unwraps layers - like opening a gift. Small details like this differentiate your brand in a crowded market.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Packaging options for DTC ecommerce brands with costs and impact">
+          <caption>DTC Packaging Options | Cost and Impact Analysis</caption>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Cost Range</th>
+              <th>Impact</th>
+              <th>Essential?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Woven label</strong></td>
+              <td>$0.10-0.30</td>
+              <td>Brand visibility, durability</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td><strong>Hang tag</strong></td>
+              <td>$0.05-0.15</td>
+              <td>First impression, information</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td><strong>Polybag</strong></td>
+              <td>$0.02-0.08</td>
+              <td>Protection, professionalism</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td><strong>Custom box</strong></td>
+              <td>$0.80-2.50</td>
+              <td>Unboxing experience, social sharing</td>
+              <td>No (premium)</td>
+            </tr>
+            <tr>
+              <td><strong>Tissue paper</strong></td>
+              <td>$0.03-0.08</td>
+              <td>Premium feel, anticipation</td>
+              <td>No (premium)</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Thank you card</strong></td>
+              <td>$0.05-0.10</td>
+              <td>Personal connection, repeat</td>
+              <td>Recommended</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Quality Control -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Quality Control for Ecommerce | Why It Matters More Than Wholesale</h2>
+      <p class="section__text">
+        Quality control is where ecommerce and wholesale brands diverge most dramatically. In wholesale, a buyer receives a shipment, finds quality issues, and quietly works with the manufacturer on resolution. The public never knows. In ecommerce, every customer is a potential reviewer. One bad batch generates dozens of 1-star reviews on your Shopify store that permanently damage your brand. This is why QC matters more for ecommerce - your reputation is public and permanent.
+      </p>
+      <p class="section__text">
+        AQL (Acceptable Quality Limit) is the international standard for quality inspection. An AQL 2.5 level means the inspection accepts shipments with no more than 2.5% defects. This sounds technical, but practically it means: for every 100 garments inspected, no more than 2-3 should have defects. This standard balances quality with realistic manufacturing capabilities. Lower AQL levels (1.5 or 1.0) are possible but increase cost - AQL 2.5 is the sweet spot for ecommerce.
+      </p>
+      <p class="section__text">
+        What to check during inspection: measurements against your size chart, color consistency across the batch, stitching quality (no loose threads, consistent tension), fabric quality (no flaws or pilling), and overall construction. Document everything with photos. If measurements are off by 0.5 inches, note it. If color varies between pieces, photograph the difference. Detailed documentation helps the factory fix issues and provides evidence if disputes arise.
+      </p>
+      <p class="section__text">
+        Pre-shipment photo reports are your quality insurance. Before the factory ships, request photos of randomly selected pieces from your order. Review these photos for the same quality criteria. If you spot issues, request additional photos or a video call to see more pieces. Catching problems before shipping saves weeks of return logistics. Our <a href="/quality-inspection-service">quality inspection service</a> provides comprehensive photo reports with every shipment.
+      </p>
+      <p class="section__text">
+        What to do if quality fails: don't accept the shipment. Document the defects thoroughly with photos and measurements. Request the factory to rework or replace the defective pieces at their expense. This is why payment terms matter - if you've paid 100% upfront, you have no leverage. With standard 30/70 terms, you withhold the balance until quality issues are resolved. Be firm but reasonable - manufacturers make mistakes, but they should fix them.
+      </p>
+      <p class="section__text">
+        Why ordering from the same factory matters for consistency: different factories use different fabric suppliers, sewing techniques, and quality standards. Your batch 2 from Factory B will look different from batch 1 from Factory A. This inconsistency confuses customers and generates "quality dropped" reviews. Stick with one factory for each product line. They maintain your approved samples, use consistent materials, and understand your quality expectations. Use our <a href="/tools/aql-calculator">AQL calculator</a> to determine inspection sample sizes for your orders.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: SDF Process -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">The SDF Clothing Process for Ecommerce Brands</h2>
+      <p class="section__text">
+        Working with SDF Clothing follows a clear, structured process designed specifically for ecommerce brands. We've refined this process over {getYearsExperience()} years of working with Shopify, WooCommerce, and DTC brands across the USA, UK, Australia, Canada, and EU. Our process eliminates the guesswork and uncertainty that typically plagues first-time manufacturing partnerships.
+      </p>
+      
+      <div class="process">
+        <div class="process__step">
+          <div class="process__number">1</div>
+          <h3 class="process__title">Submit Your Design Brief or Tech Pack</h3>
+          <p class="process__text">
+            Share your design ideas, reference photos, sketches, or complete tech packs with our team. If you're starting from scratch, describe your vision - target customer, price point, and aesthetic preferences. Our team reviews your submission within 24 hours and asks clarifying questions to ensure we understand your requirements. If you need tech pack development, we offer professional <a href="/tech-pack-service">tech pack services</a> to create production-ready specifications.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">2</div>
+          <h3 class="process__title">Receive FOB Quote Within 48 Hours</h3>
+          <p class="process__text">
+            Get a detailed written quote including fabric costs, labor, finishing, quality inspection, and FOB shipping to port. Our quotes are transparent with no hidden charges - you'll know exactly what you're paying for before production begins. We quote based on your specified quantity (300 pieces minimum) and provide alternative pricing at 500 and 1,000 pieces so you can see volume discounts. Quote delivery is guaranteed within 48 hours of receiving complete specifications.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">3</div>
+          <h3 class="process__title">Order and Approve Pre-Production Sample</h3>
+          <p class="process__text">
+            Once you approve the quote, pay the 30% deposit to initiate sampling. We develop pre-production samples within 2-3 weeks. You'll receive photos first for initial review, then physical samples via courier for final approval. Test samples for fit, fabric quality, construction, and overall finish. Mark up samples with specific feedback for any revisions. We offer unlimited revisions within reason - your satisfaction is our priority. Sample costs are credited against bulk orders.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">4</div>
+          <h3 class="process__title">Bulk Production with Inline Quality Checks</h3>
+          <p class="process__text">
+            After sample approval, pay the balance deposit and bulk production begins. Standard production takes 3-4 weeks. We conduct inline quality checks at multiple stages: cutting, sewing, and finishing. You receive weekly photo updates showing production progress. If any issues arise, we communicate immediately and present solutions. Our production team has your approved samples on file and references them throughout production to ensure consistency.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">5</div>
+          <h3 class="process__title">Shipment with Full Documentation and Tracking</h3>
+          <p class="process__text">
+            Before shipment, we conduct AQL 2.5 quality inspection and provide a detailed QC report. Review the report and approve shipment. Pay the final 70% balance and we release your goods. You receive complete export documentation including certificate of origin, commercial invoice, packing list, and quality reports. We coordinate with your freight forwarder or can arrange shipping through our partners. Track your shipment until it arrives at your location. Most ecommerce brands are selling their first collection within 4 months of contacting us.
+          </p>
+        </div>
+      </div>
+      
+      <p class="section__text" style="margin-top: 2rem;">
+        <em>Ready to start? <a href="/contact/">Contact us</a> with your design requirements or <a href="/contact/">request a sample</a> to see our quality firsthand. We work with <a href="/clothing-manufacturers-for-startups/">startup brands</a>, <a href="/oem-clothing-manufacturer">OEM clients</a>, and established DTC labels across all product categories.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Ecommerce Clothing Manufacturer FAQ</h2>
+      
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order quantity for an ecommerce clothing brand?</h3>
+          <p class="faq__answer">
+            The minimum order quantity for ecommerce clothing brands is typically 300 pieces per style. This quantity allows you to test market demand without excessive inventory risk while maintaining viable production costs. At SDF Clothing, we specialize in 300-piece MOQs specifically designed for Shopify and DTC brands who need to validate products before scaling.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does it take to manufacture clothing for my online store?</h3>
+          <p class="faq__answer">
+            Manufacturing clothing for your online store typically takes 12-16 weeks total. This includes 2-3 weeks for tech pack finalization, 1-2 weeks for fabric sourcing, 2-3 weeks for pre-production samples, 1-2 weeks for revisions if needed, 3-4 weeks for bulk production, 3-5 days for quality inspection, and 4-5 weeks for sea freight to your location. Plan your launch date backward from this realistic timeline.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can I start with 300 pieces and increase my order later?</h3>
+          <p class="faq__answer">
+            Yes, starting with 300 pieces is the smartest approach for ecommerce brands. This lets you validate demand, test different colorways, and minimize financial risk. Once a product sells well, you can reorder at 500+ pieces for better pricing. Most successful Shopify brands start small and scale based on actual sales data rather than guessing demand with large initial orders.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How much does it cost to manufacture clothing for a Shopify store?</h3>
+          <p class="faq__answer">
+            Manufacturing costs for Shopify stores vary by product type and quantity. For 300 pieces, FOB pricing ranges from $6-12 for t-shirts, $10-18 for hoodies, $8-14 for polo shirts, $12-20 for activewear sets, $10-16 for jogger pants, and $14-22 for bomber jackets. Landed costs including freight and duties typically add $2-4 per piece. Your total landed cost for a hoodie selling at $45 might be $11-15, giving you healthy margins for your ecommerce business.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do I ensure quality is consistent across multiple orders?</h3>
+          <p class="faq__answer">
+            Consistent quality across orders requires working with the same factory for all production. Different factories use different fabric suppliers, sewing techniques, and quality standards. When you stick with one factory like SDF Clothing, we maintain your approved samples, use the same fabric mills, and follow your exact specifications for every reorder. Request AQL inspection reports for each shipment and document your approved samples to ensure batch-to-batch consistency.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you help with custom packaging for DTC brands?</h3>
+          <p class="faq__answer">
+            Yes, we provide comprehensive DTC packaging solutions including woven neck labels ($0.10-0.30 each), hang tags ($0.05-0.15), individual polybags ($0.02-0.08), custom mailer boxes ($0.80-2.50), care labels with QR codes, and branded tissue paper. Packaging is critical for ecommerce unboxing experience and directly impacts customer reviews. We help you design packaging that reinforces your brand while staying within your budget.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What happens if I need to reorder quickly after a product sells out?</h3>
+          <p class="faq__answer">
+            When a product sells out, fast reorders are essential for ecommerce brands. Established relationships with your manufacturer enable priority production scheduling. At SDF Clothing, we offer expedited reorder timelines for existing clients - typically 6-8 weeks instead of the standard 12-16 weeks because we already have your tech pack, approved samples, and fabric sources on file. Keep fabric in stock for your bestsellers to enable even faster turnaround.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do I need a tech pack to work with your factory?</h3>
+          <p class="faq__answer">
+            While a tech pack is ideal for accurate production, we can work with you if you don't have one. Our team offers tech pack development services to create professional technical specifications from your sketches or reference photos. A good tech pack includes measurements, fabric specifications, construction details, and color references. Well-prepared tech packs reduce sampling rounds and ensure your vision translates accurately to finished garments.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do tariffs affect the cost of manufacturing for US ecommerce brands?</h3>
+          <p class="faq__answer">
+            Tariffs significantly impact your landed costs and margins. China faces Section 301 tariffs adding 25% to landed costs, while Bangladesh benefits from MFN (Most Favored Nation) status with standard 16.5% duties. For example, a $9 FOB hoodie from China becomes $13.89 landed with tariffs, while the same $9 FOB from Bangladesh lands at $11.64. On 300 units, that's $675 less cost with Bangladesh - directly improving your ecommerce margins.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can I sell on Amazon using your manufactured clothing?</h3>
+          <p class="faq__answer">
+            Yes, you can sell on Amazon using clothing manufactured by SDF. Amazon requires compliant labeling, accurate product descriptions, and adherence to their seller policies. We provide all necessary documentation including certificates of origin, fabric composition reports, and care label compliance. Many of our clients successfully sell on both their Shopify stores and Amazon, using manufacturing from the same production runs across both channels.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What certifications do your garments have for selling in the EU?</h3>
+          <p class="faq__answer">
+            Our garments hold certifications required for EU markets including REACH compliance for chemical safety, OEKO-TEX Standard 100 for harmful substance testing, GOTS for organic cotton, and BSCI for social compliance. We provide transaction certificates and compliance documentation for customs clearance. EU regulations are strict, and our certified manufacturing ensures your products meet all requirements for selling in European markets. Learn more about our <a href="/certifications">complete certifications</a>.
+          </p>
+        </div>
+        
+        </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="section cta-section">
+    <div class="section__container cta-section__container">
+      <h2 class="cta-section__title">Ready to Launch Your Ecommerce Clothing Brand?</h2>
+      <p class="cta-section__text">
+        SDF Clothing has helped hundreds of Shopify, WooCommerce, and DTC brands launch since 1998. We offer 300-piece minimum orders, 48-hour quote turnaround, pre-production samples for approval, and consistent quality across every order. A first collection or an established brand scaling up — we're built to be the manufacturing partner behind either one in ecommerce.
+      </p>
+      <div class="cta-section__buttons">
+        <a href={whatsappQuoteUrl} class="cta-section__button cta-section__button--primary" target="_blank" rel="noopener noreferrer">
+          Get a Free Factory Quote
+        </a>
+        <a href="/contact/" class="cta-section__button cta-section__button--secondary">
+          Request a Sample First
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<style>
+  /* CSS Variables - matching clothing-manufacturer-bangladesh.astro */
+  :root {
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111111;
+    --color-text: #ffffff;
+    --color-text-muted: #b0b0b0;
+    --color-primary: #e00000;
+    --color-border: #1a1a1a;
+    --color-border-highlight: #e00000;
+  }
+
+  /* Skip Link */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: 1rem 0;
+    margin: 0 0 2rem 0;
+    font-size: 0.85rem;
+  }
+  .breadcrumb__item {
+    margin-right: 0.5rem;
+  }
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+  }
+  @media (min-width: 768px) {
+    .hero {
+      padding: 6rem 0;
+    }
+  }
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .hero__container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .hero__content {
+    padding: 1rem 0;
+  }
+  .hero__label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+  .hero__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+  .hero__description {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    max-width: 600px;
+  }
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  @media (min-width: 480px) {
+    .hero__stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .hero__stat {
+    text-align: center;
+  }
+  .hero__stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+  }
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .hero__ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hero__cta {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+  .hero__cta:hover {
+    opacity: 0.8;
+  }
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  /* Section Styles */
+  .section {
+    padding: 3rem 0;
+  }
+  @media (min-width: 768px) {
+    .section {
+      padding: 4rem 0;
+    }
+  }
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .section__title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+  .section__text {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+  .section__text a:hover {
+    text-decoration: none;
+  }
+
+  /* Comparison Tables */
+  .comparison-wrapper {
+    margin: 2rem 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+    background: var(--color-bg);
+  }
+  .comparison caption {
+    caption-side: top;
+    text-align: left;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+    font-size: 0.95rem;
+  }
+  .comparison thead {
+    background: var(--color-primary);
+  }
+  .comparison th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 500;
+    color: white;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .comparison td {
+    padding: 1rem;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .comparison__row--highlight {
+    background: var(--color-bg-alt);
+  }
+  .comparison tr:hover {
+    background: rgba(224, 0, 0, 0.05);
+  }
+
+  /* Process Steps */
+  .process {
+    margin: 2rem 0;
+  }
+  .process__step {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    margin-bottom: 1rem;
+    border-radius: 4px;
+  }
+  @media (min-width: 768px) {
+    .process__step {
+      padding: 2rem;
+    }
+  }
+  .process__number {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .process__title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+  .process__text {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+  .process__text a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  /* FAQ Section */
+  .faq {
+    margin: 2rem 0;
+  }
+  .faq__item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .faq__question {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+  .faq__answer a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .cta-section {
+      padding: 6rem 0;
+    }
+  }
+  .cta-section__container {
+    max-width: 700px;
+  }
+  .cta-section__title {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+  .cta-section__text {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+  .cta-section__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-section__button {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .cta-section__button--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+  .cta-section__button--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+  .cta-section__button:hover {
+    opacity: 0.8;
+  }
+
+  /* Responsive Breakpoints */
+  @media (max-width: 320px) {
+    .hero__title {
+      font-size: 1.5rem;
+    }
+    .section__title {
+      font-size: 1.25rem;
+    }
+  }
+  @media (min-width: 480px) {
+    .hero__description {
+      font-size: 1.05rem;
+    }
+  }
+  @media (min-width: 768px) {
+    .section__text {
+      font-size: 1.05rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .section__container {
+      max-width: 1000px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .section__container {
+      max-width: 1100px;
+    }
+  }
+</style>
+
+</BaseLayout>

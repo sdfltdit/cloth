@@ -1,0 +1,464 @@
+---
+import { getYearsExperience } from '../data/company';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, schemaPerson, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Faux Leather Clothing Manufacturer | Vegan Since 1998";
+const pageDescription = "Leading faux leather manufacturer since 1998. 300 piece MOQ, OEKO-TEX certified, 13 certifications. Get free FOB quote for your fashion brand collections.";
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20faux%20leather%20clothing%20manufacturing`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-20",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#org" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for faux leather clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most faux leather clothing manufacturers have MOQs ranging from 300 to 1,000 pieces per style. At SDF Clothing, we offer 300 piece minimums per style with flexible size and color combinations, making us ideal for startup brands and boutique labels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why choose a specialized faux leather clothing manufacturer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Faux leather requires specialized expertise in synthetic material handling, sewing techniques, and finishing. Specialized manufacturers understand faux leather characteristics, stretch properties, and proper construction for vegan leather aesthetics. We focus on quality synthetic materials and cruelty-free production."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does faux leather clothing production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard lead time for bulk production is 30-40 days from fabric sourcing to shipment. Sample development takes 7-14 days. We provide clear timeline commitments and track production closely to ensure on-time delivery for your fashion brand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What faux leather types are available for clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Common faux leather types include polyurethane (PU) leather for flexibility, polyvinyl chloride (PVC) leather for durability, microfiber leather for premium feel, and bio-based vegan leathers for sustainability. We offer OEKO-TEX certified options and various finishes. Each material has specific characteristics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications should I look for in a faux leather clothing manufacturer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Key certifications include OEKO-TEX (chemical safety), GRS (Global Recycled Standard) for recycled materials, BSCI (social compliance), WRAP (ethical manufacturing), ISO 9001 (quality management), and vegan certification from organizations like PETA or The Vegan Society. SDF Clothing holds 13 international certifications."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you produce custom faux leather clothing designs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we offer full OEM and private label faux leather clothing manufacturing. We can produce custom designs based on your specifications or help develop designs from concepts. Our capabilities include faux leather jackets, pants, skirts, dresses, and accessories."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What services do faux leather clothing manufacturers offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Full-service faux leather manufacturers offer OEM (original equipment manufacturing), private label production, CMT (cut-make-trim), fabric sourcing, hardware sourcing, tech pack development, sampling, quality control, and finishing. SDF provides end-to-end solutions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find a reliable faux leather clothing manufacturer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Look for manufacturers with synthetic apparel experience, verify OEKO-TEX certification for chemical safety, request fabric samples, check client references, and start with sample orders. Reliable manufacturers understand faux leather characteristics and proper construction. Contact us for samples."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Faux Leather Clothing Manufacturing",
+      "provider": { "@id": SITE + "/#org" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "300",
+          "description": "Starting MOQ | 300 pieces per style"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Work with a Faux Leather Clothing Manufacturer",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Prepare Your Tech Pack",
+          "text": "Create detailed technical specifications including measurements, faux leather type, hardware, colors, and construction details. Specify material thickness, finish type, and lining requirements. Well-prepared tech packs reduce sampling time."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Request Quote and MOQ Confirmation",
+          "text": "Submit your requirements for pricing. Confirm MOQ requirements, lead times, and payment terms. Get a written quote with all costs including fabric, hardware, production, and shipping."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Samples",
+          "text": "Produce pre-production samples for approval. This step typically takes 7-14 days. Test samples for faux leather quality, construction, and fit. Approve samples before bulk production to ensure quality standards."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Place Bulk Order",
+          "text": "Pay deposit (typically 30%) to start production. Monitor production through regular updates and quality checks. Production time is usually 30-40 days. Faux leather requires specific handling during production."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Inspection and Shipment",
+          "text": "Final inspection before shipping. Pay balance (70%) before shipment. Arrange shipping (FOB, CIF, or DDP terms). Receive goods and provide feedback for future orders."
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Faux Leather Clothing Manufacturer</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Established 1998 | Vegan Leather Specialists</p>
+        <h1 class="hero__title">Faux Leather Clothing Manufacturer</h1>
+        <p class="hero__description">
+          SDF Clothing is a leading faux leather clothing manufacturer serving global fashion brands since 1998. We specialize in vegan leather apparel with 300 piece minimum orders, OEKO-TEX certified materials, and 13 international quality standards. From startup brands to established labels, we deliver exceptional cruelty-free garments with premium aesthetics.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">300+</span>
+            <span class="hero__stat-label">Pieces MOQ</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">25+</span>
+            <span class="hero__stat-label">Years Experience</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">13</span>
+            <span class="hero__stat-label">Certifications</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">98%</span>
+            <span class="hero__stat-label">On-Time Delivery</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get a Free Factory Quote
+          </a>
+          <a href="/contact/" class="hero__cta hero__cta--secondary">
+            Request Fabric Samples
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="SDF Clothing faux leather manufacturing facility" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">GRS Certified Recycled</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">BSCI Social Compliance</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">WRAP Ethical Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">C-TPAT Supply Chain Security</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">ISO 9001 Quality Management</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Overview -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What is a Faux Leather Clothing Manufacturer?</h2>
+      <p class="section__text">
+        A faux leather clothing manufacturer specializes in producing garments from synthetic leather alternatives, also known as vegan leather. This category requires specialized expertise in handling synthetic materials while achieving leather-like aesthetics. Faux leather demands knowledge of material characteristics, stretch properties, specialized sewing techniques, and appropriate finishing. The global vegan leather market exceeds $40 billion annually, with growing demand for cruelty-free, sustainable, and innovative synthetic materials.
+      </p>
+      <p class="section__text">
+        Faux leather clothing manufacturers produce various products including vegan leather jackets, pants, skirts, dresses, vests, and accessories. The manufacturing process involves synthetic material sourcing, pattern cutting considering stretch properties, specialized sewing with appropriate needles and techniques, hardware installation, and finishing processes. Specialized manufacturers understand faux leather characteristics?how different synthetics behave, proper seam construction to prevent peeling or cracking, and appropriate finishing for durability.
+      </p>
+      <p class="section__text">
+        SDF Clothing has been manufacturing faux leather garments since 1998, serving over 500 brands across 60+ countries. We produce men's and women's vegan leather apparel using PU leather, PVC leather, microfiber leather, and bio-based alternatives. Our faux leather expertise ensures premium quality, proper construction, and exceptional durability. For brands seeking <a href="/low-moq-clothing-manufacturers/">low MOQ clothing manufacturers</a> or <a href="/clothing-manufacturers-for-startups/">clothing manufacturers for startups</a>, we offer 300 piece minimums with flexible sizing.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Why Specialized Manufacturing -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Why Choose a Specialized Faux Leather Clothing Manufacturer?</h2>
+      <p class="section__text">
+        Faux leather clothing requires specialized manufacturing expertise that general garment factories may lack. Synthetic materials have unique properties and require specific handling techniques. Choosing a specialized faux leather manufacturer ensures your products meet quality and aesthetic standards.
+      </p>
+      
+      <h3 class="section__subtitle">Synthetic Material Expertise</h3>
+      <p class="section__text">
+        Faux leather manufacturers understand synthetic material characteristics?stretch properties, temperature sensitivity, peel strength, and finish durability. We know how to cut synthetic materials to maximize yield while preventing edge fraying. General textile manufacturers may not understand synthetic-specific requirements, leading to premature wear or aesthetic issues. Our synthetic expertise ensures garments that perform and maintain appearance.
+      </p>
+      
+      <h3 class="section__subtitle">Specialized Sewing Techniques</h3>
+      <p class="section__text">
+        Faux leather requires specific sewing techniques?appropriate needle types to prevent puncture marks, proper seam allowances to prevent peeling, and stitch types that accommodate material stretch. Specialized manufacturers use Teflon-coated presser feet to prevent sticking and adjust machine tension for synthetic materials. General factories may not have proper synthetic sewing capabilities.
+      </p>
+      
+      <h3 class="section__subtitle">Sustainable Options</h3>
+      <p class="section__text">
+        Faux leather sustainability is a major advantage over animal leather. Specialized manufacturers can source recycled polyester faux leather (GRS certified), bio-based vegan leathers from pineapple (Pi?atex), mushroom (Mylo), or apple waste, and water-based PU for reduced environmental impact. We understand sustainable synthetic options and can provide documentation for eco-claims. For brands prioritizing sustainability, certified faux leather is ideal.
+      </p>
+      
+      <h3 class="section__subtitle">Hardware Compatibility</h3>
+      <p class="section__text">
+        Faux leather garments often require hardware?zippers, buckles, snaps, studs. Specialized manufacturers have established supply chains for quality hardware that complements synthetic materials. We can recommend appropriate hardware types, finishes, and placement for optimal functionality and aesthetics with faux leather. Hardware quality significantly impacts synthetic garment durability.
+      </p>
+      
+      <h3 class="section__subtitle">Finish Durability</h3>
+      <p class="section__text">
+        Faux leather requires proper finishing to prevent peeling, cracking, or finish wear. Specialized manufacturers understand finish types, proper handling to protect finishes, and appropriate conditioning. We select high-quality faux leather with durable finishes and handle materials properly during production to maintain finish integrity.
+      </p>
+      
+      <h3 class="section__subtitle">Low MOQ Flexibility</h3>
+      <p class="section__text">
+        Many faux leather manufacturers require large minimums. SDF offers 300 piece minimums per style with flexible size and color combinations. This allows you to test designs, launch multiple styles, or scale gradually. Our low MOQ synthetic expertise makes us ideal for emerging vegan leather brands.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: SDF's Approach -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">How SDF Clothing Handles Faux Leather Manufacturing</h2>
+      <p class="section__text">
+        SDF Clothing approaches faux leather manufacturing with expertise developed over {getYearsExperience()} years. We understand that vegan leather represents values?cruelty-free, sustainable, innovative. Our manufacturing process prioritizes these values while offering competitive pricing and low minimums for startup brands.
+      </p>
+      
+      <h3 class="section__subtitle">Premium Synthetic Sourcing</h3>
+      <p class="section__text">
+        We source faux leather from certified suppliers ensuring quality and safety. We offer PU leather for flexibility, PVC leather for durability, microfiber leather for premium feel, and bio-based vegan leathers for sustainability. Recycled polyester options (GRS certified) are available for eco-conscious brands. We can source specific faux leather types based on your requirements or recommend optimal options for your market.
+      </p>
+      
+      <h3 class="section__subtitle">Expert Construction</h3>
+      <p class="section__text">
+        Our synthetic craftsmen understand material stretch properties, cutting techniques that maximize yield while preventing edge damage, and seam construction that prevents peeling. We use specialized sewing machines and techniques for faux leather?Teflon-coated feet, appropriate needles, adjusted tension. Each garment is constructed with attention to synthetic-specific requirements.
+      </p>
+      
+      <h3 class="section__subtitle">Certified Quality</h3>
+      <p class="section__text">
+        We hold 13 international certifications including OEKO-TEX (chemical safety), GRS (recycled materials), BSCI (social compliance), WRAP (ethical manufacturing), ISO 9001 (quality management), and C-TPAT (supply chain security). Each certification is verified by third-party auditors. Learn more about our <a href="/certifications">complete certification portfolio</a>. If you need help with designs, our <a href="/tech-pack-service">tech pack service</a> can assist.
+      </p>
+      
+      <h3 class="section__subtitle">Hardware Sourcing</h3>
+      <p class="section__text">
+        We source quality hardware?YKK zippers, metal buckles, decorative snaps?that complements our faux leather garments. Hardware selection impacts functionality and aesthetics. We can recommend appropriate hardware types and finishes based on your design and target market. Quality hardware ensures durability and consistent performance with synthetic materials.
+      </p>
+      
+      <h3 class="section__subtitle">Low MOQ Specialization</h3>
+      <p class="section__text">
+        Our 300 piece minimum per style makes us accessible to brands testing new designs, launching multiple styles, or scaling gradually. We understand faux leather material costs but offer competitive pricing through efficient sourcing and production. This flexibility has made us a preferred partner for over 500 startup brands since 1998. Our <a href="/fit-engineering-service">fit engineering service</a> ensures proper fit, and our <a href="/grading-service">grading service</a> provides accurate sizing. Our <a href="/sampling-service">sampling service</a> helps perfect designs before bulk production.
+      </p>
+      
+      <h3 class="section__subtitle">Dedicated Support</h3>
+      <p class="section__text">
+        Each client works with a dedicated account manager who understands synthetic apparel requirements. We provide regular production updates, photos of samples, and proactively communicate about any potential delays. Our 98% on-time delivery rate reflects our commitment to reliability. Whether you need <a href="/private-label-clothing-manufacturer">private label manufacturing</a> or full OEM production, we adapt to your brand's needs.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Faux Leather Types -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Faux Leather Types for Clothing</h2>
+      <p class="section__text">
+        Faux leather choice significantly impacts garment characteristics, cost, and positioning. Understanding different synthetic options helps you select the right materials for your brand and target market.
+      </p>
+      
+      <h3 class="section__subtitle">PU (Polyurethane) Leather</h3>
+      <p class="section__text">
+        PU leather is the most common faux leather, made by coating fabric with polyurethane. It's flexible, breathable, and softer than PVC. PU leather offers good leather-like appearance and feel at competitive prices. We offer various PU finishes including smooth, embossed, and textured options. Water-based PU is available for reduced environmental impact.
+      </p>
+      
+      <h3 class="section__subtitle">PVC (Polyvinyl Chloride) Leather</h3>
+      <p class="section__text">
+        PVC leather is durable and water-resistant, making it ideal for outerwear and accessories. It's less flexible than PU but offers excellent durability and weather resistance. PVC leather is often used for jackets, bags, and items requiring weather protection. We offer various PVC finishes and colors.
+      </p>
+      
+      <h3 class="section__subtitle">Microfiber Leather</h3>
+      <p class="section__text">
+        Microfiber leather is a premium synthetic made from ultra-fine fibers. It offers exceptional softness, breathability, and leather-like appearance. Microfiber is more expensive than PU and PVC but provides premium feel and durability. It's ideal for luxury vegan leather positioning.
+      </p>
+      
+      <h3 class="section__subtitle">Bio-Based Vegan Leathers</h3>
+      <p class="section__text">
+        Innovative bio-based vegan leathers include Pi?atex (pineapple leaf fiber), Mylo (mushroom mycelium), Apple Skin (apple waste), and cactus leather. These materials offer sustainable alternatives with unique textures. They're ideal for brands emphasizing innovation and sustainability. We can source various bio-based options.
+      </p>
+      
+      <h3 class="section__subtitle">Recycled Faux Leather</h3>
+      <p class="section__text">
+        Recycled faux leather is made from recycled polyester, reducing environmental impact. GRS-certified recycled materials provide traceability and sustainability verification. Recycled faux leather offers the performance of synthetic leather with reduced environmental footprint. We offer GRS-certified recycled options.
+      </p>
+      
+      <h3 class="section__subtitle">Certification and Safety</h3>
+      <p class="section__text">
+        For faux leather, chemical safety certification is crucial. We prioritize OEKO-TEX Standard 100 certification, ensuring materials are free from harmful substances. For recycled claims, we provide GRS certification. For vegan claims, we can provide documentation supporting cruelty-free status. We provide complete certification documentation.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Production Process -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Faux Leather Clothing Production Process</h2>
+      <p class="section__text">
+        Understanding the faux leather production process helps you manage expectations and ensure smooth collaboration. Here's our complete workflow from design to delivery.
+      </p>
+      
+      <div class="process">
+        <div class="process__step">
+          <div class="process__number">1</div>
+          <h3 class="process__title">Design and Tech Pack</h3>
+          <p class="process__text">
+            Provide detailed technical specifications including measurements, faux leather type, thickness, colors, and construction details. Specify hardware types, lining requirements, edge finishing, and special features. For synthetic materials, specify stretch requirements and finish preferences. Well-prepared tech packs reduce sampling time. If you need design assistance, we can help develop concepts.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">2</div>
+          <h3 class="process__title">Fabric Sourcing</h3>
+          <p class="process__text">
+            We source faux leather based on your specifications?PU, PVC, microfiber, or bio-based options. We can provide fabric swatches for your approval before bulk production. For sustainability claims, we source GRS-certified recycled or bio-based materials with complete documentation. Fabric sourcing typically takes 3-5 days for stock materials or 10-14 days for custom developments.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">3</div>
+          <h3 class="process__title">Sample Development</h3>
+          <p class="process__text">
+            We develop pre-production samples for your approval, typically taking 7-14 days. You'll receive photos first, then physical samples via courier. Test samples thoroughly for faux leather quality, construction, fit, and finish. Approve samples in writing before bulk production. Sample costs are credited against bulk orders.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">4</div>
+          <h3 class="process__title">Bulk Production</h3>
+          <p class="process__text">
+            Once samples are approved, pay the deposit (typically 30%) to start production. We provide a production schedule with key milestones: material cutting, sewing, hardware installation, finishing, quality inspection, and packaging. Production time is usually 30-40 days from deposit to shipment. We send regular updates including production photos. Faux leather production requires careful handling to protect finishes.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">5</div>
+          <h3 class="process__title">Quality Inspection and Shipment</h3>
+          <p class="process__text">
+            Before shipment, we conduct AQL 2.5 quality inspection checking faux leather quality, seam strength, hardware functionality, and finish integrity. You can request third-party inspection. Once inspection passes, pay the balance (70%) and we release shipment. We handle export documentation, customs clearance, and coordinate with your freight forwarder. Shipping time varies by destination.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Faux Leather Comparison Table -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Faux Leather Type Comparison</h2>
+      <p class="section__text">
+        Different faux leather types offer unique characteristics for clothing. Understanding these differences helps you select the optimal material for your brand and target market.
+      </p>
+      
+      <div class="comparison-wrapper">
+        </BaseLayout>
+

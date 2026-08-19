@@ -1,0 +1,838 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Inclusive Sizing Guide | XS-5XL Grading SDF";
+const pageDescription = "Inclusive sizing clothing manufacturing guide. XS-5XL grading, pattern making for extended sizes, plus size manufacturing, and fit testing. Free consultation.";
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#org",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Inclusive Sizing Guide"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is inclusive sizing in clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Inclusive sizing means producing clothing across an extended size range, typically XS-5XL, to accommodate diverse body types. It requires specialized pattern grading, fit testing across sizes, and construction adjustments to ensure consistent quality and fit throughout the size spectrum."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does pattern grading work for extended sizes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pattern grading for extended sizes uses mathematical grade rules to scale base patterns up and down. Standard grading increments 1-2 inches between sizes for most measurements. Extended sizing requires adjusted grade rules for larger sizes to maintain proportions, with careful attention to armholes, necklines, and waist positions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What size range does SDF offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SDF offers inclusive sizing from XS to 5XL for most garment categories. We can customize size ranges per brand requirements, including petite, tall, and plus size specific ranges. Our pattern grading system maintains design integrity across all sizes with proportional scaling."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you ensure fit consistency across sizes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We ensure fit consistency through comprehensive fit testing using fit models across the size range, size set sampling before bulk production, and quality control measurements at each size. Fit testing evaluates garment proportions, comfort, and movement to verify that the design intent translates correctly to all sizes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What construction adjustments are needed for plus sizes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Plus size construction requires wider waistbands for even pressure distribution, reinforced seams at stress points, adjusted armhole depths for comfort, and strategic panel placement. These adjustments ensure that larger sizes maintain the same quality and comfort as standard sizes without compromising design aesthetics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for inclusive sizing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our minimum is 300 pieces total per style, which can be distributed across the inclusive size range. For example, 300 pieces could be split across XS-5XL according to brand requirements. We recommend size runs that reflect target market demographics for optimal inventory management."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Implement Inclusive Sizing with SDF Clothing",
+      "description": "Step-by-step process for developing inclusive sizing clothing with our Bangladesh manufacturing facility",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Define Size Range Requirements",
+          "text": "Specify your target size range (XS-5XL or custom), size distribution ratios, and target market demographics for your inclusive sizing collection"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Grading Rules",
+          "text": "Our pattern team develops custom grading rules based on your base pattern and size requirements, ensuring proportional scaling across all sizes"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Fit Testing Across Sizes",
+          "text": "We produce size set samples across the full range for fit testing, evaluating proportions, comfort, and movement on diverse fit models"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Size Set",
+          "text": "Review and approve size set samples to verify fit consistency and design integrity across the entire size range before bulk production"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Production begins with size set approval, maintaining consistent quality control measurements at each size throughout production"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Inclusive Sizing Guide</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Inclusive Sizing Guide • Since 1998 • Size Range Specialists</div>
+        <h1 class="hero__title">Inclusive Sizing Clothing Manufacturing Guide • XS-5XL Grading and Extended Sizes</h1>
+        <p class="hero__description">
+          Complete guide to inclusive sizing clothing manufacturing. Learn what inclusive sizing means, pattern making for extended sizes, grading process for XS-5XL, how SDF handles size ranges, fit testing process, and construction adjustments for plus size clothing manufacturing in Bangladesh.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact/" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20help%20with%20inclusive%20sizing`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">XS-5XL</span>
+          <span class="hero__stat-label">Size Range</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Proportional</span>
+          <span class="hero__stat-label">Grading</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Fit</span>
+          <span class="hero__stat-label">Tested</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Proportional Grading</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Fit Testing</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Size Set Samples</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Quality Control</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Understanding Inclusive Sizing</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What Is Inclusive Sizing in Clothing Manufacturing?</h2>
+      </div>
+      <div class="section__text">
+        <p>Inclusive sizing represents a fundamental shift in fashion manufacturing from limited size ranges to comprehensive size offerings that accommodate diverse body types. Traditionally, many clothing brands offered sizing from XS to XL or S to L, excluding a significant portion of the population. Inclusive sizing expands this range, typically from XS to 5XL or even larger, ensuring that clothing is accessible to people of all body shapes and sizes. This approach not only serves market demand but also aligns with growing consumer expectations for body positivity and inclusivity in fashion.</p>
+        
+        <p>The implementation of inclusive sizing requires specialized manufacturing capabilities beyond simple pattern scaling. It demands understanding of how bodies differ proportionally across size ranges, not just in overall measurements but in body shape distribution. For example, the relationship between waist and hip measurements, shoulder width relative to torso length, and arm proportions all vary across size ranges. Successful inclusive sizing manufacturing addresses these variations through thoughtful pattern grading and construction adjustments that maintain design integrity while ensuring proper fit at every size.</p>
+        
+        <p>For brands, inclusive sizing offers significant market advantages. It expands addressable market size, reduces customer alienation, and builds brand loyalty among underserved demographics. However, it also requires investment in pattern development, fit testing, and potentially adjusted production processes. Manufacturers with inclusive sizing expertise, like SDF Clothing, provide the technical capability to execute extended size ranges without compromising quality or increasing costs prohibitively.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Pattern Grading Process</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Pattern Making for Extended Sizes</h2>
+      </div>
+      <div class="section__text">
+        <p>Pattern grading for extended sizes is a sophisticated technical process that goes beyond simple enlargement or reduction of base patterns. Professional grading uses mathematical grade rules that define how measurements increase or decrease between consecutive sizes. Standard grading typically uses increments of 1-2 inches between sizes for body measurements like chest, waist, and hips. However, extended sizing from XS to 5XL requires careful consideration of how these grade rules apply across a broader range to maintain proportional relationships.</p>
+        
+        <p>The grading process begins with a base pattern, typically developed in a medium size. Our pattern makers then apply grade rules to create patterns for each size in the range. For inclusive sizing, we often use adjusted grade rules for larger sizes to account for non-linear body scaling. For example, the grade rule between 2XL and 3XL might differ slightly from the rule between M and L to ensure that proportions remain consistent. This attention to detail prevents the common problem where larger sizes become disproportionately wide or long relative to the original design intent.</p>
+        
+        <p>Critical areas requiring special attention in extended size grading include armholes, necklines, and waist positions. As body size increases, these areas don't scale linearly. Armhole depth and width must be adjusted to maintain comfort and range of motion. Necklines require careful grading to maintain shape without becoming too tight or too loose. Waist positions must be evaluated to ensure they sit at the correct anatomical location across all sizes. Our pattern team has extensive experience with these nuanced grading requirements for inclusive sizing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Size Range Options</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">SDF Inclusive Sizing Capabilities</h2>
+      </div>
+      <div class="section__text">
+        <p>SDF Clothing offers comprehensive inclusive sizing capabilities to serve diverse brand requirements. Our standard inclusive size range spans from XS to 5XL, covering the vast majority of body types in most markets. This range can be customized based on specific brand needs, target demographics, or regional preferences. We also offer specialized size ranges including petite sizing for shorter frames, tall sizing for taller individuals, and dedicated plus size ranges that may extend beyond 5XL when required.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Size Range</th>
+              <th>Sizes</th>
+              <th>Target Market</th>
+              <th>Applications</th>
+              <th>Complexity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Standard Inclusive</td>
+              <td>XS-5XL</td>
+              <td>General market</td>
+              <td>Most garment types</td>
+              <td>Medium</td>
+            </tr>
+            <tr>
+              <td>Extended Plus</td>
+              <td>1X-6X</td>
+              <td>Plus size market</td>
+              <td>Plus size collections</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td>Petite Range</td>
+              <td>XXS-L (petite)</td>
+              <td>Shorter frames</td>
+              <td>Petite collections</td>
+              <td>High</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Tall Range</td>
+              <td>M-XXL (tall)</td>
+              <td>Taller frames</td>
+              <td>Tall collections</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td>Custom Range</td>
+              <td>Brand specified</td>
+              <td>Brand defined</td>
+              <td>Specialized needs</td>
+              <td>Variable</td>
+            </tr>
+          </tbody>
+          <caption>Size ranges customizable per brand requirements. Grading rules adjusted for each range type.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Fit Testing Process</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How SDF Ensures Fit Consistency</h2>
+      </div>
+      <div class="section__text">
+        <p>Fit testing is the critical validation step in inclusive sizing manufacturing. At SDF, we implement comprehensive fit testing protocols using fit models across the entire size range. Unlike manufacturers who might only sample a few sizes, we produce size set samples that include every size in the range, typically XS, S, M, L, XL, 2XL, 3XL, 4XL, and 5XL. Each size is evaluated on multiple fit models to account for body shape variation within the same size category.</p>
+        
+        <p>Fit testing evaluates multiple aspects of garment performance. We assess proportional accuracy—whether the garment maintains the intended silhouette across sizes. Comfort evaluation includes range of motion, ease of dressing, and wearability. Visual assessment ensures that design elements translate appropriately to each size without distortion or awkward proportions. Functional testing evaluates practical aspects like pocket placement, closure functionality, and adjustability across the size range.</p>
+        
+        <p>The fit testing process often reveals necessary adjustments to grading rules or construction methods. For example, we might discover that armhole grading needs adjustment for larger sizes to maintain comfort, or that waistband widths need to increase at a different rate than waist measurements to provide even pressure distribution. These insights are incorporated into final patterns before bulk production, ensuring that the finished product meets quality standards across all sizes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Construction Adjustments</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Plus Size Construction Considerations</h2>
+      </div>
+      <div class="section__text">
+        <p>Plus size construction requires specific adjustments beyond pattern grading to ensure comfort, durability, and aesthetic consistency. These construction modifications address the unique challenges of larger garment sizes where increased fabric weight and body proportions create different stress points and fit requirements. Our experience with plus size manufacturing has identified key construction areas that require specialized attention.</p>
+        
+        <p>Waistband construction is a critical consideration for plus size garments. Standard waistband widths may create uncomfortable pressure points or inadequate support at larger sizes. We use wider waistbands, typically 2-3 inches for plus sizes, to distribute pressure more evenly and provide secure fit without digging. Waistband elastic is also upgraded to heavier duty elastic that maintains recovery through repeated wear and washing. These adjustments ensure comfort while preventing the common problem of waistbands rolling or twisting.</p>
+        
+        <p>Reinforced seams at stress points are essential for plus size durability. Areas like crotch seams, shoulder seams, and armhole attachments experience increased stress in larger sizes due to greater fabric weight and body movement. We use reinforced stitching techniques, including double stitching and bar tacking at critical stress points. Seam allowances may be increased to accommodate heavier fabrics and provide additional strength. These reinforcements extend garment life and prevent seam failure, which is particularly important for plus size garments that may experience more stress during wear.</p>
+        
+        <p>Strategic panel placement and design adjustments help maintain aesthetic consistency across sizes. Some design elements that work well in smaller sizes may require adaptation for plus sizes. For example, a princess seam that provides shaping in smaller sizes might need repositioning or width adjustment to flatter larger body shapes. Pocket placement might shift to accommodate different body proportions. These design adaptations ensure that the garment's visual appeal translates appropriately to all sizes without appearing distorted or poorly proportioned.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Minimum Orders</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">MOQ and Size Distribution</h2>
+      </div>
+      <div class="section__text">
+        <p>Minimum order quantities for inclusive sizing collections are structured to be accessible while enabling efficient production. Our standard minimum of 300 pieces per style applies to the total quantity across all sizes, not per size. This means brands can distribute their 300 pieces across the inclusive size range according to their target market demographics. For example, a brand might order 50 pieces each across six sizes, or concentrate more pieces in sizes that align with their customer base.</p>
+        
+        <p>We recommend size distribution ratios based on market data and brand-specific customer demographics. General market data often shows bell curve distribution with higher quantities in mid-range sizes and lower quantities in extreme sizes. However, niche brands targeting specific demographics might require different distributions. A plus size focused brand would concentrate production in larger sizes, while a petite brand would focus on smaller sizes. Our team can provide guidance on optimal size distribution based on brand positioning and target market.</p>
+        
+        <p>For brands new to inclusive sizing, we often recommend starting with a core size range and expanding based on sales data. This approach allows market testing without committing to full range production from the outset. For example, a brand might initially produce XS-3XL and add 4XL and 5XL in subsequent seasons based on customer demand and sales performance. This phased approach reduces risk while building toward full inclusivity over time.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Inclusive Sizing Guide FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is inclusive sizing in clothing manufacturing?</h3>
+          <p class="faq__answer">Inclusive sizing means producing clothing across an extended size range, typically XS-5XL, to accommodate diverse body types. It requires specialized pattern grading, fit testing across sizes, and construction adjustments to ensure consistent quality and fit throughout the size spectrum.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does pattern grading work for extended sizes?</h3>
+          <p class="faq__answer">Pattern grading for extended sizes uses mathematical grade rules to scale base patterns up and down. Standard grading increments 1-2 inches between sizes for most measurements. Extended sizing requires adjusted grade rules for larger sizes to maintain proportions, with careful attention to armholes, necklines, and waist positions.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What size range does SDF offer?</h3>
+          <p class="faq__answer">SDF offers inclusive sizing from XS to 5XL for most garment categories. We can customize size ranges per brand requirements, including petite, tall, and plus size specific ranges. Our pattern grading system maintains design integrity across all sizes with proportional scaling.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do you ensure fit consistency across sizes?</h3>
+          <p class="faq__answer">We ensure fit consistency through comprehensive fit testing using fit models across the size range, size set sampling before bulk production, and quality control measurements at each size. Fit testing evaluates garment proportions, comfort, and movement to verify that the design intent translates correctly to all sizes.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What construction adjustments are needed for plus sizes?</h3>
+          <p class="faq__answer">Plus size construction requires wider waistbands for even pressure distribution, reinforced seams at stress points, adjusted armhole depths for comfort, and strategic panel placement. These adjustments ensure that larger sizes maintain the same quality and comfort as standard sizes without compromising design aesthetics.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order for inclusive sizing?</h3>
+          <p class="faq__answer">Our minimum is 300 pieces total per style, which can be distributed across the inclusive size range. For example, 300 pieces could be split across XS-5XL according to brand requirements. We recommend size runs that reflect target market demographics for optimal inventory management.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Develop Inclusive Sizing?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for inclusive sizing manufacturing support. We provide pattern grading for XS-5XL, fit testing across size ranges, construction adjustments for plus sizes, and guidance on size distribution. Our Bangladesh manufacturing facility delivers consistent quality across extended size ranges.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/sampling-service" class="section__cta section__cta--secondary">Request Size Set</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/plus-size-clothing-manufacturer" style="color: var(--color-primary);">plus size clothing manufacturer</a>, <a href="/grading-service" style="color: var(--color-primary);">grading service</a>, <a href="/pattern-making-service" style="color: var(--color-primary);">pattern making service</a>, <a href="/garment-development-service" style="color: var(--color-primary);">garment development service</a>, <a href="/fit-engineering-service" style="color: var(--color-primary);">fit engineering service</a>, <a href="/sampling-service" style="color: var(--color-primary);">sampling service</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/clothing-manufacturers-for-startups/" style="color: var(--color-primary);">clothing manufacturers for startups</a>, <a href="/small-batch-clothing-manufacturer" style="color: var(--color-primary);">small batch clothing manufacturer</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

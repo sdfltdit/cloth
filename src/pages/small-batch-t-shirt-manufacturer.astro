@@ -1,0 +1,1136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Small Batch T-Shirt Manufacturer | 100+ Pieces | SDF";
+const pageDescription = "Small batch t-shirt manufacturer in Bangladesh. Custom t-shirts from 100 pieces for startups and designers. Screen print, embroidery and private label ready.";
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#org",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Small Batch T-Shirt Manufacturer"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for small batch t-shirts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our small batch minimum is 100 pieces per style. This applies per colorway and size range, allowing you to test designs with manageable inventory."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does small batch t-shirt production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Small batch production takes 25-30 days from fabric receipt. Sampling requires 7-10 days before bulk commitment. Rush production available at additional cost."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I mix sizes in a 100-piece small batch order?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. 100 pieces can be distributed across your size range. Common breakdown: 15 XS, 20 S, 25 M, 20 L, 15 XL, 5 XXL. We can customize size ratios based on your needs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What printing methods are available for small batch t-shirts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Screen printing from 50 pieces, digital printing from 100 pieces, embroidery from 50 pieces, heat transfer from 100 pieces. Screen print offers best durability for bulk orders."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide private label for small batch orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Private label is standard on all orders regardless of quantity. Custom woven labels, printed care labels, hang tags, and branded packaging included."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What fabrics are available for small batch t-shirt production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "100% cotton (140-220 GSM), cotton-polyester blends, tri-blends, organic cotton (GOTS certified), recycled polyester (GRS certified). Fabric sourcing included in production."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does small batch t-shirt production cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pricing depends on fabric, decoration, and quantity. Basic cotton t-shirts: $3-6 per piece at 100 pieces, $2-4 per piece at 300 pieces. Use our price calculator at /tools/price-calculator for estimates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I scale from small batch to larger orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Many brands start with 100-300 piece batches to validate designs, then scale to 1,000+ pieces as demand grows. Same supplier, same quality, consistent production throughout."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Small Batch T-Shirt Manufacturing Service",
+      "description": "Custom t-shirt manufacturing from 100 pieces for startups and designers with screen print, embroidery, and private label options",
+      "provider": {
+        "@id": "https://sdfltd.com/#org"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Small Batch Manufacturing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Small Batch T-Shirt Production"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "100",
+              "maxPrice": "500"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Small Batch T-Shirts from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Design Brief",
+          "text": "Send your design idea, fabric preference, size range, target quantity, and decoration requirements via our contact form."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Quote Within 24 Hours",
+          "text": "Get detailed pricing including fabric cost, unit price, sampling fee, and lead times. No vague estimates | every cost itemized."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Samples",
+          "text": "Receive physical samples in 7-10 days. Evaluate fit, fabric, print quality. Revisions included before bulk commitment."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Place Bulk Order",
+          "text": "Confirm purchase order for 100+ pieces. Production starts with inline quality checks throughout the run."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Shipment",
+          "text": "Final inspection, packing, and export documentation. Ship to your freight forwarder or direct warehouse."
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Small Batch T-Shirt Manufacturer</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Small Batch Production | Since 1998 | Bangladesh Factory</div>
+        <h1 class="hero__title">Small Batch T-Shirt Manufacturer | Custom T-Shirts from 100 Pieces for Independent Brands</h1>
+        <p class="hero__description">
+          Launch your t-shirt brand without the traditional high minimums. SDF Clothing manufactures custom t-shirts in Bangladesh from 100 pieces per style with screen printing, embroidery, and private label. Perfect for startups, designers, and brands testing new designs. Explore our <a href="/clothing-manufacturers/" style="color:#e00;text-decoration:none;">clothing manufacturers</a> and <a href="/small-batch-clothing-manufacturer/" style="color:#e00;text-decoration:none;">small batch clothing manufacturer</a>.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact/" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20small%20batch%20t-shirts`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">100</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">25-30</span>
+          <span class="hero__stat-label">Days Production</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">98%</span>
+          <span class="hero__stat-label">On-Time Delivery</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>GOTS Organic Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>ISO 9001 Quality</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>BSCI Social Compliance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Understanding Small Batch</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What Small Batch T-Shirt Manufacturing Actually Means</h2>
+      </div>
+      <div class="section__text">
+        <p>Small batch t-shirt production typically refers to orders between 100-300 pieces per style, compared to traditional bulk manufacturing which requires 1,000-5,000 pieces minimum. This quantity range bridges the gap between print-on-demand services (which offer single pieces at high unit costs) and full-scale manufacturing (which requires massive commitments). For fashion brand founders, small batch means you can validate your designs, test market response, and build customer loyalty without tying up capital in excess inventory that may never sell.</p>
+        
+        <p>The 100-piece minimum at SDF applies per style, colorway, and size range. This means you can order 100 pieces of a single t-shirt design in one color across multiple sizes, or split the quantity across two colors with 50 pieces each. The flexibility allows you to test different design variations, color combinations, or fabric weights without committing to large quantities of each variant. For example, a streetwear brand might order 100 pieces of a heavyweight black tee to test design quality, then follow up with 300 pieces across three colors once customer response is confirmed.</p>
+        
+        <p>Small batch production at SDF maintains the same quality standards as our bulk orders. Every t-shirt receives the same attention to fabric sourcing, construction quality, and decoration precision regardless of order size. The difference is in production planning | we optimize cutting layouts and production scheduling for smaller runs without compromising on stitching, print application, or finishing quality. Your 100-piece order receives the same care as a 10,000-piece order from larger brands. This approach enables independent designers to compete on quality with established brands from day one.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Cost Analysis</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Small Batch vs Bulk | Cost Per Unit Comparison</h2>
+      </div>
+      <div class="section__text">
+        <p>Understanding the cost structure of small batch vs bulk production helps you make informed decisions about when to scale. The table below shows typical FOB Bangladesh pricing for basic cotton t-shirts with single-color screen print. Unit costs decrease as quantity increases due to fabric sourcing efficiency, production setup optimization, and decoration economies of scale. However, small batch pricing remains competitive compared to domestic production or print-on-demand alternatives.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Quantity</th>
+              <th>Cost/Unit</th>
+              <th>Total FOB</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>100 pieces</td>
+              <td>$5.50 - $6.50</td>
+              <td>$550 - $650</td>
+              <td>Design validation, market testing</td>
+            </tr>
+            <tr>
+              <td>200 pieces</td>
+              <td>$4.50 - $5.50</td>
+              <td>$900 - $1,100</td>
+              <td>Small brand launch, limited drops</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>300 pieces</td>
+              <td>$3.50 - $4.50</td>
+              <td>$1,050 - $1,350</td>
+              <td>Brand scaling, seasonal collection</td>
+            </tr>
+            <tr>
+              <td>500 pieces</td>
+              <td>$3.00 - $4.00</td>
+              <td>$1,500 - $2,000</td>
+              <td>Growing brand, wholesale orders</td>
+            </tr>
+            <tr>
+              <td>1,000 pieces</td>
+              <td>$2.50 - $3.50</td>
+              <td>$2,500 - $3,500</td>
+              <td>Established brand, bulk orders</td>
+            </tr>
+            <tr>
+              <td>2,000+ pieces</td>
+              <td>$2.00 - $3.00</td>
+              <td>$4,000 - $6,000+</td>
+              <td>Large scale production, retail chains</td>
+            </tr>
+          </tbody>
+          <caption>Prices are FOB Bangladesh for basic cotton t-shirts (160-180 GSM) with single-color screen print. Actual pricing depends on fabric, decoration complexity, and current market conditions.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Fabric Options</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Fabric Options Available at Small Batch Quantities</h2>
+      </div>
+      <div class="section__text">
+        <p>Small batch production doesn't mean limited fabric options. SDF offers the full range of t-shirt fabrics at 100-piece minimums, including premium materials that many manufacturers restrict to bulk orders only. This enables you to differentiate your brand through fabric quality from launch, rather than upgrading materials later. All fabrics are tested for colorfastness, shrinkage, and durability regardless of order size.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Fabric</th>
+              <th>GSM</th>
+              <th>Best For</th>
+              <th>Small Batch Available?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>100% Cotton (Carded Open End)</td>
+              <td>140-160</td>
+              <td>Basic tees, promotional items</td>
+              <td>Yes</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>100% Cotton (Combed Ring Spun)</td>
+              <td>160-180</td>
+              <td>Premium tees, retail quality</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>100% Cotton (Heavyweight)</td>
+              <td>200-220</td>
+              <td>Streetwear, winter tees</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Cotton-Polyester Blend (65/35)</td>
+              <td>150-180</td>
+              <td>Durability, color retention</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Tri-Blend (50/25/25)</td>
+              <td>140-160</td>
+              <td>Vintage feel, heathered look</td>
+              <td>Yes</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Organic Cotton (GOTS Certified)</td>
+              <td>160-180</td>
+              <td>Sustainable brands, premium positioning</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Recycled Polyester (GRS Certified)</td>
+              <td>140-160</td>
+              <td>Performance tees, eco-friendly</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+          <caption>GSM = grams per square meter. Higher GSM indicates heavier, more durable fabric. All fabrics available at 100-piece minimum with full certification documentation.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Decoration Methods</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Print and Decoration at Small Batch</h2>
+      </div>
+      <div class="section__text">
+        <p>Decoration method selection impacts both cost and quality at small batch quantities. Screen printing offers the best durability and cost efficiency for orders above 50 pieces, while digital printing enables full-color designs without setup costs at 100-piece minimums. Embroidery adds premium positioning for logos and brand marks. SDF provides all decoration methods in-house, ensuring quality control and consistent application across your order.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Min Qty</th>
+              <th>Colors</th>
+              <th>Durability</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Screen Print</td>
+              <td>50 pieces</td>
+              <td>1-6 colors</td>
+              <td>Excellent (50+ washes)</td>
+              <td>Low ($0.15-0.30/color)</td>
+            </tr>
+            <tr>
+              <td>Digital Print (DTG)</td>
+              <td>100 pieces</td>
+              <td>Unlimited</td>
+              <td>Good (30+ washes)</td>
+              <td>Medium ($0.50-1.00/pc)</td>
+            </tr>
+            <tr>
+              <td>Embroidery</td>
+              <td>50 pieces</td>
+              <td>Unlimited</td>
+              <td>Excellent (lifetime)</td>
+              <td>Medium ($0.50-2.00/logo)</td>
+            </tr>
+            <tr>
+              <td>Heat Transfer</td>
+              <td>100 pieces</td>
+              <td>Full color</td>
+              <td>Good (20+ washes)</td>
+              <td>Low ($0.20-0.50/pc)</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Plastisol Transfer</td>
+              <td>100 pieces</td>
+              <td>1-6 colors</td>
+              <td>Excellent (50+ washes)</td>
+              <td>Low ($0.20-0.40/pc)</td>
+            </tr>
+          </tbody>
+          <caption>Costs are approximate and depend on design size, complexity, and quantity. Screen print recommended for bulk orders; digital print for full-color small batches.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Our Process</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">SDF Small Batch Process | From Design to Delivery</h2>
+      </div>
+      <div class="process">
+        <div class="process__step">
+          <div class="process__number">1</div>
+          <div class="process__content">
+            <h3 class="process__title">Submit Your Design Brief</h3>
+            <p class="process__text">Include your design concept, fabric preference, size range, target quantity, and decoration requirements. We accept everything from rough sketches to finished tech packs. Submit via <a href="/contact/" style="color: var(--color-primary);">our sample request form</a> or the contact form. Response within 24 hours with initial assessment.</p>
+          </div>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">2</div>
+          <div class="process__content">
+            <h3 class="process__title">Receive Detailed Quote</h3>
+            <p class="process__text">Quote includes fabric options, unit cost at target quantity, sampling fee, decoration costs, and both sample and bulk lead times. No vague estimates | every cost itemized so you know exactly what you're committing to before any payment. Adjust quantity or specifications to optimize pricing.</p>
+          </div>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">3</div>
+          <div class="process__content">
+            <h3 class="process__title">Sample Production | 7 to 10 Days</h3>
+            <p class="process__text">One to three samples per design depending on complexity. You receive physical samples at your address for evaluation. Check fit across size range, fabric hand feel, print or embroidery quality, label placement. Revisions included before bulk commitment. No order proceeds until sample approval.</p>
+          </div>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">4</div>
+          <div class="process__content">
+            <h3 class="process__title">Place Bulk Order | From 100 Pieces</h3>
+            <p class="process__text">Purchase order confirmation starts production. 30% deposit required, balance before shipment. Inline quality checks run throughout production at cutting, sewing, and finishing stages. Production capacity: 50,000 pieces per month per style. Your order never delayed by full production floor.</p>
+          </div>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">5</div>
+          <div class="process__content">
+            <h3 class="process__title">Final Inspection, Packing, and Shipment</h3>
+            <p class="process__text">AQL final inspection before packing. Ship to your freight forwarder or direct to warehouse. Full documentation included: packing list, commercial invoice, certifications, test reports. Goods arrive ready for retail or distribution. Track shipment status throughout transit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Pricing Strategy</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Pricing Your Small Batch T-Shirt Brand</h2>
+      </div>
+      <div class="section__text">
+        <p>Pricing your t-shirt brand correctly from launch determines profitability and market positioning. Small batch production has higher unit costs than bulk manufacturing, but this enables premium positioning and lower inventory risk. A typical pricing strategy for small batch t-shirts starts with landed cost calculation, then applies markup based on brand positioning and sales channel.</p>
+        
+        <p><strong>Landed Cost Example (300 pieces, Bangladesh to USA):</strong></p>
+        <p>FOB Bangladesh: $3.50 per piece (basic cotton tee with single-color screen print)<br>
+        Shipping: $0.30 per piece (sea freight, consolidated container)<br>
+        Duties: $0.20 per piece (16.5% HTSUS 6109.10)<br>
+        Local delivery: $0.10 per piece (truck to warehouse)<br>
+        <strong>Total Landed Cost: $4.10 per piece</strong></p>
+        
+        <p><strong>Retail Pricing Scenarios:</strong></p>
+        <p>Direct-to-Consumer (DTC): $25-35 per piece (6-8.5x markup)<br>
+        Wholesale to boutiques: $12-15 per piece (3-3.5x markup)<br>
+        Private label for retailers: $8-10 per piece (2-2.5x markup)</p>
+        
+        <p>Use our <a href="/tools/price-calculator/" style="color: var(--color-primary);">price calculator</a> to estimate landed costs based on your specific quantity, fabric, and decoration choices. The calculator includes shipping estimates by destination country, duty rates by HS code, and recommended retail pricing by sales channel. This helps you make informed decisions about quantity and positioning before committing to production.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Small Batch T-Shirt FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order quantity for small batch t-shirts?</h3>
+          <p class="faq__answer">Our small batch minimum is 100 pieces per style. This applies per colorway and size range, allowing you to test designs with manageable inventory. You can split 100 pieces across multiple sizes (typically 15 XS, 20 S, 25 M, 20 L, 15 XL, 5 XXL) or across two colors with 50 pieces each.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does small batch t-shirt production take?</h3>
+          <p class="faq__answer">Small batch production takes 25-30 days from fabric receipt. Sampling requires 7-10 days before bulk commitment. Fabric sourcing adds 5-7 days if not using stock fabrics. Rush production available at additional cost for urgent deadlines.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can I mix sizes in a 100-piece small batch order?</h3>
+          <p class="faq__answer">Yes. 100 pieces can be distributed across your size range. Common breakdown: 15 XS, 20 S, 25 M, 20 L, 15 XL, 5 XXL. We can customize size ratios based on your target market or customer data. Same pricing regardless of size distribution.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What printing methods are available for small batch t-shirts?</h3>
+          <p class="faq__answer">Screen printing from 50 pieces, digital printing from 100 pieces, embroidery from 50 pieces, heat transfer from 100 pieces. Screen print offers best durability for bulk orders. Digital print enables full-color designs without setup costs. Embroidery adds premium positioning for logos.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you provide private label for small batch orders?</h3>
+          <p class="faq__answer">Yes. Private label is standard on all orders regardless of quantity. Custom woven labels, printed care labels, hang tags, and branded packaging included. Your brand appears on the product from day one | not added as an afterthought. No extra cost for private label services.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What fabrics are available for small batch t-shirt production?</h3>
+          <p class="faq__answer">100% cotton (140-220 GSM), cotton-polyester blends, tri-blends, organic cotton (GOTS certified), recycled polyester (GRS certified). Fabric sourcing included in production. All fabrics tested for colorfastness, shrinkage, and durability regardless of order size.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How much does small batch t-shirt production cost?</h3>
+          <p class="faq__answer">Pricing depends on fabric, decoration, and quantity. Basic cotton t-shirts: $5-6 per piece at 100 pieces, $3.50-4.50 per piece at 300 pieces. Use our <a href="/tools/price-calculator/" style="color: var(--color-primary);">price calculator</a> at /tools/price-calculator for detailed estimates including shipping and duties.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can I scale from small batch to larger orders?</h3>
+          <p class="faq__answer">Yes. Many brands start with 100-300 piece batches to validate designs, then scale to 1,000+ pieces as demand grows. Same supplier, same quality, consistent production throughout. No need to change manufacturers as you scale | we grow with your brand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Start Your Small Batch T-Shirt Production?</h2>
+      <p class="section__text">
+Send us your t-shirt spec — fabric weight, fit, and print or embroidery needs — through <a href="/contact/" style="color: var(--color-primary);">our sample request form</a>. We'll come back within 24 hours with fabric options, pricing, and a production timeline. No commitment on the first quote.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/contact/" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/t-shirt-manufacturer" style="color: var(--color-primary);">t-shirt manufacturer</a>, <a href="/small-batch-clothing-manufacturer" style="color: var(--color-primary);">small batch clothing manufacturer</a>, <a href="/low-moq-clothing-manufacturers/" style="color: var(--color-primary);">low MOQ clothing manufacturers</a>, <a href="/private-label-clothing-manufacturer" style="color: var(--color-primary);">private label manufacturer</a>, <a href="/embroidery-service" style="color: var(--color-primary);">embroidery service</a>, <a href="/printing-service/" style="color: var(--color-primary);">printing service</a>, <a href="/clothing-manufacturers-for-startups/" style="color: var(--color-primary);">clothing manufacturers for startups</a>, <a href="/how-to-start-a-clothing-brand" style="color: var(--color-primary);">how to start a clothing brand</a>, <a href="/tools/price-calculator/" style="color: var(--color-primary);">price calculator</a>.
+      </p>
+    </div>
+  </section>
+
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)">
+<div style="max-width:900px;margin:0 auto;padding:0 1.5rem">
+<h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">
+Why Work with a Bangladesh Clothing Manufacturer?
+</h2>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+T-shirts look simple but expose fabric problems fast — shrinkage, pilling, and
+inconsistent GSM show up within a few washes. Bangladesh's jersey knitting
+mills, part of an industry shipping $47 billion in apparel a year, have
+decades of practice holding those tolerances tight even on short runs.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+Because that jersey capacity is local and abundant, small orders don't get
+priced like a special favor. SDF Clothing works to a 100-piece minimum,
+holds GOTS and OEKO-TEX certification, and ships EU orders duty-free under
+the GSP scheme.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+T-shirt-specific expertise here covers ringspun and combed cotton sourcing,
+side-seam and tubular construction options, and consistent GSM control across
+a print or embroidery run — the details that separate a t-shirt that holds up
+from one that doesn't. Lead times run 30 to 40 days from fabric receipt.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+US brands sourcing t-shirts from Bangladesh avoid the Section 301 tariffs
+applied to Chinese cotton-knit imports, and EU brands get GSP duty-free
+treatment on qualifying codes. On a low-margin basics category, that tariff
+gap is often the difference in whether a small run is worth running at all.
+</p>
+<h3 style="font-size:1.25rem;font-weight:600;color:var(--color-text);margin:2rem 0 1rem">
+Small-Batch T-Shirt Production Through SDF Clothing
+</h3>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+We produce t-shirts as a direct-access factory — you work with our knitting
+and sewing floor directly, sign off on GSM and fabric standard yourself, and
+pay no agent markup. Certifications on file include GOTS, OEKO-TEX Standard
+100, BSCI, WRAP, and ISO 9001.
+</p>
+<p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">
+We've taken brands from a first 100-piece test batch through to established
+labels reordering tens of thousands of units per style. Fabric sourcing, print
+and embroidery, tech pack development, sampling, bulk production, and quality
+inspection are all handled in-house, under one point of contact,
+from your first enquiry to shipment confirmation.
+</p>
+</div>
+</section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .process {
+    margin-top: var(--spacing-md);
+  }
+
+  .process__step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .process__step:last-child {
+    border-bottom: none;
+  }
+
+  .process__number {
+    width: 50px;
+    height: 50px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .process__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .process__text {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+
+    .process__step {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+    }
+
+    .process__number {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+

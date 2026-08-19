@@ -1,0 +1,996 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, schemaPerson, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Clothing Manufacturer Morocco | North Africa Hub Since 1998";
+const pageDescription = "Leading clothing manufacturer in Morocco since 1998. 300 piece MOQ, GOTS certified, 13 certifications. Get free FOB quote for your fashion brand today.";
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20clothing%20manufacturing%20from%20Morocco`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-20",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#org" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for clothing manufacturers in Morocco?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most Morocco garment factories have MOQs ranging from 300 to 1,000 pieces per style. At SDF Clothing, we offer 300 piece minimums per style with flexible size and color combinations, making us ideal for startup brands and boutique labels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why choose Morocco for clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Morocco offers duty-free access to EU markets, proximity to Europe (fast shipping), skilled workforce, and strong textile heritage. The country's garment industry contributes 16% to GDP with $4 billion in annual exports. Morocco is known for fast fashion and quick turnaround times."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does clothing production take in Morocco?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard lead time for bulk production is 30-40 days from fabric sourcing to shipment. Sample development takes 7-14 days. We provide clear timeline commitments and track production closely to ensure on-time delivery for your fashion brand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications should I look for in a Morocco clothing manufacturer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Key certifications include GOTS (organic cotton), OEKO-TEX (chemical safety), BSCI (social compliance), WRAP (ethical manufacturing), ISO 9001 (quality management), and SA8000 for social accountability. Morocco has strong labor laws and monitoring. SDF Clothing holds 13 international certifications covering quality, social compliance, and environmental standards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the payment terms for Morocco clothing manufacturers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard payment terms are 30% deposit to start production and 70% before shipment. We accept T/T (wire transfer), Letter of Credit (L/C), and bank transfers. For established clients, we offer flexible payment arrangements based on order volume and relationship history."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What makes Morocco's textile industry unique?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Morocco is North Africa's largest textile manufacturer, known for proximity to European markets (10-day shipping to EU), duty-free EU access through trade agreements, and fast fashion capabilities. The country specializes in quick turnaround production and serves major European retailers. Morocco's textile heritage dates back centuries."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What services do Morocco clothing manufacturers offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Full-service manufacturers offer OEM (original equipment manufacturing), private label production, CMT (cut-make-trim), fabric sourcing, tech pack development, sampling, quality control, and logistics coordination. SDF provides end-to-end solutions from design to delivery."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find a reliable clothing manufacturer in Morocco?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Look for Moroccan Association of Textile Industries (AMITH) membership, verify certifications with issuing bodies, request factory audits, check client references, and start with sample orders. Reliable manufacturers are transparent about capabilities, pricing, and lead times. Contact us for a factory tour or video consultation."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": { "@id": SITE + "/#org" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "300",
+          "description": "Starting MOQ | 300 pieces per style"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Work with a Morocco Clothing Manufacturer",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Prepare Your Tech Pack",
+          "text": "Create detailed technical specifications including measurements, materials, colors, and construction details. Well-prepared tech packs reduce sampling time and ensure accurate production."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Request Quote and MOQ Confirmation",
+          "text": "Submit your requirements for pricing. Confirm MOQ requirements, lead times, and payment terms. Get a written quote with all costs including fabric, production, and shipping."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Samples",
+          "text": "Produce pre-production samples for approval. This step typically takes 7-14 days. Approve samples before bulk production to ensure quality standards are met."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Place Bulk Order",
+          "text": "Pay deposit (typically 30%) to start production. Monitor production through regular updates and quality checks. Production time is usually 30-40 days."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Inspection and Shipment",
+          "text": "Final inspection before shipping. Pay balance (70%) before shipment. Arrange shipping (FOB, CIF, or DDP terms). Receive goods and provide feedback for future orders."
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema} hreflangRegion="MA">
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Clothing Manufacturer Morocco</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Established 1998 | North Africa's Gateway to Europe</p>
+        <h1 class="hero__title">Clothing Manufacturer Morocco</h1>
+        <p class="hero__description">
+          SDF Clothing serves global fashion brands through Morocco's strategic textile ecosystem. As a clothing manufacturer with deep expertise in Morocco's garment industry, we offer 300 piece minimum orders, GOTS organic certification, and 13 international quality standards. From startup brands to established labels, we deliver premium garments leveraging Morocco's proximity to European markets and fast turnaround capabilities. Explore our <a href="/clothing-manufacturers/" style="color:#e00;text-decoration:none;">complete manufacturing services</a> and <a href="/clothing-manufacturer-bangladesh/" style="color:#e00;text-decoration:none;">Bangladesh operations</a>.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">300+</span>
+            <span class="hero__stat-label">Pieces MOQ</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">25+</span>
+            <span class="hero__stat-label">Years Experience</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">13</span>
+            <span class="hero__stat-label">Certifications</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">98%</span>
+            <span class="hero__stat-label">On-Time Delivery</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get a Free Factory Quote
+          </a>
+          <a href="/contact/" class="hero__cta hero__cta--secondary">
+            Download Capability Deck
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="SDF Clothing textile manufacturing facility" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">GOTS Certified Organic</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">BSCI Social Compliance</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">WRAP Ethical Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">C-TPAT Supply Chain Security</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">ISO 9001 Quality Management</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Overview -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What is a Clothing Manufacturer in Morocco?</h2>
+      <p class="section__text">
+        A clothing manufacturer in Morocco operates within North Africa's largest textile production hub, strategically positioned as a gateway to European markets. Morocco's garment industry has evolved into a competitive manufacturing destination, driven by trade agreements with the EU, geographic proximity to Europe, and a skilled workforce. The country's textile sector contributes 16% to GDP and employs over 200,000 workers across approximately 700 factories. Major manufacturing zones include Tangier, Casablanca, and Fez, with concentrations in free trade zones offering additional benefits.
+      </p>
+      <p class="section__text">
+        Morocco clothing manufacturers specialize in fast fashion, denim, woven garments, and technical apparel. The country's advantage lies in its proximity to European markets - just 10-14 days by sea to major European ports - duty-free access through EU trade agreements, and expertise in quick turnaround production. Many manufacturers, including SDF Clothing's Morocco partnerships, offer full-package production services covering fabric sourcing (often from Europe or Turkey), design development, sampling, manufacturing, quality control, and export logistics. The industry benefits from Morocco's trade relationships and cultural ties to Europe.
+      </p>
+      <p class="section__text">
+        According to the <a href="https://www.amith.ma/" target="_blank" rel="noopener noreferrer">Moroccan Association of Textile Industries (AMITH)</a>, the country exports to over 100 countries with annual garment exports exceeding $4 billion. Major buyers include Zara, H&M, Mango, Primark, and thousands of emerging fashion brands. Morocco manufacturers produce everything from fast fashion to premium denim and technical garments. For brands seeking <a href="/low-moq-clothing-manufacturers/">low MOQ clothing manufacturers</a> or <a href="/clothing-manufacturers-for-startups/">clothing manufacturers for startups</a>, Morocco offers competitive advantages through its EU proximity and fast fashion capabilities. Our <a href="/sampling-service">sampling service</a> helps perfect designs before production.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Why Morocco -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Why Choose Morocco for Clothing Manufacturing?</h2>
+      <p class="section__text">
+        Fashion brands worldwide source from Morocco for compelling strategic reasons. The country offers manufacturing advantages unique to its geographic position and trade relationships. This advantage stems from EU proximity, duty-free access, skilled workforce, and expertise in fast fashion production.
+      </p>
+      
+      <h3 class="section__subtitle">Proximity to European Markets</h3>
+      <p class="section__text">
+        Morocco's geographic advantage is unmatched - just 14km from Spain across the Strait of Gibraltar. Shipping time to major European ports is 10-14 days by sea, compared to 30-40 days from Asia. This proximity reduces lead times significantly, enabling faster replenishment and quick response to fashion trends. For European brands, Morocco offers near-shore manufacturing with Asian cost advantages. SDF leverages this proximity to provide fast turnaround for EU-focused brands.
+      </p>
+      
+      <h3 class="section__subtitle">Duty-Free EU Access</h3>
+      <p class="section__text">
+        Morocco enjoys duty-free access to European Union markets through the EU-Morocco Association Agreement. This preferential treatment provides significant duty advantages over competitors like China and India. Moroccan garments enter the EU duty-free, directly improving margins for brands targeting European markets. This trade preference makes Morocco particularly attractive for EU-focused brands seeking cost advantages.
+      </p>
+      
+      <h3 class="section__subtitle">Fast Fashion Expertise</h3>
+      <p class="section__text">
+        Morocco has developed expertise in fast fashion production, serving major European retailers like Zara and Mango. The industry excels at quick turnaround production, enabling brands to respond rapidly to changing fashion trends. Fast fashion requires efficient production processes, flexible manufacturing, and quick decision-making - Morocco's industry has mastered these capabilities. For brands requiring fast replenishment or trend-driven production, Morocco is ideal.
+      </p>
+      
+      <h3 class="section__subtitle">Skilled Workforce</h3>
+      <p class="section__text">
+        Morocco's garment workforce benefits from strong technical education and training programs. The country has invested in textile education, producing skilled pattern makers, sample makers, and production managers. Many workers speak French and English, facilitating communication with European brands. This skilled workforce ensures consistent quality, especially for fashion-forward garments requiring construction expertise.
+      </p>
+      
+      <h3 class="section__subtitle">Textile Heritage</h3>
+      <p class="section__text">
+        Morocco has centuries of textile tradition, from traditional Moroccan craftsmanship to modern garment production. This heritage translates to an appreciation for quality and attention to detail. The country's textile culture includes expertise in embroidery, finishing, and decorative techniques that add value to garments. This cultural heritage influences quality standards and craftsmanship in modern manufacturing.
+      </p>
+      
+      <h3 class="section__subtitle">Free Trade Zones</h3>
+      <p class="section__text">
+        Morocco has established Free Trade Zones (FTZs) like Tanger Med and Tangier Free Zone, offering additional benefits including tax exemptions, streamlined customs, and reliable infrastructure. These zones attract international investment and provide modern manufacturing facilities. FTZs enhance Morocco's competitiveness by reducing operational costs and improving efficiency for export-oriented manufacturers.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: SDF's Approach -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">How SDF Clothing Leverages Morocco Manufacturing</h2>
+      <p class="section__text">
+        SDF Clothing leverages Morocco's strategic textile ecosystem to deliver exceptional value to fashion brands, particularly those targeting European markets. Founded in 1998, we built our business to serve startup and emerging fashion brands that most large manufacturers overlook. While many factories require 1,000+ piece minimums, we offer 300 piece orders per style with flexible size and color combinations, utilizing Morocco's advantages to pass benefits to our clients.
+      </p>
+      
+      <h3 class="section__subtitle">EU Market Focus</h3>
+      <p class="section__text">
+        Through our Morocco operations, we specialize in serving EU-focused brands. Morocco's duty-free EU access and 10-14 day shipping time to European ports provide significant advantages for European markets. We structure production and logistics to maximize these benefits, reducing your landed costs and lead times. For brands targeting Europe, Morocco manufacturing offers strategic advantages unmatched by Asian hubs.
+      </p>
+      
+      <h3 class="section__subtitle">Low MOQ Specialization</h3>
+      <p class="section__text">
+        Our 300 piece minimum makes us accessible to brands testing new designs, launching capsule collections, or scaling gradually. We understand that not every brand can commit to large orders initially. This flexibility has made us a preferred partner for over 500 startup brands across 60+ countries since our founding. Morocco's capabilities enable us to handle low MOQs without compromising on quality or turnaround time.
+      </p>
+      
+      <h3 class="section__subtitle">Certified Quality</h3>
+      <p class="section__text">
+        Morocco's proximity to the EU is a logistics advantage, but the compliance standard behind it is the same 13 international certifications we hold everywhere: GOTS, OEKO-TEX, BSCI, WRAP, ISO 9001, and C-TPAT, spanning quality, social compliance, and environmental controls. All are third-party audited, with reports available on request for your compliance file. Browse the full <a href="/certifications">certification list</a>, and lean on our <a href="/tech-pack-service">tech pack service</a> if your designs still need finalizing.
+      </p>
+      
+      <h3 class="section__subtitle">Transparent Pricing</h3>
+      <p class="section__text">
+        Our quotes are FOB (Free On Board) Tanger Med or Casablanca, clearly itemizing fabric costs, labor, finishing, quality inspection, and port delivery. We never add hidden charges. Morocco's competitive cost structure and duty-free EU access translate to favorable pricing for European markets. You'll know exactly what you're paying for before production begins. This transparency builds trust and helps you make informed sourcing decisions.
+      </p>
+      
+      <h3 class="section__subtitle">Dedicated Support</h3>
+      <p class="section__text">
+        Each client works with a dedicated account manager who speaks fluent English and understands international fashion markets. Morocco's multilingual workforce (French, English, Arabic) ensures clear communication throughout production. We provide regular production updates, photos of samples, and proactively communicate about any potential delays. Our 98% on-time delivery rate reflects our commitment to reliability. Whether you need <a href="/private-label-clothing-manufacturer">private label manufacturing</a> or full OEM production, we adapt to your brand's specific requirements. Our <a href="/quality-inspection-service">quality inspection service</a> ensures standards, and our <a href="/fit-engineering-service">fit engineering service</a> guarantees proper fit.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Step-by-Step Process -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">How to Work with a Morocco Clothing Manufacturer</h2>
+      <p class="section__text">
+        Working with a Morocco manufacturer follows a structured process similar to other manufacturing hubs, with the advantage of faster shipping to European markets. Understanding each step helps you manage expectations and ensure smooth production. Here's the complete workflow from initial contact to final delivery.
+      </p>
+      
+      <div class="process">
+        <div class="process__step">
+          <div class="process__number">1</div>
+          <h3 class="process__title">Prepare Your Tech Pack</h3>
+          <p class="process__text">
+            A tech pack is your blueprint. It should include detailed technical specifications: measurements (size charts), materials (fabric type, weight, composition), colors (Pantone or color references), construction details (stitch types, seam allowances), and any special requirements. Morocco factories often source fabric from Europe or Turkey - specify if you have fabric preferences. Well-prepared tech packs reduce sampling time and ensure accurate production. If you don't have a tech pack, we can help develop one for a fee.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">2</div>
+          <h3 class="process__title">Request Quote and MOQ Confirmation</h3>
+          <p class="process__text">
+            Submit your tech pack and requirements for pricing. Specify order quantity per style, size breakdown, color variations, and delivery timeline. We'll provide a written quote including fabric costs (sourced from Europe, Turkey, or locally), labor, finishing, quality inspection, and FOB shipping to Tanger Med port. Confirm MOQ requirements - our minimum is 300 pieces per style with flexible size/color combinations. The quote process typically takes 2-3 business days.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">3</div>
+          <h3 class="process__title">Develop Samples</h3>
+          <p class="process__text">
+            Before bulk production, we develop pre-production samples for your approval. This step typically takes 7-14 days depending on complexity and fabric sourcing. You'll receive photos first, then physical samples via courier for final approval. Review samples carefully for fit, fabric quality, construction, and overall finish. Approve samples in writing before bulk production begins. Sample costs are typically credited against bulk orders.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">4</div>
+          <h3 class="process__title">Place Bulk Order</h3>
+          <p class="process__text">
+            Once samples are approved, pay the deposit (typically 30%) to start production. We'll provide a production schedule with key milestones: fabric sourcing, cutting, sewing, finishing, and quality inspection. Production time is usually 30-40 days from deposit to shipment. We send regular updates including photos of production progress. You can request a third-party inspection before final payment. Morocco's expertise in fast fashion supports efficient production.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">5</div>
+          <h3 class="process__title">Quality Inspection and Shipment</h3>
+          <p class="process__text">
+            Before shipment, we conduct AQL 2.5 quality inspection based on international standards. You can request your own inspector or use third-party services like SGS, Bureau Veritas, or Intertek (present in Morocco). Once inspection passes, pay the balance (70%) and we release shipment from Tanger Med port. We handle export documentation, customs clearance, and coordinate with your freight forwarder. Shipping time to Europe is 10-14 days, significantly faster than Asian hubs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: What to Look For -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What to Look for in a Morocco Clothing Manufacturer</h2>
+      <p class="section__text">
+        Morocco has approximately 700 garment factories, ranging from small facilities to large-scale industrial complexes in free trade zones. While the industry is competitive, not all factories are equal. Here's what to evaluate when selecting a manufacturing partner in Morocco's textile ecosystem.
+      </p>
+      
+      <h3 class="section__subtitle">AMITH Membership</h3>
+      <p class="section__text">
+        Legitimate manufacturers are members of the Moroccan Association of Textile Industries (AMITH). Membership indicates compliance with industry standards and regulations. Verify membership on the official AMITH website. SDF Clothing maintains active membership in relevant textile associations, demonstrating our commitment to industry standards and ethical practices.
+      </p>
+      
+      <h3 class="section__subtitle">EU Compliance</h3>
+      <p class="section__text">
+        Since Morocco primarily serves EU markets, look for manufacturers with experience exporting to Europe and understanding EU requirements. Ask about REACH compliance (chemical safety), CPSIA compliance (for US markets), and experience with European brand standards. Manufacturers serving major European retailers typically have strong EU compliance systems.
+      </p>
+      
+      <h3 class="section__subtitle">Certifications</h3>
+      <p class="section__text">
+        Certifications demonstrate commitment to quality, social compliance, and environmental standards. Key certifications include GOTS (organic), OEKO-TEX (chemical safety), BSCI (social compliance), WRAP (ethical), ISO 9001 (quality), and SA8000 (social accountability). Verify certifications with issuing organizations. SDF holds 13 verifiable certifications across all categories.
+      </p>
+      
+      <h3 class="section__subtitle">Fast Fashion Capabilities</h3>
+      <p class="section__text">
+        Morocco excels at fast fashion. If you require quick turnaround or trend-driven production, look for manufacturers with experience serving fast fashion retailers. Ask about their ability to handle rush orders, design changes, and quick replenishment. SDF leverages Morocco's fast fashion expertise for brands requiring agility.
+      </p>
+      
+      <h3 class="section__subtitle">Production Capacity</h3>
+      <p class="section__text">
+        Ensure the factory can handle your order volume within your timeline. Ask about monthly production capacity, current utilization, and lead times. Morocco factories range from small 50-machine units to large facilities with 500+ machines in free trade zones. A factory at 100% capacity may delay your order. SDF has capacity for 50,000+ pieces monthly through our Morocco operations.
+      </p>
+      
+      <h3 class="section__subtitle">Communication Quality</h3>
+      <p class="section__text">
+        Morocco has strong multilingual capabilities (French, English, Arabic). Evaluate response time, language proficiency, and clarity during initial inquiries. Are they transparent about pricing and lead times? Do they ask relevant questions about your requirements? SDF prides itself on responsive, clear communication with dedicated account managers.
+      </p>
+      
+      <h3 class="section__subtitle">Client References</h3>
+      <p class="section__text">
+        Ask for references from current or past clients, especially brands similar to yours. Morocco serves major European retailers - references can include well-known companies. Contact references to ask about quality, reliability, communication, and EU compliance. SDF can provide references from brands who have worked with our Morocco operations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Comparison Table -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Morocco vs Other Manufacturing Hubs</h2>
+      <p class="section__text">
+        Fashion brands have multiple sourcing options. Understanding how Morocco compares to other major manufacturing hubs helps you make informed decisions. This comparison covers key factors affecting your choice, particularly for EU-focused brands.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Comparison of Morocco with other manufacturing hubs">
+          <caption>Morocco Manufacturing Hub Comparison</caption>
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Morocco</th>
+              <th>Turkey</th>
+              <th>Bangladesh</th>
+              <th>China</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Shipping to EU (days)</strong></td>
+              <td>10-14</td>
+              <td>7-10</td>
+              <td>30-40</td>
+              <td>30-35</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>MOQ Typical</strong></td>
+              <td>300-1,000 pieces</td>
+              <td>300-1,000 pieces</td>
+              <td>300-1,000 pieces</td>
+              <td>500-2,000 pieces</td>
+            </tr>
+            <tr>
+              <td><strong>Lead Time (days)</strong></td>
+              <td>30-40</td>
+              <td>30-35</td>
+              <td>40-45</td>
+              <td>30-35</td>
+            </tr>
+            <tr>
+              <td><strong>EU Duty</strong></td>
+              <td>0%</td>
+              <td>0%</td>
+              <td>0% (EBA until Nov 2026)</td>
+              <td>12%</td>
+            </tr>
+            <tr>
+              <td><strong>US Duty</strong></td>
+              <td>15-32%</td>
+              <td>15-32%</td>
+              <td>15-32%</td>
+              <td>15-32%</td>
+            </tr>
+            <tr>
+              <td><strong>Fast Fashion Expertise</strong></td>
+              <td>High</td>
+              <td>High</td>
+              <td>Moderate</td>
+              <td>Very High</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Language</strong></td>
+              <td>French/English</td>
+              <td>English/Turkish</td>
+              <td>English</td>
+              <td>English</td>
+            </tr>
+            <tr>
+              <td><strong>Cost Level</strong></td>
+              <td>Medium</td>
+              <td>Medium-High</td>
+              <td>Low</td>
+              <td>Medium</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="comparison" role="table" aria-label="Morocco manufacturing advantages" style="margin-top: 2rem;">
+          <thead>
+            <tr>
+              <th scope="col">Advantage</th>
+              <th scope="col">Details</th>
+              <th scope="col">Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>EU Duty-Free Access</strong></              <td>Association Agreement provides duty-free access to EU markets</td>
+              <td>European brands</td>
+            </tr>
+            <tr>
+              <td><strong>Proximity to Europe</strong></              <td>3-7 day shipping to EU vs 30+ days from Asia</td>
+              <td>Fast fashion, quick turnaround</td>
+            </tr>
+            <tr>
+              <td><strong>Language Alignment</strong></              <td>French and English widely spoken</td>
+              <td>French/European markets</td>
+            </tr>
+            <tr>
+              <td><strong>Textile Heritage</strong></              <td>Long history of textile manufacturing expertise</td>
+              <td>Quality-focused brands</td>
+            </tr>
+            <tr>
+              <td><strong>Port Infrastructure</strong></              <td>Tangier Mediterranean Port for efficient shipping</td>
+              <td>Export-oriented businesses</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="section__text">
+        <em>Data sources: World Bank, ILO, WTO, industry reports. Duty rates are approximate and vary by product category. Morocco's duty-free EU access through Association Agreement. Bangladesh EBA duty-free access expires November 2026 upon LDC graduation.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Case Study -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Success Story: Spanish Brand Optimizes with Morocco</h2>
+      <p class="section__text">
+        A Spanish-based fast fashion brand approached SDF Clothing in 2022 to optimize their supply chain for European markets. The brand produced casual wear and denim for the Spanish and broader European market but faced long lead times from Asian manufacturing, limiting their ability to respond to trends.
+      </p>
+      
+      <h3 class="section__subtitle">The Challenge</h3>
+      <p class="section__text">
+        The brand needed faster replenishment to support their fast fashion business model. Their Asia production required 35-45 days production plus 30-40 days shipping, totaling 65-85 days from order to delivery. This lead time limited their ability to respond to emerging trends. They required consistent quality comparable to their existing production with lead times under 50 days total.
+      </p>
+      
+      <h3 class="section__subtitle">The Solution</h3>
+      <p class="section__text">
+        SDF Clothing leveraged Morocco's proximity to Europe to reduce total lead time to 45 days (35 days production + 10 days shipping). We sourced fabrics from European suppliers, developed samples in 10 days, and accommodated their 400-piece MOQ across 3 styles with 6 sizes each. Our team communicated regularly via email and WhatsApp in Spanish and English, providing production updates. Morocco's duty-free EU access maintained cost advantages while significantly reducing lead time.
+      </p>
+      
+      <h3 class="section__subtitle">The Result</h3>
+      <p class="section__text">
+        The brand transitioned 70% of their EU production to Morocco by 2023. Total lead time reduced from 75 days to 45 days - a 40% improvement. Initial quality inspection showed 98% pass rate - comparable to their Asia production. The faster lead time enabled the brand to introduce new collections 3 times per year instead of 2, significantly increasing revenue. By 2024, Morocco became their primary hub for EU markets.
+      </p>
+      
+      <h3 class="section__subtitle">Key Takeaways</h3>
+      <p class="section__text">
+        This case demonstrates how Morocco manufacturing can support EU-focused fast fashion brands. Morocco's proximity to Europe and duty-free access provide significant lead time advantages without sacrificing quality or cost competitiveness. The brand improved market responsiveness by 40% while maintaining margins. The success led to expanding the product line to include dresses and blouses, all produced through Morocco operations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: Common Mistakes -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Common Mistakes Brands Make with Morocco Manufacturers</h2>
+      <p class="section__text">
+        Working with Morocco manufacturers offers significant advantages, particularly for EU markets, but brands make avoidable mistakes that can undermine these benefits. Learn from these common pitfalls to ensure smooth production and maximize Morocco's advantages.
+      </p>
+      
+      <h3 class="section__subtitle">Not Leveraging Proximity Advantage</h3>
+      <p class="section__text">
+        Morocco's proximity to Europe is its greatest advantage | 10-14 day shipping vs 30-40 days from Asia. Some brands source from Morocco but don't adjust their supply chain planning to fully utilize this speed benefit. Plan for faster replenishment and trend response when sourcing from Morocco. SDF helps brands optimize their supply chain to maximize Morocco's proximity advantage.
+      </p>
+      
+      <h3 class="section__subtitle">Overlooking Fabric Sourcing</h3>
+      <p class="section__text">
+        Morocco imports most fabric from Europe and Turkey, unlike Asian hubs with strong domestic fabric production. Some brands don't account for this in planning or cost calculations. Understand fabric sourcing implications and costs. SDF has established fabric sourcing networks in Europe and Turkey to ensure competitive pricing and reliable supply.
+      </p>
+      
+      <h3 class="section__subtitle">Not Optimizing for EU Markets</h3>
+      <p class="section__text">
+        Morocco excels for EU markets due to duty-free access and proximity. Some brands use Morocco for US or other markets, missing Morocco's core advantage. Align your Morocco production with EU-focused products to maximize benefits. SDF advises on optimal market alignment for Morocco manufacturing.
+      </p>
+      
+      <h3 class="section__subtitle">Underestimating Fast Fashion Requirements</h3>
+      <p class="section__text">
+        Morocco specializes in fast fashion with quick turnaround. Some brands approach Morocco with traditional production expectations, missing the opportunity to leverage fast fashion capabilities. If you need quick response, design changes, or trend-driven production, communicate these requirements clearly. SDF maximizes Morocco's fast fashion expertise.
+      </p>
+      
+      <h3 class="section__subtitle">Ignoring Language Advantages</h3>
+      <p class="section__text">
+        Morocco's French and English proficiency facilitates communication with European brands. Some brands don't fully utilize this advantage, settling for basic communication when deeper collaboration could improve outcomes. Leverage Morocco's multilingual capabilities for closer collaboration. SDF ensures seamless communication in multiple languages.
+      </p>
+      
+      <h3 class="section__subtitle">Not Considering Free Trade Zone Benefits</h3>
+      <p class="section__text">
+        Morocco's Free Trade Zones offer tax and operational benefits. Some brands don't consider whether their manufacturing partner operates in FTZs, missing potential cost savings. Work with FTZ-based manufacturers when possible to maximize benefits. SDF operates through FTZ partners in Morocco.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Work with Morocco's Strategic Advantages?</h2>
+      <p class="section__text">
+        Morocco's strategic textile ecosystem offers compelling advantages for fashion brands, particularly those targeting European markets. From proximity to Europe and duty-free EU access to fast fashion expertise and skilled workforce, Morocco manufacturing delivers unique value. SDF Clothing leverages these advantages to serve brands worldwide with 300 piece MOQs and certified quality.
+      </p>
+      <p class="section__text">
+        Optimizing an existing EU supply chain or launching a first collection — our Morocco operations support either path, combining fast turnaround, strategic positioning, and certified quality to deliver garments that meet your standards and improve your market responsiveness. Contact us today to discuss how Morocco manufacturing can benefit your brand.
+      </p>
+      <div style="margin-top: 2rem;">
+        <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer" style="margin-right: 1rem;">
+          Get a Free Morocco Manufacturing Quote
+        </a>
+        <a href="/contact/" class="hero__cta hero__cta--secondary">
+          Request Sample
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<style>
+  :root {
+    --color-bg: #0a0a0a;
+    --color-text: #ffffff;
+    --color-text-muted: rgba(255, 255, 255, 0.7);
+    --color-red: #e00;
+    --color-border: #1a1a1a;
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-red);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: var(--space-md) 0;
+    margin: 0;
+  }
+
+  .breadcrumb__item {
+    margin-right: var(--space-xs);
+  }
+
+  .breadcrumb__item::after {
+    content: '/';
+    margin-left: var(--space-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item--current::after {
+    content: '';
+  }
+
+  .breadcrumb a {
+    color: var(--color-red);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .hero {
+    padding: var(--space-xl) 0;
+    background: linear-gradient(135deg, var(--color-bg) 0%, #111 100%);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .hero__content {
+    color: var(--color-text);
+  }
+
+  .hero__label {
+    font-size: 0.875rem;
+    color: var(--color-red);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .hero__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 var(--space-md) 0;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 768px) {
+    .hero__title {
+      font-size: 2rem;
+    }
+  }
+
+  .hero__description {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 768px) {
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-red);
+  }
+
+  .hero__stat-label {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-red);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: #c00;
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 2px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-red);
+    color: var(--color-red);
+  }
+
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .trust {
+    padding: var(--space-lg) 0;
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-text);
+  }
+
+  .trust__icon {
+    color: var(--color-red);
+    font-weight: bold;
+  }
+
+  .section {
+    padding: var(--space-xl) 0;
+  }
+
+  .section--alt {
+    background: #111;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  .section__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 var(--space-md) 0;
+    color: var(--color-text);
+  }
+
+  .section__subtitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: var(--space-lg) 0 var(--space-sm) 0;
+    color: var(--color-text);
+  }
+
+  .section__text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .section a {
+    color: var(--color-red);
+    text-decoration: none;
+  }
+
+  .section a:hover {
+    text-decoration: underline;
+  }
+
+  .process {
+    margin-top: var(--space-lg);
+  }
+
+  .process__step {
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+
+  .process__number {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: var(--color-red);
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-bottom: var(--space-sm);
+  }
+
+  .process__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 var(--space-sm) 0;
+    color: var(--color-text);
+  }
+
+  .process__text {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--space-lg) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    padding: var(--space-sm);
+    font-style: italic;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--space-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+
+  .comparison th {
+    background: #111;
+    font-weight: 600;
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+</style>
+
+</BaseLayout>

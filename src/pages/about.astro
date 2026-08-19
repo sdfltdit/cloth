@@ -1,0 +1,924 @@
+---
+import { getYearsExperiencePlus } from '../data/company';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAge } from '../utils/companyAge';
+export const prerender = true;
+
+const yearsExp = getCompanyAge();
+
+const pageTitle = "About SDF Clothing | Our Story, Founder & Factory";
+const pageDescription = "The story of SDF Clothing — founded 1998 in Dhaka. Company history, founder Chowdhury Remon, our 75,000 sq ft factory, and how we work with brands.";
+
+// today evaluated at build time — used for dateModified in AboutPage schema
+const today = new Date().toISOString().split("T")[0];
+
+// All page-specific schemas in one @graph object.
+// Passed via schema prop → BaseLayout → BaseHead → set:html (correct Astro pattern).
+// Previously these lived in a raw <script type="application/ld+json"> block where
+// new Date().toISOString() appeared as literal JS text, breaking Google's JSON parser.
+const aboutSchemas = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://sdfltd.com/about/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+        { "@type": "ListItem", "position": 2, "name": "About" }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "legalName": "SDF Clothing Ltd",
+      "url": "https://sdfltd.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://sdfltd.com/logo-small.webp",
+        "width": 200,
+        "height": 60
+      },
+      "description": "Full-package apparel manufacturer in Dhaka, Bangladesh since 1998. OEM, private label, and CMT apparel production for international fashion brands. GOTS certified, OEKO-TEX Standard 100, BSCI, SEDEX, GRS, ISO 9001. MOQ 300 pieces. EU GSP 0% duty.",
+      "foundingDate": "1998-08-22",
+      "foundingLocation": { "@type": "Place", "name": "Dhaka, Bangladesh" },
+      "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 500 },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "House 125, Road 01, Baridhara DOHS",
+        "addressLocality": "Dhaka",
+        "postalCode": "1212",
+        "addressCountry": "BD"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": "23.8138", "longitude": "90.4128" },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+8801819172080",
+        "contactType": "sales",
+        "areaServed": ["EU","GB","US","AU","CA"],
+        "availableLanguage": "English",
+        "hoursAvailable": "Mo-Sa 08:00-18:00"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/clothing-manufacturers",
+        "https://www.facebook.com/ClothingManufacturers/",
+        "https://x.com/clothing_makers",
+        "https://www.wikidata.org/wiki/Q139678386"
+      ],
+      "hasCredential": [
+        { "@type": "EducationalOccupationalCredential", "name": "GOTS — Global Organic Textile Standard" },
+        { "@type": "EducationalOccupationalCredential", "name": "OEKO-TEX Standard 100" },
+        { "@type": "EducationalOccupationalCredential", "name": "GRS — Global Recycled Standard" },
+        { "@type": "EducationalOccupationalCredential", "name": "BSCI Social Compliance" },
+        { "@type": "EducationalOccupationalCredential", "name": "SEDEX SMETA 4-Pillar Audit" },
+        { "@type": "EducationalOccupationalCredential", "name": "ISO 9001 Quality Management" },
+        { "@type": "EducationalOccupationalCredential", "name": "REACH Chemical Compliance" }
+      ],
+      "knowsAbout": [
+        "Apparel Manufacturing Bangladesh",
+        "OEM Clothing Production",
+        "Private Label Apparel",
+        "CMT Garment Services",
+        "GOTS Organic Apparel Manufacturing",
+        "EU GSP Duty-Free Apparel Export",
+        "Digital Product Passport Compliance",
+        "Bangladesh RMG Export"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://sdfltd.com/#founder",
+      "name": "Chowdhury Remon",
+      "jobTitle": "Founder & CEO",
+      "description": `Apparel manufacturing expert with ${getYearsExperiencePlus()} years in Bangladesh's garment industry. Founded SDF Clothing in 1998. Specialist in EU supply chain compliance, GOTS organic textile standards, OEM apparel production, and international brand partnerships. BGMEA member.`,
+      "worksFor": { "@id": "https://sdfltd.com/#org" },
+      "url": "https://sdfltd.com/about",
+      "knowsAbout": ["Apparel Manufacturer Bangladesh","OEM Clothing Production","EU GSP Trade Compliance","GOTS Certification","International Fashion Sourcing"]
+    },
+    {
+      "@type": "AboutPage",
+      "@id": "https://sdfltd.com/about/#page",
+      "url": "https://sdfltd.com/about/",
+      "name": "About SDF Clothing — Apparel Manufacturer Bangladesh Since 1998",
+      "description": "About SDF Clothing Ltd — full-package apparel manufacturer in Dhaka, Bangladesh since 1998. Company history, certifications, facility details, and production capabilities.",
+      "mainEntity": { "@id": "https://sdfltd.com/#org" },
+      "author": { "@id": "https://sdfltd.com/#founder" },
+      "datePublished": "1998-08-22",
+      "dateModified": today,
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://sdfltd.com/#org" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://sdfltd.com/about/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is SDF Clothing's minimum order quantity for apparel production?",
+          "acceptedAnswer": { "@type": "Answer", "text": "300 pieces per style across OEM, private label, CMT, and ODM apparel production. Size distribution within the 300 pieces is fully flexible. No minimum total order value — a single style at 300 pieces is a standard first order." }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is SDF Clothing's apparel factory located?",
+          "acceptedAnswer": { "@type": "Answer", "text": "SDF Clothing's manufacturing facility is located in Dhaka, Bangladesh — a 75,000 sq ft purpose-built factory with dedicated production lines for knitwear, woven apparel, and outerwear. Operational since August 1998." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does SDF Clothing export apparel to EU brands duty-free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Bangladesh holds EU GSP EBA status — 0% import duty on apparel (HS chapters 61 and 62) into all 27 EU member states. SDF Clothing prepares EUR.1 Movement Certificates and all EU customs documentation for every shipment." }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications does SDF Clothing hold for apparel manufacturing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "GOTS (full chain organic), OEKO-TEX Standard 100, GRS (recycled standard), BSCI Social Compliance, SEDEX SMETA 4-pillar audit, ISO 9001 Quality Management, and REACH chemical compliance. Physical certificate copies provided with every shipment." }
+        },
+        {
+          "@type": "Question",
+          "name": "What apparel production models does SDF Clothing support?",
+          "acceptedAnswer": { "@type": "Answer", "text": "OEM (from buyer tech pack), Private Label (full branding and packaging under buyer's brand), CMT (cut, make, trim from supplied fabric), and ODM (design development adapted for buyer's market). All models supported from 300 pieces MOQ." }
+        },
+        {
+          "@type": "Question",
+          "name": "How long has SDF Clothing been manufacturing apparel in Bangladesh?",
+          "acceptedAnswer": { "@type": "Answer", "text": `SDF Clothing was founded August 22, 1998 in Dhaka, Bangladesh — ${getYearsExperiencePlus()} years of apparel manufacturing experience. 200+ international fashion brands served across EU, UK, USA, Australia, and Canada.` }
+        },
+        {
+          "@type": "Question",
+          "name": "Does SDF Clothing work with startup fashion brands?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The 300-piece MOQ exists specifically to make factory-direct apparel manufacturing accessible to brands at any size. A startup placing a debut collection at 300 pieces per style receives the same factory, the same certifications, the same quality control process, and the same compliance documentation as a brand ordering 50,000 pieces." }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={aboutSchemas}
+  datePublished="1998-08-22"
+  dateModified={today}
+>
+
+<!-- ============================================================
+  CANONICAL & ROBOTS (Google indexing check)
+  - prerender = true ensures static HTML at build time
+  - No noindex anywhere on this page
+  - Canonical is set via BaseLayout using the page URL
+  - datePublished + dateModified passed for freshness signals
+============================================================ -->
+
+
+<style>
+  /* ============================================================
+     DESIGN SYSTEM — about.astro
+     Palette  : black #0a0a0a · red #cc0000 · green #1a9c52 · white #f0f0f0
+     Type     : system-ui stack — zero font load
+     Color rule: backgrounds = black only. Red = accents, labels, borders.
+                 Green = positive signals (certs, duty-free, ticks).
+                 NO red backgrounds. NO red text blocks.
+  ============================================================ */
+
+  .ab { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #0a0a0a; color: #c8c8c8; }
+
+  /* Layout */
+  .c  { max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
+  .cn { max-width: 700px;  margin: 0 auto; padding: 0 1.25rem; }
+
+  /* Type */
+  /* FIX: color lightened from #cc0000 to #ff3333 — original had a 3.36:1
+     contrast ratio against the #0a0a0a background (fails WCAG AA's 4.5:1
+     minimum for normal text). #ff3333 keeps the same red brand identity
+     while reaching 5.44:1, found via PowerMapper accessibility audit
+     2026-08-09. */
+  .eye { font-size: 0.58rem; letter-spacing: 0.38em; text-transform: uppercase; color: #ff7373; font-weight: 700; margin-bottom: 0.7rem; display: block; }
+  .h1  { font-size: clamp(1.85rem, 4.4vw, 3rem); font-weight: 200; color: #f0f0f0; line-height: 1.14; margin-bottom: 1rem; letter-spacing: -0.01em; }
+  .h1 em { font-style: normal; font-weight: 700; color: #cc0000; }
+  .h2  { font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 300; color: #f0f0f0; line-height: 1.22; margin-bottom: 0.5rem; }
+  .h3  { font-size: 0.94rem; font-weight: 600; color: #f0f0f0; margin-bottom: 0.4rem; }
+  .lead { font-size: 0.96rem; color: #c0c0c0; line-height: 1.8; margin-bottom: 1.4rem; max-width: 680px; }
+  .body { font-size: 0.89rem; color: #909090; line-height: 1.76; margin-bottom: 0.9rem; }
+  .body a { color: #cc5555; text-decoration: none; border-bottom: 1px solid rgba(200,60,60,0.3); transition: color 0.15s; }
+  .body a:hover { color: #e07070; }
+  .tiny { font-size: 0.74rem; color: #949494; }
+
+  /* Breadcrumb */
+  .bc { padding: 0.8rem 0; font-size: 0.74rem; color: #949494; border-bottom: 1px solid #181818; }
+  .bc a { color: #9e9e9e; text-decoration: none; } .bc a:hover { color: #cc0000; }
+  .bc span { margin: 0 0.38rem; }
+
+  /* Hero — black bg, red accent border only */
+  .hero { padding: 4.5rem 0 3.5rem; background: #0a0a0a; border-bottom: 2px solid #cc0000; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; right: -80px; top: -80px; width: 480px; height: 480px; background: radial-gradient(ellipse, rgba(200,0,0,0.05) 0%, transparent 65%); pointer-events: none; }
+
+  /* Badges — two types: red outline for compliance, green outline for positive */
+  .badges { display: flex; flex-wrap: wrap; gap: 0.48rem; margin: 1.3rem 0 2rem; }
+  .badge   { font-size: 0.64rem; letter-spacing: 0.07em; padding: 0.26rem 0.6rem; border: 1px solid rgba(200,0,0,0.35); color: #aa6060; border-radius: 2px; white-space: nowrap; }
+  .badge.g { border-color: rgba(26,156,82,0.4); color: #5aaa78; }
+
+  /* CTAs */
+  .cta-row { display: flex; gap: 0.85rem; flex-wrap: wrap; }
+  .btn-r { display: inline-block; background: #cc0000; color: #fff; padding: 0.7rem 1.5rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.17s; white-space: nowrap; }
+  .btn-r:hover { background: #aa0000; }
+  .btn-o { display: inline-block; border: 1px solid #333; color: #999; padding: 0.7rem 1.3rem; font-size: 0.82rem; text-decoration: none; border-radius: 2px; transition: border-color 0.17s, color 0.17s; white-space: nowrap; }
+  .btn-o:hover { border-color: #cc0000; color: #f0f0f0; }
+
+  /* Sections */
+  .sec { padding: 3.5rem 0; border-bottom: 1px solid #181818; }
+
+  /* Grids */
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+  .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+  .g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
+
+  /* Cards — black bg, subtle border */
+  .card { background: #0f0f0f; border: 1px solid #1e1e1e; border-radius: 3px; padding: 1.4rem; }
+  .card.hl { border-color: rgba(200,0,0,0.28); }
+  .card.gl { border-color: rgba(26,156,82,0.28); }
+
+  /* Stats */
+  .sn  { font-size: 2.2rem; font-weight: 800; line-height: 1; margin-bottom: 0.15rem; color: #cc0000; }
+  .sn.g { color: #1a9c52; }
+  .sl  { font-size: 0.78rem; font-weight: 600; color: #ddd; margin-bottom: 0.12rem; }
+  .ss  { font-size: 0.7rem; color: #949494; }
+
+  /* Icon */
+  .ico { font-size: 1.45rem; margin-bottom: 0.6rem; line-height: 1; }
+
+  /* Author bar */
+  .author { background: #0f0f0f; border: 1px solid #1e1e1e; border-radius: 3px; padding: 0.95rem 1.3rem; display: flex; gap: 1rem; align-items: center; }
+  .author-dot { width: 2.1rem; height: 2.1rem; background: #cc0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .author-name { font-size: 0.81rem; font-weight: 600; color: #e0e0e0; }
+  .author-sub  { font-size: 0.7rem; color: #949494; margin-top: 0.1rem; line-height: 1.4; }
+
+  /* Checklist */
+  .cl { list-style: none; padding: 0; margin: 0.75rem 0; }
+  .cl li { font-size: 0.84rem; color: #808080; padding: 0.34rem 0; border-bottom: 1px solid #141414; display: flex; gap: 0.55rem; line-height: 1.5; align-items: flex-start; }
+  .cl li:last-child { border-bottom: none; }
+  .cl li::before { content: "—"; color: #cc0000; flex-shrink: 0; }
+  .cl.green li::before { content: "✓"; color: #1a9c52; font-weight: 700; }
+
+  /* Timeline */
+  .tl { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #141414; }
+  .tl-item { background: #0a0a0a; padding: 1.65rem; }
+  .tl-yr { font-size: 1.55rem; font-weight: 200; color: #cc0000; line-height: 1; margin-bottom: 0.38rem; }
+  .tl-ttl { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: #f0f0f0; font-weight: 600; margin-bottom: 0.55rem; }
+  .tl-body { font-size: 0.78rem; color: #686868; line-height: 1.58; }
+
+  /* Cert table */
+  .tbl { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 1rem; }
+  .tbl th { text-align: left; font-size: 0.58rem; letter-spacing: 0.17em; text-transform: uppercase; color: #969696; padding: 0.5rem 0.7rem; border-bottom: 1px solid #1e1e1e; }
+  .tbl td { padding: 0.66rem 0.7rem; border-bottom: 1px solid #111; color: #808080; vertical-align: top; line-height: 1.5; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl td:first-child { color: #c8c8c8; font-weight: 500; }
+  .tbl tr:hover td { background: rgba(255,255,255,0.013); }
+  .yes { color: #1a9c52; font-weight: 700; }
+
+  /* Country grid */
+  .country-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: #141414; margin-top: 1.4rem; }
+  .ci { background: #0a0a0a; padding: 1.6rem 1.2rem; text-align: center; }
+  .ci-flag { font-size: 1.5rem; margin-bottom: 0.45rem; }
+  .ci-name { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: #cc0000; margin-bottom: 0.35rem; }
+  .ci-note { font-size: 0.73rem; color: #585858; line-height: 1.5; }
+
+  /* Founder quote */
+  .fq-box { border: 1px solid #cc0000; padding: 2.5rem; text-align: center; }
+  .fq-text { font-size: clamp(0.9rem, 1.5vw, 1.02rem); color: #c0c0c0; line-height: 1.88; font-style: italic; max-width: 760px; margin: 0 auto 1.4rem; }
+  .fq-sig { font-size: 0.76rem; color: #484848; letter-spacing: 0.09em; text-transform: uppercase; }
+
+  /* ============================================================
+     ACCORDION FAQ — click to open/close
+     Pure CSS + minimal JS (no external deps)
+  ============================================================ */
+  .faq-wrap { margin-top: 1.5rem; }
+  .faq-item { border-bottom: 1px solid #161616; }
+  .faq-item:first-child { border-top: 1px solid #161616; }
+
+  .faq-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1.1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    gap: 1rem;
+    text-align: left;
+  }
+  .faq-q {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #e0e0e0;
+    line-height: 1.4;
+    flex: 1;
+  }
+  .faq-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    border: 1px solid #cc0000;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    color: #cc0000;
+    transition: background 0.18s;
+    font-style: normal;
+  }
+  .faq-btn[aria-expanded="true"] .faq-icon {
+    background: #cc0000;
+    color: #fff;
+  }
+  .faq-btn:hover .faq-q { color: #fff; }
+
+  .faq-body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 0;
+  }
+  .faq-body.open {
+    max-height: 400px;
+    padding-bottom: 1.1rem;
+  }
+  .faq-a {
+    font-size: 0.85rem;
+    color: #888;
+    line-height: 1.74;
+  }
+  .faq-a strong { color: #c0c0c0; }
+  .faq-a a { color: #cc5555; text-decoration: none; border-bottom: 1px solid rgba(200,80,80,0.3); }
+
+  /* Facility grid */
+  .fac-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #141414; margin-top: 1.4rem; }
+  .fac-item { background: #0a0a0a; padding: 1.6rem; }
+  .fac-lbl { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ff5c5c; margin-bottom: 0.42rem; }
+  .fac-body { font-size: 0.77rem; color: #686868; line-height: 1.58; }
+
+  /* Internal links cluster */
+  .lc { display: flex; flex-wrap: wrap; gap: 0.42rem; margin-top: 0.8rem; }
+  .lc a { font-size: 0.74rem; padding: 0.25rem 0.6rem; border: 1px solid #1e1e1e; color: #505050; text-decoration: none; border-radius: 2px; transition: border-color 0.14s, color 0.14s; }
+  .lc a:hover { border-color: #cc0000; color: #e0e0e0; }
+
+  /* CTA section */
+  .cta-sec { padding: 4.5rem 0; border-top: 2px solid #cc0000; text-align: center; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .g2, .g3, .g4, .tl, .fac-grid { grid-template-columns: 1fr !important; }
+    .country-row { grid-template-columns: 1fr 1fr !important; }
+    .author { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 480px) {
+    .country-row { grid-template-columns: 1fr !important; }
+    .cta-row { flex-direction: column; }
+    .btn-r, .btn-o { text-align: center; }
+    .h1 { font-size: 1.7rem; }
+  }
+</style>
+
+<div class="ab">
+
+  <!-- BREADCRUMB -->
+  <nav class="bc" aria-label="Breadcrumb">
+    <div class="c">
+      <a href="/">Home</a><span aria-hidden="true">›</span>
+      <span aria-current="page">About</span>
+    </div>
+  </nav>
+
+  <!-- ====================================================
+    HERO
+  ==================================================== -->
+  <section class="hero" aria-labelledby="ab-h1">
+    <div class="c">
+      <span class="eye">Our Story · Dhaka · Since 1998</span>
+      <h1 class="h1" id="ab-h1">
+        <em>About SDF Clothing</em><br>
+        Founder, Factory &amp; Story
+      </h1>
+      <p class="lead" style="margin-bottom:0;">
+        SDF Clothing is a full-package <a href="/clothing-manufacturers/">apparel manufacturer</a> in Dhaka, Bangladesh, founded on August 22, 1998. We produce OEM, private label, CMT, and ODM apparel for 200+ international fashion brands across the EU, UK, USA, Australia, and Canada. 300 pieces MOQ. No agents. No middlemen. Direct factory access from day one — with 13 international certifications and 0% EU import duty under Bangladesh GSP EBA status.
+      </p>
+      <div class="badges">
+        <span class="badge g">GOTS Certified — Full Chain</span>
+        <span class="badge g">OEKO-TEX Standard 100</span>
+        <span class="badge g">GRS Recycled Standard</span>
+        <span class="badge">BSCI Social Compliance</span>
+        <span class="badge">SEDEX SMETA 4-Pillar</span>
+        <span class="badge">ISO 9001 Certified</span>
+        <span class="badge g">0% EU Import Duty</span>
+        <span class="badge">MOQ 300 Pieces</span>
+        <span class="badge">Founded 1998</span>
+      </div>
+      <div class="cta-row">
+        <a href="/contact/" class="btn-r">Get Free Apparel Quote</a>
+        <a href="/certifications" class="btn-o">View All Certifications</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- E-E-A-T AUTHOR BAR -->
+  <div style="padding:1.15rem 0;border-bottom:1px solid #181818;">
+    <div class="c">
+      <div class="author">
+        <div class="author-dot" aria-hidden="true">CR</div>
+        <div>
+          <div class="author-name">Chowdhury Remon — Founder &amp; CEO, SDF Clothing</div>
+          <div class="author-sub">{getYearsExperiencePlus()} years in Bangladesh apparel manufacturing · OEM &amp; private label specialist · GOTS, EU GSP, and CSDDD compliance expert · BGMEA member · Page last reviewed June 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================
+    SECTION 1 — QUICK FACTS
+  ==================================================== -->
+  <section class="sec" aria-labelledby="facts-h2">
+    <div class="c">
+      <span class="eye">Quick Facts</span>
+      <h2 class="h2" id="facts-h2">Apparel Manufacturing — Key Numbers</h2>
+      <p class="lead">The eight numbers international buyers ask before anything else.</p>
+      <div class="g4">
+        <div class="card hl" style="text-align:center;">
+          <div class="sn">{yearsExp}+</div>
+          <div class="sl">Years Operating</div>
+          <div class="ss">Founded August 22, 1998 — Dhaka</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="sn">300</div>
+          <div class="sl">Pieces MOQ</div>
+          <div class="ss">Per style — OEM, private label, CMT, ODM</div>
+        </div>
+        <div class="card hl" style="text-align:center;">
+          <div class="sn">200+</div>
+          <div class="sl">Brand Clients</div>
+          <div class="ss">EU, UK, USA, AU, CA — 60+ countries</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="sn">13</div>
+          <div class="sl">Certifications</div>
+          <div class="ss">GOTS · OEKO-TEX · BSCI · SEDEX · GRS · ISO 9001</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="sn">500+</div>
+          <div class="sl">Workers</div>
+          <div class="ss">Avg 7+ yr tenure — in-house, no outsourcing</div>
+        </div>
+        <div class="card hl" style="text-align:center;">
+          <div class="sn">75K</div>
+          <div class="sl">Sq Ft Factory</div>
+          <div class="ss">Dhaka — cutting, sewing, embroidery, QC under one roof</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="sn">14</div>
+          <div class="sl">Day Proto Sample</div>
+          <div class="ss">DHL Express to anywhere — from confirmed brief</div>
+        </div>
+        <div class="card gl" style="text-align:center;">
+          <div class="sn g">0%</div>
+          <div class="sl">EU Import Duty</div>
+          <div class="ss">Bangladesh GSP EBA — HS chapters 61 &amp; 62</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+    SECTION 2 — COMPANY STORY
+  ==================================================== -->
+  <section class="sec" aria-labelledby="story-h2">
+    <div class="c">
+      <span class="eye">Our Story</span>
+      <h2 class="h2" id="story-h2">From 25 Machines to a Full-Package Apparel Manufacturer — Dhaka, 1998 to Now</h2>
+      <div class="g2" style="margin-top:1.5rem;">
+        <div>
+          <p class="body">SDF Clothing started on August 22, 1998 — twenty-five sewing machines, a modest space in Dhaka's textile district, and a single conviction: that a Bangladesh apparel factory could compete on quality, transparency, and reliability, not just price. Chowdhury Remon, who founded the company, had spent years working in the garment industry before deciding that the right approach was to build a factory that served international brands directly — no buying house layer, no agent commission, no opacity between the brand and where its clothes were made.</p>
+          <p class="body">The first EU export client arrived in 2003. ISO 9001 quality certification came in 2011. GOTS organic certification and OEKO-TEX Standard 100 followed in 2017, driven by EU market demand from the brands we were already supplying. BSCI and SEDEX SMETA social compliance certification was added in 2019. By 2021, the factory had expanded to its current 75,000 sq ft facility with dedicated production lines for knitwear, woven apparel, and outerwear.</p>
+          <p class="body">Today SDF Clothing is a full-package apparel manufacturer serving 200+ brands across 60+ countries. Full-package means exactly what it says: we source fabric, develop patterns, produce samples, run bulk production, apply branding and embroidery, conduct AQL 2.5 inspection, pack, and arrange FOB shipment from Chittagong port. The brand sends a tech pack. We send finished, certified, compliant apparel ready for retail.</p>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom:1.2rem;">
+            <div class="h3">What "Full-Package Apparel Manufacturer" Actually Means</div>
+            <p class="body" style="margin-bottom:0.6rem;">There is a meaningful difference between a CMT factory (which cuts, makes, and trims from fabric you supply) and a full-package apparel manufacturer (which handles the complete supply chain). At SDF Clothing, full-package means:</p>
+            <ul class="cl green">
+              <li>Fabric sourcing from our vetted GOTS, OEKO-TEX, and GRS certified mills</li>
+              <li>Pattern making, grading, and size spec development</li>
+              <li>Proto and pre-production sampling — 14-day turnaround</li>
+              <li>Bulk production with in-line QC at every stage</li>
+              <li>Embroidery, screen printing, DTF, sublimation in-house</li>
+              <li>AQL 2.5 final inspection before shipment approval</li>
+              <li>Complete compliance documentation and FOB shipping</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="h3">Production Models</div>
+            <ul class="cl">
+              <li><strong style="color:#e0e0e0;">OEM</strong> — Original Equipment Manufacturing from your tech pack and specifications</li>
+              <li><strong style="color:#e0e0e0;">Private Label</strong> — Full branding, labelling, and packaging under your brand identity</li>
+              <li><strong style="color:#e0e0e0;">CMT</strong> — Cut, Make, Trim from your supplied fabric and trims</li>
+              <li><strong style="color:#e0e0e0;">ODM</strong> — Our design development adapted to your target market and buyer</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+    SECTION 3 — APPAREL CATEGORIES
+  ==================================================== -->
+  <section class="sec" aria-labelledby="cats-h2">
+    <div class="c">
+      <span class="eye">What We Produce</span>
+      <h2 class="h2" id="cats-h2">Apparel Categories — All from 300 Pieces, All with Certification Options</h2>
+      <p class="lead">Every category below is available in GOTS organic, OEKO-TEX tested, GRS recycled, or conventional fabric — with Italian, EU, UK, and USA regulatory compliance documentation prepared as standard.</p>
+      <div class="g4">
+        {[
+          ["🧶","Knitwear & Jersey","T-shirts, sweaters, cardigans, polo shirts, jersey dresses, co-ords. Bangladesh's highest-volume apparel export. GOTS organic cotton available."],
+          ["👔","Woven Shirts & Tops","Men's and women's woven shirts, blouses, tunic tops. Poplin, twill, linen, chambray. OEKO-TEX certified as standard."],
+          ["👗","Dresses & Skirts","Woven and jersey dresses, midi and maxi skirts. GOTS and GRS recycled fabric options. EU fibre labelling compliance included."],
+          ["👖","Trousers & Bottoms","Woven trousers, chinos, shorts, denim jeans. Full EU HS code classification with every order."],
+          ["🧥","Outerwear & Jackets","Padded jackets, coats, blazers, denim jackets. GRS recycled fill insulation for sustainable collections."],
+          ["🩱","Activewear","Leggings, sports bras, tanks, joggers. 4-way stretch, moisture wicking. OEKO-TEX tested as standard."],
+          ["🩳","Loungewear & Sleepwear","Pyjama sets, loungewear co-ords, nightwear. GOTS organic certification available for premium brand positioning."],
+          ["👶","Children's Apparel","Kidswear and infant garments. OEKO-TEX Standard 100 mandatory for all childrenswear. EN 14682 safety compliance verified."],
+        ].map(([icon, name, desc]) => (
+          <div class="card">
+            <div class="ico">{icon}</div>
+            <div class="h3">{name}</div>
+            <p class="body" style="font-size:0.8rem;margin:0;">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+    SECTION 4 — CERTIFICATIONS
+  ==================================================== -->
+  <section class="sec" aria-labelledby="cert-h2">
+    <div class="c">
+      <span class="eye">Compliance</span>
+      <h2 class="h2" id="cert-h2">13 International Certifications — Transparent, Not Hidden</h2>
+      <p class="lead">Every certification is listed here with what it actually covers and why it matters. Physical copies ship with every order. Full PDFs available on our <a href="/certifications" style="color:#cc5555;text-decoration:none;border-bottom:1px solid rgba(200,80,80,0.3);">certifications page</a>.</p>
+      <div style="overflow-x:auto;">
+        <table class="tbl" aria-label="SDF Clothing apparel manufacturing certifications">
+          <thead>
+            <tr>
+              <th>Certification</th>
+              <th>What It Covers</th>
+              <th>Who Requires It</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ["GOTS — Global Organic Textile Standard","Full chain: raw organic cotton → dyeing → finished apparel. The only standard that authorises a legal 'organic' label claim.","EU, UK, USA retailers selling organic apparel. Mandatory to legally label products as organic in any market.","✓ Full chain"],
+              ["OEKO-TEX Standard 100","Lab testing for 100+ harmful substances in every component — fabric, thread, buttons, labels, zips.","Mandatory for children's apparel in EU. Standard qualification requirement for virtually all EU and UK retail buyers.","✓ All categories"],
+              ["GRS — Global Recycled Standard","Certifies recycled content from raw material through finished apparel — rPET, recycled nylon, recycled cotton.","Required to make recycled material claims in EU, UK, and USA. Supports EU taxonomy and circular economy brand claims.","✓ Available"],
+              ["BSCI Social Compliance","Labour rights, wages, working hours, fire safety, child and forced labour prohibition — independent factory audit.","EU retailers under CSDDD supply chain due diligence obligations. Standard for all major fashion group supplier qualification.","✓ Current audit"],
+              ["SEDEX SMETA 4-Pillar","Labour, health and safety, environment, business ethics — the most comprehensive ethical trade audit format globally.","Major EU and UK retail audit programmes. UK Modern Slavery Act supply chain reporting. Inditex, H&M Group accepted.","✓ Current audit"],
+              ["ISO 9001 Quality Management","Process quality: documented procedures, defect prevention, measurement systems, and corrective action management.","Premium brand buyers for apparel manufacturer qualification. Proves quality is managed by process, not chance.","✓ Certified"],
+              ["REACH Compliance","EU Regulation 1907/2006 — restricts hazardous chemicals in textile articles imported and sold in the EU.","Legally mandatory for every garment entering the EU. Non-compliance causes customs seizure and market withdrawal.","✓ Every EU order"],
+            ].map(([cert, covers, who, status]) => (
+              <tr>
+                <td>{cert}</td>
+                <td>{covers}</td>
+                <td>{who}</td>
+                <td class="yes">{status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+    SECTION 5 — FACTORY
+  ==================================================== -->
+  <section class="sec" aria-labelledby="factory-h2">
+    <div class="c">
+      <span class="eye">The Factory</span>
+      <h2 class="h2" id="factory-h2">75,000 Sq Ft Apparel Factory — Dhaka, Bangladesh</h2>
+      <p class="lead">Every stage of apparel production under one roof. No subcontracting. No split production. No quality gaps between departments — because there are no departments in different buildings.</p>
+      <div class="g2" style="margin-top:1.4rem;">
+        <div class="card">
+          <div class="h3">🏭 Facility</div>
+          <p class="body">Purpose-built 75,000 sq ft in Dhaka with separate production lines for knitwear, woven apparel, and outerwear. Each line has dedicated supervisors, in-line quality controllers, and its own fabric store to prevent cross-contamination between categories. The facility sits within direct logistics reach of Chittagong port (FOB ocean freight) and Dhaka airport (DHL Express samples and air freight).</p>
+        </div>
+        <div class="card">
+          <div class="h3">🔬 Quality Control</div>
+          <p class="body">ISO 9001 certified quality management system with four inspection points: 4-point fabric inspection before cutting, cut-panel audit, in-line sewing check (every 50th piece during production), and AQL 2.5 final inspection of packed cartons. Third-party inspection available from SGS, Bureau Veritas, and Intertek. Spectrophotometer colour matching for batch consistency across production runs.</p>
+        </div>
+      </div>
+      <div class="fac-grid">
+        {[
+          ["Computerised Cutting","Pattern accuracy with automated cutting tables — fabric waste minimised at cut plan stage"],
+          ["Embroidery","Multi-head embroidery machines up to 15 colours — logos, badges, complex artwork in-house"],
+          ["Printing","Screen, DTF, sublimation, heat transfer — all decoration methods in-house, no outsourcing"],
+          ["Sample Room","Dedicated sample development — 14-day proto turnaround, shipped DHL Express worldwide"],
+          ["ERP Tracking","Real-time production tracking — cutting through packing — client visibility at every stage"],
+          ["NDA Protocol","Mutual NDA before any tech pack sharing — designs never disclosed to third parties"],
+          ["Fire Safety","RSC-level fire suppression, emergency exits, regular drills — BSCI fire safety audit compliant"],
+          ["Backup Power","Generator backup — no production downtime from grid interruptions during peak season"],
+        ].map(([lbl, body]) => (
+          <div class="fac-item">
+            <div class="fac-lbl">{lbl}</div>
+            <div class="fac-body">{body}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+    SECTION 6 — TIMELINE
+  ==================================================== -->
+  <section class="sec" aria-labelledby="tl-h2">
+    <div class="c">
+      <span class="eye">Company History</span>
+      <h2 class="h2" id="tl-h2">{yearsExp}+ Years of Apparel Manufacturing — Milestones</h2>
+      <div class="tl" style="margin-top:1.4rem;">
+        {[
+          ["1998","Founded","25 sewing machines, Dhaka. Chowdhury Remon's founding premise: direct factory access for international brands, no agent layers, no opacity."],
+          ["2003","First EU Export","First European client secured — beginning of our EU market compliance focus and GSP duty-free documentation practice."],
+          ["2007","Facility Growth","Expanded to 10,000 sq ft. Embroidery and screen printing added in-house — first steps toward full-package apparel production."],
+          ["2011","ISO 9001","Quality management system certified — the documented process foundation that still governs production today."],
+          ["2014","Full-Package","Complete transition: fabric sourcing, pattern development, and sample production added alongside CMT capability."],
+          ["2017","GOTS & OEKO-TEX","Full-chain GOTS organic certification and OEKO-TEX Standard 100 achieved — driven by EU buyer demand from existing clients."],
+          ["2019","Social Compliance","BSCI and SEDEX SMETA 4-pillar audit certifications added — meeting EU retailer ethical sourcing qualification requirements."],
+          ["2021","75,000 Sq Ft","Expanded to current purpose-built facility. Dedicated knitwear, woven, and outerwear production lines installed."],
+          ["2023","GRS & Environment","GRS recycled standard certification added. Tree plantation initiative launched. Environmental management programme formalised."],
+          ["2025","ERP Live","Real-time production tracking for all clients at every stage — cutting, sewing, QC, packing, shipment — via ERP system."],
+          ["2026","EU EPR Ready","Digital Product Passport data file generation added as standard for all EU orders. ESPR 2026 compliant supply chain documentation."],
+          ["Now","Your Brand","300 pieces MOQ. 13 certifications. "+yearsExp+"+ years. Factory-direct — no agents, no middlemen, no margin layers between you and your apparel."],
+        ].map(([yr, ttl, body]) => (
+          <div class="tl-item">
+            <div class="tl-yr">{yr}</div>
+            <div class="tl-ttl">{ttl}</div>
+            <div class="tl-body">{body}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+    SECTION 7 — EXPORT MARKETS
+  ==================================================== -->
+  <section class="sec" aria-labelledby="markets-h2">
+    <div class="c">
+      <span class="eye">Export Markets</span>
+      <h2 class="h2" id="markets-h2">Apparel Export Markets — Duty &amp; Compliance by Country</h2>
+      <p class="lead">We handle the compliance documentation for every market we serve. Your customs agent, logistics partner, and retail buyer receive exactly what they need — without you having to chase it.</p>
+      <div class="country-row">
+        {[
+          ["🇪🇺","European Union","0% duty — GSP EBA. REACH, BSCI, CSDDD docs. EUR.1 certificate. DPP data file. All 27 member states covered."],
+          ["🇬🇧","United Kingdom","UK DCTS duty-free access. UK Modern Slavery Act — SEDEX SMETA audit available. UKCA marking preparation where required."],
+          ["🇺🇸","United States","C-TPAT certified supply chain. FOB Chittagong with full US customs documentation. Competitive landed cost vs China without EU duty friction."],
+          ["🇦🇺","Australia","DFQF duty-free access, confirmed past 2026 graduation. Australian Border Force documentation. Care labelling per Australian Consumer Law."],
+          ["🇨🇦","Canada","LDCT/GPT+ duty-free access, secured through 2034. Canadian customs documentation. Bilingual care labels (English/French) available on request."],
+        ].map(([flag, name, note]) => (
+          <div class="ci">
+            <div class="ci-flag" aria-hidden="true">{flag}</div>
+            <div class="ci-name">{name}</div>
+            <div class="ci-note">{note}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+    SECTION 8 — FOUNDER VISION
+  ==================================================== -->
+  <section class="sec" aria-labelledby="founder-h2">
+    <div class="c">
+      <span class="eye">Our Purpose</span>
+      <h2 class="h2" id="founder-h2" style="text-align:center;margin-bottom:1.4rem;">Founder's Vision</h2>
+      <div class="fq-box">
+        <p class="fq-text">"When we started SDF Clothing in 1998, the goal was not to be the cheapest apparel factory in Bangladesh. It was to be the most trustworthy. We believed — and still believe — that a Bangladesh apparel manufacturer can deliver the same quality as any factory in Europe, with the same ethical standards and the same supply chain transparency. {yearsExp}+ years later, 200+ international brands agree. Every certification, every documented process, every worker trained — all of it serves one purpose: when a brand sources apparel from SDF Clothing, they know exactly what they are getting and where it came from."</p>
+        <div class="fq-sig">— Chowdhury Remon, Founder &amp; CEO &nbsp;·&nbsp; SDF Clothing &nbsp;·&nbsp; Est. August 22, 1998</div>
+        <div style="margin-top:1.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <a href="/careers/" style="font-size:0.8rem;color:#cc5555;text-decoration:none;">Careers</a>
+          <a href="/editorial-policy/" style="font-size:0.8rem;color:#cc5555;text-decoration:none;">Editorial Policy</a>
+          <a href="/faq/" style="font-size:0.8rem;color:#cc5555;text-decoration:none;">FAQ</a>
+          <a href="/sustainability/" style="font-size:0.8rem;color:#cc5555;text-decoration:none;">Sustainability</a>
+          <a href="/csr" style="font-size:0.8rem;color:#cc5555;text-decoration:none;">CSR</a>
+          <a href="/public-notice/" style="font-size:0.8rem;color:#cc5555;text-decoration:none;">Public Notices</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+    SECTION 9 — FAQ (ACCORDION)
+  ==================================================== -->
+  <section class="sec" aria-labelledby="faq-h2">
+    <div class="c">
+      <span class="eye">Common Questions</span>
+      <h2 class="h2" id="faq-h2">Questions Buyers Ask About SDF Clothing</h2>
+      <p class="lead">Click any question to expand the answer.</p>
+
+      <div class="faq-wrap" id="faq-wrap">
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-a1">
+            <span class="faq-q">What is the minimum order quantity for apparel production?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-body" id="faq-a1" role="region">
+            <p class="faq-a"><strong>300 pieces per style</strong> — across OEM, private label, CMT, and ODM. Size distribution within the 300 pieces is fully flexible. Multiple styles on the same purchase order each carry their own 300-piece minimum. A startup brand ordering two styles at 300 pieces each (600 total) is a standard first order — no higher MOQ for new clients, no trial order surcharges.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-a2">
+            <span class="faq-q">How does SDF Clothing differ from other apparel manufacturers in Bangladesh?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-body" id="faq-a2" role="region">
+            <p class="faq-a">Three things most clients mention: <strong>300-piece MOQ</strong> — most Bangladesh apparel factories start at 500–1,000 pieces per style. <strong>Full-chain GOTS certification</strong> — many factories claim to use organic cotton but cannot issue a GOTS certificate of conformity for your organic labelling claim. We can, because our certification covers every stage from fibre to finished apparel. <strong>EU EPR 2026 readiness</strong> — we generate Digital Product Passport data files as standard for EU orders. Most Bangladesh apparel manufacturers are not doing this yet. Beyond those, direct factory access means pricing transparency that a buying house or agent cannot offer.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-a3">
+            <span class="faq-q">What is the production lead time from brief to shipment?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-body" id="faq-a3" role="region">
+            <p class="faq-a">Proto sample: <strong>14 days</strong> from confirmed brief, DHL Express to your door. Pre-production sample: 10 days after proto approval. Bulk production: <strong>30–45 days</strong> from PP sample sign-off. Total first-order time from brief to FOB Chittagong: 55–65 days. Repeat orders run faster — fabric and PP approval already in place. Ocean freight to EU ports (Rotterdam, Hamburg, Genova): 22–28 additional transit days. Air freight to major EU/UK airports: 4–5 days.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-a4">
+            <span class="faq-q">Do EU and UK brands pay import duty on apparel from SDF Clothing?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-body" id="faq-a4" role="region">
+            <p class="faq-a"><strong>No.</strong> Bangladesh holds EU GSP EBA (Everything But Arms) status — 0% import duty on most apparel (HS chapters 61 and 62) into all 27 EU member states and the UK under the UK's DCTS scheme. Standard EU MFN duty on clothing is 12% of CIF value — on a €100,000 order that is €12,000 saved versus sourcing from China or other non-GSP countries. We prepare EUR.1 Movement Certificates for every EU and UK shipment. See our <a href="/clothing-manufacturer-italy/">Italy page</a>, <a href="/clothing-manufacturer-germany/">Germany page</a>, or <a href="/clothing-manufacturer-uk/">UK page</a> for country-specific duty and customs detail.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-a5">
+            <span class="faq-q">Can SDF Clothing produce GOTS certified organic apparel?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-body" id="faq-a5" role="region">
+            <p class="faq-a">Yes — and the distinction matters. We hold <strong>full-chain GOTS certification</strong>: from raw organic cotton sourcing through spinning, dyeing, cutting, sewing, and finishing at our Dhaka factory. Transaction certificates are issued at each stage. The GOTS certificate of conformity we provide with your order is the legal document that authorises your organic labelling claim in EU, UK, and USA markets. A factory that uses organic cotton but lacks GOTS scope certification cannot issue this — you cannot legally label the garments as organic without it.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-a6">
+            <span class="faq-q">Does SDF Clothing work with startup fashion brands?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-body" id="faq-a6" role="region">
+            <p class="faq-a">Yes. The 300-piece MOQ exists specifically because smaller brands deserve direct factory access too. A founder placing a debut collection at 300 pieces per style gets the same factory, the same certifications, the same quality control process, and the same compliance documentation as a brand ordering 50,000 pieces. Price per piece differs with volume — the production standard does not. We have worked with brands from their first-ever order through to large repeat accounts. Both are important to us.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-a7">
+            <span class="faq-q">Can I visit the SDF Clothing factory in Bangladesh?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-body" id="faq-a7" role="region">
+            <p class="faq-a">Yes. Factory visits are welcome for verified business partners — we encourage them. Third-party social and environmental audits at our facility are fully supported: SGS, Bureau Veritas, and Intertek all conduct audits here. If your retail buyer requires a specific audit format, we work with you to schedule it. We have nothing to hide. Factory transparency is a basic expectation of doing business with international brands, not a favour we grant selectively.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+    SECTION 10 — INTERNAL LINKS
+  ==================================================== -->
+  <section class="sec" style="padding:2.5rem 0;" aria-labelledby="rel-h2">
+    <div class="c">
+      <span class="eye">Explore More</span>
+      <h2 class="h2" id="rel-h2" style="font-size:1.1rem;">Apparel Services, EU Markets &amp; Free Tools</h2>
+      <div class="g2" style="margin-top:1.1rem;gap:2rem;">
+        <div>
+          <div class="h3" style="font-size:0.82rem;margin-bottom:0.5rem;">Apparel Production Services</div>
+          <div class="lc">
+            <a href="/clothing-manufacturers/">All Apparel Services</a>
+            <a href="/gots-certified-clothing-manufacturer">GOTS Organic Apparel</a>
+            <a href="/cut-and-sew-service">CMT / Cut &amp; Sew</a>
+            <a href="/white-label-manufacturer/">Private Label Apparel</a>
+            <a href="/sampling-service">Sampling — 14 Days</a>
+            <a href="/bulk-clothing-manufacturer">Bulk Production</a>
+            <a href="/fabric-sourcing">Fabric Sourcing</a>
+            <a href="/work-process/">How We Work</a>
+            <a href="/certifications">All 13 Certifications</a>
+            <a href="/sustainability/">Sustainability</a>
+          </div>
+          <div class="h3" style="font-size:0.82rem;margin-bottom:0.5rem;margin-top:1.1rem;">Apparel Manufacturing by Country</div>
+          <div class="lc">
+            <a href="/clothing-manufacturer-italy/">🇮🇹 Italy</a>
+            <a href="/clothing-manufacturer-germany/">🇩🇪 Germany</a>
+            <a href="/clothing-manufacturer-france/">🇫🇷 France</a>
+            <a href="/clothing-manufacturer-netherlands/">🇳🇱 Netherlands</a>
+            <a href="/clothing-manufacturer-spain/">🇪🇸 Spain</a>
+            <a href="/clothing-manufacturer-sweden/">🇸🇪 Sweden</a>
+            <a href="/clothing-manufacturer-uk/">🇬🇧 United Kingdom</a>
+          </div>
+        </div>
+        <div>
+          <div class="h3" style="font-size:0.82rem;margin-bottom:0.5rem;">Free Tools for Apparel Brands</div>
+          <div class="lc">
+            <a href="/tools/hs-code">HS Code Checker</a>
+            <a href="/tools/price-calculator/">Price Calculator</a>
+            <a href="/tools/moq-calculator/">MOQ Calculator</a>
+            <a href="/contact/">Sample Request</a>
+            <a href="/tools/garment-cost-calculator">Tech Pack Cost Calculator</a>
+            <a href="/tools/lead-time-calculator">Shipping Lead Time Calculator</a>
+            <a href="/tools/eu-readiness-checker">EU Readiness Checker</a>
+            <a href="/tools/aql-calculator">AQL Calculator</a>
+          </div>
+          <div class="h3" style="font-size:0.82rem;margin-bottom:0.5rem;margin-top:1.1rem;">Company</div>
+          <div class="lc">
+            <a href="/case-studies/">Case Studies</a>
+            <a href="/journal">Journal</a>
+            <a href="/insights/">Industry Insights</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/careers/">Careers</a>
+            <a href="/contact/">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+    CTA
+  ==================================================== -->
+  <section class="cta-sec" aria-labelledby="cta-h2">
+    <div class="cn">
+      <span class="eye" style="display:block;text-align:center;">Start Manufacturing</span>
+      <h2 class="h2" id="cta-h2" style="text-align:center;max-width:500px;margin:0 auto 1rem;">Partner with a Bangladesh Apparel Manufacturer — Quote in 48 Hours</h2>
+      <p style="color:#9e9e9e;font-size:0.88rem;max-width:440px;margin:0 auto 2rem;line-height:1.75;text-align:center;">Send your tech pack or product brief. We respond with a full FOB quote, lead time, certification list, and EU compliance documentation within 48 hours. MOQ 300 pieces. No agents. No commitment required.</p>
+      <div class="cta-row" style="justify-content:center;">
+        <a href="/contact/" class="btn-r">Get Free Quote</a>
+        <a href="https://wa.me/8801819172080?text=Hi%20SDF%20Clothing%2C%20I%20am%20interested%20in%20apparel%20manufacturing%20for%20my%20brand" class="btn-o">💬 WhatsApp Us</a>
+      </div>
+      <p class="tiny" style="text-align:center;margin-top:1.5rem;">🏭 Dhaka, Bangladesh &nbsp;·&nbsp; Since 1998 &nbsp;·&nbsp; MOQ 300 Pcs &nbsp;·&nbsp; GOTS · OEKO-TEX · BSCI · ISO 9001 &nbsp;·&nbsp; 0% EU Duty</p>
+    </div>
+  </section>
+
+  <!-- EDITORIAL NOTE -->
+  <div style="padding:2rem 0;background:#060606;border-top:1px solid #111;">
+    <div class="cn" style="text-align:center;">
+      <p class="tiny" style="max-width:680px;margin:0 auto;line-height:1.7;">All content on this page is written and reviewed by SDF Clothing's in-house manufacturing, sourcing, and compliance team. Company history, certifications, and production capabilities are reviewed annually. Last reviewed: June 2026.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+  ACCORDION FAQ — Vanilla JS, zero dependencies
+  aria-expanded toggles for accessibility
+  max-height animation for smooth open/close
+============================================================ -->
+<script>
+  (function () {
+    const btns = document.querySelectorAll('.faq-btn');
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        const bodyId = btn.getAttribute('aria-controls');
+        const body = document.getElementById(bodyId);
+        const icon = btn.querySelector('.faq-icon');
+
+        // Close all others
+        btns.forEach(function (other) {
+          if (other !== btn) {
+            other.setAttribute('aria-expanded', 'false');
+            const otherId = other.getAttribute('aria-controls');
+            const otherBody = document.getElementById(otherId);
+            const otherIcon = other.querySelector('.faq-icon');
+            if (otherBody) otherBody.classList.remove('open');
+            if (otherIcon) otherIcon.textContent = '+';
+          }
+        });
+
+        // Toggle current
+        btn.setAttribute('aria-expanded', String(!expanded));
+        if (body) body.classList.toggle('open', !expanded);
+        if (icon) icon.textContent = expanded ? '+' : '−';
+      });
+    });
+  })();
+</script>
+
+</BaseLayout>

@@ -1,0 +1,890 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Startup Clothing Manufacturing Services | SDF";
+const pageDescription = "SDF's manufacturing services for clothing startups: brand development support, low MOQ from 300 pieces, and a defined scaling path as your order volumes grow.";
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#org",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Startup Clothing Manufacturer"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is your minimum order for clothing startups?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our minimum for clothing startups is 300 pieces per style. This low MOQ enables new brands to test designs and launch collections without excessive inventory investment. Minimum can be split across sizes within a single colorway. We also offer sampling quantities for prototype development before committing to bulk orders."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you help new clothing brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We help new clothing brands through comprehensive support including tech pack development assistance, fabric sourcing guidance, sampling and prototyping, production planning, and scaling strategies. Our team provides guidance throughout the manufacturing process, helping startups navigate production challenges and build successful clothing lines."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the biggest challenges for clothing startups?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The biggest challenges for clothing startups include finding manufacturers with accessible MOQs, managing production timelines, ensuring quality control, understanding fabric selection, and managing cash flow for production. We address these challenges through low minimums, transparent communication, quality assurance systems, fabric expertise, and flexible payment terms."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer brand development support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer brand development support including design consultation, fabric selection guidance, sizing recommendations, and production planning. Our team helps startups refine their concepts for manufacturability, select appropriate materials for their target market, and plan production schedules that align with launch timelines and budget constraints."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does scaling work with SDF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Scaling with SDF follows a structured path starting with low MOQ production for market testing. As brands grow and demand increases, we can scale production while maintaining quality consistency. Our capacity accommodates growth from 300 pieces to thousands of pieces per style, with volume pricing benefits as production quantities increase."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are your requirements for working with new brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our requirements for new brands are minimal. We need basic design concepts or tech packs, target quantity specifications, and timeline requirements. We work with brands at all stages from concept to established businesses. No minimum annual volume commitment required, making us accessible to startups testing their first collections."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Startup Clothing Manufacturing Service",
+      "description": "Low MOQ clothing manufacturing for startups from 300 pieces with brand development support and scaling path for new clothing brands",
+      "provider": {
+        "@id": "https://sdfltd.com/#org"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Startup Clothing Manufacturing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Low MOQ Startup Production"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "8",
+              "maxPrice": "25"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Start Manufacturing with SDF as a Startup",
+      "description": "Step-by-step process for clothing startups to begin manufacturing with our Bangladesh facility",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Design Concept",
+          "text": "Share your clothing line concept, design sketches, or tech packs with our team for initial feasibility assessment and recommendations"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Development Plan",
+          "text": "Get a detailed development plan including fabric recommendations, sizing strategy, timeline, and cost estimate for your startup collection"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Samples",
+          "text": "Work with our team to develop samples for design validation, fit testing, and market feedback before committing to bulk production"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Launch Production",
+          "text": "Begin bulk production with low MOQ quantities for market testing, with quality control and timeline management throughout"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Scale Production",
+          "text": "Scale production quantities based on market response and sales performance, with volume pricing benefits as your brand grows"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Startup Clothing Manufacturer</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Startup Clothing Manufacturer • Since 1998 • New Brand Specialists</div>
+        <h1 class="hero__title">Startup Clothing Manufacturing Services — Brand Development & Scaling Support</h1>
+        <p class="hero__description">
+          SDF Clothing is a startup clothing manufacturer in Bangladesh helping new brands launch with low MOQ manufacturing from 300 pieces. Brand development support, scaling path, tech pack assistance, fabric sourcing guidance, and production planning for clothing startups. Bangladesh manufacturer for startups. Explore our <a href="/clothing-manufacturers-for-startups/" style="color:#e00;text-decoration:none;">clothing manufacturers for startups</a> and <a href="/clothing-brand-startup-costs/" style="color:#e00;text-decoration:none;">clothing brand startup costs</a>.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact/" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20help%20with%20my%20startup%20brand`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">300</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Low</span>
+          <span class="hero__stat-label">MOQ Startup</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Scale</span>
+          <span class="hero__stat-label">Ready</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Low MOQ Production</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Brand Development</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Tech Pack Support</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Scaling Path</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Startup Challenges</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Specific Challenges Clothing Startups Face</h2>
+      </div>
+      <div class="section__text">
+        <p>Clothing startups face unique challenges that established brands have already overcome. The most significant hurdle is finding manufacturers willing to work with low order quantities. Most traditional garment factories require minimum orders of 1,000-5,000 pieces per style, creating an impossible barrier for new brands testing their first collections. This MOQ challenge forces many startups to either compromise on quality by working with less capable manufacturers or invest heavily in inventory before validating market demand.</p>
+        
+        <p>Beyond MOQ challenges, startups struggle with production timeline management, quality control without established relationships, fabric selection without industry connections, and cash flow management for production costs. These challenges compound each other—delays in production can miss selling seasons, quality issues damage brand reputation before it's established, and poor fabric choices lead to customer returns. Many startups underestimate the complexity of manufacturing and focus primarily on design, only to encounter production realities that can derail their launch plans.</p>
+        
+        <p>SDF Clothing addresses these startup-specific challenges through our low MOQ model, comprehensive support systems, and startup-friendly approach. Our 300-piece minimum enables market testing without excessive inventory investment. Our experience working with hundreds of startups means we understand the typical pitfalls and provide proactive guidance to avoid them. We've structured our entire operation to support new brands through their critical first collections and beyond.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">How SDF Helps</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How SDF Helps New Clothing Brands</h2>
+      </div>
+      <div class="section__text">
+        <p>SDF Clothing provides comprehensive support specifically designed for new clothing brands. Our approach goes beyond simple manufacturing to include guidance and services that address the full spectrum of startup needs. We understand that new brands need more than just production—they need a partner who has actually done the work of bringing a clothing line to market before and can walk them through it.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Support Area</th>
+              <th>What We Provide</th>
+              <th>Startup Benefit</th>
+              <th>Timeline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Tech Pack Development</td>
+              <td>Review and refinement of technical specifications</td>
+              <td>Manufacturable designs, reduced revisions</td>
+              <td>Pre-production</td>
+            </tr>
+            <tr>
+              <td>Fabric Sourcing</td>
+              <td>Fabric recommendations and sourcing assistance</td>
+              <td>Appropriate materials, cost optimization</td>
+              <td>Pre-production</td>
+            </tr>
+            <tr>
+              <td>Sampling</td>
+              <td>Prototype development and fit testing</td>
+              <td>Design validation, market feedback</td>
+              <td>2-3 weeks</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Production Planning</td>
+              <td>Timeline and scheduling management</td>
+              <td>Launch alignment, reduced delays</td>
+              <td>Ongoing</td>
+            </tr>
+            <tr>
+              <td>Quality Control</td>
+              <td>Inspection and testing protocols</td>
+              <td>Consistent quality, reduced returns</td>
+              <td>Production</td>
+            </tr>
+            <tr>
+              <td>Scaling Strategy</td>
+              <td>Growth planning and capacity management</td>
+              <td>Sustainable growth, volume benefits</td>
+              <td>Post-launch</td>
+            </tr>
+          </tbody>
+          <caption>Support services available as needed. Startups can select services based on their specific requirements.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Minimum Requirements</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Minimum Requirements for Working with SDF</h2>
+      </div>
+      <div class="section__text">
+        <p>We've intentionally minimized our requirements to make manufacturing accessible to new brands. Unlike many manufacturers who require annual volume commitments, established business history, or complex qualification processes, SDF works with brands at any stage from concept to established business. Our requirements focus on the essentials needed to produce quality garments rather than arbitrary barriers to entry.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Requirement</th>
+              <th>What We Need</th>
+              <th>What We Don't Need</th>
+              <th>Flexibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Design Documentation</td>
+              <td>Basic sketches or tech pack concepts</td>
+              <td>Professional tech packs not required</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td>Quantity Commitment</td>
+              <td>300 pieces per style</td>
+              <td>No annual volume commitment</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td>Business History</td>
+              <td>None required</td>
+              <td>No track record needed</td>
+              <td>High</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Timeline</td>
+              <td>Target delivery date</td>
+              <td>Rush production available</td>
+              <td>Medium</td>
+            </tr>
+            <tr>
+              <td>Payment</td>
+              <td>Deposit and balance</td>
+              <td>No long-term contracts</td>
+              <td>Medium</td>
+            </tr>
+          </tbody>
+          <caption>Requirements designed to be startup-friendly. We accommodate brands at all development stages.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Brand Development</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Brand Development Support</h2>
+      </div>
+      <div class="section__text">
+        <p>Brand development support at SDF focuses on helping startups translate their creative vision into manufacturable reality. Many new brands have strong design concepts but lack technical manufacturing knowledge. Our team bridges this gap, providing guidance that ensures designs can be produced efficiently while maintaining brand aesthetics. This support prevents costly revisions and production delays that commonly occur when designs aren't optimized for manufacturing.</p>
+        
+        <p>Design consultation services include reviewing sketches for manufacturability, suggesting construction methods that balance aesthetics with production efficiency, and recommending fabric choices that achieve desired performance within budget constraints. Our pattern makers and sample makers work directly with startup teams to refine designs before production, catching potential issues early when changes are least costly. This collaborative approach helps startups learn manufacturing considerations while developing their collections.</p>
+        
+        <p>Fabric selection guidance leverages our extensive supplier network and material knowledge. We help startups navigate fabric options based on their target market, price point, and performance requirements. This includes explaining trade-offs between different fabric types, suggesting alternatives that achieve similar aesthetics at different price points, and providing samples for evaluation. Our fabric expertise helps startups make informed decisions that balance quality, cost, and brand positioning.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Scaling Path</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Scaling Path for Growing Brands</h2>
+      </div>
+      <div class="section__text">
+        <p>Scaling with SDF follows a structured path designed to support brands through their growth stages. We understand that startup needs evolve from initial launch to established growth, and our services adapt accordingly. The scaling path begins with low MOQ production for market testing, progresses to increased volumes as demand validates, and eventually accommodates large-scale production for established brands.</p>
+        
+        <p>The initial launch phase typically involves 300-500 pieces per style for market testing. This phase focuses on validating designs, gathering customer feedback, and establishing brand presence. Our production during this stage emphasizes flexibility and quick turnaround to enable rapid iteration based on market response. Pricing at this stage reflects the lower volumes but provides access to professional manufacturing quality that wouldn't be possible with domestic or smaller-scale alternatives.</p>
+        
+        <p>As brands establish market demand and sales performance, scaling increases to 1,000-2,000 pieces per style. At this volume, pricing becomes more competitive, and production efficiency improves. Our capacity accommodates this growth while maintaining the same quality standards and communication that established during the startup phase. Brands benefit from volume pricing while continuing to work with a manufacturing partner who understands their products and brand identity.</p>
+        
+        <p>For established brands requiring 5,000+ pieces per style, we offer dedicated production lines, priority scheduling, and further pricing optimization. At this scale, we can implement specialized processes, custom fabric developments, and dedicated quality control protocols. The relationship evolves from startup support to strategic partnership, with our team contributing to seasonal planning, inventory management, and long-term production strategy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Startup Clothing Manufacturer FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is your minimum order for clothing startups?</h3>
+          <p class="faq__answer">Our minimum for clothing startups is 300 pieces per style. This low MOQ enables new brands to test designs and launch collections without excessive inventory investment. Minimum can be split across sizes within a single colorway. We also offer sampling quantities for prototype development before committing to bulk orders.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do you help new clothing brands?</h3>
+          <p class="faq__answer">We help new clothing brands through comprehensive support including tech pack development assistance, fabric sourcing guidance, sampling and prototyping, production planning, and scaling strategies. Our team provides guidance throughout the manufacturing process, helping startups navigate production challenges and build successful clothing lines.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are the biggest challenges for clothing startups?</h3>
+          <p class="faq__answer">The biggest challenges for clothing startups include finding manufacturers with accessible MOQs, managing production timelines, ensuring quality control, understanding fabric selection, and managing cash flow for production. We address these challenges through low minimums, transparent communication, quality assurance systems, fabric expertise, and flexible payment terms.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you offer brand development support?</h3>
+          <p class="faq__answer">Yes. We offer brand development support including design consultation, fabric selection guidance, sizing recommendations, and production planning. Our team helps startups refine their concepts for manufacturability, select appropriate materials for their target market, and plan production schedules that align with launch timelines and budget constraints.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does scaling work with SDF?</h3>
+          <p class="faq__answer">Scaling with SDF follows a structured path starting with low MOQ production for market testing. As brands grow and demand increases, we can scale production while maintaining quality consistency. Our capacity accommodates growth from 300 pieces to thousands of pieces per style, with volume pricing benefits as production quantities increase.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are your requirements for working with new brands?</h3>
+          <p class="faq__answer">Our requirements for new brands are minimal. We need basic design concepts or tech packs, target quantity specifications, and timeline requirements. We work with brands at all stages from concept to established businesses. No minimum annual volume commitment required, making us accessible to startups testing their first collections.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Launch Your Clothing Brand?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for startup clothing manufacturing support. We provide low MOQ production from 300 pieces, brand development guidance, tech pack assistance, fabric sourcing, and scaling support for new clothing brands. Bangladesh manufacturer for startups ready to help you launch successfully.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/sampling-service" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/clothing-manufacturers-for-startups/" style="color: var(--color-primary);">clothing manufacturers for startups</a>, <a href="/best-clothing-manufacturer-for-startups" style="color: var(--color-primary);">best clothing manufacturer for startups</a>, <a href="/small-batch-clothing-manufacturer" style="color: var(--color-primary);">small batch clothing manufacturer</a>, <a href="/private-label-clothing-manufacturer" style="color: var(--color-primary);">private label manufacturer</a>, <a href="/tech-pack-service" style="color: var(--color-primary);">tech pack service</a>, <a href="/tools/moq-calculator/" style="color: var(--color-primary);">MOQ calculator</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/how-to-start-a-clothing-brand" style="color: var(--color-primary);">how to start a clothing brand</a>, <a href="/low-moq-clothing-manufacturers/" style="color: var(--color-primary);">low MOQ clothing manufacturers</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

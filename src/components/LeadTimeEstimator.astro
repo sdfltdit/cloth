@@ -1,0 +1,264 @@
+---
+// ============================================================
+// SDF CLOTHING — LEAD TIME ESTIMATOR
+// src/components/LeadTimeEstimator.astro
+// ============================================================
+---
+
+<section id="lead-time-tool" aria-labelledby="lt-title">
+  <div class="tool-header">
+    <span class="tool-label">Interactive Tool</span>
+    <h2 id="lt-title">Lead Time Estimator</h2>
+    <p>Get a realistic production timeline from order confirmation to shipment. Includes all stages: fabric sourcing, sample approval, production, QC, and export documentation.</p>
+  </div>
+
+  <div class="lt-grid">
+    <div class="lt-inputs">
+
+      <div class="input-group">
+        <label for="lt-product-type">Product Type</label>
+        <select id="lt-product-type">
+          <option value="basics">Basics (T-shirts, tanks, simple jersey)</option>
+          <option value="woven">Woven (shirts, trousers, chinos)</option>
+          <option value="denim">Denim (jeans, jackets, shorts)</option>
+          <option value="knitwear">Knitwear (sweaters, cardigans)</option>
+          <option value="outerwear">Outerwear (jackets, coats)</option>
+          <option value="activewear">Activewear (cut & sew, performance)</option>
+          <option value="swimwear">Swimwear / Beachwear</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="lt-quantity">Order Quantity (pcs)</label>
+        <select id="lt-quantity">
+          <option value="small">Under 1,000 pcs</option>
+          <option value="medium" selected>1,000 – 5,000 pcs</option>
+          <option value="large">5,000 – 20,000 pcs</option>
+          <option value="xlarge">20,000 – 100,000 pcs</option>
+          <option value="xxlarge">100,000+ pcs</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="lt-fabric-source">Fabric Sourcing</label>
+        <select id="lt-fabric-source">
+          <option value="local">Local Bangladesh mill stock</option>
+          <option value="india" selected>India mill (custom weave/knit)</option>
+          <option value="china">China mill (custom)</option>
+          <option value="buyer">Buyer-nominated fabric (FOB)</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="lt-approvals">Approval Complexity</label>
+        <select id="lt-approvals">
+          <option value="simple">Simple — 1 round of comments</option>
+          <option value="standard" selected>Standard — 2–3 rounds</option>
+          <option value="complex">Complex — brand has strict approval matrix</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="lt-compliance">Compliance / Testing Required</label>
+        <select id="lt-compliance">
+          <option value="none">None (no lab tests)</option>
+          <option value="basic" selected>Basic (2–3 tests, single lab)</option>
+          <option value="full">Full (10+ tests, EU/US standards)</option>
+          <option value="dpp">DPP + Full Traceability</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="lt-shipping">Shipping Mode</label>
+        <select id="lt-shipping">
+          <option value="sea" selected>Sea freight (FCL)</option>
+          <option value="lcl">Sea freight (LCL consolidation)</option>
+          <option value="air">Air freight</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="lt-destination">Destination</label>
+        <select id="lt-destination">
+          <option value="europe" selected>Europe (Rotterdam / Felixstowe)</option>
+          <option value="usa-east">USA East Coast (NY/NJ)</option>
+          <option value="usa-west">USA West Coast (LA/Long Beach)</option>
+          <option value="australia">Australia / NZ</option>
+          <option value="canada">Canada</option>
+          <option value="me">Middle East</option>
+        </select>
+      </div>
+
+      <button id="lt-calculate-btn" class="calculate-btn" type="button">
+        Estimate Lead Time →
+      </button>
+    </div>
+
+    <div class="lt-result" aria-live="polite">
+      <div class="result-placeholder" id="lt-placeholder">
+        <div class="result-placeholder-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <p>Select your product specs to generate a T&amp;A calendar breakdown.</p>
+      </div>
+
+      <div id="lt-result-content" style="display:none;">
+        <div class="result-header">
+          <span class="result-label">Total Lead Time</span>
+          <div class="result-price" id="lt-total-days">0 days</div>
+          <div class="result-range" id="lt-range-text">—</div>
+        </div>
+
+        <div class="lt-timeline" id="lt-timeline"></div>
+
+        <div class="result-notes" id="lt-critical-path"></div>
+
+        <div class="result-disclaimer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Lead times are estimates based on normal operating conditions. Peak season (Aug–Oct), public holidays, and unforeseen delays can add 2–4 weeks. <a href="/contact/" style="color:#e00;">Discuss your specific timeline →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #lead-time-tool {
+    padding: 3rem 0;
+    border-top: 1px solid #e00;
+  }
+  .lt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (max-width: 768px) { .lt-grid { grid-template-columns: 1fr; } }
+  .lt-inputs { display: flex; flex-direction: column; gap: 1rem; }
+
+  .lt-result {
+    background: #000;
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 1.75rem;
+    position: sticky;
+    top: 80px;
+  }
+
+  /* Timeline bars */
+  .lt-timeline { margin: 1.25rem 0; }
+  .tl-stage { margin-bottom: 0.9rem; }
+  .tl-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 0.3rem;
+  }
+  .tl-label span:last-child { color: rgba(255,255,255,0.5); }
+  .tl-bar-bg { background: rgba(255,255,255,0.08); height: 6px; width: 100%; }
+  .tl-bar-fill { height: 6px; background: #e00; transition: width 0.6s ease; }
+
+  .tool-header { margin-bottom: 2rem; }
+  .tool-label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: #e00; display: block; margin-bottom: 0.5rem; }
+  .tool-header h2 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 600; color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+  .tool-header p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+  .input-group { display: flex; flex-direction: column; gap: 0.3rem; }
+  .input-group label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+  .input-group select { background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 0.6rem 0.85rem; font-size: 0.9rem; font-family: 'Inter', sans-serif; transition: border-color 0.2s; min-height: 44px; width: 100%; }
+  .input-group select:focus { border-color: #e00; outline: none; }
+  .calculate-btn { background: #e00; color: #fff; border: 1px solid #e00; padding: 0.85rem 1.5rem; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; margin-top: 0.5rem; min-height: 44px; font-family: 'Inter', sans-serif; }
+  .calculate-btn:hover { background: #aa0000; }
+  .result-placeholder { text-align: center; padding: 2rem 0; }
+  .result-placeholder-icon { margin-bottom: 1rem; color: rgba(255,255,255,0.3); }
+  .result-placeholder p { font-size: 0.85rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+  .result-header { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .result-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: #e00; display: block; margin-bottom: 0.5rem; }
+  .result-price { font-size: 2.5rem; font-weight: 600; color: #fff; letter-spacing: -0.02em; line-height: 1; }
+  .result-range { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 0.35rem; }
+  .result-notes { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin: 1rem 0; padding: 0.75rem; background: rgba(255,255,255,0.04); border-left: 2px solid #e00; line-height: 1.5; }
+  .result-disclaimer { font-size: 0.72rem; color: rgba(255,255,255,0.4); line-height: 1.6; margin-top: 1rem; display: flex; gap: 0.5rem; align-items: flex-start; }
+  .result-disclaimer svg { flex-shrink: 0; margin-top: 2px; }
+</style>
+
+<script>
+  interface Stage { label: string; days: number; }
+
+  const productBase: Record<string, number> = {
+    basics: 25, woven: 32, denim: 38, knitwear: 42, outerwear: 50, activewear: 35, swimwear: 30
+  };
+  const fabricSourcingDays: Record<string, number> = {
+    local: 7, india: 25, china: 35, buyer: 10
+  };
+  const approvalDays: Record<string, number> = {
+    simple: 7, standard: 18, complex: 30
+  };
+  const complianceDays: Record<string, number> = {
+    none: 0, basic: 10, full: 18, dpp: 28
+  };
+  const shippingDays: Record<string, Record<string, number>> = {
+    sea:    { europe: 28, 'usa-east': 30, 'usa-west': 35, australia: 22, canada: 28, me: 18 },
+    lcl:    { europe: 35, 'usa-east': 38, 'usa-west': 42, australia: 28, canada: 35, me: 24 },
+    air:    { europe: 5,  'usa-east': 5,  'usa-west': 6,  australia: 5,  canada: 5,  me: 4 }
+  };
+
+  document.getElementById('lt-calculate-btn')?.addEventListener('click', () => {
+    const product = (document.getElementById('lt-product-type') as HTMLSelectElement).value;
+    const qty     = (document.getElementById('lt-quantity') as HTMLSelectElement).value;
+    const fabric  = (document.getElementById('lt-fabric-source') as HTMLSelectElement).value;
+    const approvals = (document.getElementById('lt-approvals') as HTMLSelectElement).value;
+    const compliance = (document.getElementById('lt-compliance') as HTMLSelectElement).value;
+    const shipping = (document.getElementById('lt-shipping') as HTMLSelectElement).value;
+    const destination = (document.getElementById('lt-destination') as HTMLSelectElement).value;
+
+    const qtyMultiplier: Record<string, number> = { small: 0.85, medium: 1.0, large: 1.1, xlarge: 1.2, xxlarge: 1.35 };
+
+    const fabricDays = fabricSourcingDays[fabric];
+    const preProdDays = Math.round(approvalDays[approvals] + 5); // +5 for PP sample
+    const productionDays = Math.round(productBase[product] * qtyMultiplier[qty]);
+    const qcDays = compliance === 'none' ? 3 : complianceDays[compliance];
+    const docDays = 5; // export docs, booking
+    const transitDays = shippingDays[shipping][destination];
+
+    const stages: Stage[] = [
+      { label: 'Fabric & Trims Sourcing', days: fabricDays },
+      { label: 'Pre-Production & Sample Approval', days: preProdDays },
+      { label: 'Production (Cutting → Finishing)', days: productionDays },
+      { label: 'QC Inspection & Lab Testing', days: qcDays },
+      { label: 'Export Documentation & Booking', days: docDays },
+      { label: 'Ocean / Air Transit', days: transitDays },
+    ];
+
+    const total = stages.reduce((s, st) => s + st.days, 0);
+    const totalWeeks = Math.ceil(total / 7);
+
+    (document.getElementById('lt-total-days') as HTMLElement).textContent = `${total} days`;
+    (document.getElementById('lt-range-text') as HTMLElement).textContent = `≈ ${totalWeeks}–${totalWeeks + 2} weeks from order confirmation`;
+
+    const timelineEl = document.getElementById('lt-timeline') as HTMLElement;
+    timelineEl.innerHTML = '';
+    stages.forEach(stage => {
+      const pct = Math.round((stage.days / total) * 100);
+      const div = document.createElement('div');
+      div.className = 'tl-stage';
+      div.innerHTML = `
+        <div class="tl-label">
+          <span>${stage.label}</span>
+          <span>${stage.days} days</span>
+        </div>
+        <div class="tl-bar-bg">
+          <div class="tl-bar-fill" style="width:${pct}%"></div>
+        </div>`;
+      timelineEl.appendChild(div);
+    });
+
+    // Critical path note
+    const maxStage = stages.reduce((a, b) => a.days > b.days ? a : b);
+    const critEl = document.getElementById('lt-critical-path') as HTMLElement;
+    critEl.textContent = `Critical path: "${maxStage.label}" takes ${maxStage.days} days (${Math.round(maxStage.days/total*100)}% of total lead time). This is the first area to address if you need to compress the timeline.`;
+
+    (document.getElementById('lt-placeholder') as HTMLElement).style.display = 'none';
+    (document.getElementById('lt-result-content') as HTMLElement).style.display = 'block';
+  });
+</script>

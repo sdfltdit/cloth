@@ -1,0 +1,1218 @@
+---
+import { getYearsExperiencePlus } from '../../data/company';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { schemaOrganization, schemaPerson } from '../../data/schema';
+export const prerender = true;
+
+const pageTitle = "HS Code Finder for Clothing & Textiles | Free Tool | SDF";
+const pageDescription = "Free searchable HS code reference for clothing and textiles — garment codes for USA, UK, EU, Australia, Canada, and Japan, with official customs links.";
+
+const hsCodes = {
+  "Knitted Garments": [
+    { code: "6101.10", description: "T-shirts, singlets and other vests, knitted or crocheted, of cotton", notes: "Basic t-shirts, undershirts, tank tops" },
+    { code: "6101.20", description: "T-shirts, singlets and other vests, knitted or crocheted, of man-made fibres", notes: "Polyester, nylon, rayon t-shirts" },
+    { code: "6102.10", description: "Singlets and other vests, knitted or crocheted, of cotton", notes: "Undershirts, tank tops, vests" },
+    { code: "6103.10", description: "Suits and ensembles, knitted or crocheted, of cotton", notes: "Men's/boys' suit jackets, blazers" },
+    { code: "6103.22", description: "Trousers, bib and brace overalls, breeches and shorts, knitted or crocheted, of cotton", notes: "Men's/boys' trousers, shorts, pants" },
+    { code: "6103.31", description: "Trousers, bib and brace overalls, breeches and shorts, knitted or crocheted, of synthetic fibres", notes: "Polyester, nylon tracksuit bottoms" },
+    { code: "6104.10", description: "Suits and ensembles, knitted or crocheted, of cotton", notes: "Women's/girls' skirt suits, pant suits" },
+    { code: "6104.22", description: "Trousers, bib and brace overalls, breeches and shorts, knitted or crocheted, of cotton", notes: "Women's/girls' trousers, shorts" },
+    { code: "6104.31", description: "Trousers, bib and brace overalls, breeches and shorts, knitted or crocheted, of synthetic fibres", notes: "Women's/girls' polyester trousers" },
+    { code: "6104.44", description: "Dresses, knitted or crocheted, of synthetic fibres", notes: "Women's/girls' polyester dresses" },
+    { code: "6104.62", description: "Skirts and divided skirts, knitted or crocheted, of cotton", notes: "Women's/girls' cotton skirts" },
+    { code: "6105.10", description: "Shirts, knitted or crocheted, of cotton", notes: "Men's/boys' polo shirts, dress shirts" },
+    { code: "6106.10", description: "Blouses, shirts and shirt-blouses, knitted or crocheted, of cotton", notes: "Women's/girls' blouses, shirts" },
+    { code: "6107.11", description: "Underpants, panties and similar articles, knitted or crocheted, of cotton", notes: "Men's/boys' underwear, briefs" },
+    { code: "6108.21", description: "Slips and petticoats, knitted or crocheted, of man-made fibres", notes: "Women's/girls' nylon slips" },
+    { code: "6109.10", description: "T-shirts, singlets and other vests, knitted or crocheted, of cotton", notes: "All cotton t-shirts and vests" },
+    { code: "6110.11", description: "Pullovers, cardigans, waistcoats and similar articles, knitted or crocheted, of cotton", notes: "Cotton sweaters, hoodies, cardigans" },
+    { code: "6110.12", description: "Pullovers, cardigans, waistcoats and similar articles, knitted or crocheted, of wool or fine animal hair", notes: "Wool sweaters, cashmere cardigans" },
+    { code: "6110.20", description: "Pullovers, cardigans, waistcoats and similar articles, knitted or crocheted, of cotton", notes: "Cotton knitwear" },
+    { code: "6110.30", description: "Pullovers, cardigans, waistcoats and similar articles, knitted or crocheted, of synthetic fibres", notes: "Polyester, acrylic sweaters" },
+    { code: "6111.20", description: "Babies' garments and clothing accessories, knitted or crocheted, of cotton", notes: "Infant onesies, baby clothes" },
+    { code: "6112.11", description: "Track suits with other than knitted cotton, of synthetic fibres", notes: "Nylon, polyester tracksuits" },
+    { code: "6112.12", description: "Track suits, knitted or crocheted, of cotton", notes: "Cotton tracksuits, jogging suits" },
+    { code: "6112.31", description: "Garments, knitted or crocheted, of cotton", notes: "Ski suits, swimwear" },
+    { code: "6112.41", description: "Garments, knitted or crocheted, of synthetic fibres", notes: "Athletic wear, sports clothing" },
+    { code: "6114.20", description: "Garments, knitted or crocheted, of cotton", notes: "Other knitted garments" },
+    { code: "6115.10", description: "Pantyhose, tights, stockings, socks and other hosiery, knitted or crocheted, of synthetic fibres", notes: "Nylon stockings, tights" },
+    { code: "6115.21", description: "Pantyhose, tights, stockings, socks and other hosiery, knitted or crocheted, of cotton", notes: "Cotton socks" },
+    { code: "6115.30", description: "Pantyhose, tights, stockings, socks and other hosiery, knitted or crocheted, of synthetic fibres", notes: "Synthetic hosiery" },
+    { code: "6115.95", description: "Pantyhose, tights, stockings, socks and other hosiery, knitted or crocheted, of other textile materials", notes: "Bamboo, wool socks" },
+    { code: "6116.10", description: "Gloves, mittens and mitts, knitted or crocheted, of impregnated, coated or covered textiles", notes: "Protective gloves" },
+    { code: "6117.10", description: "Other made up clothing accessories, knitted or crocheted; parts of garments or of clothing accessories, knitted or crocheted", notes: "Knitted ties, scarves, shawls" },
+    { code: "6117.80", description: "Other made up clothing accessories, knitted or crocheted", notes: "Knitted belts, suspenders" },
+  ],
+  "Woven Garments": [
+    { code: "6201.11", description: "Overcoats, carcoats, capes, cloaks and similar articles, of wool or fine animal hair", notes: "Men's/boys' wool overcoats" },
+    { code: "6201.12", description: "Overcoats, carcoats, capes, cloaks and similar articles, of cotton", notes: "Men's/boys' cotton overcoats, denim jacket" },
+    { code: "6201.13", description: "Overcoats, carcoats, capes, cloaks and similar articles, of man-made fibres", notes: "Men's/boys' polyester overcoats" },
+    { code: "6201.92", description: "Anoraks, windcheaters, windjackets and similar articles, of cotton", notes: "Men's/boys' windbreakers" },
+    { code: "6201.93", description: "Anoraks, windcheaters, windjackets and similar articles, of man-made fibres", notes: "Men's/boys' synthetic jackets" },
+    { code: "6202.11", description: "Overcoats, carcoats, capes, cloaks and similar articles, of wool or fine animal hair", notes: "Women's/girls' wool coats" },
+    { code: "6202.12", description: "Overcoats, carcoats, capes, cloaks and similar articles, of cotton", notes: "Women's/girls' cotton coats, denim jacket" },
+    { code: "6202.13", description: "Overcoats, carcoats, capes, cloaks and similar articles, of man-made fibres", notes: "Women's/girls' polyester coats" },
+    { code: "6202.92", description: "Anoraks, windcheaters, windjackets and similar articles, of cotton", notes: "Women's/girls' windbreakers" },
+    { code: "6202.93", description: "Anoraks, windcheaters, windjackets and similar articles, of man-made fibres", notes: "Women's/girls' synthetic jackets" },
+    { code: "6203.11", description: "Suits, of wool or fine animal hair", notes: "Men's/boys' wool suits" },
+    { code: "6203.12", description: "Suits, of synthetic fibres", notes: "Men's/boys' polyester suits" },
+    { code: "6203.22", description: "Ensembles, of cotton", notes: "Men's/boys' cotton ensembles" },
+    { code: "6203.23", description: "Ensembles, of synthetic fibres", notes: "Men's/boys' polyester ensembles" },
+    { code: "6203.31", description: "Jackets, of wool or fine animal hair", notes: "Men's/boys' wool jackets" },
+    { code: "6203.32", description: "Jackets, of cotton", notes: "Men's/boys' cotton jackets" },
+    { code: "6203.33", description: "Jackets, of synthetic fibres", notes: "Men's/boys' polyester jackets" },
+    { code: "6203.42", description: "Trousers, bib and brace overalls, breeches and shorts, of cotton", notes: "Men's/boys' cotton trousers, jeans, denim trousers" },
+    { code: "6203.43", description: "Trousers, bib and brace overalls, breeches and shorts, of synthetic fibres", notes: "Men's/boys' polyester trousers" },
+    { code: "6204.11", description: "Suits, of wool or fine animal hair", notes: "Women's/girls' wool suits" },
+    { code: "6204.12", description: "Suits, of cotton", notes: "Women's/girls' cotton suits" },
+    { code: "6204.13", description: "Suits, of synthetic fibres", notes: "Women's/girls' polyester suits" },
+    { code: "6204.21", description: "Ensembles, of wool or fine animal hair", notes: "Women's/girls' wool ensembles" },
+    { code: "6204.22", description: "Ensembles, of cotton", notes: "Women's/girls' cotton ensembles" },
+    { code: "6204.23", description: "Ensembles, of synthetic fibres", notes: "Women's/girls' polyester ensembles" },
+    { code: "6204.31", description: "Jackets, of wool or fine animal hair", notes: "Women's/girls' wool jackets" },
+    { code: "6204.32", description: "Jackets, of cotton", notes: "Women's/girls' cotton jackets" },
+    { code: "6204.33", description: "Jackets, of synthetic fibres", notes: "Women's/girls' polyester jackets" },
+    { code: "6204.41", description: "Dresses, of wool or fine animal hair", notes: "Women's/girls' wool dresses" },
+    { code: "6204.42", description: "Dresses, of cotton", notes: "Women's/girls' cotton dresses" },
+    { code: "6204.43", description: "Dresses, of synthetic fibres", notes: "Women's/girls' polyester dresses" },
+    { code: "6204.44", description: "Dresses, of artificial fibres", notes: "Women's/girls' rayon, viscose dresses" },
+    { code: "6204.51", description: "Skirts and divided skirts, of wool or fine animal hair", notes: "Women's/girls' wool skirts" },
+    { code: "6204.52", description: "Skirts and divided skirts, of cotton", notes: "Women's/girls' cotton skirts" },
+    { code: "6204.53", description: "Skirts and divided skirts, of synthetic fibres", notes: "Women's/girls' polyester skirts" },
+    { code: "6204.62", description: "Trousers, bib and brace overalls, breeches and shorts, of cotton", notes: "Women's/girls' cotton trousers, jeans, denim trousers" },
+    { code: "6204.63", description: "Trousers, bib and brace overalls, breeches and shorts, of synthetic fibres", notes: "Women's/girls' polyester trousers" },
+    { code: "6205.20", description: "Shirts, of cotton", notes: "Men's/boys' woven shirts, denim shirt" },
+    { code: "6205.30", description: "Shirts, of man-made fibres", notes: "Men's/boys' polyester shirts" },
+    { code: "6206.20", description: "Blouses, shirts and shirt-blouses, of cotton", notes: "Women's/girls' woven blouses, denim shirt" },
+    { code: "6206.30", description: "Blouses, shirts and shirt-blouses, of man-made fibres", notes: "Women's/girls' polyester blouses" },
+    { code: "6207.11", description: "Underpants and briefs, of cotton", notes: "Men's/boys' woven underwear" },
+    { code: "6207.21", description: "Nightshirts and pyjamas, of cotton", notes: "Men's/boys' cotton pyjamas" },
+    { code: "6207.22", description: "Nightshirts and pyjamas, of man-made fibres", notes: "Men's/boys' polyester pyjamas" },
+    { code: "6208.11", description: "Slips and petticoats, of man-made fibres", notes: "Women's/girls' nylon slips" },
+    { code: "6208.21", description: "Nightdresses and pyjamas, of cotton", notes: "Women's/girls' cotton nightwear" },
+    { code: "6208.22", description: "Nightdresses and pyjamas, of man-made fibres", notes: "Women's/girls' polyester nightwear" },
+    { code: "6209.00", description: "Babies' garments and clothing accessories", notes: "Infant woven clothing" },
+    { code: "6210.10", description: "Garments made up of fabrics of heading 5602, 5603, 5903, 5906 or 5907", notes: "Disposable garments, protective clothing" },
+    { code: "6210.50", description: "Other garments, of cotton", notes: "Other woven cotton garments" },
+    { code: "6211.11", description: "Track suits, ski suits and swimwear, of cotton", notes: "Athletic wear, swimwear" },
+    { code: "6211.12", description: "Track suits, ski suits and swimwear, of man-made fibres", notes: "Synthetic athletic wear" },
+    { code: "6211.32", description: "Other garments, of cotton", notes: "Other woven cotton garments" },
+    { code: "6211.33", description: "Other garments, of man-made fibres", notes: "Other woven synthetic garments" },
+    { code: "6211.42", description: "Other garments, of cotton", notes: "Other woven cotton garments" },
+  ],
+  "Yarn": [
+    { code: "5205.11", description: "Cotton yarn (other than sewing thread), of single yarn, of uncombed fibres, not put up for retail sale", notes: "Single cotton yarn, uncombed" },
+    { code: "5205.12", description: "Cotton yarn (other than sewing thread), of single yarn, of combed fibres, not put up for retail sale", notes: "Single cotton yarn, combed" },
+    { code: "5205.21", description: "Cotton yarn (other than sewing thread), measuring 714.29 decitex or more per single yarn, of uncombed fibres, not put up for retail sale", notes: "Multiple cotton yarn, uncombed" },
+    { code: "5205.22", description: "Cotton yarn (other than sewing thread), measuring 714.29 decitex or more per single yarn, of combed fibres, not put up for retail sale", notes: "Multiple cotton yarn, combed" },
+    { code: "5205.31", description: "Cotton yarn (other than sewing thread), measuring 232.56 decitex or more but less than 714.29 decitex per single yarn, of uncombed fibres, not put up for retail sale", notes: "Medium cotton yarn, uncombed" },
+    { code: "5205.32", description: "Cotton yarn (other than sewing thread), measuring 232.56 decitex or more but less than 714.29 decitex per single yarn, of combed fibres, not put up for retail sale", notes: "Medium cotton yarn, combed" },
+    { code: "5205.41", description: "Cotton yarn (other than sewing thread), measuring 192.31 decitex or more but less than 232.56 decitex per single yarn, of uncombed fibres, not put up for retail sale", notes: "Fine cotton yarn, uncombed" },
+    { code: "5205.42", description: "Cotton yarn (other than sewing thread), measuring 192.31 decitex or more but less than 232.56 decitex per single yarn, of combed fibres, not put up for retail sale", notes: "Fine cotton yarn, combed" },
+    { code: "5205.48", description: "Cotton yarn (other than sewing thread), of uncombed fibres, not put up for retail sale", notes: "Other cotton yarn, uncombed" },
+    { code: "5205.49", description: "Cotton yarn (other than sewing thread), of combed fibres, not put up for retail sale", notes: "Other cotton yarn, combed" },
+    { code: "5509.21", description: "Synthetic filament yarn (other than sewing thread), put up for retail sale", notes: "Retail polyester yarn" },
+    { code: "5509.31", description: "Synthetic filament yarn (other than sewing thread), of polyamides (nylon)", notes: "Nylon filament yarn" },
+    { code: "5509.32", description: "Synthetic filament yarn (other than sewing thread), of polyesters", notes: "Polyester filament yarn" },
+    { code: "5509.51", description: "Synthetic filament yarn (other than sewing thread), textured", notes: "Textured synthetic yarn" },
+    { code: "5509.52", description: "Synthetic filament yarn (other than sewing thread), high tenacity yarn of aramids", notes: "Aramid yarn" },
+    { code: "5509.53", description: "Synthetic filament yarn (other than sewing thread), of elastomers", notes: "Elastane, spandex yarn" },
+    { code: "5510.11", description: "Artificial filament yarn (other than sewing thread), of viscose rayon", notes: "Viscose rayon yarn" },
+    { code: "5510.12", description: "Artificial filament yarn (other than sewing thread), of acetate", notes: "Acetate yarn" },
+    { code: "5510.20", description: "Artificial filament yarn (other than sewing thread), textured", notes: "Textured artificial yarn" },
+    { code: "5510.30", description: "Artificial filament yarn (other than sewing thread), put up for retail sale", notes: "Retail artificial yarn" },
+    { code: "5503.90", description: "Synthetic staple fibres, not carded, combed or otherwise processed for spinning", notes: "Synthetic staple fibres, general" },
+    { code: "5504.10", description: "Artificial staple fibres, of viscose rayon, not carded, combed or otherwise processed for spinning", notes: "Viscose rayon staple fibres" },
+    { code: "5509.11", description: "Synthetic staple fibres, carded or combed", notes: "Carded synthetic fibres" },
+    { code: "5509.12", description: "Artificial staple fibres, carded or combed", notes: "Carded artificial fibres" },
+    { code: "5509.22", description: "Synthetic staple fibres, combed", notes: "Combed synthetic fibres" },
+    { code: "5503.20", description: "Synthetic staple fibres, of polyesters, not carded, combed or otherwise processed for spinning", notes: "Polyester staple fibres" },
+  ],
+  "Fabrics": [
+    { code: "5208.11", description: "Cotton fabrics, plain weave, weighing not more than 100 g/m², unbleached", notes: "Lightweight cotton plain weave" },
+    { code: "5208.12", description: "Cotton fabrics, plain weave, weighing more than 100 g/m², unbleached", notes: "Medium-weight cotton plain weave" },
+    { code: "5208.13", description: "Cotton fabrics, 3-thread or 4-thread twill, including cross twill, weighing not more than 200 g/m², unbleached", notes: "Cotton twill fabric" },
+    { code: "5208.19", description: "Cotton fabrics, other woven fabrics, unbleached", notes: "Other unbleached cotton fabrics" },
+    { code: "5208.21", description: "Cotton fabrics, plain weave, weighing not more than 100 g/m², bleached", notes: "Lightweight bleached cotton" },
+    { code: "5208.22", description: "Cotton fabrics, plain weave, weighing more than 100 g/m², bleached", notes: "Medium-weight bleached cotton" },
+    { code: "5208.23", description: "Cotton fabrics, 3-thread or 4-thread twill, including cross twill, weighing not more than 200 g/m², bleached", notes: "Bleached cotton twill" },
+    { code: "5208.29", description: "Cotton fabrics, other woven fabrics, bleached", notes: "Other bleached cotton fabrics" },
+    { code: "5208.31", description: "Cotton fabrics, plain weave, weighing not more than 100 g/m², dyed", notes: "Lightweight dyed cotton" },
+    { code: "5208.32", description: "Cotton fabrics, plain weave, weighing more than 100 g/m², dyed", notes: "Medium-weight dyed cotton" },
+    { code: "5208.33", description: "Cotton fabrics, 3-thread or 4-thread twill, including cross twill, weighing not more than 200 g/m², dyed", notes: "Dyed cotton twill (denim), lightweight" },
+    { code: "5209.42", description: "Denim, cotton fabrics containing 85% or more cotton by weight, weighing more than 200 g/m²", notes: "Standard and heavyweight denim, jeans fabric" },
+    { code: "5208.39", description: "Cotton fabrics, other woven fabrics, dyed", notes: "Other dyed cotton fabrics" },
+    { code: "5208.41", description: "Cotton fabrics, plain weave, weighing not more than 100 g/m², of yarns of different colours", notes: "Lightweight yarn-dyed cotton" },
+    { code: "5208.42", description: "Cotton fabrics, plain weave, weighing more than 100 g/m², of yarns of different colours", notes: "Medium-weight yarn-dyed cotton" },
+    { code: "5208.49", description: "Cotton fabrics, other woven fabrics, of yarns of different colours", notes: "Other yarn-dyed cotton" },
+    { code: "5208.51", description: "Cotton fabrics, plain weave, weighing not more than 100 g/m², printed", notes: "Lightweight printed cotton" },
+    { code: "5208.52", description: "Cotton fabrics, plain weave, weighing more than 100 g/m², printed", notes: "Medium-weight printed cotton" },
+    { code: "5208.59", description: "Cotton fabrics, other woven fabrics, printed", notes: "Other printed cotton fabrics" },
+    { code: "5210.11", description: "Cotton fabrics, plain weave, weighing not more than 200 g/m², dyed", notes: "Medium dyed cotton fabrics" },
+    { code: "5210.21", description: "Cotton fabrics, 3-thread or 4-thread twill, including cross twill, weighing not more than 200 g/m², dyed", notes: "Dyed cotton twill" },
+    { code: "5211.11", description: "Cotton fabrics, plain weave, weighing more than 200 g/m², dyed", notes: "Heavy dyed cotton fabrics" },
+    { code: "5211.12", description: "Cotton fabrics, 3-thread or 4-thread twill, including cross twill, weighing more than 200 g/m², dyed", notes: "Heavy dyed cotton twill" },
+    { code: "6001.10", description: "Pile fabrics and terry fabrics, of cotton", notes: "Cotton terry, velvet" },
+    { code: "6001.92", description: "Pile fabrics and terry fabrics, of man-made fibres", notes: "Synthetic pile fabrics" },
+    { code: "6002.10", description: "Pile fabrics and terry fabrics, of cotton", notes: "Cotton looped fabrics" },
+    { code: "6002.31", description: "Pile fabrics and terry fabrics, of synthetic fibres", notes: "Synthetic looped fabrics" },
+    { code: "6004.10", description: "Knitted fabrics of a width not exceeding 30 cm, of cotton", notes: "Narrow cotton knit fabrics" },
+    { code: "6004.21", description: "Knitted fabrics of a width exceeding 30 cm, of cotton", notes: "Wide cotton knit fabrics" },
+    { code: "6004.31", description: "Knitted fabrics of a width exceeding 30 cm, of synthetic fibres", notes: "Synthetic knit fabrics" },
+    { code: "6004.41", description: "Knitted fabrics of a width exceeding 30 cm, of artificial fibres", notes: "Artificial knit fabrics" },
+    { code: "6005.10", description: "Knitted pile fabrics, of cotton", notes: "Cotton knit pile fabrics" },
+    { code: "6005.21", description: "Knitted pile fabrics, of synthetic fibres", notes: "Synthetic knit pile fabrics" },
+    { code: "6006.10", description: "Other knitted fabrics, of cotton", notes: "Other cotton knit fabrics" },
+    { code: "6006.21", description: "Other knitted fabrics, of synthetic fibres", notes: "Other synthetic knit fabrics" },
+    { code: "6006.31", description: "Other knitted fabrics, of artificial fibres", notes: "Other artificial knit fabrics" },
+  ],
+  "Trims & Accessories": [
+    { code: "5607.41", description: "Twine, cordage, ropes and cables, of polyethylene or polypropylene", notes: "PP ropes, cords, drawcord, drawstring" },
+    { code: "5607.49", description: "Twine, cordage, ropes and cables, of other synthetic fibres", notes: "Synthetic ropes, cords, drawcord, drawstring, hoodie cord" },
+    { code: "5607.50", description: "Twine, cordage, ropes and cables, of other textile materials", notes: "Cotton, jute ropes, cotton drawcord" },
+    { code: "5608.11", description: "Knotted netting of twine, cordage or rope, of man-made fibres", notes: "Synthetic netting" },
+    { code: "5608.19", description: "Knotted netting of twine, cordage or rope, of other textile materials", notes: "Other netting" },
+    { code: "5608.90", description: "Other made up netting fabrics", notes: "Other netting fabrics" },
+    { code: "5609.00", description: "Articles of yarn, twine, cordage, ropes or cables", notes: "Rope articles, nets" },
+    { code: "5804.10", description: "Tulle and other net fabrics, of silk", notes: "Silk tulle, netting" },
+    { code: "5804.21", description: "Tulle and other net fabrics, of man-made fibres", notes: "Synthetic tulle, netting" },
+    { code: "5804.29", description: "Tulle and other net fabrics, of other textile materials", notes: "Other tulle, netting" },
+    { code: "5805.00", description: "Hand-woven tapestries, of wool, fine animal hair, cotton or man-made fibres", notes: "Tapestries" },
+    { code: "5806.10", description: "Narrow woven fabrics, of cotton", notes: "Cotton tapes, ribbons, twill tape, herringbone tape" },
+    { code: "5806.20", description: "Narrow woven fabrics, of man-made fibres", notes: "Synthetic tapes, ribbons, hook-and-loop tape, velcro, twill tape" },
+    { code: "5806.31", description: "Narrow woven fabrics, of silk or silk waste", notes: "Silk tapes, ribbons" },
+    { code: "5806.32", description: "Narrow woven fabrics, of wool or fine animal hair", notes: "Wool tapes, ribbons, hook-and-loop tape, velcro" },
+    { code: "5806.39", description: "Narrow woven fabrics, of other textile materials", notes: "Other tapes, ribbons" },
+    { code: "5806.40", description: "Narrow woven fabrics, containing by weight 5% or more of elastomeric yarn", notes: "Elastic tapes, elastic webbing, waistband elastic" },
+    { code: "5807.10", description: "Labels, badges and similar articles of textile materials, woven", notes: "Woven labels" },
+    { code: "5807.90", description: "Labels, badges and similar articles of textile materials, other", notes: "Printed labels" },
+    { code: "5808.10", description: "Woven pile fabrics and chenille fabrics, of cotton", notes: "Cotton chenille" },
+    { code: "5808.90", description: "Woven pile fabrics and chenille fabrics, of other textile materials", notes: "Other chenille" },
+    { code: "5810.10", description: "Embroidery in the piece, in strips or in motifs, of cotton", notes: "Cotton embroidery" },
+    { code: "5810.91", description: "Embroidery in the piece, in strips or in motifs, of synthetic fibres", notes: "Synthetic embroidery" },
+    { code: "5810.92", description: "Embroidery in the piece, in strips or in motifs, of man-made fibres", notes: "Artificial embroidery" },
+    { code: "5810.99", description: "Embroidery in the piece, in strips or in motifs, of other textile materials", notes: "Other embroidery" },
+    { code: "5801.10", description: "Woven pile fabrics and long-pile fabrics, of cotton", notes: "Cotton velvet, plush" },
+    { code: "5801.21", description: "Woven pile fabrics and long-pile fabrics, of wool or fine animal hair", notes: "Wool velvet, plush" },
+    { code: "5801.22", description: "Woven pile fabrics and long-pile fabrics, of man-made fibres", notes: "Synthetic velvet, plush" },
+    { code: "5801.26", description: "Woven pile fabrics and long-pile fabrics, of other textile materials", notes: "Other velvet, plush" },
+    { code: "5802.11", description: "Terry towelling and similar woven terry fabrics, of cotton", notes: "Cotton terry cloth" },
+    { code: "5802.19", description: "Terry towelling and similar woven terry fabrics, of other textile materials", notes: "Other terry cloth" },
+    { code: "5802.20", description: "Gauzed fabrics, of cotton", notes: "Cotton gauze" },
+    { code: "5802.30", description: "Looped pile fabrics, of cotton", notes: "Cotton looped pile" },
+    { code: "5802.90", description: "Other woven fabrics of cotton", notes: "Other cotton woven fabrics" },
+    { code: "5903.10", description: "Textile fabrics impregnated, coated, covered or laminated with plastics, of polyurethane", notes: "PU coated fabrics" },
+    { code: "5903.20", description: "Textile fabrics impregnated, coated, covered or laminated with plastics, of polyvinyl chloride", notes: "PVC coated fabrics" },
+    { code: "5903.90", description: "Textile fabrics impregnated, coated, covered or laminated with plastics, of other plastics", notes: "Other coated fabrics" },
+    { code: "5906.10", description: "Rubberised textile fabrics, of cotton", notes: "Rubber coated cotton" },
+    { code: "5906.91", description: "Rubberised textile fabrics, of man-made fibres", notes: "Rubber coated synthetic" },
+    { code: "5906.99", description: "Rubberised textile fabrics, of other textile materials", notes: "Other rubber coated" },
+    { code: "5907.00", description: "Textile fabrics otherwise impregnated, coated or covered", notes: "Other coated fabrics" },
+    { code: "5908.00", description: "Textile wicks, woven, plaited or knitted, for lamps, stoves, lighters or similar", notes: "Textile wicks" },
+    { code: "5909.00", description: "Textile hose and tubing, with or without reinforcement", notes: "Textile hoses" },
+    { code: "5910.00", description: "Transmission or conveyor belts or belting, of textile material", notes: "Textile belts" },
+    { code: "5911.00", description: "Textile products and articles for technical uses", notes: "Technical textiles" },
+    { code: "9606.10", description: "Press-fasteners, snap-fasteners and press-studs and parts therefor", notes: "Snap fasteners, press-studs" },
+    { code: "9606.21", description: "Buttons, of plastics, not covered with textile material", notes: "Plastic buttons" },
+    { code: "9606.22", description: "Buttons, of base metal, not covered with textile material", notes: "Metal buttons, jeans buttons" },
+    { code: "9606.29", description: "Buttons, other (of shell, wood, or covered with textile material)", notes: "Shell, wood, fabric-covered buttons" },
+    { code: "9606.30", description: "Button moulds and other parts of buttons; button blanks", notes: "Button blanks, moulds" },
+    { code: "9607.11", description: "Slide fasteners fitted with chain scoops of base metal", notes: "Metal-tooth zippers" },
+    { code: "9607.19", description: "Slide fasteners, other (plastic or coil zippers)", notes: "Plastic-tooth / coil zippers" },
+    { code: "9607.20", description: "Parts of slide fasteners", notes: "Zipper sliders, pulls, tape" },
+    { code: "5204.11", description: "Sewing thread of cotton, containing 85% or more cotton by weight, not for retail sale", notes: "Cotton sewing thread, bulk" },
+    { code: "5204.20", description: "Sewing thread of cotton, put up for retail sale", notes: "Cotton sewing thread, retail spools" },
+    { code: "5401.10", description: "Sewing thread of man-made filaments", notes: "Polyester/nylon filament sewing thread" },
+    { code: "5401.20", description: "Sewing thread of artificial filaments", notes: "Viscose/rayon filament sewing thread" },
+    { code: "5508.10", description: "Sewing thread of synthetic staple fibres", notes: "Polyester/nylon staple sewing thread" },
+    { code: "5508.20", description: "Sewing thread of artificial staple fibres", notes: "Viscose staple sewing thread" },
+    { code: "5602.10", description: "Needleloom felt and stitch-bonded fibre fabrics", notes: "Needle-punched felt, used as interlining/padding" },
+    { code: "5603.11", description: "Nonwovens, of man-made filaments, weighing not more than 25 g/m2", notes: "Lightweight nonwoven interlining" },
+    { code: "5603.12", description: "Nonwovens, of man-made filaments, weighing more than 25 but not more than 70 g/m2", notes: "Mid-weight nonwoven interlining" },
+    { code: "5603.13", description: "Nonwovens, of man-made filaments, weighing more than 70 but not more than 150 g/m2", notes: "Heavier nonwoven interlining" },
+    { code: "5603.14", description: "Nonwovens, of man-made filaments, weighing more than 150 g/m2", notes: "Heavy nonwoven interlining" },
+    { code: "5603.91", description: "Nonwovens, other, weighing not more than 25 g/m2", notes: "Lightweight nonwoven, other fibre" },
+    { code: "5603.92", description: "Nonwovens, other, weighing more than 25 but not more than 70 g/m2", notes: "Mid-weight nonwoven, other fibre" },
+    { code: "5603.93", description: "Nonwovens, other, weighing more than 70 but not more than 150 g/m2", notes: "Heavier nonwoven, other fibre" },
+    { code: "5603.94", description: "Nonwovens, other, weighing more than 150 g/m2", notes: "Heavy nonwoven, other fibre" },
+    { code: "6217.10", description: "Accessories of apparel, not knitted or crocheted", notes: "Belt loops, appliques, non-knit accessories" },
+    { code: "6217.90", description: "Parts of garments or of clothing accessories, not knitted or crocheted", notes: "Fused interlining pieces, pocket linings, zipper fly panels, canvas reinforcements" },
+    { code: "8308.10", description: "Hooks, eyes and eyelets, of base metal", notes: "Metal hooks, eyes, eyelets for closures" },
+    { code: "8308.20", description: "Tubular or bifurcated rivets, of base metal", notes: "Jeans rivets, reinforcement rivets" },
+    { code: "8308.90", description: "Clasps, buckles, buckle-clasps, and similar articles of base metal", notes: "Belt buckles, strap buckles, garment clasps" },
+    { code: "6307.90", description: "Other made-up textile articles, not elsewhere specified", notes: "Shoulder pads, garment padding, dust bags" },
+  ],
+  "Dyes & Chemicals": [
+    { code: "3201", description: "Tanning or dyeing extracts; tannins and their derivatives", notes: "Tanning extracts, tannins" },
+    { code: "3202", description: "Synthetic organic tanning substances", notes: "Synthetic tanning agents" },
+    { code: "3203", description: "Colour lakes; preparations based on colour lakes", notes: "Colour lakes" },
+    { code: "3204", description: "Synthetic organic colouring matter and preparations", notes: "Synthetic dyes" },
+    { code: "3205", description: "Colour lakes; preparations based on colour lakes", notes: "Pigment preparations" },
+    { code: "3206", description: "Other colouring matter; preparations based on colour matter", notes: "Other dyes, pigments" },
+    { code: "3207", description: "Printing ink, writing or drawing ink", notes: "Inks" },
+    { code: "3208", description: "Paints and varnishes based on synthetic polymers", notes: "Synthetic paints" },
+    { code: "3209", description: "Paints and varnishes based on other polymers", notes: "Other paints" },
+    { code: "3210", description: "Other paints and varnishes", notes: "Other coatings" },
+    { code: "3211", description: "Prepared dyes", notes: "Prepared dye preparations" },
+    { code: "3212", description: "Vehicles; prepared thinners and reducers", notes: "Paint thinners" },
+    { code: "3213", description: "Artists', students' or signboard painters' colours", notes: "Artist colors" },
+    { code: "3214", description: "Fillers, putty, mastics, etc.", notes: "Fillers, mastics" },
+    { code: "3215", description: "Printing ink, writing or drawing ink", notes: "Printing inks" },
+    { code: "3402", description: "Organic surface-active agents", notes: "Surfactants, detergents" },
+    { code: "3403", description: "Preparations for washing, cleaning", notes: "Cleaning preparations" },
+    { code: "3404", description: "Artificial waxes, prepared waxes", notes: "Waxes" },
+    { code: "3405", description: "Polishes, creams and similar preparations", notes: "Polishes" },
+    { code: "3808", description: "Insecticides, rodenticides, fungicides", notes: "Pesticides" },
+    { code: "3809", description: "Finishing agents, dye carriers", notes: "Textile finishing agents" },
+  ],
+  "Machinery": [
+    { code: "8443", description: "Printing machinery", notes: "Label printing machines" },
+    { code: "8444", description: "Machines for extruding, drawing, texturing man-made fibres", notes: "Fiber extrusion machines" },
+    { code: "8445", description: "Machines for preparing textile fibres; spinning, doubling or twisting machines", notes: "Spinning machines" },
+    { code: "8446", description: "Looms", notes: "Weaving looms" },
+    { code: "8447", description: "Knitting machines", notes: "Knitting machines" },
+    { code: "8448", description: "Auxiliary machinery for use with machines of headings 8444-8447", notes: "Textile auxiliary machines" },
+    { code: "8450", description: "Household or laundry-type washing machines", notes: "Washing machines" },
+    { code: "8451", description: "Machinery for dry-cleaning, washing", notes: "Dry cleaning machines" },
+    { code: "8452", description: "Sewing machines", notes: "Sewing machines" },
+    { code: "8453", description: "Machinery for preparing, tanning or working hides, skins or leather", notes: "Leather working machines" },
+    { code: "8454", description: "Convertor furnaces", notes: "Metal furnaces" },
+    { code: "8455", description: "Metal-rolling mills and rolls", notes: "Rolling mills" },
+    { code: "8456", description: "Machine-tools for working metal by removing material", notes: "Cutting machines" },
+    { code: "8457", description: "Machining centres", notes: "CNC machines" },
+    { code: "8458", description: "Lathes", notes: "Turning lathes" },
+    { code: "8459", description: "Machine-tools for drilling, boring, milling", notes: "Drilling machines" },
+    { code: "8460", description: "Machine-tools for planing, shaping, slotting", notes: "Planing machines" },
+    { code: "8461", description: "Machine-tools for grinding", notes: "Grinding machines" },
+    { code: "8462", description: "Machine-tools for sawing, cutting", notes: "Cutting machines" },
+    { code: "8463", description: "Other machine-tools for working metal", notes: "Other metalworking machines" },
+    { code: "8464", description: "Machine-tools for working stone, ceramics", notes: "Stone working machines" },
+    { code: "8465", description: "Machine-tools for working wood, cork, bone, hard rubber", notes: "Woodworking machines" },
+    { code: "8469", description: "Machinery for making or repairing footwear", notes: "Footwear machines" },
+    { code: "8477", description: "Machinery for working rubber or plastics", notes: "Plastic processing machines" },
+    { code: "8479", description: "Machines and mechanical appliances", notes: "Special purpose machines" },
+  ],
+  "Headwear & Woven Accessories": [
+    { code: "6501.00", description: "Hat forms, hat bodies and hoods of felt; plateaux and manchons of felt", notes: "Unfinished felt hat forms" },
+    { code: "6502.00", description: "Hat shapes, plaited or made by assembling strips, not blocked, not lined, not trimmed", notes: "Unfinished plaited hat shapes" },
+    { code: "6505.00", description: "Hats and other headgear, knitted or crocheted, or made up from lace, felt, or other textile fabric", notes: "Caps, beanies, bucket hats, knitted headwear" },
+    { code: "6506.99", description: "Other headgear, of other materials", notes: "Other caps and headgear" },
+    { code: "6213.20", description: "Handkerchiefs, of cotton", notes: "Cotton handkerchiefs" },
+    { code: "6213.90", description: "Handkerchiefs, of other textile materials", notes: "Other handkerchiefs" },
+    { code: "6214.10", description: "Shawls, scarves, mufflers, mantillas, veils, of silk or silk waste", notes: "Silk scarves, shawls" },
+    { code: "6214.20", description: "Shawls, scarves, mufflers, mantillas, veils, of wool or fine animal hair", notes: "Wool scarves, shawls" },
+    { code: "6214.30", description: "Shawls, scarves, mufflers, mantillas, veils, of synthetic fibres", notes: "Synthetic scarves, shawls" },
+    { code: "6214.90", description: "Shawls, scarves, mufflers, mantillas, veils, of other textile materials", notes: "Other scarves, shawls" },
+    { code: "6215.10", description: "Ties, bow ties and cravats, of silk or silk waste", notes: "Silk neckties" },
+    { code: "6215.20", description: "Ties, bow ties and cravats, of man-made fibres", notes: "Synthetic neckties" },
+    { code: "6215.90", description: "Ties, bow ties and cravats, of other textile materials", notes: "Other neckties" },
+    { code: "6216.00", description: "Gloves, mittens and mitts, not knitted or crocheted", notes: "Woven/non-knit gloves" },
+  ],
+  "Bags & Leather Goods": [
+    { code: "4202.11", description: "Trunks, suitcases and similar containers, with outer surface of leather", notes: "Leather luggage" },
+    { code: "4202.12", description: "Trunks, suitcases and similar containers, with outer surface of plastics or of textile materials", notes: "Textile luggage" },
+    { code: "4202.19", description: "Trunks, suitcases and similar containers, of other materials", notes: "Other luggage" },
+    { code: "4202.21", description: "Handbags, with outer surface of leather", notes: "Leather handbags" },
+    { code: "4202.22", description: "Handbags, with outer surface of plastics or of textile materials", notes: "Textile handbags, tote bags" },
+    { code: "4202.29", description: "Handbags, of other materials", notes: "Other handbags" },
+    { code: "4202.31", description: "Wallets, purses, key-cases, with outer surface of leather", notes: "Leather wallets" },
+    { code: "4202.32", description: "Wallets, purses, key-cases, with outer surface of plastics or of textile materials", notes: "Textile wallets" },
+    { code: "4202.39", description: "Wallets, purses, key-cases, of other materials", notes: "Other wallets" },
+    { code: "4202.91", description: "Other containers, with outer surface of leather", notes: "Leather containers" },
+    { code: "4202.92", description: "Other containers, with outer surface of plastics or of textile materials", notes: "Textile containers, pouches" },
+    { code: "4202.99", description: "Other containers, of other materials", notes: "Other containers" },
+  ],
+  "Packaging": [
+    { code: "3923.21", description: "Sacks and bags, of polymers of ethylene", notes: "PE bags, sacks" },
+    { code: "3923.29", description: "Sacks and bags, of other plastics", notes: "PP, PVC bags" },
+    { code: "3923.30", description: "Carboys, bottles, flasks and similar articles, of plastics", notes: "Plastic bottles" },
+    { code: "4819.10", description: "Cartons, boxes and cases, of corrugated paper or paperboard", notes: "Corrugated cardboard boxes" },
+    { code: "4819.20", description: "Folding cartons, boxes and cases, of non-corrugated paper or paperboard", notes: "Folding cartons" },
+    { code: "4819.30", description: "Sacks and bags, of paper", notes: "Paper bags, sacks" },
+    { code: "4819.40", description: "Other packing containers, of paper", notes: "Other paper containers" },
+    { code: "4819.50", description: "Office box files and similar containers", notes: "Box files" },
+    { code: "4819.60", description: "Other packing containers, of paper", notes: "Other paper packing" },
+    { code: "6305.10", description: "Sacks and bags, of jute or of other textile bast fibres", notes: "Jute sacks" },
+    { code: "6305.20", description: "Sacks and bags, of cotton", notes: "Cotton sacks" },
+    { code: "6305.32", description: "Sacks and bags, of man-made fibres", notes: "Synthetic sacks" },
+    { code: "6305.33", description: "Sacks and bags, of other textile materials", notes: "Other textile sacks" },
+    { code: "6305.90", description: "Sacks and bags, of other materials", notes: "Other sacks" },
+    { code: "3923.10", description: "Boxes, cases, crates and similar articles, of plastics", notes: "Plastic boxes" },
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<style>
+  .faq-item {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    padding: 1.25rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    min-height: 44px;
+    font-family: inherit;
+  }
+
+  .faq-question:hover {
+    color: #fff;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: transform 0.2s;
+    color: #fff;
+  }
+
+  .faq-icon--open {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    display: none;
+    padding-bottom: 1.25rem;
+  }
+
+  .faq-answer--visible {
+    display: block;
+  }
+</style>
+
+<script type="application/ld+json" set:html={JSON.stringify(schemaOrganization)} />
+<script type="application/ld+json" set:html={JSON.stringify(schemaPerson)} />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "HS Code Reference for Clothing & Textiles",
+  "description": "Searchable HS code reference for clothing, textiles, and apparel manufacturing with knitted garments, woven garments, yarn, fabrics, trims, and packaging codes.",
+  "url": "https://sdfltd.com/tools/hs-code",
+  "applicationCategory": "BusinessApplication",
+  "provider": { "@id": "https://sdfltd.com/#org" },
+  "author": { "@id": "https://sdfltd.com/#founder" },
+  "reviewedBy": { "@id": "https://sdfltd.com/#founder" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://sdfltd.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tools",
+      "item": "https://sdfltd.com/tools"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "HS Code Reference"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the HS code for a t-shirt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The HS code for a t-shirt typically falls under Chapter 61 or 62. For knitted cotton t-shirts, the HS code is 6109.10. For woven cotton t-shirts, use 6206.30. The exact code depends on the material (cotton, polyester, wool) and construction (knitted vs woven). Always verify with your country's customs authority."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I find the HS code for my garment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To find the HS code for your garment: 1) Identify the garment type (t-shirt, dress, trousers), 2) Determine the material (cotton, polyester, wool), 3) Check if it's knitted or woven, 4) Use the search box above to find matching codes, 5) Verify with your country's customs authority link provided below. The first 6 digits are standardized internationally."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the HS code the same in every country?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The first 6 digits of the HS code are standardized globally by the World Customs Organization (WCO). However, digits beyond the 6th are country-specific. For example, the USA uses 10 digits (HTS codes), the UK uses 10 digits, the EU uses 8 digits (TARIC codes), Australia uses 8 digits, and Canada uses 10 digits. Duty rates and regulations also vary by country."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the main HS code chapters for clothing and textiles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The main HS code chapters for clothing and textiles are: Chapter 50-60 (Silk, wool, cotton, other vegetable textiles, man-made filaments, man-made staple fibres), Chapter 61 (Knitted apparel), Chapter 62 (Woven apparel), Chapter 63 (Other made-up textile articles, including worn clothing). Use the search tool above to find specific codes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is accurate HS code classification important?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Accurate HS code classification is critical because: 1) It determines the correct duty rate you must pay, 2) Incorrect classification can lead to customs delays, penalties, and fines, 3) Different materials have different duty rates (e.g., cotton vs polyester), 4) Some countries have preferential trade agreements that reduce duties for certain classifications. Always verify with official customs authorities."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if the wrong HS code is used on a shipment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Using the wrong HS code can trigger customs delays while the shipment is re-inspected, incorrect duty being charged (either overpaying or underpaying, with underpayment risking penalties and back-payment demands), and in repeated cases can flag your importer account for closer scrutiny on future shipments. Correcting a misclassification after goods have shipped is far more costly than verifying the code before production begins."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who is responsible for correct HS code classification, the buyer or the manufacturer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Legal responsibility for correct classification on import documentation typically rests with the importer of record, which is usually the buyer or their customs broker, not the factory. However, an experienced manufacturer should be able to confirm the correct 6-digit international code for what they're producing, since they know the exact fiber content and construction. Buyers should still verify the final country-specific code with their own customs broker before shipment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does SDF Clothing verify HS codes for my order?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SDF Clothing can confirm the correct 6-digit international HS code for any product we manufacture, based on the exact fiber content and construction of your order, as part of production documentation. For the final country-specific 8-10 digit code and duty rate, we recommend confirming with your customs broker or the relevant customs authority, since that final classification also depends on your specific import circumstances."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- BREADCRUMB NAVIGATION -->
+<nav style="padding:1rem 0;background:#000;border-bottom:1px solid #000000;">
+  <div class="container">
+    <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:#ffffff;">
+      <a href="/" style="color:#ffffff;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Home</a>
+      <span style="opacity:0.5;">/</span>
+      <a href="/tools" style="color:#ffffff;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Tools</a>
+      <span style="opacity:0.5;">/</span>
+      <span style="color:#fff;">HS Code Reference</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding:5rem 0 3rem;border-bottom:1px solid #000000;">
+  <div class="container">
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#ffffff;margin-bottom:0.75rem;text-align:center;">Free Reference Tool · Searchable Database</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1rem;line-height:1.2;text-align:center;">HS Code Reference<br>for Clothing & Textiles</h1>
+    <p style="color:#ffffff;max-width:620px;line-height:1.8;font-size:0.92rem;text-align:center;margin-left:auto;margin-right:auto;">Search and filter HS codes for knitted garments, woven garments, yarn, fabrics, trims & accessories, packaging, dyes, and machinery. Essential for your clothing manufacturer and your team for customs classification and duty calculation.</p>
+    <p style="color:#888;font-size:0.72rem;text-align:center;margin-top:1rem;">Compiled and reviewed by <a href="/about" style="color:#e00;text-decoration:none;">Chowdhury Remon</a>, Founder &amp; CEO — {getYearsExperiencePlus()} years in garment manufacturing &middot; Last verified July 2026</p>
+  </div>
+</section>
+
+<!-- CODE BREAKDOWN EXPLAINER -->
+<section style="padding:3rem 0;background:linear-gradient(135deg, #000000 0%, #000000 100%);border-bottom:1px solid #000000;">
+  <div class="container">
+    <h2 style="font-size:1.25rem;font-weight:400;letter-spacing:0.15em;text-transform:uppercase;color:#ffffff;margin-bottom:1.5rem;text-align:center;">How HS Codes Work
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;padding:2rem;background:#000;border:1px solid #000000;border-radius:8px;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <label for="code-chapter" style="font-size:0.75rem;color:#ffffff;display:block;margin-bottom:0.5rem;">Chapter</label>
+          <input type="text" id="code-chapter" placeholder="61" style="font-family:'Courier New',monospace;font-size:2rem;font-weight:700;color:#ffffff;padding:1rem;background:#000000;border:1px solid #e00;border-radius:4px;margin-bottom:0.5rem;text-align:center;width:80px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#ffffff'" onblur="this.style.borderColor='#e00'" />
+          <div style="font-size:0.65rem;color:#ffffff;">Knitted apparel</div>
+        </div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;" aria-label="Right arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        <div style="text-align:center;">
+          <label for="code-heading" style="font-size:0.75rem;color:#ffffff;display:block;margin-bottom:0.5rem;">Heading</label>
+          <input type="text" id="code-heading" placeholder="09" style="font-family:'Courier New',monospace;font-size:2rem;font-weight:700;color:#ffffff;padding:1rem;background:#000000;border:1px solid #e00;border-radius:4px;margin-bottom:0.5rem;text-align:center;width:80px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#ffffff'" onblur="this.style.borderColor='#e00'" />
+          <div style="font-size:0.65rem;color:#ffffff;">T-shirts/vests</div>
+        </div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;" aria-label="Right arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        <div style="text-align:center;">
+          <label for="code-subheading" style="font-size:0.75rem;color:#ffffff;display:block;margin-bottom:0.5rem;">Subheading</label>
+          <input type="text" id="code-subheading" placeholder="10" style="font-family:'Courier New',monospace;font-size:2rem;font-weight:700;color:#ffffff;padding:1rem;background:#000000;border:1px solid #e00;border-radius:4px;margin-bottom:0.5rem;text-align:center;width:80px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#ffffff'" onblur="this.style.borderColor='#e00'" />
+          <div style="font-size:0.65rem;color:#ffffff;">Cotton</div>
+        </div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;" aria-label="Right arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        <div style="text-align:center;">
+          <label for="code-country" style="font-size:0.75rem;color:#ffffff;display:block;margin-bottom:0.5rem;">Country-specific</label>
+          <input type="text" id="code-country" placeholder="XX.XX" style="font-family:'Courier New',monospace;font-size:2rem;font-weight:700;color:#ffffff;padding:1rem;background:#000000;border:1px solid #e00;border-radius:4px;margin-bottom:0.5rem;text-align:center;width:100px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#ffffff'" onblur="this.style.borderColor='#e00'" />
+          <div style="font-size:0.65rem;color:#ffffff;">Extended digits</div>
+        </div>
+      </div>
+      
+      <div id="code-breakdown-results" style="background:#000000;border:1px solid #000000;border-radius:4px;padding:1.5rem;min-height:150px;max-height:300px;overflow-y:auto;">
+        <p id="code-breakdown-empty" style="font-size:0.85rem;color:#ffffff;text-align:center;padding-top:2rem;">Enter a code above to see results.</p>
+        <div id="code-breakdown-list" style="display:none;"></div>
+      </div>
+    </div>
+    
+    <!-- SEARCH & FILTER INSIDE EXPLAINER BOX -->
+    <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid #000000;">
+      <div>
+        <label for="searchInput" style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:#ffffff;display:block;margin-bottom:0.5rem;">Search Products</label>
+        <input type="text" id="searchInput" placeholder="Search by product name or HS code..." autocomplete="off" style="background:#000;border:1px solid #e00;color:#fff;padding:0.85rem;font-size:16px;min-height:44px;width:100%;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;" onfocus="this.style.borderColor='#ffffff'" onblur="this.style.borderColor='#e00'" />
+      </div>
+
+      <div style="margin-top:0.85rem;display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;" id="quickSearchChips">
+        <span style="font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:#ffffff;margin-right:0.25rem;">Popular:</span>
+        <button type="button" class="hs-quick-chip" data-term="denim">Denim</button>
+        <button type="button" class="hs-quick-chip" data-term="buttons">Buttons</button>
+        <button type="button" class="hs-quick-chip" data-term="zipper">Zippers</button>
+        <button type="button" class="hs-quick-chip" data-term="label">Labels</button>
+        <button type="button" class="hs-quick-chip" data-term="interlining">Interlining</button>
+        <button type="button" class="hs-quick-chip" data-term="poly bag">Poly Bags</button>
+      </div>
+
+      <div style="margin-top:1.25rem;">
+        <label style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:#ffffff;display:block;margin-bottom:0.5rem;">Filter by Category</label>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;" id="categoryChips">
+          <button type="button" class="hs-category-chip active" data-category="all">All Categories</button>
+          <button type="button" class="hs-category-chip" data-category="Knitted Garments">Knitted Garments</button>
+          <button type="button" class="hs-category-chip" data-category="Woven Garments">Woven Garments</button>
+          <button type="button" class="hs-category-chip" data-category="Yarn">Yarn</button>
+          <button type="button" class="hs-category-chip" data-category="Fabrics">Fabrics</button>
+          <button type="button" class="hs-category-chip" data-category="Trims & Accessories">Trims &amp; Accessories</button>
+          <button type="button" class="hs-category-chip" data-category="Headwear & Woven Accessories">Headwear &amp; Woven Accessories</button>
+          <button type="button" class="hs-category-chip" data-category="Bags & Leather Goods">Bags &amp; Leather Goods</button>
+          <button type="button" class="hs-category-chip" data-category="Packaging">Packaging</button>
+          <button type="button" class="hs-category-chip" data-category="Dyes & Chemicals">Dyes &amp; Chemicals</button>
+          <button type="button" class="hs-category-chip" data-category="Machinery">Machinery</button>
+        </div>
+        <select id="categoryFilter" aria-hidden="true" tabindex="-1" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+          <option value="all">All Categories</option>
+          <option value="Knitted Garments">Knitted Garments</option>
+          <option value="Woven Garments">Woven Garments</option>
+          <option value="Yarn">Yarn</option>
+          <option value="Fabrics">Fabrics</option>
+          <option value="Trims & Accessories">Trims &amp; Accessories</option>
+          <option value="Headwear & Woven Accessories">Headwear &amp; Woven Accessories</option>
+          <option value="Bags & Leather Goods">Bags &amp; Leather Goods</option>
+          <option value="Packaging">Packaging</option>
+          <option value="Dyes & Chemicals">Dyes &amp; Chemicals</option>
+          <option value="Machinery">Machinery</option>
+        </select>
+      </div>
+
+      <p id="hsResultCount" style="font-size:0.75rem;color:#ffffff;margin-top:1rem;"></p>
+    </div>
+
+    <style>
+      .hs-quick-chip{background:#000;border:1px solid #333;color:#ccc;padding:0.5rem 0.9rem;font-size:0.75rem;font-family:inherit;cursor:pointer;border-radius:999px;min-height:36px;transition:border-color 0.2s,color 0.2s;}
+      .hs-quick-chip:hover{border-color:#e00;color:#fff;}
+      .hs-category-chip{background:#000;border:1px solid #333;color:#ccc;padding:0.65rem 1rem;font-size:0.78rem;font-family:inherit;cursor:pointer;border-radius:4px;min-height:44px;transition:border-color 0.2s,background 0.2s,color 0.2s;}
+      .hs-category-chip:hover{border-color:#e00;color:#fff;}
+      .hs-category-chip.active{background:#e00;border-color:#e00;color:#fff;}
+      #searchInput{position:sticky;top:0.5rem;z-index:5;}
+    </style>
+    
+    <p style="font-size:0.78rem;color:#ffffff;text-align:center;margin-top:1.5rem;max-width:700px;margin-left:auto;margin-right:auto;">The first 6 digits (61.09.10) are internationally standardized by the World Customs Organization (WCO). Digits beyond 6 are country-specific for duty rates and detailed classification.</p>
+  </div>
+</section>
+
+<!-- STANDARDIZATION NOTE -->
+<section style="padding:2rem 0;background:linear-gradient(135deg, #000000 0%, #000000 100%);border-bottom:1px solid #000000;">
+  <div class="container">
+    <div style="background:rgba(255,255,255,0.02);border:1px solid #000000;border-radius:8px;padding:1.5rem;margin-bottom:1.5rem;">
+      <div style="display:flex;align-items:flex-start;gap:1rem;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:0.25rem;" aria-label="Information icon">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <div>
+          <h3 style="font-size:0.85rem;color:#fff;font-weight:500;margin-bottom:0.5rem;line-height:1.6;">Important Note on HS Code Standardization</h3>
+          <p style="font-size:0.8rem;color:#ffffff;line-height:1.7;">The first 6 digits of every HS code are internationally standardized (WCO). Beyond 6 digits, each country has its own extended classification and duty rates. Always verify with your country's customs authority.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#ffffff;margin-bottom:1rem;">Country-Specific Customs Authorities</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+      <a href="https://hts.usitc.gov/" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 1rem;background:#000;border:1px solid #000000;text-decoration:none;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#ffffff'" onmouseout="this.style.borderColor='#000000'">
+        <span style="font-size:0.82rem;color:#fff;">USA (10 digits)</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
+      <a href="https://www.trade-tariff.service.gov.uk/find_commodity" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 1rem;background:#000;border:1px solid #000000;text-decoration:none;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#ffffff'" onmouseout="this.style.borderColor='#000000'">
+        <span style="font-size:0.82rem;color:#fff;">UK (10 digits)</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
+      <a href="https://taxation-customs.ec.europa.eu/customs-4/calculation-customs-duties/customs-tariff/eu-customs-tariff-taric_en" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 1rem;background:#000;border:1px solid #000000;text-decoration:none;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#ffffff'" onmouseout="this.style.borderColor='#000000'">
+        <span style="font-size:0.82rem;color:#fff;">EU/TARIC (8 digits)</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
+      <a href="https://www.tariff.customs.go.jp/tariff/2024/index_e.htm" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 1rem;background:#000;border:1px solid #000000;text-decoration:none;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#ffffff'" onmouseout="this.style.borderColor='#000000'">
+        <span style="font-size:0.82rem;color:#fff;">Japan (9 digits)</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
+      <a href="https://www.abf.gov.au/importing-exporting-and-manufacturing/tariff-classification/current-tariff/schedule-3" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 1rem;background:#000;border:1px solid #000000;text-decoration:none;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#ffffff'" onmouseout="this.style.borderColor='#000000'">
+        <span style="font-size:0.82rem;color:#fff;">Australia (8 digits)</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
+      <a href="https://www.cbsa-asfc.gc.ca/trade-commerce/tariff-tarif/2024/html/00/m-00-eng.html" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 1rem;background:#000;border:1px solid #000000;text-decoration:none;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#ffffff'" onmouseout="this.style.borderColor='#000000'">
+        <span style="font-size:0.82rem;color:#fff;">Canada (10 digits)</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
+      <a href="https://www.customs.go.kr/kcshome/main/main.do" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 1rem;background:#000;border:1px solid #000000;text-decoration:none;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#ffffff'" onmouseout="this.style.borderColor='#000000'">
+        <span style="font-size:0.82rem;color:#fff;">South Korea (10 digits)</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
+      <a href="https://nbr.gov.bd/" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 1rem;background:#000;border:1px solid #000000;text-decoration:none;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#ffffff'" onmouseout="this.style.borderColor='#000000'">
+        <span style="font-size:0.82rem;color:#fff;">Bangladesh Export (8 digits)</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HS CODE TABLES - TWO PANEL LAYOUT -->
+<section style="padding:0 0 4rem;">
+  <div class="container">
+    <div id="hs-container" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+      <!-- LEFT PANEL: CODE LIST -->
+      <div id="hs-left-panel">
+        <div id="hs-empty-state" style="background:#000;border:1px solid #000000;padding:3rem;text-align:center;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:1rem;opacity:0.5;" aria-label="Search icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <p style="font-size:0.9rem;color:#ffffff;">Search above to find HS codes</p>
+        </div>
+        {Object.entries(hsCodes).map(([category, codes]) => (
+          <div class="hs-category" data-category={category} data-category-id={category.toLowerCase().replace(/[^a-z0-9]+/g, '-')} style="margin-bottom:2rem;display:none;">
+            <h2 class="hs-category-title" style="font-size:1.1rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#fff;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid #000000;">{category}</h2>
+            <div class="hs-table" style="display:grid;gap:1px;background:#000000;">
+              {codes.map((item) => (
+                <div class="hs-row clickable" data-code={item.code} data-description={item.description} data-notes={item.notes} data-category={category} style="background:#000;padding:1rem 1.25rem;display:grid;grid-template-columns:100px 1fr auto;gap:1rem;align-items:start;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#000000'" onmouseout="this.style.background='#000'">
+                  <div style="font-family:'Courier New',monospace;font-size:0.9rem;color:#ffffff;font-weight:500;">{item.code.substring(0, 6)}</div>
+                  <div>
+                    <div style="font-size:0.85rem;color:#fff;margin-bottom:0.3rem;line-height:1.5;">{item.description}</div>
+                    <div style="font-size:0.75rem;color:#ffffff;line-height:1.4;">{item.notes}</div>
+                  </div>
+                  <span style="font-size:0.65rem;padding:0.25rem 0.5rem;background:#000000;color:#ffffff;border-radius:3px;text-transform:uppercase;letter-spacing:0.05em;">{category}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <!-- RIGHT PANEL: COUNTRY BREAKDOWN -->
+      <div id="hs-right-panel" style="position:sticky;top:2rem;height:fit-content;">
+        <div id="hs-default-message" style="background:#000;border:1px solid #000000;padding:3rem;text-align:center;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:1rem;opacity:0.5;" aria-label="Information icon"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <p style="font-size:0.9rem;color:#ffffff;margin-bottom:0.5rem;">Select an HS code</p>
+          <p style="font-size:0.78rem;color:#ffffff;">Click on any code to view country-specific breakdown</p>
+        </div>
+        
+        <div id="hs-country-breakdown" style="display:none;background:#000;border:1px solid #000000;">
+          <div style="padding:1.5rem;border-bottom:1px solid #000000;">
+            <div style="font-family:'Courier New',monospace;font-size:1.5rem;color:#ffffff;font-weight:700;margin-bottom:0.5rem;" id="selected-code">610910</div>
+            <div style="font-size:0.85rem;color:#fff;line-height:1.5;" id="selected-description">T-shirts, singlets and other vests</div>
+            <div style="font-size:0.75rem;color:#ffffff;margin-top:0.5rem;" id="selected-notes">Cotton t-shirts</div>
+          </div>
+          
+          <div style="padding:1.5rem;">
+            <p style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#ffffff;margin-bottom:1rem;">Country-Specific Codes</p>
+            <div style="display:grid;gap:1px;background:#000000;">
+              <div style="background:#000;padding:0.85rem;display:grid;grid-template-columns:1fr auto auto 40px;gap:0.75rem;align-items:center;">
+                <span style="font-size:0.8rem;color:#fff;">USA</span>
+                <span style="font-size:0.75rem;color:#ffffff;">10 digits</span>
+                <a href="https://hts.usitc.gov/" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;color:#ffffff;text-decoration:none;">hts.usitc.gov</a>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </div>
+              <div style="background:#000;padding:0.85rem;display:grid;grid-template-columns:1fr auto auto 40px;gap:0.75rem;align-items:center;">
+                <span style="font-size:0.8rem;color:#fff;">UK</span>
+                <span style="font-size:0.75rem;color:#ffffff;">10 digits</span>
+                <a href="https://www.trade-tariff.service.gov.uk/find_commodity" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;color:#ffffff;text-decoration:none;">trade-tariff.service.gov.uk</a>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </div>
+              <div style="background:#000;padding:0.85rem;display:grid;grid-template-columns:1fr auto auto 40px;gap:0.75rem;align-items:center;">
+                <span style="font-size:0.8rem;color:#fff;">EU/TARIC</span>
+                <span style="font-size:0.75rem;color:#ffffff;">8 digits</span>
+                <a href="https://taxation-customs.ec.europa.eu/customs-4/calculation-customs-duties/customs-tariff/eu-customs-tariff-taric_en" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;color:#ffffff;text-decoration:none;">TARIC portal</a>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </div>
+              <div style="background:#000;padding:0.85rem;display:grid;grid-template-columns:1fr auto auto 40px;gap:0.75rem;align-items:center;">
+                <span style="font-size:0.8rem;color:#fff;">Japan</span>
+                <span style="font-size:0.75rem;color:#ffffff;">9 digits</span>
+                <a href="https://www.tariff.customs.go.jp/tariff/2024/index_e.htm" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;color:#ffffff;text-decoration:none;">tariff.customs.go.jp</a>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </div>
+              <div style="background:#000;padding:0.85rem;display:grid;grid-template-columns:1fr auto auto 40px;gap:0.75rem;align-items:center;">
+                <span style="font-size:0.8rem;color:#fff;">Australia</span>
+                <span style="font-size:0.75rem;color:#ffffff;">8 digits</span>
+                <a href="https://www.abf.gov.au/importing-exporting-and-manufacturing/tariff-classification/current-tariff/schedule-3" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;color:#ffffff;text-decoration:none;">abf.gov.au</a>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </div>
+              <div style="background:#000;padding:0.85rem;display:grid;grid-template-columns:1fr auto auto 40px;gap:0.75rem;align-items:center;">
+                <span style="font-size:0.8rem;color:#fff;">Canada</span>
+                <span style="font-size:0.75rem;color:#ffffff;">10 digits</span>
+                <a href="https://www.cbsa-asfc.gc.ca/trade-commerce/tariff-tarif/2024/html/00/m-00-eng.html" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;color:#ffffff;text-decoration:none;">cbsa-asfc.gc.ca</a>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </div>
+              <div style="background:#000;padding:0.85rem;display:grid;grid-template-columns:1fr auto auto 40px;gap:0.75rem;align-items:center;">
+                <span style="font-size:0.8rem;color:#fff;">South Korea</span>
+                <span style="font-size:0.75rem;color:#ffffff;">10 digits</span>
+                <a href="https://www.customs.go.kr/kcshome/main/main.do" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;color:#ffffff;text-decoration:none;">customs.go.kr</a>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </div>
+              <div style="background:#000;padding:0.85rem;display:grid;grid-template-columns:1fr auto auto 40px;gap:0.75rem;align-items:center;">
+                <span style="font-size:0.8rem;color:#fff;">Bangladesh</span>
+                <span style="font-size:0.75rem;color:#ffffff;">8 digits</span>
+                <a href="https://nbr.gov.bd/" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;color:#ffffff;text-decoration:none;">nbr.gov.bd</a>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="External link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </div>
+            </div>
+            <p style="font-size:0.7rem;color:#ffffff;margin-top:1rem;line-height:1.5;">The first 6 digits are internationally standardized by the World Customs Organization (WCO). Digits beyond 6 are country-specific. Duty rates change regularly  always verify with the official customs authority link before shipping.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="hs-no-results" style="display:none;text-align:center;padding:3rem;background:#000;border:1px solid #000000;">
+      <p style="font-size:0.9rem;color:#ffffff;">No HS codes found matching your search.</p>
+      <button id="hs-reset" style="margin-top:1rem;background:#000000;color:#000;border:none;padding:0.75rem 1.5rem;font-size:0.8rem;cursor:pointer;min-height:44px;font-family:inherit;">Clear Filters</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section style="padding:4rem 0;border-bottom:1px solid #000000;">
+  <div class="container">
+    <h2 style="font-size:1.25rem;font-weight:400;letter-spacing:0.15em;text-transform:uppercase;color:#ffffff;margin-bottom:2rem;">Frequently Asked Questions About HS Codes for Clothing</h2>
+    <div style="display:grid;gap:0;max-width:900px;">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is the HS code for a t-shirt?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p style="font-size:0.85rem;color:#ffffff;line-height:1.6;">The HS code for a t-shirt typically falls under Chapter 61 or 62. For knitted cotton t-shirts, the HS code is 6109.10. For woven cotton t-shirts, use 6206.30. The exact code depends on the material (cotton, polyester, wool) and construction (knitted vs woven). Always verify with your country's customs authority.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How do I find the HS code for my garment?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p style="font-size:0.85rem;color:#ffffff;line-height:1.6;">To find the HS code for your garment: 1) Identify the garment type (t-shirt, dress, trousers), 2) Determine the material (cotton, polyester, wool), 3) Check if it's knitted or woven, 4) Use the search box above to find matching codes, 5) Verify with your country's customs authority link provided below. The first 6 digits are standardized internationally.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is the HS code the same in every country?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p style="font-size:0.85rem;color:#ffffff;line-height:1.6;">The first 6 digits of the HS code are standardized globally by the World Customs Organization (WCO). However, digits beyond the 6th are country-specific. For example, the USA uses 10 digits (HTS codes), the UK uses 10 digits, the EU uses 8 digits (TARIC codes), Australia uses 8 digits, and Canada uses 10 digits. Duty rates and regulations also vary by country.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What are the main HS code chapters for clothing and textiles?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p style="font-size:0.85rem;color:#ffffff;line-height:1.6;">The main HS code chapters for clothing and textiles are: Chapter 50-60 (Silk, wool, cotton, other vegetable textiles, man-made filaments, man-made staple fibres), Chapter 61 (Knitted apparel), Chapter 62 (Woven apparel), Chapter 63 (Other made-up textile articles, including worn clothing). Use the search tool above to find specific codes.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Why is accurate HS code classification important?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p style="font-size:0.85rem;color:#ffffff;line-height:1.6;">Accurate HS code classification is critical because: 1) It determines the correct duty rate you must pay, 2) Incorrect classification can lead to customs delays, penalties, and fines, 3) Different materials have different duty rates (e.g., cotton vs polyester), 4) Some countries have preferential trade agreements that reduce duties for certain classifications. Always verify with official customs authorities.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What happens if the wrong HS code is used on a shipment?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p style="font-size:0.85rem;color:#ffffff;line-height:1.6;">Using the wrong HS code can trigger customs delays while the shipment is re-inspected, incorrect duty being charged (either overpaying or underpaying, with underpayment risking penalties and back-payment demands), and in repeated cases can flag your importer account for closer scrutiny on future shipments. Correcting a misclassification after goods have shipped is far more costly than verifying the code before production begins.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Who is responsible for correct HS code classification, the buyer or the manufacturer?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p style="font-size:0.85rem;color:#ffffff;line-height:1.6;">Legal responsibility for correct classification on import documentation typically rests with the importer of record, which is usually the buyer or their customs broker, not the factory. However, an experienced manufacturer should be able to confirm the correct 6-digit international code for what they're producing, since they know the exact fiber content and construction. Buyers should still verify the final country-specific code with their own customs broker before shipment.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Does SDF Clothing verify HS codes for my order?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p style="font-size:0.85rem;color:#ffffff;line-height:1.6;">SDF Clothing can confirm the correct 6-digit international HS code for any product we manufacture, based on the exact fiber content and construction of your order, as part of production documentation. For the final country-specific 8-10 digit code and duty rate, we recommend confirming with your customs broker or the relevant customs authority, since that final classification also depends on your specific import circumstances.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:3rem 0;">
+  <div class="container" style="max-width:1200px;margin:0 auto;padding:0 2rem;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#000000;">
+      <a href="/insights/customs-clearance-guide" style="background:#000;padding:1.5rem;text-decoration:none;display:block;transition:background 0.2s;" onmouseover="this.style.background='#0a0a0a'" onmouseout="this.style.background='#000'">
+        <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.4rem;">Guide</div>
+        <div style="font-size:0.85rem;color:#fff;">Customs Clearance Guide</div>
+      </a>
+      <a href="/tools/garment-cost-calculator" style="background:#000;padding:1.5rem;text-decoration:none;display:block;transition:background 0.2s;" onmouseover="this.style.background='#0a0a0a'" onmouseout="this.style.background='#000'">
+        <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.4rem;">Tool</div>
+        <div style="font-size:0.85rem;color:#fff;">Garment Cost Calculator</div>
+      </a>
+      <a href="/contact/" style="background:#000;padding:1.5rem;text-decoration:none;display:block;transition:background 0.2s;" onmouseover="this.style.background='#0a0a0a'" onmouseout="this.style.background='#000'">
+        <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.4rem;">Quote</div>
+        <div style="font-size:0.85rem;color:#fff;">Request Free Quote</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ hsCodes }}>
+document.addEventListener('DOMContentLoaded', function(){
+  const searchInput = document.getElementById('searchInput');
+  const filterSelect = document.getElementById('categoryFilter');
+  const codeChapter = document.getElementById('code-chapter');
+  const codeHeading = document.getElementById('code-heading');
+  const codeSubheading = document.getElementById('code-subheading');
+  const codeCountry = document.getElementById('code-country');
+  const codeBreakdownResults = document.getElementById('code-breakdown-results');
+  const codeBreakdownEmpty = document.getElementById('code-breakdown-empty');
+  const codeBreakdownList = document.getElementById('code-breakdown-list');
+  const hsContainer = document.getElementById('hs-container');
+  const hsNoResults = document.getElementById('hs-no-results');
+  const hsReset = document.getElementById('hs-reset');
+  const hsLeftPanel = document.getElementById('hs-left-panel');
+  const hsRightPanel = document.getElementById('hs-right-panel');
+  const hsDefaultMessage = document.getElementById('hs-default-message');
+  const hsCountryBreakdown = document.getElementById('hs-country-breakdown');
+  const hsEmptyState = document.getElementById('hs-empty-state');
+  const selectedCode = document.getElementById('selected-code');
+  const selectedDescription = document.getElementById('selected-description');
+  const selectedNotes = document.getElementById('selected-notes');
+  const hsResultCount = document.getElementById('hsResultCount');
+
+  const hsData = hsCodes;
+  let searchTerm = '';
+  let selectedCategory = '';
+  let chapterValue = '';
+  let headingValue = '';
+  let subheadingValue = '';
+  let countryValue = '';
+  let constructedCode = '';
+  let visibleCount = 0;
+  let hasResults = false;
+  let categoryVisible = false;
+  let categoryMatches = false;
+  let matchesSearch = false;
+  let hasSearchOrFilter = false;
+  let code = '';
+  let description = '';
+  let notes = '';
+
+  function filterHS() {
+    searchTerm = searchInput.value.toLowerCase();
+    selectedCategory = filterSelect.value;
+    chapterValue = codeChapter.value;
+    headingValue = codeHeading.value;
+    subheadingValue = codeSubheading.value;
+    countryValue = codeCountry.value;
+    
+    // Construct HS code from breakdown inputs
+    constructedCode = '';
+    if (chapterValue || headingValue || subheadingValue || countryValue) {
+      constructedCode = (chapterValue || '') + (headingValue || '') + (subheadingValue || '') + (countryValue || '');
+    }
+    
+    visibleCount = 0;
+    hasResults = false;
+
+    // Check if we should show empty state
+    hasSearchOrFilter = searchTerm || selectedCategory !== 'all' || constructedCode;
+    
+    if (hasSearchOrFilter) {
+      hsEmptyState.style.display = 'none';
+    } else {
+      hsEmptyState.style.display = 'block';
+    }
+
+    // Update code breakdown results box
+    if (constructedCode) {
+      codeBreakdownEmpty.style.display = 'none';
+      codeBreakdownList.style.display = 'block';
+      codeBreakdownList.innerHTML = '';
+      
+      Object.entries(hsData).forEach(([category, codes]) => {
+        codes.forEach(item => {
+          if (item.code.toLowerCase().includes(constructedCode.toLowerCase())) {
+            const resultItem = document.createElement('div');
+            resultItem.style.background = '#000000';
+            resultItem.style.border = '1px solid #000000';
+            resultItem.style.padding = '0.75rem';
+            resultItem.style.marginBottom = '0.5rem';
+            resultItem.style.borderRadius = '4px';
+            resultItem.style.cursor = 'pointer';
+            resultItem.style.transition = 'background 0.2s';
+            resultItem.onmouseover = function() { this.style.background = '#050505'; };
+            resultItem.onmouseout = function() { this.style.background = '#000000'; };
+            resultItem.innerHTML = `
+              <div style="font-family:'Courier New',monospace;font-size:0.9rem;color:#ffffff;font-weight:500;margin-bottom:0.25rem;">${item.code}</div>
+              <div style="font-size:0.8rem;color:#fff;margin-bottom:0.25rem;">${item.description}</div>
+              <div style="font-size:0.7rem;color:#ffffff;">${category}</div>
+            `;
+            codeBreakdownList.appendChild(resultItem);
+          }
+        });
+      });
+      
+      if (codeBreakdownList.children.length === 0) {
+        codeBreakdownEmpty.style.display = 'block';
+        codeBreakdownEmpty.textContent = 'No codes found matching your input.';
+        codeBreakdownList.style.display = 'none';
+      }
+    } else {
+      codeBreakdownEmpty.style.display = 'block';
+      codeBreakdownEmpty.textContent = 'Enter a code above to see results.';
+      codeBreakdownList.style.display = 'none';
+    }
+
+    Object.entries(hsData).forEach(([category, codes]) => {
+      const categoryId = category.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      const categoryDiv = document.querySelector(`.hs-category[data-category-id="${categoryId}"]`);
+      if (!categoryDiv) { return; }
+      const rows = categoryDiv.querySelectorAll('.hs-row');
+      categoryVisible = false;
+
+      // Check if category matches filter
+      categoryMatches = selectedCategory === 'all' || selectedCategory === category;
+
+      rows.forEach(row => {
+        code = row.dataset.code.toLowerCase();
+        description = row.dataset.description.toLowerCase();
+        notes = row.dataset.notes.toLowerCase();
+        
+        matchesSearch = code.includes(searchTerm) || 
+                              description.includes(searchTerm) || 
+                              notes.includes(searchTerm) ||
+                              (constructedCode !== '' && code.includes(constructedCode.toLowerCase()));
+        
+        if (hasSearchOrFilter && categoryMatches && matchesSearch) {
+          row.style.display = 'grid';
+          visibleCount++;
+          categoryVisible = true;
+          hasResults = true;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      if (hasSearchOrFilter && categoryVisible) {
+        categoryDiv.style.display = 'block';
+      } else {
+        categoryDiv.style.display = 'none';
+      }
+    });
+
+    // Show/hide no results message
+    if (hasSearchOrFilter && !hasResults) {
+      hsContainer.style.display = 'none';
+      hsNoResults.style.display = 'block';
+    } else {
+      hsContainer.style.display = 'grid';
+      hsNoResults.style.display = 'none';
+    }
+
+    if (hsResultCount) {
+      if (hasSearchOrFilter) {
+        hsResultCount.textContent = visibleCount + (visibleCount === 1 ? ' code found' : ' codes found');
+      } else {
+        hsResultCount.textContent = '';
+      }
+    }
+  }
+
+  function showCountryBreakdown(codeParam, descriptionParam, notesParam) {
+    selectedCode.textContent = codeParam.substring(0, 6);
+    selectedDescription.textContent = descriptionParam;
+    selectedNotes.textContent = notesParam;
+    
+    hsDefaultMessage.style.display = 'none';
+    hsCountryBreakdown.style.display = 'block';
+  }
+
+  // Click handlers for HS code rows
+  document.querySelectorAll('.hs-row.clickable').forEach(row => {
+    row.addEventListener('click', function(){
+      const code = this.dataset.code;
+      const description = this.dataset.description;
+      const notes = this.dataset.notes;
+      
+      // Remove active class from all rows
+      document.querySelectorAll('.hs-row.clickable').forEach(r => {
+        r.style.background = '#000';
+      });
+      
+      // Add active state to clicked row
+      this.style.background = '#000000';
+      
+      showCountryBreakdown(code, description, notes);
+    });
+  });
+
+  searchInput.addEventListener('input', filterHS);
+  filterSelect.addEventListener('change', filterHS);
+  codeChapter.addEventListener('input', filterHS);
+  codeHeading.addEventListener('input', filterHS);
+  codeSubheading.addEventListener('input', filterHS);
+  codeCountry.addEventListener('input', filterHS);
+
+  // Category filter chips (replace native dropdown for a friendlier tap target)
+  document.querySelectorAll('.hs-category-chip').forEach(chip => {
+    chip.addEventListener('click', function(){
+      document.querySelectorAll('.hs-category-chip').forEach(c => c.classList.remove('active'));
+      this.classList.add('active');
+      filterSelect.value = this.dataset.category;
+      filterHS();
+    });
+  });
+
+  // Quick-search suggestion chips
+  document.querySelectorAll('.hs-quick-chip').forEach(chip => {
+    chip.addEventListener('click', function(){
+      searchInput.value = this.dataset.term;
+      filterHS();
+      searchInput.focus();
+    });
+  });
+
+  hsReset.addEventListener('click', function(){
+    searchInput.value = '';
+    filterSelect.value = 'all';
+    codeChapter.value = '';
+    codeHeading.value = '';
+    codeSubheading.value = '';
+    codeCountry.value = '';
+    document.querySelectorAll('.hs-category-chip').forEach(c => c.classList.remove('active'));
+    const allChip = document.querySelector('.hs-category-chip[data-category="all"]');
+    if (allChip) allChip.classList.add('active');
+    filterHS();
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const answer = button.nextElementSibling;
+      const icon = button.querySelector('.faq-icon');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      
+      button.setAttribute('aria-expanded', !isExpanded);
+      answer.classList.toggle('faq-answer--visible');
+      icon.classList.toggle('faq-icon--open');
+    });
+  });
+
+  // Initialize filter on load
+  filterHS();
+});
+</script>
+
+<style>
+@media(max-width:1024px){
+  .search-filter-grid{
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media(max-width:768px){
+  section:first-of-type .container > div[style*="grid-template-columns:repeat(auto-fit"]{
+    grid-template-columns:1fr !important;
+  }
+  
+  section:nth-of-type(2) .container > div[style*="grid-template-columns:1fr 1fr"]{
+    grid-template-columns:1fr !important;
+  }
+  
+  #hs-container{
+    grid-template-columns:1fr !important;
+  }
+  
+  #hs-right-panel{
+    position:static !important;
+    order:-1;
+  }
+  
+  .hs-row{
+    grid-template-columns:1fr !important;
+    gap:1rem !important;
+  }
+  
+  .hs-row > div:first-child{
+    font-size:0.85rem;
+  }
+  
+  .internal-links-grid{
+    grid-template-columns:repeat(2,1fr) !important;
+  }
+  
+  .search-filter-grid{
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media(max-width:480px){
+  .internal-links-grid{
+    grid-template-columns:1fr !important;
+  }
+  
+  .hs-row{
+    padding:0.75rem 1rem !important;
+  }
+  
+  #hs-country-breakdown > div:first-child{
+    padding:1rem !important;
+  }
+  
+  #hs-country-breakdown > div:last-child{
+    padding:1rem !important;
+  }
+  
+  #hs-country-breakdown > div:last-child > div[style*="display:grid"]{
+    grid-template-columns:1fr !important;
+  }
+  
+  #hs-country-breakdown > div:last-child > div[style*="display:grid"] > div{
+    grid-template-columns:1fr auto !important;
+    gap:0.5rem !important;
+  }
+}
+</style>
+
+</BaseLayout>

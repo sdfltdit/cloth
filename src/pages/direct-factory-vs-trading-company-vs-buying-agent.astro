@@ -1,0 +1,244 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+export const prerender = true;
+
+const pageTitle = "Direct Factory vs Trading Company vs Buying Agent";
+const pageDescription = "Which sourcing model fits your order — direct factory, trading company, or buying agent? Comparison of MOQ, pricing, risk, and certifications.";
+const companyAge = getCompanyAgeString();
+
+const sourcingFaqs = [
+  {
+    question: "Is a trading company safe for clothing manufacturing?",
+    answer: "It can work fine, but you're adding a layer between yourself and the actual factory. Most of the time you won't know which factory is producing your order, the certifications you're shown belong to that factory rather than the trading company, and there's a markup baked into the price. If you're going this route, just ask directly which factory will make your order, then verify that factory's certifications yourself."
+  },
+  {
+    question: "What is the difference between a buying agent and a trading company?",
+    answer: "A buying agent works for you — usually for a fee or commission — sourcing and vetting factories on your behalf, without owning any inventory. A trading company buys from a factory and sells to you at a markup, more like a reseller. In practice, agents tend to be upfront about which factory they're using; trading companies are hit or miss on that."
+  },
+  {
+    question: "How do I verify a clothing manufacturer is a real direct factory?",
+    answer: "Ask for the business registration number and check it against the public registry (RJSC and BGMEA, if it's a Bangladesh factory). Then ask to book a visit or an audit. A real factory won't hesitate on either — a trading company or agent can't really offer this, since there's no factory of their own to show you."
+  },
+  {
+    question: "How much markup does a trading company add to clothing manufacturing?",
+    answer: "There's no fixed number — it varies by supplier — but it's an added cost sitting on top of whatever the actual factory charges, since the trading company is reselling access rather than producing anything itself. Cut that layer out and the same budget usually stretches further, whether that goes toward better fabric, faster turnaround, or just a lower price."
+  },
+  {
+    question: "What are the risks of using a buying agent for clothing manufacturing?",
+    answer: "Mainly that the agent doesn't own a factory, so you're trusting their judgment and their network — and the factory making your bulk order isn't guaranteed to be the one that made your sample. A good agent offsets some of this by arranging independent inspection, which is worth asking for. Just confirm upfront whether the sample factory and the bulk factory will be the same one."
+  },
+  {
+    question: "Should a startup brand work directly with a factory or use an agent?",
+    answer: "Depends where you are in the process. If you're new to this, an agent can help you avoid early mistakes. Once you know your specs and what you're looking for, going direct usually makes more sense — no agent fee, and you're talking straight to the people making your garments, which also means fewer delays when something needs fixing."
+  }
+];
+const lastReviewed = "July 22, 2026";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": sourcingFaqs.map((f) => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+  }))
+};
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Direct Factory vs. Trading Company vs. Buying Agent",
+  "author": {
+    "@type": "Person",
+    "name": "Chowdhury Remon",
+    "jobTitle": "Founder & CEO, SDF Clothing",
+    "url": "https://sdfltd.com/about"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SDF Clothing",
+    "url": "https://sdfltd.com"
+  },
+  "datePublished": "2026-07-21",
+  "dateModified": "2026-07-22",
+  "mainEntityOfPage": "https://sdfltd.com/direct-factory-vs-trading-company-vs-buying-agent/"
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Clothing Manufacturers", "item": "https://sdfltd.com/clothing-manufacturers" },
+    { "@type": "ListItem", "position": 3, "name": "Direct Factory vs Trading Company vs Buying Agent" }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website">
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<section style="padding: 6rem 0 3rem; background:#000;">
+  <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;">
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.5rem;">Sourcing Decision Guide</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1.25rem;line-height:1.2;">
+      Direct Factory vs. Trading Company vs. Buying Agent
+    </h1>
+    <p style="color:#ccc;max-width:760px;line-height:1.8;font-size:0.95rem;">
+      Half the "clothing manufacturers" that email you back aren't manufacturers at all. Some are trading companies reselling access to a factory they don't own. Some are buying agents working on your behalf. A few are the real thing — a factory that actually cuts, sews, and ships your order. None of that is obvious from an inbox, so we wrote this to make it obvious. It includes where we fall short too, because a comparison that only flatters one side isn't worth reading.
+    </p>
+    <p style="color:#888;font-size:0.8rem;margin-top:1rem;">Written by <a href="/about/" style="color:#e00;text-decoration:none;">Chowdhury Remon</a>, Founder & CEO, SDF Clothing · Last reviewed {lastReviewed}</p>
+  </div>
+</section>
+
+<section style="padding: 2rem 0 5rem; background:#000;">
+  <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; overflow-x:auto;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:2rem;">Direct Factory vs Trading Company vs Buying Agent: Full Comparison Table</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:0.82rem;color:#ddd;">
+      <thead>
+        <tr style="border-bottom:1px solid #e00;">
+          <th style="text-align:left;padding:0.75rem;color:#fff;">Dimension</th>
+          <th style="text-align:left;padding:0.75rem;color:#e00;">SDF (Direct, Vertically-Integrated Factory)</th>
+          <th style="text-align:left;padding:0.75rem;color:#fff;">Trading Company</th>
+          <th style="text-align:left;padding:0.75rem;color:#fff;">Buying Agent</th>
+          <th style="text-align:left;padding:0.75rem;color:#fff;">Local / Boutique Factory</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Ownership structure</td><td style="padding:0.75rem;">Yarn spinning through warehousing, all under one ownership since {companyAge}</td><td style="padding:0.75rem;">Owns nothing — resells access to a factory</td><td style="padding:0.75rem;">Owns nothing — represents buyer, sources from factories</td><td style="padding:0.75rem;">Usually cut & sew only; fabric sourced separately</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Legal registration proof</td><td style="padding:0.75rem;">RJSC company registration + BGMEA membership number, publicly verifiable</td><td style="padding:0.75rem;">Usually no manufacturing license</td><td style="padding:0.75rem;">Usually none</td><td style="padding:0.75rem;">Local business registration, manufacturing-specific certs less common</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Founder / accountability</td><td style="padding:0.75rem;">Named founder, public track record</td><td style="padding:0.75rem;">Often faceless/anonymous operation</td><td style="padding:0.75rem;">Agent named, but no factory accountability</td><td style="padding:0.75rem;">Varies by size</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Company age</td><td style="padding:0.75rem;">Since 1998 ({companyAge})</td><td style="padding:0.75rem;">Varies, often shorter track record</td><td style="padding:0.75rem;">Varies</td><td style="padding:0.75rem;">Often 2-10 years</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Scale</td><td style="padding:0.75rem;">500+ employees, 4 locations</td><td style="padding:0.75rem;">N/A — no own production</td><td style="padding:0.75rem;">N/A</td><td style="padding:0.75rem;">Usually small teams</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Certifications</td><td style="padding:0.75rem;">13 named certifications (GOTS, OEKO-TEX, ISO 9001/14001, BSCI, SEDEX SMETA, GRS, OCS, RCS, C-TPAT, WRAP, SA8000, BCI), audited under SDF's own name</td><td style="padding:0.75rem;">Usually the subcontracted factory's certs, not their own</td><td style="padding:0.75rem;">None — depends entirely on whichever factory is used</td><td style="padding:0.75rem;">Typically 1-3, cost-limited</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Factory safety compliance</td><td style="padding:0.75rem;">RSC (Remediation & Sustainability Council, post-Rana Plaza Accord framework)-level compliant — fire exits, sprinklers, emergency lighting, regular drills</td><td style="padding:0.75rem;">Subcontracted factory's status usually unknown to buyer</td><td style="padding:0.75rem;">Same issue</td><td style="padding:0.75rem;">Not applicable — different regulatory framework</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Sustainability documentation</td><td style="padding:0.75rem;">GOTS, OEKO-TEX, GRS, BSCI, SEDEX, ISO 9001, REACH Annex XVII, Digital Product Passport (ESPR 2026 format), material composition cert, Scope 3 carbon estimate — one package</td><td style="padding:0.75rem;">Not typically offered</td><td style="padding:0.75rem;">Not typically offered</td><td style="padding:0.75rem;">1-2 basic documents usually</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Max production capacity</td><td style="padding:0.75rem;">Up to 50,000 pieces per style, 40-day lead time</td><td style="padding:0.75rem;">Depends on whichever factory is subcontracted that month</td><td style="padding:0.75rem;">Depends on factory used</td><td style="padding:0.75rem;">Usually caps at a few hundred pieces</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">MOQ</td><td style="padding:0.75rem;">300 pieces, size/colour mix flexible</td><td style="padding:0.75rem;">Depends on factory</td><td style="padding:0.75rem;">Depends on factory</td><td style="padding:0.75rem;">Often claims 50-100, but can't scale up from there</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Sample-to-bulk risk control</td><td style="padding:0.75rem;">Bulk production never starts without sample approval; up to 10 free correction rounds</td><td style="padding:0.75rem;">No guarantee the sample factory is the bulk factory</td><td style="padding:0.75rem;">Same issue</td><td style="padding:0.75rem;">Correction rounds usually capped at 1-2</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Free sample policy</td><td style="padding:0.75rem;">Free sample if buyer supplies materials — buyer only pays return shipping</td><td style="padding:0.75rem;">Not typically offered</td><td style="padding:0.75rem;">Not typically offered</td><td style="padding:0.75rem;">Varies</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">QC standard</td><td style="padding:0.75rem;">AQL 2.5%, in-house checks at every stage</td><td style="padding:0.75rem;">Relies on subcontracted factory's self-reporting</td><td style="padding:0.75rem;">Usually arranges third-party inspection — this is where agents actually earn their fee</td><td style="padding:0.75rem;">Varies, formal AQL systems less common</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Third-party verification</td><td style="padding:0.75rem;">Any inspection agency or lab test welcomed</td><td style="padding:0.75rem;">Often reluctant</td><td style="padding:0.75rem;">Varies</td><td style="padding:0.75rem;">Often reluctant</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Full-package vs CMT</td><td style="padding:0.75rem;">Full-package — fabric, trims, labels, packaging included in FOB price</td><td style="padding:0.75rem;">Varies</td><td style="padding:0.75rem;">Varies</td><td style="padding:0.75rem;">Usually CMT-only — buyer sources fabric separately</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Free self-service tools</td><td style="padding:0.75rem;">13 free tools — cost calculator, HS code finder, GSM converter, colour converter, AQL calculator, EU compliance checker, and more</td><td style="padding:0.75rem;">None</td><td style="padding:0.75rem;">Usually none</td><td style="padding:0.75rem;">Rarely 1-2 basic calculators</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">In-person verification</td><td style="padding:0.75rem;">Factory visit booking in Dhaka + Narayanganj — tours, audits, business discussions</td><td style="padding:0.75rem;">No factory to show</td><td style="padding:0.75rem;">None</td><td style="padding:0.75rem;">Limited, formal audit process less common</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Visa/travel support</td><td style="padding:0.75rem;">Visit-support documents provided for embassy applications</td><td style="padding:0.75rem;">Not offered</td><td style="padding:0.75rem;">Usually not offered</td><td style="padding:0.75rem;">Usually not offered</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Confidential proof access</td><td style="padding:0.75rem;">Genuine buyers, verified through a government/regulatory channel, can review audit reports</td><td style="padding:0.75rem;">Not offered</td><td style="padding:0.75rem;">Not offered</td><td style="padding:0.75rem;">Rarely a formal process</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Payment options</td><td style="padding:0.75rem;">TT, LC, plus a WorldRemit partnership for more flexible remittance on smaller/first-time orders</td><td style="padding:0.75rem;">Usually LC-dependent, less flexible on small orders</td><td style="padding:0.75rem;">Varies</td><td style="padding:0.75rem;">Varies</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Defect liability</td><td style="padding:0.75rem;">Root-cause verified first; confirmed factory-fault cases handled with case-by-case compensation</td><td style="padding:0.75rem;">No formal liability policy — passes blame to subcontracted factory</td><td style="padding:0.75rem;">Agent doesn't take on liability</td><td style="padding:0.75rem;">Varies</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Cargo/shipping insurance</td><td style="padding:0.75rem;">Buyer can arrange it, or ask SDF to arrange it — flexible either way</td><td style="padding:0.75rem;">Usually buyer's responsibility</td><td style="padding:0.75rem;">Varies</td><td style="padding:0.75rem;">Usually buyer's responsibility</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Order tracking</td><td style="padding:0.75rem;">Email notification at every stage, plus a buyer portal login (via customer ID) for full order history</td><td style="padding:0.75rem;">Usually email updates only</td><td style="padding:0.75rem;">Varies</td><td style="padding:0.75rem;">Usually no system, email/WhatsApp only</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Response time</td><td style="padding:0.75rem;">Within 48 hours</td><td style="padding:0.75rem;">Varies</td><td style="padding:0.75rem;">Varies</td><td style="padding:0.75rem;">Varies</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.75rem;font-weight:600;">Communication channels</td><td style="padding:0.75rem;">WhatsApp and Telegram (AI-assisted first response, routed to a dedicated merchandising ticket as needed)</td><td style="padding:0.75rem;">Usually email-only</td><td style="padding:0.75rem;">Varies</td><td style="padding:0.75rem;">Varies</td></tr>
+      </tbody>
+    </table>
+    <p style="color:#888;font-size:0.78rem;margin-top:1.5rem;">Trading Company / Buying Agent / Local Factory columns describe typical industry patterns for each business model, not any single named company.</p>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:2rem;">Pros and Cons of Each Sourcing Model (The Honest Version)</h2>
+
+    <h3 style="font-size:1.15rem;color:#e00;margin-bottom:1rem;">SDF Clothing (Direct Factory)</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:0.75rem;"><strong>What works in our favour:</strong> we own the whole process, yarn to finished garment, so there's nowhere for a defect to hide behind a subcontractor. Our <a href="/certifications" style="color:#e00;text-decoration:none;">certifications</a> are audited under our own name, not borrowed. If a sample comes back wrong, we fix it and send it again — up to 10 rounds — before bulk ever starts. We also give buyers free tools to check our numbers instead of taking our word for it, and we'll let serious buyers visit or audit under NDA.</p>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;"><strong>Where we fall short:</strong> we're in Dhaka, so shipping takes longer than a factory down the road from you. And our 300-piece MOQ is higher than the "50 pieces" some overseas sellers advertise — though most of them can't actually produce past a few hundred, and we can.</p>
+
+    <h3 style="font-size:1.15rem;color:#fff;margin-bottom:1rem;">Trading Company</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:0.75rem;"><strong>What works:</strong> you get access to several factories without vetting each one yourself, and there's less upfront commitment.</p>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;"><strong>Where it falls short:</strong> you're paying a markup on top of the real factory price for a service that doesn't change the garment. Most of the time you can't confirm which factory actually made your order, and the certifications you're shown usually belong to that factory, not to the trading company.</p>
+
+    <h3 style="font-size:1.15rem;color:#fff;margin-bottom:1rem;">Buying Agent</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:0.75rem;"><strong>What works:</strong> the agent is on your side, not the factory's, and a decent one will arrange independent inspection — that's a real safeguard, not a sales line.</p>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:2rem;"><strong>Where it falls short:</strong> the agent doesn't own a factory, so your capacity and certifications depend on whichever one they pick that month. And there's an extra person between you and whoever is actually making your clothes.</p>
+
+    <h3 style="font-size:1.15rem;color:#fff;margin-bottom:1rem;">Local / Boutique Factory</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:0.75rem;"><strong>What works:</strong> same time zone, easier to visit, faster turnaround on small batches.</p>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">
+      <strong>Where it falls short:</strong> most cap out well before a few thousand pieces, usually cut-and-sew only so you're sourcing your own fabric, and formal certifications are hard to justify at that scale — the cost doesn't make sense yet.
+    </p>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">Which One Fits You?</h2>
+    <p style="color:#ddd;line-height:1.8;font-size:0.92rem;margin-bottom:1.5rem;">There's no single right answer here — it depends on where you are. This is how we'd point most buyers, based on what we actually see from this side of the table:</p>
+    <table style="width:100%;border-collapse:collapse;font-size:0.85rem;color:#ddd;margin-bottom:2rem;">
+      <thead>
+        <tr style="border-bottom:1px solid #e00;">
+          <th style="text-align:left;padding:0.6rem;color:#fff;">If you're...</th>
+          <th style="text-align:left;padding:0.6rem;color:#fff;">Usually a better fit</th>
+          <th style="text-align:left;padding:0.6rem;color:#fff;">Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.6rem;">A first-time brand, unsure of specs</td><td style="padding:0.6rem;">Buying agent</td><td style="padding:0.6rem;">Fewer costly mistakes while you learn the process</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.6rem;">Ordering a mix of small quantities across many styles</td><td style="padding:0.6rem;">Trading company</td><td style="padding:0.6rem;">Access to variety without vetting a factory for each style</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.6rem;">You know your specs and plan to reorder</td><td style="padding:0.6rem;">Direct factory</td><td style="padding:0.6rem;">No markup, no agent fee, faster answers</td></tr>
+        <tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:0.6rem;">Scaling past a few thousand pieces per style</td><td style="padding:0.6rem;">Direct factory</td><td style="padding:0.6rem;">Most trading companies and agents are limited by whichever factory they're subcontracting that month</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">A rough sense of where the cost difference comes from</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;margin-bottom:1rem;">Say a factory's real price for a garment is $5.00 FOB. As a rough illustration of how each model typically prices the same garment:</p>
+    <ul style="color:#ddd;line-height:2;font-size:0.9rem;padding-left:1.2rem;margin-bottom:1.5rem;">
+      <li><strong>Direct factory:</strong> ~$5.00 — the price you'd get talking to the factory directly</li>
+      <li><strong>Trading company:</strong> ~$5.75–$6.50 — the same garment plus their markup for arranging it</li>
+      <li><strong>Buying agent:</strong> ~$5.00 + a commission (commonly around 5–10%, agent-dependent) — closer to the factory price, since the agent isn't buying and reselling the goods themselves</li>
+    </ul>
+    <p style="color:#888;font-size:0.8rem;margin-bottom:2rem;">These are illustrative ranges to explain where the cost sits, not a quote — get an actual <a href="/tools/price-calculator/" style="color:#e00;text-decoration:none;">FOB estimate</a> or <a href="/tools/garment-cost-calculator" style="color:#e00;text-decoration:none;">landed cost calculation</a> for your specific order.</p>
+
+    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:1rem;">A quick way to think it through</h3>
+    <p style="color:#ddd;line-height:1.8;font-size:0.9rem;">Need a custom product at high volume? Go direct to a factory. Need it customized but you're still small or unsure? A buying agent is worth the commission while you learn. Need a bit of everything in small quantities, and don't want to manage multiple factory relationships yourself? A trading company earns its markup. None of this is permanent — plenty of buyers start with an agent and move direct once they know what they're doing.</p>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 5rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:2rem;">Common Questions Buyers Ask Before Choosing a Sourcing Model</h2>
+    <div style="background:#000;border:1px solid rgba(255,255,255,0.1);">
+      {sourcingFaqs.map((faq, index) => (
+        <details style="border-bottom:1px solid rgba(255,255,255,0.1);" open={index === 0}>
+          <summary style="padding:1.5rem;cursor:pointer;color:#fff;font-size:0.95rem;font-weight:500;display:flex;justify-content:space-between;align-items:center;list-style:none;gap:1rem;">
+            {faq.question}
+            <span style="font-size:1.5rem;color:#e00;flex-shrink:0;">+</span>
+          </summary>
+          <div style="padding:0 1.5rem 1.5rem;">
+            <p style="color:#bbb;line-height:1.8;font-size:0.9rem;margin:0;">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section style="padding: 3rem 0 6rem; background:#000; border-top:1px solid #1a1a1a;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 style="font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:1.5rem;">How to Verify Any Manufacturer Before You Commit</h2>
+    <p style="color:#ddd;line-height:1.8;font-size:0.92rem;margin-bottom:1rem;">Whatever you go with, check it before you commit. Ask for a business registration number and look it up (RJSC and BGMEA, for a Bangladesh factory). Ask if you can visit or audit in person. And get it in writing whether the factory making your sample is the same one that will make your bulk order — that one question alone rules out a lot of bad options. For a longer list of warning signs, see our guide on <a href="/insights/avoiding-clothing-manufacturer-scams" style="color:#e00;text-decoration:none;">spotting a fake clothing manufacturer</a>.</p>
+    <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 2rem;">
+      <p style="color:#fff;font-size:1rem;margin-bottom:1rem;">Want to verify SDF Clothing directly?</p>
+      <a href="/booking" style="color:#e00;text-decoration:none;margin-right:1.5rem;">Book a factory visit →</a>
+      <a href="/contact/" style="color:#e00;text-decoration:none;">Contact us →</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0 0 5rem; background:#000;">
+  <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <div style="padding:2rem;border:1px solid #1a1a1a;background:#050505;">
+      <div>
+        <p style="color:#fff;font-weight:600;font-size:0.92rem;margin-bottom:0.25rem;">Chowdhury Remon</p>
+        <p style="color:#888;font-size:0.8rem;margin-bottom:0.75rem;">Founder & CEO, SDF Clothing — running the factory floor since 1998</p>
+        <p style="color:#bbb;font-size:0.85rem;line-height:1.7;">This guide is based on what we see from the buyer side every week: people who've already been burned by a trading company or an unverifiable "factory." <a href="/editorial-policy/" style="color:#e00;text-decoration:none;">Read our editorial policy</a> or <a href="/about/" style="color:#e00;text-decoration:none;">more about SDF</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>

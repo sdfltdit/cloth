@@ -1,0 +1,416 @@
+---
+// ContactSection.astro
+---
+
+<section id="contact" class="contact-section">
+  <div class="container">
+
+    <div class="section-header contact-header">
+      <div class="contact-header-icon" style="margin-bottom:1rem; display:flex; justify-content:center;">
+        <svg width="48" height="48" viewBox="0 0 40 40" fill="none" stroke="#e00" stroke-width="2" aria-hidden="true">
+          <rect x="8" y="12" width="24" height="16" rx="2"/>
+          <path d="M8 14 L20 22 L32 14"/>
+        </svg>
+      </div>
+      <span class="section-label">Get Quote</span>
+      <h2>Get Your Free Quote</h2>
+      <p>Tell us about your project. We respond within 48 hours.</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- LEFT: Form -->
+      <div class="contact-form-box">
+
+        <div id="form-success" style="display:none;" class="form-feedback form-feedback--success">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <div>
+            <strong>Message sent successfully!</strong>
+            <p>Thank you. We'll respond within 48 hours.</p>
+          </div>
+        </div>
+
+        <div id="form-error" style="display:none;" class="form-feedback form-feedback--error">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
+          <div>
+            <strong>Something went wrong.</strong>
+            <p>Please <a href="/contact/">contact us</a></p>
+          </div>
+        </div>
+
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="6cdc0c73-5cd1-4d25-a4c8-562a46b623ae" />
+          <input type="hidden" name="subject" value="New Quote Request  SDF Clothing" />
+          <input type="hidden" name="from_name" value="SDF Clothing Website" />
+          <input type="hidden" name="redirect" value="false" />
+          <!-- Honeypot -->
+          <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="first-name" class="form-label">First Name *</label>
+              <input id="first-name" type="text" name="first-name" placeholder="John" required class="form-input" autocomplete="given-name" />
+            </div>
+            <div class="form-group">
+              <label for="last-name" class="form-label">Last Name *</label>
+              <input id="last-name" type="text" name="last-name" placeholder="Doe" required class="form-input" autocomplete="family-name" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address *</label>
+            <input id="email" type="email" name="email" placeholder="your@email.com" required class="form-input" autocomplete="email" />
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="company" class="form-label">Company *</label>
+              <input id="company" type="text" name="company" placeholder="Your Brand" required class="form-input" autocomplete="organization" />
+            </div>
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone</label>
+              <input id="phone" type="tel" name="phone" placeholder="+1 234 567 8900" class="form-input" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="product-type" class="form-label">Product Type *</label>
+              <select id="product-type" name="product-type" required class="form-select">
+                <option value="">Select type</option>
+                <option value="tshirts-knitwear">T-Shirts &amp; Knitwear</option>
+                <option value="woven-apparel">Woven Apparel</option>
+                <option value="activewear">Activewear</option>
+                <option value="outerwear">Outerwear &amp; Jackets</option>
+                <option value="private-label">Private Label</option>
+                <option value="oem">OEM Manufacturing</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="quantity" class="form-label">Quantity (pcs) *</label>
+              <input id="quantity" type="text" name="quantity" placeholder="300 – 100,000" required class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="details" class="form-label">Project Details *</label>
+            <textarea id="details" name="details" placeholder="Describe your garment requirements, fabrics, styles, delivery timeline..." rows="4" required class="form-textarea"></textarea>
+          </div>
+
+          <button type="submit" id="form-submit-btn" class="form-submit">Send Message →</button>
+        </form>
+      </div>
+
+      <!-- RIGHT: Lead Time Calculator -->
+      <div class="contact-calc-box">
+        <div class="calc-icon-box" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e00" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+
+        <h3 class="calc-title">Lead Time Calculator</h3>
+        <p class="calc-desc">Get instant timeline estimates for your garment production.</p>
+
+        <div class="form-group">
+          <label for="lead-product" class="form-label">Product Type</label>
+          <select id="lead-product" class="form-select">
+            <option value="tshirt">T-Shirt</option>
+            <option value="hoodie">Hoodie / Sweatshirt</option>
+            <option value="polo">Polo Shirt</option>
+            <option value="dress-shirt">Dress Shirt</option>
+            <option value="trousers">Trousers / Pants</option>
+            <option value="jacket">Jacket</option>
+            <option value="activewear">Activewear / Sportswear</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom:1.5rem;">
+          <label for="lead-qty" class="form-label">Quantity (pcs)</label>
+          <input type="number" id="lead-qty" min="300" value="300" class="form-input" />
+        </div>
+
+        <button type="button" id="lead-calc-btn" class="form-submit" style="margin-bottom:1.5rem;">Calculate Timeline →</button>
+
+        <div id="lead-results" style="display:none;">
+          <div class="calc-results-grid">
+            <div class="calc-result-item">
+              <div id="sample-time" class="calc-result-val"></div>
+              <div class="calc-result-label">Sample Production</div>
+            </div>
+            <div class="calc-result-item">
+              <div id="bulk-time" class="calc-result-val"></div>
+              <div class="calc-result-label">Bulk Production</div>
+            </div>
+            <div class="calc-result-item">
+              <div id="shipping-time" class="calc-result-val"></div>
+              <div class="calc-result-label">Shipping</div>
+            </div>
+            <div class="calc-result-item">
+              <div id="total-time" class="calc-result-val"></div>
+              <div class="calc-result-label">Total Timeline</div>
+            </div>
+          </div>
+          <p class="calc-note">* Timelines are estimates. Exact delivery depends on customs and order complexity.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-header .accent-line {
+    display: none;
+  }
+  .contact-section {
+    padding: 80px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .contact-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .contact-form-box,
+  .contact-calc-box {
+    border: 1px solid #1a1a1a;
+    border-top: 0.6px solid #e00;
+    padding: 2.5rem;
+    background: #050505;
+  }
+  .form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .form-group { margin-bottom: 1rem; }
+  .form-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    background: #000;
+    border: 1px solid #2a2a2a;
+    color: #fff;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.875rem;
+    outline: none;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus { border-color: #e00; }
+  .form-input::placeholder,
+  .form-textarea::placeholder { color: #555; }
+  .form-textarea { resize: vertical; min-height: 100px; }
+  .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23555' stroke-width='1' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+  .form-select option { background: #000; color: #fff; }
+  .form-submit {
+    width: 100%;
+    background: #e00;
+    color: #fff;
+    border: none;
+    padding: 0.9rem 2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.25s;
+  }
+  .form-submit:hover { background: #c00; }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .calc-icon-box {
+    width: 48px;
+    height: 48px;
+    border: 1px solid #e00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .calc-title {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+  .calc-desc {
+    font-size: 0.85rem;
+    color: #aaa;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .calc-results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #000000;
+    margin-bottom: 1rem;
+  }
+  .calc-result-item {
+    background: #000;
+    padding: 1rem;
+    text-align: center;
+  }
+  .calc-result-val {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+  }
+  .calc-result-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #e00;
+    margin-top: 0.3rem;
+  }
+  .calc-note {
+    font-size: 0.72rem;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .form-feedback {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  .form-feedback--success {
+    border: 1px solid #1a4a1a;
+    background: #050f05;
+    color: #5a5;
+  }
+  .form-feedback--success strong { color: #7c7; }
+  .form-feedback--success p { color: #5a5; margin: 0.2rem 0 0; }
+  .form-feedback--error {
+    border: 1px solid #4a1a1a;
+    background: #0f0505;
+    color: #c55;
+  }
+  .form-feedback--error strong { color: #e77; }
+  .form-feedback--error p { color: #c55; margin: 0.2rem 0 0; }
+  .form-feedback--error a { color: #e77; }
+
+  @media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-row-2 { grid-template-columns: 1fr; }
+    .contact-form-box,
+    .contact-calc-box { padding: 1.5rem; }
+  }
+</style>
+
+<script>
+(function () {
+  // ── Web3Forms ──────────────────────────────────────────────
+  var form      = document.getElementById('contact-form');
+  var submitBtn = document.getElementById('form-submit-btn');
+  var successEl = document.getElementById('form-success');
+  var errorEl   = document.getElementById('form-error');
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!submitBtn) return;
+
+      submitBtn.disabled    = true;
+      submitBtn.textContent = 'Sending…';
+      if (successEl) successEl.style.display = 'none';
+      if (errorEl)   errorEl.style.display   = 'none';
+
+      var data = new FormData(form);
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: data
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (json) {
+          if (json.success) {
+            if (successEl) successEl.style.display = 'flex';
+            form.reset();
+          } else {
+            if (errorEl) errorEl.style.display = 'flex';
+          }
+        })
+        .catch(function () {
+          if (errorEl) errorEl.style.display = 'flex';
+        })
+        .finally(function () {
+          submitBtn.disabled    = false;
+          submitBtn.textContent = 'Send Message →';
+        });
+    });
+  }
+
+  // ── Lead Time Calculator ───────────────────────────────────
+  var calcBtn = document.getElementById('lead-calc-btn');
+  if (calcBtn) {
+    calcBtn.addEventListener('click', function () {
+      var product = document.getElementById('lead-product').value;
+      var qty     = Math.max(300, parseInt(document.getElementById('lead-qty').value, 10) || 300);
+
+      var times = {
+        tshirt:        { sample: '7–10 days',  bulk: '21–30 days', ship: '20–30 days' },
+        hoodie:        { sample: '10–14 days', bulk: '30–40 days', ship: '25–35 days' },
+        polo:          { sample: '8–12 days',  bulk: '25–35 days', ship: '20–30 days' },
+        'dress-shirt': { sample: '12–16 days', bulk: '35–40 days', ship: '25–35 days' },
+        trousers:      { sample: '10–14 days', bulk: '30–40 days', ship: '25–35 days' },
+        jacket:        { sample: '14–18 days', bulk: '40–45 days', ship: '30–40 days' },
+        activewear:    { sample: '8–12 days',  bulk: '25–35 days', ship: '20–30 days' }
+      };
+
+      var t = times[product] || times.tshirt;
+
+      function parseRange(str) {
+        var parts = str.replace(' days','').split('–');
+        return { lo: parseInt(parts[0],10), hi: parseInt(parts[1],10) };
+      }
+      var s  = parseRange(t.sample);
+      var b  = parseRange(t.bulk);
+      var sh = parseRange(t.ship);
+      var totalLo = s.lo + b.lo + sh.lo;
+      var totalHi = s.hi + b.hi + sh.hi;
+
+      document.getElementById('sample-time').textContent   = t.sample;
+      document.getElementById('bulk-time').textContent     = t.bulk;
+      document.getElementById('shipping-time').textContent = t.ship;
+      document.getElementById('total-time').textContent    = totalLo + '–' + totalHi + ' days';
+      document.getElementById('lead-results').style.display = 'block';
+    });
+  }
+})();
+</script>

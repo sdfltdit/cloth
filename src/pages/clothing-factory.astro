@@ -1,0 +1,1029 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Clothing Factory — Direct Access, No Agents | SDF Clothing";
+const pageDescription = "SDF Clothing is a direct-access clothing factory in Bangladesh. No agents, no markup. Custom garments from 300 pieces. Request direct factory access today.";
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#org",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Clothing Factory"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I know if I'm working with a direct factory or an agent?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Verify by requesting a factory visit, checking business registration for manufacturing license, and confirming direct production capacity. Ask for production line photos and capacity details. Direct factories can show you sewing machines, not just offices. SDF welcomes factory visits and provides production documentation proving direct manufacturing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What savings can I expect by working directly with a factory?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Direct factory access typically saves 10-20% compared to agent pricing. Agents add markup for their services, which increases your landed cost. Working directly with SDF means you pay factory-direct pricing with no middleman markup. Savings compound on large orders and re-orders over time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide virtual factory visits?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We provide virtual factory visits via video call, showing production lines, quality control areas, and warehouse facilities. Virtual visits include real-time production observation and Q&A with production managers. Physical factory visits also welcome with advance notice."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is communication different with a direct factory?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Direct factory communication means faster response times (24 hours or less), no information loss through intermediaries, direct access to production decisions, and immediate problem resolution. You speak directly to the people making your products, not to representatives relaying messages."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is your minimum order quantity for direct factory access?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our direct factory minimum is 300 pieces per style. This is lower than many factories because we operate efficient production and accept smaller orders to build long-term relationships. Direct access doesn't require large minimums | it requires commitment to the relationship."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you protect intellectual property with direct factory access?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "IP protection through NDAs, restricted access to design files, segregated production lines for exclusive designs, and sample destruction after order completion. We've never had an IP violation in {companyAge}+ years of operation. Direct factory access means fewer people see your designs, reducing IP risk."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I audit your factory directly?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We welcome direct factory audits by buyers or third-party inspection companies. We provide access to all production areas, documentation, and personnel. We maintain ISO 9001, BSCI, and SEDEX certifications which are verified through annual audits. Direct audit access is standard for SDF."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if there's a quality issue with my order?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Direct factory access means immediate problem resolution. If issues arise, you speak directly to production managers who can make decisions and implement fixes immediately. No waiting for agents to relay problems. We take ownership of issues and provide corrective action plans, replacements, or credits as appropriate."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com"
+      },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "NL"],
+      "description": "Custom clothing manufacturing from Bangladesh with low MOQ from 300 pieces."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Clothing from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Brief",
+          "text": "Share your design, quantity, fabric requirements and timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Quote",
+          "text": "Get a detailed FOB quote within 48 hours."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample",
+          "text": "Review and approve a pre-production sample."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Full production with inline quality checks."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipment",
+          "text": "FOB Dhaka shipment with full export documentation."
+        }
+      ]
+    }
+]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Clothing Factory</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Direct Factory Access | Since 1998 | Bangladesh Manufacturing</div>
+        <h1 class="hero__title">Clothing Factory | Direct Access to SDF Bangladesh Production, No Agents or Middlemen</h1>
+        <p class="hero__description">
+          SDF Clothing is a direct-access clothing factory and clothing manufacturer in Bangladesh. You speak directly to production, no agents, no markup, no information loss. Custom garments from 300 pieces with full package production, quality control, and export documentation. Factory visits welcome | virtual or physical. Verify you're working with a real factory, not an intermediary.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact/" class="hero__cta hero__cta--primary">Request Factory Access</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20direct%20factory%20access`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">300</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">0%</span>
+          <span class="hero__stat-label">Agent Markup</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Factory</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">200K</span>
+          <span class="hero__stat-label">Monthly Capacity</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>GOTS Organic Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>ISO 9001 Quality</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>BSCI Social Compliance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Direct Comparison</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Direct Factory vs Agent vs Trading Company</h2>
+      </div>
+      <div class="section__text">
+        <p>Understanding the difference between direct factory access, agents, and trading companies is critical for cost control and communication efficiency. Many brands believe they're working with a factory when they're actually dealing with an intermediary. The table below compares key factors across three supply chain models, helping you identify what you're actually getting and the implications for your business.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Direct Factory (SDF)</th>
+              <th>Agent</th>
+              <th>Trading Company</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Pricing Transparency</td>
+              <td>Full cost breakdown, factory-direct</td>
+              <td>Hidden markup, opaque pricing</td>
+              <td>High markup, multiple layers</td>
+            </tr>
+            <tr>
+              <td>Communication Speed</td>
+              <td>24-hour response, direct to decision-makers</td>
+              <td>48-72 hours, message relay</td>
+              <td>72+ hours, multiple intermediaries</td>
+            </tr>
+            <tr>
+              <td>IP Protection</td>
+              <td>Fewer people see designs, direct control</td>
+              <td>More exposure through intermediaries</td>
+              <td>High exposure, multiple parties</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Quality Control</td>
+              <td>Direct oversight, immediate fixes</td>
+              <td>Relayed information, delayed action</td>
+              <td>Third-party QC, slower response</td>
+            </tr>
+            <tr>
+              <td>Problem Resolution</td>
+              <td>Immediate, you speak to production</td>
+              <td>Delayed, agent relays messages</td>
+              <td>Complex, multiple parties involved</td>
+            </tr>
+            <tr>
+              <td>Price Negotiation</td>
+              <td>Direct with decision-makers, flexibility</td>
+              <td>Limited, agent controls margin</td>
+              <td>None, fixed pricing structure</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Factory Audit</td>
+              <td>Full access, verify directly</td>
+              <td>Restricted, see agent's selection</td>
+              <td>Not applicable, no factory relationship</td>
+            </tr>
+          </tbody>
+          <caption>Direct factory access provides transparency, speed, and control that intermediaries cannot match. SDF guarantees direct access | verify through factory visit.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Supply Chain Model</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Direct Factory vs Trading Company | What Changes</h2>
+      </div>
+      <div class="section__text">
+        <p>The supply chain model fundamentally changes your relationship with production. Trading companies and agents add layers between you and manufacturing, which increases cost, slows communication, and reduces control. Direct factory access eliminates these layers, creating a direct relationship with the people who make your products. This changes everything from pricing transparency to problem resolution speed to intellectual property protection.</p>
+        
+        <p>Trading companies typically source from multiple factories and add 15-30% markup for their services. They control communication, pricing, and quality decisions. You never speak to the actual factory. Agents add 10-20% markup for facilitating the relationship. They relay messages between you and factories, creating information loss and delayed response times. Direct factory access means you pay factory-direct pricing, speak directly to production managers, and make decisions without intermediary input.</p>
+        
+        <p>The most significant change is in problem resolution. When issues arise with trading companies or agents, you wait while messages travel through intermediaries, decisions are made by people who don't know your production, and fixes are implemented by third parties you never communicate with. With direct factory access, you speak directly to the production manager who made the garment, they assess the issue immediately, and implement the fix in real-time. This speed and control is impossible with intermediaries.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Direct Access</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What Direct Factory Access Means in Practice</h2>
+      </div>
+      <div class="section__text">
+        <p>Direct factory access with SDF means you communicate directly with our production team, not with sales representatives or account managers. When you send a design brief, it goes directly to the production manager who will oversee your order. When you have questions about production status, you receive answers from the person managing the line. When issues arise, you speak to the decision-maker who can implement fixes immediately. No message relay, no interpretation, no delay.</p>
+        
+        <p>Practically, this means 24-hour response time or less for all communications. You receive production updates directly from the floor, not filtered through intermediaries. You negotiate pricing directly with the people who set production costs. You can request specific production adjustments and receive immediate answers about feasibility and cost implications. You can visit the factory and meet the team making your products, seeing the actual sewing machines and quality control processes.</p>
+        
+        <p>Direct access also means transparency. We provide full cost breakdowns showing fabric cost, labor cost, decoration cost, and margin. You know exactly what you're paying for and why. No hidden fees, no mysterious markups. This transparency builds trust and enables informed decision-making about specifications, quantities, and timing. You understand the trade-offs between cost and quality because you see the actual cost structure.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Factory Capabilities</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">SDF Factory Capabilities and Production Capacity</h2>
+      </div>
+      <div class="section__text">
+        <p>SDF operates a vertically integrated clothing factory in Bangladesh with knitting, dyeing, cutting, sewing, and finishing all under one roof. This integration reduces lead times, improves quality control, and enables cost efficiency. Our production capacity is 200,000 pieces per month across multiple product categories. We allocate capacity for long-term partners and can scale during peak seasons with advance planning.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>Capacity</th>
+              <th>Equipment</th>
+              <td>Lead Time</td>
+              <th>Quality Control</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Knitting</td>
+              <td>50,000 kg/month</td>
+              <td>50 circular knitting machines</td>
+              <td>7-10 days</td>
+              <td>GSM tolerance ?5%</td>
+            </tr>
+            <tr>
+              <td>Dyeing</td>
+              <td>60,000 kg/month</td>
+              <td>Jet dyeing machines</td>
+              <td>5-7 days</td>
+              <td>Color fastness Grade 4-5</td>
+            </tr>
+            <tr>
+              <td>Cutting</td>
+              <td>200,000 pieces/month</td>
+              <td>20 automatic cutting machines</td>
+              <td>2-3 days</td>
+              <td>Pattern accuracy ?2mm</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Sewing</td>
+              <td>200,000 pieces/month</td>
+              <td>300 sewing machines</td>
+              <td>15-20 days</td>
+              <td>AQL 2.5 inspection</td>
+            </tr>
+            <tr>
+              <td>Finishing</td>
+              <td>200,000 pieces/month</td>
+              <td>Steam iron, inspection lines</td>
+              <td>2-3 days</td>
+              <td>Final inspection AQL 4.0</td>
+            </tr>
+          </tbody>
+          <caption>Vertical integration reduces total lead time to 25-35 days from fabric to finished goods. Capacity can scale 20% with advance notice.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Factory Verification</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How to Verify You Are Working With a Real Factory</h2>
+      </div>
+      <div class="section__text">
+        <p>Many suppliers claim to be factories when they're actually trading companies or agents. Verification is essential to ensure you're getting direct factory access. The following verification methods enable you to confirm factory status before committing to production. SDF passes all verification methods | we encourage buyers to verify through multiple methods before establishing a relationship.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Verification Method</th>
+              <th>What to Check</th>
+              <th>Red Flags</th>
+              <th>SDF Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Business Registration</td>
+              <td>Manufacturing license on registration</td>
+              <td>Trading license only, no manufacturing</td>
+              <td>Manufacturing license verified</td>
+            </tr>
+            <tr>
+              <td>Factory Visit Request</td>
+              <td>Willingness to show production floor</td>
+              <td>Excuses, office-only visits</td>
+              <td>Factory visits always welcome</td>
+            </tr>
+            <tr>
+              <td>Production Photos</td>
+              <td>Real photos of sewing machines, lines</td>
+              <td>Stock photos, no production evidence</td>
+              <td>Real production photos provided</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Capacity Documentation</td>
+              <td>Machine count, line capacity details</td>
+              <td>Vague capacity, no specifics</td>
+              <td>Full capacity disclosure</td>
+            </tr>
+            <tr>
+              <td>Direct Communication</td>
+              <td>Speak to production managers</td>
+              <td>Sales-only communication</td>
+              <td>Direct production access</td>
+            </tr>
+          </tbody>
+          <caption>Verify through multiple methods. SDF passes all verification checks. Request factory visit, capacity documentation, and direct production access to confirm.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Factory Visits</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Factory Visit | Virtual and Physical Options</h2>
+      </div>
+      <div class="section__text">
+        <p>Factory visits are the most direct way to verify factory status and build confidence in your manufacturing partner. SDF offers both virtual factory visits via video call and physical factory visits at our Bangladesh facility. Virtual visits provide real-time observation of production lines, quality control areas, and warehouse facilities with Q&A with production managers. Physical visits allow hands-on inspection of equipment, materials, and processes.</p>
+        
+        <p>Virtual factory visits are available on short notice and can be scheduled within 48 hours. The video call includes a guided tour of knitting, dyeing, cutting, sewing, and finishing areas, with live observation of production in progress. You can ask questions directly to the production manager overseeing operations. Virtual visits are ideal for initial verification and ongoing relationship maintenance without travel costs.</p>
+        
+        <p>Physical factory visits require advance notice (minimum 2 weeks) for scheduling and visa arrangements. We arrange airport pickup, accommodation, and transportation to the factory. The visit includes a comprehensive tour of all production areas, meetings with production and quality management teams, and review of certification documentation. Physical visits are recommended for large orders or long-term partnerships.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Cost Comparison</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Direct Factory Pricing vs Agent Pricing | Savings Calculation</h2>
+      </div>
+      <div class="section__text">
+        <p>Direct factory pricing eliminates intermediary markups, resulting in significant cost savings. Agents typically add 10-20% markup for their services. Trading companies add 15-30% markup for sourcing, coordination, and profit. These markups compound on large orders and accumulate over time. Working directly with SDF means you pay factory-direct pricing with no middleman markup.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Order Size</th>
+              <th>Agent Price</th>
+              <th>Direct Factory Price</th>
+              <th>Savings</th>
+              <th>Annual Savings (4 orders)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>500 pieces</td>
+              <td>$5,500</td>
+              <td>$4,500</td>
+              <td>$1,000 (18%)</td>
+              <td>$4,000</td>
+            </tr>
+            <tr>
+              <td>1,000 pieces</td>
+              <td>$10,000</td>
+              <td>$8,000</td>
+              <td>$2,000 (20%)</td>
+              <td>$8,000</td>
+            </tr>
+            <tr>
+              <td>5,000 pieces</td>
+              <td>$45,000</td>
+              <td>$36,000</td>
+              <td>$9,000 (20%)</td>
+              <td>$36,000</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>10,000 pieces</td>
+              <td>$85,000</td>
+              <td>$68,000</td>
+              <td>$17,000 (20%)</td>
+              <td>$68,000</td>
+            </tr>
+          </tbody>
+          <caption>Savings calculated at 20% agent markup. Actual savings vary by agent and order size. Direct factory pricing compounds savings over time.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Clothing Factory FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">How do I know if I'm working with a direct factory or an agent?</h3>
+          <p class="faq__answer">Verify by requesting a factory visit, checking business registration for manufacturing license, and confirming direct production capacity. Ask for production line photos and capacity details. Direct factories can show you sewing machines, not just offices. SDF welcomes factory visits and provides production documentation proving direct manufacturing.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What savings can I expect by working directly with a factory?</h3>
+          <p class="faq__answer">Direct factory access typically saves 10-20% compared to agent pricing. Agents add markup for their services, which increases your landed cost. Working directly with SDF means you pay factory-direct pricing with no middleman markup. Savings compound on large orders and re-orders over time.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you provide virtual factory visits?</h3>
+          <p class="faq__answer">Yes. We provide virtual factory visits via video call, showing production lines, quality control areas, and warehouse facilities. Virtual visits include real-time production observation and Q&A with production managers. Physical factory visits also welcome with advance notice. Schedule within 48 hours for virtual visits.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How is communication different with a direct factory?</h3>
+          <p class="faq__answer">Direct factory communication means faster response times (24 hours or less), no information loss through intermediaries, direct access to production decisions, and immediate problem resolution. You speak directly to the people making your products, not to representatives relaying messages.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is your minimum order quantity for direct factory access?</h3>
+          <p class="faq__answer">Our direct factory minimum is 300 pieces per style. This is lower than many factories because we operate efficient production and accept smaller orders to build long-term relationships. Direct access doesn't require large minimums | it requires commitment to the relationship.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do you protect intellectual property with direct factory access?</h3>
+          <p class="faq__answer">IP protection through NDAs, restricted access to design files, segregated production lines for exclusive designs, and sample destruction after order completion. We've never had an IP violation in {companyAge}+ years of operation. Direct factory access means fewer people see your designs, reducing IP risk.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can I audit your factory directly?</h3>
+          <p class="faq__answer">Yes. We welcome direct factory audits by buyers or third-party inspection companies. We provide access to all production areas, documentation, and personnel. We maintain ISO 9001, BSCI, and SEDEX certifications which are verified through annual audits. Direct audit access is standard for SDF.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What happens if there's a quality issue with my order?</h3>
+          <p class="faq__answer">Direct factory access means immediate problem resolution. If issues arise, you speak directly to production managers who can make decisions and implement fixes immediately. No waiting for agents to relay problems. We take ownership of issues and provide corrective action plans, replacements, or credits as appropriate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready for Direct Factory Access?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for direct factory access. No agents, no markup, no information loss. You speak directly to production. Request a virtual factory visit or schedule a physical visit to verify factory status. No commitment required for initial consultation.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Request Factory Access</a>
+        <a href="/contact/" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/full-package-production/" style="color: var(--color-primary);">full package production</a>, <a href="/oem-clothing-manufacturer" style="color: var(--color-primary);">OEM clothing manufacturer</a>, <a href="/quality-inspection-service" style="color: var(--color-primary);">quality inspection service</a>, <a href="/sourcing-agent-service" style="color: var(--color-primary);">sourcing agent service</a>, <a href="/certifications" style="color: var(--color-primary);">certifications</a>, <a href="/insights/avoiding-clothing-manufacturer-scams" style="color: var(--color-primary);">avoiding clothing manufacturer scams</a>.
+      </p>
+    </div>
+  </section>
+
+<section style="padding:2rem 0;border-top:1px solid var(--color-border);margin-top:2rem"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:1.1rem;font-weight:600;color:var(--color-text);margin-bottom:1rem">Related Services</h2><nav aria-label="Related pages"><ul style="display:flex;flex-wrap:wrap;gap:0.75rem;list-style:none;padding:0"><li><a href="/low-moq-clothing-manufacturers/" style="color:var(--color-primary)">Low MOQ Manufacturers</a></li><li><a href="/private-label-clothing-manufacturer" style="color:var(--color-primary)">Private Label</a></li><li><a href="/clothing-manufacturers-for-startups/" style="color:var(--color-primary)">Startup Manufacturers</a></li><li><a href="/oem-clothing-manufacturer" style="color:var(--color-primary)">OEM Manufacturing</a></li><li><a href="/sustainable-clothing-manufacturers/" style="color:var(--color-primary)">Sustainable Manufacturing</a></li><li><a href="/certifications" style="color:var(--color-primary)">Certifications</a></li><li><a href="/quality-inspection-service" style="color:var(--color-primary)">Quality Inspection</a></li><li><a href="/tech-pack-service" style="color:var(--color-primary)">Tech Pack Service</a></li><li><a href="/sampling-service" style="color:var(--color-primary)">Sampling Service</a></li><li><a href="/full-package-production/" style="color:var(--color-primary)">Full Package Production</a></li><li><a href="/tools/price-calculator/" style="color:var(--color-primary)">Price Calculator</a></li><li><a href="/contact/" style="color:var(--color-primary)">Get a Quote</a></li></ul></nav></div></section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Every order at SDF Clothing runs through a single production floor we own outright — no subcontracted buying house sits between your brief and our sewing lines. Communication goes straight to our merchandising and production teams, pricing reflects factory cost rather than agent commission, and you retain full visibility into your supply chain. GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certification cover the facility.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Bangladesh's ready-made garment sector exported $39.35 billion in apparel during FY2024-25, an 8.84% increase on the previous year, holding the country's position as the world's second-largest apparel exporter after China. Our minimum order starts at 300 pieces per style, a threshold set to serve brands from a first production run through repeat seasonal orders, backed by in-house tech pack development, fabric sourcing, sampling, bulk manufacturing, quality inspection, and export documentation.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Brands sourcing from Bangladesh sidestep the Section 301 tariffs that add 25% or more to Chinese-made imports entering the US, and a 20% tariff cap negotiated with Washington in late 2025 keeps landed costs predictable. On the EU side, Bangladesh keeps duty-free access under the Everything But Arms scheme through November 2029, even after the country's LDC graduation in November 2026 — a multi-year runway most competing sourcing countries don't offer. Combined with competitive FOB pricing, that supports durable margins for our clients.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/contact/" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact/" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+
+
+

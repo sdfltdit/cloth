@@ -1,0 +1,562 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Petite Clothing Manufacturer | Proportional Fit Production";
+const pageDescription = "Manufacture petite clothing with SDF's proportional fit production. We specialize in petite sizing manufacturing for global fashion brands.";
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com",
+        "name": "SDF Clothing"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "description": "Petite clothing manufacturer from Bangladesh providing custom petite clothing with proportional adjustments for 5'4\" and under, specialized patterns, and fit specifications to petite brands worldwide since 1998."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for petite clothing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "300 pieces per style minimum. This applies per design, colorway, and size range. Lower quantities possible at higher per-piece cost for sampling or prototype runs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What height range do you consider petite?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We consider petite as 5'4\" and under. Our specialized patterns and proportional adjustments are designed specifically for this height range to ensure proper fit without alterations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer proportional adjustments for petite sizing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer proportional adjustments including shortened sleeves, adjusted torso length, scaled proportions, and proper inseam lengths. All adjustments maintain the design integrity while fitting petite frames."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What petite products do you manufacture?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We manufacture petite dresses, tops, bottoms, outerwear, workwear, and casual wear. All categories are available with petite-specific patterns and proportional adjustments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you ensure proper fit for petite frames?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We use specialized petite patterns, conduct fit testing with petite fit models, and adjust proportions based on real-world feedback. Our grading ensures consistent fit across the petite size range."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does petite clothing production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard production timeline: 30-40 days from fabric receipt for basic petite clothing. 35-50 days for custom pattern development or specialized fit requirements. 7-14 days for sampling before bulk."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sdfltd.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Petite Clothing Manufacturer"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SDF Clothing accepts orders from 300 pieces per style. This low MOQ makes us ideal for startup brands and small businesses testing new designs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard production takes 30-45 days after sample approval. Rush orders may be possible depending on factory capacity. Total lead time including shipping is typically 10-16 weeks."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com"
+      },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "NL"],
+      "description": "Custom clothing manufacturing from Bangladesh with low MOQ from 300 pieces."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Clothing from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Brief",
+          "text": "Share your design, quantity, fabric requirements and timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Quote",
+          "text": "Get a detailed FOB quote within 48 hours."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample",
+          "text": "Review and approve a pre-production sample."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Full production with inline quality checks."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipment",
+          "text": "FOB Dhaka shipment with full export documentation."
+        }
+      ]
+    }
+]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+
+<meta name="keywords" content="petite clothing manufacturer, petite apparel manufacturer, petite sizing manufacturer, short women clothing manufacturer, petite fit specifications" />
+
+<!-- Hero Section -->
+<section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+      <p style="font-size:0.72rem;color:#FFFFFF;">
+        <a href="/" style="color:#FFFFFF;text-decoration:none;">Home</a>
+        <span style="margin:0 0.5rem;color:#333;">/</span>
+        Petite Clothing Manufacturer
+      </p>
+    </nav>
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Petite Clothing Manufacturer | Since 1998 | 5'4\" and Under</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1rem;line-height:1.2;">
+      Custom Petite Clothing Manufacturer for Petite Brands
+    </h1>
+    <p style="color:#FFFFFF;max-width:640px;line-height:1.8;font-size:0.92rem;">
+      Petite clothing requires specialized patterns, proportional adjustments, and proper fit specifications for women 5'4\" and under. Standard sizing often requires alterations for petite frames. SDF Clothing manufactures petite clothing in Bangladesh with expert pattern adjustments. From 300 pieces per style.
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <a href="/contact/" class="cta-button">Get Free Quote</a>
+      <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20petite-clothing-manufacturer`} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WhatsApp Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Stats Section -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#000000;">
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">300</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Pieces Minimum</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">5'4\"</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">And Under</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">30-40</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Days Production</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">Proportional</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Adjustments</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Capabilities Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Our Capabilities</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Petite Manufacturing Capabilities</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Our petite manufacturing covers the full production cycle from pattern development to finished garment. We use specialized petite patterns, conduct fit testing, and ensure proportional adjustments for women 5'4\" and under.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Production capacity: 40,000-60,000 petite pieces per month across multiple production lines. We handle basic petite tops for wholesale, premium petite dresses for boutique brands, and petite collections for fashion brands.
+    </p>
+  </div>
+</section>
+
+<!-- Pattern Adjustments Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Pattern Work</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Proportional Adjustments for Petite Frames</h2>
+    </div>
+    
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Shortened sleeves for proper arm length
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Adjusted torso length for petite proportions
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Scaled proportions for balanced silhouette
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Proper inseam lengths for pants and jeans
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Consistent fit across the petite size range
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Products Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Product Range</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Petite Products We Manufacture</h2>
+    </div>
+    
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Petite dresses (casual, formal, workwear)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Petite tops and blouses
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Petite bottoms (pants, skirts, jeans)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Petite outerwear (jackets, coats)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Petite workwear and professional attire
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Petite casual wear and loungewear
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Fit Specifications Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Quality Assurance</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Fit Specifications and Quality Control</h2>
+    </div>
+    
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Fit samples across multiple petite sizes
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Fit model testing for petite frames
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Pattern adjustments based on fit feedback
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Quality inspection for consistent fit
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- MOQ and Pricing Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Pricing Guide</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">MOQ and Pricing</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      <strong>MOQ:</strong> 300 pieces per style minimum. Applies per design, colorway, and size range.
+    </p>
+    
+    <div style="margin-top:2rem;">
+      <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+        FOB Bangladesh pricing for 500-piece orders:
+      </p>
+      <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Petite top (cotton): $8-15 per piece
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Petite dress (polyester): $12-22 per piece
+        </li>
+        <li style="padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Petite pants (cotton blend): $10-18 per piece
+        </li>
+      </ul>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Pricing includes fabric, cut, sew, specialized pattern adjustments, fit testing, and standard packaging. Premium fabrics, complex designs, and additional features are extra.
+    </p>
+  </div>
+</section>
+
+<!-- Timeline Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Production Timeline</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Petite Clothing Production Timeline</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Standard petite clothing production timeline from order confirmation to shipment:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Pattern development: 5-7 days (specialized petite patterns)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Fit sampling: 7-14 days
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Bulk production: 30-40 days
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Quality inspection: 2-3 days
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Packing and shipping: 3-5 days
+      </li>
+    </ul>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Total timeline: 50-75 days from order to delivery. Custom pattern development and fit testing add 5-10 days. Rush production available at 20-30% premium.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Common Questions</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Frequently Asked Questions</h2>
+    </div>
+    
+    <div style="max-width:800px;">
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What is the minimum order for petite clothing?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">300 pieces per style minimum. This applies per design, colorway, and size range. Lower quantities possible at higher per-piece cost for sampling or prototype runs.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What height range do you consider petite?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We consider petite as 5'4\" and under. Our specialized patterns and proportional adjustments are designed specifically for this height range to ensure proper fit without alterations.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Do you offer proportional adjustments for petite sizing?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. We offer proportional adjustments including shortened sleeves, adjusted torso length, scaled proportions, and proper inseam lengths. All adjustments maintain the design integrity while fitting petite frames.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What petite products do you manufacture?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We manufacture petite dresses, tops, bottoms, outerwear, workwear, and casual wear. All categories are available with petite-specific patterns and proportional adjustments.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How do you ensure proper fit for petite frames?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We use specialized petite patterns, conduct fit testing with petite fit models, and adjust proportions based on real-world feedback. Our grading ensures consistent fit across the petite size range.</p>
+      </div>
+      <div style="padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How long does petite clothing production take?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Standard production timeline: 30-40 days from fabric receipt for basic petite clothing. 35-50 days for custom pattern development or specialized fit requirements. 7-14 days for sampling before bulk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Need custom petite clothing manufacturing for your petite brand? <a href="/contact/" style="color:#e00;text-decoration:underline;">Contact SDF Clothing here</a> with your size requirements, style specifications, and quantity. We will quote pricing, lead time, and capacity within 48 hours. From 300 pieces minimum.
+    </p>
+  </div>
+</section>
+
+<!-- Internal Link Section -->
+<section style="padding:5rem 0;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      For complete production strategy, read our <a href="/clothing-manufacturers/" style="color:#e00;text-decoration:underline;">complete clothing manufacturers guide</a>.
+    </p>
+  </div>
+</section>
+
+
+    
+    <section style="padding:2rem 0;border-top:1px solid var(--color-border);margin-top:2rem"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:1.1rem;font-weight:600;color:var(--color-text);margin-bottom:1rem">Related Services</h2><nav aria-label="Related pages"><ul style="display:flex;flex-wrap:wrap;gap:0.75rem;list-style:none;padding:0"><li><a href="/low-moq-clothing-manufacturers/" style="color:var(--color-primary)">Low MOQ Manufacturers</a></li><li><a href="/private-label-clothing-manufacturer" style="color:var(--color-primary)">Private Label</a></li><li><a href="/clothing-manufacturers-for-startups/" style="color:var(--color-primary)">Startup Manufacturers</a></li><li><a href="/oem-clothing-manufacturer" style="color:var(--color-primary)">OEM Manufacturing</a></li><li><a href="/sustainable-clothing-manufacturers/" style="color:var(--color-primary)">Sustainable Manufacturing</a></li><li><a href="/certifications" style="color:var(--color-primary)">Certifications</a></li><li><a href="/quality-inspection-service" style="color:var(--color-primary)">Quality Inspection</a></li><li><a href="/tech-pack-service" style="color:var(--color-primary)">Tech Pack Service</a></li><li><a href="/sampling-service" style="color:var(--color-primary)">Sampling Service</a></li><li><a href="/full-package-production/" style="color:var(--color-primary)">Full Package Production</a></li><li><a href="/tools/price-calculator/" style="color:var(--color-primary)">Price Calculator</a></li><li><a href="/contact/" style="color:var(--color-primary)">Get a Quote</a></li></ul></nav></div></section>
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Petite patterns are graded as their own proportional block — adjusted armhole depth, rise, and sleeve length — rather than simply shortened from a standard-size pattern, which tends to leave proportions off even when overall length is correct. GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certification applies.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Getting petite proportions right takes an extra pattern-grading pass most standard programs don't need, which we build into development rather than treating as a size-chart edit. Minimum order is 300 pieces per style, with pattern development, grading, sampling, bulk manufacturing, and export documentation included.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Petite-specific programs still carry Bangladesh's full trade advantage once they move to bulk: EU duty-free access under Everything But Arms through November 2029 despite LDC graduation in November 2026, and a 20% US tariff cap from late 2025 that limits exposure versus Chinese-made alternatives facing Section 301 duties.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/contact/" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact/" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-header {
+    text-align: center;
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .accent-line {
+    width: 60px;
+    height: 2px;
+    background: #e00;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .cta-button {
+    background: #e00;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .cta-button:hover {
+    background: #cc0000;
+  }
+  
+  .whatsapp-cta {
+    background: #25D366;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .whatsapp-cta:hover {
+    background: #128C7E;
+  }
+</style>
+
+
+
+
+
+
+
+

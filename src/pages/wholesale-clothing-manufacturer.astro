@@ -1,0 +1,980 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Wholesale Clothing Manufacturer | Bulk SDF";
+const pageDescription = "Wholesale clothing manufacturer in Bangladesh. Bulk garments from 300 pieces with tiered pricing and quality control. Get a free quote today.";
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#org",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Wholesale Clothing Manufacturer"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between wholesale and retail manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wholesale manufacturing produces garments for resale through retailers, distributors, or brands at wholesale pricing. Retail manufacturing typically produces for direct-to-consumer sales. Wholesale manufacturing involves higher volumes, pricing tiers, documentation requirements, and longer production relationships compared to retail manufacturing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the benefits of bulk orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bulk orders provide volume pricing benefits, consistent quality across production runs, priority scheduling, dedicated production capacity, and reduced per-unit costs. Larger orders also enable custom fabric development, specialized construction methods, and economies of scale that aren't possible with smaller quantities."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are your pricing tiers for wholesale orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our pricing tiers scale with order quantity: 300-500 pieces at standard pricing, 500-1000 pieces at 10-15% discount, 1000-2000 pieces at 15-20% discount, and 2000+ pieces at 20-25% discount. Volume discounts apply across the entire order, not per style, allowing flexibility in SKU mix while achieving tier benefits."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are your minimum quantities for wholesale?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our minimum for wholesale orders is 300 pieces per style, which can be distributed across sizes and colors. For brands requiring lower entry points, we offer sampling quantities at higher per-piece rates. True wholesale relationships typically involve 1000+ pieces per style to maximize volume benefits."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documentation do you provide for wholesale orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide comprehensive wholesale documentation including commercial invoices, packing lists, certificates of origin, quality inspection reports, fabric certifications, and customs documentation. All documentation meets international trade requirements and facilitates smooth customs clearance and regulatory compliance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer custom fabric development for wholesale orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. For wholesale orders of 1000+ pieces, we offer custom fabric development including custom colors, prints, and fabric constructions. Custom fabric development requires 45-60 day lead time and minimum orders of 1000 pieces per fabric to justify development costs. This service enables brands to create unique materials that differentiate their products."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Wholesale Clothing Manufacturing Service",
+      "description": "Bulk garment manufacturing from 300 pieces with wholesale pricing tiers, bulk order benefits, and comprehensive documentation for wholesale clothing suppliers",
+      "provider": {
+        "@id": "https://sdfltd.com/#org"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Wholesale Manufacturing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Wholesale Production"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "6",
+              "maxPrice": "20"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Wholesale from SDF Clothing",
+      "description": "Step-by-step process for placing wholesale clothing orders with our Bangladesh manufacturing facility",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Wholesale Requirements",
+          "text": "Provide wholesale specifications including order quantities, SKU breakdown, pricing targets, delivery timeline, and documentation requirements"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Wholesale Quote",
+          "text": "Get detailed wholesale pricing with tier breakdown, volume discounts, and payment terms for your wholesale order"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Wholesale Samples",
+          "text": "Review and approve samples for quality verification before committing to wholesale production quantities"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Production with Documentation",
+          "text": "Production begins with comprehensive documentation preparation including commercial invoices, packing lists, and certificates"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Delivery and Support",
+          "text": "Receive finished goods with complete documentation package and ongoing wholesale support"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Wholesale Clothing Manufacturer</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Wholesale Clothing Manufacturer • Since 1998 • Bulk Specialists</div>
+        <h1 class="hero__title">Wholesale Clothing Manufacturer • Bulk Garment Supplier from 300 Pieces</h1>
+        <p class="hero__description">
+          SDF Clothing is a wholesale clothing manufacturer in Bangladesh producing bulk garments from 300 pieces. Wholesale vs retail manufacturing, bulk order benefits, pricing tiers, minimum quantities, wholesale documentation for garment suppliers and distributors. Explore our <a href="/clothing-manufacturers/" style="color:#e00;text-decoration:none;">clothing manufacturers</a> and <a href="/wholesale-t-shirt-supplier/" style="color:#e00;text-decoration:none;">wholesale t-shirt supplier</a>.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact/" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20wholesale%20quote`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">300</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Volume</span>
+          <span class="hero__stat-label">Pricing</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Full</span>
+          <span class="hero__stat-label">Documentation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Volume Discounts</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Bulk Benefits</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Trade Documentation</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Wholesale Support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Wholesale vs Retail</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wholesale vs Retail Manufacturing</h2>
+      </div>
+      <div class="section__text">
+        <p>Wholesale manufacturing differs from retail manufacturing in several key aspects that impact production approach, pricing structure, and business relationships. Wholesale manufacturing produces garments for resale through intermediaries—retailers, distributors, or brands—who then sell to end consumers. Retail manufacturing typically produces for direct-to-consumer sales channels. This fundamental difference shapes everything from order quantities to pricing models to documentation requirements.</p>
+        
+        <p>Order volumes in wholesale manufacturing are significantly higher than retail manufacturing. While retail orders might range from 100-500 pieces per style, wholesale orders typically start at 1,000 pieces and extend to tens of thousands. This volume difference enables economies of scale that reduce per-unit costs dramatically. Wholesale manufacturers optimize production for high-volume efficiency, with dedicated production lines, specialized equipment, and streamlined processes that wouldn't be justified for smaller retail orders.</p>
+        
+        <>Pricing structures reflect the volume difference. Wholesale pricing is based on FOB manufacturer rates that allow retailers to apply their own markup while maintaining competitive retail prices. Retail pricing must account for the entire margin structure including manufacturer, distributor, and retailer margins. Wholesale manufacturers provide pricing tiers that reward volume with progressive discounts, making larger orders increasingly cost-effective on a per-unit basis.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Aspect</th>
+              <th>Wholesale Manufacturing</th>
+              <th>Retail Manufacturing</th>
+              <th>Key Difference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Order Volume</td>
+              <td>1,000-50,000+ pieces</td>
+              <td>100-500 pieces</td>
+              <td>Volume scale</td>
+            </tr>
+            <tr>
+              <td>Pricing Model</td>
+              <td>FOB manufacturer with volume tiers</td>
+              <td>DTC retail pricing</td>
+              <td>Margin structure</td>
+            </tr>
+            <tr>
+              <td>Relationship</td>
+              <td>Long-term partnerships</td>
+              <td>Project-based</td>
+              <td>Commitment level</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Documentation</td>
+              <td>Comprehensive trade documentation</td>
+              <td>Basic production documentation</td>
+              <td>Regulatory compliance</td>
+            </tr>
+            <tr>
+              <td>Customization</td>
+              <td>Custom fabrics, constructions available</td>
+              <td>Standard options typically</td>
+              <td>Development capability</td>
+            </tr>
+          </tbody>
+          <caption>Wholesale manufacturing optimized for high-volume, long-term relationships with comprehensive support.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Bulk Order Benefits</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Benefits of Bulk Clothing Orders</h2>
+      </div>
+      <div class="section__text">
+        <p>Bulk clothing orders provide multiple advantages beyond simple volume pricing. The cumulative benefits of large-scale production create value that extends beyond per-unit cost reduction. These benefits include production efficiency, quality consistency, supply chain reliability, and strategic advantages that support business growth and market positioning.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Benefit</th>
+              <th>Description</th>
+              <th>Business Impact</th>
+              <th>Minimum Volume</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Volume Pricing</td>
+              <td>Progressive discounts on larger orders</td>
+              <td>Improved margins, competitive pricing</td>
+              <td>500+ pieces</td>
+            </tr>
+            <tr>
+              <td>Consistent Quality</td>
+              <td>Uniform production across large runs</td>
+              <td>Brand reliability, reduced returns</td>
+              <td>1,000+ pieces</td>
+            </tr>
+            <tr>
+              <td>Priority Scheduling</td>
+              <td>Dedicated production timeline priority</td>
+              <td>Reliable delivery, seasonal alignment</td>
+              <td>2,000+ pieces</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Custom Development</td>
+              <td>Custom fabrics and constructions</td>
+              <td>Product differentiation, exclusivity</td>
+              <td>3,000+ pieces</td>
+            </tr>
+            <tr>
+              <td>Dedicated Capacity</td>
+              <td>Reserved production capacity</td>
+              <td>Supply security, growth support</td>
+              <td>5,000+ pieces</td>
+            </tr>
+          </tbody>
+          <caption>Benefits scale with order volume. Multiple benefits often available at lower thresholds for established relationships.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Pricing Tiers</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wholesale Pricing Tiers</h2>
+      </div>
+      <div class="section__text">
+        <p>Our wholesale pricing structure rewards volume with progressive discounts that make larger orders increasingly cost-effective. Pricing tiers are designed to provide clear incentives for volume growth while remaining accessible at entry levels. Volume discounts apply across the total order quantity, allowing brands to mix multiple SKUs while still achieving tier benefits based on aggregate volume.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Order Quantity</th>
+              <th>Discount</th>
+              <th>Customization</th>
+              <th>Lead Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Entry Tier</td>
+              <td>300-500 pieces</td>
+              <td>Standard pricing</td>
+              <td>Standard options</td>
+              <td>30-40 days</td>
+            </tr>
+            <tr>
+              <td>Growth Tier</td>
+              <td>500-1,000 pieces</td>
+              <td>10-15% discount</td>
+              <td>Standard + minor custom</td>
+              <td>30-40 days</td>
+            </tr>
+            <tr>
+              <td>Volume Tier</td>
+              <td>1,000-2,000 pieces</td>
+              <td>15-20% discount</td>
+              <td>Custom fabrics available</td>
+              <td>35-45 days</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Bulk Tier</td>
+              <td>2,000-5,000 pieces</td>
+              <td>20-25% discount</td>
+              <td>Full custom development</td>
+              <td>40-50 days</td>
+            </tr>
+            <tr>
+              <td>Enterprise Tier</td>
+              <td>5,000+ pieces</td>
+              <td>25%+ discount</td>
+              <td>Dedicated development</td>
+              <td>45-60 days</td>
+            </tr>
+          </tbody>
+          <caption>Discounts apply to aggregate order quantity. Customization options expand with volume tiers.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Minimum Quantities</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wholesale Minimum Quantities</h2>
+      </div>
+      <div class="section__text">
+        <p>Minimum quantities for wholesale manufacturing balance production efficiency with accessibility. Our entry-level minimum of 300 pieces per style enables brands to begin wholesale relationships without prohibitive initial commitments. However, true wholesale benefits typically materialize at 1,000+ pieces where volume pricing becomes meaningful and production optimization delivers significant cost advantages.</p>
+        
+        <p>Minimum quantities vary by product category and complexity. Basic garments like t-shirts and leggings maintain the 300-piece minimum. More complex items like outerwear or structured garments may require 500-piece minimums due to specialized construction and longer setup times. Custom fabric development typically requires 1,000-piece minimums per fabric to justify development costs. These minimums ensure production efficiency while remaining accessible for growing brands.</p>
+        
+        <p>For brands requiring lower entry points for market testing, we offer sampling programs that allow small quantity production at adjusted pricing. These sampling quantities, typically 50-100 pieces, serve as bridge between development and full wholesale production. Brands can validate designs, test market response, and establish quality standards before committing to wholesale quantities. This staged approach reduces risk while building toward full wholesale partnerships.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Documentation</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wholesale Documentation</h2>
+      </div>
+      <div class="section__text">
+        <p>Comprehensive documentation is essential for wholesale clothing orders to facilitate international trade, ensure regulatory compliance, and provide transparency throughout the supply chain. Wholesale documentation differs from retail documentation in scope and detail, reflecting the more complex requirements of B2B transactions and international shipping. We provide complete documentation packages that meet all major market requirements.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Document</th>
+              <th>Purpose</th>
+              <th>Required For</th>
+              <td>Included</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Commercial Invoice</td>
+              <td>Billing and customs declaration</td>
+              <td>All international shipments</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Packing List</td>
+              <td>Shipment content details</td>
+              <td>All international shipments</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Certificate of Origin</td>
+              <td>Country of origin verification</td>
+              <td>Preferential trade agreements</td>
+              <td>Yes</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Quality Inspection Report</td>
+              <td>Quality verification documentation</td>
+              <td>Brand quality requirements</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Fabric Certifications</td>
+              <td>Material compliance verification</td>
+              <td>Regulatory requirements</td>
+              <td>As applicable</td>
+            </tr>
+            <tr>
+              <td>Customs Documentation</td>
+              <td>Import/export compliance</td>
+              <td>Customs clearance</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+          <caption>Documentation provided based on order destination and regulatory requirements. Additional documentation available on request.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Wholesale Clothing Manufacturer FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between wholesale and retail manufacturing?</h3>
+          <p class="faq__answer">Wholesale manufacturing produces garments for resale through retailers, distributors, or brands at wholesale pricing. Retail manufacturing typically produces for direct-to-consumer sales. Wholesale manufacturing involves higher volumes, pricing tiers, documentation requirements, and longer production relationships compared to retail manufacturing.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are the benefits of bulk orders?</h3>
+          <p class="faq__answer">Bulk orders provide volume pricing benefits, consistent quality across production runs, priority scheduling, dedicated production capacity, and reduced per-unit costs. Larger orders also enable custom fabric development, specialized construction methods, and economies of scale that aren't possible with smaller quantities.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are your pricing tiers for wholesale orders?</h3>
+          <p class="faq__answer">Our pricing tiers scale with order quantity: 300-500 pieces at standard pricing, 500-1000 pieces at 10-15% discount, 1000-2000 pieces at 15-20% discount, and 2000+ pieces at 20-25% discount. Volume discounts apply across the entire order, not per style, allowing flexibility in SKU mix while achieving tier benefits.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are your minimum quantities for wholesale?</h3>
+          <p class="faq__answer">Our minimum for wholesale orders is 300 pieces per style, which can be distributed across sizes and colors. For brands requiring lower entry points, we offer sampling quantities at higher per-piece rates. True wholesale relationships typically involve 1000+ pieces per style to maximize volume benefits.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What documentation do you provide for wholesale orders?</h3>
+          <p class="faq__answer">We provide comprehensive wholesale documentation including commercial invoices, packing lists, certificates of origin, quality inspection reports, fabric certifications, and customs documentation. All documentation meets international trade requirements and facilitates smooth customs clearance and regulatory compliance.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you offer custom fabric development for wholesale orders?</h3>
+          <p class="faq__answer">Yes. For wholesale orders of 1000+ pieces, we offer custom fabric development including custom colors, prints, and fabric constructions. Custom fabric development requires 45-60 day lead time and minimum orders of 1000 pieces per fabric to justify development costs. This service enables brands to create unique materials that differentiate their products.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Place Wholesale Orders?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for wholesale clothing manufacturing. We provide bulk garment production from 300 pieces with volume pricing tiers, bulk order benefits, comprehensive documentation, and wholesale support for garment suppliers and distributors.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/sampling-service" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/wholesale-clothing-supplier" style="color: var(--color-primary);">wholesale clothing supplier</a>, <a href="/bulk-clothing-manufacturer" style="color: var(--color-primary);">bulk clothing manufacturer</a>, <a href="/private-label-clothing-manufacturer" style="color: var(--color-primary);">private label manufacturer</a>, <a href="/full-package-production/" style="color: var(--color-primary);">full package production</a>, <a href="/tools/price-calculator/" style="color: var(--color-primary);">price calculator</a>, <a href="/tools/moq-calculator/" style="color: var(--color-primary);">MOQ calculator</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/clothing-manufacturers-for-startups/" style="color: var(--color-primary);">clothing manufacturers for startups</a>, <a href="/small-batch-clothing-manufacturer" style="color: var(--color-primary);">small batch clothing manufacturer</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

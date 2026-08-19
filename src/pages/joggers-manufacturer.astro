@@ -1,0 +1,987 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Joggers Manufacturer | Custom & Wholesale | SDF Clothing";
+const pageDescription = "Custom joggers manufacturer in Bangladesh. Cotton fleece, French terry from 300 pieces. Tapered fit, cuffed ankles, cargo styles. Get a free quote.";
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#org",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Joggers Manufacturer"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for joggers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our minimum order quantity for custom joggers is 300 pieces per style. This minimum allows you to access factory-direct pricing while testing market response with manageable inventory. The 300-piece minimum can be distributed across sizes within a single colorway. Lower quantities are available for sampling and prototype development at higher per-piece costs for brands requiring smaller initial runs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What fabric options do you offer for joggers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer cotton fleece for warmth and natural feel (280-320 GSM), French terry for textured comfort (240-280 GSM), polyester fleece for durability and color retention (260-300 GSM), bamboo blends for sustainable softness (240-280 GSM), and cotton-polyester blends for balanced performance (260-300 GSM). All fabrics are pre-shrunk to minimize dimensional changes after washing. Fabric selection depends on climate, season, and intended use."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What jogger styles can you manufacture?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We manufacture slim fit joggers with tapered legs for modern styling, relaxed fit joggers for comfort and casual wear, cargo joggers with multiple pockets for functionality, track joggers with side stripes for athletic styling, and fleece-lined joggers for cold weather. All styles feature elastic waistbands with drawstring options and cuffed ankles. Custom style development is available with technical specifications."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer eco-friendly jogger options?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer organic cotton fleece certified by GOTS for natural fiber sustainability, recycled polyester fleece certified by GRS for synthetic material recycling, and bamboo blends for sustainable softness. All eco-friendly options maintain the same quality standards as conventional fabrics. Organic cotton costs approximately 15-20% more than conventional cotton, while recycled polyester is priced similarly to virgin polyester. Certification documentation is provided for marketing substantiation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does jogger production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard production timeline is 30-40 days from fabric receipt for basic joggers. Custom fabric development adds 15-20 days. Sampling takes 15-20 days before bulk production approval. Complex styles such as cargo joggers or fleece-lined versions may require 35-45 days production time. We recommend planning 60-75 days total from initial inquiry to delivery for first-time orders including sampling and production, or 45-60 days for repeat orders."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you produce joggers with custom pocket configurations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer standard side pockets, back patch pockets, cargo pockets with flap closures, zippered security pockets, and hidden media pockets. Custom pocket placement and sizing are available with technical specifications. Complex pocket configurations may increase minimum order quantities to 500 pieces due to production complexity. We can provide guidance on pocket construction methods that balance functionality with manufacturing efficiency."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Joggers Manufacturing Service",
+      "description": "Custom joggers manufacturing from 300 pieces including cotton fleece, French terry, tapered fit, cuffed ankles, and cargo styles",
+      "provider": {
+        "@id": "https://sdfltd.com/#org"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Joggers Manufacturing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom Joggers Production"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "10",
+              "maxPrice": "25"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Joggers from SDF Clothing",
+      "description": "Step-by-step process for ordering custom joggers from our Bangladesh manufacturing facility",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Design Requirements",
+          "text": "Send your jogger design, fabric preferences (fleece or terry), fit type (slim or relaxed), size chart, and target quantity via contact form"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Detailed Quote",
+          "text": "Get pricing within 24-48 hours including fabric costs, production, customization, and shipping for your jogger order"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Samples",
+          "text": "Review jogger samples for fit, fabric hand feel, construction quality, and pocket functionality within 15-20 days before bulk production"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Production begins after sample approval with 30-40 day turnaround for standard jogger items"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Inspection & Shipping",
+          "text": "Final quality check before shipment with tracking documentation for your jogger order"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Joggers Manufacturer</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Joggers Manufacturer | Since 1998 | Casual Wear Specialists</div>
+        <h1 class="hero__title">Joggers Manufacturer | Custom Cotton Fleece & French Terry from 300 Pieces</h1>
+        <p class="hero__description">
+          SDF Clothing is a joggers manufacturer and full-service clothing manufacturer in Bangladesh producing custom joggers with cotton fleece, French terry, and polyester fabrics. Tapered fit, cuffed ankles, and cargo styles available from 300 pieces minimum. 15-20 day sampling, 30-40 day production.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact/" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20joggers-manufacturer`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">300</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">240-380</span>
+          <span class="hero__stat-label">GSM Range</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">30-40</span>
+          <span class="hero__stat-label">Days Production</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>GRS Recycled</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>BSCI Social Compliance</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>ISO 9001 Quality</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Introduction</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Joggers Manufacturer for Casual and Streetwear Brands</h2>
+      </div>
+      <div class="section__text">
+        <p>As a specialized joggers manufacturer based in Bangladesh, SDF Clothing understands that comfort, durability, and style are essential requirements for casual and streetwear brands. The jogger market has evolved from basic athletic wear to a fashion staple that bridges comfort and style. Our facility delivers on these requirements with minimum orders of 300 pieces, making professional manufacturing accessible to emerging lifestyle brands and established labels expanding their casual wear collections.</p>
+        
+        <p>Bangladesh has developed significant expertise in fleece and knit garment manufacturing, with specialized factories focused on cotton fleece, French terry, and performance blends. Our jogger production leverages this expertise, offering international brands access to skilled labor, competitive pricing, and established supply chains for fleece fabrics. The 300-piece minimum enables brands to test different fits and fabric weights without committing to large inventory positions, reducing risk while accessing factory-direct pricing.</p>
+        
+        <p>Our joggers manufacturing addresses the technical requirements that distinguish quality joggers from basic sweatpants: appropriate fabric weight for climate and season, pre-shrunk materials to maintain fit after washing, durable construction that withstands repeated wear and laundering, and design features that balance comfort with contemporary styling. We work with cotton fleece, French terry, polyester fleece, and bamboo blends to achieve these characteristics while offering options for sustainable materials.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Product Range</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What We Manufacture</h2>
+      </div>
+      <div class="section__text">
+        <p>Our joggers production encompasses multiple styles and fabric weights designed for different climates, seasons, and fashion preferences. Each style maintains our commitment to quality fabrics and durable construction while offering distinct aesthetic and functional characteristics. We manufacture all styles from 300 pieces minimum, with the ability to mix styles within larger orders for comprehensive collections.</p>
+        
+        <p>Slim fit joggers feature tapered legs that narrow from thigh to ankle, creating a modern silhouette that works for both casual and athleisure styling. These joggers typically use mid-weight fabrics in the 260-300 GSM range, providing structure without bulk. The slim fit requires careful pattern grading to ensure the taper is proportional across sizes while maintaining comfort through the hips and thighs. Slim fit joggers are particularly popular in streetwear markets and for customers who prefer a more tailored appearance from their casual wear.</p>
+        
+        <p>Relaxed fit joggers offer a roomier silhouette through the hips and thighs with a more gradual taper toward the ankle. These styles prioritize comfort and are ideal for lounging, casual wear, and customers who prefer a looser fit. Relaxed fit joggers typically use heavier fabrics in the 280-340 GSM range, providing warmth and substance. The relaxed fit accommodates layering and is popular in colder climates where additional warmth is desired. This style represents the classic jogger silhouette that appeals to broad market segments.</p>
+        
+        <p>Cargo joggers incorporate multiple pockets for enhanced functionality, typically featuring side cargo pockets with flap closures in addition to standard front and back pockets. The cargo style adds visual interest and practical storage, appealing to customers who value utility in their casual wear. Cargo joggers require specialized construction to ensure pocket placement does not compromise comfort or create bulk. These styles typically have a 500-piece minimum due to increased production complexity. Cargo joggers are popular in utility-inspired fashion and for customers who need practical storage in everyday wear.</p>
+        
+        <p>Track joggers feature side stripes or piping down the legs, referencing classic athletic track pant styling while maintaining jogger comfort. These styles often use ribbed cuffs and waistbands for a sport aesthetic. Track joggers can be produced in contrasting color combinations for bold visual impact or in tonal stripes for subtle branding. The side stripe construction requires careful alignment to ensure stripes run straight and maintain consistent width through the leg. Track joggers are popular in retro-inspired collections and for brands with athletic heritage.</p>
+        
+        <p>Fleece-lined joggers provide additional warmth for cold weather wear, featuring a fleece interior that traps heat against the body. These styles use heavier fabrics in the 320-380 GSM range and are ideal for fall and winter collections. The fleece lining adds bulk, requiring pattern adjustments to maintain fit proportions. Fleece-lined joggers are particularly popular in markets with cold winters and for outdoor lifestyle brands. The additional warmth comes with increased material costs, typically adding 15-20% to the base price of standard joggers.</p>
+        
+        <p>French terry joggers feature the characteristic looped texture on the interior, providing moisture-wicking properties and a distinctive hand feel. French terry is lighter than fleece, typically in the 240-280 GSM range, making it suitable for transitional seasons and warmer climates. The textured interior adds visual interest and differentiates French terry joggers from smooth fleece options. French terry is also breathable, making it comfortable for active casual wear. These joggers are popular in spring collections and for customers who prefer lighter-weight casual pants.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Style</th>
+              <th>Fabric GSM</th>
+              <th>Key Features</th>
+              <th>Best For</th>
+              <th>Price Tier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Slim Fit Joggers</td>
+              <td>260-300</td>
+              <td>Tapered leg, modern silhouette, structured</td>
+              <td>Streetwear, athleisure, fashion</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>Relaxed Fit Joggers</td>
+              <td>280-340</td>
+              <td>Roomy fit, comfort focus, warm</td>
+              <td>Lounging, casual wear, cold climates</td>
+              <td>$</td>
+            </tr>
+            <tr>
+              <td>Cargo Joggers</td>
+              <td>280-320</td>
+              <td>Multiple pockets, utility focus, functional</td>
+              <td>Utility fashion, practical wear</td>
+              <td>$$$</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Track Joggers</td>
+              <td>260-300</td>
+              <td>Side stripes, sport aesthetic, ribbed cuffs</td>
+              <td>Athletic heritage, retro styling</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>Fleece-Lined Joggers</td>
+              <td>320-380</td>
+              <td>Fleece interior, maximum warmth, cold weather</td>
+              <td>Winter wear, outdoor lifestyle</td>
+              <td>$$$</td>
+            </tr>
+          </tbody>
+          <caption>All styles available from 300 pieces minimum. Cargo joggers require 500 pieces minimum.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Production Process</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Our Manufacturing Process</h2>
+      </div>
+      <div class="section__text">
+        <p>Our joggers manufacturing follows a structured process designed to ensure consistent fit, fabric quality, and construction durability. The process typically spans 60-75 days for first-time orders including sampling and production, with 45-60 days for repeat orders using approved fabrics and patterns. Joggers require particular attention to fabric pre-shrinking and dimensional stability to ensure consistent fit after laundering.</p>
+        
+        <p>The process begins with specification review, where we analyze your requirements including fabric preferences (fleece or terry), fit type (slim or relaxed), size chart, pocket configuration, and waistband details. Our team provides feedback on technical feasibility and may suggest modifications to optimize manufacturability while maintaining design intent. This stage takes 2-3 days and ensures technical alignment before sampling begins. For joggers, we pay particular attention to waistband elasticity and cuff construction specifications.</p>
+        
+        <p>Fabric sourcing and pre-shrinking follows specification review, taking 10-15 days for standard fabrics and 15-20 days for custom fabric development. Jogger fabrics undergo pre-shrinking treatment before cutting to minimize dimensional changes after washing. We test fabrics for shrinkage in both warp and weft directions, ensuring that finished garments maintain their measurements after laundering. If you require custom fabric development for specific colors or weights, we coordinate with mills to produce sample yardage for testing.</p>
+        
+        <p>Sample development for joggers takes 15-20 days. Initial samples focus on construction and basic fit, with subsequent samples refining fit details, pocket placement, and cuff proportions. We provide detailed measurement reports comparing samples to your specifications and conduct wash testing to verify dimensional stability. Jogger samples require particular attention to waistband fit and cuff construction to ensure they maintain their shape through wear and washing. You may request multiple sample rounds to perfect the design.</p>
+        
+        <p>Dimensional stability testing is a critical step in jogger sampling that we conduct on all fabric lots. We measure garments before and after washing to verify that shrinkage remains within acceptable tolerances (typically less than 3% in either direction). This testing ensures that the fit customers experience in unwashed garments is maintained after home laundering. Dimensional stability testing reduces returns due to fit changes after washing and is particularly important for cotton-based fabrics that have higher shrinkage potential.</p>
+        
+        <p>Pattern grading for joggers requires careful attention to proportional scaling, particularly for tapered styles. The relationship between waist, hip, and ankle measurements must be maintained through grading to ensure that the silhouette remains consistent across sizes. Our pattern makers use graded measurement systems that account for this relationship, producing size sets from XS to 4XL that maintain proportional fit. Grading takes 3-5 days and includes verification of taper consistency, cuff width scaling, and pocket placement proportionality.</p>
+        
+        <p>Bulk production for joggers spans 30-40 days from fabric receipt, with complex styles such as cargo joggers requiring 35-45 days. Cutting is performed with attention to pattern alignment to ensure consistent grain direction, which affects fit and appearance. Sewing lines are staffed by operators trained in fleece and terry construction, with particular expertise in elastic application, pocket construction, and cuff attachment. Quality checkpoints at each sewing operation verify seam integrity, elastic tension, and pocket alignment. Throughout production, we conduct in-line testing of waistband elasticity and cuff construction.</p>
+        
+        <p>Final quality inspection uses AQL 2.5 standards for major defects and AQL 4.0 for minor defects, with additional testing for jogger-specific criteria. Inspection includes measurement verification against graded size charts, wash testing on random samples to verify dimensional stability, and pocket functionality testing. We also conduct elastic tension testing to ensure waistbands maintain appropriate recovery after stretching. Detailed inspection reports with photos are provided before shipment, and any defects found are rectified before goods leave our facility.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Materials</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Fabric & Material Options</h2>
+      </div>
+      <div class="section__text">
+        <p>Fabric selection is critical to jogger performance, affecting warmth, comfort, durability, and care requirements. We offer multiple fabric options optimized for different climates, seasons, and performance requirements. All fabrics are pre-shrunk and tested for dimensional stability to ensure consistent fit after laundering.</p>
+        
+        <p>Cotton fleece is the traditional choice for joggers, providing warmth, softness, and natural comfort. Cotton fleece typically ranges from 280-320 GSM, with heavier weights providing more warmth for cold weather. The fabric features a brushed interior that traps heat against the body, making it ideal for fall and winter wear. Cotton fleece is breathable and absorbs moisture, though it retains moisture more than synthetic alternatives. We offer combed cotton fleece for enhanced softness and reduced pilling. Cotton fleece is our recommendation for classic jogger styling and customers prioritizing natural fibers.</p>
+        
+        <p>French terry features a looped interior texture that provides moisture-wicking properties and a distinctive hand feel. French terry is lighter than fleece, typically in the 240-280 GSM range, making it suitable for transitional seasons and active casual wear. The looped texture increases surface area for moisture evaporation, making French terry more breathable than fleece. French terry can be produced from cotton, polyester, or blends, with cotton providing natural comfort and polyester enhancing durability. French terry is ideal for spring collections and customers who prefer lighter-weight joggers.</p>
+        
+        <p>Polyester fleece offers durability, color retention, and moisture-wicking properties at competitive prices. Polyester fleece typically ranges from 260-300 GSM and maintains its appearance through repeated washing without significant fading or pilling. The synthetic fiber resists shrinkage, reducing dimensional stability concerns. Polyester fleece is lighter weight than cotton fleece for equivalent warmth, making it suitable for active wear. However, polyester does not provide the natural hand feel of cotton and may retain odors more than natural fibers. Polyester fleece is ideal for value positioning and performance-focused joggers.</p>
+        
+        <p>Bamboo blends combine bamboo viscose with cotton or polyester for sustainable softness with performance characteristics. Bamboo fibers are naturally antimicrobial and moisture-wicking, providing odor resistance and comfort. Bamboo blends typically range from 240-280 GSM and offer a luxurious hand feel that differentiates them from conventional fleece options. The fabric has natural temperature-regulating properties, making it comfortable across a range of conditions. Bamboo blends cost approximately 15-20% more than conventional cotton but appeal to eco-conscious customers and premium positioning.</p>
+        
+        <p>Cotton-polyester blends combine the natural comfort of cotton with the durability and color retention of polyester. Typical blends range from 80/20 to 50/50 cotton-polyester ratios, with higher cotton content providing more natural feel and higher polyester content enhancing durability. These blends typically range from 260-300 GSM and offer balanced performance at competitive prices. The polyester component reduces shrinkage compared to 100% cotton, improving dimensional stability. Cotton-polyester blends are ideal for brands seeking a balance of natural comfort with practical performance.</p>
+        
+        <p>Organic cotton fleece, certified by GOTS (Global Organic Textile Standard), provides sustainable options for customers prioritizing organic materials. Organic cotton is grown without synthetic pesticides or fertilizers and processed without harmful chemicals. The fabric maintains the same warmth and comfort as conventional cotton fleece with the added benefit of environmental certification. Organic cotton typically costs 15-20% more than conventional cotton but enables sustainability claims that appeal to eco-conscious consumers. GOTS certification requires traceability throughout the supply chain.</p>
+        
+        <p>Recycled polyester fleece, certified by GRS, provides sustainable synthetic options made from post-consumer plastic bottles. Recycled polyester offers the same durability and performance as virgin polyester with reduced environmental impact. The fabric is ideal for brands seeking sustainable options in synthetic materials. GRS certification verifies recycled content and ensures environmental and social standards in production. Recycled polyester fleece is priced similarly to virgin polyester, making sustainability accessible without significant cost premium.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Fabric</th>
+              <th>GSM Range</th>
+              <th>Key Properties</th>
+              <th>Best For</th>
+              <th>Price Tier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Cotton Fleece</td>
+              <td>280-320</td>
+              <td>Warm, soft, natural, breathable</td>
+              <td>Classic joggers, cold weather</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>French Terry</td>
+              <td>240-280</td>
+              <td>Lightweight, moisture-wicking, textured</td>
+              <td>Transitional seasons, active wear</td>
+              <td>$</td>
+            </tr>
+            <tr>
+              <td>Polyester Fleece</td>
+              <td>260-300</td>
+              <td>Durable, color-fast, lightweight warmth</td>
+              <td>Value positioning, performance</td>
+              <td>$</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Bamboo Blend</td>
+              <td>240-280</td>
+              <td>Sustainable, antimicrobial, soft</td>
+              <td>Premium, eco-conscious</td>
+              <td>$$$</td>
+            </tr>
+            <tr>
+              <td>Cotton-Polyester Blend</td>
+              <td>260-300</td>
+              <td>Balanced performance, reduced shrinkage</td>
+              <td>All-season, value positioning</td>
+              <td>$</td>
+            </tr>
+          </tbody>
+          <caption>All fabrics pre-shrunk and tested for dimensional stability. Custom GSM available.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Bangladesh Advantage</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Why Source Joggers from Bangladesh</h2>
+      </div>
+      <div class="section__text">
+        <p>Bangladesh has established itself as a competitive sourcing destination for joggers and casual knit garments, combining cost advantages with specialized expertise in fleece and terry production. The country's garment industry includes numerous factories focused on casual wear, with developed supply chains for cotton fleece and French terry fabrics. This specialization, combined with competitive labor costs, makes Bangladesh an attractive option for jogger manufacturing.</p>
+        
+        <p>Labor costs in Bangladesh are significantly lower than in China, Vietnam, or Turkey, translating to 15-25% cost savings on finished joggers. However, the cost advantage does not come at the expense of quality. The Bangladeshi garment industry has developed particular expertise in fleece garment production, with operators skilled in handling bulky fabrics, attaching cuffs and waistbands, and constructing pockets that maintain their shape. Our facility conducts regular training programs to ensure operators are proficient in the latest jogger construction techniques.</p>
+        
+        <p>Bangladesh's domestic fabric supply includes numerous mills capable of producing cotton fleece, French terry, and polyester blends suitable for jogger construction. The country has invested heavily in knitting capacity, reducing reliance on imported fabrics for basic jogger styles. This local sourcing reduces lead times and logistics costs compared to countries that rely entirely on imported fabrics. Our relationships with local fabric mills ensure priority allocation and consistent quality for jogger fabrics. For specialized fabrics or custom weights, we maintain relationships with international fabric suppliers.</p>
+        
+        <p>The country's export infrastructure includes experienced freight forwarders, customs brokers, and documentation specialists familiar with garment export requirements. Shipments from Bangladesh to major markets are routine, with multiple weekly sailings to Europe and North America. Ocean freight is particularly cost-effective for bulky joggers compared to air freight, given the fabric weight. The established export infrastructure reduces the risk of delays and documentation errors that can occur with less experienced sourcing locations.</p>
+        
+        <p>Bangladesh's garment sector has made substantial progress on workplace safety and social compliance since the reforms that followed 2013. Our factory holds BSCI certification, covering fair wages, reasonable working hours, and safe working conditions, and joggers brands sourcing today are sourcing from a very different compliance landscape than the one that existed a decade ago. That matters directly to retailers and consumers who now factor ethical sourcing into buying decisions, and it lowers the reputational risk that once made some brands hesitant about Bangladesh production.</p>
+        
+        <p>Duty-free access to European markets through the Everything But Arms (EBA) arrangement provides Bangladesh garments with preferential tariff treatment, reducing import costs for EU customers. Similar preferential access exists for other markets including Canada, Australia, and Japan. This duty advantage can significantly impact landed costs for joggers, which are subject to standard garment duty rates in many markets. For brands targeting EU distribution, the duty savings can offset other costs and improve overall margins.</p>
+        
+        <p>The Bangladesh garment industry has developed specialized expertise in knit garment production, which directly translates to jogger manufacturing. Handling fleece and terry fabrics, attaching elastic waistbands and cuffs, and constructing garments that maintain dimensional stability are well-established skills in the country's workforce. This specialized expertise reduces the learning curve for new jogger styles and ensures consistent quality across production runs. The industry's experience with international casual wear brands also means that quality expectations for fit and finish are well-understood.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">International Shipping</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Shipping to UK, USA, Australia & EU</h2>
+      </div>
+      <div class="section__text">
+        <p>We ship joggers to major international markets including the United Kingdom, United States, Australia, and European Union countries. Each market has specific requirements for documentation, duties, and shipping timelines that we navigate routinely. Our experience with international jogger shipments ensures your goods arrive on time and with proper documentation for customs clearance.</p>
+        
+        <p>Shipments to the United Kingdom typically take 30-35 days by ocean freight, including transit time and customs clearance. Air freight options reduce this to 7-10 days at significantly higher cost, though air freight is less common for joggers due to fabric weight. The UK applies import duties on garments from Bangladesh, though rates vary by fabric composition and declared value. Joggers typically fall under specific HS codes for cotton or synthetic trousers. We provide accurate classification and valuation to ensure proper duty calculation. Post-Brexit documentation requirements are handled to ensure smooth customs clearance.</p>
+        
+        <p>United States shipments take 25-30 days by ocean freight to West Coast ports and 35-40 days to East Coast ports. Air freight takes 5-7 days to major US airports. The US maintains normal trade relations with Bangladesh, with standard MFN duty rates applying to joggers. The US has specific labeling requirements for garments including fiber content in English and country of origin. We ensure all labels meet US Federal Trade Commission requirements. US customs may also inspect for compliance with textile fiber identification rules, which we address through proper documentation.</p>
+        
+        <p>Joggers shipping to Australia typically take 20-25 days by ocean freight into Sydney, Melbourne, or Brisbane, or 7-10 days by air for smaller or urgent orders. The Bangladesh-Australia free trade agreement eliminates duties on most garment categories provided rules-of-origin conditions are satisfied — something we account for during production planning rather than after the fact. We also prepare packaging and documentation to Australia's biosecurity standards to keep shipments moving through customs without delay.</p>
+        
+        <p>As a least-developed country, Bangladesh ships joggers into the EU duty-free under the Everything But Arms arrangement. Ocean freight takes 28-32 days to Northern Europe and 32-38 days to Southern Europe, while air freight cuts that to 5-8 days. EU-bound shipments need certificates of origin, detailed commercial invoices, and conformity declarations where materials require them, along with textile labels showing fiber content and care instructions in the destination market's language.</p>
+        
+        <p>Documentation for all markets includes commercial invoices, packing lists, bills of lading, certificates of origin, and any required certificates for regulated materials. For joggers, this may include certificates for fiber content if organic or recycled materials are used. We provide all documentation in English and can arrange for translations if required by specific markets. Our documentation is prepared to meet both customs requirements and your internal accounting needs, with clear descriptions and accurate valuations.</p>
+        
+        <p>Incoterms can be structured according to your preferences, including FOB (Free On Board) Bangladesh for maximum control, CIF (Cost, Insurance, Freight) to destination port for convenience, or DDP (Delivered Duty Paid) for complete door-to-door service. For joggers, we typically recommend FOB for experienced importers, as the cost savings on ocean freight for bulky garments make FOB economically advantageous. CIF and DDP options are available for brands seeking simplified logistics or those new to international sourcing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Certifications</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Quality Standards & Certifications</h2>
+      </div>
+      <div class="section__text">
+        <p>Quality assurance and certification are fundamental to our joggers manufacturing process. Joggers require particular attention to dimensional stability and construction durability due to their casual nature and frequent washing. We maintain multiple certifications that verify our commitment to quality, social responsibility, and environmental standards.</p>
+        
+        <p>OEKO-TEX Standard 100 certification applies to our fabrics, ensuring they are free from harmful substances including heavy metals, pesticides, and formaldehyde. This certification is particularly important for joggers that have prolonged skin contact during casual wear and lounging. OEKO-TEX testing covers all fabric components including base materials, elastics, trims, and threads. We provide OEKO-TEX certificates for each material lot, enabling you to substantiate claims about chemical safety in your marketing materials.</p>
+        
+        <p>GRS (Global Recycled Standard) certification applies to our recycled polyester fabrics, verifying the recycled content and ensuring traceability throughout the supply chain. GRS certification covers environmental and social criteria for recycled material production, including wastewater treatment, chemical restrictions, and labor practices. If you choose recycled fabrics for your joggers, GRS certification provides credible substantiation for sustainability claims and is increasingly required by major retailers for recycled content products.</p>
+        
+        <p>GOTS (Global Organic Textile Standard) certification applies to our organic cotton fabrics, verifying organic fiber content and ensuring environmentally and socially responsible production. GOTS covers the entire supply chain from harvesting to labeling, ensuring that organic claims are substantiated throughout production. If you choose organic cotton for your joggers, GOTS certification provides credibility for organic marketing claims and is required by many retailers for organic textile products.</p>
+        
+        <p>BSCI (Business Social Compliance Initiative) certification is what backs up our labor-standards claims on fair wages, reasonable working hours, prohibition of child labor, and safe working conditions. Independent third-party auditors carry out the audits, covering the full scope of social compliance rather than a single checkbox item. For joggers and loungewear brands, that's the kind of documentation you can hand to retail buyers or put in front of end consumers who are increasingly asking about labor practices before they purchase.</p>
+        
+        <p>ISO 9001 certification applies to our quality management system, ensuring consistent processes for production and quality control. ISO 9001 requires documented procedures for all critical processes, regular internal audits, and continuous improvement. This certification provides assurance that our quality systems are systematic and repeatable, reducing variability between production runs. For joggers, this means consistent fit, fabric quality, and construction across orders.</p>
+        
+        <p>Internal quality control processes supplement these certifications with day-to-day assurance specific to jogger production. We conduct in-line inspections during production, measuring garments at critical checkpoints to verify dimensional accuracy. Final inspection includes wash testing on random samples to verify dimensional stability, ensuring that garments maintain their fit after home laundering. We maintain records of all testing results, enabling traceability if issues arise after delivery. These internal processes ensure certifications translate to actual quality in finished joggers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Getting Started</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How to Get Started</h2>
+      </div>
+      <div class="section__text">
+        <p>Starting your joggers production with SDF Clothing follows a structured process designed to ensure your fabric and fit requirements are met and quality expectations are understood from the outset. The process begins with providing detailed specifications, after which we guide you through sampling, dimensional stability testing, and production.</p>
+        
+        <p>Step one is to submit your technical specifications through our contact form or email. Essential information for joggers includes: fabric preference (cotton fleece, French terry, or polyester blend), target GSM weight, fit type (slim or relaxed), waistband configuration (elastic only or with drawstring), cuff style (ribbed or folded), pocket configuration, size chart or target market sizing, target quantity per style and color, and desired delivery timeline. If you have technical drawings, photos of reference samples, or existing products you want to replicate, include these for clarity.</p>
+        
+        <p>Step two involves our technical review and quotation process. Within 24-48 hours of receiving your specifications, we provide a detailed quotation including fabric costs, production costs, sampling costs, and estimated shipping costs. The quotation specifies lead times for sampling and production, minimum order quantities, and payment terms. For joggers, we may provide fabric swatch options for your selection and clarify specifications regarding pre-shrinking treatments. You may request revisions to the quotation to adjust specifications to meet budget targets.</p>
+        
+        <p>Step three is sample development and approval. After quotation acceptance, we proceed with sample development, typically taking 15-20 days. Samples are shipped to you for review, and we provide detailed measurement reports. For joggers, we recommend wash testing samples to verify dimensional stability and ensure fit is maintained after laundering. You may approve samples as-is, request modifications to fit or fabric, or proceed with additional sample rounds. Each sample round adds 7-10 days but ensures the final product meets expectations. We recommend thorough testing including wash testing before approval.</p>
+        
+        <p>Step four is production confirmation. With the jogger sample approved and waistband/cuff elastic tested for recovery and dimensional stability, we collect a deposit to lock in production and start fabric and elastic procurement. Standard terms are 30% at order confirmation and 70% before shipment, with cutting beginning once the deposit clears and fabric is on hand. You'll get a production schedule flagging cutting completion, sewing completion, and expected shipment date, plus progress photos as joggers move through sewing and finishing.</p>
+        
+        <p>Step five is final inspection and shipment. Before shipment, we conduct final quality inspection using AQL standards with additional testing for jogger-specific criteria including dimensional stability. We provide an inspection report for your review. Once inspection is approved, we finalize packaging and prepare shipping documentation. Balance payment is required before release of shipping documents. We provide all necessary documentation including commercial invoice, packing list, bill of lading, certificates of origin, and any required certificates for regulated materials. Goods are released to your nominated freight forwarder or ours depending on agreed Incoterms.</p>
+        
+        <p>Throughout the process, our team provides technical guidance on jogger construction, fabric selection, and fit optimization. We understand that joggers are staple items in casual wear collections and require consistent quality to maintain customer satisfaction. Clear communication about fabric expectations and dimensional requirements helps us deliver products that perform as intended through repeated wear and washing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Joggers Manufacturer FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order quantity for joggers?</h3>
+          <p class="faq__answer">Our minimum order quantity for custom joggers is 300 pieces per style. This minimum allows you to access factory-direct pricing while testing market response with manageable inventory. The 300-piece minimum can be distributed across sizes within a single colorway. Lower quantities are available for sampling and prototype development at higher per-piece costs for brands requiring smaller initial runs or needing to test multiple styles before committing to bulk production.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What fabric options do you offer for joggers?</h3>
+          <p class="faq__answer">We offer cotton fleece for warmth and natural feel (280-320 GSM), French terry for textured comfort (240-280 GSM), polyester fleece for durability and color retention (260-300 GSM), bamboo blends for sustainable softness (240-280 GSM), and cotton-polyester blends for balanced performance (260-300 GSM). All fabrics are pre-shrunk to minimize dimensional changes after washing. Fabric selection depends on climate, season, and intended use, with heavier weights for cold weather and lighter weights for transitional seasons.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What jogger styles can you manufacture?</h3>
+          <p class="faq__answer">We manufacture slim fit joggers with tapered legs for modern styling, relaxed fit joggers for comfort and casual wear, cargo joggers with multiple pockets for functionality, track joggers with side stripes for athletic styling, and fleece-lined joggers for cold weather. All styles feature elastic waistbands with drawstring options and cuffed ankles. Custom style development is available with technical specifications. Cargo joggers typically require a 500-piece minimum due to increased production complexity.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you offer eco-friendly jogger options?</h3>
+          <p class="faq__answer">Yes. We offer organic cotton fleece certified by GOTS for natural fiber sustainability, recycled polyester fleece certified by GRS for synthetic material recycling, and bamboo blends for sustainable softness. All eco-friendly options maintain the same quality standards as conventional fabrics. Organic cotton costs approximately 15-20% more than conventional cotton, while recycled polyester is priced similarly to virgin polyester. Certification documentation is provided for marketing substantiation.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does jogger production take?</h3>
+          <p class="faq__answer">Standard production timeline is 30-40 days from fabric receipt for basic joggers. Custom fabric development adds 15-20 days. Sampling takes 15-20 days before bulk production approval. Complex styles such as cargo joggers or fleece-lined versions may require 35-45 days production time. We recommend planning 60-75 days total from initial inquiry to delivery for first-time orders including sampling and production, or 45-60 days for repeat orders using approved fabrics and patterns.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can you produce joggers with custom pocket configurations?</h3>
+          <p class="faq__answer">Yes. We offer standard side pockets, back patch pockets, cargo pockets with flap closures, zippered security pockets, and hidden media pockets. Custom pocket placement and sizing are available with technical specifications. Complex pocket configurations may increase minimum order quantities to 500 pieces due to production complexity. We can provide guidance on pocket construction methods that balance functionality with manufacturing efficiency, ensuring pockets maintain their shape and function through repeated use and washing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Order Custom Joggers?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for custom joggers manufacturing. We provide detailed quotes, production timelines, and sample development. Cotton fleece, French terry, tapered fit, and cargo styles available from 300 pieces minimum. Pre-shrunk fabrics with dimensional stability testing and OEKO-TEX certification.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/sampling-service" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/sweater-manufacturer/" style="color: var(--color-primary);">sweater manufacturer</a>, <a href="/hoodie-manufacturer/" style="color: var(--color-primary);">hoodie manufacturer</a>, <a href="/streetwear-manufacturer" style="color: var(--color-primary);">streetwear manufacturer</a>, <a href="/fabric-sourcing" style="color: var(--color-primary);">fabric sourcing</a>, <a href="/sampling-service" style="color: var(--color-primary);">sampling service</a>, <a href="/tools/price-calculator/" style="color: var(--color-primary);">price calculator</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .hero__description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
+  .hero__cta--primary:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-alt);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .hero__stat-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    font-size: 1.25rem;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background-color: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background-color: var(--color-bg-alt);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .section__label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text p {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__ctas {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
+  .section__cta--primary:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-lg) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background-color: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison td {
+    color: var(--color-text-muted);
+  }
+
+  .comparison__row--highlight {
+    background-color: var(--color-bg-alt);
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    padding: var(--spacing-sm) 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .faq {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .faq__item {
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-alt);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .faq__answer {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__stats {
+      order: -1;
+    }
+
+    .trust__items {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+</style>

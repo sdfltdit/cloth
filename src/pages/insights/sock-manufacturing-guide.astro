@@ -1,0 +1,603 @@
+---
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../../data/schema';
+export const prerender = true;
+
+const pageTitle = "Sock Manufacturing Guide | Complete Process & Materials";
+const pageDescription = "Complete guide to sock manufacturing: process, materials, production steps, quality control, and sourcing. Learn how socks are made from yarn.";
+const dateModified = new Date().toISOString().split("T")[0];
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "dateModified": dateModified,
+      "isPartOf": {
+        "@type": "WebSite",
+          "@id": "https://sdfltd.com/#website",
+          "url": "https://sdfltd.com/",
+          "name": "SDF Clothing",
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://sdfltd.com/#org",
+            "name": "SDF Clothing",
+            "url": "https://sdfltd.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://sdfltd.com/logo.png"
+            },
+            "sameAs": [
+              "https://www.facebook.com/sdfltd",
+              "https://www.linkedin.com/company/sdf-clothing"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "PHONE",
+              "contactType": "sales",
+              "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+              "availableLanguage": "English"
+            }
+          }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Sock Manufacturing Guide"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "Sock Manufacturing Process",
+      "description": "Complete guide to manufacturing socks from yarn to finished product",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Yarn Selection and Preparation",
+          "text": "Select appropriate yarn materials (cotton, bamboo, merino, synthetic) and prepare for knitting"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Knitting",
+          "text": "Knit sock shape on circular knitting machines with cuff, leg, heel, and toe formation"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Linking",
+          "text": "Close toe seam using linking machines for seamless finish"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Washing and Finishing",
+          "text": "Wash socks to remove knitting oils and achieve final hand feel"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Inspection",
+          "text": "Inspect for defects, measure dimensions, and verify quality standards"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Packaging",
+          "text": "Package socks according to retail requirements with labels and tags"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+
+  schema={pageSchema}
+  dateModified={dateModified}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/insights/">Insights</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Sock Manufacturing Guide</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Manufacturing Guide</div>
+        <h1 class="hero__title">Complete Sock Manufacturing Guide: Process, Materials & Quality</h1>
+        <p class="hero__description">
+          Learn how socks are manufactured from yarn to finished product. This comprehensive guide covers the complete sock manufacturing process, material selection, production steps, quality control, and what to look for in a clothing manufacturer for brands sourcing socks.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Introduction to Sock Manufacturing</h2>
+      </div>
+      <div class="section__text">
+        <p>Sock manufacturing represents a specialized segment of the textile industry, combining centuries-old textile principles with modern computerized precision. The process transforms raw yarn into finished socks through a sequence of specialized steps, each requiring specific equipment, expertise, and quality controls. Understanding this process is essential for brands seeking to develop sock products, manufacturers aiming to optimize production, and anyone interested in the technical aspects of hosiery production.</p>
+        
+        <p>The global sock market encompasses diverse product categories from everyday casual socks to specialized athletic performance gear, compression socks for medical applications, and luxury fashion socks. Each category requires different materials, construction techniques, and quality standards. The manufacturing process adapts to these varying requirements while maintaining core principles of knitting, linking, finishing, and quality assurance.</p>
+        
+        <p>Modern sock manufacturing facilities like those in Bangladesh have evolved to handle diverse sock production needs. These facilities combine skilled labor with advanced knitting technology to produce socks that meet international quality standards. The industry has developed particular expertise in cotton and synthetic sock production, with growing capabilities in bamboo and merino wool socks for premium and sustainable markets.</p>
+        
+        <p>This guide provides comprehensive coverage of sock manufacturing from material selection through finished product delivery. This guide covers the technical knowledge needed whether you're developing a first sock line, evaluating manufacturing partners, or just curious how socks are actually made — the sock manufacturing landscape.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Sock Manufacturing Process Overview</h2>
+      </div>
+      <div class="section__text">
+        <p>The sock manufacturing process follows a linear progression from raw materials to finished products. While variations exist for different sock types and quality levels, the core process remains consistent across the industry. Understanding this process enables effective communication with manufacturers, realistic production planning, and informed decision-making throughout product development.</p>
+        
+        <p>The process begins with yarn selection and preparation, where appropriate materials are chosen based on sock type, performance requirements, and cost considerations. Yarns are prepared for knitting through winding and conditioning processes that ensure optimal performance on knitting machines. This preparation stage is critical for preventing knitting defects and achieving consistent quality throughout production.</p>
+        
+        <p>Knitting forms the core of sock manufacturing, where circular knitting machines create the tubular sock shape with cuff, leg, heel, and toe formation. Modern sock knitting machines are highly specialized, with different machines optimized for different sock types and yarns. The knitting process determines the sock's basic structure, including needle count for gauge, stitch patterns for texture, and elastic integration for fit.</p>
+        
+        <p>Linking closes the toe seam, traditionally a critical quality point in sock construction. Modern linking machines create nearly invisible seams that don't irritate feet. The quality of linking significantly affects sock comfort and durability, making this a key focus of quality control. Some sock types use alternative toe closure methods, but linking remains the standard for most sock categories.</p>
+        
+        <p>Washing and finishing remove knitting oils, achieve final dimensions, and develop the intended hand feel. This stage may include additional treatments like softening, antimicrobial application, or water repellency depending on sock type. Finishing transforms the mechanically produced sock into a comfortable, wearable product ready for quality inspection and packaging.</p>
+        
+        <p>Quality inspection occurs throughout the process but culminates in a final examination before packaging. Inspection covers dimensional accuracy, construction quality, visual defects, and performance characteristics. Defective socks are identified and either reworked or removed from production. Quality standards vary by market segment and retailer requirements, but basic quality principles apply across all categories.</p>
+        
+        <p>Packaging prepares socks for retail distribution, including pairing, labeling, and protective packaging. Packaging varies from simple poly bags for basic socks to elaborate presentation boxes for luxury products. The packaging stage also includes final quality checks and preparation of shipping documentation for international distribution.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Material Selection for Socks</h2>
+      </div>
+      <div class="section__text">
+        <p>Material selection fundamentally determines sock performance, comfort, and durability. The sock industry uses diverse fiber types, each offering distinct characteristics suited to specific applications. Understanding these materials enables informed material selection aligned with product positioning and performance requirements.</p>
+        
+        <p>Cotton remains the most common sock material, offering natural comfort, breathability, and moisture absorption. Cotton socks use various cotton qualities, with long-staple combed cotton providing superior softness and durability. Cotton is typically blended with synthetic fibers to enhance durability, elasticity, and shape retention. Cotton content in socks typically ranges from 60-80% for everyday wear socks, with higher cotton content in premium products. Cotton is ideal for casual and dress socks where natural comfort is prioritized.</p>
+        
+        <p>Bamboo fiber has gained popularity for socks due to its natural antimicrobial properties and environmental credentials. Bamboo socks offer moisture-wicking, breathability, and odor resistance, making them ideal for athletic and everyday wear. Bamboo is often blended with cotton or synthetic fibers to enhance durability while maintaining bamboo's comfort characteristics. Bamboo typically costs 15-20% more than conventional cotton but provides sustainability appeal and performance benefits.</p>
+        
+        <p>Merino wool represents the premium natural option for socks, offering superior temperature regulation, moisture management, and odor resistance. Merino wool socks are particularly valued for outdoor and performance applications where comfort in varying conditions is critical. Merino's fine fibers provide softness without itchiness, distinguishing it from traditional wool. Merino wool typically costs 2-3 times more than cotton but justifies the premium through superior performance characteristics.</p>
+        
+        <p>Synthetic fibers including polyester, nylon, and spandex provide durability, elasticity, and moisture-wicking properties. Polyester offers moisture-wicking and quick-drying characteristics, nylon provides abrasion resistance and durability, and spandex (elastane) provides stretch and recovery. Synthetic blends typically comprise 20-40% of sock composition, with higher synthetic content in performance socks. Synthetics are essential for athletic socks and any application requiring durability and shape retention.</p>
+        
+        <p>Specialty materials include silver-infused yarns for antimicrobial properties, copper-infused fibers for enhanced antimicrobial and thermal regulation, and performance fibers like Coolmax or Tencel for specific performance characteristics. These materials are used in specialized applications where their unique properties justify additional cost. Silver-infused socks, for example, are used in medical and diabetic applications where antimicrobial properties are essential.</p>
+        
+        <p>Yarn quality significantly affects sock performance. Key quality indicators include fiber length, twist level, and evenness. Long-staple fibers produce smoother, stronger yarns with better pilling resistance. Twist level affects yarn strength and texture, with higher twist providing more durable but potentially coarser yarns. Evenness ensures consistent knitting and appearance. Material selection must balance these quality factors against cost considerations for target market positioning.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Material</th>
+              <th>Key Properties</th>
+              <th>Best Applications</th>
+              <th>Cost Level</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Cotton</td>
+              <td>Natural, breathable, comfortable</td>
+              <td>Casual, dress, everyday wear</td>
+              <td>$</td>
+            </tr>
+            <tr>
+              <td>Bamboo</td>
+              <td>Antimicrobial, moisture-wicking, sustainable</td>
+              <td>Athletic, everyday, eco-conscious</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>Merino Wool</td>
+              <td>Temperature regulating, odor resistant, premium</td>
+              <td>Outdoor, performance, hiking</td>
+              <td>$$$</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Synthetic Blends</td>
+              <td>Durable, elastic, moisture-wicking</td>
+              <td>Athletic, performance, durability</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>Specialty Fibers</td>
+              <td>Antimicrobial, thermal, performance-specific</td>
+              <td>Medical, specialized, premium</td>
+              <td>$$$</td>
+            </tr>
+          </tbody>
+          <caption>Material selection depends on application, performance requirements, and cost targets.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Step-by-Step Manufacturing Process</h2>
+      </div>
+      <div class="section__text">
+        <p>The sock manufacturing process comprises distinct steps that transform raw materials into finished products. Each step requires specific equipment and expertise, with quality control integrated throughout. Understanding these steps in detail enables effective manufacturing management and quality assurance.</p>
+        
+        <p><strong>Step 1: Yarn Preparation</strong> - Yarn preparation begins with yarn winding onto cones compatible with knitting machines. Winding ensures appropriate tension and removes any defects from the yarn. Yarn may undergo conditioning to achieve optimal moisture content for knitting. For colored socks, yarn is pre-dyed to the required colors. Yarn preparation typically takes 1-2 days and is critical for preventing knitting defects and ensuring consistent quality.</p>
+        
+        <p><strong>Step 2: Knitting</strong> - Circular knitting machines form the sock shape in a continuous tube. Modern machines can knit the entire sock including cuff, leg, heel, and toe in a single operation. Needle count determines gauge, with higher needle counts producing finer, more detailed socks. The knitting process creates the sock's basic structure, including elastic integration in the cuff for secure fit. Knitting typically takes 30-60 seconds per pair on modern machines, with throughput varying by machine type and sock complexity.</p>
+        
+        <p><strong>Step 3: Toe Linking</strong> - After knitting, the open toe must be closed. Linking machines use specialized needles to interlock the toe stitches, creating a nearly invisible flat seam. The quality of linking significantly affects comfort, as poorly linked toes can irritate feet. Linking typically takes 10-15 seconds per pair. Alternative toe closure methods include hand-sewn toes for premium products and seamless toes produced on specialized machines for athletic socks.</p>
+        
+        <p><strong>Step 4: Washing</strong> - Freshly knitted socks contain knitting oils and have not achieved their final dimensions. Washing removes oils, sets the dimensions, and develops the intended hand feel. Washing parameters including temperature, detergent type, and mechanical action are carefully controlled to achieve desired results. Some socks undergo additional treatments during washing, such as softener application for enhanced comfort or antimicrobial treatments for odor resistance. Washing typically takes 30-60 minutes including drying.</p>
+        
+        <p><strong>Step 5: Boarding</strong> - Boarding shapes the socks for consistent appearance and dimensions. Socks are placed on heated metal forms called boards that steam the socks into their final shape. Boarding ensures consistent sizing and removes wrinkles for retail presentation. Boarding is particularly important for dress socks and fashion socks where appearance is critical. The boarding process typically takes 5-10 minutes per batch.</p>
+        
+        <p><strong>Step 6: Quality Inspection</strong> - Quality inspection examines socks for defects and verifies compliance with specifications. Inspection includes visual examination for knitting defects, measurement verification for dimensional accuracy, and construction quality checks. Defects may include dropped stitches, holes, loose threads, or incorrect sizing. Quality inspectors use AQL sampling to determine inspection intensity. Defective socks are separated for rework or removal. Inspection typically adds 1-2 days to production time.</p>
+        
+        <p><strong>Step 7: Pairing and Packaging</strong> - Socks are paired by size and color, then packaged according to retail requirements. Packaging may range from simple poly bags to elaborate presentation boxes. Labels with size, content, and care information are attached to each pair. Packaging also includes barcode application for inventory management. Pairing and packaging typically take 1-2 days and complete the manufacturing process.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Quality Control in Sock Manufacturing</h2>
+      </div>
+      <div class="section__text">
+        <p>Quality control is integrated throughout the sock manufacturing process, with specific checks at each production stage. Comprehensive quality assurance ensures that finished socks meet performance expectations and customer requirements. Understanding quality control principles enables effective specification development and manufacturer evaluation.</p>
+        
+        <p><strong>Yarn Quality Control</strong> - Yarn is inspected before use to verify quality specifications. Checks include evenness testing, twist verification, and strength testing. Colored yarns undergo color fastness testing to ensure color retention through washing and wear. Yarn defects like knots, slubs, or weak spots can cause knitting defects or reduced durability, making pre-production yarn inspection critical for quality assurance.</p>
+        
+        <p><strong>Knitting Quality Control</strong> - In-line monitoring during knitting identifies defects as they occur. Operators monitor machine performance for dropped stitches, tension variations, and pattern errors. Modern knitting machines include sensors that detect common defects and can automatically stop the machine when problems occur. Regular maintenance prevents machine-related defects. Knitting quality control focuses on preventing defects rather than detecting them after the fact.</p>
+        
+        <p><strong>Linking Quality Control</strong> - Toe linking is a critical quality point. Inspectors check linked toes for seam smoothness, strength, and invisibility. Poorly linked toes can cause irritation during wear and are a common customer complaint. Linking quality is verified through visual inspection and strength testing. Some manufacturers use specialized equipment to test seam strength on a sampling basis.</p>
+        
+        <p><strong>Dimensional Quality Control</strong> - Socks must maintain consistent dimensions within specified tolerances. Length, width, and cuff elasticity are measured on a sampling basis. Dimensional control is critical for customer satisfaction, as socks that don't fit properly cause returns and dissatisfaction. Dimensional control is achieved through proper boarding and consistent manufacturing parameters.</p>
+        
+        <p><strong>Visual Quality Control</strong> - Final inspection examines socks for visual defects including holes, stains, loose threads, and construction errors. Inspection occurs under appropriate lighting conditions to ensure defect visibility. Inspectors use defect classification systems to categorize defects by severity. AQL sampling determines inspection intensity based on order size and quality requirements.</p>
+        
+        <p><strong>Performance Testing</strong> - Performance socks undergo additional testing for specific performance characteristics. Athletic socks may be tested for moisture-wicking efficiency, compression socks for pressure distribution, and antimicrobial socks for efficacy. Performance testing ensures that functional claims are substantiated and products perform as expected in use.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Sourcing Considerations</h2>
+      </div>
+      <div class="section__text">
+        <p>Sourcing socks requires consideration of multiple factors beyond basic manufacturing capability. Brands must evaluate manufacturers based on quality, capacity, compliance, and alignment with brand values. Understanding these sourcing considerations enables informed manufacturer selection and effective supply chain management.</p>
+        
+        <p><strong>Manufacturing Capacity</strong> - Manufacturer capacity must align with your volume requirements and growth plans. Consider both current capacity and ability to scale as your brand grows. Capacity includes not just knitting capacity but also linking, finishing, and quality inspection capacity. Capacity constraints can cause delays during peak seasons, so understanding capacity utilization is important for reliable supply.</p>
+        
+        <p><strong>Quality Standards</strong> - Manufacturers should maintain appropriate quality certifications and demonstrated quality performance. Key certifications include ISO 9001 for quality management, OEKO-TEX for chemical safety, and BSCI for social compliance. Request quality reports and defect statistics from prospective manufacturers to assess their quality performance. Quality standards should align with your market requirements and retailer expectations.</p>
+        
+        <p><strong>Minimum Order Quantities</strong> - MOQs vary by manufacturer and sock type. Basic cotton socks may have lower MOQs than specialized performance socks. Consider whether manufacturer MOQs align with your inventory requirements and cash flow. Some manufacturers offer lower MOQs for sampling or initial orders, with higher MOQs for repeat production. Understanding MOQ structures helps in production planning and inventory management.</p>
+        
+        <p><strong>Lead Times</strong> Production lead times affect inventory planning and responsiveness to market trends. Standard sock production typically takes 30-45 days from order confirmation to delivery. Rush production may be available at premium cost. Consider whether manufacturer lead times align with your product development calendar and retail calendar requirements. Shorter lead times enable faster response to trends but may come at higher cost.</p>
+        
+        <p><strong>Material Capabilities</strong> - Manufacturers vary in their material capabilities and material sourcing relationships. Consider whether the manufacturer can work with your preferred materials, including specialty fibers if required. Some manufacturers have strong relationships with cotton suppliers, while others specialize in synthetic performance materials. Material capabilities affect product differentiation and performance characteristics.</p>
+        
+        <p><strong>Compliance and Ethics</strong> - Social compliance and environmental responsibility are increasingly important considerations. Manufacturers should hold relevant social compliance certifications and demonstrate ethical labor practices. Environmental practices including chemical management and waste treatment affect sustainability credentials. Consider whether manufacturer practices align with your brand values and customer expectations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Common Challenges and Solutions</h2>
+      </div>
+      <div class="section__text">
+        <p>Sock manufacturing presents specific challenges that manufacturers and brands must address to achieve quality outcomes. Understanding these challenges enables proactive problem-solving and effective supply chain management.</p>
+        
+        <p><strong>Dimensional Consistency</strong> - Maintaining consistent sock dimensions across production runs is challenging due to variations in yarn, knitting tension, and finishing. Solutions include strict process controls, regular calibration of equipment, and dimensional testing throughout production. Some manufacturers use automated measurement systems to ensure consistency. Dimensional consistency is critical for customer satisfaction and reduces returns due to fit issues.</p>
+        
+        <p><strong>Color Consistency</strong> - Achieving consistent color across dye lots is challenging, particularly for fashion colors. Solutions include color measurement systems, strict dye lot management, and color matching protocols. Some manufacturers maintain yarn inventory in specific colors to ensure consistency across orders. Color consistency is particularly important for fashion socks where visual appeal is a key selling point.</p>
+        
+        <p><strong>Toe Seam Quality</strong> - Toe seams are a common point of failure and customer complaint. Solutions include investment in high-quality linking equipment, operator training, and regular quality monitoring. Some manufacturers use seamless toe construction methods to eliminate the seam issue entirely. Toe seam quality significantly affects comfort and is a key differentiator between basic and premium socks.</p>
+        
+        <p><strong>Pilling and Wear</strong> - Socks are subject to significant abrasion during wear, leading to pilling and wear. Solutions include appropriate fiber selection, yarn construction optimization, and anti-pilling treatments. Higher quality materials and construction reduce pilling but increase cost. Balancing durability with cost requires understanding your target market's expectations and usage patterns.</p>
+        
+        <p><strong>Moisture Management</strong> - Athletic socks must effectively manage moisture to prevent blisters and discomfort. Solutions include appropriate material selection, structural design for moisture transport, and moisture-wicking treatments. Performance testing verifies moisture management effectiveness. Moisture management is critical for athletic and performance socks where comfort during activity is essential.</p>
+        
+        <p><strong>Elastic Durability</strong> - Elastic in sock cuffs and throughout the sock must maintain elasticity through repeated wear and washing. Solutions include high-quality elastic materials, appropriate elastic placement, and construction techniques that protect elastic from damage. Elastic durability affects sock fit and lifespan, making it a key quality factor for customer satisfaction.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <h2 class="section__title">Conclusion</h2>
+      </div>
+      <div class="section__text">
+        <p>Sock manufacturing combines technical precision with material science to create products that serve essential functions in everyday life. The process has evolved from manual knitting to highly automated production, yet the fundamental principles remain consistent. Understanding these principles enables effective product development, sourcing, and quality management.</p>
+        
+        <p>The future of sock manufacturing includes continued advancement in materials, particularly sustainable and performance fibers. Smart textiles incorporating sensors and connectivity may transform functional socks. Automation and digital technologies will enhance quality control and production efficiency. Sustainability will drive material selection and process optimization throughout the industry.</p>
+        
+        <p>For brands entering the sock market or expanding their sock offerings, understanding the manufacturing process provides a foundation for effective supplier communication, realistic production planning, and quality specification development. The knowledge in this guide enables informed decision-making throughout the product development and sourcing process.</p>
+        
+        <p>SDF Clothing leverages its {companyAge} of experience in garment manufacturing to provide sock manufacturing services to international brands. Our Bangladesh-based facility combines skilled labor with modern equipment to produce socks that meet international quality standards. We work with diverse materials and can support various sock categories from basic cotton socks to performance athletic socks.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Manufacture Socks?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for sock manufacturing services. We provide production support for cotton, bamboo, and performance socks with quality assurance and competitive pricing. Our Bangladesh facility delivers international quality with efficient lead times.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/sampling-service" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related resources: <a href="/insights/circular-fashion-guide" style="color: var(--color-primary);">circular fashion guide</a>, <a href="/insights/ethical-manufacturing-verification" style="color: var(--color-primary);">ethical manufacturing verification</a>, <a href="/sustainable-clothing-manufacturer/" style="color: var(--color-primary);">sustainable clothing manufacturer</a>, <a href="/fabric-sourcing" style="color: var(--color-primary);">fabric sourcing</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .hero__description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background-color: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background-color: var(--color-bg-alt);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text p {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__ctas {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
+  .section__cta--primary:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-lg) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background-color: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison td {
+    color: var(--color-text-muted);
+  }
+
+  .comparison__row--highlight {
+    background-color: var(--color-bg-alt);
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    padding: var(--spacing-sm) 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,469 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, schemaPerson, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Clothing Manufacturer Cambodia | Rising Hub Since 1998";
+const pageDescription = "Leading clothing manufacturer in Cambodia since 1998. 300 piece MOQ, GOTS certified, 13 certifications. Get free FOB quote for your fashion brand today.";
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20clothing%20manufacturing%20from%20Cambodia`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-20",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#org" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for clothing manufacturers in Cambodia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most Cambodia garment factories have MOQs ranging from 300 to 1,000 pieces per style. At SDF Clothing, we offer 300 piece minimums per style with flexible size and color combinations, making us ideal for startup brands and boutique labels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why choose Cambodia for clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cambodia offers competitive labor costs, duty-free access to EU and US markets through trade agreements, improving infrastructure, and a growing skilled workforce. The country's garment industry contributes 40% to GDP with $11 billion in annual exports. Cambodia is known for ethical improvements and compliance monitoring."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does clothing production take in Cambodia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard lead time for bulk production is 35-45 days from fabric sourcing to shipment. Sample development takes 7-14 days. We provide clear timeline commitments and track production closely to ensure on-time delivery for your fashion brand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications should I look for in a Cambodia clothing manufacturer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Key certifications include GOTS (organic cotton), OEKO-TEX (chemical safety), BSCI (social compliance), WRAP (ethical manufacturing), ISO 9001 (quality management), and ILO Better Work compliance. Cambodia has strong labor monitoring programs. SDF Clothing holds 13 international certifications covering quality, social compliance, and environmental standards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the payment terms for Cambodia clothing manufacturers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard payment terms are 30% deposit to start production and 70% before shipment. We accept T/T (wire transfer), Letter of Credit (L/C), and bank transfers. For established clients, we offer flexible payment arrangements based on order volume and relationship history."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What makes Cambodia's textile industry unique?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cambodia is one of Southeast Asia's fastest-growing garment manufacturing hubs, known for improving labor standards and trade preferences. The country enjoys duty-free access to EU (EBA until 2028) and US (GSP) markets. Cambodia's Better Work program monitors compliance, making it attractive for ethical sourcing. The industry has invested in modern facilities and worker training."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What services do Cambodia clothing manufacturers offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Full-service manufacturers offer OEM (original equipment manufacturing), private label production, CMT (cut-make-trim), fabric sourcing, tech pack development, sampling, quality control, and logistics coordination. SDF provides end-to-end solutions from design to delivery."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find a reliable clothing manufacturer in Cambodia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Look for Garment Manufacturers Association in Cambodia (GMAC) membership, verify certifications with issuing bodies, request factory audits, check client references, and start with sample orders. Reliable manufacturers are transparent about capabilities, pricing, and lead times. Cambodia's Better Work program provides compliance data. Contact us for a factory tour or video consultation."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": { "@id": SITE + "/#org" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "300",
+          "description": "Starting MOQ | 300 pieces per style"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Work with a Cambodia Clothing Manufacturer",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Prepare Your Tech Pack",
+          "text": "Create detailed technical specifications including measurements, materials, colors, and construction details. Well-prepared tech packs reduce sampling time and ensure accurate production."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Request Quote and MOQ Confirmation",
+          "text": "Submit your requirements for pricing. Confirm MOQ requirements, lead times, and payment terms. Get a written quote with all costs including fabric, production, and shipping."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Samples",
+          "text": "Produce pre-production samples for approval. This step typically takes 7-14 days. Approve samples before bulk production to ensure quality standards are met."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Place Bulk Order",
+          "text": "Pay deposit (typically 30%) to start production. Monitor production through regular updates and quality checks. Production time is usually 35-45 days."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Inspection and Shipment",
+          "text": "Final inspection before shipping. Pay balance (70%) before shipment. Arrange shipping (FOB, CIF, or DDP terms). Receive goods and provide feedback for future orders."
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema} hreflangRegion="KH">
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Clothing Manufacturer Cambodia</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Established 1998 | Southeast Asia's Rising Hub</p>
+        <h1 class="hero__title">Clothing Manufacturer Cambodia</h1>
+        <p class="hero__description">
+          SDF Clothing serves global fashion brands through Cambodia's emerging textile ecosystem. As a clothing manufacturer with deep expertise in Cambodia's growing garment industry, we offer 300 piece minimum orders, GOTS organic certification, and 13 international quality standards. From startup brands to established labels, we deliver premium garments leveraging Cambodia's competitive advantages and improving infrastructure. Explore our <a href="/clothing-manufacturers/" style="color:#e00;text-decoration:none;">complete manufacturing services</a> and <a href="/clothing-manufacturer-bangladesh/" style="color:#e00;text-decoration:none;">Bangladesh operations</a>.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">300+</span>
+            <span class="hero__stat-label">Pieces MOQ</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">25+</span>
+            <span class="hero__stat-label">Years Experience</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">13</span>
+            <span class="hero__stat-label">Certifications</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">98%</span>
+            <span class="hero__stat-label">On-Time Delivery</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get a Free Factory Quote
+          </a>
+          <a href="/contact/" class="hero__cta hero__cta--secondary">
+            Download Capability Deck
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="SDF Clothing textile manufacturing facility" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">GOTS Certified Organic</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">BSCI Social Compliance</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">WRAP Ethical Certified</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">C-TPAT Supply Chain Security</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">ISO 9001 Quality Management</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Overview -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What is a Clothing Manufacturer in Cambodia?</h2>
+      <p class="section__text">
+        A clothing manufacturer in Cambodia operates within one of Southeast Asia's fastest-growing garment production hubs. Cambodia's textile industry has emerged as a competitive alternative to established manufacturing centers, driven by trade preferences, improving infrastructure, and a focus on compliance. The country's garment sector contributes 40% to GDP and employs over 600,000 workers across approximately 600 factories. Major manufacturing zones include Phnom Penh, Kandal, and Sihanoukville, with concentrations in special economic zones.
+      </p>
+      <p class="section__text">
+        Cambodia clothing manufacturers specialize in both knitwear (t-shirts, polo shirts, casual wear) and woven garments (shirts, pants, dresses). The country's advantage lies in competitive labor costs, duty-free access to major markets through trade agreements, and improving labor standards monitored by international programs. Many manufacturers, including SDF Clothing's Cambodia partnerships, offer full-package production services covering fabric sourcing (often imported from Vietnam, China, or Thailand), design development, sampling, manufacturing, quality control, and export logistics. The industry benefits from Cambodia's trade relationships with the EU and US.
+      </p>
+      <p class="section__text">
+        According to the <a href="https://gmac-cambodia.org/" target="_blank" rel="noopener noreferrer">Garment Manufacturers Association in Cambodia (GMAC)</a>, the country exports to over 60 countries with annual garment exports exceeding $11 billion. Major buyers include H&M, Gap, Levi Strauss, Adidas, and thousands of emerging fashion brands. Cambodia manufacturers produce everything from basic t-shirts to complex denim and technical garments. For brands seeking <a href="/low-moq-clothing-manufacturers/">low MOQ clothing manufacturers</a> or <a href="/clothing-manufacturers-for-startups/">clothing manufacturers for startups</a>, Cambodia offers competitive advantages through its growing capabilities and trade preferences. Our <a href="/quality-inspection-service">quality inspection service</a> ensures every garment meets your standards.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Why Cambodia -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Why Choose Cambodia for Clothing Manufacturing?</h2>
+      <p class="section__text">
+        Fashion brands worldwide are increasingly sourcing from Cambodia for compelling economic and strategic reasons. The country offers manufacturing costs competitive with other Asian hubs while maintaining improving quality standards and compliance. This advantage stems from competitive labor costs, trade preferences, improving infrastructure, and a commitment to labor standards through international monitoring programs.
+      </p>
+      
+      <h3 class="section__subtitle">Competitive Labor Costs</h3>
+      <p class="section__text">
+        Cambodia's minimum wage for garment workers is approximately $204 per month (as of 2024), competitive within Southeast Asia and significantly lower than China's $300-400 monthly wage. This labor cost advantage translates to lower FOB prices for buyers while maintaining quality. The workforce is productive and increasingly skilled, with training programs improving capabilities. Cambodia's labor costs provide a sweet spot between very low-cost but less-compliant markets and higher-cost established hubs.
+      </p>
+      
+      <h3 class="section__subtitle">Trade Preferences</h3>
+      <p class="section__text">
+        Cambodia enjoys significant trade advantages. The country has duty-free access to European Union markets under the Everything But Arms (EBA) arrangement for least developed countries (extended to 2028). Cambodia also benefits from US Generalized System of Preferences (GSP) for many garment categories. These preferential treatments provide duty advantages of 0-12% over competitors like China and India. This makes Cambodia particularly attractive for brands targeting EU and US markets.
+      </p>
+      
+      <h3 class="section__subtitle">Improving Labor Standards</h3>
+      <p class="section__text">
+        Cambodia participates in the ILO Better Work program, which monitors and improves labor conditions in garment factories. This program provides transparency on compliance through publicly available factory assessments. Brands can access compliance data to verify working conditions. Cambodia has made significant improvements in labor rights, wage increases, and workplace safety over the past decade. For brands prioritizing ethical sourcing with verification, Cambodia's monitoring infrastructure provides assurance.
+      </p>
+      
+      <h3 class="section__subtitle">Growing Infrastructure</h3>
+      <p class="section__text">
+        Cambodia has invested significantly in infrastructure to support the garment industry. Special Economic Zones (SEZs) in Phnom Penh and Sihanoukville offer reliable utilities, streamlined customs, and modern facilities. The port of Sihanoukville handles increasing container volumes, and roads connecting manufacturing zones to ports have improved. This infrastructure development reduces lead times and improves efficiency. SDF leverages Cambodia's improving infrastructure to provide reliable service to clients.
+      </p>
+      
+      <h3 class="section__subtitle">Skilled Workforce Development</h3>
+      <p class="section__text">
+        Cambodia's garment workforce has developed expertise over 25 years of industry growth. Workers specialize in specific operations - sewing, finishing, quality control - developing skill levels through experience. Technical staff including pattern makers, sample makers, and production managers have gained valuable experience serving international brands. Training programs supported by international organizations continue to upgrade workforce capabilities. This expertise ensures consistent quality, especially for standard garment types.
+      </p>
+      
+      <h3 class="section__subtitle">Government Support</h3>
+      <p class="section__text">
+        The Cambodian government actively supports the garment industry through export incentives, investment in SEZs, and infrastructure development. The government recognizes the garment sector's importance to employment and economic growth, implementing policies to maintain competitiveness. This supportive environment reduces operational costs and improves efficiency for manufacturers serving international markets.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: SDF's Approach -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">How SDF Clothing Leverages Cambodia Manufacturing</h2>
+      <p class="section__text">
+        SDF Clothing leverages Cambodia's emerging textile ecosystem to deliver exceptional value to fashion brands. Founded in 1998, we built our business to serve startup and emerging fashion brands that most large manufacturers overlook. While many factories require 1,000+ piece minimums, we offer 300 piece orders per style with flexible size and color combinations, utilizing Cambodia's cost advantages and trade preferences to pass savings to our clients.
+      </p>
+      
+      <h3 class="section__subtitle">Trade Preference Utilization</h3>
+      <p class="section__text">
+        Through our Cambodia operations, we maximize duty savings for EU and US-bound shipments. Cambodia's EBA status with the EU and GSP with the US provide significant duty advantages. We structure production and documentation to fully leverage these preferences, reducing your landed costs. For brands targeting these markets, Cambodia manufacturing offers duty savings that directly improve margins.
+      </p>
+      
+      <h3 class="section__subtitle">Low MOQ Specialization</h3>
+      <p class="section__text">
+        Our 300 piece minimum makes us accessible to brands testing new designs, launching capsule collections, or scaling gradually. We understand that not every brand can commit to large orders initially. This flexibility has made us a preferred partner for over 500 startup brands across 60+ countries since our founding. Cambodia's cost structure enables us to offer low MOQs without compromising on quality.
+      </p>
+      
+      <h3 class="section__subtitle">Certified Quality</h3>
+      <p class="section__text">
+        Cambodia sourcing runs under the same 13 international certifications we hold across quality, social compliance, and environmental standards — GOTS, OEKO-TEX, BSCI, WRAP, ISO 9001, and C-TPAT among them. Every certificate is third-party audited, and we'll share the underlying reports on request so your compliance team can verify Cambodia-origin orders directly. See the full <a href="/certifications">certification portfolio</a>, or start with our <a href="/tech-pack-service">tech pack service</a> if you're still finalizing designs.
+      </p>
+      
+      <h3 class="section__subtitle">Transparent Pricing</h3>
+      <p class="section__text">
+        Our quotes are FOB (Free On Board) Sihanoukville or Phnom Penh, clearly itemizing fabric costs, labor, finishing, quality inspection, and port delivery. We never add hidden charges. Cambodia's competitive cost structure translates to favorable pricing. You'll know exactly what you're paying for before production begins. This transparency builds trust and helps you make informed sourcing decisions.
+      </p>
+      
+      <h3 class="section__subtitle">Dedicated Support</h3>
+      <p class="section__text">
+        Each client works with a dedicated account manager who speaks fluent English and understands international fashion markets. We provide regular production updates, photos of samples, and proactively communicate about any potential delays. Our 98% on-time delivery rate reflects our commitment to reliability. Whether you need <a href="/private-label-clothing-manufacturer">private label manufacturing</a> or full OEM production, we adapt to your brand's specific requirements. Our <a href="/fit-engineering-service">fit engineering service</a> ensures proper garment fit, and our <a href="/grading-service">grading service</a> provides accurate sizing across all markets.
+      </p>
+      
+      <h3 class="section__subtitle">Compliance Assurance</h3>
+      <p class="section__text">
+        Cambodia's Better Work program provides verified compliance data for participating factories. We leverage this transparency to provide brands with assurance about labor practices and working conditions. For brands requiring ethical sourcing with verification, Cambodia's monitoring infrastructure offers a level of transparency not available in all manufacturing hubs. SDF can provide Better Work assessment reports for our Cambodia operations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Step-by-Step Process -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">How to Work with a Cambodia Clothing Manufacturer</h2>
+      <p class="section__text">
+        Working with a Cambodia manufacturer follows a structured process similar to other manufacturing hubs. Understanding each step helps you manage expectations and ensure smooth production. Here's the complete workflow from initial contact to final delivery, leveraging Cambodia's textile ecosystem.
+      </p>
+      
+      <div class="process">
+        <div class="process__step">
+          <div class="process__number">1</div>
+          <h3 class="process__title">Prepare Your Tech Pack</h3>
+          <p class="process__text">
+            A tech pack is your blueprint. It should include detailed technical specifications: measurements (size charts), materials (fabric type, weight, composition), colors (Pantone or color references), construction details (stitch types, seam allowances), and any special requirements. Cambodia factories import most fabrics, so specify if you have fabric preferences or if we should source locally. Well-prepared tech packs reduce sampling time and ensure accurate production. If you don't have a tech pack, we can help develop one for a fee.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">2</div>
+          <h3 class="process__title">Request Quote and MOQ Confirmation</h3>
+          <p class="process__text">
+            Submit your tech pack and requirements for pricing. Specify order quantity per style, size breakdown, color variations, and delivery timeline. We'll provide a written quote including fabric costs (sourced regionally or imported), labor, finishing, quality inspection, and FOB shipping to Sihanoukville port. Confirm MOQ requirements - our minimum is 300 pieces per style with flexible size/color combinations. The quote process typically takes 2-3 business days.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">3</div>
+          <h3 class="process__title">Develop Samples</h3>
+          <p class="process__text">
+            Before bulk production, we develop pre-production samples for your approval. This step typically takes 7-14 days depending on complexity and fabric sourcing. You'll receive photos first, then physical samples via courier for final approval. Review samples carefully for fit, fabric quality, construction, and overall finish. Approve samples in writing before bulk production begins. Sample costs are typically credited against bulk orders.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">4</div>
+          <h3 class="process__title">Place Bulk Order</h3>
+          <p class="process__text">
+            Once samples are approved, pay the deposit (typically 30%) to start production. We'll provide a production schedule with key milestones: fabric sourcing, cutting, sewing, finishing, and quality inspection. Production time is usually 35-45 days from deposit to shipment. We send regular updates including photos of production progress. You can request a third-party inspection before final payment. Cambodia's improving infrastructure supports reliable production timelines.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">5</div>
+          <h3 class="process__title">Quality Inspection and Shipment</h3>
+          <p class="process__text">
+            Before shipment, we conduct AQL 2.5 quality inspection based on international standards. You can request your own inspector or use third-party services like SGS, Bureau Veritas, or Intertek (present in Cambodia). Once inspection passes, pay the balance (70%) and we release shipment from Sihanoukville port. We handle export documentation, customs clearance, and coordinate with your freight forwarder. Shipping time varies: 20-25 days to US West Coast, 25-30 days to Europe, depending on route and carrier.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: What to Look For -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What to Look for in a Cambodia Clothing Manufacturer</h2>
+      <p class="section__text">
+        Cambodia has approximately 600 garment factories, ranging from small facilities to large-scale industrial complexes. While the industry is improving rapidly, not all factories are equal. Here's what to evaluate when selecting a manufacturing partner in Cambodia's textile ecosystem.
+      </p>
+      
+      <h3 class="section__subtitle">GMAC Membership</h3>
+      <p class="section__text">
+        Legitimate manufacturers are members of the Garment Manufacturers Association in Cambodia (GMAC). Membership indicates compliance with industry standards and regulations. Verify membership on the official GMAC website. SDF Clothing maintains active membership in relevant textile associations, demonstrating our commitment to industry standards and ethical practices.
+      </p>
+      
+      <h3 class="section__subtitle">Better Work Participation</h3>
+      <p class="section__text">
+        Cambodia's Better Work program provides verified compliance data. Look for factories participating in this program and review their publicly available assessment reports. Better Work monitors labor practices, working conditions, and compliance with international standards. This transparency is valuable for brands requiring verification of ethical practices. SDF works with Better Work-participating factories in Cambodia.
+      </p>
+      
+      <h3 class="section__subtitle">Certifications</h3>
+      <p class="section__text">
+        Certifications demonstrate commitment to quality, social compliance, and environmental standards. Key certifications include GOTS (organic), OEKO-TEX (chemical safety), BSCI (social compliance), WRAP (ethical), ISO 9001 (quality), and C-TPAT (supply chain security). Verify certifications with issuing organizations. SDF holds 13 verifiable certifications across all categories.
+      </p>
+      
+      <h3 class="section__subtitle">Experience with Your Product Type</h3>
+      <p class="section__text">
+        Different Cambodia factories specialize in different products. Some excel at basic t-shirts, others at denim or woven garments. Ask about experience with garments similar to yours. Request photos of similar past production. A factory that understands your product category will deliver better quality and fewer issues. SDF specializes in cotton-based knitted garments including t-shirts, polo shirts, and casual wear.
+      </p>
+      
+      <h3 class="section__subtitle">Production Capacity</h3>
+      <p class="section__text">
+        Ensure the factory can handle your order volume within your timeline. Ask about monthly production capacity, current utilization, and lead times. Cambodia factories range from small 50-machine units to large facilities with 500+ machines. A factory at 100% capacity may delay your order. SDF has capacity for 50,000+ pieces monthly through our Cambodia operations, ensuring we can scale with your brand's growth.
+      </p>
+      
+      <h3 class="section__subtitle">Communication Quality</h3>
+      <p class="section__text">
+        English proficiency varies in Cambodia. Evaluate response time, English proficiency, and clarity during initial inquiries. Are they transparent about pricing and lead times? Do they ask relevant questions about your requirements? Poor communication during sales often indicates worse communication during production. SDF prides itself on responsive, clear communication with dedicated account managers.
+      </p>
+      
+      <h3 class="section__subtitle">Client References</h3>
+      <p class="section__text">
+        Ask for references from current or past clients, especially brands similar to yours. Contact references to ask about quality, reliability, communication, and problem resolution. SDF can provide references from brands who have worked with our Cambodia operations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Comparison Table -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Cambodia vs Other Manufacturing Hubs</h2>
+      <p class="section__text">
+        Fashion brands have multiple sourcing options. Understanding how Cambodia compares to other major manufacturing hubs helps you make informed decisions. This comparison covers key factors affecting your choice.
+      </p>
+      
+      <div class="comparison-wrapper">
+        </BaseLayout>
+
+

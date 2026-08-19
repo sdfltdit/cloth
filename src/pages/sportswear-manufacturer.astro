@@ -1,0 +1,874 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Sportswear Manufacturer | Custom & Team | SDF Clothing";
+const pageDescription = "Custom sportswear manufacturer in Bangladesh. Performance jerseys, training kits and activewear from 300 pieces. GOTS certified factory. Get a free quote today.";
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com",
+        "name": "SDF Clothing"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "description": "Custom sportswear manufacturer from Bangladesh providing professional athletic wear, team uniforms, and performance fabrics to sports brands worldwide since 1998."
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Custom Sportswear Manufacturing",
+      "provider": { "@id": "https://sdfltd.com/#org" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE"],
+      "description": "Custom sportswear manufacturer in Bangladesh. Performance jerseys, training kits and activewear from 300 pieces. GOTS certified factory. Get a free quote today."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Sportswear from SDF Clothing",
+      "step": [
+        { "@type": "HowToStep", "name": "Submit Design Brief", "text": "Share your sportswear design, team colors, and technical requirements" },
+        { "@type": "HowToStep", "name": "Receive Tech Pack and Quote", "text": "Our team prepares tech pack and factory quote within 48 hours" },
+        { "@type": "HowToStep", "name": "Approve Pre-Production Sample", "text": "Review physical sample before bulk production begins" },
+        { "@type": "HowToStep", "name": "Bulk Production and Inspection", "text": "Factory produces order with inline quality checks" },
+        { "@type": "HowToStep", "name": "Shipment to Your Door", "text": "Order shipped FOB Dhaka or CIF your destination port" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for custom sportswear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "300 pieces per style minimum. This applies per design, colorway, and size range. Lower quantities possible at higher per-piece cost for sampling or prototype runs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What sportswear products do you manufacture?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We manufacture football jerseys, basketball uniforms, soccer kits, rugby shirts, tennis apparel, cricket whites, athletic shorts, tracksuits, training gear, warm-up suits, and custom team uniforms for all sports."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you customize sportswear with team logos and numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer sublimation printing, screen printing, embroidery, heat transfer, and vinyl numbering for team customization. Custom logos, player names, numbers, and sponsor branding available."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What performance fabrics do you use for sportswear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We use moisture-wicking polyester, breathable mesh, 4-way stretch fabrics, anti-odor treatments, UV protection fabrics, and quick-dry materials. All fabrics designed for athletic performance and durability."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does custom sportswear production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard production timeline: 30-40 days from fabric receipt for basic sportswear. 35-50 days for custom fabric development or specialized performance fabrics. 7-14 days for sampling before bulk."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer sublimation printing for jerseys?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Full sublimation printing for unlimited colors and complex designs. Sublimation is permanent, breathable, and doesn't crack or peel. Ideal for team jerseys with intricate patterns and gradients."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you manufacture custom compression sportswear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We manufacture compression shirts, leggings, shorts, and base layers using high-stretch performance fabrics. Compression garments improve blood circulation and muscle recovery during athletic activity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What size ranges do you offer for team sportswear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer full size ranges from youth XS to adult 5XL. Custom sizing charts available for specific team requirements. Size run flexibility within MOQ enables balanced inventory distribution."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sdfltd.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sportswear Manufacturer"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+
+<meta name="keywords" content="sportswear manufacturer, custom sportswear, athletic wear manufacturer, team uniforms manufacturer, football jersey manufacturer, basketball uniform manufacturer, sports apparel manufacturer" />
+
+<!-- Hero Section -->
+<section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+      <p style="font-size:0.72rem;color:#FFFFFF;">
+        <a href="/" style="color:#FFFFFF;text-decoration:none;">Home</a>
+        <span style="margin:0 0.5rem;color:#333;">/</span>
+        Sportswear Manufacturer
+      </p>
+    </nav>
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Custom Sportswear Manufacturer | Since 1998 | Performance Fabrics</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1rem;line-height:1.2;">
+      Custom Sportswear Manufacturer for Teams and Brands
+    </h1>
+    <p style="color:#FFFFFF;max-width:640px;line-height:1.8;font-size:0.92rem;">
+      Custom sportswear requires performance fabrics that wick moisture, stretch for mobility, and withstand intense athletic activity. SDF Clothing, a full-service clothing manufacturer in Bangladesh, produces custom sportswear with professional-grade construction and team customization options. From 300 pieces per style with sublimation printing, embroidery, and numbering.
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <a href="/contact/" class="cta-button">Get Free Quote</a>
+      <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20sportswear-manufacturer`} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WhatsApp Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Stats Section -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#000000;">
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">300</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Pieces Minimum</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">Full</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Sublimation</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">30-40</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Days Production</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">Team</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Customization</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Capabilities Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Our Capabilities</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Sportswear Manufacturing Capabilities</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Our custom sportswear manufacturing covers the full production cycle from fabric sourcing to finished team uniforms. We source performance fabrics from certified mills, cut, sew with athletic construction techniques, apply team customization, and package for shipment.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Production capacity: 40,000-60,000 sportswear pieces per month across multiple production lines. We handle basic training gear for clubs, professional team uniforms for leagues, and custom sportswear for retail brands.
+    </p>
+  </div>
+</section>
+
+<!-- Fabric Options Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Materials</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Performance Fabric Options</h2>
+    </div>
+    
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Moisture-Wicking Polyester</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Standard performance fabric for sportswear. Pulls sweat away from skin for faster evaporation. Lightweight, breathable, and quick-drying. Ideal for jerseys, shorts, and training gear.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Breathable Mesh</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Mesh panels for ventilation in high-heat areas. Used in underarms, back panels, and side panels for improved airflow during intense activity.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">4-Way Stretch Fabric</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Stretch fabrics that move with the athlete. Provides maximum mobility for running, jumping, and dynamic movements. Essential for basketball, soccer, and training apparel.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Anti-Odor Treatment</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Fabric treatments that inhibit odor-causing bacteria. Popular for sportswear worn during intense workouts and extended use. Keeps uniforms fresh longer.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">UV Protection Fabric</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      UPF-rated fabrics that block harmful UV rays. Essential for outdoor sports like tennis, cricket, and running. Provides sun protection during extended outdoor activity.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Quick-Dry Materials</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;">
+      Engineered fabrics that dry rapidly after washing or exposure to moisture. Reduces downtime between games and training sessions.
+    </p>
+  </div>
+</section>
+
+<!-- Products Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Product Range</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Sportswear Products We Manufacture</h2>
+    </div>
+    
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Football jerseys and soccer kits (home, away, goalkeeper)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Custom team uniforms for all sports | see our <a href="/uniform-manufacturer" style="color:#e00;text-decoration:underline;">uniform manufacturer</a> services
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Rugby shirts and shorts
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Tennis apparel (shirts, skirts, shorts)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Cricket whites and colored kits
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Athletic shorts and compression shorts
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Tracksuits and warm-up suits
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Training gear and practice uniforms
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Basketball uniforms (jerseys and shorts)
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Customization Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Customization</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Team Customization Options</h2>
+    </div>
+    
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Full sublimation printing (unlimited colors, complex designs)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Screen printing (logos, sponsor branding) | see <a href="/printing-service/" style="color:#e00;text-decoration:underline;">printing service</a>
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Embroidery (team crests, premium logos)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Heat transfer (numbers, names)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Vinyl numbering (player numbers)
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Custom labels and tags
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- MOQ and Pricing Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Pricing Guide</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">MOQ and Pricing</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      <strong>MOQ:</strong> 300 pieces per style minimum. Applies per design, colorway, and size range. We are among the <a href="/low-moq-clothing-manufacturers/" style="color:#e00;text-decoration:underline;">low MOQ clothing manufacturers</a> serving startup and emerging brands.
+    </p>
+    
+    <div style="margin-top:2rem;">
+      <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+        FOB Bangladesh pricing for 500-piece orders:
+      </p>
+      <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Basic jersey (polyester, sublimation): $8-15 per piece
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Premium jersey (mesh panels, advanced features): $12-20 per piece
+        </li>
+        <li style="padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Complete kit (jersey + shorts): $15-28 per set
+        </li>
+      </ul>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Pricing includes fabric, cut, sew, basic customization, and standard packaging. Advanced customization options are additional. All products come with GOTS and OEKO-TEX <a href="/certifications" style="color:#e00;text-decoration:underline;">certifications</a> ensuring sustainable and safe production.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Sample development costs are credited against bulk orders. We provide competitive pricing on prototype samples, with these costs deducted from the final production invoice when the order is placed. This approach encourages thorough sampling without financial penalty for brands committed to production.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Rush production options are available for urgent deadlines. Accelerated production schedules with compressed lead times incur 20-30% premium pricing but enable brands to meet critical launch dates or seasonal requirements. We provide clear timelines and cost estimates for rush orders before commitment.
+    </p>
+  </div>
+</section>
+
+<!-- Timeline Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Production Timeline</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Sportswear Production Timeline</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Standard sportswear production timeline from order confirmation to shipment:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Fabric sourcing: 5-10 days (if not in stock)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Sampling: 7-14 days
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Bulk production: 30-40 days
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Quality inspection: 2-3 days
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Packing and shipping: 3-5 days
+      </li>
+    </ul>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Total timeline: 50-75 days from order to delivery. Custom fabric development and specialized performance fabrics add 5-10 days. Rush production available at 20-30% premium.
+    </p>
+  </div>
+</section>
+
+<!-- Production Capacity Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Our Factory</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Production Capacity | 75,000 Sq Ft Factory in Bangladesh</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      SDF Clothing operates a 75,000 square foot manufacturing facility in Dhaka, Bangladesh. Our factory produces over 2 million garments annually for brands worldwide. With 500+ skilled workers and modern equipment, we handle orders from 300 pieces to container-scale production with consistent quality and timely delivery.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Our production lines are organized by garment type, with dedicated lines for knitwear, woven garments, and specialized items. This specialization ensures that each production team develops expertise in specific product categories, improving efficiency and quality. Sportswear production benefits from dedicated lines focused on performance fabric handling and decoration.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Equipment includes automated cutting machines, computerized sewing systems, and advanced decoration equipment. Our sublimation printing setup handles full-color designs with precision, while our embroidery department offers multi-head machines for efficient logo application. This investment in technology enables consistent quality at competitive pricing.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Production capacity planning accommodates both small and large orders. We reserve production slots for new brands with lower MOQs while maintaining capacity for established clients requiring volume. Flexible scheduling allows us to adjust production priorities based on client needs and seasonal requirements.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Quality control is integrated throughout production. Inline checkpoints at cutting, sewing, and finishing stages catch defects early. Our quality team conducts AQL 2.5 inspection on all orders, ensuring that only garments meeting strict standards reach our clients. This comprehensive QC process reduces returns and ensures customer satisfaction.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Factory certifications demonstrate our commitment to quality and compliance. SDF holds GOTS organic certification, OEKO-TEX Standard 100, WRAP social compliance, and multiple ISO certifications. These certifications provide assurance to brands that production meets international standards for quality, environmental responsibility, and worker welfare.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Worker safety and welfare are paramount. Our facility follows international labor standards with fair wages, safe working conditions, and no child labor. Workers receive regular training on safety procedures, quality standards, and new equipment operation. This focus on workforce stability ensures consistent quality and reliable production schedules.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Environmental sustainability initiatives include water recycling, energy-efficient equipment, and waste reduction programs. Our factory implements responsible manufacturing practices that minimize environmental impact while maintaining competitive pricing. These sustainability efforts align with global best practices and emerging regulatory requirements.
+    </p>
+  </div>
+</section>
+
+<!-- Performance Fabrics Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Fabric Guide</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Performance Sportswear Fabrics | What Works for Each Sport</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Different sports require different fabric properties. Running and track athletes need lightweight, moisture-wicking polyester mesh with 4-way stretch and reflective details for visibility. The fabric must move with the body while pulling sweat away from the skin to prevent chafing during high-intensity movement.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Team sports like football, rugby, and basketball demand sublimation-ready polyester with color-fast dyes and reinforced seams for contact sports. These fabrics must withstand grabbing, pulling, and repeated impacts while maintaining team colors that don't fade after washing. Sublimation printing allows unlimited colors and complex designs without affecting fabric breathability.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Gym and training apparel uses cotton-poly blends and French terry for heavyweight lifting gear, while lightweight moisture-wicking fabrics serve cardio and HIIT training. Lifting apparel needs durability and structure to support muscles during heavy movements, whereas cardio gear prioritizes breathability and moisture management for extended sweat sessions.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Cycling and endurance sports require specialized aerodynamic fabrics with compression properties. See our dedicated <a href="/cycling-apparel-manufacturer" style="color:#e00;text-decoration:underline;">cycling apparel manufacturer</a> page for detailed information on cycling-specific fabrics and construction techniques.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Golf and leisure sports use polyester pique fabric with UV protection and breathable construction for comfort during extended outdoor play. These fabrics balance performance with a polished appearance suitable for club environments while providing sun protection for players spending hours on the course.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Swimming and water sports require chlorine-resistant polyester with quick-drying properties and UPF protection for sun exposure. These fabrics must withstand pool chemicals and saltwater while maintaining shape and color integrity. Swimming costumes and water sport apparel benefit from four-way stretch for unrestricted movement in water.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Winter sports necessitate thermal insulation fabrics with windproof and waterproof properties. Ski and snowboard apparel uses laminated fabrics with breathable membranes that block wind and water while allowing moisture vapor to escape. Base layers use merino wool or synthetic blends for temperature regulation in cold conditions.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Fabric testing ensures performance claims are validated. We conduct wash tests to verify color fastness, stretch tests to confirm elastic recovery, and abrasion tests to measure durability. These quality assurance measures guarantee that sportswear fabrics perform as advertised throughout their intended use lifespan.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Sustainable fabric options are increasingly important for environmentally conscious brands. Recycled polyester made from post-consumer plastic bottles offers performance equivalent to virgin polyester with reduced environmental impact. Organic cotton blends provide natural fiber comfort for casual sportswear while meeting sustainability criteria.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Fabric sourcing partnerships with certified mills ensure consistent quality and reliable supply. We work with mills that share our commitment to quality, sustainability, and ethical production. These relationships enable us to access premium fabrics at competitive prices while maintaining traceability throughout the supply chain.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Color consistency across dye lots is critical for team uniforms and brand apparel. Our fabric partners implement rigorous color matching protocols to ensure that colors remain consistent from one production run to the next. This attention to detail prevents color variations that could compromise brand identity or team uniform consistency.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Lead times for fabric sourcing vary by fabric type and complexity. Stock fabrics ship within 3-5 days, while custom fabrics require 7-14 days for production. We maintain fabric inventory for popular colors and weights to reduce lead times for urgent orders, enabling faster turnaround for time-sensitive team uniform projects and seasonal launches.
+    </p>
+    
+    <div style="margin-top:2.5rem;overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;color:#FFFFFF;font-size:0.88rem;" aria-label="Fabric performance by sport">
+        <caption style="color:#aaa;font-size:0.8rem;text-align:left;margin-bottom:1rem;padding:0;">Recommended fabrics for different sport categories</caption>
+        <thead>
+          <tr style="border-bottom:1px solid #e00;">
+            <th scope="col" style="padding:1rem;text-align:left;font-weight:400;">Sport</th>
+            <th scope="col" style="padding:1rem;text-align:left;font-weight:400;">Recommended Fabric</th>
+            <th scope="col" style="padding:1rem;text-align:left;font-weight:400;">GSM Range</th>
+            <th scope="col" style="padding:1rem;text-align:left;font-weight:400;">Key Property</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #333;">
+            <td style="padding:1rem;">Running</td>
+            <td style="padding:1rem;">Polyester mesh</td>
+            <td style="padding:1rem;">100-130</td>
+            <td style="padding:1rem;">Moisture-wicking</td>
+          </tr>
+          <tr style="border-bottom:1px solid #333;">
+            <td style="padding:1rem;">Team sports</td>
+            <td style="padding:1rem;">Polyester interlock</td>
+            <td style="padding:1rem;">140-180</td>
+            <td style="padding:1rem;">Sublimation-ready</td>
+          </tr>
+          <tr style="border-bottom:1px solid #333;">
+            <td style="padding:1rem;">Gym/training</td>
+            <td style="padding:1rem;">Cotton-poly blend</td>
+            <td style="padding:1rem;">200-260</td>
+            <td style="padding:1rem;">Durability</td>
+          </tr>
+          <tr style="border-bottom:1px solid #333;">
+            <td style="padding:1rem;">Yoga/pilates</td>
+            <td style="padding:1rem;">Nylon-spandex</td>
+            <td style="padding:1rem;">160-200</td>
+            <td style="padding:1rem;">4-way stretch</td>
+          </tr>
+          <tr>
+            <td style="padding:1rem;">Golf</td>
+            <td style="padding:1rem;">Polyester pique</td>
+            <td style="padding:1rem;">180-220</td>
+            <td style="padding:1rem;">UV protection</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Customization Section Expanded -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Decoration Methods</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Sportswear Customization Options | Beyond the Logo</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Sublimation printing offers full-color, photographic detail with no hand feel and unlimited colors at no extra cost. This method is ideal for team kits requiring complex gradients, sponsor logos, and player-specific designs. The dye becomes part of the fabric, so it won't crack, peel, or fade over time, making it perfect for jerseys that undergo frequent washing and intense use.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Screen printing provides bold designs with limited colors at cost-effective pricing for large runs. This traditional method works well for training tops, practice gear, and promotional sportswear where simple designs with 1-6 colors are sufficient. Screen printing offers excellent durability and vibrant colors on polyester fabrics.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Embroidery delivers a premium look that works particularly well on polo-style sportswear and outerwear. This three-dimensional decoration adds perceived value and is ideal for corporate team uniforms, golf apparel, and premium athletic wear where brand presentation is paramount. Our <a href="/embroidery-service" style="color:#e00;text-decoration:underline;">embroidery service</a> offers various thread types and stitch patterns.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Heat transfer decoration provides versatility across most fabric types and works well for individual player names, numbers, and sponsor logos. This method allows for full-color designs without the setup costs of screen printing, making it suitable for smaller runs or items requiring personalized elements for each piece.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Custom labels and packaging complete the branded experience. Team names on neck labels, individual player names and numbers on back panels, and branded hang tags create a professional presentation. As a <a href="/private-label-clothing-manufacturer" style="color:#e00;text-decoration:underline;">private label manufacturer</a>, we handle all branding elements to ensure your products arrive retail-ready.
+    </p>
+    
+    <div style="margin-top:2.5rem;overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;color:#FFFFFF;font-size:0.88rem;" aria-label="Decoration method comparison">
+        <caption style="color:#aaa;font-size:0.8rem;text-align:left;margin-bottom:1rem;padding:0;">Decoration methods for sportswear customization</caption>
+        <thead>
+          <tr style="border-bottom:1px solid #e00;">
+            <th scope="col" style="padding:1rem;text-align:left;font-weight:400;">Method</th>
+            <th scope="col" style="padding:1rem;text-align:left;font-weight:400;">Colors</th>
+            <th scope="col" style="padding:1rem;text-align:left;font-weight:400;">MOQ</th>
+            <th scope="col" style="padding:1rem;text-align:left;font-weight:400;">Best For</th>
+            <th scope="col" style="padding:1rem;text-align:left;font-weight:400;">Durability</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #333;">
+            <td style="padding:1rem;">Sublimation</td>
+            <td style="padding:1rem;">Unlimited</td>
+            <td style="padding:1rem;">50 pcs</td>
+            <td style="padding:1rem;">Team kits</td>
+            <td style="padding:1rem;">Excellent</td>
+          </tr>
+          <tr style="border-bottom:1px solid #333;">
+            <td style="padding:1rem;">Screen print</td>
+            <td style="padding:1rem;">1-6 colors</td>
+            <td style="padding:1rem;">100 pcs</td>
+            <td style="padding:1rem;">Training tops</td>
+            <td style="padding:1rem;">Very good</td>
+          </tr>
+          <tr style="border-bottom:1px solid #333;">
+            <td style="padding:1rem;">Embroidery</td>
+            <td style="padding:1rem;">Any</td>
+            <td style="padding:1rem;">50 pcs</td>
+            <td style="padding:1rem;">Polo/outerwear</td>
+            <td style="padding:1rem;">Excellent</td>
+          </tr>
+          <tr>
+            <td style="padding:1rem;">Heat transfer</td>
+            <td style="padding:1rem;">Unlimited</td>
+            <td style="padding:1rem;">25 pcs</td>
+            <td style="padding:1rem;">Names/numbers</td>
+            <td style="padding:1rem;">Good</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Quality Standards Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Quality Control</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Sportswear Quality Standards | What to Inspect Before Shipping</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      AQL inspection standards are the industry benchmark for quality control in sportswear manufacturing. SDF Clothing follows AQL 2.5 for major defects and AQL 4.0 for minor defects, ensuring that only garments meeting strict quality standards reach our clients. This systematic approach involves inspecting a statistically significant sample from each production lot to identify defects before shipment.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Inline inspection occurs throughout the production process, not just at the end. Our quality team monitors cutting accuracy, sewing consistency, and decoration application at multiple checkpoints. This proactive approach catches defects early when they can be corrected efficiently, reducing waste and ensuring consistent quality across the entire production run.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Final inspection evaluates finished garments for seam strength, color fastness, sizing accuracy, and overall appearance. We check that sublimation prints are vibrant and crack-free, embroidery is secure without loose threads, and all labels and tags are correctly positioned. Our <a href="/quality-inspection-service" style="color:#e00;text-decoration:underline;">quality inspection service</a> provides detailed inspection reports with photos before shipment approval.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Common defects in sportswear include skipped stitches, puckered seams, misaligned patterns, and color bleeding. Sport-specific defects include uneven hemlines on running shorts, loose elastic in waistbands, and peeling numbers on jerseys. Our inspection process specifically targets these common issues based on garment type and intended use.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Reading an inspection report requires understanding defect classification and acceptance criteria. Major defects render a garment unsellable and must be rejected, while minor defects may be acceptable within specified limits. Our reports clearly categorize findings, provide photographic evidence, and recommend corrective actions for any identified issues.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Performance testing goes beyond visual inspection. We conduct wash tests to verify color fastness, stretch tests for elastic components, and abrasion tests for durability on high-wear areas. These tests ensure that sportswear will perform as expected during actual use, maintaining appearance and functionality through repeated wear and laundering.
+    </p>
+  </div>
+</section>
+
+<!-- Team Uniforms Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Team Orders</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Custom Team Uniforms | Complete Solutions for Sports Clubs</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      SDF provides complete team uniform solutions for sports clubs, schools, and organizations. From football clubs needing home and away kits to basketball teams requiring warm-up suits, we handle all aspects of team apparel production. Our team uniform service includes design consultation, sizing assistance, and custom decoration for each player.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Player-specific customization is a key strength. We can individualize each jersey with player names, numbers, and position-specific details. This is ideal for competitive teams where personal identification matters. Our numbering systems include heat transfer for cost-effectiveness and premium options for durability.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Team uniform packages typically include jerseys, shorts, and socks with the option to add warm-up suits, training gear, and coaching apparel. Bundling these items provides cost savings and ensures brand consistency across all team apparel. We offer tiered pricing for complete team packages versus individual item orders.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Reorder consistency is critical for team programs. We maintain design files, color recipes, and sizing specifications for all repeat orders, ensuring that new uniforms match previous seasons exactly. This allows teams to add new players or replace worn uniforms without brand inconsistency. Our <a href="/uniform-manufacturer" style="color:#e00;text-decoration:underline;">uniform manufacturer</a> service guarantees consistency across seasons.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Sponsor branding integration is seamless with our sublimation capabilities. Logos and sponsor graphics can be incorporated directly into the design rather than applied afterward, creating a more professional and durable result. This is particularly valuable for competitive teams with commercial sponsorship requirements.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Team uniform production timelines are optimized for seasonal requirements. We understand that teams need uniforms before season starts, so we offer accelerated production schedules with compressed lead times when needed. Rush production options are available for urgent team orders, though these incur premium pricing.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Size inclusivity is essential for team programs. We offer comprehensive size ranges from youth sizes to adult 5XL, ensuring all team members can be accommodated. Custom sizing options are available for players requiring non-standard measurements, with our <a href="/fit-engineering-service" style="color:#e00;text-decoration:underline;">fit engineering service</a> ensuring consistent fit across the entire team.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Team uniform durability is enhanced through construction techniques designed for athletic use. Reinforced seams, double-stitched stress points, and quality zippers ensure that uniforms withstand the demands of competitive sports. Our performance fabrics maintain their technical properties through repeated washing and intense use.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Team uniform programs include comprehensive support services. We assist with design development, sizing recommendations, and ordering processes to make team procurement straightforward. Dedicated account managers handle communication and coordination, ensuring that team orders progress smoothly from design to delivery.
+    </p>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Team uniform pricing is competitive with volume discounts for larger orders. We provide transparent quotes with no hidden fees, including all decoration costs in the initial price. This allows teams and organizations to budget accurately without unexpected charges during the production process.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Common Questions</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Frequently Asked Questions</h2>
+    </div>
+    
+    <div style="max-width:800px;">
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What is the minimum order for custom sportswear?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">300 pieces per style minimum. This applies per design, colorway, and size range. Lower quantities possible at higher per-piece cost for sampling or prototype runs.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What sportswear products do you manufacture?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We manufacture football jerseys, basketball uniforms, soccer kits, rugby shirts, tennis apparel, cricket whites, athletic shorts, tracksuits, training gear, warm-up suits, and custom team uniforms for all sports.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can you customize sportswear with team logos and numbers?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. We offer sublimation printing, screen printing, embroidery, heat transfer, and vinyl numbering for team customization. Custom logos, player names, numbers, and sponsor branding available.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What performance fabrics do you use for sportswear?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We use moisture-wicking polyester, breathable mesh, 4-way stretch fabrics, anti-odor treatments, UV protection fabrics, and quick-dry materials. All fabrics designed for athletic performance and durability.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How long does custom sportswear production take?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Standard production timeline: 30-40 days from fabric receipt for basic sportswear. 35-50 days for custom fabric development or specialized performance fabrics. 7-14 days for sampling before bulk.</p>
+      </div>
+      <div style="padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Do you offer sublimation printing for jerseys?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. Full sublimation printing for unlimited colors and complex designs. Sublimation is permanent, breathable, and doesn't crack or peel. Ideal for team jerseys with intricate patterns and gradients.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can you manufacture custom compression sportswear?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes. We manufacture compression shirts, leggings, shorts, and base layers using high-stretch performance fabrics. Compression garments improve blood circulation and muscle recovery during athletic activity.</p>
+      </div>
+      <div style="padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What size ranges do you offer for team sportswear?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We offer full size ranges from youth XS to adult 5XL. Custom sizing charts available for specific team requirements. Size run flexibility within MOQ enables balanced inventory distribution.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Need custom sportswear manufacturing for your team or brand? <a href="/contact/" style="color:#e00;text-decoration:underline;">Contact SDF Clothing here</a> with your design requirements, customization needs, and quantity. We provide comprehensive <a href="/tech-pack-service" style="color:#e00;text-decoration:underline;">tech pack service</a> to prepare your designs for production. We will quote pricing, lead time, and capacity within 48 hours. From 300 pieces minimum. <a href="/contact/" style="color:#e00;text-decoration:underline;">Request a free sample</a> to evaluate quality before bulk.
+    </p>
+  </div>
+</section>
+
+<!-- Internal Link Section -->
+<section style="padding:5rem 0;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      For complete production strategy, read our <a href="/clothing-manufacturers/" style="color:#e00;text-decoration:underline;">complete clothing manufacturers guide</a>. For startup brands, see our <a href="/clothing-manufacturers-for-startups/" style="color:#e00;text-decoration:underline;">clothing manufacturers for startups</a> guide.
+    </p>
+  </div>
+</section>
+
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-header {
+    text-align: center;
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .accent-line {
+    width: 60px;
+    height: 2px;
+    background: #e00;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .cta-button {
+    background: #e00;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .cta-button:hover {
+    background: #cc0000;
+  }
+  
+  .whatsapp-cta {
+    background: #25D366;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .whatsapp-cta:hover {
+    background: #128C7E;
+  }
+</style>

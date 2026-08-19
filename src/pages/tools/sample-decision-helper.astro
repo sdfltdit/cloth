@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Digital vs Physical Sample Decision Helper | Free Tool | SDF";
+const pageDescription = "Free tool: answer a few questions about your fabric and approval needs to get a recommendation — digital 3D sample, physical, or both.";
+const canonicalURL = "https://sdfltd.com/tools/sample-decision-helper/";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalURL}>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Digital vs Physical Sample Decision Helper",
+  "description": "Free tool to help apparel buyers and designers decide whether a digital 3D sample, a physical sample, or both are needed for a given garment and stage.",
+  "url": "https://sdfltd.com/tools/sample-decision-helper/",
+  "inLanguage": "en",
+  "isPartOf": { "@type": "WebSite", "@id": "https://sdfltd.com/#website" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://sdfltd.com/all-services/" },
+      { "@type": "ListItem", "position": 3, "name": "Sample Decision Helper", "item": "https://sdfltd.com/tools/sample-decision-helper/" }
+    ]
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Digital vs Physical Sample Decision Helper",
+  "description": "Answer four quick questions about your design stage, fabric, color requirements, and approval purpose to get a recommendation on whether to use digital 3D sampling, a physical sample, or both.",
+  "url": "https://sdfltd.com/tools/sample-decision-helper/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@id": "https://sdfltd.com/#org" }
+}
+</script>
+
+<div class="dh-page">
+  <section class="dh-section">
+    <div class="dh-container" style="text-align:center;">
+      <p class="breadcrumb"><a href="/">Home</a> / <a href="/tools">Tools</a> / Sample Decision Helper</p>
+      <span class="section-label">Free Tool</span>
+      <h1 class="page-title">Digital or Physical Sample? Decide in 30 Seconds</h1>
+      <p class="page-subtitle">Answer four quick questions to get a straight recommendation, based on the tradeoffs covered in our <a href="/digital-3d-sample-vs-physical-sample" style="color:#e00;">Digital 3D Sample vs Physical Sample guide</a>.</p>
+    </div>
+  </section>
+
+  <section class="dh-section dh-section--no-border">
+    <div class="dh-container" style="max-width:720px;">
+      <div class="calc-block">
+        <p class="calc-block-title">Tell Us About the Order</p>
+
+        <div class="form-group">
+          <label class="form-label" for="stage">Design stage</label>
+          <select id="stage" class="form-select">
+            <option value="exploring">Still comparing design directions or colorways</option>
+            <option value="finalized">Design is finalized, ready to validate</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="fabric">Fabric characteristics</label>
+          <select id="fabric" class="form-select">
+            <option value="standard">Standard weight, stable weave or jersey knit</option>
+            <option value="unusual">Unusual drape, heavy structure, high stretch, or technical performance fabric</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="color">Color requirement</label>
+          <select id="color" class="form-select">
+            <option value="flexible">Not critical, some variation is acceptable</option>
+            <option value="exact">Must match an exact Pantone or existing product</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="purpose">Purpose of this sample</label>
+          <select id="purpose" class="form-select">
+            <option value="internal">Internal review, buyer presentation, or marketing render</option>
+            <option value="bulk">Final approval before placing a bulk order</option>
+          </select>
+        </div>
+
+        <button id="decide-btn" class="calc-btn" type="button">Get My Recommendation</button>
+      </div>
+
+      <div id="result-box" class="result-box">
+        <h2 class="content-h2" style="margin-top:0;">Our Recommendation</h2>
+        <p id="result-headline" style="font-size:1.3rem;color:#e00;font-weight:600;margin-bottom:1rem;"></p>
+        <p id="result-reasoning" class="content-prose" style="margin-bottom:0;"></p>
+      </div>
+
+      <p class="content-prose" style="font-size:0.8rem;color:#666;margin-top:1.5rem;">This tool gives a directional recommendation based on common tradeoffs, not a guarantee for your specific product — for anything approving bulk production, a physical sample is the safer default regardless of what this tool suggests. See our <a href="/sample-service" style="color:#e00;">sample service</a> for real turnaround and cost.</p>
+    </div>
+  </section>
+</div>
+
+<style>
+  .dh-page {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+  }
+  .dh-container { width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+  .dh-section { padding: 4rem 0 2rem; }
+  .dh-section--no-border { padding-top: 1rem; padding-bottom: 4rem; }
+  .breadcrumb { font-size: 0.72rem; color: #888; margin-bottom: 1.5rem; }
+  .breadcrumb a { color: #888; text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .section-label {
+    display: block; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: #e00; margin-bottom: 0.75rem;
+  }
+  .page-title { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 200; color: #fff; margin-bottom: 1rem; line-height: 1.2; }
+  .page-subtitle { font-size: 0.95rem; color: #aaa; max-width: 640px; margin: 0 auto; line-height: 1.8; }
+  .content-h2 { font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 300; color: #fff; margin-bottom: 1.25rem; }
+  .content-prose { font-size: 0.92rem; color: #bbb; line-height: 1.8; }
+  .calc-block { background-color: #0a0a0a; border: 1px solid #1a1a1a; padding: 2rem; margin-bottom: 1.5rem; }
+  .calc-block-title { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #e00; margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group:last-child { margin-bottom: 0; }
+  .form-label { display: block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #aaa; margin-bottom: 0.5rem; }
+  .form-select {
+    width: 100%; padding: 0.75rem; font-size: 0.95rem; font-family: inherit;
+    background-color: #000; color: #fff; border: 1px solid #333; min-height: 44px; cursor: pointer;
+  }
+  .form-select:focus { outline: none; border-color: #e00; }
+  .calc-btn {
+    display: block; width: 100%; max-width: 320px; margin: 1.5rem auto 0;
+    background-color: #e00; color: #fff; padding: 1rem 2.5rem; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase; min-height: 44px; border: 1px solid #e00;
+    cursor: pointer; font-family: inherit; font-weight: 600; transition: background-color 0.2s, color 0.2s;
+  }
+  .calc-btn:hover { background-color: #000; color: #e00; }
+  .result-box {
+    display: none; background-color: #0a0a0a; border: 1px solid #1a1a1a; border-top: 2px solid #e00;
+    padding: 2rem;
+  }
+  .result-box--visible { display: block; }
+</style>
+
+<script>
+  document.getElementById('decide-btn').addEventListener('click', () => {
+    const stage = (document.getElementById('stage') as HTMLSelectElement).value;
+    const fabric = (document.getElementById('fabric') as HTMLSelectElement).value;
+    const color = (document.getElementById('color') as HTMLSelectElement).value;
+    const purpose = (document.getElementById('purpose') as HTMLSelectElement).value;
+
+    let headline = "";
+    let reasoning = "";
+
+    if (purpose === 'bulk') {
+      headline = "Go straight to a physical sample.";
+      reasoning = "You're approving for bulk production, and that's the one step no digital tool reliably replaces — fit, fabric drape, hand-feel, and true color still need to be confirmed physically before you commit.";
+    } else if (fabric === 'unusual' || color === 'exact') {
+      headline = "Physical sampling first, even at this stage.";
+      reasoning = "Unusual fabric behavior and exact color matching are exactly what digital simulation still struggles with. It's worth going physical earlier here rather than risking a digital approval that doesn't hold up in person.";
+    } else if (stage === 'exploring') {
+      headline = "Start with a digital 3D sample.";
+      reasoning = "You're still comparing options, and the fabric and color requirements are standard enough that digital simulation should give you a reliable early read. Move to physical once you've settled on a direction.";
+    } else {
+      headline = "A digital sample now, physical before you move forward.";
+      reasoning = "The design is settled and the fabric is fairly standard, so a digital check can confirm proportions quickly — but plan on a physical round before this goes any further, since internal or buyer review still benefits from seeing the real thing.";
+    }
+
+    (document.getElementById('result-headline') as HTMLElement).textContent = headline;
+    (document.getElementById('result-reasoning') as HTMLElement).textContent = reasoning;
+    document.getElementById('result-box')!.classList.add('result-box--visible');
+  });
+</script>
+
+</BaseLayout>

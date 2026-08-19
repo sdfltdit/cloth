@@ -1,0 +1,389 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "Visitor Document Submission | SDF Clothing";
+const pageDescription = "Securely submit your visit supporting documents to SDF Clothing's factory visit coordination team.";
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": pageTitle,
+    "description": pageDescription,
+    "url": "https://sdfltd.com/visa-docs/",
+    "isPartOf": { "@id": "https://sdfltd.com/#website" }
+  }
+];
+
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription} schema={schema}
+  datePublished="2026-06-18"
+  dateModified={new Date().toISOString().split("T")[0]}
+  noindex={true}
+>
+<div id="sdf-docs-root"></div>
+
+<script type="module">
+const G = "#C9A84C";
+const BG = "#0A0A0A";
+const S1 = "#111111";
+const S2 = "#181818";
+const S3 = "#222222";
+const BD = "#2C2C2C";
+const T1 = "#FFFFFF";
+const T2 = "#888888";
+const T3 = "#404040";
+const GREEN = "#22c55e";
+const RED = "#ef4444";
+
+const css = `
+  .sdf-docs * { box-sizing: border-box; }
+  .sdf-docs { background: ${BG}; min-height: 100vh; font-family: system-ui,-apple-system,sans-serif; color: ${T1}; }
+  .sdf-inp { width: 100%; background: ${S2}; border: 1px solid ${BD}; border-radius: 8px; color: ${T1}; padding: 10px 12px; font-size: 13px; outline: none; font-family: inherit; transition: border-color 0.15s; }
+  .sdf-inp:focus { border-color: ${G}; }
+  .sdf-lbl { color: ${T3}; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 6px; }
+  .sdf-drop { border: 1.5px dashed ${BD}; border-radius: 12px; padding: 28px 20px; text-align: center; cursor: pointer; transition: all 0.15s; background: ${S2}; }
+  .sdf-drop:hover, .sdf-drop.drag { border-color: ${G}; background: rgba(201,168,76,0.04); }
+  .sdf-drop.has-file { border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.04); }
+  .sdf-file-item { background: ${S3}; border: 1px solid ${BD}; border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .sdf-remove { background: transparent; border: none; color: ${T3}; cursor: pointer; font-size: 15px; padding: 2px 6px; border-radius: 4px; transition: color 0.1s; }
+  .sdf-remove:hover { color: ${RED}; }
+  .sdf-btn-primary { background: ${G}; color: #000; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; width: 100%; }
+  .sdf-btn-primary:disabled { background: ${S3}; color: ${T3}; cursor: not-allowed; }
+  .sdf-doc-type-btn { background: transparent; border: 1px solid ${BD}; border-radius: 8px; padding: 10px 14px; cursor: pointer; text-align: left; transition: all 0.12s; width: 100%; color: ${T1}; }
+  .sdf-doc-type-btn.active { background: rgba(201,168,76,0.08); border-color: ${G}; }
+  .sdf-notice { background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.12); border-radius: 10px; padding: 14px 16px; }
+`;
+
+const styleEl = document.createElement("style");
+styleEl.textContent = css;
+document.head.appendChild(styleEl);
+
+const DOC_TYPES = [
+  {
+    id: "passport",
+    label: "Passport — Photo Page",
+    hint: "The page showing your photo, name, nationality and passport number",
+    required: true,
+  },
+  {
+    id: "business_letter",
+    label: "Company Invitation / Business Letter",
+    hint: "A letter from your company confirming the purpose of visit on company letterhead",
+    required: false,
+  },
+  {
+    id: "company_reg",
+    label: "Company Registration Certificate",
+    hint: "Official registration document showing your business is legally incorporated",
+    required: false,
+  },
+  {
+    id: "other",
+    label: "Other Supporting Document",
+    hint: "Any additional document your embassy or consulate has requested",
+    required: false,
+  },
+];
+
+let state = {
+  submitted: false,
+  loading: false,
+  error: null,
+  isCooldown: false,
+  files: {},       // { docTypeId: File }
+  form: {
+    name: "",
+    email: "",
+    bookingRef: "",
+    country: "",
+    notes: "",
+  },
+};
+
+function formatBytes(bytes) {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+  return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+}
+
+function canSubmit() {
+  return (
+    state.form.name.trim() &&
+    state.form.email.trim() &&
+    state.form.country.trim() &&
+    state.files["passport"]
+  );
+}
+
+function render() {
+  const root = document.getElementById("sdf-docs-root");
+  if (!root) return;
+
+  if (state.submitted) {
+    root.innerHTML = `
+    <div class="sdf-docs" style="display:flex;align-items:center;justify-content:center;padding:40px 20px;min-height:100vh;">
+      <div style="background:${S1};border:1px solid ${BD};border-radius:20px;padding:48px 40px;max-width:520px;width:100%;text-align:center;">
+        <div style="width:60px;height:60px;background:rgba(201,168,76,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:2px solid ${G};">
+          <span style="color:${G};font-size:24px;font-weight:700;">✓</span>
+        </div>
+        <h2 style="color:${T1};margin:0 0 8px;font-size:21px;font-weight:600;">Documents Received</h2>
+        <p style="color:${T2};margin:0 0 28px;font-size:14px;line-height:1.7;">
+          Your submission has been forwarded to our visit coordination team at
+          <a href="/contact/">Get in Touch</a>.
+          A confirmation has been sent to <span style="color:${G};">${state.form.email}</span>.
+        </p>
+        <div class="sdf-notice" style="text-align:left;margin-bottom:24px;">
+          <div style="color:${G};font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;">What happens next</div>
+          ${[
+            "Our team will review your documents within 1–2 business days.",
+            "We will reach out to you at " + state.form.email + " if any clarification is needed.",
+            "Factory visit details will be confirmed separately via your booking.",
+          ].map(t => `<div style="display:flex;gap:8px;margin-bottom:7px;"><span style="color:${G};font-size:12px;margin-top:1px;">→</span><span style="color:${T2};font-size:12px;line-height:1.6;">${t}</span></div>`).join("")}
+        </div>
+        <p style="color:${T3};font-size:11px;margin:0;line-height:1.6;">
+          Questions? Contact us at <a href="/contact/">Get in Touch</a><br>
+          or WhatsApp <span style="color:${G};">+880 1819 172080</span>
+        </p>
+      </div>
+    </div>`;
+    return;
+  }
+
+  const fileListHTML = Object.keys(state.files).length
+    ? `<div style="display:flex;flex-direction:column;gap:7px;margin-top:12px;">
+        ${Object.entries(state.files).map(([typeId, file]) => {
+          const docType = DOC_TYPES.find(d => d.id === typeId);
+          return `<div class="sdf-file-item">
+            <div style="flex:1;min-width:0;">
+              <div style="color:${G};font-size:10px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;">${docType?.label || typeId}</div>
+              <div style="color:${T1};font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${file.name}</div>
+              <div style="color:${T3};font-size:11px;">${formatBytes(file.size)}</div>
+            </div>
+            <button class="sdf-remove" data-remove="${typeId}" title="Remove">✕</button>
+          </div>`;
+        }).join("")}
+      </div>`
+    : "";
+
+  root.innerHTML = `
+  <div class="sdf-docs">
+    <!-- Header -->
+    <div style="background:${S1};border-bottom:1px solid ${BD};padding:14px 40px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div>
+          <div style="color:${T1};font-weight:500;font-size:14px;line-height:1.2;">SDF Clothing</div>
+          <div style="color:${T3};font-size:11px;">Garment Manufacturers · Dhaka, Bangladesh · Est. 1998</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <span style="width:7px;height:7px;background:${GREEN};border-radius:50%;display:inline-block;"></span>
+        <span style="color:${T2};font-size:12px;white-space:nowrap;">Visit Coordination</span>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div style="max-width:680px;margin:0 auto;padding:40px 24px;">
+      <div style="margin-bottom:32px;">
+        <h1 style="color:${T1};font-size:22px;font-weight:600;margin:0 0 8px;">Visitor Document Submission</h1>
+        <p style="color:${T2};font-size:14px;margin:0;line-height:1.7;">
+          If you require an invitation letter or visa support for your visit to our clothing manufacturer in Bangladesh,
+          please submit the relevant documents below. Our team will review and follow up within 1–2 business days.
+        </p>
+      </div>
+
+      <!-- Privacy notice -->
+      <div class="sdf-notice" style="margin-bottom:28px;">
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <span style="color:${G};font-size:14px;margin-top:1px;">🔒</span>
+          <div>
+            <div style="color:${G};font-size:12px;font-weight:600;margin-bottom:4px;">Document handling</div>
+            <p style="color:${T2};font-size:12px;margin:0;line-height:1.7;">
+              Submitted documents are forwarded directly to our visit coordination team and used solely for the purpose of facilitating your factory visit. Documents are not stored on public servers and are handled in accordance with applicable data protection standards.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:22px;">
+
+        <!-- Contact details -->
+        <div style="background:${S1};border:1px solid ${BD};border-radius:16px;padding:24px;">
+          <h3 style="color:${T1};font-size:14px;font-weight:500;margin:0 0 20px;">Your Details</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div>
+              <label class="sdf-lbl">Full name <span style="color:${G};">*</span></label>
+              <input class="sdf-inp" type="text" id="f-name" placeholder="As shown on passport" value="${state.form.name}">
+            </div>
+            <div>
+              <label class="sdf-lbl">Business email <span style="color:${G};">*</span></label>
+              <input class="sdf-inp" type="email" id="f-email" placeholder="you@company.com" value="${state.form.email}">
+            </div>
+            <div>
+              <label class="sdf-lbl">Country of passport <span style="color:${G};">*</span></label>
+              <input class="sdf-inp" type="text" id="f-country" placeholder="e.g. Sweden" value="${state.form.country}">
+            </div>
+            <div>
+              <label class="sdf-lbl">Booking reference (if known)</label>
+              <input class="sdf-inp" type="text" id="f-bookingref" placeholder="e.g. SDF-2026-0618" value="${state.form.bookingRef}">
+            </div>
+          </div>
+        </div>
+
+        <!-- Document type selector -->
+        <div style="background:${S1};border:1px solid ${BD};border-radius:16px;padding:24px;">
+          <h3 style="color:${T1};font-size:14px;font-weight:500;margin:0 0 6px;">Select Document Type & Upload</h3>
+          <p style="color:${T3};font-size:12px;margin:0 0 18px;">PDF or JPG only · Max 5 MB per file · You may submit up to ${DOC_TYPES.length} documents</p>
+
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            ${DOC_TYPES.map(dt => {
+              const hasFile = !!state.files[dt.id];
+              return `
+              <div style="border:1px solid ${hasFile ? "rgba(201,168,76,0.3)" : BD};border-radius:10px;padding:14px 16px;background:${hasFile ? "rgba(201,168,76,0.04)" : S2};transition:all 0.15s;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+                  <div style="flex:1;">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;">
+                      <span style="color:${hasFile ? G : T1};font-size:13px;font-weight:500;">${dt.label}</span>
+                      ${dt.required ? `<span style="background:rgba(201,168,76,0.12);color:${G};font-size:10px;padding:1px 7px;border-radius:4px;border:1px solid rgba(201,168,76,0.2);">Required</span>` : `<span style="color:${T3};font-size:10px;">Optional</span>`}
+                    </div>
+                    <div style="color:${T3};font-size:11px;line-height:1.5;">${dt.hint}</div>
+                    ${hasFile ? `<div style="margin-top:7px;display:flex;align-items:center;gap:6px;">
+                      <span style="color:${GREEN};font-size:11px;">✓</span>
+                      <span style="color:${T2};font-size:11px;">${state.files[dt.id].name} · ${formatBytes(state.files[dt.id].size)}</span>
+                      <button class="sdf-remove" data-remove="${dt.id}" style="margin-left:4px;">✕</button>
+                    </div>` : ""}
+                  </div>
+                  ${!hasFile ? `<label style="background:${S3};border:1px solid ${BD};border-radius:7px;padding:7px 14px;font-size:12px;color:${T2};cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 0.12s;" onmouseover="this.style.borderColor='${G}';this.style.color='${G}'" onmouseout="this.style.borderColor='${BD}';this.style.color='${T2}'">
+                    Choose file
+                    <input type="file" accept=".pdf,.jpg,.jpeg" data-doctype="${dt.id}" style="display:none;" class="file-input">
+                  </label>` : ""}
+                </div>
+              </div>`;
+            }).join("")}
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div style="background:${S1};border:1px solid ${BD};border-radius:16px;padding:24px;">
+          <label class="sdf-lbl">Additional notes (optional)</label>
+          <textarea class="sdf-inp" id="f-notes" rows="3" placeholder="e.g. specific embassy requirements, interpreter needed, visa type requested..." style="resize:vertical;line-height:1.6;">${state.form.notes}</textarea>
+        </div>
+
+        <!-- What we do NOT collect notice -->
+        <div style="background:${S2};border:1px solid ${BD};border-radius:12px;padding:16px 18px;">
+          <div style="color:${T3};font-size:10px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">Documents we do not require</div>
+          ${["Personal tax identification numbers or national ID numbers","Bank statements or personal financial records","Home address or personal contact details beyond your business email","Any document not directly relevant to your factory visit"].map(t => `<div style="display:flex;gap:8px;margin-bottom:6px;align-items:flex-start;"><span style="color:${T3};font-size:12px;margin-top:1px;">—</span><span style="color:${T3};font-size:12px;line-height:1.5;">${t}</span></div>`).join("")}
+        </div>
+
+        <!-- Error / Cooldown notice -->
+        ${state.error ? `<div style="background:${state.isCooldown ? "rgba(201,168,76,0.06)" : "rgba(239,68,68,0.08)"};border:1px solid ${state.isCooldown ? "rgba(201,168,76,0.2)" : "rgba(239,68,68,0.2)"};border-radius:8px;padding:12px 16px;color:${state.isCooldown ? G : "#f87171"};font-size:13px;line-height:1.6;display:flex;gap:8px;align-items:flex-start;">
+          <span style="margin-top:1px;">${state.isCooldown ? "🕐" : "⚠️"}</span>
+          <span>${state.error}</span>
+        </div>` : ""}
+
+        <!-- Submit -->
+        <button id="btn-submit" class="sdf-btn-primary" ${!canSubmit() || state.loading ? "disabled" : ""}>
+          ${state.loading ? "Submitting…" : "Submit Documents"}
+        </button>
+        <p style="color:${T3};font-size:11px;text-align:center;margin:0;line-height:1.6;">
+          Documents are forwarded to our team at <a href="/contact/">Get in Touch</a> · Coordination team reviews within 1–2 business days
+        </p>
+
+      </div>
+    </div>
+  </div>`;
+
+  // File input listeners
+  document.querySelectorAll(".file-input").forEach(input => {
+    input.addEventListener("change", e => {
+      const file = e.target.files[0];
+      const docType = e.target.dataset.doctype;
+      if (!file) return;
+      if (file.size > 5 * 1024 * 1024) {
+        state.error = `"${file.name}" exceeds the 5 MB limit. Please compress or crop the file and try again.`;
+        render(); return;
+      }
+      if (!["application/pdf","image/jpeg","image/jpg"].includes(file.type)) {
+        state.error = "Only PDF or JPG files are accepted.";
+        render(); return;
+      }
+      state.error = null;
+      state.files[docType] = file;
+      render();
+    });
+  });
+
+  // Remove file
+  document.querySelectorAll(".sdf-remove").forEach(btn => {
+    btn.addEventListener("click", () => {
+      delete state.files[btn.dataset.remove];
+      render();
+    });
+  });
+
+  // Form inputs
+  ["name","email","country","bookingref","notes"].forEach(field => {
+    document.getElementById(`f-${field}`)?.addEventListener("input", e => {
+      const key = field === "bookingref" ? "bookingRef" : field;
+      state.form[key] = e.target.value;
+    });
+  });
+
+  // Submit
+  document.getElementById("btn-submit")?.addEventListener("click", async () => {
+    if (!canSubmit() || state.loading) return;
+    state.loading = true;
+    state.error = null;
+    render();
+
+    try {
+      const formData = new FormData();
+      formData.append("name", state.form.name);
+      formData.append("email", state.form.email);
+      formData.append("country", state.form.country);
+      formData.append("bookingRef", state.form.bookingRef);
+      formData.append("notes", state.form.notes);
+
+      Object.entries(state.files).forEach(([typeId, file]) => {
+        const docType = DOC_TYPES.find(d => d.id === typeId);
+        formData.append(`doc_${typeId}`, file, `[${docType?.label || typeId}] ${file.name}`);
+      });
+
+      const res = await fetch("/api/visitor-docs", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (res.ok) {
+        state.submitted = true;
+      } else {
+        const txt = await res.text();
+        if (res.status === 429) {
+          // Cooldown limit reached — show the Worker's exact message with remaining days
+          state.isCooldown = true;
+          state.error = txt || "You have reached the maximum number of submissions allowed. Please contact <a href=\"/contact\">Get in Touch</a> directly.";
+        } else if (txt && txt.length < 200) {
+          state.isCooldown = false;
+          state.error = txt;
+        } else {
+          state.isCooldown = false;
+          state.error = "Something went wrong. Please try again or email us at <a href=\"/contact\">Get in Touch</a>";
+        }
+        console.error("Upload error:", txt);
+      }
+    } catch (err) {
+      state.error = "Connection error. Please check your internet and try again.";
+      console.error(err);
+    }
+
+    state.loading = false;
+    render();
+  });
+}
+
+render();
+</script>
+
+</BaseLayout>

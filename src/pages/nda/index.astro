@@ -1,0 +1,889 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pageTitle = "Non-Disclosure Agreement | SDF Clothing";
+const pageDescription = "Download a pre-filled NDA from SDF Clothing. Enter your details, generate a ready-to-sign PDF non-disclosure agreement instantly.";
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": pageTitle,
+    "description": pageDescription,
+    "url": "https://sdfltd.com/nda/",
+    "isPartOf": { "@id": "https://sdfltd.com/#website" }
+  }
+];
+
+---
+
+<BaseLayout 
+  title={pageTitle}
+  description={pageDescription} schema={schema}
+
+>
+  <section class="nda-section">
+    <div class="container">
+
+      <div class="form-section">
+        <h2>Generate Your NDA</h2>
+        <p class="form-intro">Complete the form below to generate a pre-filled Non-Disclosure Agreement PDF.</p>
+        
+        <form id="ndaForm">
+          <div class="form-group">
+            <label for="fullName">Client Full Name *</label>
+            <input type="text" id="fullName" name="fullName" required placeholder="Enter your full legal name" />
+          </div>
+          <div class="form-group">
+            <label for="companyName">Client Company Name *</label>
+            <input type="text" id="companyName" name="companyName" required placeholder="Enter your registered company name" />
+          </div>
+          <div class="form-group">
+            <label for="companyReg">Company Registration Number (optional)</label>
+            <input type="text" id="companyReg" name="companyReg" placeholder="e.g., 12345678" />
+          </div>
+          <div class="form-group">
+            <label for="address">Business Address *</label>
+            <input type="text" id="address" name="address" required placeholder="Enter your complete registered business address" />
+          </div>
+          <div class="form-group">
+            <label for="cityCountry">City & Country *</label>
+            <input type="text" id="cityCountry" name="cityCountry" required placeholder="e.g., New York, USA" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your business email address" />
+          </div>
+          <div class="legal-metadata-warning">
+            <div class="warning-icon">⚠️</div>
+            <p>
+              <strong>LEGAL NOTICE:</strong> By generating this NDA, you acknowledge that the following technical metadata — including your IP address, device information, browser, operating system, screen resolution, language, timezone, and exact timestamp — is permanently embedded within this PDF document. This metadata serves as legally admissible evidence of document receipt and identity verification under the <strong>Contract Act 1872 (Bangladesh)</strong> and the <strong>Digital Security Act 2018</strong>. SDF Clothing does not store this data on any server. It exists solely inside your downloaded PDF and may be used in legal proceedings in the event of any breach of this Agreement.
+            </p>
+          </div>
+          <div class="metadata-notice" id="metadataNotice">
+            <div class="metadata-header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Information recorded in your NDA for security purposes</span>
+            </div>
+            <p class="metadata-desc">For legal verification and document authenticity, the following information will be automatically recorded inside your generated PDF. This ensures the document is traceable and tamper-evident. We do not store this data on our servers.</p>
+            <div class="metadata-grid">
+              <div class="metadata-item">
+                <span class="meta-label">IP Address</span>
+                <span class="meta-value" id="metaIP">Detecting...</span>
+              </div>
+              <div class="metadata-item">
+                <span class="meta-label">Browser</span>
+                <span class="meta-value" id="metaBrowser">Detecting...</span>
+              </div>
+              <div class="metadata-item">
+                <span class="meta-label">Operating System</span>
+                <span class="meta-value" id="metaOS">Detecting...</span>
+              </div>
+              <div class="metadata-item">
+                <span class="meta-label">Device Type</span>
+                <span class="meta-value" id="metaDevice">Detecting...</span>
+              </div>
+              <div class="metadata-item">
+                <span class="meta-label">Screen Resolution</span>
+                <span class="meta-value" id="metaScreen">Detecting...</span>
+              </div>
+              <div class="metadata-item">
+                <span class="meta-label">Language</span>
+                <span class="meta-value" id="metaLang">Detecting...</span>
+              </div>
+              <div class="metadata-item">
+                <span class="meta-label">Timezone</span>
+                <span class="meta-value" id="metaTimezone">Detecting...</span>
+              </div>
+              <div class="metadata-item">
+                <span class="meta-label">Date & Time</span>
+                <span class="meta-value" id="metaDateTime">Detecting...</span>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="generate-btn" id="generateBtn">
+  <span class="btn-idle">Generate & Download NDA</span>
+  <span class="btn-loading" style="display:none">
+    <svg class="spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;margin-right:8px"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+    Generating PDF...
+  </span>
+  <span class="btn-done" style="display:none">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;margin-right:8px"><polyline points="20 6 9 17 4 12"/></svg>
+    Downloaded!
+  </span>
+</button>
+        </form>
+      </div>
+
+      <div class="seo-content">
+        <h1>Non-Disclosure Agreement</h1>
+
+        <div class="content-block">
+          <h2>What is an NDA?</h2>
+          <p>A Non-Disclosure Agreement (NDA) — also known as a Confidentiality Agreement — is a legally binding contract under the <strong>Contract Act 1872 (Bangladesh)</strong> that establishes a confidential relationship between two or more parties. It prevents the receiving party from disclosing proprietary information shared during business discussions, manufacturing collaborations, or supply chain partnerships.</p>
+          <p>In the Bangladesh Ready-Made Garment (RMG) industry, NDAs are a standard practice endorsed by <strong>BGMEA (Bangladesh Garment Manufacturers and Exporters Association)</strong> and <strong>BKMEA (Bangladesh Knitwear Manufacturers and Exporters Association)</strong> to protect intellectual property across global supply chains.</p>
+        </div>
+
+        <div class="content-block">
+          <h2>Why SDF Clothing Requires an NDA</h2>
+          <p>As a <a href="/certifications" style="color: #e00; text-decoration: none;">GOTS-certified clothing manufacturer</a> operating under Bangladesh's <strong>Export Policy 2021–2024</strong> and international trade compliance standards, SDF Clothing handles highly sensitive client information including:</p>
+          <ul>
+            <li><strong>Tech Packs:</strong> Detailed technical specifications, construction details, and garment measurements</li>
+            <li><strong>Design Files:</strong> Original artwork, CAD patterns, colorways, and creative concepts protected under the <strong>Copyright Act 2000 (Bangladesh)</strong></li>
+            <li><strong>Fabric Sourcing:</strong> Proprietary material specifications, yarn compositions, and supplier relationships</li>
+            <li><strong>Pricing Information:</strong> FOB cost structures, CMT rates, and commercial terms</li>
+            <li><strong>Business Strategy:</strong> Market positioning, launch timelines, and growth plans</li>
+            <li><strong>Trade Secrets:</strong> Manufacturing processes protected under the <strong>Penal Code 1860 (Bangladesh), Section 408</strong></li>
+          </ul>
+        </div>
+
+        <div class="content-block">
+          <h2>Legal Framework</h2>
+          <p>This NDA is governed by and enforceable under the following Bangladesh laws and international frameworks:</p>
+          <ul>
+            <li><strong>Contract Act 1872</strong> — legal basis for the binding agreement</li>
+            <li><strong>Copyright Act 2000</strong> — protection of design files and creative works</li>
+            <li><strong>Penal Code 1860</strong> — criminal liability for breach of trust (Section 408)</li>
+            <li><strong>Evidence Act 1872</strong> — admissibility of signed NDA in court proceedings</li>
+            <li><strong>Arbitration Act 2001</strong> — dispute resolution mechanism</li>
+            <li><strong>TRIPS Agreement (WTO)</strong> — international intellectual property protection</li>
+            <li><strong>BGMEA & BKMEA Compliance Standards</strong> — industry-standard confidentiality protocols</li>
+          </ul>
+        </div>
+
+        <div class="content-block">
+          <h2>How It Works</h2>
+          <p>After downloading your NDA, you may also want to <a href="/contact/" style="color: #e00; text-decoration: none;">request free samples</a> to evaluate our manufacturing quality, or explore <a href="/case-studies/" style="color: #e00; text-decoration: none;">our client case studies</a> to see real-world results.</p>
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h3>Fill the Form</h3>
+                <p>Enter your personal and company details above. All fields are required to generate a complete, legally formatted NDA.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h3>Download PDF</h3>
+                <p>Click Generate to instantly create a professionally formatted PDF NDA with your details pre-filled and dated.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h3>Sign and Send</h3>
+                <p>Print, sign, and email the signed NDA to <a href="/contact/">Get in Touch</a>. We will countersign and return a fully executed copy.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script is:inline src="/js/jspdf.umd.min.js"></script>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('ndaForm');
+
+      // ── Detect & display metadata ──────────────────────────────
+      function detectBrowser(ua) {
+        if (ua.includes('Edg/')) return 'Microsoft Edge';
+        if (ua.includes('OPR/') || ua.includes('Opera')) return 'Opera';
+        if (ua.includes('Chrome/')) return 'Google Chrome';
+        if (ua.includes('Firefox/')) return 'Mozilla Firefox';
+        if (ua.includes('Safari/') && !ua.includes('Chrome')) return 'Apple Safari';
+        return 'Unknown Browser';
+      }
+      function detectOS(ua) {
+        if (ua.includes('Windows NT 10.0')) return 'Windows 11/10';
+        if (ua.includes('Windows NT 6.3')) return 'Windows 8.1';
+        if (ua.includes('Windows')) return 'Windows';
+        if (ua.includes('Mac OS X')) return 'macOS';
+        if (ua.includes('iPhone')) return 'iOS (iPhone)';
+        if (ua.includes('iPad')) return 'iOS (iPad)';
+        if (ua.includes('Android')) return 'Android';
+        if (ua.includes('Linux')) return 'Linux';
+        return 'Unknown OS';
+      }
+      function detectDevice(ua) {
+        if (ua.includes('iPhone') || ua.includes('Android') && ua.includes('Mobile')) return 'Mobile';
+        if (ua.includes('iPad') || ua.includes('Android') && !ua.includes('Mobile')) return 'Tablet';
+        return 'Desktop';
+      }
+
+      const ua = navigator.userAgent;
+      const browserName = detectBrowser(ua);
+      const osName = detectOS(ua);
+      const deviceType = detectDevice(ua);
+      const screenRes = window.screen.width + 'x' + window.screen.height;
+      const language = navigator.language || 'Unknown';
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
+      const now = new Date();
+      const dateTimeStr = now.toLocaleString('en-GB', {
+        day: '2-digit', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit',
+        timeZoneName: 'short'
+      });
+
+      document.getElementById('metaBrowser').textContent = browserName;
+      document.getElementById('metaOS').textContent = osName;
+      document.getElementById('metaDevice').textContent = deviceType;
+      document.getElementById('metaScreen').textContent = screenRes;
+      document.getElementById('metaLang').textContent = language;
+      document.getElementById('metaTimezone').textContent = timezone;
+      document.getElementById('metaDateTime').textContent = dateTimeStr;
+
+      // Fetch public IP
+      fetch('https://api.ipify.org?format=json')
+        .then(r => r.json())
+        .then(data => { document.getElementById('metaIP').textContent = data.ip; })
+        .catch(() => { document.getElementById('metaIP').textContent = 'Unavailable'; });
+
+      // ── Store metadata for PDF use ─────────────────────────────
+      window.ndaMetadata = {
+        ip: 'Fetching...', browser: browserName, os: osName,
+        device: deviceType, screen: screenRes, language, timezone,
+        dateTime: dateTimeStr
+      };
+      fetch('https://api.ipify.org?format=json')
+        .then(r => r.json())
+        .then(data => {
+          window.ndaMetadata.ip = data.ip;
+          document.getElementById('metaIP').textContent = data.ip;
+        })
+        .catch(() => {
+          window.ndaMetadata.ip = 'Unavailable';
+          document.getElementById('metaIP').textContent = 'Unavailable';
+        });
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const btn = document.getElementById('generateBtn');
+        btn.disabled = true;
+        btn.querySelector('.btn-idle').style.display = 'none';
+        btn.querySelector('.btn-loading').style.display = 'inline-flex';
+        btn.querySelector('.btn-done').style.display = 'none';
+
+        const fullName = document.getElementById('fullName').value.trim();
+        const companyName = document.getElementById('companyName').value.trim();
+        const companyReg = document.getElementById('companyReg').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const cityCountry = document.getElementById('cityCountry').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+        const today = new Date();
+        const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const agreementNo = 'SDF-NDA-' + year + '-' + month + day;
+
+        // Logo loading with async/await
+        let logoBase64 = null;
+        try {
+          const response = await fetch('/sdf.jpg');
+          if (response.ok) {
+            const blob = await response.blob();
+            logoBase64 = await new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result);
+              reader.onerror = reject;
+              reader.readAsDataURL(blob);
+            });
+          }
+        } catch (err) {
+          console.warn('Logo fetch failed, proceeding without logo:', err);
+        }
+
+        generatePDF(logoBase64);
+
+        function generatePDF(logoBase64) {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+
+          const lm = 20;
+          const usableWidth = 170;
+          const topMargin = 22;
+          const bottomLimit = 272;
+          const lineHeight = 5.5;
+          let y = topMargin;
+          let pageNum = 1;
+
+          const headingColor = [26, 46, 74];
+
+          function addHeaderFooter() {
+            const pageWidth = 210;
+            const pageHeight = 297;
+
+            // Header - Navy filled rectangle
+            doc.setFillColor(...headingColor);
+            doc.rect(0, 0, pageWidth, 14, 'F');
+
+            // Header text - white bold
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(7);
+            doc.setFont('helvetica', 'bold');
+            doc.text('NON-DISCLOSURE AGREEMENT  |  SDF Clothing  |  Agreement No: ' + agreementNo, 20, 9);
+
+            // Page number - right aligned
+            doc.setFont('helvetica', 'normal');
+            doc.text('Page ' + pageNum, pageWidth - 20, 9, { align: 'right' });
+
+            // Logo if available
+            if (logoBase64) {
+              try {
+                doc.addImage(logoBase64, 'JPEG', 170, 1.5, 12, 12);
+              } catch (e) {
+                console.warn('Failed to add logo to header:', e);
+              }
+            }
+
+            // Footer - Navy filled rectangle
+            doc.setFillColor(...headingColor);
+            doc.rect(0, 285, pageWidth, 12, 'F');
+
+            // Footer text - centered
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(7);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Confidential  |  SDF Clothing — sdfltd.com  |  contact@sdfltd.com', pageWidth / 2, 291, { align: 'center' });
+
+            doc.setTextColor(0, 0, 0);
+          }
+
+          function newPage() {
+            addHeaderFooter();
+            doc.addPage();
+            pageNum++;
+            addHeaderFooter();
+            y = topMargin;
+          }
+
+          function addSection(title) {
+            if (y > 260) newPage();
+            doc.setFillColor(...headingColor);
+            doc.rect(20, y - 4, usableWidth, 8, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'bold');
+            doc.text(title, 22, y + 1);
+            doc.setTextColor(0, 0, 0);
+            y += 10;
+          }
+
+          function addBody(text) {
+            const lines = doc.splitTextToSize(text, usableWidth);
+            lines.forEach(function (line) {
+              if (y > 270) newPage();
+              doc.setFontSize(9);
+              doc.setFont('helvetica', 'normal');
+              doc.text(line, 20, y);
+              y += lineHeight;
+            });
+          }
+
+          function addClause(text) {
+            if (y > 265) newPage();
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(26, 46, 74);
+            doc.text(text, 20, y);
+            doc.setTextColor(0, 0, 0);
+            y += 7;
+          }
+
+          // Add header/footer to first page
+          addHeaderFooter();
+
+          // Title
+          doc.setFontSize(16);
+          doc.setFont('helvetica', 'bold');
+          doc.setTextColor(...headingColor);
+          doc.text('NON-DISCLOSURE AGREEMENT', 105, y, { align: 'center' });
+          y += 10;
+
+          doc.setFontSize(10);
+          doc.setFont('helvetica', 'normal');
+          doc.setTextColor(80, 80, 80);
+          doc.text('(Mutual Confidentiality Agreement)', 105, y, { align: 'center' });
+          doc.setTextColor(0, 0, 0);
+          y += 10;
+
+          doc.setFontSize(9);
+          doc.setFont('helvetica', 'bold');
+          doc.text('Effective Date: ' + dateStr, 20, y);
+          doc.text('Agreement No: ' + agreementNo, 190, y, { align: 'right' });
+          y += 6;
+          doc.setFont('helvetica', 'normal');
+          doc.text('This Agreement is entered into between SDF Clothing and ' + companyName + '.', 20, y);
+          y += 10;
+
+          addSection('PARTIES');
+          addBody('DISCLOSING PARTY — SDF Clothing');
+          addBody('Address: House 125, Road 01, Baridhara DOHS, Dhaka 1212, Bangladesh');
+          addBody('Contact: sdfltd.com/contact | Website: https://sdfltd.com');
+          y += 5;
+          addBody('RECEIVING PARTY — ' + companyName);
+          addBody('Name: ' + fullName);
+          if (companyReg) addBody('Company Registration: ' + companyReg);
+          addBody('Address: ' + address);
+          addBody('City/Country: ' + cityCountry);
+          addBody('Email: ' + email);
+          y += 10;
+
+          // CLAUSE 1
+          addClause('CLAUSE 1 — PURPOSE');
+          addBody('The Parties wish to explore a potential business relationship involving garment manufacturing, private label production, OEM/ODM services, and/or related supply chain activities ("Purpose"). In connection with this Purpose, each Party may disclose certain Confidential Information to the other Party.');
+          y += 5;
+
+          // CLAUSE 2
+          addClause('CLAUSE 2 — DEFINITION OF CONFIDENTIAL INFORMATION');
+          addBody('For the purposes of this Agreement, "Confidential Information" means any and all non-public information disclosed by either Party to the other, whether disclosed orally, in writing, electronically, or by any other means, including but not limited to:');
+          addBody('(a) Tech packs, technical specifications, construction details, bill of materials (BOM), and garment measurement charts;');
+          addBody('(b) Design files, CAD patterns, artwork, colorways, and creative concepts, protected under the Copyright Act 2000 of Bangladesh;');
+          addBody('(c) Fabric composition, yarn specifications, fabric sourcing suppliers, trims and accessories sourcing details;');
+          addBody('(d) Pricing information, FOB/CMT cost sheets, factory pricing, and commercial payment terms;');
+          addBody('(e) Business strategies, marketing plans, product launch timelines, customer lists, and market positioning;');
+          addBody('(f) Manufacturing processes, production capacity, factory floor plans, and quality control procedures;');
+          addBody('(g) Any trade secrets as defined under the Penal Code 1860 (Bangladesh), Section 408;');
+          addBody('(h) Financial information, investment plans, and funding structures;');
+          addBody('(i) Supplier and buyer databases, logistics arrangements, and shipping documentation.');
+          y += 5;
+
+          // CLAUSE 3
+          addClause('CLAUSE 3 — OBLIGATIONS OF THE RECEIVING PARTY');
+          addBody('The Receiving Party agrees to:');
+          addBody('(a) Hold all Confidential Information in strict confidence and protect it with at least the same degree of care used to protect its own confidential information, but in no event less than reasonable care;');
+          addBody('(b) Not disclose Confidential Information to any third party, employee, agent, contractor, or affiliate without prior written consent from the Disclosing Party;');
+          addBody('(c) Use Confidential Information solely for the Purpose stated in Clause 1 and for no other purpose;');
+          addBody('(d) Not reverse engineer, decompile, disassemble, or otherwise attempt to derive the composition of any material, product, or process disclosed as Confidential Information;');
+          addBody('(e) Not reproduce, copy, or publish Confidential Information in any form;');
+          addBody('(f) Immediately notify the Disclosing Party upon discovery of any unauthorised disclosure or use of Confidential Information;');
+          addBody('(g) Return or destroy all Confidential Information upon request or upon termination of this Agreement.');
+          y += 5;
+
+          // CLAUSE 4
+          addClause('CLAUSE 4 — EXCLUSIONS FROM CONFIDENTIAL INFORMATION');
+          addBody('The obligations of confidentiality shall not apply to information that:');
+          addBody('(a) Is or becomes publicly available through no fault of the Receiving Party;');
+          addBody('(b) Was rightfully known to the Receiving Party prior to disclosure, as evidenced by written records;');
+          addBody('(c) Is independently developed by the Receiving Party without use of Confidential Information;');
+          addBody('(d) Is received from a third party without restriction and without breach of any obligation of confidentiality;');
+          addBody('(e) Is required to be disclosed by applicable law, regulation, or court order, provided that the Receiving Party gives prompt written notice to the Disclosing Party before such disclosure.');
+          y += 5;
+
+          // CLAUSE 5
+          addClause('CLAUSE 5 — INTELLECTUAL PROPERTY RIGHTS');
+          addBody('Nothing in this Agreement shall be construed as granting any rights, licences, or interests in any Confidential Information, patent, trademark, copyright, or other intellectual property right of the Disclosing Party. All designs, tech packs, and creative works remain the exclusive property of the originating Party and are protected under the Copyright Act 2000 (Bangladesh) and the TRIPS Agreement (WTO). Any unauthorised use shall constitute infringement actionable under both civil and criminal law.');
+          y += 5;
+
+          // CLAUSE 6
+          addClause('CLAUSE 6 — TERM AND TERMINATION');
+          addBody('This Agreement shall commence on the Effective Date and remain in full force for a period of two (2) years from the effective date, unless terminated earlier by mutual written consent. The confidentiality obligations contained herein shall survive the expiration or termination of this Agreement and shall continue to bind the Receiving Party indefinitely with respect to any Confidential Information disclosed during the term.');
+          y += 5;
+
+          // CLAUSE 7
+          addClause('CLAUSE 7 — REMEDIES FOR BREACH');
+          addBody('The Parties acknowledge that any breach or threatened breach of this Agreement would cause irreparable harm to the Disclosing Party for which monetary damages would be inadequate. In the event of a breach:');
+          addBody('(a) The Disclosing Party shall be entitled to seek injunctive relief and any other equitable remedies available under the laws of Bangladesh;');
+          addBody('(b) The Disclosing Party may pursue claims for damages, loss of profits, and consequential losses;');
+          addBody('(c) Criminal proceedings may be initiated under Section 408 of the Penal Code 1860 (Bangladesh) for breach of trust;');
+          addBody('(d) The breaching Party shall bear all legal costs, attorney fees, and court expenses incurred by the Disclosing Party.');
+          y += 5;
+
+          // CLAUSE 8
+          addClause('CLAUSE 8 — GOVERNING LAW AND DISPUTE RESOLUTION');
+          addBody('This Agreement shall be governed by and construed in accordance with the laws of the People\'s Republic of Bangladesh.');
+          addBody('(a) The Parties agree to attempt to resolve any dispute through good-faith negotiation within thirty (30) days of written notice;');
+          addBody('(b) If negotiation fails, disputes shall be referred to binding arbitration in Dhaka, Bangladesh, conducted in English, under the Arbitration Act 2001 of Bangladesh;');
+          addBody('(c) The arbitral award shall be final and binding on both Parties;');
+          addBody('(d) Nothing in this clause prevents either Party from seeking urgent injunctive relief from the competent courts of Dhaka, Bangladesh.');
+          y += 5;
+
+          // CLAUSE 9
+          addClause('CLAUSE 9 — COMPLIANCE WITH INDUSTRY STANDARDS');
+          addBody('SDF Clothing is a registered member of BGMEA (Bangladesh Garment Manufacturers and Exporters Association) and BKMEA (Bangladesh Knitwear Manufacturers and Exporters Association). This Agreement aligns with the confidentiality standards recommended by these bodies for international garment trade. Both Parties agree to comply with all applicable Bangladesh export regulations, including the Export Policy 2021-2024, and international trade compliance frameworks including C-TPAT and WRAP requirements.');
+          y += 5;
+
+          // CLAUSE 10
+          addClause('CLAUSE 10 — GENERAL PROVISIONS');
+          addBody('(a) Entire Agreement: This Agreement constitutes the entire agreement between the Parties with respect to its subject matter and supersedes all prior discussions, representations, and agreements;');
+          addBody('(b) Amendment: This Agreement may not be amended except by a written instrument signed by authorised representatives of both Parties;');
+          addBody('(c) Waiver: Failure to enforce any provision of this Agreement shall not constitute a waiver of that provision;');
+          addBody('(d) Severability: If any provision is found to be unenforceable, the remaining provisions shall continue in full force and effect;');
+          addBody('(e) Counterparts: This Agreement may be executed in counterparts, each of which shall be deemed an original;');
+          addBody('(f) Language: This Agreement is executed in the English language, which shall be the governing language for all interpretations;');
+          addBody('(g) Force Majeure: Neither Party shall be liable for failure to perform obligations due to circumstances beyond their reasonable control.');
+          y += 5;
+
+          // CLAUSE 11
+          addClause('CLAUSE 11 — INCOTERMS & TRADE TERM CONFIDENTIALITY');
+          addBody('All pricing discussed under INCOTERMS 2020 terms (FOB, CIF, CFR, EXW, DDP etc.) is strictly confidential. FOB Chittagong/Dhaka port pricing, landed cost calculations, freight estimates, duty rates, and logistics arrangements shared between parties are Confidential Information. Neither party shall disclose trade term structures or cost breakdowns to competitors or third parties.');
+          y += 5;
+
+          // CLAUSE 12
+          addClause('CLAUSE 12 — CROSS-BORDER DATA PROTECTION & GDPR COMPLIANCE');
+          addBody('Where the Receiving Party is based in the European Union, United Kingdom, or any jurisdiction with data protection laws, both parties agree to comply with applicable regulations including GDPR (EU) 2016/679 and UK GDPR. Personal data shared during the business relationship (employee names, emails, contact details) shall be processed lawfully and not retained beyond the term of this Agreement. SDF Clothing complies with Bangladesh\'s Digital Security Act 2018 for all digital data handling. Data breach notification must occur within 72 hours of discovery.');
+          y += 5;
+
+          // CLAUSE 13
+          addClause('CLAUSE 13 — EXPORT CONTROL & TRADE COMPLIANCE');
+          addBody('Both parties agree to comply with all applicable export control laws and regulations including Bangladesh Export Policy 2021-2024, US Export Administration Regulations (EAR), EU Dual-Use Regulation, and UN trade sanctions. Confidential Information shall not be transferred to any sanctioned country, entity, or individual. Both parties confirm they are not listed on any government sanctions list (OFAC, EU, UN). C-TPAT and WRAP compliance standards apply to all supply chain information shared.');
+          y += 5;
+
+          // CLAUSE 14
+          addClause('CLAUSE 14 — SAMPLE, PROTO & TECH PACK CONFIDENTIALITY');
+          addBody('All physical and digital samples, proto samples, pre-production samples, tech packs, CAD patterns, measurement charts, bill of materials (BOM), grading specs, and fit comments shared between parties are strictly Confidential Information. The Receiving Party shall not use sample garments, tech packs, or construction details to replicate, copy, or manufacture identical or substantially similar products with any other manufacturer. Samples remain the intellectual property of the originating party and must be returned or destroyed upon request. This clause survives termination of the Agreement indefinitely.');
+          y += 5;
+
+          // CLAUSE 15
+          addClause('CLAUSE 15 — NON-SOLICITATION');
+          addBody('During the term of this Agreement and for a period of two (2) years after termination, neither party shall directly or indirectly solicit, recruit, hire, or engage any employee, contractor, agent, or key personnel of the other party who was involved in the business relationship. Neither party shall solicit or approach the other party\'s disclosed suppliers, sub-contractors, or buyers for independent business dealings without prior written consent.');
+          y += 5;
+
+          // CLAUSE 16
+          addClause('CLAUSE 16 — NON-CIRCUMVENTION');
+          addBody('The Receiving Party agrees not to bypass, circumvent, avoid, or otherwise exclude SDF Clothing from any transaction, deal, or business opportunity that originated from or was made possible by information, introductions, or connections provided by SDF Clothing. The Receiving Party shall not contact SDF Clothing\'s disclosed fabric suppliers, trim suppliers, sub-contractors, freight forwarders, or factory partners directly for independent business dealings without prior written consent from SDF Clothing. Violation of this clause shall entitle SDF Clothing to a commission equivalent to 15% of the total transaction value of any circumvented deal, in addition to all other remedies available.');
+          y += 5;
+
+          // CLAUSE 17
+          addClause('CLAUSE 17 — DIGITAL ASSET & INTELLECTUAL PROPERTY PROTECTION');
+          addBody('All digital assets shared between parties including but not limited to: design files (AI, PSD, PDF, CDR), CAD pattern files, Adobe Illustrator/Photoshop files, Canva designs, mockup files, 3D render files, embroidery digitization files (.dst, .emb), color palette files, and brand asset files remain the exclusive intellectual property of the originating party. The Receiving Party shall not reproduce, modify, sub-license, sell, or transfer any digital assets without explicit written consent. Protected under Copyright Act 2000 (Bangladesh) and TRIPS Agreement (WTO). Upon termination, all digital assets must be permanently deleted and confirmation provided in writing within 7 days.');
+          y += 5;
+
+          // CLAUSE 18
+          addClause('CLAUSE 18 — SOCIAL MEDIA & MARKETING RESTRICTION');
+          addBody('SDF Clothing does NOT showcase, photograph, publish, promote, or display any client\'s products, brand names, designs, samples, or order details on any social media platform, website, portfolio, case study, press release, trade publication, or marketing material — under any circumstances. This is a strict and unconditional policy of SDF Clothing. No client product or brand association will ever be made public without explicit, separate written authorisation from the client. The Receiving Party (client) similarly agrees not to make false, misleading, or damaging public statements about SDF Clothing. This clause applies to all platforms including but not limited to: Instagram, LinkedIn, Facebook, TikTok, Pinterest, YouTube, WhatsApp broadcast, WeChat, and any future platforms.');
+          y += 5;
+
+          // CLAUSE 19
+          addClause('CLAUSE 19 — AUDIT RIGHTS');
+          addBody('In the event of a reasonably suspected breach of this Agreement, the non-breaching party may request a compliance audit with 14 days written notice. The audit shall be conducted by a mutually agreed independent auditor at the cost of the requesting party (unless breach is confirmed, in which case costs are borne by the breaching party). The audit scope is limited strictly to matters relevant to this Agreement and shall not disrupt normal business operations.');
+          y += 5;
+
+          // CLAUSE 20
+          addClause('CLAUSE 20 — OFFICIAL NOTICE & COMMUNICATION');
+          addBody('All official notices, demands, or communications under this Agreement shall be made in writing. Accepted communication channels: registered email to the addresses stated in this Agreement, courier/registered post to the addresses stated. Email notices are considered received within 24 hours of sending, provided no delivery failure notification is received. WhatsApp or other messaging app communications do not constitute official legal notice under this Agreement, though they may be used for day-to-day coordination.');
+          y += 5;
+
+          // CLAUSE 21
+          addClause('CLAUSE 21 — LANGUAGE & GOVERNING INTERPRETATION');
+          addBody('This Agreement is executed in English, which shall be the sole governing language for all legal interpretations, disputes, and arbitration proceedings. Any Bengali translation prepared for reference purposes shall be non-binding and shall not override the English version. In case of any conflict between the English version and any translation, the English version shall prevail.');
+          y += 5;
+
+          // CLAUSE 22
+          addClause('CLAUSE 22 — LIQUIDATED DAMAGES');
+          addBody('Both Parties acknowledge that in the event of a material breach of this Agreement, actual damages may be difficult to calculate. Accordingly:');
+          addBody('(a) In the event of unauthorised disclosure of Confidential Information, the breaching Party agrees to pay liquidated damages of USD 10,000 (ten thousand United States Dollars) per incident of breach as a genuine pre-estimate of loss, and not as a penalty;');
+          addBody('(b) In the event of breach of the Non-Circumvention clause (Clause 16), liquidated damages shall be equivalent to 15% of the total circumvented transaction value, with a minimum of USD 5,000;');
+          addBody('(c) In the event of breach of the Digital Asset & IP Protection clause (Clause 17), liquidated damages shall be USD 15,000 per instance of unauthorised use or distribution;');
+          addBody('(d) Payment of liquidated damages does not preclude the non-breaching Party from seeking additional equitable relief or injunctive remedies;');
+          addBody('(e) These amounts shall be reviewed and may be updated by mutual written agreement between the Parties.');
+          y += 5;
+
+          // CLAUSE 23
+          addClause('CLAUSE 23 — LIABILITY CAP');
+          addBody('(a) Except in cases of wilful misconduct, gross negligence, fraud, or breach of confidentiality obligations, neither Party\'s total aggregate liability to the other under or in connection with this Agreement shall exceed USD 50,000 (fifty thousand United States Dollars) or the total value of transactions conducted between the Parties in the twelve (12) months preceding the claim, whichever is greater;');
+          addBody('(b) Neither Party shall be liable for indirect, incidental, special, or consequential damages including loss of profits, loss of business, or loss of reputation, except in cases of deliberate breach of confidentiality;');
+          addBody('(c) Nothing in this clause limits liability for personal injury, death, fraud, or any liability that cannot be excluded by law.');
+          y += 5;
+
+          // CLAUSE 24
+          addClause('CLAUSE 24 — SPECIFIC PERFORMANCE');
+          addBody('The Parties acknowledge that monetary damages alone may be insufficient to remedy certain breaches of this Agreement, particularly breaches involving disclosure of Confidential Information, misuse of digital assets, or circumvention. Accordingly:');
+          addBody('(a) Either Party shall be entitled to seek an order of specific performance from the competent courts of Dhaka, Bangladesh, compelling the other Party to perform or refrain from specific acts in breach of this Agreement;');
+          addBody('(b) The right to seek specific performance is in addition to, and not in substitution of, any other remedy available under this Agreement or applicable law;');
+          addBody('(c) No bond or other security shall be required in connection with any application for specific performance or injunctive relief under this Agreement.');
+          y += 5;
+
+          // CLAUSE 25
+          addClause('CLAUSE 25 — SURVIVAL CLAUSE & POST-TERMINATION OBLIGATIONS');
+          addBody('The following clauses shall survive the expiration or termination of this Agreement and remain binding on both Parties indefinitely, unless otherwise specified:');
+          addBody('- Clause 2: Definition of Confidential Information — Indefinite');
+          addBody('- Clause 3: Obligations of Receiving Party — Indefinite');
+          addBody('- Clause 5: Intellectual Property Rights — Indefinite');
+          addBody('- Clause 7: Remedies for Breach — Indefinite');
+          addBody('- Clause 14: Sample, Proto & Tech Pack Confidentiality — Indefinite');
+          addBody('- Clause 15: Non-Solicitation — 2 years post-termination');
+          addBody('- Clause 16: Non-Circumvention — 3 years post-termination');
+          addBody('- Clause 17: Digital Asset & IP Protection — Indefinite');
+          addBody('- Clause 18: Social Media & Marketing Restriction — Indefinite');
+          addBody('- Clause 22: Liquidated Damages — Indefinite');
+          addBody('- Clause 24: Specific Performance — Indefinite');
+          addBody('All other clauses cease upon expiration of the Agreement term unless a dispute is pending.');
+          y += 5;
+
+          // CLAUSE 26
+          addClause('CLAUSE 26 — DOCUMENT VERSION CONTROL & AMENDMENT LOG');
+          addBody('(a) This document is Version 2.0;');
+          addBody('(b) Any future amendments to this Agreement shall be recorded as a new version, signed by authorised representatives of both Parties, and appended to this Agreement;');
+          addBody('(c) Version history: v1.0 — Initial Agreement — SDF Clothing; v2.0 — Enhanced International Version — SDF Clothing;');
+          addBody('(d) Only the most recent signed version shall be considered the operative agreement between the Parties.');
+          y += 5;
+
+          // CLAUSE 27
+          addClause('CLAUSE 27 — ACKNOWLEDGEMENT OF RECEIPT & UNDERSTANDING');
+          addBody('By signing this Agreement, the Receiving Party confirms and acknowledges that:');
+          addBody('(a) They have received a complete copy of this Agreement;');
+          addBody('(b) They have read and understood all clauses contained herein;');
+          addBody('(c) They have had the opportunity to seek independent legal advice before signing;');
+          addBody('(d) They are signing this Agreement voluntarily and without duress;');
+          addBody('(e) They have the full legal authority and capacity to enter into this Agreement on behalf of themselves or their organisation;');
+          addBody('(f) All information provided in the Receiving Party section of this Agreement is accurate and complete to the best of their knowledge.');
+          y += 10;
+
+          // SIGNATURE PAGE
+          if (y > 220) newPage();
+          else y += 10;
+
+          // Left column
+          doc.setFontSize(9);
+          doc.setFont('helvetica', 'bold');
+          doc.text('DISCLOSING PARTY — SDF Clothing', 20, y);
+          y += 6;
+          doc.setFont('helvetica', 'normal');
+          doc.text('Name: Chowdhury Remon', 20, y);
+          y += 5;
+          doc.text('Title: Founder & CEO', 20, y);
+          y += 5;
+          doc.text('Date: ' + dateStr, 20, y);
+          y += 5;
+          doc.text('Signature: /s/ Chowdhury Remon', 20, y);
+          y += 8;
+          doc.setFontSize(7);
+          doc.setFont('helvetica', 'italic');
+          doc.setTextColor(80, 80, 80);
+          const sdfNote = 'This is an electronically authorized document. SDF Clothing\'s physical wet signature is not required. This electronic authorization is legally valid under the Digital Security Act 2018 (Bangladesh) and the Electronic Transactions Act. Agreement No: ' + agreementNo;
+          const sdfNoteLines = doc.splitTextToSize(sdfNote, 85);
+          sdfNoteLines.forEach(function (line) {
+            doc.text(line, 20, y);
+            y += 4;
+          });
+          doc.setTextColor(0, 0, 0);
+          y += 5;
+
+          // Right column
+          const startY = y - (sdfNoteLines.length * 4) - 30;
+          doc.setFontSize(9);
+          doc.setFont('helvetica', 'bold');
+          doc.text('RECEIVING PARTY — ' + companyName, 115, startY);
+          doc.setFont('helvetica', 'normal');
+          doc.text('Name: _______________________________', 115, startY + 6);
+          doc.text('Title: _______________________________', 115, startY + 11);
+          doc.text('Date: ________________________________', 115, startY + 16);
+          doc.text('Signature: ___________________________', 115, startY + 21);
+          doc.setFontSize(7);
+          doc.setFont('helvetica', 'italic');
+          doc.setTextColor(80, 80, 80);
+          doc.text('Client\'s physical or digital signature is required to make this Agreement binding.', 115, startY + 26);
+          doc.setTextColor(0, 0, 0);
+          y += 5;
+
+          // Acknowledgment line below both columns
+          y += 5;
+          doc.setFontSize(8);
+          doc.setFont('helvetica', 'italic');
+          doc.setTextColor(80, 80, 80);
+          doc.text('By signing below, the Receiving Party confirms acknowledgement per Clause 27 of this Agreement.', 20, y);
+          doc.setTextColor(0, 0, 0);
+          y += 8;
+
+          // Final footer line
+          doc.setFontSize(7);
+          doc.setFont('helvetica', 'normal');
+          const finalFooter = 'This document is legally binding under the Contract Act 1872 of Bangladesh. | Agreement No: ' + agreementNo + ' | Generated: ' + dateStr + ' | SDF Clothing — https://sdfltd.com';
+          const finalFooterLines = doc.splitTextToSize(finalFooter, usableWidth);
+          finalFooterLines.forEach(function (line) {
+            if (y > 285) newPage();
+            doc.text(line, 20, y);
+            y += 4;
+          });
+
+          // ── Document Metadata Section ──
+          y += 8;
+          if (y > 255) { newPage(); }
+
+          // Section heading
+          doc.setFillColor(26, 46, 74);
+          doc.rect(20, y - 4, 170, 8, 'F');
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9);
+          doc.setTextColor(255, 255, 255);
+          doc.text('DOCUMENT METADATA — FOR LEGAL VERIFICATION', 22, y + 1);
+          doc.setTextColor(0, 0, 0);
+          y += 10;
+
+          const meta = window.ndaMetadata || {};
+          const metaLines = [
+            'This document was electronically generated and the following technical metadata was automatically recorded at the time of generation for legal verification and document authenticity purposes.',
+            '',
+            'IP Address      : ' + (meta.ip || 'Unavailable'),
+            'Browser         : ' + (meta.browser || 'Unknown'),
+            'Operating System: ' + (meta.os || 'Unknown'),
+            'Device Type     : ' + (meta.device || 'Unknown'),
+            'Screen Resolution: ' + (meta.screen || 'Unknown'),
+            'Language        : ' + (meta.language || 'Unknown'),
+            'Timezone        : ' + (meta.timezone || 'Unknown'),
+            'Generated At    : ' + (meta.dateTime || dateStr),
+            '',
+            'Note: SDF Clothing does not store this metadata on its servers. This information is embedded solely within this PDF document for the purpose of legal traceability and document authenticity verification.',
+          ];
+
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8);
+          doc.setTextColor(60, 60, 60);
+          metaLines.forEach(function(line) {
+            if (y > 272) { newPage(); }
+            if (line === '') { y += 3; return; }
+            const wrapped = doc.splitTextToSize(line, 170);
+            wrapped.forEach(function(wl) {
+              if (y > 272) { newPage(); }
+              doc.text(wl, 20, y);
+              y += 5;
+            });
+          });
+          doc.setTextColor(0, 0, 0);
+
+          // Add header/footer to last page
+          addHeaderFooter();
+
+          // Save PDF
+          const sanitizedCompanyName = companyName.replace(/[^a-zA-Z0-9]/g, '-');
+          doc.save('SDF-Clothing-NDA-' + sanitizedCompanyName + '-' + dateStr.replace(/ /g, '-') + '.pdf');
+
+          setTimeout(function() {
+            btn.querySelector('.btn-loading').style.display = 'none';
+            btn.querySelector('.btn-done').style.display = 'inline-flex';
+            btn.classList.add('success');
+            setTimeout(function() {
+              btn.querySelector('.btn-done').style.display = 'none';
+              btn.querySelector('.btn-idle').style.display = 'inline-flex';
+              btn.classList.remove('success');
+              btn.disabled = false;
+            }, 3000);
+          }, 300);
+        }
+      });
+    });
+  </script>
+
+  <style>
+    .nda-section { min-height: 100vh; padding: 80px 1.5rem 60px; background: #000; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .seo-content { margin-bottom: 60px; }
+    .seo-content h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 200; color: #fff; margin-bottom: 2rem; line-height: 1.2; letter-spacing: 0.02em; }
+    .content-block { margin-bottom: 2.5rem; }
+    .content-block h2 { font-size: 1.5rem; font-weight: 400; color: #fff; margin-bottom: 1rem; letter-spacing: 0.02em; }
+    .content-block p { font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 1rem; }
+    .content-block ul { list-style: none; padding: 0; margin: 1rem 0; }
+    .content-block li { font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative; }
+    .content-block li::before { content: '•'; position: absolute; left: 0; color: rgba(255,255,255,0.5); }
+    .content-block strong { color: #fff; font-weight: 500; }
+    .steps { display: grid; gap: 2rem; margin-top: 1.5rem; }
+    @media (min-width: 768px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .step { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 1.5rem; border-radius: 8px; }
+    .step-number { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 1rem; }
+    .step-content h3 { font-size: 1.1rem; font-weight: 500; color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+    .step-content p { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0; }
+    .form-section { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); padding: 2.5rem; border-radius: 12px; margin-bottom: 60px; }
+    .form-section h2 { font-size: 1.75rem; font-weight: 300; color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+    .form-intro { font-size: 0.95rem; color: rgba(255,255,255,0.65); margin-bottom: 2rem; }
+    #ndaForm { display: flex; flex-direction: column; gap: 1.5rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label { font-size: 0.85rem; font-weight: 500; color: rgba(255,255,255,0.85); letter-spacing: 0.05em; text-transform: uppercase; }
+    .form-group input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); padding: 0.875rem 1rem; font-size: 1rem; color: #fff; border-radius: 6px; transition: border-color 0.2s, background 0.2s; font-family: inherit; }
+    .form-group input::placeholder { color: rgba(255,255,255,0.4); }
+    .form-group input:focus { outline: none; border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08); }
+    .generate-btn { background: #fff; color: #000; border: none; padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border-radius: 6px; cursor: pointer; transition: background 0.2s, transform 0.1s, opacity 0.2s; margin-top: 1rem; letter-spacing: 0.02em; position: relative; display: flex; align-items: center; justify-content: center; min-width: 260px; }
+    .generate-btn:hover { background: rgba(255,255,255,0.9); }
+    .generate-btn:active { transform: translateY(1px); }
+    .generate-btn:disabled { opacity: 0.75; cursor: not-allowed; transform: none; }
+    .spin { animation: spin 0.8s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .generate-btn.success { background: #22c55e; color: #fff; }
+    @media (max-width: 768px) { .nda-section { padding: 60px 1rem 40px; } .form-section { padding: 1.5rem; } .form-section h2 { font-size: 1.5rem; } }
+    .metadata-notice {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-left: 3px solid rgba(255,255,255,0.4);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .metadata-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .metadata-header svg { opacity: 0.7; flex-shrink: 0; }
+    .metadata-desc {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .metadata-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.6rem;
+    }
+    @media (min-width: 600px) { .metadata-grid { grid-template-columns: repeat(4, 1fr); } }
+    .metadata-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      background: rgba(255,255,255,0.04);
+      border-radius: 6px;
+      padding: 0.6rem 0.75rem;
+    }
+    .meta-label {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+    }
+    .meta-value {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+      word-break: break-all;
+    }
+    .legal-metadata-warning {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      background: rgba(255, 200, 0, 0.05);
+      border: 1px solid rgba(255, 200, 0, 0.2);
+      border-left: 4px solid rgba(255, 200, 0, 0.6);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .warning-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .legal-metadata-warning p {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .legal-metadata-warning strong {
+      color: rgba(255, 220, 0, 0.9);
+      font-weight: 600;
+    }
+  </style>
+</BaseLayout>

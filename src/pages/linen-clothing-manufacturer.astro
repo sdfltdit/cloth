@@ -1,0 +1,569 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Linen Clothing Manufacturer | Breathable Fabric Production";
+const pageDescription = "Manufacture linen clothing with SDF's breathable fabric production. We specialize in summer fabric manufacturing for global fashion brands.";
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com",
+        "name": "SDF Clothing"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "description": "Linen clothing manufacturer from Bangladesh providing pure linen, cotton-linen blends, and premium summer wear including shirts, dresses, and trousers to fashion brands worldwide since 1998."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for linen clothing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "300 pieces per style minimum. This applies per design, colorway, and size range. Lower quantities possible at higher per-piece cost for sampling or prototype runs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What linen fabric options do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer 100% pure linen, cotton-linen blends (60/40, 50/50), linen-rayon blends for drape, heavy linen for jackets, and lightweight linen for shirts. All fabrics are sourced from certified linen mills."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What linen products do you manufacture?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We manufacture linen shirts for men and women, linen dresses, linen trousers, linen suits and blazers, and linen kaftan and beach wear. All products use premium linen fabrics with authentic linen characteristics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you handle linen care and construction?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Linen requires specialized construction to manage natural wrinkling and fabric movement. We use appropriate seam allowances, interfacing for structure, and pre-washing to reduce shrinkage. Care instructions provided with each garment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does linen cost compared to cotton?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Linen typically costs 20-40% more than cotton due to fiber production and processing. The premium is justified by linen's natural luxury, breathability, and sustainability credentials. Cotton-linen blends offer a mid-range option."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does linen clothing production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard production timeline: 35-45 days from fabric receipt for basic linen clothing. 40-55 days for custom fabric development or specialized linen options. 10-14 days for sampling before bulk."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sdfltd.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Linen Clothing Manufacturer"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SDF Clothing accepts orders from 300 pieces per style. This low MOQ makes us ideal for startup brands and small businesses testing new designs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard production takes 30-45 days after sample approval. Rush orders may be possible depending on factory capacity. Total lead time including shipping is typically 10-16 weeks."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing",
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com"
+      },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "NL"],
+      "description": "Custom clothing manufacturing from Bangladesh with low MOQ from 300 pieces."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Clothing from SDF Clothing",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Your Brief",
+          "text": "Share your design, quantity, fabric requirements and timeline."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Quote",
+          "text": "Get a detailed FOB quote within 48 hours."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Sample",
+          "text": "Review and approve a pre-production sample."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Full production with inline quality checks."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Shipment",
+          "text": "FOB Dhaka shipment with full export documentation."
+        }
+      ]
+    }
+]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+
+<meta name="keywords" content="linen clothing manufacturer, custom linen manufacturer, linen shirt manufacturer, linen dress manufacturer, cotton linen blend manufacturer, premium linen apparel" />
+
+<!-- Hero Section -->
+<section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+      <p style="font-size:0.72rem;color:#FFFFFF;">
+        <a href="/" style="color:#FFFFFF;text-decoration:none;">Home</a>
+        <span style="margin:0 0.5rem;color:#333;">/</span>
+        Linen Clothing Manufacturer
+      </p>
+    </nav>
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Linen Clothing Manufacturer | Since 1998 | Premium Fabrics</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1rem;line-height:1.2;">
+      Custom Linen Clothing Manufacturer for Premium Brands
+    </h1>
+    <p style="color:#FFFFFF;max-width:640px;line-height:1.8;font-size:0.92rem;">
+      Linen is the fabric of summer - naturally cooling, breathable, and with a distinctive texture that signals quality. Premium linen clothing requires specialized construction to manage natural wrinkling and fabric movement. SDF Clothing manufactures linen clothing in Bangladesh with pure linen and cotton-linen blends. From 300 pieces per style for authentic linen garments.
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <a href="/contact/" class="cta-button">Get Free Quote</a>
+      <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20linen-clothing-manufacturer`} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WhatsApp Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Stats Section -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#000000;">
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">300</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Pieces Minimum</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">Pure</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Linen</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">35-45</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Days Production</div>
+      </div>
+      <div style="background:#000;padding:2rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:200;color:#e00;margin-bottom:0.5rem;">Blends</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#FFFFFF;">Available</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Capabilities Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Our Capabilities</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Linen Manufacturing Capabilities</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Our linen manufacturing covers the full production cycle from fabric sourcing to finished garment. We source premium linen fabrics from certified mills, cut, sew with specialized construction for linen's unique characteristics, apply finishing, and package for shipment.
+    </p>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+      Production capacity: 20,000-30,000 linen pieces per month across dedicated production lines. We handle pure linen for premium positioning, cotton-linen blends for accessibility, and specialized linen constructions for fashion-forward designs.
+    </p>
+  </div>
+</section>
+
+<!-- Fabric Options Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Materials</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Linen Fabric Options</h2>
+    </div>
+    
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">100% Pure Linen</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Pure linen with authentic linen characteristics. Natural texture, breathability, and wrinkle. Available in various weights from lightweight for shirts to heavy for jackets. Premium positioning for luxury brands.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Cotton-Linen Blends (60/40, 50/50)</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Cotton-linen blends combine linen's breathability with cotton's softness and reduced wrinkling. 60/40 and 50/50 blends available. Mid-range pricing with premium positioning. Popular for accessible luxury.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Linen-Rayon Blends</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Linen-rayon blends for enhanced drape and softness. Rayon adds fluidity and reduces wrinkling while maintaining linen's natural texture. Ideal for dresses and flowing garments.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Heavy Linen for Jackets</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Heavyweight linen for structured garments. 200-250 GSM for jackets, blazers, and outerwear. Provides structure while maintaining linen's natural characteristics. Premium luxury positioning.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Lightweight Linen for Shirts</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;">
+      Lightweight linen for shirts and blouses. 120-160 GSM for summer wear. Breathable and cooling for hot weather. Crisp handfeel with natural linen texture. Essential for summer collections.
+    </p>
+  </div>
+</section>
+
+<!-- Products Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Product Range</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Linen Products We Manufacture</h2>
+    </div>
+    
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Linen Shirts (Men's and Women's)</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Linen shirts for men and women. Button-down shirts, casual shirts, and blouses. Lightweight linen for summer wear. Cotton-linen blends for reduced wrinkling. Premium styling with authentic linen characteristics.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Linen Dresses</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Linen dresses for women. Summer dresses, maxi dresses, and casual dresses. Linen-rayon blends for drape and softness. Pure linen for authentic linen texture. Breathable and cooling for summer.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Linen Trousers</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Linen trousers for men and women. Casual trousers, shorts, and cropped trousers. Cotton-linen blends for comfort and reduced wrinkling. Pure linen for authentic linen characteristics. Summer essential.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Linen Suits and Blazers</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;margin-bottom:2rem;">
+      Linen suits and blazers for men and women. Heavyweight linen for structure. Cotton-linen blends for comfort. Premium linen construction for luxury positioning. Summer formal wear.
+    </p>
+
+    <h3 style="font-size:1.3rem;font-weight:400;color:#e00;margin-bottom:1.5rem;">Linen Kaftan and Beach Wear</h3>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.92rem;">
+      Linen kaftan and beach wear for women. Flowing dresses, cover-ups, and resort wear. Linen-rayon blends for drape. Pure linen for authentic texture. Beach and resort essential.
+    </p>
+  </div>
+</section>
+
+<!-- Care Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Construction</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Linen Care and Construction Considerations</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Linen requires specialized construction to manage natural wrinkling and fabric movement. We use appropriate seam allowances, interfacing for structure in key areas, and pre-washing to reduce shrinkage.
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Pre-washing to reduce shrinkage (linen shrinks significantly)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Appropriate seam allowances (for fabric movement)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Interfacing for structure (collars, cuffs, waistbands)
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Care instructions provided (washing, ironing guidelines)
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- MOQ and Pricing Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Pricing Guide</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">MOQ and Pricing</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      <strong>MOQ:</strong> 300 pieces per style minimum. Applies per design, colorway, and size range.
+    </p>
+    
+    <div style="margin-top:2rem;">
+      <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+        Linen typically costs 20-40% more than cotton due to fiber production and processing. The premium is justified by linen's natural luxury, breathability, and sustainability credentials. Cotton-linen blends offer a mid-range option.
+      </p>
+      <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:1rem;">
+        FOB Bangladesh pricing for 500-piece orders:
+      </p>
+      <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Linen shirt (pure linen): $15-25 per piece
+        </li>
+        <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Linen shirt (cotton-linen blend): $12-20 per piece
+        </li>
+        <li style="padding-left:1.5rem;position:relative;">
+          <span style="color:#e00;position:absolute;left:0;">✓</span>
+          Linen dress: $18-30 per piece
+        </li>
+      </ul>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Pricing includes fabric, cut, sew, basic branding, and standard packaging. Custom printing, embroidery, and premium packaging are additional.
+    </p>
+  </div>
+</section>
+
+<!-- Timeline Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Production Timeline</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Linen Clothing Production Timeline</h2>
+    </div>
+    
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Standard linen clothing production timeline from order confirmation to shipment:
+    </p>
+    <ul style="color:#FFFFFF;font-size:0.88rem;line-height:1.9;list-style:none;padding:0;margin:1.5rem 0;max-width:800px;">
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Linen fabric sourcing: 10-15 days (specialized fabrics)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Sampling: 10-14 days (with pre-washing)
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Bulk production: 35-45 days
+      </li>
+      <li style="margin-bottom:0.75rem;padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Quality inspection: 2-3 days
+      </li>
+      <li style="padding-left:1.5rem;position:relative;">
+        <span style="color:#e00;position:absolute;left:0;">✓</span>
+        Packing and shipping: 3-5 days
+      </li>
+    </ul>
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;margin-top:2rem;">
+      Total timeline: 60-85 days from order to delivery. Linen fabric sourcing and pre-washing add 5-10 days compared to cotton. Rush production available at 20-30% premium.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Common Questions</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Frequently Asked Questions</h2>
+    </div>
+    
+    <div style="max-width:800px;">
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What is the minimum order for linen clothing?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">300 pieces per style minimum. This applies per design, colorway, and size range. Lower quantities possible at higher per-piece cost for sampling or prototype runs.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What linen fabric options do you offer?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We offer 100% pure linen, cotton-linen blends (60/40, 50/50), linen-rayon blends for drape, heavy linen for jackets, and lightweight linen for shirts. All fabrics are sourced from certified linen mills.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">What linen products do you manufacture?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">We manufacture linen shirts for men and women, linen dresses, linen trousers, linen suits and blazers, and linen kaftan and beach wear. All products use premium linen fabrics with authentic linen characteristics.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How do you handle linen care and construction?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Linen requires specialized construction to manage natural wrinkling and fabric movement. We use appropriate seam allowances, interfacing for structure, and pre-washing to reduce shrinkage. Care instructions provided with each garment.</p>
+      </div>
+      <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How much does linen cost compared to cotton?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Linen typically costs 20-40% more than cotton due to fiber production and processing. The premium is justified by linen's natural luxury, breathability, and sustainability credentials. Cotton-linen blends offer a mid-range option.</p>
+      </div>
+      <div style="padding:1.5rem 0;">
+        <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">How long does linen clothing production take?</h3>
+        <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Standard production timeline: 35-45 days from fabric receipt for basic linen clothing. 40-55 days for custom fabric development or specialized linen options. 10-14 days for sampling before bulk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      Need linen clothing manufacturing for your premium brand? <a href="/contact/" style="color:#e00;text-decoration:underline;">Contact SDF Clothing here</a> with your fabric specifications, style requirements, and quantity. We will quote pricing, lead time, and capacity within 48 hours. From 300 pieces minimum.
+    </p>
+  </div>
+</section>
+
+<!-- Internal Link Section -->
+<section style="padding:5rem 0;">
+  <div class="container">
+    <p style="color:#FFFFFF;max-width:800px;line-height:1.8;font-size:0.95rem;">
+      For complete production strategy, read our <a href="/clothing-manufacturers/" style="color:#e00;text-decoration:underline;">complete clothing manufacturers guide</a>.
+    </p>
+  </div>
+</section>
+
+
+    
+    <section style="padding:2rem 0;border-top:1px solid var(--color-border);margin-top:2rem"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:1.1rem;font-weight:600;color:var(--color-text);margin-bottom:1rem">Related Services</h2><nav aria-label="Related pages"><ul style="display:flex;flex-wrap:wrap;gap:0.75rem;list-style:none;padding:0"><li><a href="/low-moq-clothing-manufacturers/" style="color:var(--color-primary)">Low MOQ Manufacturers</a></li><li><a href="/private-label-clothing-manufacturer" style="color:var(--color-primary)">Private Label</a></li><li><a href="/clothing-manufacturers-for-startups/" style="color:var(--color-primary)">Startup Manufacturers</a></li><li><a href="/oem-clothing-manufacturer" style="color:var(--color-primary)">OEM Manufacturing</a></li><li><a href="/sustainable-clothing-manufacturers/" style="color:var(--color-primary)">Sustainable Manufacturing</a></li><li><a href="/certifications" style="color:var(--color-primary)">Certifications</a></li><li><a href="/quality-inspection-service" style="color:var(--color-primary)">Quality Inspection</a></li><li><a href="/tech-pack-service" style="color:var(--color-primary)">Tech Pack Service</a></li><li><a href="/sampling-service" style="color:var(--color-primary)">Sampling Service</a></li><li><a href="/full-package-production/" style="color:var(--color-primary)">Full Package Production</a></li><li><a href="/tools/price-calculator/" style="color:var(--color-primary)">Price Calculator</a></li><li><a href="/contact/" style="color:var(--color-primary)">Get a Quote</a></li></ul></nav></div></section>
+<section style="padding:3rem 0;border-top:1px solid var(--color-border)"><div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--color-text);margin-bottom:1.5rem">Why Partner with SDF Clothing?</h2><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Linen production runs through our own cutting and sewing floor, with fabric sourced directly rather than through a buying house adding a markup on top of mill pricing. Most of our linen sits in the 160-180 GSM range, the weight most summer garments call for, with heavier and lighter options available by request. GOTS, OEKO-TEX Standard 100, BSCI, WRAP, and ISO 9001 certification applies.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Linen's structured drape and natural wrinkling come from the low elasticity of the flax fiber itself, not a manufacturing defect — something we brief buyers on upfront so finished garments match expectations. Minimum order starts at 300 pieces per style, with fabric sourcing, sampling, bulk manufacturing, quality inspection, and export documentation handled in-house.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:1.5rem">Bangladesh's LDC graduation takes effect in November 2026, but nothing changes at the border immediately: the EU has committed to duty-free treatment under Everything But Arms through 2029, and Washington capped tariff exposure at 20% in a late-2025 agreement. For linen specifically, that keeps landed cost manageable on a fabric that already carries higher raw-material cost than cotton.</p><p style="color:var(--color-text-muted);line-height:1.8;margin-bottom:2rem">Ready to start? <a href="/contact/" style="color:var(--color-primary)">Request a sample</a> or <a href="/contact/" style="color:var(--color-primary)">contact our team</a> for a detailed FOB quote within 48 hours.</p></div></section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-header {
+    text-align: center;
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .accent-line {
+    width: 60px;
+    height: 2px;
+    background: #e00;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .cta-button {
+    background: #e00;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .cta-button:hover {
+    background: #cc0000;
+  }
+  
+  .whatsapp-cta {
+    background: #25D366;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .whatsapp-cta:hover {
+    background: #128C7E;
+  }
+</style>
+
+
+
+
+
+
+
+
+

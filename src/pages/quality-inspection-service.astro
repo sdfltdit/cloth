@@ -1,0 +1,1299 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, schemaPerson, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Garment Inspection Checklist: Third-Party vs Factory";
+const pageDescription = "A practical garment quality inspection checklist covering AQL levels, common defects, and third-party vs factory inspection.";
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20quality%20inspection%20service`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-21",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#org" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is AQL in garment inspection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AQL stands for Acceptable Quality Level, the international standard for statistical quality control in garment inspection. AQL defines the maximum number of defective items acceptable in a sample batch. Common levels are AQL 1.5 for major defects (premium goods), AQL 2.5 for general apparel, and AQL 4.0 for basic items. Inspectors use AQL sampling tables to determine how many pieces to check based on lot size."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many pieces does a quality inspector check?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The number of pieces inspected depends on lot size and AQL level. For example, a lot of 500-1,200 pieces at AQL 2.5 requires inspecting 80 pieces. Larger lots require proportionally larger samples. AQL 1.5 requires larger samples than AQL 2.5 for the same lot size. SDF follows international AQL sampling standards to ensure statistically valid inspection results."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between inline and final inspection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Inline inspection occurs during production, typically when 20-30% of goods are completed. It catches defects early before they affect the entire batch, allowing for corrections. Final inspection occurs after production is complete, before shipment. It evaluates the finished product against approved samples and specifications. Both are important - inline prevents mass defects, final ensures shipment quality."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does garment quality inspection cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Garment inspection costs typically range from $200-500 per inspection depending on lot size, location, and inspection type. Factory self-inspection is often included in production costs. Third-party inspection by agencies like QIMA, Bureau Veritas, or SGS costs extra but provides objective verification. SDF includes AQL 2.5 final inspection as standard in our production pricing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I hire a third-party inspector for Bangladesh factories?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can hire third-party inspection companies to inspect Bangladesh factories. Reputed agencies operating in Bangladesh include QIMA, Bureau Veritas, SGS, Intertek, and Tetra Inspection. These agencies send qualified inspectors to factories and provide detailed reports with photos. SDF welcomes third-party inspections and facilitates access for qualified inspectors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What defects cause a shipment to be rejected?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Shipments are rejected when defects exceed AQL acceptance limits. Critical defects (safety issues, hazardous materials) cause immediate rejection regardless of count. Major defects (construction errors, wrong fabric, measurement deviations) are more serious than minor defects (loose threads, minor stitching issues). If major defects exceed AQL limits, the shipment fails and requires rework before re-inspection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documents does a quality inspection produce?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quality inspection produces a detailed inspection report including: lot size and sample size inspected, defect classification (critical/major/minor), photos of defects found, measurement verification results, packaging check results, overall pass/fail determination, and recommendations. Reports typically include 20-50 photos documenting the inspection. Third-party reports are signed and dated by the inspector."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I read a quality inspection report?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start with the overall result - pass or fail based on AQL limits. Review defect counts by category (critical, major, minor). Check if any critical defects exist (automatic fail). Examine photos to understand defect types. Verify measurement results against tolerance limits. Review packaging and labeling compliance. The report should clearly state whether the shipment meets your quality standards and any required corrective actions."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Garment Quality Inspection",
+      "provider": { "@id": SITE + "/#org" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "0",
+          "description": "Included in production | AQL 2.5 standard inspection"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "Garment Quality Inspection Process",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Pre-Production Inspection",
+          "text": "Inspect raw materials and trims before cutting begins. Verify fabric quality, color matching against lab dips, and component specifications. This prevents defective materials from entering production."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Inline Inspection During Production",
+          "text": "Conduct inspection when 20-30% of production is complete. Check sewing quality, construction accuracy, and measurements. Catch issues early to prevent mass defects."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Pre-Shipment Final Inspection",
+          "text": "Perform AQL 2.5 inspection on completed goods before shipment. Randomly sample pieces based on lot size. Check against approved samples and specifications."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Defect Classification and Reporting",
+          "text": "Classify defects as critical, major, or minor. Document findings with photos. Generate detailed inspection report with pass/fail determination and recommendations."
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Common Garment Defect Types",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Sewing Defects"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Fabric Defects"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Measurement Defects"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Color Defects"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Packaging Defects"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Trim Defects"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Labeling Defects"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "Finishing Defects"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Garment Quality Inspection Service</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">AQL Standards | Since 1998 | Dhaka, Bangladesh</p>
+        <h1 class="hero__title">Garment Inspection Checklist: Third-Party vs Factory Inspection</h1>
+        <p class="hero__description">
+          SDF Clothing, a full-service clothing manufacturer, provides comprehensive garment quality inspection services in Bangladesh. Our AQL-based inspection process covers pre-production, inline, and final inspection stages. We catch defects before shipment, protecting your brand reputation and ensuring customer satisfaction. From fabric inspection to final random sampling, our qualified inspectors follow international standards. Third-party inspection welcome. Get your inspection quote today.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">AQL</span>
+            <span class="hero__stat-label">2.5 Standard</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">4-Stage</span>
+            <span class="hero__stat-label">Inline QC</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">98%</span>
+            <span class="hero__stat-label">Pass Rate</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">24hr</span>
+            <span class="hero__stat-label">Report Turnaround</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Request Inspection Quote
+          </a>
+          <a href="/contact/" class="hero__cta hero__cta--secondary">
+            Download Inspection Checklist
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="Garment quality inspection in progress at SDF Clothing Bangladesh factory" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">AQL 2.5 Inspection</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Pre-Production Check</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Inline Monitoring</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Final Random Sampling</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Third-Party Welcome</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Detailed Reports</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: 3 Types of Inspection -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">The 3 Types of Garment Quality Inspection | Which Do You Need?</h2>
+      <p class="section__text">
+        Quality inspection occurs at multiple stages of garment production. Understanding the three main inspection types helps you implement a comprehensive quality control strategy. Each inspection type serves a specific purpose and catches different types of defects.
+      </p>
+
+      <h3 class="section__subtitle">Pre-Production Inspection (PPI)</h3>
+      <p class="section__text">
+        Pre-production inspection happens before cutting begins. Inspectors verify raw materials including fabric, trims, buttons, zippers, and labels against specifications. They check fabric quality for defects, color matching against approved lab dips, GSM verification, and material composition. PPI prevents defective materials from entering production, which would cause mass defects later. This inspection is critical for new suppliers or first orders. Read our guide on <a href="/insights/AQL-inspection-explained">AQL inspection explained</a> for detailed PPI procedures.
+      </p>
+
+      <h3 class="section__subtitle">During Production Inspection (DUPRO/Inline)</h3>
+      <p class="section__text">
+        Inline inspection occurs when production is 20-30% complete. Inspectors check sewing quality, construction accuracy, measurements against tech packs, and workmanship. This stage catches issues like incorrect stitching patterns, wrong seam allowances, or measurement deviations before they affect the entire production run. Inline inspection allows for corrections while production continues, minimizing waste and delays. It's especially important for complex garments or new styles.
+      </p>
+
+      <h3 class="section__subtitle">Final Random Inspection (FRI)</h3>
+      <p class="section__text">
+        Final inspection occurs after production is complete, before shipment. Inspectors randomly sample finished garments based on AQL standards and evaluate them against approved samples and specifications. FRI checks for final defects, packaging accuracy, labeling correctness, and overall finish. This is the gatekeeper inspection - goods must pass FRI before shipment. FRI provides the final quality assurance that what ships matches what was approved.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Comparison of three types of garment quality inspection">
+          <caption>Garment Inspection Type Comparison</caption>
+          <thead>
+            <tr>
+              <th>Inspection Type</th>
+              <th>When</th>
+              <th>What's Checked</th>
+              <th>Catch Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Pre-Production (PPI)</strong></td>
+              <td>Before cutting begins</td>
+              <td>Fabric, trims, materials, lab dips, specifications</td>
+              <td>90% of material defects</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Inline (DUPRO)</strong></td>
+              <td>20-30% through production</td>
+              <td>Sewing, construction, measurements, workmanship</td>
+              <td>70% of production defects</td>
+            </tr>
+            <tr>
+              <td><strong>Final Random (FRI)</strong></td>
+              <td>After production, before shipment</td>
+              <td>Finished garments, packaging, labeling, overall quality</td>
+              <td>95% of shipment defects</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="section__text">
+        For comprehensive quality control, implement all three inspection types. PPI prevents material issues, inline catches production problems early, and final ensures shipment quality. Many brands skip PPI or inline to save costs, but this increases risk of receiving defective goods. The cost of inspection is negligible compared to the cost of returns, reputational damage, and lost customers from quality failures.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: AQL Standards -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">AQL Inspection Standards Explained | What the Numbers Mean</h2>
+      <p class="section__text">
+        AQL (Acceptable Quality Level) is the international standard for statistical quality control in garment inspection. AQL defines the maximum number of defective items acceptable in a production batch. Understanding AQL levels helps you set appropriate quality standards for your products.
+      </p>
+
+      <h3 class="section__subtitle">AQL Levels Explained</h3>
+      <p class="section__text">
+        AQL 1.5 is used for premium goods where quality is critical - luxury fashion, baby clothing, medical textiles. This stricter standard allows fewer defects and requires larger sample sizes. AQL 2.5 is the industry standard for general apparel including t-shirts, casual wear, and standard fashion items. It balances quality with practical production realities. AQL 4.0 applies to basic items where minor defects are more tolerable - workwear, promotional items, budget fashion. The AQL level you choose depends on your brand positioning and customer expectations.
+      </p>
+
+      <h3 class="section__subtitle">Sample Size Tables</h3>
+      <p class="section__text">
+        AQL sampling tables determine how many pieces inspectors check based on lot size. For example, a lot of 281-500 pieces at AQL 2.5 requires inspecting 50 pieces. A lot of 501-1,200 pieces requires inspecting 80 pieces. Larger lots require proportionally larger samples to maintain statistical validity. The sampling tables ensure inspection results are representative of the entire lot. Use our <a href="/tools/aql-calculator">AQL calculator tool</a> to determine sample sizes for your orders.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="AQL sampling table showing sample sizes and acceptance limits">
+          <caption>AQL Sampling Reference Table (AQL 2.5 Standard)</caption>
+          <thead>
+            <tr>
+              <th>Lot Size</th>
+              <th>AQL 1.5 Sample</th>
+              <th>AQL 2.5 Sample</th>
+              <th>Accept/Reject (AQL 2.5)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>281-500 pieces</strong></td>
+              <td>50 pieces</td>
+              <td>50 pieces</td>
+              <td>Accept 3, Reject 4 major defects</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>501-1,200 pieces</strong></td>
+              <td>80 pieces</td>
+              <td>80 pieces</td>
+              <td>Accept 5, Reject 6 major defects</td>
+            </tr>
+            <tr>
+              <td><strong>1,201-3,200 pieces</strong></td>
+              <td>125 pieces</td>
+              <td>125 pieces</td>
+              <td>Accept 7, Reject 8 major defects</td>
+            </tr>
+            <tr>
+              <td><strong>3,201-10,000 pieces</strong></td>
+              <td>200 pieces</td>
+              <td>200 pieces</td>
+              <td>Accept 10, Reject 11 major defects</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>10,001-35,000 pieces</strong></td>
+              <td>315 pieces</td>
+              <td>315 pieces</td>
+              <td>Accept 14, Reject 15 major defects</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="section__subtitle">Defect Classification</h3>
+      <p class="section__text">
+        AQL inspection classifies defects into three categories. Critical defects are safety hazards or issues that make the product unusable - sharp objects, hazardous materials, missing safety features. Any critical defect causes automatic rejection regardless of count. Major defects affect function, appearance, or saleability - wrong fabric, construction errors, measurement deviations, color mismatches. Major defects are counted against AQL limits. Minor defects don't affect function but are imperfect - loose threads, minor stitching issues, slight color variation. Minor defects have separate, more lenient AQL limits.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Common Defects -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Common Garment Defects | What Inspectors Look For</h2>
+      <p class="section__text">
+        Quality inspectors systematically check for specific defect types during inspection. Understanding these defects helps you communicate quality standards to manufacturers and interpret inspection reports effectively.
+      </p>
+
+      <h3 class="section__subtitle">Sewing Defects</h3>
+      <p class="section__text">
+        Sewing defects are among the most common garment issues. Skipped stitches occur when the sewing machine misses stitches, creating weak seams that may unravel. Open seams result from insufficient stitching or incorrect seam allowance, causing seams to separate under stress. Puckering happens when fabric is pulled during sewing, creating uneven, wrinkled seams. Uneven stitch length affects both appearance and durability. Broken needles leave needle fragments in garments, a critical safety defect. Inspectors check seam strength, stitch consistency, and seam allowances against specifications.
+      </p>
+
+      <h3 class="section__subtitle">Fabric Defects</h3>
+      <p class="section__text">
+        Fabric defects originate from material quality issues. Holes and tears in fabric make garments unusable. Stains from oil, dye, or other contaminants affect appearance and saleability. Shading variation occurs when fabric pieces from different dye lots have slightly different colors, creating mismatched garments. Slub or nep defects are thick/thin spots in yarn that create uneven texture. Incorrect GSM means fabric weight doesn't match specifications, affecting garment drape and feel. Inspectors verify fabric quality, color consistency, and material composition.
+      </p>
+
+      <h3 class="section__subtitle">Measurement Defects</h3>
+      <p class="section__text">
+        Measurement defects occur when finished garments don't match specified dimensions. Out-of-spec measurements affect fit and sizing consistency. Common issues include incorrect length, width, or circumference measurements. Sleeve length discrepancies, inseam variations, and neck size inconsistencies are typical problems. Inspectors measure key points against tolerance limits specified in tech packs. Tolerance is typically  | 0.5cm for critical measurements,  | 1cm for less critical dimensions. Measurement defects are classified as major if they exceed tolerance.
+      </p>
+
+      <h3 class="section__subtitle">Color Defects</h3>
+      <p class="section__text">
+        Color defects involve mismatched or incorrect coloring. Shade variation between pieces creates inconsistent appearance in multi-piece orders. Color bleeding occurs when dyes transfer during washing or wear. Fading happens when colors aren't colorfast to light or washing. Incorrect color - garments produced in wrong color entirely - is a major defect requiring complete rework. Inspectors compare garments against approved lab dips or color standards under standard lighting conditions (D65 light box).
+      </p>
+
+      <h3 class="section__subtitle">Packaging Defects</h3>
+      <p class="section__text">
+        Packaging defects affect product presentation and protection. Wrong labels - incorrect size labels, care labels, or brand labels - mislead customers and may violate regulations. Incorrect folding creates wrinkles and poor presentation. Missing polybags or insufficient packaging allows damage during transit. Wrong hangtags or missing price tags affect retail readiness. Inspectors verify all labeling against specifications and check packaging integrity.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Defect classification table with examples and required actions">
+          <caption>Garment Defect Classification Table</caption>
+          <thead>
+            <tr>
+              <th>Defect Type</th>
+              <th>Examples</th>
+              <th>Classification</th>
+              <th>Action Required</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sewing</strong></td>
+              <td>Skipped stitches, open seams, puckering, uneven stitch length</td>
+              <td>Major</td>
+              <td>Rework or reject affected pieces</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Fabric</strong></td>
+              <td>Holes, stains, shading variation, slub defects, wrong GSM</td>
+              <td>Major</td>
+              <td>Replace fabric or reject garments</td>
+            </tr>
+            <tr>
+              <td><strong>Measurement</strong></td>
+              <td>Out-of-spec dimensions, incorrect length/width/size</td>
+              <td>Major</td>
+              <td>Rework if possible, otherwise reject</td>
+            </tr>
+            <tr>
+              <td><strong>Color</strong></td>
+              <td>Shade variation, color bleeding, fading, wrong color</td>
+              <td>Major/Critical</td>
+              <td>Redye or reject (critical if wrong color)</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Packaging</strong></td>
+              <td>Wrong labels, incorrect folding, missing polybags, wrong hangtags</td>
+              <td>Minor/Major</td>
+              <td>Repackage and correct labels</td>
+            </tr>
+            <tr>
+              <td><strong>Trim</strong></td>
+              <td>Broken zippers, missing buttons, defective snaps</td>
+              <td>Major</td>
+              <td>Replace trims and rework</td>
+            </tr>
+            <tr>
+              <td><strong>Labeling</strong></td>
+              <td>Wrong size labels, incorrect care instructions, missing brand labels</td>
+              <td>Major</td>
+              <td>Replace labels</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Finishing</strong></td>
+              <td>Loose threads, untrimmed seams, poor ironing, uneven hems</td>
+              <td>Minor</td>
+              <td>Re-finish affected pieces</td>
+            </tr>
+            <tr>
+              <td><strong>Safety</strong></td>
+              <td>Sharp objects, needle fragments, hazardous materials</td>
+              <td>Critical</td>
+              <td>Immediate rejection, investigate root cause</td>
+            </tr>
+            <tr>
+              <td><strong>Odor</strong></td>
+              <td>Chemical smell, mold odor, musty smell</td>
+              <td>Major</td>
+              <td>Re-wash or reject if persistent</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: SDF's Process -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">SDF's Quality Inspection Process | What We Check</h2>
+      <p class="section__text">
+        SDF Clothing implements a comprehensive 4-stage quality inspection process covering every production stage. Our systematic approach ensures defects are caught early and corrected before shipment, protecting your brand reputation.
+      </p>
+
+      <h3 class="section__subtitle">Stage 1: Fabric and Material Inspection</h3>
+      <p class="section__text">
+        Before production begins, we inspect all incoming materials. Fabric is checked for defects, color consistency against approved <a href="/lab-dip-service/">lab dips</a>, GSM verification, and composition testing. Trims including buttons, zippers, labels, and threads are verified against specifications. This stage prevents defective materials from entering production, which would cause mass defects later. We work with certified suppliers and verify material certificates for organic or recycled materials.
+      </p>
+
+      <h3 class="section__subtitle">Stage 2: First Sample and Pattern Verification</h3>
+      <p class="section__text">
+        We produce first samples and verify them against your <a href="/tech-pack-service">tech pack</a> specifications. Measurements are checked point-by-point against tolerance limits. Construction details are verified - seam types, stitch counts, seam allowances. Fit evaluation ensures the garment matches intended sizing. First sample approval is required before bulk production. Any deviations are corrected before proceeding.
+      </p>
+
+      <h3 class="section__subtitle">Stage 3: Inline Quality Checks</h3>
+      <p class="section__text">
+        During production, our quality team conducts inline inspections at 20%, 50%, and 80% completion. At each checkpoint, we randomly sample pieces from the line and check for sewing quality, construction accuracy, and measurement consistency. Issues detected early can be corrected immediately, preventing mass defects. Production operators receive feedback and training based on inline inspection findings. This proactive approach maintains quality throughout the production run.
+      </p>
+
+      <h3 class="section__subtitle">Stage 4: Final AQL Inspection</h3>
+      <p class="section__text">
+        After production completion, we conduct final AQL 2.5 inspection. Using statistical sampling tables, we randomly select pieces based on lot size. Each sampled piece is evaluated against approved samples and specifications. We check measurements, construction, fabric quality, color, labeling, and packaging. Defects are classified as critical, major, or minor. The shipment passes only if defect counts fall within AQL acceptance limits. You receive a detailed inspection report with photos before final payment.
+      </p>
+
+      <h3 class="section__subtitle">What We Specifically Check</h3>
+      <p class="section__text">
+        Our inspection covers: measurement verification against tech pack tolerances, color matching against approved lab dips under D65 lighting, fabric GSM and composition testing via certified labs, seam strength testing, zipper and button functionality, label accuracy and placement, packaging correctness, and overall garment appearance. We follow international inspection standards and provide transparent reporting. Our <a href="/sampling-service">sampling service</a> ensures samples accurately represent bulk production.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Checklist -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Quality Inspection Checklist | Download and Use</h2>
+      <p class="section__text">
+        Use this comprehensive quality inspection checklist for your garment production. This checklist covers all major inspection categories and helps ensure nothing is overlooked during quality checks. Use it for internal inspections or when reviewing third-party inspection reports.
+      </p>
+
+      <div class="checklist">
+        <h3 class="checklist__category">Fabric Quality</h3>
+        <ul class="checklist__items">
+          <li class="checklist__item">? Fabric free from holes, tears, and stains</li>
+          <li class="checklist__item">? Color matches approved lab dip</li>
+          <li class="checklist__item">? GSM within specified tolerance</li>
+          <li class="checklist__item">? Fabric composition verified</li>
+          <li class="checklist__item">? No shading variation between pieces</li>
+          <li class="checklist__item">? Hand feel matches specification</li>
+        </ul>
+
+        <h3 class="checklist__category">Construction and Sewing</h3>
+        <ul class="checklist__items">
+          <li class="checklist__item">? No skipped stitches</li>
+          <li class="checklist__item">? Seams secure and not open</li>
+          <li class="checklist__item">? No puckering or uneven seams</li>
+          <li class="checklist__item">? Stitch length consistent</li>
+          <li class="checklist__item">? Seam allowances correct</li>
+          <li class="checklist__item">? No loose threads</li>
+          <li class="checklist__item">? Reinforced stitching at stress points</li>
+        </ul>
+
+        <h3 class="checklist__category">Measurements</h3>
+        <ul class="checklist__items">
+          <li class="checklist__item">? Chest/bust measurement within tolerance</li>
+          <li class="checklist__item">? Length measurement within tolerance</li>
+          <li class="checklist__item">? Sleeve length within tolerance</li>
+          <li class="checklist__item">? Shoulder width within tolerance</li>
+          <li class="checklist__item">? Waist/inseam within tolerance</li>
+          <li class="checklist__item">? Neck/collar size within tolerance</li>
+        </ul>
+
+        <h3 class="checklist__category">Trims and Accessories</h3>
+        <ul class="checklist__items">
+          <li class="checklist__item">? Zippers function smoothly</li>
+          <li class="checklist__item">? Buttons secure and correct</li>
+          <li class="checklist__item">? Snaps and fasteners work properly</li>
+          <li class="checklist__item">? No missing trims</li>
+          <li class="checklist__item">? Trim quality matches specification</li>
+        </ul>
+
+        <h3 class="checklist__category">Color and Appearance</h3>
+        <ul class="checklist__items">
+          <li class="checklist__item">? Color consistent across pieces</li>
+          <li class="checklist__item">? No color bleeding or fading</li>
+          <li class="checklist__item">? Print quality if applicable</li>
+          <li class="checklist__item">? Embroidery quality if applicable</li>
+          <li class="checklist__item">? Overall appearance matches approved sample</li>
+        </ul>
+
+        <h3 class="checklist__category">Labels and Packaging</h3>
+        <ul class="checklist__items">
+          <li class="checklist__item">? Brand label correct and securely attached</li>
+          <li class="checklist__item">? Size label correct</li>
+          <li class="checklist__item">? Care label correct and compliant</li>
+          <li class="checklist__item">? Hangtags correct and present</li>
+          <li class="checklist__item">? Packaging correct (polybags, boxes)</li>
+          <li class="checklist__item">? Folding correct</li>
+        </ul>
+      </div>
+
+      <p class="section__text">
+        Use this checklist for every production run. Adapt it to your specific product types and quality requirements.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Third-Party vs Factory -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Third-Party vs Factory Inspection | Which Is Better?</h2>
+      <p class="section__text">
+        Brands have two options for quality inspection: factory self-inspection or third-party inspection. Each approach has advantages and limitations. Understanding the differences helps you choose the right inspection strategy for your needs.
+      </p>
+
+      <h3 class="section__subtitle">Factory Self-Inspection</h3>
+      <p class="section__text">
+        Factory self-inspection is performed by the manufacturer's own quality team. This is typically included in production costs at no additional charge. Factory inspectors know the product intimately and can quickly identify issues. They can implement corrections immediately during production. However, factory inspectors may have inherent bias - they work for the factory and want shipments to pass to get paid. This potential conflict of interest can affect objectivity. Factory inspection is suitable for established relationships with trusted manufacturers.
+      </p>
+
+      <h3 class="section__subtitle">Third-Party Inspection</h3>
+      <p class="section__text">
+        Third-party inspection is performed by independent inspection companies hired by the buyer. These companies have no financial relationship with the factory, ensuring objectivity. They follow standardized protocols and provide detailed reports with photos. Third-party inspectors are trained professionals who inspect across multiple factories, bringing broad experience. However, third-party inspection costs extra ($200-500 per inspection) and requires scheduling coordination. It may add 1-2 days to production timelines. Third-party inspection is recommended for first orders, high-value shipments, or when working with new suppliers.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Comparison of factory self-inspection and third-party inspection">
+          <caption>Factory Self-Inspection vs Third-Party Inspection</caption>
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Factory Self-Inspection</th>
+              <th>Third-Party Inspection</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Cost</strong></td>
+              <td>Usually included in production cost</td>
+              <td>$200-500 per inspection</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Objectivity</strong></td>
+              <td>Potential bias - factory wants shipments to pass</td>
+              <td>Independent and objective</td>
+            </tr>
+            <tr>
+              <td><strong>Speed</strong></td>
+              <td>Immediate - factory controls timing</td>
+              <td>Requires scheduling, adds 1-2 days</td>
+            </tr>
+            <tr>
+              <td><strong>Reliability</strong></td>
+              <td>Depends on factory integrity</td>
+              <td>High - standardized professional protocols</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Best For</strong></td>
+              <td>Established relationships, trusted suppliers</td>
+              <td>First orders, high-value shipments, new suppliers</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="section__subtitle">Recommended Third-Party Agencies</h3>
+      <p class="section__text">
+        Several reputable third-party inspection agencies operate in Bangladesh. <a href="https://www.qima.com" target="_blank" rel="noopener noreferrer">QIMA</a> provides comprehensive inspection services with detailed reporting. <a href="https://www.bureauveritas.com" target="_blank" rel="noopener noreferrer">Bureau Veritas</a> offers global inspection capabilities with local expertise. <a href="https://www.sgs.com" target="_blank" rel="noopener noreferrer">SGS</a> provides inspection and testing services with strong technical expertise. <a href="https://www.intertek.com" target="_blank" rel="noopener noreferrer">Intertek</a> offers textile-specific inspection services. <a href="https://tetrainspection.com" target="_blank" rel="noopener noreferrer">Tetra Inspection</a> specializes in garment and textile inspection. When selecting a third-party inspector, verify their experience with your product type and request sample reports.
+      </p>
+
+      <p class="section__text">
+        SDF Clothing welcomes third-party inspections and facilitates access for qualified inspectors. We provide factory access, production records, and coordinate inspection timing at no additional cost. Our transparent approach means we're confident in our quality - whether inspected by our team or third-party professionals.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Different Categories -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Quality Inspection for Different Garment Categories</h2>
+      <p class="section__text">
+        Different garment types require specialized inspection focus. Understanding category-specific quality considerations helps ensure inspection protocols match product requirements.
+      </p>
+
+      <h3 class="section__subtitle">Knitwear Inspection</h3>
+      <p class="section__text">
+        Knitwear including t-shirts, hoodies, and sweaters requires checking fabric stretch recovery - garments should return to original shape after stretching. Seam strength is critical because knit fabrics can unravel if seams are weak. Needle damage causes small holes along seam lines - a common knit defect. Inspectors check for even knitting, no dropped stitches, consistent gauge, and proper ribbing at cuffs and hems. Link to relevant <a href="/t-shirt-manufacturer">t-shirt</a> or <a href="/hoodie-manufacturer/">hoodie</a> product pages for specific inspection criteria.
+      </p>
+
+      <h3 class="section__subtitle">Woven Garment Inspection</h3>
+      <p class="section__text">
+        Woven garments including shirts, trousers, and jackets require checking thread count and weave integrity. Seam slippage - threads pulling apart at stress points - is a key concern. Pattern matching at seams is important for printed or patterned wovens. Interfacing quality affects collar and cuff structure. Inspectors verify dart placement, pleat accuracy, and zipper alignment. Buttonhole strength and button securement are critical for woven shirts and jackets.
+      </p>
+
+      <h3 class="section__subtitle">Activewear Inspection</h3>
+      <p class="section__text">
+        Activewear and sportswear require performance testing beyond visual inspection. Moisture-wicking performance is tested - fabric should absorb and spread moisture for quick drying. Seam stretch is critical - activewear seams must stretch with the body without breaking. Flatlock seams should lie flat and not cause chafing. Reflective elements must be securely attached and visible. Inspectors check compression consistency for compression garments and verify UPF rating for sun-protective clothing. Link to <a href="/activewear-manufacturer">activewear</a> and <a href="/sportswear-manufacturer">sportswear</a> pages for detailed criteria.
+      </p>
+
+      <h3 class="section__subtitle">Outerwear Inspection</h3>
+      <p class="section__text">
+        Outerwear including jackets and coats requires specialized checks. Waterproofing is tested - water should not penetrate under specified pressure. Seam sealing must be complete and durable. Insulation distribution should be even with no cold spots. Zipper functionality is critical - zippers must operate smoothly without jamming. Hood attachment and drawcord functionality are checked. Inspectors verify lining quality and attachment. Storm flap functionality and snap/button securement ensure weather protection.
+      </p>
+
+      <h3 class="section__subtitle">Denim Inspection</h3>
+      <p class="section__text">
+        Denim garments require checking for consistent wash across pieces - no variation in color or fading effects. Whisker and distress patterns should match design specifications. Rivet and button securement is critical due to denim's weight. Seam strength at stress points (crotch, pockets) must withstand wear. Inspectors check for correct thread weight and color. Stretch denim should have consistent stretch and recovery. Link to <a href="/denim-manufacturer">denim</a> product pages for denim-specific inspection protocols.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: FAQ -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Garment Quality Inspection FAQ</h2>
+
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is AQL in garment inspection?</h3>
+          <p class="faq__answer">
+            AQL stands for Acceptable Quality Level, the international standard for statistical quality control in garment inspection. AQL defines the maximum number of defective items acceptable in a sample batch. Common levels are AQL 1.5 for major defects in premium goods, AQL 2.5 for general apparel (industry standard), and AQL 4.0 for basic items. Inspectors use AQL sampling tables to determine how many pieces to check based on lot size. For example, a lot of 500-1,200 pieces at AQL 2.5 requires inspecting 80 pieces, with acceptance of 5 major defects and rejection at 6.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">How many pieces does a quality inspector check?</h3>
+          <p class="faq__answer">
+            The number of pieces inspected depends on lot size and AQL level. AQL sampling tables provide statistically valid sample sizes. For AQL 2.5: lots of 281-500 pieces require inspecting 50 pieces; lots of 501-1,200 pieces require 80 pieces; lots of 1,201-3,200 pieces require 125 pieces; lots of 3,201-10,000 pieces require 200 pieces. AQL 1.5 requires larger samples for the same lot size to achieve stricter quality control. SDF follows international AQL sampling standards to ensure inspection results are representative of the entire production lot.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between inline and final inspection?</h3>
+          <p class="faq__answer">
+            Inline inspection occurs during production, typically when 20-30% of goods are completed. It catches defects early before they affect the entire batch, allowing for immediate corrections while production continues. Inline inspection focuses on sewing quality, construction accuracy, and measurement consistency. Final inspection occurs after production is complete, before shipment. It evaluates finished garments against approved samples and specifications using AQL random sampling. Final inspection is the gatekeeper - goods must pass final inspection before shipment. Both are important: inline prevents mass defects, final ensures shipment quality.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">How much does garment quality inspection cost?</h3>
+          <p class="faq__answer">
+            Garment inspection costs vary by inspection type and provider. Factory self-inspection is typically included in production costs at no additional charge. Third-party inspection by agencies like QIMA, Bureau Veritas, SGS, or Intertek costs $200-500 per inspection depending on lot size, location, and inspection complexity. Pre-production inspection costs less than final inspection for smaller lots. Complex garments requiring specialized testing may cost more. SDF includes AQL 2.5 final inspection as standard in our production pricing - no additional charge for factory inspection. Third-party inspection is optional at buyer's expense.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">Can I hire a third-party inspector for Bangladesh factories?</h3>
+          <p class="faq__answer">
+            Yes, you can hire third-party inspection companies to inspect Bangladesh factories. Several reputable agencies operate in Bangladesh including QIMA, Bureau Veritas, SGS, Intertek, and Tetra Inspection. These agencies send qualified inspectors to factories, conduct inspections according to international standards, and provide detailed reports with photos. You contract directly with the inspection agency, not the factory. SDF welcomes third-party inspections and facilitates factory access, provides production records, and coordinates inspection timing at no additional cost. We're confident in our quality and support objective verification.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What defects cause a shipment to be rejected?</h3>
+          <p class="faq__answer">
+            Shipments are rejected when defects exceed AQL acceptance limits. Critical defects (safety issues like sharp objects, hazardous materials, missing safety features) cause immediate rejection regardless of count - even one critical defect fails the shipment. Major defects (construction errors, wrong fabric, measurement deviations, color mismatches) are counted against AQL limits. If major defects exceed the acceptance number (e.g., more than 5 major defects in an 80-piece sample at AQL 2.5), the shipment fails. Minor defects (loose threads, minor stitching issues) have separate, more lenient AQL limits. Failed shipments require rework before re-inspection and re-approval.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What documents does a quality inspection produce?</h3>
+          <p class="faq__answer">
+            Quality inspection produces a comprehensive inspection report including: lot size and sample size inspected, AQL level applied, defect classification summary (critical/major/minor counts), detailed list of defects found with descriptions, 20-50 photos documenting defects and overall condition, measurement verification results against tolerance limits, packaging check results, labeling compliance verification, overall pass/fail determination based on AQL limits, and recommendations for corrective actions if applicable. Third-party reports are signed and dated by the inspector with inspector credentials. Reports are typically delivered within 24 hours of inspection completion.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">How do I read a quality inspection report?</h3>
+          <p class="faq__answer">
+            Start with the overall result at the top of the report - pass or fail based on AQL limits. Review the defect summary showing counts by category (critical, major, minor). Check if any critical defects exist - any critical defect means automatic fail. Examine major defect count against the acceptance number for your AQL level. Review the detailed defect list to understand what types of issues were found. Look at photos to visually assess defect severity. Verify measurement results show all measurements within tolerance limits. Check packaging and labeling sections for compliance. The report conclusion should clearly state whether the shipment meets your quality standards. If failed, review recommendations for required corrective actions before re-inspection.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 9: CTA -->
+  <section class="section section--cta">
+    <div class="section__container section__container--narrow">
+      <h2 class="section__title">Need Quality Inspection for Your Production?</h2>
+      <p class="section__text">
+        SDF Clothing includes comprehensive AQL 2.5 quality inspection as standard in all production orders. Our 4-stage inspection process catches defects early and ensures shipment quality. We also welcome third-party inspection if you prefer independent verification.
+      </p>
+      <p class="section__text">
+        Request a quote for production including quality inspection, or arrange third-party inspection for your existing orders. We provide factory access and full cooperation for qualified inspectors.
+      </p>
+      <div class="section__ctas">
+        <a href={whatsappQuoteUrl} class="section__cta section__cta--primary" target="_blank" rel="noopener noreferrer">
+          Request Inspection Quote
+        </a>
+        <a href="/contact/" class="section__cta section__cta--secondary">
+          Contact Our Team
+        </a>
+        <a href="/contact/" class="section__cta section__cta--secondary">
+          Request Sample
+        </a>
+      </div>
+      <p class="section__text section__text--small">
+        Last updated: May 2026 | Average response time: 24 hours
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: var(--spacing-sm) 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__container--narrow {
+    max-width: 700px;
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .checklist {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background: var(--color-bg-alt);
+    border-radius: 8px;
+  }
+
+  .checklist__category {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .checklist__category:first-child {
+    margin-top: 0;
+  }
+
+  .checklist__items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .checklist__item {
+    padding: var(--spacing-xs) 0;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+</BaseLayout>

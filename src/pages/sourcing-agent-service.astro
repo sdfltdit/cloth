@@ -1,0 +1,1066 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, schemaPerson, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Clothing Sourcing Agent | Bangladesh Factory Service | SDF";
+const pageDescription = "Clothing sourcing agent service from SDF Bangladesh. Factory vetting, sampling, production management and QC. No middleman markup. Get a free consultation.";
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20clothing%20manufacturing%20from%20Bangladesh`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-21",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#org" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does a clothing sourcing agent cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clothing sourcing agent costs typically range from 5-15% commission on factory prices, paid by either the brand or factory. Flat fee arrangements range from $2,000-10,000 per project. Retainer models cost $500-2,000 monthly. SDF operates as a direct factory partner with no agent commission, saving brands 5-15% on production costs. Direct factory relationships eliminate middleman markup while providing full transparency on pricing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a sourcing agent to manufacture in Bangladesh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You do not need a sourcing agent to manufacture in Bangladesh. You can work directly with factories like SDF Clothing. Direct factory relationships offer lower costs, better communication, and greater transparency. Sourcing agents add value primarily for brands lacking time or expertise to vet factories. However, working directly with a reputable factory like SDF provides the same services - factory vetting, sampling, production management, QC - without the 5-15% agent commission."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a sourcing agent and a buying house?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A sourcing agent typically works independently, connecting brands to factories for commission. A buying house is a larger organization with in-house teams handling design, sourcing, and production. Both charge commission or markup. SDF differs from both as a direct factory partner - we are the manufacturer, not an intermediary. We provide end-to-end production services without middleman costs, offering the same capabilities as buying houses at factory-direct pricing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I know if a sourcing agent is trustworthy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Verify a sourcing agent's trustworthiness by checking client references, requesting factory audit reports, confirming their physical presence in the manufacturing country, and reviewing their commission structure. Red flags include demanding upfront fees, refusing to disclose commission percentages, or working with only one or two factories. Trustworthy agents provide transparency, references, and access to multiple verified factories. SDF operates transparently as a direct factory with verifiable certifications and client references."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can SDF act as my sourcing agent in Bangladesh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SDF operates as a direct factory partner rather than a traditional sourcing agent. We provide all sourcing services - factory capability assessment, sampling, production management, quality control, and export documentation - but as the manufacturer, not a middleman. This model eliminates agent commission while providing comprehensive support. For brands needing production outside our core capabilities, we can coordinate with our partner network, still at direct factory pricing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documents should a sourcing agent provide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A professional sourcing agent should provide factory audit reports, certification verification (GOTS, OEKO-TEX, BSCI, WRAP), detailed cost breakdowns, production schedules, quality inspection reports, and export documentation. They should also provide a formal contract outlining services, fees, and responsibilities. SDF provides all documentation directly as the factory, including audit reports, certification certificates, detailed costing, and comprehensive production tracking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does factory sourcing take in Bangladesh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Factory sourcing in Bangladesh typically takes 1-3 weeks for initial identification and 2-4 weeks for sample development and approval. Total timeline from initial inquiry to production start is usually 4-7 weeks. SDF accelerates this process by providing immediate capability assessment and in-house sampling, reducing sourcing time to 2-3 weeks. Direct factory relationships eliminate the back-and-forth communication delays common with agent-mediated sourcing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the risk of using a sourcing agent I find online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Online sourcing agents pose several risks: hidden commission structures pushing specific factories, lack of physical presence in manufacturing countries, inability to verify factory conditions, potential for scams requiring upfront fees, and communication delays. Red flags include demanding payment before showing factories, refusing to provide references, or using only WhatsApp without formal contracts. Work with verified, established partners like SDF with physical factories and transparent operations. Learn more about <a href=\"/insights/avoiding-clothing-manufacturer-scams\">avoiding clothing manufacturer scams</a>."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Sourcing Agent Service",
+      "provider": { "@id": SITE + "/#org" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "0",
+          "description": "No commission | direct factory pricing"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How SDF Works With Your Brand as Direct Factory Partner",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Initial Brief",
+          "text": "Submit your requirements: product type, quantity, timeline, budget, and technical specifications. We assess capability immediately without waiting for third-party factory responses."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Factory Capability Assessment and Costing",
+          "text": "SDF evaluates your requirements against our production capabilities and provides detailed FOB costing. No middleman markup - factory-direct pricing with full transparency."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Sample Development and Approval",
+          "text": "Our in-house sample team develops pre-production samples. Sample development takes 7-14 days with direct communication and photos for approval before bulk production."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Production Planning and Timeline Confirmation",
+          "text": "We create detailed production schedules with milestones for fabric sourcing, cutting, sewing, finishing, and quality inspection. Clear timeline commitments with regular updates."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Inline and Final Quality Inspection",
+          "text": "SDF conducts AQL 2.5 quality inspection during production and before shipment. You can request third-party inspection. Quality reports provided with photos."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Export Documentation and Shipment Coordination",
+          "text": "We handle all export documentation including commercial invoices, packing lists, certificates of origin, and coordinate with your freight forwarder for seamless shipment."
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Sourcing Agent Red Flags to Avoid",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Demands Upfront Fee",
+          "description": "Requiring payment before showing factories is a major red flag"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "No Factory Audit Reports",
+          "description": "Unable to provide third-party audit reports indicates lack of verification"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Hidden Commission",
+          "description": "Refusing to disclose commission percentage suggests conflict of interest"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Limited Factory Access",
+          "description": "Working with only one or two factories limits options and raises conflict concerns"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Clothing Sourcing Agent Service</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Direct Factory Partner | No Middleman</p>
+        <h1 class="hero__title">Clothing Sourcing Agent | Direct Factory Access in Bangladesh Without the Middleman</h1>
+        <p class="hero__description">
+          Traditional sourcing agents add 5-15% commission on top of factory prices, creating unnecessary costs and communication layers. SDF Clothing operates differently - as a direct clothing manufacturer and Bangladesh factory partner, providing comprehensive sourcing, sampling, production management, and quality control without agent markup. Get factory-direct pricing, full transparency, and single-point accountability from enquiry to shipment.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">0%</span>
+            <span class="hero__stat-label">Agent Commission</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">100%</span>
+            <span class="hero__stat-label">Transparent Pricing</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">300</span>
+            <span class="hero__stat-label">Piece MOQ</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">25+</span>
+            <span class="hero__stat-label">Years Experience</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get Free Consultation
+          </a>
+          <a href="/contact/" class="hero__cta hero__cta--secondary">
+            Download Capability Deck
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="SDF Clothing factory production line in Bangladesh" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: What Does a Sourcing Agent Do -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What Does a Clothing Sourcing Agent Do?</h2>
+      <p class="section__text">
+        A clothing sourcing agent acts as an intermediary between fashion brands and garment factories, facilitating the production process. Agents typically handle factory identification, vetting, negotiation, sampling oversight, production monitoring, quality control, and export documentation. The traditional model involves the agent earning commission from either the brand, the factory, or both - creating potential conflicts of interest.
+      </p>
+      
+      <h3 class="section__subtitle">Typical Sourcing Agent Services</h3>
+      <p class="section__text">
+        Professional sourcing agents provide several core services. Factory finding involves identifying manufacturers capable of producing your specific product type within your budget and timeline. Factory vetting includes checking certifications, production capacity, financial stability, and compliance records. Sampling oversight ensures pre-production samples meet your specifications before bulk production begins. Production monitoring tracks progress through cutting, sewing, and finishing stages. Quality control inspection verifies finished goods meet agreed standards before shipment. Export documentation handling includes commercial invoices, packing lists, and certificates of origin.
+      </p>
+      
+      <h3 class="section__subtitle">Commission Model vs Fee Model</h3>
+      <p class="section__text">
+        Most sourcing agents operate on commission, typically 5-15% of the factory price. Commission may be paid by the brand (added to your cost), by the factory (hidden in the price), or split between both. This creates misaligned incentives - agents may push factories paying higher commission rather than those offering best value. Fee-based models charge flat project fees ($2,000-10,000) or monthly retainers ($500-2,000). Fee models can be more transparent but still add cost without direct production involvement. SDF eliminates both models by operating as the direct factory - no commission, no fees, just factory pricing.
+      </p>
+      
+      <h3 class="section__subtitle">Why Brands Use Agents vs Going Direct</h3>
+      <p class="section__text">
+        Brands traditionally use sourcing agents when lacking internal sourcing expertise, time to vet factories, or established manufacturing relationships. Agents provide access to factory networks and handle local logistics. However, the agent model adds cost, communication layers, and potential conflicts of interest. Going direct to factories like SDF provides the same services - vetting, sampling, production management, QC - without middleman markup. Direct relationships offer better pricing, faster communication, and greater transparency. For <a href="/low-moq-clothing-manufacturers/">low MOQ clothing manufacturers</a>, direct factory relationships are increasingly common as brands seek cost efficiency and control.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Problem with Traditional Agents -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">The Problem with Traditional Sourcing Agents</h2>
+      <p class="section__text">
+        The traditional sourcing agent model has inherent flaws that cost brands money and create risk. Understanding these problems helps you make better sourcing decisions. SDF was founded specifically to address these issues by providing direct factory access without intermediary costs or conflicts.
+      </p>
+      
+      <h3 class="section__subtitle">Commission Markup</h3>
+      <p class="section__text">
+        Sourcing agent commissions of 5-15% directly increase your landed cost. On a $50,000 production order, agent commission adds $2,500-7,500 in pure markup with no added value. This commission is often hidden - factory prices are inflated to include the agent's cut, making it difficult to identify the true cost. Brands paying agent commission are effectively subsidizing a middleman without receiving additional production value. SDF's direct factory model eliminates this markup entirely, providing factory-direct pricing with full cost transparency.
+      </p>
+      
+      <h3 class="section__subtitle">Conflict of Interest</h3>
+      <p class="section__text">
+        Many sourcing agents receive commission from factories as well as brands, creating inherent conflicts. Agents may steer brands toward factories paying higher commission rather than those offering best quality or value. This misalignment undermines the agent's role as brand advocate. Even well-intentioned agents face unconscious bias toward higher-paying partners. SDF, as a direct factory, has no such conflict - our incentive aligns with yours: delivering quality production at competitive prices to earn repeat business. Learn about <a href="/insights/avoiding-clothing-manufacturer-scams">avoiding clothing manufacturer scams</a> related to agent conflicts.
+      </p>
+      
+      <h3 class="section__subtitle">Limited Factory Access</h3>
+      <p class="section__text">
+        Individual agents typically work with a limited network of 5-20 factories, often those paying highest commission. This restricts your options to the agent's preferred partners rather than the best fit for your needs. Agents may push factories within their network even when better options exist. SDF, as a manufacturer with partner networks, provides access to broader capabilities while maintaining direct accountability. For specialized production, we coordinate with certified partners at factory-direct pricing without agent markup.
+      </p>
+      
+      <h3 class="section__subtitle">Communication Layer</h3>
+      <p class="section__text">
+        Adding an agent between brand and factory creates an additional communication layer, increasing risk of miscommunication and delay. Instructions pass through agent to factory, responses return through agent to brand - each step introducing potential distortion. Time-sensitive decisions require multiple communication hops. Direct factory relationships eliminate this layer, enabling faster, clearer communication. SDF provides dedicated account managers who communicate directly with your team, reducing response time and minimizing misunderstandings.
+      </p>
+      
+      <h3 class="section__subtitle">How SDF Eliminates the Middleman</h3>
+      <p class="section__text">
+        SDF Clothing is a Bangladesh garment factory, not an intermediary. We provide all the services sourcing agents offer - factory capability assessment, sampling, production management, quality control, export documentation - but as the manufacturer, not a middleman. This means no commission, no hidden costs, no communication layers. You deal directly with the production team making your garments. Our <a href="/full-package-production/">full package production</a> service covers everything from fabric sourcing to shipment at factory-direct pricing.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: SDF as Direct Factory Partner -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">SDF as Your Direct Bangladesh Factory Partner</h2>
+      <p class="section__text">
+        SDF Clothing operates differently from traditional sourcing agents. We are a Bangladesh garment factory founded in 1998, serving global fashion brands directly. Our model eliminates intermediary costs while providing comprehensive production support. Working with SDF means dealing directly with the source - no layers, no markup, full transparency.
+      </p>
+      
+      <h3 class="section__subtitle">Direct Factory Relationship</h3>
+      <p class="section__text">
+        When you work with SDF, you work directly with the factory producing your garments. No agent sits between you and production. This direct relationship means you know exactly who is making your products, at what cost, and under what conditions. Factory visits, video calls with production managers, and direct communication with technical staff are all possible. Direct relationships build trust and enable better collaboration. For <a href="/clothing-manufacturer-bangladesh">Bangladesh clothing manufacturing</a>, direct factory partnerships offer the best combination of cost, quality, and control.
+      </p>
+      
+      <h3 class="section__subtitle">Full Transparency on Pricing</h3>
+      <p class="section__text">
+        SDF provides detailed FOB (Free On Board) quotations itemizing fabric costs, labor, finishing, quality inspection, and port delivery. No hidden charges, no undisclosed markups. You see exactly what you're paying for before production begins. This transparency enables accurate cost calculation and informed decision-making. Agent-mediated pricing often obscures true factory costs, making value assessment difficult. SDF's transparent pricing helps you understand production economics and optimize your sourcing strategy.
+      </p>
+      
+      <h3 class="section__subtitle">Single Point of Contact</h3>
+      <p class="section__text">
+        Each SDF client works with a dedicated account manager serving as single point of contact from initial enquiry through final shipment. Your account manager coordinates sampling, production, quality control, and logistics, eliminating the need to manage multiple relationships. This streamlined communication reduces complexity and ensures accountability. Agent models often involve communicating with multiple parties - agent, factory, freight forwarder - creating coordination challenges. SDF's single-point accountability simplifies your supply chain management.
+      </p>
+      
+      <h3 class="section__subtitle">In-House Services</h3>
+      <p class="section__text">
+        SDF provides comprehensive in-house services without third-party dependencies. Our <a href="/sampling-service">sampling service</a> develops pre-production samples in our sample room. Our <a href="/quality-inspection-service">quality inspection service</a> conducts AQL 2.5 inspections before shipment. Fabric sourcing, pattern making, and tech pack development are all handled internally or through trusted partners at factory-direct pricing. This integration reduces lead times and costs while maintaining quality control. Agent models often outsource sampling and QC to third parties, adding cost and complexity.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Red Flags Table -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">How to Vet a Clothing Sourcing Agent | Red Flags</h2>
+      <p class="section__text">
+        Vetting sourcing agents is critical to avoiding scams and ensuring quality production. Many online agents operate without proper verification or transparency. Recognizing red flags helps you identify trustworthy partners. This table outlines common warning signs and what to do instead.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Sourcing agent red flags and alternatives">
+          <caption>Sourcing Agent Red Flags and Safe Alternatives</caption>
+          <thead>
+            <tr>
+              <th>Red Flag</th>
+              <th>Why It's Dangerous</th>
+              <th>What to Do Instead</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Demands upfront fee before showing factories</strong></td>
+              <td>Legitimate agents earn from commission or successful production, not upfront payments. Upfront fees indicate potential scam.</td>
+              <td>Work with partners who provide factory information and capabilities before payment. SDF provides immediate capability assessment at no cost.</td>
+            </tr>
+            <tr>
+              <td><strong>Can't provide factory audit reports</strong></td>
+              <td>Without audit reports, factory conditions and compliance are unknown. This risks safety violations and ethical issues.</td>
+              <td>Request third-party audit reports (BSCI, SEDEX, WRAP). Verify with issuing bodies. SDF provides verifiable audit reports.</td>
+            </tr>
+            <tr>
+              <td><strong>Won't disclose their commission</strong></td>
+              <td>Hidden commission suggests conflict of interest or inflated pricing. Transparency is essential for trust.</td>
+              <td>Work with partners disclosing all costs. SDF charges zero commission - factory-direct pricing with full transparency.</td>
+            </tr>
+            <tr>
+              <td><strong>Only works with one or two factories</strong></td>
+              <td>Limited factory access restricts options and suggests the agent may be factory-owned or receiving exclusive commissions.</td>
+              <td>Seek partners with broader factory networks or direct factory relationships. SDF is a factory with partner network access.</td>
+            </tr>
+            <tr>
+              <td><strong>No physical presence in manufacturing country</strong></td>
+              <td>Agents without local presence cannot effectively monitor production or verify factory conditions.</td>
+              <td>Verify physical office and factory presence. SDF has owned factory in Dhaka, Bangladesh since 1998.</td>
+            </tr>
+            <tr>
+              <td><strong>Uses WhatsApp only with no formal contract</strong></td>
+              <td>Informal communication without contracts offers no legal protection or clear service terms.</td>
+              <td>Require formal contracts with defined services, deliverables, and payment terms. SDF provides formal agreements.</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Can't provide references from recent clients</strong></td>
+              <td>Lack of references suggests inexperience or dissatisfied clients. References are essential for verification.</td>
+              <td>Request and contact client references in your market segment. SDF provides references from global brands.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p class="section__text">
+        <em>For comprehensive guidance on identifying and avoiding manufacturing scams, read our guide on <a href="/insights/avoiding-clothing-manufacturer-scams">avoiding clothing manufacturer scams</a>.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Sourcing Process -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">The Sourcing Process | How SDF Works With Your Brand</h2>
+      <p class="section__text">
+        SDF's sourcing process is streamlined for efficiency and transparency. As a direct factory, we eliminate the back-and-forth delays common with agent-mediated sourcing. Our process moves from initial brief to production in 4-7 weeks, compared to 8-12 weeks with traditional agents.
+      </p>
+      
+      <div class="process">
+        <div class="process__step">
+          <div class="process__number">1</div>
+          <h3 class="process__title">Initial Brief</h3>
+          <p class="process__text">
+            Submit your requirements including product type, quantity per style, size breakdown, color variations, delivery timeline, and budget. Provide tech packs if available, or describe specifications in detail. Our team assesses capability immediately - no waiting for third-party factory responses. We provide initial feedback within 24-48 hours on feasibility, pricing range, and timeline. If you need <a href="/tech-pack-service">tech pack service</a>, we can develop specifications for a fee.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">2</div>
+          <h3 class="process__title">Factory Capability Assessment and Costing</h3>
+          <p class="process__text">
+            SDF evaluates your requirements against our production capabilities. We assess fabric availability, production capacity, technical requirements, and certification needs. Within 2-3 business days, we provide detailed FOB costing itemizing fabric, labor, finishing, quality inspection, and port delivery. No agent markup - factory-direct pricing with full transparency. We confirm MOQ requirements (our minimum is 300 pieces per style) and lead time commitments. Costing includes all variables with no hidden charges.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">3</div>
+          <h3 class="process__title">Sample Development and Approval</h3>
+          <p class="process__text">
+            Our in-house sample team develops pre-production samples based on your specifications. Sample development typically takes 7-14 days depending on complexity. We send photos first for preliminary review, then ship physical samples via courier for final approval. Samples include all construction details, fabrics, trims, and finishes as specified. You approve samples in writing before bulk production begins. Sample costs are typically credited against bulk orders. If you need <a href="/lab-dip-service/">lab dip service</a> for color development, we provide that as well.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">4</div>
+          <h3 class="process__title">Production Planning and Timeline Confirmation</h3>
+          <p class="process__text">
+            Once samples are approved and deposit paid (typically 30%), we create detailed production schedules. Milestones include fabric sourcing, cutting, sewing, finishing, and quality inspection dates. We provide regular updates including production photos at key stages. Production time is usually 40-45 days from deposit to shipment. Clear timeline commitments with buffer for contingencies. Direct communication means you can reach production managers directly for urgent decisions.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">5</div>
+          <h3 class="process__title">Inline and Final Quality Inspection</h3>
+          <p class="process__text">
+            SDF conducts AQL 2.5 quality inspection during production (inline inspection) and before shipment (final inspection). Inspections cover construction, measurements, stitching, fabric quality, and overall finish. We provide inspection reports with photos. You can request third-party inspection by SGS, Bureau Veritas, or Intertek at your cost. Any quality issues identified are addressed before shipment. Our <a href="/quality-inspection-service">quality inspection service</a> ensures standards are met before goods leave the factory.
+          </p>
+        </div>
+        
+        <div class="process__step">
+          <div class="process__number">6</div>
+          <h3 class="process__title">Export Documentation and Shipment Coordination</h3>
+          <p class="process__text">
+            Before shipment, pay the balance (70%) and we release goods. We handle all export documentation including commercial invoices, packing lists, certificates of origin, and any required certification documents. We coordinate with your freight forwarder or can arrange shipping FOB, CIF, or DDP terms. Documentation is provided digitally and physically as required. We track shipment until departure from port and provide tracking information. Post-shipment support includes addressing any quality issues that arise upon receipt.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Cost Comparison Table -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Sourcing Agent Costs | Commission vs Fee Models</h2>
+      <p class="section__text">
+        Understanding cost structures helps you evaluate sourcing options accurately. Traditional agent models add significant cost through commissions or fees. Direct factory relationships eliminate these costs. This comparison shows typical pricing for each model and the savings achievable by working directly with SDF.
+      </p>
+      
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Cost comparison of sourcing models">
+          <caption>Sourcing Model Cost Comparison</caption>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>How It Works</th>
+              <th>Typical Cost</th>
+              <th>Transparency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Commission (%)</strong></td>
+              <td>Agent charges percentage of factory price, paid by brand, factory, or both</td>
+              <td>5-15% of order value</td>
+              <td>Low - commission often hidden in pricing</td>
+            </tr>
+            <tr>
+              <td><strong>Flat Fee</strong></td>
+              <td>One-time project fee for sourcing services</td>
+              <td>$2,000-10,000 per project</td>
+              <td>Medium - fee disclosed but factory pricing opaque</td>
+            </tr>
+            <tr>
+              <td><strong>Retainer</strong></td>
+              <td>Monthly fee for ongoing sourcing support</td>
+              <td>$500-2,000 per month</td>
+              <td>Medium - retainer disclosed but ongoing costs accumulate</td>
+            </tr>
+            <tr>
+              <td><strong>Direct Factory (SDF)</strong></td>
+              <td>Work directly with manufacturer, no intermediary</td>
+              <td>$0 commission, $0 fees</td>
+              <td>High - factory-direct pricing with full cost breakdown</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <h3 class="section__subtitle">Why the Direct Factory Model Saves 5-15%</h3>
+      <p class="section__text">
+        The direct factory model eliminates all intermediary costs. On a $50,000 production order, commission-based agents add $2,500-7,500 in markup. Flat fee models add $2,000-10,000 project costs. Retainer models add $6,000-24,000 annually. SDF charges zero commission and zero fees - you pay only for production. This 5-15% savings goes directly to your bottom line. Use our <a href="/tools/price-calculator/">price calculator</a> to compare costs for your specific order quantity and product type.
+      </p>
+      
+      <h3 class="section__subtitle">Hidden Costs Traditional Agents Don't Disclose</h3>
+      <p class="section__text">
+        Beyond explicit commissions and fees, traditional agent models involve hidden costs. Communication delays extend timelines, increasing carrying costs. Miscommunication requires re-sampling or re-production, adding expense. Limited factory access may result in suboptimal pricing. Quality issues from poor factory vetting create returns and reputational damage. These hidden costs accumulate and often exceed the explicit agent commission. Direct factory relationships minimize these risks through better communication, broader capabilities, and direct accountability.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Factory Vetting -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What to Look for in Bangladesh Factory Vetting</h2>
+      <p class="section__text">
+        Vetting Bangladesh factories requires systematic verification of capabilities, compliance, and reliability. Whether working through agents or directly, due diligence is essential. This checklist covers key verification steps to ensure you partner with reputable manufacturers.
+      </p>
+      
+      <h3 class="section__subtitle">BGMEA Membership Verification</h3>
+      <p class="section__text">
+        Verify factory membership in the Bangladesh Garment Manufacturers and Exporters Association (BGMEA) or Bangladesh Knitwear Manufacturers and Exporters Association (BKMEA). Membership indicates basic regulatory compliance and industry standing. Check the official BGMEA website factory directory to confirm membership status. Note that membership alone doesn't guarantee quality - it's a baseline requirement. SDF Clothing is a registered BGMEA member in good standing since 1998.
+      </p>
+      
+      <h3 class="section__subtitle">Third-Party Audit Reports</h3>
+      <p class="section__text">
+        Request recent audit reports from recognized third-party organizations including BSCI (Business Social Compliance Initiative), SEDEX (Supplier Ethical Data Exchange), WRAP (Worldwide Responsible Accredited Production), and client-commissioned audits. These reports reveal working conditions, safety standards, and compliance issues. Verify audit authenticity with the issuing organization - certificates can be forged. SDF undergoes regular third-party audits and shares reports with qualified clients. Learn about our <a href="/certifications">complete certification portfolio</a>.
+      </p>
+      
+      <h3 class="section__subtitle">Certification Verification</h3>
+      <p class="section__text">
+        Verify sustainability and quality certifications directly with issuing bodies. Key certifications include GOTS (Global Organic Textile Standard) for organic cotton, OEKO-TEX Standard 100 for chemical safety, ISO 9001 for quality management, and C-TPAT for supply chain security. Check certificate validity on the issuing organization's website. SDF holds 13 international certifications covering quality, social compliance, and environmental standards. All certificates are verifiable through issuing organizations.
+      </p>
+      
+      <h3 class="section__subtitle">Factory Capacity vs Order Size</h3>
+      <p class="section__text">
+        Assess whether factory capacity matches your order volume and timeline. Ask about monthly production capacity, current utilization, and lead times. A factory at 100% capacity may delay your order or compromise quality. Conversely, a factory too large for your order may deprioritize your business. SDF has 75,000 sq ft of production space with capacity for 50,000+ pieces monthly, ensuring we can scale with your brand's growth while maintaining attention to smaller orders. We serve <a href="/clothing-manufacturers-for-startups/">clothing manufacturers for startups</a> with flexible capacity.
+      </p>
+      
+      <h3 class="section__subtitle">Financial Stability Indicators</h3>
+      <p class="section__text">
+        Evaluate factory financial stability to ensure long-term reliability. Indicators include years in operation, ownership stability, investment in equipment and facilities, and client retention rates. Factories with frequent ownership changes or financial distress pose supply chain risk. SDF has operated continuously since 1998 under stable ownership, with consistent investment in equipment and facilities. Our client retention rate exceeds 85%, reflecting long-term relationships built on reliability.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: FAQ -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Sourcing Agent Service FAQ</h2>
+      
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What does a clothing sourcing agent cost?</h3>
+          <p class="faq__answer">
+            Clothing sourcing agent costs typically range from 5-15% commission on factory prices, paid by either the brand or factory. Flat fee arrangements range from $2,000-10,000 per project. Retainer models cost $500-2,000 monthly. SDF operates as a direct factory partner with no agent commission, saving brands 5-15% on production costs. Direct factory relationships eliminate middleman markup while providing full transparency on pricing.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do I need a sourcing agent to manufacture in Bangladesh?</h3>
+          <p class="faq__answer">
+            You do not need a sourcing agent to manufacture in Bangladesh. You can work directly with factories like SDF Clothing. Direct factory relationships offer lower costs, better communication, and greater transparency. Sourcing agents add value primarily for brands lacking time or expertise to vet factories. However, working directly with a reputable factory like SDF provides the same services - factory vetting, sampling, production management, QC - without the 5-15% agent commission.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between a sourcing agent and a buying house?</h3>
+          <p class="faq__answer">
+            A sourcing agent typically works independently, connecting brands to factories for commission. A buying house is a larger organization with in-house teams handling design, sourcing, and production. Both charge commission or markup. SDF differs from both as a direct factory partner - we are the manufacturer, not an intermediary. We provide end-to-end production services without middleman costs, offering the same capabilities as buying houses at factory-direct pricing.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How do I know if a sourcing agent is trustworthy?</h3>
+          <p class="faq__answer">
+            Verify a sourcing agent's trustworthiness by checking client references, requesting factory audit reports, confirming their physical presence in the manufacturing country, and reviewing their commission structure. Red flags include demanding upfront fees, refusing to disclose commission percentages, or working with only one or two factories. Trustworthy agents provide transparency, references, and access to multiple verified factories. SDF operates transparently as a direct factory with verifiable certifications and client references.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can SDF act as my sourcing agent in Bangladesh?</h3>
+          <p class="faq__answer">
+            SDF operates as a direct factory partner rather than a traditional sourcing agent. We provide all sourcing services - factory capability assessment, sampling, production management, quality control, and export documentation - but as the manufacturer, not a middleman. This model eliminates agent commission while providing comprehensive support. For brands needing production outside our core capabilities, we can coordinate with our partner network, still at direct factory pricing.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What documents should a sourcing agent provide?</h3>
+          <p class="faq__answer">
+            A professional sourcing agent should provide factory audit reports, certification verification (GOTS, OEKO-TEX, BSCI, WRAP), detailed cost breakdowns, production schedules, quality inspection reports, and export documentation. They should also provide a formal contract outlining services, fees, and responsibilities. SDF provides all documentation directly as the factory, including audit reports, certification certificates, detailed costing, and comprehensive production tracking.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does factory sourcing take in Bangladesh?</h3>
+          <p class="faq__answer">
+            Factory sourcing in Bangladesh typically takes 1-3 weeks for initial identification and 2-4 weeks for sample development and approval. Total timeline from initial inquiry to production start is usually 4-7 weeks. SDF accelerates this process by providing immediate capability assessment and in-house sampling, reducing sourcing time to 2-3 weeks. Direct factory relationships eliminate the back-and-forth communication delays common with agent-mediated sourcing.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the risk of using a sourcing agent I find online?</h3>
+          <p class="faq__answer">
+            Online sourcing agents pose several risks: hidden commission structures pushing specific factories, lack of physical presence in manufacturing countries, inability to verify factory conditions, potential for scams requiring upfront fees, and communication delays. Red flags include demanding payment before showing factories, refusing to provide references, or using only WhatsApp without formal contracts. Work with verified, established partners like SDF with physical factories and transparent operations. Learn more about <a href="/insights/avoiding-clothing-manufacturer-scams">avoiding clothing manufacturer scams</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section">
+    <div class="section__container">
+      <div class="cta">
+        <h2 class="cta__title">Ready to Work Directly with a Bangladesh Factory?</h2>
+        <p class="cta__text">
+          Skip the agent commission and work directly with SDF Clothing. Get factory-direct pricing, full transparency, and comprehensive production support. Contact us for a free consultation and capability assessment.
+        </p>
+        <div class="cta__actions">
+          <a href={whatsappQuoteUrl} class="cta__button cta__button--primary" target="_blank" rel="noopener noreferrer">
+            Get Free Consultation
+          </a>
+          <a href="/contact/" class="cta__button cta__button--secondary">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+  }
+  
+  .skip-link:focus {
+    top: 0;
+  }
+  
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: 1rem 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+  
+  .breadcrumb__item {
+    color: #666;
+  }
+  
+  .breadcrumb__item:not(:last-child)::after {
+    content: ' / ';
+    margin: 0 0.5rem;
+  }
+  
+  .breadcrumb__item a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  .breadcrumb__item a:hover {
+    text-decoration: underline;
+  }
+  
+  .breadcrumb__item--current {
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 4rem 0;
+  }
+  
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .hero__label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+  }
+  
+  .hero__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 1.5rem 0;
+  }
+  
+  @media (max-width: 768px) {
+    .hero__title {
+      font-size: 1.875rem;
+    }
+  }
+  
+  .hero__description {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin: 0 0 2rem 0;
+    opacity: 0.95;
+  }
+  
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .hero__stat {
+    text-align: center;
+  }
+  
+  .hero__stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  
+  .hero__stat-label {
+    font-size: 0.75rem;
+    opacity: 0.9;
+  }
+  
+  .hero__ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .hero__cta {
+    display: inline-block;
+    padding: 0.875rem 1.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+  }
+  
+  .hero__cta--primary {
+    background: #fff;
+    color: #667eea;
+  }
+  
+  .hero__cta--primary:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+  }
+  
+  .hero__cta--secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+  }
+  
+  .hero__cta--secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+  
+  .section {
+    padding: 4rem 0;
+  }
+  
+  .section--alt {
+    background: #f8f9fa;
+  }
+  
+  .section__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1.5rem 0;
+    color: #1a1a1a;
+  }
+  
+  @media (max-width: 768px) {
+    .section__title {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .section__text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #4a4a4a;
+    margin: 0 0 1.5rem 0;
+  }
+  
+  .section__text a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+  
+  .section__subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem 0;
+    color: #2a2a2a;
+  }
+  
+  @media (max-width: 768px) {
+    .section__subtitle {
+      font-size: 1.25rem;
+    }
+  }
+  
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: 2rem 0;
+  }
+  
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .comparison caption {
+    font-size: 0.875rem;
+    color: #666;
+    padding: 0.5rem;
+    caption-side: bottom;
+  }
+  
+  .comparison th,
+  .comparison td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .comparison th {
+    background: #667eea;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .comparison tr:nth-child(even) {
+    background: #f8f9fa;
+  }
+  
+  .comparison__row--highlight {
+    background: #e8f4fd !important;
+  }
+  
+  .process {
+    display: grid;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+  
+  .process__step {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .process__number {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #667eea;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  
+  .process__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: #2a2a2a;
+  }
+  
+  .process__text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4a4a4a;
+    margin: 0;
+  }
+  
+  .faq {
+    display: grid;
+    gap: 2rem;
+  }
+  
+  .faq__item {
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 2rem;
+  }
+  
+  .faq__question {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    color: #2a2a2a;
+  }
+  
+  .faq__answer {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #4a4a4a;
+    margin: 0;
+  }
+  
+  .faq__answer a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  .faq__answer a:hover {
+    text-decoration: underline;
+  }
+  
+  .cta {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 3rem;
+    border-radius: 1rem;
+    text-align: center;
+  }
+  
+  .cta__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+  }
+  
+  @media (max-width: 768px) {
+    .cta__title {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .cta__text {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin: 0 0 2rem 0;
+    opacity: 0.95;
+  }
+  
+  .cta__actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .cta__button {
+    display: inline-block;
+    padding: 0.875rem 1.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+  }
+  
+  .cta__button--primary {
+    background: #fff;
+    color: #667eea;
+  }
+  
+  .cta__button--primary:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+  }
+  
+  .cta__button--secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+  }
+  
+  .cta__button--secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+</style>

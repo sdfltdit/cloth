@@ -1,0 +1,1195 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Tech Pack Guide for Clothing Brands 2026 | SDF Clothing";
+const pageDescription = "Complete tech pack guide for clothing brands. What a tech pack includes, how to create one, costs and common mistakes before you approach a manufacturer.";
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20tech%20pack%20creation`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-23",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#org" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need a tech pack to work with a clothing manufacturer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you need a tech pack to work with most clothing manufacturers. Without a tech pack, manufacturers must guess your specifications, which leads to incorrect sizing, wrong fabric choices, and costly sample revisions. A tech pack provides the technical blueprint needed for accurate production. Some manufacturers offer tech pack creation services if you don't have one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I don't have a tech pack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Without a tech pack, manufacturers will either refuse the project or charge significantly more to create one for you. Production delays are common as factories must clarify ambiguous specifications. Sample costs increase as multiple iterations are needed to get the product right. The final product may not match your vision, leading to costly rework or unsellable inventory."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does it cost to create a tech pack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tech pack costs vary by method: DIY with software costs $0 (if you own Adobe Illustrator) but takes 5-10 hours per style with a steep learning curve. Freelance designers charge $200-500 per style for simple garments and $500-1,500 for complex styles. Tech pack agencies charge $300-800 per style. SDF Clothing includes tech pack creation in our full package quote for clients who don't have one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can SDF create a tech pack from my design sketches?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SDF Clothing can create a tech pack from your design sketches. Our design team converts creative sketches into technical manufacturing documents. We review your sketches, clarify specifications, and produce complete tech packs ready for production. This service is included in our full package quote or available as a standalone service for brands who need tech pack creation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What software do designers use to create tech packs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Professional designers use Adobe Illustrator for tech pack creation due to its precision and industry-standard vector capabilities. Dedicated platforms like Techpacker.com offer collaborative features for tech pack management. Canva can be used for basic tech packs but lacks technical precision. Excel with manual drawings is possible but inefficient. Most fashion brands hire freelance designers with Illustrator expertise rather than learning the software themselves."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to create a tech pack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tech pack creation time varies by experience and complexity. Experienced designers take 2-4 hours for simple garments like t-shirts and 4-8 hours for complex garments like jackets. Beginners may take 10-20 hours per style due to the learning curve. Freelance designers typically deliver within 3-5 business days. SDF Clothing delivers tech packs within 5-7 business days as part of our development process."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a tech pack and a spec sheet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A tech pack is a comprehensive document including sketches, measurements, fabric specifications, color callouts, trim details, construction notes, and quality standards. A spec sheet is typically a subset focusing only on measurements and basic specifications. Tech packs are more detailed and used for full production, while spec sheets may be used for simple sampling or quick costing. Professional manufacturing requires full tech packs for accuracy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I update a tech pack after production starts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can update a tech pack after production starts, but changes incur costs and delays. Minor changes like adjusting measurements within tolerance may be possible without significant impact. Major changes like fabric substitution or style modification require re-sampling and may incur additional charges. It's best to finalize your tech pack before bulk production to avoid costly revisions. SDF Clothing reviews tech packs before production to catch issues early."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": pageTitle,
+      "description": pageDescription,
+      "author": { "@id": SITE + "/#org" },
+      "publisher": { "@id": SITE + "/#org" },
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-23"
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Tech Pack Guide</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Tech Pack Guide 2026 | Before You Approach a Manufacturer</p>
+        <h1 class="hero__title">Tech Pack Guide | What Every Clothing Brand Needs to Know Before Approaching a Manufacturer</h1>
+        <p class="hero__description">
+          A tech pack is your garment's blueprint. Without one, manufacturers guess - and guessing costs money. Learn what a tech pack includes, how to create one, costs, and common mistakes that delay production. Get your tech pack right before you approach a manufacturer. Explore our <a href="/how-to-start-a-clothing-brand/" style="color:#e00;text-decoration:none;">how to start a clothing brand</a> and <a href="/how-to-find-clothing-manufacturer/" style="color:#e00;text-decoration:none;">how to find a clothing manufacturer</a>.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">8</span>
+            <span class="hero__stat-label">Essential Components</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">$0</span>
+            <span class="hero__stat-label">DIY Option</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">48hr</span>
+            <span class="hero__stat-label">Review Time</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">8+</span>
+            <span class="hero__stat-label">Common Mistakes</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get Tech Pack Quote
+          </a>
+          <a href="/tech-pack-service" class="hero__cta hero__cta--secondary">
+            Tech Pack Service
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.webp" alt="SDF Clothing tech pack development and garment manufacturing facility" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Tech Pack Creation Included</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">48-Hour Review</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">300 Piece MOQ</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Since 1998</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: What Is a Tech Pack -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What Is a Tech Pack?</h2>
+      <p class="section__text">
+        A tech pack is a technical document that tells a manufacturer exactly how to build your garment. Think of it as a blueprint for clothing. Just as an architect needs detailed blueprints to build a house, manufacturers need tech packs to produce garments accurately. Without a tech pack, manufacturers must guess your specifications - fit, fabric, construction details - and guessing inevitably leads to errors, costly revisions, and products that don't match your vision.
+      </p>
+      <p class="section__text">
+        Tech packs contain all the technical specifications needed for production: technical flat sketches showing front, back, and detail views; precise measurements for each size; fabric specifications including composition and weight; color specifications using Pantone numbers or hex codes; trim and hardware details like zippers, buttons, and labels; construction notes specifying stitch types and seam allowances; label and packaging specifications; and quality standards including AQL levels and inspection criteria. Every element that affects how your garment looks, fits, and performs must be documented.
+      </p>
+      <p class="section__text">
+        Many fashion founders confuse tech packs with design sketches. A design sketch is your creative vision - what you want the garment to look like. A tech pack is the technical translation of that vision into manufacturing instructions. Design sketches are mood boards, pencil drawings, or Canva concepts. Tech packs are precise documents with measurements, specifications, and construction details. Manufacturers cannot produce from design sketches alone - they need the technical precision of a tech pack to execute your vision accurately.
+      </p>
+      <p class="section__text">
+        Tech packs serve multiple critical functions beyond production. They enable accurate costing by providing all specifications needed for fabric sourcing and labor estimation. They facilitate communication between your brand and the factory, reducing misunderstandings. They provide a reference for quality control during production and inspection. They protect your brand by documenting specifications that can be referenced if disputes arise. Most importantly, they demonstrate professionalism to manufacturers - brands with complete tech packs get better pricing, faster turnaround, and more attention than brands without them.
+      </p>
+      <p class="section__text">
+        SDF Clothing provides tech pack creation services for brands that don't have one. Our design team converts your design sketches into complete technical manufacturing documents. We include tech pack creation in our full package quote or offer it as a standalone service. Visit our <a href="/tech-pack-service">tech pack service page</a> to learn more about how we can help you prepare for manufacturing. For brands who already have tech packs, we review them within 48 hours and provide feedback before production begins.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Tech Pack Components -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">What Every Tech Pack Must Include | 8 Essential Components</h2>
+      <p class="section__text">
+        A complete tech pack contains eight essential components. Missing any of these components leads to production delays, incorrect specifications, and costly revisions. Manufacturers need complete information to produce your garment accurately. This section details each component, what it contains, why it matters, and who typically creates it. Use this as your checklist when creating or reviewing your tech pack.
+      </p>
+      <p class="section__text">
+        Technical flat sketches show your garment from multiple views - front, back, and critical detail views. Unlike design sketches which are artistic representations, flat sketches are proportionally accurate technical drawings showing seam lines, stitching details, and component placement. Measurements and grading specify exact dimensions for each size in your range, including point of measure definitions and tolerance allowances. Fabric specifications detail composition, weight in GSM, finish type, and any certification requirements like organic or OEKO-TEX.
+      </p>
+      <p class="section__text">
+        Color specifications use Pantone numbers or hex codes for accurate color matching. Pantone is the industry standard for textiles, ensuring consistent color across production runs. Trim and hardware details specify every zipper, button, label, patch, and drawstring with part numbers, sizes, and attachment methods. Construction notes specify stitch types, seam allowances, and special construction techniques for complex areas. Label and packaging specifications define label placement, size, content, and packaging requirements. Quality standards specify AQL levels, inspection criteria, and defect classifications.
+      </p>
+
+      <h3 class="section__subtitle">Tech Pack Components Breakdown</h3>
+      <p class="section__text">
+        This table outlines the eight essential tech pack components, what each contains, why it matters for production, and who typically creates each element.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>What It Contains</th>
+              <th>Why It Matters</th>
+              <th>Who Creates It</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Flat sketches</strong></td>
+              <td>Front, back, detail views with seam lines</td>
+              <td>Visual reference for construction</td>
+              <td>Designer / Illustrator</td>
+            </tr>
+            <tr>
+              <td><strong>Measurements</strong></td>
+              <td>Size chart, POMs, tolerance, grade rules</td>
+              <td>Ensures correct fit across sizes</td>
+              <td>Pattern maker / Grading expert</td>
+            </tr>
+            <tr>
+              <td><strong>Fabric spec</strong></td>
+              <td>Composition, GSM, finish, certification</td>
+              <td>Determines cost and hand feel</td>
+              <td>Designer / Fabric sourcer</td>
+            </tr>
+            <tr>
+              <td><strong>Colour callouts</strong></td>
+              <td>Pantone numbers, hex codes, placement</td>
+              <td>Ensures accurate color matching</td>
+              <td>Designer / Color specialist</td>
+            </tr>
+            <tr>
+              <td><strong>Trims</strong></td>
+              <td>Zippers, buttons, labels, hardware details</td>
+              <td>Completes garment functionality</td>
+              <td>Designer / Sourcing</td>
+            </tr>
+            <tr>
+              <td><strong>Construction notes</strong></td>
+              <td>Stitch type, seam allowance, special techniques</td>
+              <td>Guides manufacturing process</td>
+              <td>Technical designer</td>
+            </tr>
+            <tr>
+              <td><strong>Labels</strong></td>
+              <td>Placement, size, content, legal requirements</td>
+              <td>Branding and regulatory compliance</td>
+              <td>Designer / Legal team</td>
+            </tr>
+            <tr>
+              <td><strong>Quality standards</strong></td>
+              <td>AQL level, inspection criteria, defects</td>
+              <td>Ensures production quality</td>
+              <td>QC team / Factory</td>
+            </tr>
+          </tbody>
+        </table>
+        <caption>Table: Eight essential tech pack components with descriptions and creation responsibility. Complete tech packs include all elements for accurate production.</caption>
+      </div>
+
+      <p class="section__text" style="margin-top: 2rem;">
+        SDF Clothing provides tech pack creation services covering all eight components. Our team includes technical designers, pattern makers, and sourcing specialists who create complete production-ready tech packs. We also offer <a href="/pattern-making-service">pattern making</a> and <a href="/grading-service">grading services</a> for brands who need technical development support. Our <a href="/fit-engineering-service">fit engineering service</a> ensures your measurements translate correctly to production samples.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Tech Pack vs Design Sketch -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Tech Pack vs Design Sketch | What Is the Difference?</h2>
+      <p class="section__text">
+        Many fashion founders confuse tech packs with design sketches, but they serve fundamentally different purposes. A design sketch is your creative vision - what you want the garment to look like. A tech pack is the technical translation of that vision into manufacturing instructions. Design sketches are artistic representations: mood boards, pencil drawings, or Canva concepts that communicate style, silhouette, and aesthetic. Tech packs are precise documents with measurements, specifications, and construction details that communicate how to build the garment.
+      </p>
+      <p class="section__text">
+        Design sketches focus on aesthetics: color, proportion, silhouette, and visual appeal. They might show a garment worn by a model with artistic shading and creative styling. They are valuable for marketing presentations, investor pitches, and communicating your brand vision. However, manufacturers cannot produce from design sketches alone because sketches lack the technical specifications needed for production. A sketch shows what the garment should look like, but not how to construct it, what measurements to use, or what materials to source.
+      </p>
+      <p class="section__text">
+        Tech packs focus on technical precision: exact measurements for each size, fabric specifications with composition and weight, color specifications using Pantone numbers, trim details with part numbers, construction notes specifying stitch types and seam allowances, and quality standards for inspection. Tech packs include technical flat sketches - proportionally accurate line drawings showing seam lines and construction details rather than artistic representations. These flats serve as the visual reference for production, not the artistic sketch you might use for marketing.
+      </p>
+      <p class="section__text">
+        The distinction matters because approaching a manufacturer with only design sketches leads to problems. The manufacturer must guess specifications: what fabric weight to use, what measurements to follow, how to construct complex details. Guessing leads to samples that don't match your vision, requiring multiple costly revisions. Manufacturers often charge additional fees to convert sketches into tech packs, or they may refuse the project entirely if specifications are unclear. Brands with complete tech packs get faster response, more accurate costing, and better manufacturer attention.
+      </p>
+      <p class="section__text">
+        You can turn a design sketch into a tech pack by adding technical specifications. Start by creating technical flat sketches from your design sketch - remove artistic elements and add seam lines, stitch details, and component placement. Add a complete measurement spec with point of measure definitions for each size. Specify fabric composition, weight, and finish. Add color specifications using Pantone numbers or hex codes. Document all trims with part numbers and attachment methods. Write construction notes specifying stitch types and seam allowances. Add label placement and packaging specifications. If this process sounds overwhelming, <a href="/tech-pack-service">SDF Clothing can convert your sketches into complete tech packs</a> as part of our development services.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: How to Create a Tech Pack -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">How to Create a Tech Pack | Step by Step</h2>
+      <p class="section__text">
+        Creating a tech pack requires attention to detail and technical precision. Follow these six steps to create a complete tech pack that manufacturers can work with accurately. Each step builds on the previous one, so complete them in order. The tools you use depend on your budget and technical skills - Adobe Illustrator is the professional standard, Techpacker.com offers collaborative features, Canva works for basic tech packs, and hiring a freelancer is an option if you lack technical skills.
+      </p>
+
+      <div class="process">
+        <div class="process__step">
+          <div class="process__number">1</div>
+          <div class="process__content">
+            <h3 class="process__title">Create Technical Flat Sketches</h3>
+            <p class="process__text">
+              Draw proportionally accurate flat sketches showing front, back, and critical detail views. Remove artistic elements and add seam lines, stitch details, and component placement. Technical flats serve as the visual reference for production, not artistic representations for marketing. Use Adobe Illustrator or hire a technical designer if you lack drawing skills.
+            </p>
+          </div>
+        </div>
+
+        <div class="process__step">
+          <div class="process__number">2</div>
+          <div class="process__content">
+            <h3 class="process__title">Develop Size Chart for Target Markets</h3>
+            <p class="process__text">
+              Create a measurement spec with point of measure definitions for each size in your range. Include grade rules specifying how measurements change between sizes. Add tolerance allowances for acceptable variation. Ensure your size chart matches your target market standards - US, UK, and EU sizing differ significantly. Our <a href="/grading-service">grading service</a> can help create accurate size charts.
+            </p>
+          </div>
+        </div>
+
+        <div class="process__step">
+          <div class="process__number">3</div>
+          <div class="process__content">
+            <h3 class="process__title">Specify All Fabrics with Composition and GSM</h3>
+            <p class="process__text">
+              Document fabric composition (e.g., 100% organic cotton, 95% cotton 5% elastane), weight in GSM (grams per square meter), finish type (e.g., enzyme washed, stone washed), and any certification requirements (GOTS, OEKO-TEX). Fabric specifications determine cost, hand feel, and drape - critical for production accuracy.
+            </p>
+          </div>
+        </div>
+
+        <div class="process__step">
+          <div class="process__number">4</div>
+          <div class="process__content">
+            <h3 class="process__title">Add Colour Callouts with Pantone Numbers</h3>
+            <p class="process__text">
+              Use Pantone numbers for accurate color matching - Pantone TPX is the textile industry standard. Specify color placement on sketches with callouts. If you don't have Pantone numbers, provide hex codes as an alternative but note that Pantone matching is more accurate for production. Include color cards for visual reference.
+            </p>
+          </div>
+        </div>
+
+        <div class="process__step">
+          <div class="process__number">5</div>
+          <div class="process__content">
+            <h3 class="process__title">Document All Trims, Labels, and Hardware</h3>
+            <p class="process__text">
+              Specify every zipper, button, label, patch, and drawstring with part numbers, sizes, and attachment methods. Avoid vague descriptions like "silver button" | specify "20mm silver shank button, style SB-201, 2-hole attachment." Include label placement, size, and content. Document packaging requirements.
+            </p>
+          </div>
+        </div>
+
+        <div class="process__step">
+          <div class="process__number">6</div>
+          <div class="process__content">
+            <h3 class="process__title">Write Construction Notes and Quality Standards</h3>
+            <p class="process__text">
+              Specify stitch types (e.g., overlock, coverstitch), seam allowance (typically 1cm), and special construction techniques for complex areas. Define quality standards including AQL level (typically 2.5 for garments), inspection criteria, and defect classifications. Our <a href="/quality-inspection-service">quality inspection service</a> provides AQL guidance.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <p class="section__text" style="margin-top: 2rem;">
+        Tools for tech pack creation include Adobe Illustrator (professional, $20-50/month subscription, steep learning curve), Techpacker.com (dedicated platform, $50-100/month, collaborative features), Canva (basic, free-$15/month, limited technical precision), and hiring a freelancer ($200-500 per style). SDF Clothing includes tech pack creation in our <a href="/full-package-production/">full package production</a> service for clients who need technical development support. Our <a href="/garment-development-service">garment development service</a> handles the entire technical process from sketch to production-ready tech pack.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Tech Pack Cost -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Tech Pack Cost | DIY vs Hiring a Professional</h2>
+      <p class="section__text">
+        Tech pack costs vary significantly based on the approach you choose. DIY with software costs nothing if you already own Adobe Illustrator, but takes 5-10 hours per style with a steep learning curve if you're unfamiliar with technical drawing. Freelance designers charge $200-500 per style for simple garments like t-shirts and $500-1,500 for complex styles like jackets with multiple components. Tech pack service agencies charge $300-800 per style depending on complexity. SDF Clothing includes tech pack creation in our full package quote, making it cost-effective for brands who need both development and production.
+      </p>
+      <p class="section__text">
+        DIY with Illustrator costs $0 in software fees if you own a subscription, but the time investment is significant | 5-10 hours per style for experienced users, 10-20 hours for beginners. The learning curve for Illustrator is steep, requiring weeks or months to master technical drawing skills. DIY with Canva costs $0-15/month for the free or pro plan, but Canva lacks technical precision for accurate measurements and specifications. Canva works for basic tech packs but may require revisions by the manufacturer to add missing technical details.
+      </p>
+      <p class="section__text">
+        Freelance designers on Fiverr and Upwork charge $200-500 per style for simple garments like basic t-shirts, hoodies, and leggings. Complex garments like jackets, coats, and structured dresses cost $500-1,500 per style due to additional components and construction details. Freelancer quality varies significantly - review portfolios and ask for tech pack samples before hiring. Turnaround time is typically 3-5 business days. Tech pack service agencies charge $300-800 per style with more consistent quality and faster turnaround, but at higher cost than freelancers.
+      </p>
+      <p class="section__text">
+        SDF Clothing includes tech pack creation in our full package quote for clients who don't have one. Our design team converts your design sketches into complete technical manufacturing documents as part of our development process. This eliminates separate tech pack costs and ensures the tech pack aligns with our production capabilities. For brands who only need tech pack creation without production, we offer standalone tech pack services at competitive rates. Visit our <a href="/tech-pack-service">tech pack service page</a> for pricing details.
+      </p>
+
+      <h3 class="section__subtitle">Tech Pack Cost Comparison</h3>
+      <p class="section__text">
+        This table compares tech pack creation options with costs, time investment, and best use cases. Choose the option that matches your budget, timeline, and technical skills.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Cost</th>
+              <th>Time</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>DIY (Illustrator)</strong></td>
+              <td>$0 (if you own software)</td>
+              <td>5-10 hours per style</td>
+              <td>Brands with technical skills and time</td>
+            </tr>
+            <tr>
+              <td><strong>DIY (Canva)</strong></td>
+              <td>$0-15/month</td>
+              <td>3-6 hours per style</td>
+              <td>Basic tech packs, simple garments</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Freelance designer</strong></td>
+              <td>$200-1,500 per style</td>
+              <td>3-5 business days</td>
+              <td>Brands without technical skills</td>
+            </tr>
+            <tr>
+              <td><strong>Tech pack agency</strong></td>
+              <td>$300-800 per style</td>
+              <td>2-4 business days</td>
+              <td>Brands needing quality and speed</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>SDF Tech Pack Service</strong></td>
+              <td>Included in package quote</td>
+              <td>5-7 business days</td>
+              <td>Brands working with SDF for production</td>
+            </tr>
+          </tbody>
+        </table>
+        <caption>Table: Tech pack creation cost comparison by method. SDF Tech Pack Service is included in full package production quotes.</caption>
+      </div>
+
+      <p class="section__text" style="margin-top: 2rem;">
+        When budgeting for tech packs, consider both direct costs and opportunity costs. DIY options have low direct costs but high time investment that could be spent on marketing and sales. Professional options have higher direct costs but save significant time and ensure quality. For brands launching their first collection, the time saved by hiring professionals often justifies the cost by enabling faster market entry. For established brands with technical teams in-house, DIY may be cost-effective for routine tech pack updates.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Common Tech Pack Mistakes -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Common Tech Pack Mistakes That Delay Production</h2>
+      <p class="section__text">
+        This section builds expert credibility by identifying specific tech pack mistakes that cause production delays and costly revisions. Most mistakes stem from incomplete specifications, vague descriptions, or missing critical information. Manufacturers must guess when specifications are unclear, and guessing inevitably leads to errors. The following eight mistakes are the most common causes of tech pack-related production delays. Avoid these to ensure smooth, accurate production.
+      </p>
+      <p class="section__text">
+        Missing measurements is the most common mistake. Without complete measurement specs for each size, manufacturers guess dimensions based on standard grading rules, which may not match your intended fit. This leads to samples that don't fit correctly, requiring multiple rounds of fit samples and pattern revisions. Pantone numbers not specified is another frequent error - without Pantone numbers, manufacturers match colors visually, which results in inconsistent color across production runs. Fabric weight not stated leads to wrong hand feel and drape, as the same fabric in different weights behaves differently in production.
+      </p>
+      <p class="section__text">
+        No seam allowance noted causes manufacturers to add seam allowances differently than intended, affecting fit and construction. Missing construction notes for complex areas like collar stands, plackets, or pocket placements leads to incorrect construction methods. Vague trim descriptions like "silver button" instead of "20mm silver shank button, style SB-201, 2-hole attachment" cause suppliers to source the wrong components. No size chart grading across the full range means manufacturers must guess intermediate sizes, leading to inconsistent fit. Missing label position and size specs results in labels placed incorrectly or at wrong sizes, requiring rework.
+      </p>
+
+      <h3 class="section__subtitle">Common Tech Pack Mistakes and Solutions</h3>
+      <p class="section__text">
+        This table lists the eight most common tech pack mistakes, what happens when they occur, and how to fix them. Use this as a checklist when creating or reviewing your tech pack.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Mistake</th>
+              <th>What Happens</th>
+              <th>How to Fix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Missing measurements</strong></td>
+              <td>Factory guesses = wrong fit</td>
+              <td>Include complete POMs for all sizes</td>
+            </tr>
+            <tr>
+              <td><strong>Pantone numbers not specified</strong></td>
+              <td>Colours get matched wrong</td>
+              <td>Use Pantone TPX for all colours</td>
+            </tr>
+            <tr>
+              <td><strong>Fabric weight not stated</strong></td>
+              <td>Wrong hand feel and drape</td>
+              <td>Specify GSM for all fabrics</td>
+            </tr>
+            <tr>
+              <td><strong>No seam allowance noted</strong></td>
+              <td>Manufacturer adds differently</td>
+              <td>Specify seam allowance (typically 1cm)</td>
+            </tr>
+            <tr>
+              <td><strong>Missing construction notes</strong></td>
+              <td>Complex areas constructed incorrectly</td>
+              <td>Detail special construction techniques</td>
+            </tr>
+            <tr>
+              <td><strong>Vague trim descriptions</strong></td>
+              <td>Wrong components sourced</td>
+              <td>Specify part numbers and attachment methods</td>
+            </tr>
+            <tr>
+              <td><strong>No size chart grading</strong></td>
+              <td>Inconsistent fit across range</td>
+              <td>Include grade rules for all sizes</td>
+            </tr>
+            <tr>
+              <td><strong>Missing label position specs</strong></td>
+              <td>Labels placed incorrectly</td>
+              <td>Document label placement and size</td>
+            </tr>
+          </tbody>
+        </table>
+        <caption>Table: Eight common tech pack mistakes with consequences and solutions. Complete tech packs avoid these issues.</caption>
+      </div>
+
+      <p class="section__text" style="margin-top: 2rem;">
+        SDF Clothing reviews all tech packs before production begins and flags any unclear specifications. Our team identifies missing information and requests clarification before sampling starts, preventing costly revisions downstream. For brands who need help creating complete tech packs, our <a href="/tech-pack-service">tech pack service</a> ensures all critical specifications are included. Our <a href="/sampling-service">sampling service</a> includes tech pack review as part of the sample development process.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Tech Pack Requirements by Product Type -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Tech Pack Requirements by Product Type</h2>
+      <p class="section__text">
+        Different products require different tech pack depth and complexity. Simple products like basic t-shirts need 4-6 pages of documentation covering essential specifications. Complex products like bomber jackets with multiple components require 12-20 pages of documentation to specify all details accurately. Understanding the tech pack requirements for your product type helps you budget for development time and ensure you include all necessary information.
+      </p>
+      <p class="section__text">
+        Simple products like basic t-shirts, polo shirts, and leggings require minimal tech pack documentation because they have few components and straightforward construction. Tech packs for these products typically include front and back flat sketches, a basic measurement spec, fabric composition and weight, color specifications, and basic trim details. Complex products like jackets, coats, and structured dresses require extensive documentation because they have multiple components (linings, interlinings, zippers, buttons, pockets, collars, cuffs), complex construction techniques, and specialized trims.
+      </p>
+      <p class="section__text">
+        Activewear sets require additional specifications for performance fabrics, compression ratios, and stretch recovery. Woven shirts need collar and cuff construction details, button placket specifications, and interfacing requirements. Swimwear requires fabric stretch specifications, lining details, and chlorine resistance notes. Outerwear coats require interlining specifications, thermal insulation requirements, and weatherproofing details. The more complex the product, the more detailed the tech pack must be to ensure accurate production.
+      </p>
+
+      <h3 class="section__subtitle">Tech Pack Complexity by Product Type</h3>
+      <p class="section__text">
+        This table shows typical tech pack page counts and additional requirements for common product types. Use this as a guide when planning your tech pack development.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Product Type</th>
+              <th>Tech Pack Pages</th>
+              <th>Key Additional Requirements</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Basic t-shirt</strong></td>
+              <td>4-6 pages</td>
+              <td>Basic measurement spec, simple trim details</td>
+            </tr>
+            <tr>
+              <td><strong>Polo shirt</strong></td>
+              <td>6-8 pages</td>
+              <td>Collar construction, placket specifications</td>
+            </tr>
+            <tr>
+              <td><strong>Hoodie</strong></td>
+              <td>8-10 pages</td>
+              <td>Hood construction, cuff and hem details</td>
+            </tr>
+            <tr>
+              <td><strong>Activewear set</strong></td>
+              <td>10-12 pages</td>
+              <td>Performance fabric specs, compression ratios</td>
+            </tr>
+            <tr>
+              <td><strong>Woven shirt</strong></td>
+              <td>8-10 pages</td>
+              <td>Collar, cuff, placket, interfacing details</td>
+            </tr>
+            <tr>
+              <td><strong>Jacket</strong></td>
+              <td>12-16 pages</td>
+              <td>Lining, interlining, zipper, pocket details</td>
+            </tr>
+            <tr>
+              <td><strong>Swimwear</strong></td>
+              <td>8-10 pages</td>
+              <td>Fabric stretch, lining, chlorine resistance</td>
+            </tr>
+            <tr>
+              <td><strong>Outerwear coat</strong></td>
+              <td>16-20 pages</td>
+              <td>Thermal insulation, weatherproofing, hardware</td>
+            </tr>
+          </tbody>
+        </table>
+        <caption>Table: Tech pack complexity by product type with typical page counts and additional requirements.</caption>
+      </div>
+
+      <p class="section__text" style="margin-top: 2rem;">
+        SDF Clothing provides tech pack creation services for all product types from basic t-shirts to complex outerwear. Our technical designers understand the specific requirements for each product category and create comprehensive tech packs accordingly. From a basic t-shirt line to a complex outerwear collection, our <a href="/tech-pack-service">tech pack service</a> ensures your documentation meets production requirements. Our <a href="/oem-clothing-manufacturer">OEM manufacturing</a> and <a href="/private-label-clothing-manufacturer">private label services</a> both include tech pack development support.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: What Happens When You Send a Tech Pack to SDF -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">What Happens When You Send a Tech Pack to SDF</h2>
+      <p class="section__text">
+        When you submit your tech pack to SDF Clothing, our team reviews it within 48 hours and provides detailed feedback. We assess completeness, technical accuracy, and production feasibility. If specifications are unclear or missing, we flag them before sampling begins to prevent costly revisions. This review process ensures your tech pack is production-ready and aligned with our manufacturing capabilities.
+      </p>
+      <p class="section__text">
+        After review, we send back costing and lead time estimates based on your specifications. Our costing includes fabric sourcing, labor, trims, and any additional services you need. Lead times cover fabric sourcing, sampling, and bulk production. We provide transparent pricing with no hidden costs. If your tech pack requires adjustments for cost optimization or production efficiency, we suggest alternatives and explain the trade-offs.
+      </p>
+      <p class="section__text">
+        Once you approve costing and lead times, we proceed to sample development. Our <a href="/sampling-service">sampling service</a> creates proto samples for your review and approval. Samples are produced according to your tech pack specifications, and we flag any discrepancies during sampling. If samples don't match your vision, we identify whether the issue is tech pack specifications or production execution and adjust accordingly. This iterative process ensures final bulk production matches your requirements.
+      </p>
+      <p class="section__text">
+        For brands who don't have a tech pack, our <a href="/tech-pack-service">tech pack service</a> creates complete technical documents from your design sketches. We convert creative concepts into production-ready specifications, handling all eight essential components. This service is included in our full package quote or available as a standalone service. Our <a href="/garment-development-service">garment development service</a> manages the entire process from sketch to production-ready tech pack, so you can focus on marketing and sales.
+      </p>
+      <p class="section__text">
+        After sample approval, we proceed to bulk production. Throughout production, your tech pack serves as the reference for quality control. Our QC team inspects garments against your specifications, ensuring measurements, construction, and finish match the tech pack. Any deviations are identified and corrected before shipment. This quality control process minimizes defects and ensures your final product meets your specifications.
+      </p>
+      <p class="section__text">
+        SDF Clothing's tech pack review and development services are designed to streamline your path to production. Whether you have a complete tech pack or need us to create one from scratch, we ensure your specifications are production-ready and aligned with manufacturing best practices. Contact us to submit your tech pack or discuss tech pack creation services. Visit our <a href="/contact/">contact page</a> or request samples through our <a href="/contact/">sample request tool</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: FAQ -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Tech Pack FAQ</h2>
+      
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">Do I need a tech pack to work with a clothing manufacturer?</h3>
+          <p class="faq__answer">
+            Yes, you need a tech pack to work with most clothing manufacturers. Without a tech pack, manufacturers must guess your specifications, which leads to incorrect sizing, wrong fabric choices, and costly sample revisions. A tech pack provides the technical blueprint needed for accurate production. Some manufacturers offer tech pack creation services if you don't have one.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What happens if I don't have a tech pack?</h3>
+          <p class="faq__answer">
+            Without a tech pack, manufacturers will either refuse the project or charge significantly more to create one for you. Production delays are common as factories must clarify ambiguous specifications. Sample costs increase as multiple iterations are needed to get the product right. The final product may not match your vision, leading to costly rework or unsellable inventory.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How much does it cost to create a tech pack?</h3>
+          <p class="faq__answer">
+            Tech pack costs vary by method: DIY with software costs $0 (if you own Adobe Illustrator) but takes 5-10 hours per style with a steep learning curve. Freelance designers charge $200-500 per style for simple garments and $500-1,500 for complex styles. Tech pack agencies charge $300-800 per style. SDF Clothing includes tech pack creation in our full package quote for clients who don't have one.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can SDF create a tech pack from my design sketches?</h3>
+          <p class="faq__answer">
+            Yes, SDF Clothing can create a tech pack from your design sketches. Our design team converts creative sketches into technical manufacturing documents. We review your sketches, clarify specifications, and produce complete tech packs ready for production. This service is included in our full package quote or available as a standalone service for brands who need tech pack creation.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What software do designers use to create tech packs?</h3>
+          <p class="faq__answer">
+            Professional designers use Adobe Illustrator for tech pack creation due to its precision and industry-standard vector capabilities. Dedicated platforms like Techpacker.com offer collaborative features for tech pack management. Canva can be used for basic tech packs but lacks technical precision. Excel with manual drawings is possible but inefficient. Most fashion brands hire freelance designers with Illustrator expertise rather than learning the software themselves.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does it take to create a tech pack?</h3>
+          <p class="faq__answer">
+            Tech pack creation time varies by experience and complexity. Experienced designers take 2-4 hours for simple garments like t-shirts and 4-8 hours for complex garments like jackets. Beginners may take 10-20 hours per style due to the learning curve. Freelance designers typically deliver within 3-5 business days. SDF Clothing delivers tech packs within 5-7 business days as part of our development process.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between a tech pack and a spec sheet?</h3>
+          <p class="faq__answer">
+            A tech pack is a comprehensive document including sketches, measurements, fabric specifications, color callouts, trim details, construction notes, and quality standards. A spec sheet is typically a subset focusing only on measurements and basic specifications. Tech packs are more detailed and used for full production, while spec sheets may be used for simple sampling or quick costing. Professional manufacturing requires full tech packs for accuracy.
+          </p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Can I update a tech pack after production starts?</h3>
+          <p class="faq__answer">
+            Yes, you can update a tech pack after production starts, but changes incur costs and delays. Minor changes like adjusting measurements within tolerance may be possible without significant impact. Major changes like fabric substitution or style modification require re-sampling and may incur additional charges. It's best to finalize your tech pack before bulk production to avoid costly revisions. SDF Clothing reviews tech packs before production to catch issues early.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10: CTA -->
+  <section class="section section--cta">
+    <div class="section__container section__container--narrow">
+      <h2 class="section__title">Ready to Submit Your Tech Pack?</h2>
+      <p class="section__text">
+        SDF Clothing reviews tech packs within 48 hours and provides detailed costing and lead time estimates. If you don't have a tech pack, our design team can create one from your design sketches as part of our development services. We've helped 500+ brands with tech pack creation and production since 1998.
+      </p>
+      <p class="section__text">
+        Get a free tech pack review and production quote within 48 hours. We'll assess your specifications, provide feedback, and answer all your questions about bringing your garment to production.
+      </p>
+      <div class="section__ctas">
+        <a href={whatsappQuoteUrl} class="section__cta section__cta--primary" target="_blank" rel="noopener noreferrer">
+          Submit Tech Pack for Review
+        </a>
+        <a href="/tech-pack-service" class="section__cta section__cta--secondary">
+          Tech Pack Creation Service
+        </a>
+        <a href="/contact/" class="section__cta section__cta--secondary">
+          Request Samples
+        </a>
+      </div>
+      <p class="section__text section__text--small">
+        Last updated: May 2026 | Average response time: 24 hours
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related: <a href="/how-to-create-a-tech-pack" style="color: var(--color-primary);">how to create a tech pack</a>, <a href="/sampling-service" style="color: var(--color-primary);">sampling service</a>, <a href="/garment-development-service" style="color: var(--color-primary);">garment development service</a>.
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-md) 0;
+    font-size: 0.9rem;
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 0.5rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, var(--color-bg) 0%, #1a0505 100%);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .hero__label {
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9rem;
+  }
+
+  .hero__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text);
+  }
+
+  @media (max-width: 768px) {
+    .hero__title {
+      font-size: 2rem;
+    }
+  }
+
+  .hero__description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  @media (max-width: 600px) {
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid var(--color-primary);
+  }
+
+  .hero__cta--secondary:hover {
+    background: var(--color-primary);
+  }
+
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .trust {
+    background: var(--color-bg-alt);
+    padding: var(--spacing-md) 0;
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    justify-content: center;
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+    font-size: 0.9rem;
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: bold;
+  }
+
+  .section {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, #1a0505 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__container--narrow {
+    max-width: 700px;
+  }
+
+  .section__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text);
+  }
+
+  .section__subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    color: var(--color-text);
+  }
+
+  .section__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid var(--color-primary);
+  }
+
+  .section__cta--secondary:hover {
+    background: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .process {
+    display: grid;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+
+  .process__step {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: var(--spacing-md);
+    align-items: start;
+  }
+
+  @media (max-width: 600px) {
+    .process__step {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+    }
+  }
+
+  .process__number {
+    width: 50px;
+    height: 50px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .process__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .process__text {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+</style>
+
+</BaseLayout>

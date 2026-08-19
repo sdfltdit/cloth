@@ -1,0 +1,1084 @@
+---
+import { getYearsExperiencePlus } from '../data/company';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, schemaPerson, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "Loungewear Manufacturer | Lounge Sets & Home Wear | SDF";
+const pageDescription = "Loungewear manufacturer in Bangladesh. Comfortable lounge sets, sleepwear, and casual home wear. 300 piece MOQ. Get your free quote for loungewear today.";
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20loungewear%20manufacturing`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-21",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#org" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is loungewear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Loungewear is casual, comfortable clothing designed for relaxing at home. Unlike sleepwear which is specifically for sleeping, loungewear is suitable for wearing around the house during the day. Loungewear includes lounge sets, joggers, hoodies, sweatshirts, and relaxed-fit tops. The category has expanded significantly with the rise of remote work and athleisure trends. Loungewear balances comfort with presentability - you're comfortable at home but presentable enough for quick errands or video calls."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between loungewear and sleepwear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sleepwear is specifically designed for sleeping, typically featuring lighter fabrics, loose fits, and minimal fasteners for comfort during sleep. Loungewear is designed for daytime home wear, often with more structured designs, durable fabrics, and presentable styling. Sleepwear includes pajamas, nightgowns, and robes. Loungewear includes lounge sets, joggers, hoodies, and casual separates. While some garments overlap (like comfortable robes), loungewear is generally more substantial and designed for visibility, while sleepwear prioritizes sleeping comfort above appearance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What fabrics are best for loungewear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Best loungewear fabrics include cotton for breathability and natural feel, polyester for durability and wrinkle resistance, and blends like poly-cotton for balanced performance. Modal and rayon offer luxurious softness and drape. Fleece provides warmth for winter loungewear. Jersey knits offer stretch and comfort. For premium loungewear, bamboo fabric offers softness and sustainability. The best fabric depends on your target market and price point - cotton for natural preference, polyester for durability and affordability, blends for balanced performance. SDF sources all loungewear fabric types."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the most popular loungewear styles?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Popular loungewear styles include matching lounge sets (coordinating tops and bottoms), joggers with elastic waistbands, hoodies and sweatshirts, relaxed-fit t-shirts, casual dresses, and lounge shorts. Lounge sets are particularly popular, offering coordinated looks in comfortable fabrics. Athleisure-inspired pieces like leggings and crop tops bridge loungewear and casual wear. Oversized silhouettes, neutral colors, and minimalist designs are trending. Comfort-focused features like elastic waists, soft fabrics, and relaxed fits are essential across all loungewear styles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can loungewear be worn outside the home?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, modern loungewear is designed to be presentable enough for quick errands, coffee runs, or casual outings. The athleisure trend has blurred lines between loungewear and casual wear. However, traditional sleepwear is generally not appropriate for public wear. When designing loungewear for dual home-and-public use, focus on presentable styling, quality fabrics, and neat construction. Avoid overly worn-out looks or sleepwear-specific features like overly loose fits or delicate fabrics. Many brands now market loungewear as 'lifestyle apparel' suitable for various casual settings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for loungewear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most loungewear manufacturers require 500-1,000 pieces per style. However, SDF Clothing offers 300 piece minimums per style for loungewear manufacturing, making us accessible to startup brands and smaller collections. We can produce 300-piece orders across multiple sizes and colors. This flexibility enables new brands to test designs without committing to large quantities. As your brand grows, we can scale production to meet increasing demand. Our low MOQ loungewear manufacturing is ideal for brands testing the market or launching new categories."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I design a lounge set?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Designing a lounge set involves creating coordinating top and bottom pieces that work together aesthetically. Start with your brand aesthetic and target customer preferences. Choose a comfortable fabric - cotton jersey, poly-cotton fleece, or modal blends are popular. Design the top (hoodie, sweatshirt, or relaxed tee) and bottom (joggers, shorts, or lounge pants) with coordinating colors, patterns, or design elements. Consider practical features like elastic waists, pockets, and comfortable necklines. Create a <a href='/tech-pack-service'>tech pack</a> with detailed specifications for both pieces. Our <a href='/sampling-service'>sampling service</a> can develop prototypes for fit and design verification."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is private label loungewear available?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SDF Clothing offers private label loungewear manufacturing. We can produce loungewear with your brand labels, tags, and packaging. Private label means you select from our existing styles and add your branding, or we can develop custom styles based on your specifications. Private label loungewear is ideal for brands wanting to launch quickly with proven designs. We handle production while you focus on branding and marketing. Our <a href='/private-label-clothing-manufacturer'>private label service</a> includes full customization of labels, hangtags, and packaging to match your brand identity."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Loungewear Manufacturing",
+      "provider": { "@id": SITE + "/#org" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE", "FR", "IT", "ES"],
+      "description": pageDescription,
+      "offers": {
+        "@type": "Offer",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "300",
+          "description": "Starting MOQ | 300 pieces per style"
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "Loungewear Manufacturing Process",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Design and Fabric Selection",
+          "text": "Submit your lounge set designs or select from our existing styles. Choose comfortable fabrics - cotton, poly-cotton, modal, or fleece based on your target market and season. Specify colors, patterns, and branding requirements."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Pattern Making and Sampling",
+          "text": "Develop patterns for top and bottom pieces. Create samples for fit evaluation and design verification. Adjust patterns based on fitting results. Sample costs are credited against bulk orders."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "After sample approval, begin bulk production with 30% deposit. Our quality team conducts inline inspections at 20%, 50%, and 80% completion. Production typically takes 40-45 days."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Inspection and Shipment",
+          "text": "Conduct final AQL 2.5 inspection before shipment. Pay 70% balance upon approval. Apply your private labels and packaging. Ship FOB from Bangladesh port."
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Loungewear Products",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Lounge Sets"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Joggers"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Hoodies"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Sweatshirts"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Sleepwear"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">Loungewear Manufacturer</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Since 1998 | Dhaka, Bangladesh</p>
+        <h1 class="hero__title">Loungewear Manufacturer | Comfortable Lounge Sets and Home Wear</h1>
+        <p class="hero__description">
+          SDF Clothing is a loungewear specialist and full-service clothing manufacturer, producing from our Bangladesh factory with 300 piece MOQ. We produce comfortable lounge sets, joggers, hoodies, sweatshirts, and sleepwear. Cotton, polyester, modal, and fleece fabric options. Private label manufacturing with your branding. GOTS certified factory with 13 international certifications. Ideal for startup brands and established labels. Get a free quote today.
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">300</span>
+            <span class="hero__stat-label">Piece MOQ</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">Cotton</span>
+            <span class="hero__stat-label">& Modal</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">Private</span>
+            <span class="hero__stat-label">Label</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">25+</span>
+            <span class="hero__stat-label">Years</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get a Free Quote
+          </a>
+          <a href="/contact/" class="hero__cta hero__cta--secondary">
+            Request Sample
+          </a>
+        </div>
+      </div>
+      <div class="hero__image">
+        <img src="/factory.jpg" alt="SDF Clothing loungewear manufacturing facility in Bangladesh" width="600" height="400" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Lounge Sets</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Joggers</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Hoodies</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Sleepwear</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">300 Piece MOQ</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span class="trust__text">Private Label</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: What Is Loungewear -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">What Is Loungewear? | The Ultimate Comfort Clothing Category</h2>
+      <p class="section__text">
+        Loungewear is casual, comfortable clothing specifically designed for relaxing at home. Unlike sleepwear which is intended primarily for sleeping, loungewear bridges the gap between sleepwear and casual wear - comfortable enough for home but presentable enough for quick errands or casual outings. The category has exploded in popularity with the rise of remote work, athleisure trends, and increased focus on comfort. Loungewear includes coordinating lounge sets, joggers, hoodies, sweatshirts, relaxed-fit t-shirts, casual dresses, and comfortable shorts. The defining characteristics are comfort, relaxed fit, soft fabrics, and presentable styling suitable for home wear and casual public settings.
+      </p>
+      <p class="section__text">
+        The loungewear market has evolved significantly from basic sweatpants and t-shirts to sophisticated, fashion-forward designs. Modern loungewear incorporates design elements from activewear, casual wear, and even luxury fashion. Premium loungewear uses high-quality fabrics like modal, bamboo, and organic cotton for superior comfort. Lounge sets - coordinating tops and bottoms - have become particularly popular, offering put-together looks without sacrificing comfort. The category now spans price points from budget-friendly basics to luxury designer pieces. SDF produces loungewear across all quality tiers and price points to match your brand positioning.
+      </p>
+      <p class="section__text">
+        Loungewear differs from sleepwear in important ways. While both prioritize comfort, sleepwear is designed specifically for sleeping with lighter fabrics and looser fits. Loungewear is designed for daytime home wear with more substantial fabrics and structured designs that maintain presentability. Our <a href="/sleepwear-manufacturer/">sleepwear manufacturing</a> focuses specifically on nightwear, while our loungewear production creates garments suitable for wearing around the house and casual public settings. Understanding this distinction helps brands position products correctly and meet customer expectations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Loungewear vs Sleepwear -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Loungewear vs Sleepwear | Understanding the Difference</h2>
+      <p class="section__text">
+        While loungewear and sleepwear both prioritize comfort, they serve different purposes and have distinct characteristics. Understanding these differences helps brands design appropriate products and market them correctly to consumers who may not clearly distinguish between the categories.
+      </p>
+
+      <h3 class="section__subtitle">Purpose and Use</h3>
+      <p class="section__text">
+        Sleepwear is specifically designed for sleeping. Features include loose fits for unrestricted movement, lightweight breathable fabrics for temperature regulation during sleep, and minimal fasteners or decorations that could cause discomfort. Sleepwear includes pajamas, nightgowns, sleep shirts, and robes. Loungewear is designed for daytime home wear - relaxing, working from home, casual home activities. Loungewear is more structured, with durable fabrics and presentable styling suitable for being seen. While you can sleep in loungewear, it's not optimized for sleep, and while you can wear sleepwear during the day, it's generally not appropriate for public visibility.
+      </p>
+
+      <h3 class="section__subtitle">Fabric Characteristics</h3>
+      <p class="section__text">
+        Sleepwear fabrics prioritize lightness and breathability - cotton voile, silk, satin, lightweight modal. These fabrics feel luxurious against skin and regulate temperature but may lack durability for daytime wear. Loungewear fabrics prioritize comfort plus durability - heavier cotton jerseys, poly-cotton blends, fleece for warmth, modal blends for softness with structure. Loungewear fabrics withstand repeated washing and daily wear better than delicate sleepwear fabrics. Our <a href="/fabric-sourcing">fabric sourcing service</a> provides both sleepwear and loungewear fabric options appropriate to each category's requirements.
+      </p>
+
+      <h3 class="section__subtitle">Design and Styling</h3>
+      <p class="section__text">
+        Sleepwear design emphasizes simplicity and comfort - minimal seams, loose cuts, gentle necklines, no rough edges or scratchy labels. Styling is often feminine or masculine rather than fashion-forward. Loungewear design balances comfort with presentability - structured cuts, quality construction, fashionable colors and patterns, design details like pockets and drawstrings. Loungewear can be styled for casual public wear, while sleepwear typically cannot. The athleisure influence means loungewear often incorporates sporty elements like ribbed cuffs, drawstring waists, and athletic-inspired cuts.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Comparison of loungewear and sleepwear characteristics">
+          <caption>Loungewear vs Sleepwear Comparison</caption>
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Loungewear</th>
+              <th>Sleepwear</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Purpose</strong></td>
+              <td>Daytime home wear, casual outings</td>
+              <td>Sleeping only</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Fabric</strong></td>
+              <td>Durable, substantial (jersey, fleece, blends)</td>
+              <td>Lightweight, breathable (voile, silk, satin)</td>
+            </tr>
+            <tr>
+              <td><strong>Fit</strong></td>
+              <td>Relaxed but structured</td>
+              <td>Loose, flowing</td>
+            </tr>
+            <tr>
+              <td><strong>Public Wear</strong></td>
+              <td>Yes, appropriate for casual settings</td>
+              <td>No, generally not appropriate</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Durability</strong></td>
+              <td>High - designed for daily wear</td>
+              <td>Moderate - designed for sleep</td>
+            </tr>
+            <tr>
+              <td><strong>Styling</strong></td>
+              <td>Fashionable, presentable</td>
+              <td>Simple, comfort-focused</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Popular Loungewear Styles -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Popular Loungewear Styles | What Customers Want</h2>
+      <p class="section__text">
+        Loungewear encompasses various garment types, each with specific appeal and market positioning. Understanding popular styles helps brands develop product lines that resonate with customers and capture market share in this competitive category.
+      </p>
+
+      <h3 class="section__subtitle">Lounge Sets</h3>
+      <p class="section__text">
+        Lounge sets - coordinating tops and bottoms - are the most popular loungewear category. Matching sweatshirt or hoodie with joggers or lounge pants creates put-together looks without effort. Lounge sets appeal to customers wanting coordinated outfits that look intentional rather than thrown together. Popular fabric combinations include cotton jersey sets for year-round comfort, fleece sets for winter warmth, and modal blends for luxury feel. Lounge sets work well for <a href="/private-label-clothing-manufacturer">private label</a> programs where brands can add their branding to proven popular styles. SDF produces lounge sets in various fabric weights and color combinations.
+      </p>
+
+      <h3 class="section__subtitle">Joggers</h3>
+      <p class="section__text">
+        Joggers are relaxed-fit pants with elastic waistbands and cuffed ankles. Originally athletic wear, joggers have become essential loungewear staples. Features include drawstring waists for adjustability, side pockets for practicality, and comfortable stretch fabrics. Joggers work as standalone pieces or as part of lounge sets. Popular fabric choices include cotton jersey for breathability, poly-cotton for durability, and fleece for warmth. Joggers bridge loungewear and casual wear - appropriate for home but presentable enough for errands. Our <a href="/joggers-manufacturer">jogger manufacturing</a> produces various styles from basic to fashion-forward.
+      </p>
+
+      <h3 class="section__subtitle">Hoodies and Sweatshirts</h3>
+      <p class="section__text">
+        Hoodies and sweatshirts are loungewear essentials. Hoodies offer the added comfort and casual style of a hood, while sweatshirts provide a cleaner look. Both feature relaxed fits, comfortable fabrics, and casual styling appropriate for home wear. Popular styles include pullover hoodies, zip-up hoodies, crewneck sweatshirts, and oversized fits. Fabric choices include cotton fleece for warmth and softness, French terry for lighter weight, and jersey blends for breathability. Hoodies and sweatshirts work as standalone pieces or as tops in lounge sets. Our <a href="/hoodie-manufacturer/">hoodie manufacturing</a> produces various weights and styles.
+      </p>
+
+      <h3 class="section__subtitle">Relaxed T-Shirts and Tops</h3>
+      <p class="section__text">
+        Relaxed-fit t-shirts and casual tops complete loungewear wardrobes. Unlike fitted t-shirts, loungewear tops prioritize comfort with relaxed cuts, soft fabrics, and gentle necklines. Styles include oversized tees, relaxed crewnecks, V-neck tops, and casual button-front shirts. Fabric choices include cotton jersey for natural feel, modal blends for luxury softness, and poly-cotton for durability. These tops pair with joggers, lounge shorts, or can be worn alone for maximum comfort. Our <a href="/t-shirt-manufacturer">t-shirt manufacturing</a> produces relaxed-fit styles specifically for loungewear applications.
+      </p>
+
+      <h3 class="section__subtitle">Lounge Shorts</h3>
+      <p class="section__text">
+        Lounge shorts provide warm-weather loungewear options. Features include elastic waistbands, comfortable inseams, and soft fabrics. Styles range from basic jersey shorts to more structured designs with pockets and details. Lounge shorts are ideal for summer, warmer climates, or customers preferring shorter styles. Popular fabrics include cotton jersey, lightweight poly-cotton, and modal blends. Lounge shorts pair with relaxed t-shirts or casual tops for complete warm-weather loungewear looks. SDF produces lounge shorts in various lengths and fabric options.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Popular loungewear styles with characteristics and best fabric choices">
+          <caption>Popular Loungewear Styles</caption>
+          <thead>
+            <tr>
+              <th>Style</th>
+              <th>Key Features</th>
+              <th>Best Fabrics</th>
+              <th>Season</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Lounge Sets</strong></td>
+              <td>Coordinating top and bottom, put-together look</td>
+              <td>Cotton jersey, fleece, modal blends</td>
+              <td>All-season</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Joggers</strong></td>
+              <td>Elastic waist, cuffed ankles, pockets</td>
+              <td>Cotton jersey, poly-cotton, fleece</td>
+              <td>All-season</td>
+            </tr>
+            <tr>
+              <td><strong>Hoodies</strong></td>
+              <td>Hood, relaxed fit, warm</td>
+              <td>Cotton fleece, French terry</td>
+              <td>Fall/Winter</td>
+            </tr>
+            <tr>
+              <td><strong>Sweatshirts</strong></td>
+              <td>Crewneck, relaxed fit, warm</td>
+              <td>Cotton fleece, French terry</td>
+              <td>Fall/Winter</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Relaxed Tees</strong></td>
+              <td>Oversized, soft fabrics, gentle necklines</td>
+              <td>Cotton jersey, modal blends</td>
+              <td>All-season</td>
+            </tr>
+            <tr>
+              <td><strong>Lounge Shorts</strong></td>
+              <td>Elastic waist, comfortable inseam</td>
+              <td>Cotton jersey, lightweight poly-cotton</td>
+              <td>Spring/Summer</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Fabric Options -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Loungewear Fabric Options | Choosing Comfort Materials</h2>
+      <p class="section__text">
+        Fabric choice significantly impacts loungewear comfort, performance, and perceived quality. Different fabrics offer distinct benefits and appeal to different market segments. Understanding fabric options helps brands select materials aligned with their positioning and customer preferences.
+      </p>
+
+      <h3 class="section__subtitle">Cotton</h3>
+      <p class="section__text">
+        Cotton is the most popular loungewear fabric for its natural feel, breathability, and comfort. Cotton jersey knits offer softness and stretch ideal for relaxed fits. Cotton absorbs moisture, keeping skin dry and comfortable. Natural fiber appeals to customers preferring materials over synthetics. Organic cotton adds sustainability credentials for eco-conscious brands. Cotton requires more care than polyester (wrinkles, shrinks) but the natural feel is worth it for many customers. SDF sources both conventional and organic cotton for loungewear. Our <a href="/cotton-clothing-manufacturer">cotton manufacturing</a> specializes in cotton-based loungewear.
+      </p>
+
+      <h3 class="section__subtitle">Polyester and Poly-Cotton Blends</h3>
+      <p class="section__text">
+        Polyester offers durability, wrinkle resistance, and affordability. Poly-cotton blends (typically 65/35 or 50/50) combine polyester's durability with cotton's comfort for balanced performance. Blends require less care than pure cotton and maintain appearance better over time. For budget-conscious brands or high-durability requirements, poly-cotton is ideal. Polyester fleece provides warmth and softness for winter loungewear. Our <a href="/polyester-clothing-manufacturer">polyester manufacturing</a> offers various polyester and blend options for loungewear applications.
+      </p>
+
+      <h3 class="section__subtitle">Modal and Rayon</h3>
+      <p class="section__text">
+        Modal and rayon are semi-synthetic fibers made from regenerated cellulose (wood pulp). These fabrics offer luxurious softness, excellent drape, and smooth texture. Modal feels softer than cotton and resists pilling better. Rayon offers similar properties with slightly less durability. Modal and rayon appeal to premium loungewear customers seeking luxury feel. These fabrics are more expensive than cotton or polyester but command higher price points. Modal-blend fabrics balance luxury with durability. SDF sources modal and rayon for premium loungewear lines.
+      </p>
+
+      <h3 class="section__subtitle">Bamboo</h3>
+      <p class="section__text">
+        Bamboo fabric is made from bamboo pulp and offers exceptional softness, natural antibacterial properties, and sustainability credentials. Bamboo feels silky-smooth against skin and regulates temperature effectively. The sustainability story appeals to eco-conscious customers. Bamboo is more expensive than cotton but offers premium positioning. Bamboo blends with cotton or polyester add durability while maintaining softness. For brands emphasizing sustainability and luxury, bamboo is an excellent loungewear fabric choice. Our <a href="/sustainability/">sustainability initiatives</a> include bamboo fabric options.
+      </p>
+
+      <h3 class="section__subtitle">Fleece</h3>
+      <p class="section__text">
+        Fleece is a soft, insulating fabric made from polyester fibers. Fleece provides warmth without weight, making it ideal for winter loungewear. The fuzzy surface feels cozy against skin. Fleece is quick-drying and moisture-wicking, adding comfort. Polyester fleece is durable and easy to care for. For hoodies, sweatshirts, and winter lounge pants, fleece is the fabric of choice. Fleece can be made from recycled polyester for environmental benefits. SDF produces fleece loungewear in various weights from lightweight microfleece to heavy polar fleece.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Loungewear fabric comparison with properties and positioning">
+          <caption>Loungewear Fabric Options</caption>
+          <thead>
+            <tr>
+              <th>Fabric</th>
+              <th>Benefits</th>
+              <th>Drawbacks</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Cotton</strong></td>
+              <td>Natural feel, breathable, comfortable</td>
+              <td>Wrinkles, shrinks, requires care</td>
+              <td>Natural preference, mid-range pricing</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Poly-Cotton Blend</strong></td>
+              <td>Durable, wrinkle-resistant, affordable</td>
+              <td>Less natural feel than pure cotton</td>
+              <td>Budget-conscious, durability focus</td>
+            </tr>
+            <tr>
+              <td><strong>Modal/Rayon</strong></td>
+              <td>Luxurious softness, excellent drape</td>
+              <td>More expensive, less durable</td>
+              <td>Premium positioning, luxury feel</td>
+            </tr>
+            <tr>
+              <td><strong>Bamboo</strong></td>
+              <td>Soft, antibacterial, sustainable</td>
+              <td>Expensive, requires careful care</td>
+              <td>Eco-conscious, luxury markets</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Fleece</strong></td>
+              <td>Warm, soft, lightweight insulation</td>
+              <td>Seasonal (winter only), can pill</td>
+              <td>Winter loungewear, warmth focus</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Designing Lounge Sets -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Designing Lounge Sets | Creating Coordinated Comfort Looks</h2>
+      <p class="section__text">
+        Lounge sets - coordinating tops and bottoms - are loungewear's most popular category. Designing successful lounge sets requires balancing comfort, style, and practicality while ensuring both pieces work together aesthetically. Following design principles helps create lounge sets that resonate with customers.
+      </p>
+
+      <h3 class="section__subtitle">Color and Pattern Coordination</h3>
+      <p class="section__text">
+        Successful lounge sets feature coordinated colors or patterns. Solid color sets in neutral tones (gray, navy, black, beige) offer versatility and broad appeal. Matching colors create cohesive looks. Patterned sets - stripes, florals, geometric prints - add visual interest and fashion appeal. When using patterns, ensure both pieces use the same pattern or complementary colors. Color blocking - different but coordinating colors on top and bottom - creates dynamic looks. Consider your target market's color preferences when designing sets. Our <a href="/tech-pack-service">tech pack service</a> helps develop coordinated color specifications.
+      </p>
+
+      <h3 class="section__subtitle">Fabric Consistency</h3>
+      <p class="section__text">
+        Use the same fabric for both top and bottom pieces to ensure consistency in feel, drape, and care requirements. Different fabrics may wash differently or fade at different rates, creating mismatched appearances over time. If using different fabrics (e.g., fleece top with jersey bottom), ensure colors coordinate and care instructions are compatible. Fabric weight should be consistent - heavy tops with light bottoms feel unbalanced. Our <a href="/fabric-sourcing">fabric sourcing</a> ensures fabric consistency across set pieces.
+      </p>
+
+      <h3 class="section__subtitle">Top Design Considerations</h3>
+      <p class="section__text">
+        Lounge set tops include hoodies, sweatshirts, relaxed tees, or casual button-front shirts. Prioritize comfort with relaxed fits, soft fabrics, and gentle necklines. Features like kangaroo pockets (hoodies), ribbed cuffs and hems, and quality construction add value. Consider sleeve length - long sleeves for winter, short sleeves for summer. Neckline options include crewneck, V-neck, or hooded. Ensure top proportions balance with bottom style. Oversized tops pair with fitted bottoms, while fitted tops work with relaxed bottoms.
+      </p>
+
+      <h3 class="section__subtitle">Bottom Design Considerations</h3>
+      <p class="section__text">
+        Lounge set bottoms include joggers, lounge pants, or shorts. Essential features include elastic waistbands with drawstrings for adjustability, comfortable inseams appropriate for the style, and practical pockets. Joggers feature cuffed ankles for a polished look. Lounge pants may have straight or tapered legs. Shorts should have appropriate inseam length - too short feels inappropriate, too long defeats the purpose. Ensure bottom style coordinates with top - joggers pair with hoodies, lounge pants with relaxed tees.
+      </p>
+
+      <h3 class="section__subtitle">Practical Features</h3>
+      <p class="section__text">
+        Include practical features that enhance comfort and functionality. Pockets on bottoms and some tops add utility. Drawstring waists allow fit adjustment. Ribbed cuffs and hems maintain shape and add polish. Quality stitching and durable construction ensure longevity. Consider washing requirements - loungewear should be machine washable for convenience. Avoid delicate trims or complicated care instructions that deter customers. Practical features enhance perceived value and customer satisfaction.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: FAQ -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Loungewear Manufacturing FAQ</h2>
+
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is loungewear?</h3>
+          <p class="faq__answer">
+            Loungewear is casual, comfortable clothing designed for relaxing at home. Unlike sleepwear which is specifically for sleeping, loungewear is suitable for wearing around the house during the day. Loungewear includes lounge sets, joggers, hoodies, sweatshirts, and relaxed-fit tops. The category has expanded significantly with the rise of remote work and athleisure trends. Loungewear balances comfort with presentability - you're comfortable at home but presentable enough for quick errands or video calls. Modern loungewear incorporates design elements from activewear and casual wear, making it versatile enough for various settings beyond just home use.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What is the difference between loungewear and sleepwear?</h3>
+          <p class="faq__answer">
+            Sleepwear is specifically designed for sleeping, typically featuring lighter fabrics like cotton voile, silk, or satin, loose fits for unrestricted movement during sleep, and minimal fasteners for comfort. Sleepwear includes pajamas, nightgowns, and robes. Loungewear is designed for daytime home wear, often with more structured designs, durable fabrics like cotton jersey or poly-cotton blends, and presentable styling. Loungewear includes lounge sets, joggers, hoodies, and casual separates. While some garments overlap (like comfortable robes), loungewear is generally more substantial and designed for visibility, while sleepwear prioritizes sleeping comfort above appearance. Sleepwear is generally not appropriate for public wear, while loungewear often is.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What fabrics are best for loungewear?</h3>
+          <p class="faq__answer">
+            Best loungewear fabrics include cotton for breathability and natural feel, polyester for durability and wrinkle resistance, and blends like poly-cotton for balanced performance. Modal and rayon offer luxurious softness and drape for premium positioning. Fleece provides warmth for winter loungewear. Jersey knits offer stretch and comfort. Bamboo fabric offers softness and sustainability credentials for eco-conscious brands. The best fabric depends on your target market and price point - cotton for natural preference, polyester for durability and affordability, modal/rayon for luxury feel, blends for balanced performance. SDF sources all loungewear fabric types from certified suppliers.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What are the most popular loungewear styles?</h3>
+          <p class="faq__answer">
+            Popular loungewear styles include matching lounge sets (coordinating tops and bottoms), joggers with elastic waistbands, hoodies and sweatshirts, relaxed-fit t-shirts, casual dresses, and lounge shorts. Lounge sets are particularly popular, offering coordinated looks in comfortable fabrics. Athleisure-inspired pieces like leggings and crop tops bridge loungewear and casual wear. Oversized silhouettes, neutral colors, and minimalist designs are trending. Comfort-focused features like elastic waists, soft fabrics, and relaxed fits are essential across all loungewear styles. Seasonal variations include fleece pieces for winter and lightweight jersey for summer.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">Can loungewear be worn outside the home?</h3>
+          <p class="faq__answer">
+            Yes, modern loungewear is designed to be presentable enough for quick errands, coffee runs, or casual outings. The athleisure trend has blurred lines between loungewear and casual wear. Many loungewear pieces - joggers, hoodies, relaxed tees - are appropriate for casual public settings. However, traditional sleepwear is generally not appropriate for public wear due to loose fits, lightweight fabrics, and sleep-specific design elements. When designing loungewear for dual home-and-public use, focus on presentable styling, quality fabrics, and neat construction. Avoid overly worn-out looks or sleepwear-specific features. Many brands now market loungewear as 'lifestyle apparel' suitable for various casual settings beyond just home.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order quantity for loungewear?</h3>
+          <p class="faq__answer">
+            Most loungewear manufacturers require 500-1,000 pieces per style. However, SDF Clothing offers 300 piece minimums per style for loungewear manufacturing, making us accessible to startup brands and smaller collections. We can produce 300-piece orders across multiple sizes and colors within a style. This flexibility enables new brands to test designs and market response without committing to large quantities. As your brand grows and demand increases, we can scale production to meet higher volume requirements. Our low MOQ loungewear manufacturing is ideal for brands testing the market, launching new categories, or producing seasonal collections with variety.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">How do I design a lounge set?</h3>
+          <p class="faq__answer">
+            Designing a lounge set involves creating coordinating top and bottom pieces that work together aesthetically. Start with your brand aesthetic and target customer preferences. Choose a comfortable fabric appropriate for your season and market - cotton jersey for year-round, fleece for winter, modal for luxury. Design the top (hoodie, sweatshirt, or relaxed tee) and bottom (joggers, shorts, or lounge pants) with coordinating colors, patterns, or design elements. Consider practical features like elastic waists, pockets, and comfortable necklines. Ensure consistent fabric across both pieces. Create a detailed <a href='/tech-pack-service'>tech pack</a> with specifications for both pieces. Our <a href='/sampling-service'>sampling service</a> can develop prototypes for fit and design verification before bulk production.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">Is private label loungewear available?</h3>
+          <p class="faq__answer">
+            Yes, SDF Clothing offers private label loungewear manufacturing. Private label means we produce loungewear with your brand labels, tags, and packaging. You can select from our existing proven styles and add your branding, or we can develop custom styles based on your specifications. Private label loungewear is ideal for brands wanting to launch quickly with proven designs without investing in custom development. We handle all production while you focus on branding, marketing, and sales. Our <a href='/private-label-clothing-manufacturer'>private label service</a> includes full customization of labels, hangtags, and packaging to match your brand identity. Private label reduces development time while maintaining brand exclusivity.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: CTA -->
+  <section class="section section--cta">
+    <div class="section__container section__container--narrow">
+      <h2 class="section__title">Ready to Manufacture Loungewear?</h2>
+      <p class="section__text">
+        SDF Clothing manufactures loungewear from our Bangladesh factory with {getYearsExperiencePlus()} years of experience. We produce lounge sets, joggers, hoodies, sweatshirts, and sleepwear with 300 piece MOQ. Cotton, polyester, modal, and fleece fabric options. Private label manufacturing with your branding. GOTS certified with 13 international certifications.
+      </p>
+      <p class="section__text">
+        Get a free FOB quote within 48 hours. We provide detailed pricing for all loungewear styles and fabric options. No commitment required.
+      </p>
+      <div class="section__ctas">
+        <a href={whatsappQuoteUrl} class="section__cta section__cta--primary" target="_blank" rel="noopener noreferrer">
+          Get a Free Quote
+        </a>
+        <a href="/contact/" class="section__cta section__cta--secondary">
+          Contact Our Team
+        </a>
+        <a href="/contact/" class="section__cta section__cta--secondary">
+          Request Sample
+        </a>
+      </div>
+      <p class="section__text section__text--small">
+        Last updated: May 2026 | Average response time: 24 hours
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: var(--spacing-sm) 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__container--narrow {
+    max-width: 700px;
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>
+
+</BaseLayout>

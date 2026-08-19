@@ -1,0 +1,881 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Clothing Manufacturer for Small Brands | Sampling & Fit";
+const pageDescription = "How SDF supports small clothing brands on identity and sampling: flexible small-order manufacturing, brand-specific detailing, and direct factory communication.";
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#org",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Clothing Manufacturer for Small Brands"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the specific needs of small clothing brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Small clothing brands need flexible MOQs, responsive communication, brand identity preservation, quick turnaround times, and personalized attention. Unlike large brands with established supply chains, small brands require manufacturers who understand their unique constraints and provide support beyond basic production."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does SDF maintain brand identity in manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We maintain brand identity through strict adherence to design specifications, consistent quality across production runs, careful handling of branding elements, and attention to details that define brand character. Our team understands that small brands build reputation through consistency and quality."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What communication support do you provide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide dedicated communication channels, regular production updates, quick response times, and transparent processes. Small brands receive the same attention to communication as larger clients, with personalized service that addresses their specific needs and concerns throughout production."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the sampling process work for small orders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our sampling process for small orders includes proto samples for design validation, fit samples for sizing confirmation, and pre-production samples for final approval before bulk. Sampling timeline is 10-14 days with revision rounds included. Small order sampling ensures quality without requiring large commitments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What flexibility do you offer small brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer flexibility in order quantities, size distribution, color variations, and production scheduling. Small brands can adjust orders based on market response, test multiple SKUs within reasonable minimums, and scale production as demand grows without penalty."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for small brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our minimum for small brands is 300 pieces per style, which can be distributed across sizes and colors. This accessible minimum enables small brands to produce collections without excessive inventory. We also offer lower quantities for sampling with adjusted pricing."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Small Brand Clothing Manufacturing Service",
+      "description": "Flexible clothing manufacturing for small brands and independent labels from 300 pieces with brand identity support, communication excellence, and sampling process",
+      "provider": {
+        "@id": "https://sdfltd.com/#org"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Small Brand Manufacturing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Small Brand Production"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "8",
+              "maxPrice": "25"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How Small Brands Work with SDF Clothing",
+      "description": "Step-by-step process for small brands to begin manufacturing with our Bangladesh facility",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Initial Consultation",
+          "text": "Share your brand vision, design concepts, and production requirements with our team for assessment and recommendations"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Samples",
+          "text": "Create prototype samples for design validation with revision rounds to ensure brand identity is preserved"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Production",
+          "text": "Review and approve pre-production samples before committing to bulk order with flexible quantity options"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Production with Updates",
+          "text": "Begin production with regular communication updates and quality control checkpoints throughout"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Delivery and Scaling",
+          "text": "Receive finished goods with quality inspection and plan scaling based on market response"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Clothing Manufacturer for Small Brands</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Clothing Manufacturer for Small Brands • Since 1998 • Independent Brand Specialists</div>
+        <h1 class="hero__title">Clothing Manufacturer for Small Brands — Sampling & Brand Identity</h1>
+        <p class="hero__description">
+          SDF Clothing is a clothing manufacturer for small brands and independent fashion labels. Flexible manufacturing from 300 pieces with brand identity support, communication excellence, flexibility, and sampling process for small orders. Bangladesh manufacturer for small brands.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact/" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20help%20with%20my%20small%20brand`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">300</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Flexible</span>
+          <span class="hero__stat-label">Production</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Brand</span>
+          <span class="hero__stat-label">Focused</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Brand Identity Support</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Communication Excellence</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Flexible MOQ</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Sampling Process</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Small Brand Needs</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Specific Needs of Small Clothing Brands</h2>
+      </div>
+      <div class="section__text">
+        <p>Small clothing brands have distinct needs that differentiate them from large fashion houses. These needs stem from limited resources, established brand identity that must be protected, and the critical importance of early customer experiences. Small brands often operate with lean teams where founders or small teams handle design, marketing, operations, and customer service simultaneously. This structure requires manufacturing partners who provide comprehensive support and reduce operational burden.</p>
+        
+        <p>Brand identity is particularly crucial for small brands. Unlike large brands with established recognition, small brands build their reputation through every customer interaction and product experience. Manufacturing quality directly impacts brand perception—one quality issue can disproportionately damage a small brand's reputation. Small brands need manufacturers who understand this stakes and treat every garment as brand-critical, not just another production unit.</p>
+        
+        <p>Cash flow management represents another key challenge for small brands. Limited capital means that production investments must be calculated carefully. Large minimum orders tie up capital in inventory that may not sell quickly. Small brands need manufacturing flexibility that allows them to test designs, validate market response, and scale production based on actual demand rather than speculative forecasts. This flexibility reduces financial risk and enables more efficient capital allocation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Brand Identity</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Brand Identity in Manufacturing</h2>
+      </div>
+      <div class="section__text">
+        <p>Brand identity preservation in manufacturing requires attention to every detail that defines a brand's character. For small brands, these details are often the differentiators that attract customers and build loyalty. We understand that brand identity extends beyond logos and colors to include fabric hand, construction quality, fit philosophy, and even packaging presentation. Every aspect of production must align with and enhance the brand's identity.</p>
+        
+        <p>Our approach to brand identity preservation starts with detailed design review. We analyze tech packs and design concepts not just for manufacturability but for brand alignment. If a construction method might compromise a brand's aesthetic or quality standards, we propose alternatives that achieve both manufacturability and brand integrity. This collaborative approach ensures that production realities don't dilute the brand vision.</p>
+        
+        <p>Consistency across production runs is essential for brand identity. Small brands building customer trust need assurance that every garment meets the same quality standards regardless of when it was produced. Our quality control systems measure consistency across batches, ensuring that a customer's second purchase matches their first experience. This consistency builds brand reliability and encourages repeat business, which is particularly important for small brands relying on customer loyalty for growth.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Communication Excellence</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Communication for Small Brands</h2>
+      </div>
+      <div class="section__text">
+        <p>Communication excellence is critical for small brands who may not have dedicated production teams. Large brands often have production managers, quality control specialists, and logistics coordinators handling manufacturing communication. Small brands typically rely on founders or small teams who juggle multiple responsibilities. In this context, clear, responsive, and proactive manufacturing communication becomes essential for operational efficiency and peace of mind.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Communication Aspect</th>
+              <th>Our Approach</th>
+              <th>Small Brand Benefit</th>
+              <th>Response Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Dedicated Contact</td>
+              <td>Single point of contact for each account</td>
+              <td>No confusion, consistent relationship</td>
+              <td>Within 24 hours</td>
+            </tr>
+            <tr>
+              <td>Production Updates</td>
+              <td>Regular status reports at key milestones</td>
+              <td>Timeline visibility, planning ability</td>
+              <td>Weekly during production</td>
+            </tr>
+            <tr>
+              <td>Issue Resolution</td>
+              <td>Proactive identification and solution proposal</td>
+              <td>Reduced problems, faster resolution</td>
+              <td>Immediate for urgent issues</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Documentation</td>
+              <td>Complete records and easy access</td>
+              <td>Transparency, accountability</td>
+              <td>Available on request</td>
+            </tr>
+            <tr>
+              <td>After-Sales Support</td>
+              <td>Post-delivery follow-up and assistance</td>
+              <td>Relationship continuity, issue handling</td>
+              <td>Ongoing</td>
+            </tr>
+          </tbody>
+          <caption>Communication designed for small brand needs. Responsive, transparent, and supportive throughout the process.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Flexibility</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Manufacturing Flexibility for Small Brands</h2>
+      </div>
+      <div class="section__text">
+        <p>Manufacturing flexibility enables small brands to adapt to market feedback and scale appropriately. Rigid manufacturing requirements force small brands into production commitments that may not align with actual demand. SDF provides flexibility across multiple dimensions, allowing small brands to manufacture in ways that match their business reality rather than imposing arbitrary constraints.</p>
+        
+        <p>Order quantity flexibility allows small brands to produce quantities that make sense for their stage and market. Our 300-piece minimum enables collection launches without excessive inventory. As sales validate demand, brands can increase quantities for subsequent production runs. This staged approach reduces risk and allows capital-efficient growth. We don't penalize brands for starting small—our pricing structure is designed to be accessible at lower volumes while offering volume benefits as brands scale.</p>
+        
+        <p>Size and color distribution flexibility accommodates the diverse needs of small brand customer bases. Rather than requiring fixed size ratios, we allow brands to distribute their minimum quantities across sizes and colors according to their market knowledge. This flexibility prevents inventory accumulation in unpopular sizes or colors and ensures that production matches actual customer demand patterns. Small brands with niche customer bases can tailor their production to serve their specific market effectively.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Sampling Process</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sampling Process for Small Orders</h2>
+      </div>
+      <div class="section__text">
+        <p>The sampling process for small orders balances thoroughness with efficiency. Small brands need confidence in production quality without investing excessive time and resources in sampling before committing to bulk orders. Our sampling process is designed to provide comprehensive validation through focused sample stages that deliver maximum information with minimum lead time.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Sample Type</th>
+              <th>Purpose</th>
+              <th>Timeline</th>
+              <th>Revisions</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Proto Sample</td>
+              <td>Design validation, fabric confirmation</td>
+              <td>7-10 days</td>
+              <td>1-2 rounds</td>
+              <td>Material cost + labor</td>
+            </tr>
+            <tr>
+              <td>Fit Sample</td>
+              <td>Sizing verification, fit assessment</td>
+              <td>7-10 days</td>
+              <td>1-2 rounds</td>
+              <td>Material cost + labor</td>
+            </tr>
+            <tr>
+              <td>Pre-Production Sample</td>
+              <td>Final approval before bulk</td>
+              <td>7-10 days</td>
+              <td>1 round</td>
+              <td>Included with bulk order</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Size Set Sample</td>
+              <td>Full range fit verification</td>
+              <td>10-14 days</td>
+              <td>As needed</td>
+              <td>Per sample pricing</td>
+            </tr>
+          </tbody>
+          <caption>Sampling stages can be selected based on brand needs. Not all stages required for every project.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Clothing Manufacturer for Small Brands FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What are the specific needs of small clothing brands?</h3>
+          <p class="faq__answer">Small clothing brands need flexible MOQs, responsive communication, brand identity preservation, quick turnaround times, and personalized attention. Unlike large brands with established supply chains, small brands require manufacturers who understand their unique constraints and provide support beyond basic production.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does SDF maintain brand identity in manufacturing?</h3>
+          <p class="faq__answer">We maintain brand identity through strict adherence to design specifications, consistent quality across production runs, careful handling of branding elements, and attention to details that define brand character. Our team understands that small brands build reputation through consistency and quality.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What communication support do you provide?</h3>
+          <p class="faq__answer">We provide dedicated communication channels, regular production updates, quick response times, and transparent processes. Small brands receive the same attention to communication as larger clients, with personalized service that addresses their specific needs and concerns throughout production.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does the sampling process work for small orders?</h3>
+          <p class="faq__answer">Our sampling process for small orders includes proto samples for design validation, fit samples for sizing confirmation, and pre-production samples for final approval before bulk. Sampling timeline is 10-14 days with revision rounds included. Small order sampling ensures quality without requiring large commitments.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What flexibility do you offer small brands?</h3>
+          <p class="faq__answer">We offer flexibility in order quantities, size distribution, color variations, and production scheduling. Small brands can adjust orders based on market response, test multiple SKUs within reasonable minimums, and scale production as demand grows without penalty.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order for small brands?</h3>
+          <p class="faq__answer">Our minimum for small brands is 300 pieces per style, which can be distributed across sizes and colors. This accessible minimum enables small brands to produce collections without excessive inventory. We also offer lower quantities for sampling with adjusted pricing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Manufacture Your Small Brand Collection?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for small brand manufacturing support. We provide flexible production from 300 pieces, brand identity preservation, communication excellence, and sampling support for independent fashion labels. Bangladesh manufacturer for small brands ready to support your growth.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/sampling-service" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/small-batch-clothing-manufacturer" style="color: var(--color-primary);">small batch clothing manufacturer</a>, <a href="/clothing-manufacturer-for-small-business/" style="color: var(--color-primary);">clothing manufacturer for small business</a>, <a href="/private-label-clothing-manufacturer" style="color: var(--color-primary);">private label manufacturer</a>, <a href="/white-label-manufacturer/" style="color: var(--color-primary);">white label manufacturer</a>, <a href="/sampling-service" style="color: var(--color-primary);">sampling service</a>, <a href="/tools/price-calculator/" style="color: var(--color-primary);">price calculator</a>, <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/clothing-manufacturers-for-startups/" style="color: var(--color-primary);">clothing manufacturers for startups</a>, <a href="/low-moq-clothing-manufacturers/" style="color: var(--color-primary);">low MOQ clothing manufacturers</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

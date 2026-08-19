@@ -1,0 +1,542 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Garment Label Materials & Manufacturing Methods";
+const pageDescription = "Damask, satin, TPU, silicone and 6 more label materials compared — plus woven, printed, heat transfer and laser-cut manufacturing methods explained.";
+
+const fabricMaterials = [
+  { name: "Damask", text: "A tightly woven fabric with a raised, reversible pattern, produced on a Jacquard loom. Damask is the highest-detail woven label option, capable of rendering small text and fine logo detail. It is the most common subtype of woven label in premium apparel." },
+  { name: "Satin", text: "A smooth, glossy woven polyester with a lustrous surface. Satin labels feel soft against the neckline, print with sharp clarity, and are a common choice for babywear, lingerie, and premium fashion where comfort against skin matters." },
+  { name: "Taffeta", text: "A crisp, plain-woven fabric with a slight sheen, stiffer than satin. Taffeta holds fine woven detail well and is often chosen for care and size labels that need to stay flat and legible." },
+  { name: "Cotton", text: "A natural-fiber label material with a soft, matte finish. Cotton labels suit brands positioning around natural or sustainable materials, though they are less durable under repeated industrial washing than synthetic alternatives." },
+  { name: "Polyester", text: "The most widely used synthetic label base — durable, colorfast, and cost-effective at scale. Most woven and printed labels are polyester or polyester-blend at their core." },
+  { name: "Nylon", text: "A strong, elastic synthetic often chosen for care labels and technical wear because it tolerates repeated flexing and high-heat industrial laundering without cracking." },
+];
+
+const syntheticMaterials = [
+  { name: "TPU", text: "Thermoplastic polyurethane is a flexible, rubber-like film used for waterproof, high-stretch labels — common on activewear, outerwear, and swimwear where the label must move with the fabric and resist moisture." },
+  { name: "Silicone", text: "A soft, flexible material molded or printed into a label shape, offering a tag-free feel with no fabric edge. Silicone labels are heat-applied and popular for underwear, activewear, and children's clothing." },
+  { name: "Leather / PU", text: "Genuine or synthetic leather patches, typically riveted or sewn onto denim, outerwear, and bags. Leather labels signal a premium, rugged brand positioning and are usually embossed or debossed rather than printed." },
+];
+
+const manufacturingMethods = [
+  { name: "Woven", text: "The design is built into the fabric structure itself on a loom — the image is not printed on the surface, it is the fabric. This makes woven labels highly durable; colors will not crack, peel, or fade the way surface ink can. The tradeoff is design complexity: woven labels work best with solid colors and clean vector artwork, since detail depends on thread count, typically 80-100 threads per centimeter for fine damask weaves." },
+  { name: "Printed", text: "The design is printed directly onto a fabric or synthetic surface. Printing allows unlimited colors, photographic detail, and gradients that a loom cannot reproduce, and setup cost stays flat regardless of color count — a six-color printed label costs close to the same as a two-color one. Durability is the tradeoff: ink sits on the surface and is more exposed to washing and friction than woven thread." },
+  { name: "Heat Transfer", text: "A design is printed onto a film or paper carrier, then applied to the garment using heat and pressure, bonding directly to the fabric with no stitched edge. This produces the tag-free feel increasingly demanded in activewear and children's wear, though it generally holds up to fewer wash cycles than a sewn woven label under high-heat industrial laundering." },
+  { name: "Laser Cut", text: "A laser cuts the label's edge with precision instead of a die or scissors, producing clean, sealed edges that resist fraying without a folded hem. Laser cutting works well on synthetic materials like TPU and polyester satin, where the heat of the laser fuses the edge as it cuts." },
+  { name: "Emboss / Deboss", text: "Embossing raises a design above the material surface; debossing presses it below. Both are applied under heat and pressure, most often to leather or PU patches, and communicate a tactile, premium feel without relying on printed color at all." },
+];
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Garment Labels", "item": "https://sdfltd.com/garment-labels/" },
+          { "@type": "ListItem", "position": 3, "name": "Materials & Manufacturing" }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are woven labels more expensive than printed labels?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, at low volumes. Woven labels require a physical loom setup, which drives up initial sampling cost, typically making printed labels 15-30% less expensive at equivalent size and small quantities. The cost gap narrows significantly at higher volumes because the loom setup cost gets amortized across more pieces — many manufacturers see the economics favor woven labels once an order crosses roughly 500 units."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which label material is best for activewear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TPU and silicone are the most common choices for activewear because they are flexible, moisture-resistant, and can be heat-applied for a tag-free feel that will not chafe skin during movement. Woven labels are still used for brand identification at the neck, but performance-focused garments increasingly avoid sewn labels against high-friction skin contact points."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between embossing and debossing on a label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Embossing raises a design above the surrounding material surface, while debossing presses the design below it. Both use heat and pressure and are most commonly applied to leather or PU patches to create a tactile, premium finish without relying on printed ink for the design."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item"><a href="/garment-labels/">Garment Labels</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Materials & Manufacturing</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__label">Garment Labels • Materials & Manufacturing</div>
+      <h1 class="hero__title">Garment Label Materials and Manufacturing Methods</h1>
+      <p class="hero__description">
+        The material and manufacturing method you choose for a label affects three things at once: how it feels against skin, how long it survives washing, and what it costs at your order volume. Here is how the main options compare.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Fabric-Based Materials</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Fabric Label Materials</h2>
+      </div>
+      <div class="section__text">
+        <p>Most labels start as one of six common fabric bases. Each carries a different balance of feel, durability, and cost.</p>
+      </div>
+      <div class="material-grid">
+        {fabricMaterials.map((material) => (
+          <div class="material-card">
+            <h3 class="material-card__title">{material.name}</h3>
+            <p class="material-card__text">{material.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Specialty Materials</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Synthetic & Specialty Label Materials</h2>
+      </div>
+      <div class="section__text">
+        <p>Performance and premium categories increasingly move beyond woven fabric altogether, into materials built for stretch, waterproofing, or a tactile finish.</p>
+      </div>
+      <div class="material-grid">
+        {syntheticMaterials.map((material) => (
+          <div class="material-card">
+            <h3 class="material-card__title">{material.name}</h3>
+            <p class="material-card__text">{material.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Manufacturing Methods</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How Garment Labels Are Made</h2>
+      </div>
+      <div class="section__text">
+        <p>Material is only half the equation — how the design gets onto that material determines cost, durability, and how much design detail is possible. This includes what the industry often separates out as "printing technology" (screen, offset, digital, thermal, and flexographic printing): in practice, these are all variations of the printed manufacturing method below, distinguished mainly by press type, ink transfer method, and run-length economics rather than a separate category of label.</p>
+      </div>
+      <div class="method-list">
+        {manufacturingMethods.map((method) => (
+          <div class="method-item">
+            <h3 class="method-item__title">{method.name}</h3>
+            <p class="method-item__text">{method.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Decision Guide</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Woven vs. Printed: Which One Fits Your Brand?</h2>
+      </div>
+      <div class="table-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Woven</th>
+              <th>Printed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Durability</td>
+              <td>Highest — color is structural, will not fade or crack</td>
+              <td>Good with quality ink, but ink sits on the surface</td>
+            </tr>
+            <tr>
+              <td>Design complexity</td>
+              <td>Best for solid colors, clean vector logos</td>
+              <td>Unlimited colors, gradients, photographic detail</td>
+            </tr>
+            <tr>
+              <td>Cost at low volume</td>
+              <td>Higher — loom setup cost per design</td>
+              <td>Lower — minimal setup regardless of color count</td>
+            </tr>
+            <tr>
+              <td>Cost at high volume</td>
+              <td>Setup cost amortizes — becomes cost-competitive</td>
+              <td>Stays consistently low per unit</td>
+            </tr>
+            <tr>
+              <td>Perceived quality</td>
+              <td>Higher — associated with premium positioning</td>
+              <td>Neutral to positive, depends on execution</td>
+            </tr>
+          </tbody>
+          <caption>Most brands combine both: a woven main label for brand identity, and printed labels for care, fiber, and size information that changes frequently.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Get a Material Recommendation for Your Product</h2>
+      <p class="section__text">SDF Clothing produces woven, printed, and heat-transfer labels in-house alongside your garments — one supplier, one timeline, no separate shipment waiting on a trim vendor.</p>
+      <div class="section__ctas">
+        <a href="/#contact" class="section__cta section__cta--primary">Get a Free Label & Trim Consultation</a>
+        <a href="/garment-labels/quality-testing-and-defects/" class="section__cta section__cta--secondary">See Quality Testing Standards →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-xs);
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: "/";
+    margin-left: var(--spacing-xs);
+    color: var(--color-border);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .hero__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section--cta .section__container {
+    max-width: 700px;
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .material-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+  }
+
+  .material-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: var(--spacing-sm);
+  }
+
+  .material-card__title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .material-card__text {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .method-list {
+    margin-top: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .method-item {
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .method-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .method-item__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .method-item__text {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    margin-top: var(--spacing-md);
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+    font-size: 0.875rem;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  @media (max-width: 900px) {
+    .material-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+
+    .comparison {
+      font-size: 0.8125rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

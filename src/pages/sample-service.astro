@@ -1,0 +1,897 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Sample Service | Proto & Fit Samples SDF";
+const pageDescription = "Clothing sample service for proto, fit, and pre-production samples. Tech pack development, sample timeline, revision rounds, size set samples.";
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#org",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Sample Service"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What types of samples do you provide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide proto samples for design validation, fit samples for sizing verification, pre-production samples for final approval before bulk, and size set samples for full range verification. Each sample type serves a specific purpose in the development process, from initial concept through production readiness."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does tech pack development work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tech pack development translates design concepts into detailed manufacturing specifications. We review your designs and create comprehensive tech packs including measurements, construction details, material specifications, and grading information. Well-developed tech packs reduce development time and ensure accurate production."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the sample development timeline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sample development typically takes 7-10 days per sample type. Proto samples take 7-10 days, fit samples 7-10 days, and pre-production samples 7-10 days. Size set samples require 10-14 days for multiple sizes. Revision rounds add 5-7 days each. Complete development from proto through pre-production typically requires 3-6 weeks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many revision rounds are included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We include 1-2 revision rounds per sample type in standard pricing. Proto samples include 2 revisions for design refinement. Fit samples include 1-2 revisions for sizing adjustments. Pre-production samples typically include 1 revision for final adjustments. Additional revisions incur additional costs but ensure samples meet specifications before bulk production."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are size set samples?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Size set samples include production of the garment in multiple sizes across the size range, typically XS, S, M, L, XL, 2XL, 3XL. Size sets verify fit consistency across sizes and ensure grading accuracy before bulk production. Size sets are recommended for new styles or inclusive sizing ranges."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the sampling costs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sampling costs vary by complexity and sample type. Proto samples start at $50-100 depending on complexity. Fit samples are $50-100. Pre-production samples are $50-100. Size set samples are $50-100 per size. Material costs are additional for custom fabrics. Sampling costs are credited against bulk production orders for styles that proceed to manufacturing."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Sample Service",
+      "description": "Clothing sample service including proto, fit, pre-production, and size set samples with tech pack development and revision rounds",
+      "provider": {
+        "@id": "https://sdfltd.com/#org"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Sampling Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Proto Sample"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "50",
+              "maxPrice": "100"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Develop Samples with SDF Clothing",
+      "description": "Step-by-step process for developing clothing samples with our Bangladesh manufacturing facility",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Design Concept",
+          "text": "Share your design concepts, sketches, or inspiration images for initial review and tech pack development"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Tech Pack",
+          "text": "Create detailed technical specifications including measurements, construction details, and material requirements"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Produce Proto Sample",
+          "text": "Create initial sample for design validation with 2 revision rounds for refinement"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Fit Sample Development",
+          "text": "Produce fit sample for sizing verification with revision rounds for adjustments"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Pre-Production Approval",
+          "text": "Create final pre-production sample for approval before committing to bulk production"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Sample Service</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Sample Service • Since 1998 • Development Specialists</div>
+        <h1 class="hero__title">Clothing Sample Service • Proto, Fit & Pre-Production Samples</h1>
+        <p class="hero__description">
+          SDF Clothing, a full-service clothing manufacturer, provides sample development for proto, fit, and pre-production samples. Tech pack development, sample development timeline, revision rounds, size set samples, and garment sampling process for clothing brands. Explore our <a href="/all-services/" style="color:#e00;text-decoration:none;">all manufacturing services</a> and <a href="/pattern-making-service/" style="color:#e00;text-decoration:none;">pattern making service</a>.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact/" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20sample%20services`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">7-10</span>
+          <span class="hero__stat-label">Days Per Sample</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">2</span>
+          <span class="hero__stat-label">Revisions Included</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">Credited</span>
+          <span class="hero__stat-label">To Production</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Proto Samples</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Fit Samples</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Pre-Production</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">✓</span>
+          <span>Size Sets</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Sample Types</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Types of Garment Samples</h2>
+      </div>
+      <div class="section__text">
+        <p>Garment samples serve specific purposes throughout the development process, from initial concept validation through production readiness. Each sample type provides different insights and requires different levels of detail. Understanding sample types helps brands plan development effectively and allocate resources appropriately.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Sample Type</th>
+              <th>Purpose</th>
+              <th>Detail Level</th>
+              <th>Timeline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Proto Sample</td>
+              <td>Design validation, concept visualization</td>
+              <td>Construction focus</td>
+              <td>7-10 days</td>
+            </tr>
+            <tr>
+              <td>Fit Sample</td>
+              <td>Sizing verification, fit assessment</td>
+              <td>Measurement focus</td>
+              <td>7-10 days</td>
+            </tr>
+            <tr>
+              <td>Pre-Production Sample</td>
+              <td>Final approval before bulk</td>
+              <td>Production accuracy</td>
+              <td>7-10 days</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Size Set Sample</td>
+              <td>Fit across size range</td>
+              <td>Grading verification</td>
+              <td>10-14 days</td>
+            </tr>
+          </tbody>
+          <caption>Not all projects require every sample type. We recommend sampling based on project complexity and requirements.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Tech Pack Development</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Tech Pack Development Service</h2>
+      </div>
+      <div class="section__text">
+        <p>Tech pack development translates design concepts into detailed manufacturing specifications that factories can execute accurately. Well-developed tech packs reduce development time, minimize revisions, and ensure production accuracy. Our tech pack service creates comprehensive specifications that serve as the blueprint for sample and production.</p>
+        
+        <p>Tech pack components include detailed measurements for each size, construction specifications with seam types and stitch details, material specifications including fabric and trims, grading rules for size range expansion, and visual references for design elements. The tech pack becomes the authoritative reference throughout development and production.</p>
+        
+        <p>We can work from your existing sketches and concepts to create complete tech packs, or review and refine your existing tech packs for manufacturability. Tech pack development is particularly valuable for brands without technical design experience or those transitioning to new manufacturers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Sample Development</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sample Development Timeline</h2>
+      </div>
+      <div class="section__text">
+        <p>Sample development timeline varies by sample type and complexity, but understanding typical lead times helps plan development schedules. Each sample requires time for pattern making, cutting, sewing, and quality checks. Revision rounds add additional time but are essential for achieving desired results.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Duration</th>
+              <th>Activities</th>
+              <th>Dependencies</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Tech Pack Review</td>
+              <td>2-3 days</td>
+              <td>Spec review, material confirmation</td>
+              <td>Design submission</td>
+            </tr>
+            <tr>
+              <td>Pattern Making</td>
+              <td>3-4 days</td>
+              <td>Pattern development, grading setup</td>
+              <td>Tech pack approval</td>
+            </tr>
+            <tr>
+              <td>Sample Production</td>
+              <td>3-4 days</td>
+              <td>Cutting, sewing, finishing</td>
+              <td>Pattern completion</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Quality Check</td>
+              <td>1 day</td>
+              <td>Inspection, measurement verification</td>
+              <td>Sample completion</td>
+            </tr>
+            <tr>
+              <td>Shipping</td>
+              <td>3-5 days</td>
+              <td>International delivery</td>
+              <td>Quality approval</td>
+            </tr>
+          </tbody>
+          <caption>Total timeline 7-10 days per sample plus shipping. Revision rounds add 5-7 days each.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Revision Rounds</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sample Revision Process</h2>
+      </div>
+      <div class="section__text">
+        <p>Revision rounds are an essential part of sample development, allowing refinement based on evaluation and feedback. Our standard pricing includes revision rounds to ensure samples meet specifications before proceeding to the next development stage. Strategic use of revisions prevents costly errors in bulk production.</p>
+        
+        <p>Proto samples include 2 revision rounds for design refinement. These revisions focus on design elements, construction details, and overall garment appearance. Changes might include adjusting seam placements, modifying design features, or refining proportions based on visual assessment.</p>
+        
+        <p>Fit samples include 1-2 revision rounds for sizing adjustments. These revisions address fit issues, measurement corrections, and comfort improvements. Changes might include adjusting grade rules, modifying ease allowances, or refining fit at specific body points based on fit testing feedback.</p>
+        
+        <p>Pre-production samples typically include 1 revision for final adjustments. At this stage, revisions should be minimal and focused on final details rather than major changes. The pre-production sample represents the final product that will be produced in bulk, so accuracy is critical.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Size Set Samples</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Size Set Development</h2>
+      </div>
+      <div class="section__text">
+        <p>Size set samples verify fit consistency across the entire size range. Producing samples in multiple sizes—typically XS, S, M, L, XL, 2XL, 3XL—ensures that grading accuracy maintains design intent and fit quality across all sizes. Size sets are particularly valuable for new styles or inclusive sizing ranges.</p>
+        
+        <p>Size set development requires producing each size in the range with the same construction and materials. This process reveals grading issues that might not be apparent from a single size sample. Common issues identified include armhole depth variations, neckline proportion changes, and waist positioning shifts across sizes.</p>
+        
+        <p>Size set samples are recommended for new styles where grading hasn't been previously validated, for inclusive sizing ranges extending beyond standard sizes, and for styles where fit is critical to customer satisfaction. While size sets add cost and time, the investment prevents grading errors that would affect bulk production quality.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Sampling Costs</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sample Service Pricing</h2>
+      </div>
+      <div class="section__text">
+        <p>Sampling costs vary by garment complexity, sample type, and material requirements. Our pricing structure is transparent with clear costs for each sample type. Importantly, sampling costs are credited against bulk production orders for styles that proceed to manufacturing, reducing the net cost for committed production.</p>
+        
+        <p>Proto samples start at $50-100 depending on complexity. Simple garments like t-shirts fall at the lower end, while complex items like outerwear or structured garments require higher investment. Fit samples are similarly priced at $50-100. Pre-production samples maintain the same pricing structure as they represent production-accurate versions of the garment.</p>
+        
+        <p>Size set samples are priced at $50-100 per size, with the entire set typically costing $350-700 for a 7-size range. Material costs are additional when custom fabrics are required rather than using available stock fabrics. Standard stock fabrics are included in sample pricing for most sample types.</p>
+        
+        <p>Sampling credits apply when styles proceed to bulk production. The sampling investment is deducted from production costs, effectively making samples free for committed production. This structure encourages thorough sampling without penalizing brands for proper development.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Sample Service FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What types of samples do you provide?</h3>
+          <p class="faq__answer">We provide proto samples for design validation, fit samples for sizing verification, pre-production samples for final approval before bulk, and size set samples for full range verification. Each sample type serves a specific purpose in the development process, from initial concept through production readiness.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How does tech pack development work?</h3>
+          <p class="faq__answer">Tech pack development translates design concepts into detailed manufacturing specifications. We review your designs and create comprehensive tech packs including measurements, construction details, material specifications, and grading information. Well-developed tech packs reduce development time and ensure accurate production.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What is the sample development timeline?</h3>
+          <p class="faq__answer">Sample development typically takes 7-10 days per sample type. Proto samples take 7-10 days, fit samples 7-10 days, and pre-production samples 7-10 days. Size set samples require 10-14 days for multiple sizes. Revision rounds add 5-7 days each. Complete development from proto through pre-production typically requires 3-6 weeks.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How many revision rounds are included?</h3>
+          <p class="faq__answer">We include 1-2 revision rounds per sample type in standard pricing. Proto samples include 2 revisions for design refinement. Fit samples include 1-2 revisions for sizing adjustments. Pre-production samples typically include 1 revision for final adjustments. Additional revisions incur additional costs but ensure samples meet specifications before bulk production.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are size set samples?</h3>
+          <p class="faq__answer">Size set samples include production of the garment in multiple sizes across the size range, typically XS, S, M, L, XL, 2XL, 3XL. Size sets verify fit consistency across sizes and ensure grading accuracy before bulk production. Size sets are recommended for new styles or inclusive sizing ranges.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What are the sampling costs?</h3>
+          <p class="faq__answer">Sampling costs vary by complexity and sample type. Proto samples start at $50-100 depending on complexity. Fit samples are $50-100. Pre-production samples are $50-100. Size set samples are $50-100 per size. Material costs are additional for custom fabrics. Sampling costs are credited against bulk production orders for styles that proceed to manufacturing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Develop Samples?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for sample development services. We provide proto, fit, pre-production, and size set samples with tech pack development, revision rounds, and sampling credits for production.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/fulfillment-service" class="section__cta section__cta--secondary">Fulfillment Service</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/clothing-manufacturer-bangladesh" style="color: var(--color-primary);">clothing manufacturer Bangladesh</a>, <a href="/clothing-manufacturers-for-startups/" style="color: var(--color-primary);">clothing manufacturers for startups</a>, <a href="/private-label-clothing-manufacturer" style="color: var(--color-primary);">private label clothing manufacturer</a>, <a href="/dropshipping-service" style="color: var(--color-primary);">dropshipping service</a>, <a href="/fulfillment-service" style="color: var(--color-primary);">fulfillment service</a>, <a href="/wholesale-clothing-supplier" style="color: var(--color-primary);">wholesale clothing manufacturer</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .hero__description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .hero__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+  }
+
+  .section__text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__text a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .section__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .section__cta--primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison__row--highlight {
+    background: rgba(224, 0, 0, 0.1);
+  }
+
+  .faq {
+    margin-top: var(--spacing-md);
+  }
+
+  .faq__item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .faq__answer {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+
+    .trust__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-muted: #666;
+      --color-bg: #fff;
+      --color-bg-alt: #f5f5f5;
+      --color-border: #e0e0e0;
+    }
+  }
+</style>

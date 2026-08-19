@@ -1,0 +1,1132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { schemaOrganization, schemaPerson, SITE_URL as SITE } from '../data/schema';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+
+export const prerender = true;
+
+const companyAge = getCompanyAgeString();
+
+const pageTitle = "How to Find a Clothing Manufacturer 2026 | SDF Guide";
+const pageDescription = "How to find the right clothing manufacturer for your brand. Where to look, how to verify, red flags, sampling and questions to ask. 2026 guide for founders.";
+
+const whatsappQuoteUrl = `${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%27d%20like%20a%20quote%20for%20clothing%20manufacturing`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "datePublished": "2025-01-15",
+      "dateModified": "2026-05-24",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": SITE + "/#website",
+        "url": SITE,
+        "name": "SDF Clothing"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageTitle
+          }
+        ]
+      },
+      "publisher": { "@id": SITE + "/#org" }
+    },
+    schemaOrganization,
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where can I find clothing manufacturers for my brand?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Five proven methods exist: direct outreach to country trade bodies like BGMEA for Bangladesh or AEPC for India (most reliable and free), Google search with specific terms like 'knitwear factory Bangladesh' rather than generic searches, industry trade shows including Magic Las Vegas, Texworld NYC, and Canton Fair for face-to-face vetting, LinkedIn and industry networks for connecting with sourcing agents and factory representatives, and referrals from other brand founders which are often the most reliable source."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I know if a clothing manufacturer is legitimate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Verify legitimacy through eight key checks: confirm business registration with government databases, verify certifications directly with issuing organizations like GOTS, OEKO-TEX, and BSCI, request third-party audit reports from organizations like WRAP or client-commissioned audits, contact client references from brands similar to yours, request factory photos or video tours showing actual production facilities, place a sample order to test quality and communication, review payment terms carefully avoiding 100% upfront demands, and ensure a signed contract with clear terms before proceeding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What questions should I ask a clothing manufacturer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ask twelve critical questions: what is your minimum order quantity per style, can you share client references in my product category, what certifications do you hold, what is your standard sample process and timeline, do you charge for samples and is the cost credited against bulk orders, what are your payment terms, how do you handle quality issues before shipment, do you subcontract any production, what is your on-time delivery rate, can I visit your factory, do you have NDA or confidentiality agreements, and what is your reorder lead time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to find and start working with a manufacturer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The timeline typically ranges from 2 to 4 months for first-time brands. Research and initial outreach takes 2-4 weeks, receiving and comparing quotes requires 1-2 weeks, sample development and approval takes 3-6 weeks including multiple iterations, contract negotiation and deposit payment takes 1-2 weeks, and production lead time adds 40-45 days. Using trade body referrals or warm introductions can shorten this to 6-8 weeks, while cold outreach may extend to 4-6 months."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I use a sourcing agent to find a manufacturer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sourcing agents can be valuable for brands new to manufacturing or targeting unfamiliar countries. Agents provide local knowledge, language translation, factory vetting, and ongoing communication support. However, they add cost typically 5-15% of order value. For established brands or those comfortable with direct communication, working directly with manufacturers reduces costs. For first-time buyers or complex projects, a reputable sourcing agent can prevent costly mistakes and accelerate the process."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for most clothing manufacturers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MOQ varies significantly by region and manufacturer type. Bangladesh and India typically offer 300-500 piece MOQs for basic garments. China often requires 500-1,000 pieces but offers lower MOQs for repeat orders. Vietnam generally requires 500-1,500 pieces. Turkey and Portugal range from 300-1,000 pieces. USA and UK manufacturers typically require 100-300 pieces but at significantly higher costs. SDF Clothing offers 300 piece minimums per style, making us ideal for startup brands testing new designs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I protect my designs when approaching manufacturers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Protect your designs through five key measures: register your trademark before approaching factories, use non-disclosure agreements when sharing detailed designs or tech packs, work with certified manufacturers like BGMEA members who have accountability structures, keep comprehensive tech packs on file as proof of original design, and consider registering distinctive design elements in key markets. SDF Clothing provides confidentiality agreements and respects intellectual property rights for all client projects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I compare quotes from different manufacturers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Compare quotes across eight elements: FOB price per unit, fabric specifications ensuring identical materials across quotes, MOQ requirements and flexibility, lead time from deposit to shipment, payment terms and security, included services like sampling or quality inspection, certification status affecting retail access, and communication quality and responsiveness. The lowest price often cuts corners on quality or service - evaluate total value including reliability, not just unit cost."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best country to find clothing manufacturers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The best country depends on your priorities. Bangladesh offers lowest costs for basic garments with 300-piece MOQ and duty advantages for EU markets. China provides speed and technical capability with lower MOQs but higher costs. Vietnam balances cost and technical capability with duty advantages for US markets. Turkey offers proximity to Europe with quick turnaround. Portugal provides quality and speed for premium European brands. India offers competitive costs and cotton expertise. USA and UK provide communication ease and speed but at significantly higher costs. Choose based on product type, target market, budget, and timeline."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can startup brands find manufacturers willing to work with them?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, many manufacturers specialize in working with startup brands. Look for manufacturers advertising low MOQs, those explicitly mentioning startup support, and factories offering flexible terms. Bangladesh manufacturers like SDF Clothing built our business serving emerging brands with 300-piece minimums. Trade shows and online platforms like Maker's Row connect startups with manufacturer-friendly factories. Be prepared with professional communication, clear requirements, and realistic expectations. Start with 1-2 styles to build the relationship before expanding."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Find and Work with a Clothing Manufacturer",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Define Your Requirements",
+          "text": "Specify your product type, quantity, fabric requirements, quality standards, budget, and timeline before starting your search."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Research Manufacturers",
+          "text": "Use trade bodies, Google searches, trade shows, referrals, and directories to create a list of potential manufacturers."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Verify Legitimacy",
+          "text": "Check business registration, certifications, references, factory facilities, and payment terms before engaging."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Request Quotes",
+          "text": "Submit detailed requirements to 3-5 manufacturers and compare quotes on identical specifications."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Develop Samples",
+          "text": "Order samples from top candidates, evaluate quality, and approve before bulk production."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Negotiate Terms",
+          "text": "Finalize pricing, payment terms, delivery schedule, and contract terms before placing order."
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">How to Find a Clothing Manufacturer</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <p class="hero__label">Sourcing Guide | 2026 Edition | {companyAge} Experience</p>
+        <h1 class="hero__title">How to Find a Clothing Manufacturer | Complete Step-by-Step Guide for Brand Founders in 2026</h1>
+        <p class="hero__description">
+          Finding the right clothing manufacturer is one of the most critical decisions for your fashion brand. This comprehensive guide covers where to look, how to verify legitimacy, red flags to avoid, the sampling process, questions to ask, quote comparison, and regional guidance. Everything you need to find reliable manufacturing partners in 2026. Explore our <a href="/how-to-start-a-clothing-brand/" style="color:#e00;text-decoration:none;">how to start a clothing brand</a> and <a href="/tech-pack-guide/" style="color:#e00;text-decoration:none;">tech pack guide</a>.
+        </p>
+        <div class="hero__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get Free Factory Quote
+          </a>
+          <a href="/contact/" class="hero__cta hero__cta--secondary">
+            Contact SDF Clothing
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Where to Find Manufacturers -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Where to Find Clothing Manufacturers | 5 Proven Methods</h2>
+      <p class="section__text">
+        Finding clothing manufacturers requires knowing where to look. Not all search methods are equal - some yield high-quality leads while others waste time with unverified factories. Using multiple methods increases your chances of finding a manufacturer aligned with your brand requirements. The following five methods have proven most effective for fashion brands in 2026.
+      </p>
+
+      <h3 class="section__subtitle">1. Direct Outreach to Country Trade Bodies</h3>
+      <p class="section__text">
+        The most reliable and free method is contacting trade associations directly. These organizations maintain verified databases of legitimate manufacturers. For Bangladesh, contact BGMEA (Bangladesh Garment Manufacturers and Exporters Association) or BKMEA (Bangladesh Knitwear Manufacturers and Exporters Association). For India, reach out to AEPC (Apparel Export Promotion Council). China has CCCT (China Chamber of Commerce for Import and Export of Textiles). Vietnam offers VITAS (Vietnam Textile and Apparel Association). These trade bodies provide member lists filtered by product type, capacity, and certifications. The manufacturers listed are verified businesses, not middlemen or scams. This method costs nothing but time and provides legitimacy assurance from the start.
+      </p>
+
+      <h3 class="section__subtitle">2. Google Search with Specific Terms</h3>
+      <p class="section__text">
+        Google works when you search strategically. Most brands search too broadly | "clothing manufacturer" returns millions of results, mostly irrelevant. Instead, use specific combinations: "[product type] manufacturer [country]" like "knitwear factory Bangladesh" or "activewear OEM manufacturer Vietnam." Even better: "[fabric type] factory [certification] [country]" like "organic cotton factory GOTS certified India." Specific searches filter out generalists and connect you with specialists. Evaluate search results carefully - manufacturers investing in professional websites and SEO demonstrate business stability and interest in new clients. However, search ranking doesn't guarantee quality, so always verify independently through the methods in this guide.
+      </p>
+
+      <h3 class="section__subtitle">3. Industry Trade Shows</h3>
+      <p class="section__text">
+        Trade shows bring manufacturers and buyers together in one location. Major events include MAGIC Las Vegas, Texworld NYC, Premi - re Vision Paris, Canton Fair Guangzhou, and Intertextile Shanghai. The advantage is face-to-face interaction - you can inspect samples, meet factory representatives, and assess professionalism directly. Trade shows enable rapid vetting; you can visit dozens of manufacturers in days versus months of remote communication. The disadvantage is cost and timing. Travel, accommodation, and booth fees add up, and shows occur on fixed schedules. Plan meetings in advance, bring detailed requirements, and collect samples for later comparison. For brands with budget and timeline flexibility, trade shows offer the most efficient path to finding manufacturers.
+      </p>
+
+      <h3 class="section__subtitle">3. LinkedIn and Industry Networks</h3>
+      <p class="section__text">
+        LinkedIn connects you with sourcing agents, factory representatives, and other brand founders. Join fashion industry groups, participate in discussions, and reach out directly to manufacturing professionals. Sourcing agents can be valuable intermediaries - they have existing relationships with factories and can match you with suitable partners. However, agents typically charge 5-15% commission on orders. Industry networks also include Facebook groups, Reddit communities like r/streetwearstartup, and fashion forums. These platforms provide unfiltered advice from founders who have worked with specific manufacturers. Referrals from other brand founders carry significant weight because they come from unbiased sources with direct experience. Build relationships before you need manufacturers - active participation in communities yields better results than cold requests for help. Consider our <a href="/sourcing-agent-service">sourcing agent service</a> for professional assistance.
+      </p>
+
+      <h3 class="section__subtitle">5. Referrals from Other Brand Founders</h3>
+      <p class="section__text">
+        The most reliable manufacturer leads come from founder referrals. When another brand recommends a factory, they've already vetted legitimacy, tested quality, and experienced the communication style. Ask founders in your network or reach out to brands at a similar stage to yours. Most founders are willing to share positive experiences and warn about problematic manufacturers. When requesting referrals, be specific about your needs - product type, quantity range, and target market. A manufacturer perfect for one brand may be wrong for another. Referrals accelerate trust building but still perform your own verification. Even with a warm introduction, confirm certifications, check references, and order samples before committing. SDF Clothing has grown primarily through founder referrals, with over 500 brands recommending us based on their positive experiences.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Method comparison for finding clothing manufacturers">
+          <caption>Method Comparison for Finding Clothing Manufacturers</caption>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Cost</th>
+              <th>Time</th>
+              <th>Reliability</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Trade body referral</strong></td>
+              <td>Free</td>
+              <td>2-4 weeks</td>
+              <td>High</td>
+              <td>Verified manufacturers, specific countries</td>
+            </tr>
+            <tr>
+              <td><strong>Google search</strong></td>
+              <td>Free</td>
+              <td>4-8 weeks</td>
+              <td>Medium</td>
+              <td>Initial research, specific product searches</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Trade shows</strong></td>
+              <td>High ($2,000-5,000)</td>
+              <td>1-2 weeks</td>
+              <td>High</td>
+              <td>Face-to-face vetting, rapid sourcing</td>
+            </tr>
+            <tr>
+              <td><strong>LinkedIn</strong></td>
+              <td>Free</td>
+              <td>3-6 weeks</td>
+              <td>Medium</td>
+              <td>Connecting with agents and reps</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Referrals</strong></td>
+              <td>Free</td>
+              <td>1-2 weeks</td>
+              <td>Very High</td>
+              <td>Trusted recommendations, fastest path</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: How to Search Online Effectively -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">How to Search for Manufacturers Online Effectively</h2>
+      <p class="section__text">
+        Most brands search for manufacturers incorrectly, wasting time on irrelevant results and unqualified factories. Effective online searching requires specificity and strategy. The difference between a productive search and hours of frustration comes down to how you frame your queries and what you look for in the results.
+      </p>
+
+      <h3 class="section__subtitle">The Problem with Broad Searches</h3>
+      <p class="section__text">
+        Searching "clothing manufacturer" returns millions of results - middlemen, trading companies, directories, and actual factories mixed together. Most results won't match your needs. Even worse, many top results are paid listings from companies that may not manufacture anything themselves. You'll spend weeks filtering through irrelevant leads, many of which turn out to be agents rather than direct manufacturers. Broad searches also attract low-quality factories desperate for any business - exactly the type you want to avoid.
+      </p>
+
+      <h3 class="section__subtitle">Better Search Terms</h3>
+      <p class="section__text">
+        Structure your searches with four elements: product type, manufacturing term, location, and qualification. Instead of "clothing manufacturer," use "[product type] manufacturer [country]" like "knitwear manufacturer Bangladesh" or "denim manufacturer Turkey." This immediately filters for factories specializing in your product category in your target region. Add qualifiers like "OEM" if you need custom production, "private label" if you want white-label customization, or "small batch" if you need low quantities. Each qualifier narrows results to manufacturers matching your specific requirements.
+      </p>
+
+      <h3 class="section__subtitle">Advanced Search Techniques</h3>
+      <p class="section__text">
+        For even better results, include fabric specifications and certifications. Search "organic cotton t-shirt manufacturer GOTS certified India" to find factories with specific material capabilities and sustainability credentials. Use "performance activewear manufacturer recycled polyester Vietnam" for technical sportswear. These specific searches bypass generalist factories and connect you with specialists who understand your product requirements. The results may be fewer, but each lead is more likely to be relevant and qualified. If you need custom manufacturing, search for <a href="/oem-clothing-manufacturer">OEM clothing manufacturer</a> or <a href="/private-label-clothing-manufacturer">private label manufacturer</a> to find specialized partners.
+      </p>
+
+      <h3 class="section__subtitle">Evaluating Manufacturer Websites</h3>
+      <p class="section__text">
+        When reviewing manufacturer websites, look for specific information indicating legitimacy and capability. Professional sites clearly state production capacity, equipment details, product range, and client names. They provide factory address, contact information, and certification numbers with verification links. High-quality websites include photo galleries showing actual production facilities, not stock images. They specify MOQ requirements, lead times, and payment terms transparently. The about section should mention founding year, team background, and company history.
+      </p>
+
+      <h3 class="section__subtitle">Red Flags on Websites</h3>
+      <p class="section__text">
+        Walk away from manufacturers showing these warning signs: stock photos only with no actual factory images, no physical address or only a PO box, vague capability statements without specifics, no client names or recognizable brands listed, certification logos without certificate numbers or verification links, contact forms only with no direct email or phone, unrealistic pricing promises, pressure tactics like "limited time offers," and poor English or generic content that suggests the site was outsourced cheaply. Legitimate manufacturers invest in professional websites that accurately represent their capabilities.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: How to Verify Legitimacy -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">How to Verify a Manufacturer Is Legitimate</h2>
+      <p class="section__text">
+        Verification is the most critical step in finding a clothing manufacturer. Scams and unqualified factories cost brands thousands in lost deposits, delayed production, and quality disasters. Never skip due diligence regardless of how professional a manufacturer appears or how warm the referral. Legitimate manufacturers welcome thorough vetting and provide documentation willingly. The following verification checklist covers all essential checks before engaging with any factory.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Verification checklist for clothing manufacturers">
+          <caption>Manufacturer Verification Checklist</caption>
+          <thead>
+            <tr>
+              <th>Check</th>
+              <th>How to Do It</th>
+              <th>Time Required</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Business registration</strong></td>
+              <td>Search government business databases in manufacturer's country. Verify company name, address, and registration status match provided information.</td>
+              <td>30 minutes</td>
+            </tr>
+            <tr>
+              <td><strong>Certification verification</strong></td>
+              <td>Request certificate numbers and verify directly with issuing organizations (GOTS, OEKO-TEX, BSCI, WRAP). Check expiration dates and factory name match.</td>
+              <td>1-2 hours</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Third-party audit report</strong></td>
+              <td>Request recent audit reports from BSCI, WRAP, or client-commissioned audits. Review for compliance issues, working conditions, and safety standards.</td>
+              <td>1 hour</td>
+            </tr>
+            <tr>
+              <td><strong>Client references</strong></td>
+              <td>Request references from brands similar to yours. Contact 2-3 references to ask about quality, communication, timeline adherence, and problem resolution.</td>
+              <td>2-3 hours</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Factory photos or video tour</strong></td>
+              <td>Request current photos or video showing production lines, equipment, and working conditions. Look for modern machinery and organized facilities.</td>
+              <td>30 minutes</td>
+            </tr>
+            <tr>
+              <td><strong>Sample order</strong></td>
+              <td>Place a small sample order before committing to bulk production. Tests communication, quality, and processes with minimal risk.</td>
+              <td>2-3 weeks</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Payment terms review</strong></td>
+              <td>Verify payment terms are standard (30/70 TT or Letter of Credit). Avoid 100% upfront demands or unusual payment methods like Western Union.</td>
+              <td>30 minutes</td>
+            </tr>
+            <tr>
+              <td><strong>Contract review</strong></td>
+              <td>Review proposed contract terms for specifications, delivery, quality standards, payment schedule, IP protection, and dispute resolution.</td>
+              <td>1-2 hours</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="section__text">
+        Complete verification takes 1-2 weeks but prevents far larger losses. Manufacturers refusing any of these checks or showing resistance to due diligence should be avoided immediately. SDF Clothing provides all verification documentation proactively - we have nothing to hide and want you to feel confident in your manufacturing partnership. Our certifications are verifiable, our references are current, and we welcome factory audits or virtual tours for serious buyers.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: 12 Questions to Ask -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">12 Questions You Must Ask Before Choosing a Manufacturer</h2>
+      <p class="section__text">
+        Asking the right questions reveals manufacturer capabilities, communication style, and alignment with your requirements. Good manufacturers provide detailed, specific answers. Vague or evasive answers indicate problems. Prepare these questions in advance, ask them of every manufacturer you consider, and compare responses side by side. The differences in answers will clarify which manufacturer is the best fit for your brand.
+      </p>
+
+      <h3 class="section__subtitle">1. What is your minimum order quantity?</h3>
+      <p class="section__text">
+        MOQ determines whether you can work with this manufacturer at all. Ask whether the MOQ applies per style, per colorway, or total across colors. Clarify whether size distribution is flexible within the MOQ. Low MOQ manufacturers like SDF Clothing (300 pieces) enable startups to test designs without massive inventory risk. High MOQ manufacturers (1,000+ pieces) may offer lower per-unit costs but require significant upfront investment. Ensure the MOQ aligns with your budget and launch strategy. If you need low quantities, explore <a href="/low-moq-clothing-manufacturers/">low MOQ clothing manufacturers</a> that specialize in small batch production.
+      </p>
+
+      <h3 class="section__subtitle">2. Can you share client references in my product category?</h3>
+      <p class="section__text">
+        References from brands making similar products provide the most relevant insight. A manufacturer great at t-shirts may struggle with complex technical outerwear. Ask for references from brands similar in size, product type, and market to yours. Contact these references directly - ask about communication quality, production quality, timeline accuracy, and how the manufacturer handles problems. Manufacturers refusing references or providing only outdated references warrant caution.
+      </p>
+
+      <h3 class="section__subtitle">3. What certifications do you hold?</h3>
+      <p class="section__text">
+        Certifications enable retail access and ensure compliance with quality, social, and environmental standards. Key certifications include GOTS for organic cotton, OEKO-TEX for chemical safety, BSCI for social compliance, WRAP for ethical manufacturing, and ISO 9001 for quality management. Ask for current certificates and verify through issuing organization databases. Certificates can be forged - verification is essential. SDF Clothing holds 13 international certifications covering all major standards. View our full <a href="/certifications">certifications</a> for details.
+      </p>
+
+      <h3 class="section__subtitle">4. What is your standard sample process and timeline?</h3>
+      <p class="section__text">
+        Understanding the sample process prevents timeline surprises. Ask about proto samples, fit samples, and pre-production samples. Typical timeline is 7-14 days per sample round. Ask how many rounds are included in the sample cost and whether costs credit against bulk orders. Clarify whether you approve samples electronically or require physical shipment. Good manufacturers provide clear sample timelines and keep you updated throughout the process.
+      </p>
+
+      <h3 class="section__subtitle">5. Do you charge for samples? Is the cost credited?</h3>
+      <p class="section__text">
+        Sample costs vary widely - some manufacturers charge $50-200 per sample, others offer free samples for confirmed orders. Most reputable manufacturers credit sample costs against bulk orders, effectively making samples free when you proceed to production. Ask about sample payment terms (some require upfront payment, others deduct from final invoice). Budget for 2-3 sample iterations per style to achieve desired results. SDF Clothing credits sample costs against bulk orders to minimize your risk.
+      </p>
+
+      <h3 class="section__subtitle">6. What are your payment terms?</h3>
+      <p class="section__text">
+        Standard payment terms in the industry are 30% deposit to start production and 70% before shipment. This structure protects both parties - you have leverage until goods are ready, the manufacturer has security against cancellation. For larger orders, Letter of Credit provides additional security but involves bank fees. Avoid manufacturers demanding 100% upfront payment - this is a major red flag. Clarify what payment methods are accepted (wire transfer, PayPal, etc.) and whether there are currency exchange considerations.
+      </p>
+
+      <h3 class="section__subtitle">7. How do you handle quality issues before shipment?</h3>
+      <p class="section__text">
+        Quality problems are inevitable even with good manufacturers. The important question is how they're handled. Ask about the manufacturer's quality control process - do they have in-house QC, what AQL level they use, and whether they conduct pre-shipment inspections. Ask specifically what happens if goods don't meet specifications. Will they re-produce at their cost? Offer discounts? The answer reveals whether the manufacturer stands behind their work or passes problems to you. Consider our <a href="/quality-inspection-service">quality inspection service</a> for independent QC.
+      </p>
+
+      <h3 class="section__subtitle">8. Do you subcontract any production?</h3>
+      <p class="section__text">
+        Some manufacturers subcontract overflow production to other factories. This isn't necessarily bad, but you need to know. If subcontracting occurs, ask which factories are used, whether they meet the same certification standards, and how quality is controlled across locations. Subcontracting without disclosure can cause quality inconsistencies and certification compliance issues. SDF Clothing handles all production in our own facility - no subcontracting, full control over quality and timeline.
+      </p>
+
+      <h3 class="section__subtitle">9. What is your on-time delivery rate?</h3>
+      <p class="section__text">
+        On-time delivery matters for your launch planning and inventory management. Ask for the manufacturer's on-time delivery percentage over the past 12 months. Request specific examples of delays and how they were communicated. Manufacturers with 95%+ on-time delivery like SDF Clothing demonstrate reliable production planning and capacity management. Be wary of vague answers or manufacturers who can't provide specific data - this suggests they don't track performance or have delivery issues.
+      </p>
+
+      <h3 class="section__subtitle">10. Can I visit your factory?</h3>
+      <p class="section__text">
+        Factory visits provide the most direct verification of capabilities and working conditions. Ask whether visits are welcomed and what the process involves. For international manufacturers, ask about virtual tours via video call. Manufacturers refusing visits or making excuses to prevent facility inspection warrant investigation. Legitimate factories are proud of their facilities and welcome serious buyers. SDF Clothing welcomes factory visits and provides virtual tours for international clients unable to travel to Bangladesh.
+      </p>
+
+      <h3 class="section__subtitle">11. Do you have NDA or confidentiality agreements?</h3>
+      <p class="section__text">
+        Intellectual property protection is critical for fashion brands. Ask whether the manufacturer has standard NDAs or is willing to sign one before you share detailed designs or tech packs. The agreement should prohibit them from using your designs, patterns, or branding for other clients. Ask how they protect your information internally and who has access to your designs. SDF Clothing provides comprehensive confidentiality agreements and respects IP rights for all client projects.
+      </p>
+
+      <h3 class="section__subtitle">12. What is your reorder lead time?</h3>
+      <p class="section__text">
+        Reorder lead time differs from first order lead time. Once patterns are made and production is established, reorders should be faster. Ask specifically about lead time for repeat orders of the same style. This affects your inventory planning and ability to restock quickly when products sell well. Manufacturers with efficient processes can reduce reorder time by 20-30% compared to first orders. Understanding reorder timelines helps you plan inventory and cash flow more effectively.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Questions to ask manufacturers with good and bad answers">
+          <caption>Manufacturer Questions: Good vs Bad Answers</caption>
+          <thead>
+            <tr>
+              <th>Question</th>
+              <th>Good Answer</th>
+              <th>Bad Answer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>What is your MOQ?</strong></td>
+              <td>300 pieces per style, flexible size distribution, colorways can be mixed within MOQ</td>
+              <td>Depends on the product, we'll discuss after seeing your designs</td>
+            </tr>
+            <tr>
+              <td><strong>Can you share client references?</strong></td>
+              <td>Yes, here are 3 references from brands making similar products in your market</td>
+              <td>Our clients prefer confidentiality, we can't share references</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>What certifications do you hold?</strong></td>
+              <td>GOTS, OEKO-TEX, BSCI, WRAP, ISO 9001 | here are certificate numbers for verification</td>
+              <td>We have many certifications, I'll send them later</td>
+            </tr>
+            <tr>
+              <td><strong>What is your sample timeline?</strong></td>
+              <td>7-10 days for proto sample, 7-10 days for revisions, included in sample cost</td>
+              <td>It depends on complexity, usually 2-4 weeks</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>What are your payment terms?</strong></td>
+              <td>30% deposit to start production, 70% before shipment via wire transfer</td>
+              <td>We require 100% upfront for new clients</td>
+            </tr>
+            <tr>
+              <td><strong>How do you handle quality issues?</strong></td>
+              <td>We conduct AQL 2.5 inspection, re-produce defects at our cost, provide QC report</td>
+              <td>We rarely have quality issues</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Do you subcontract production?</strong></td>
+              <td>No, all production is in our own facility under our direct control</td>
+              <td>Sometimes for overflow, but we manage quality closely</td>
+            </tr>
+            <tr>
+              <td><strong>What is your on-time delivery rate?</strong></td>
+              <td>98% on-time over the past 12 months, we track every order and communicate delays early</td>
+              <td>We always try to deliver on time</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Can I visit your factory?</strong></td>
+              <td>Yes, we welcome visits and can arrange virtual tours for international clients</td>
+              <td>Our facility is very busy, visits are difficult to schedule</td>
+            </tr>
+            <tr>
+              <td><strong>Do you have NDAs?</strong></td>
+              <td>Yes, we have standard confidentiality agreements and can sign yours before reviewing designs</td>
+              <td>We don't usually need NDAs, we keep everything confidential</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>What is your reorder lead time?</strong></td>
+              <td>30-35 days for reorders of established styles, 20% faster than first orders</td>
+              <td>Same as first order, 40-45 days</td>
+            </tr>
+            <tr>
+              <td><strong>Do you charge for samples?</strong></td>
+              <td>$50-100 per sample, fully credited against bulk orders</td>
+              <td>Sample costs vary, we'll quote after seeing designs</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Evaluating Quotes -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">How to Evaluate and Compare Manufacturer Quotes</h2>
+      <p class="section__text">
+        Getting quotes is relatively easy - comparing them effectively is where most brands struggle. The lowest price rarely represents the best value. Manufacturers cutting corners on quality, communication, or service can offer lower unit prices that cost far more in revisions, delays, and quality problems. Effective quote comparison requires evaluating multiple dimensions beyond FOB price per unit.
+      </p>
+
+      <h3 class="section__subtitle">Ensure Apples-to-Apples Comparison</h3>
+      <p class="section__text">
+        Before comparing prices, ensure all manufacturers quote on identical specifications. Different fabric quality, construction details, or trim specifications cause price differences unrelated to manufacturer efficiency. Provide the same tech pack, fabric requirements, and quality standards to all manufacturers. If specifications vary, request revised quotes on matching specifications. Only compare prices when the input specifications are identical.
+      </p>
+
+      <h3 class="section__subtitle">Evaluate Communication Quality</h3>
+      <p class="section__text">
+        Communication during the quoting process predicts communication during production. Manufacturers responding quickly, answering questions thoroughly, and providing detailed information demonstrate professionalism. Slow responses, vague answers, or difficulty reaching decision-makers during quoting will not improve after you place an order. Good communication prevents misunderstandings, reduces revision rounds, and enables problem resolution. Factor communication quality heavily into your decision - it affects every aspect of the relationship.
+      </p>
+
+      <h3 class="section__subtitle">Consider Total Landed Cost</h3>
+      <p class="section__text">
+        FOB price is only one component of total cost. Calculate landed cost including freight, insurance, duties, and any additional fees. A manufacturer in a country with duty advantages to your target market may have higher FOB pricing but lower total landed cost. For example, Bangladesh's duty-free access to EU markets can make higher FOB prices more economical than lower prices from China subject to 12% EU duty. Consider shipping time as well - faster shipping enables quicker inventory turns and lower holding costs.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Quote comparison framework">
+          <caption>Quote Comparison Framework</caption>
+          <thead>
+            <tr>
+              <th>Element</th>
+              <th>What to Check</th>
+              <th>Why It Matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>FOB price</strong></td>
+              <td>Price per unit, currency, payment terms, any volume discounts</td>
+              <td>Direct cost impact, cash flow requirements</td>
+            </tr>
+            <tr>
+              <td><strong>Fabric specification</strong></td>
+              <td>Fabric composition, weight, source, certification status</td>
+              <td>Quality consistency, retail access, sustainability claims</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>MOQ</strong></td>
+              <td>Minimum quantity per style, flexibility for size/color distribution</td>
+              <td>Inventory risk, upfront investment, testing capability</td>
+            </tr>
+            <tr>
+              <td><strong>Lead time</strong></td>
+              <td>Days from deposit to shipment, whether fabric sourcing included</td>
+              <td>Launch planning, inventory timing, ability to restock</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Payment terms</strong></td>
+              <td>Deposit percentage, balance trigger, payment methods, currency</td>
+              <td>Cash flow impact, payment security, exchange rate risk</td>
+            </tr>
+            <tr>
+              <td><strong>Included services</strong></td>
+              <td>Sampling costs, quality inspection, shipping documentation, design support</td>
+              <td>Additional costs avoided, value received beyond production</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Certification status</strong></td>
+              <td>Relevant certifications for your market and retail requirements</td>
+              <td>Retail access, compliance, sustainability positioning</td>
+            </tr>
+            <tr>
+              <td><strong>Communication quality</strong></td>
+              <td>Response time, English proficiency, clarity, proactive updates</td>
+              <td>Problem prevention, revision reduction, overall experience</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Sample Process -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">The Sample Process | How to Evaluate Before Committing</h2>
+      <p class="section__text">
+        Samples prevent expensive bulk production mistakes. Never approve designs for production without physical samples. The sample process typically involves three stages: proto sample, fit sample, and pre-production sample. Understanding each stage and what to evaluate ensures you approve production only when quality meets your standards.
+      </p>
+
+      <h3 class="section__subtitle">Proto Sample Stage</h3>
+      <p class="section__text">
+        The proto sample is the first physical version of your design. Manufacturers create this sample to demonstrate they understand your specifications and can produce the garment. Evaluate the proto sample for overall design interpretation - does it match your vision? Check construction methods, fabric quality, and basic measurements. Proto samples often require revisions; this is normal. Provide specific feedback with measurements or photos where needed. The proto sample stage typically takes 7-14 days.
+      </p>
+
+      <h3 class="section__subtitle">Fit Sample Stage</h3>
+      <p class="section__text">
+        Fit samples focus on sizing and proportion. After revising the proto sample, manufacturers produce fit samples in multiple sizes to evaluate grading and fit across your size range. Test fit samples on fit models or mannequins representing your target customer. Check that measurements match your size chart, proportions work across sizes, and the garment fits as intended. Fit issues identified at this stage are easier to fix than after bulk production. The fit sample stage adds another 7-14 days.
+      </p>
+
+      <h3 class="section__subtitle">Pre-Production Sample Stage</h3>
+      <p class="section__text">
+        The pre-production (PP) sample is the final version before bulk production. This sample should match production specifications exactly - correct fabric, accurate colors, proper construction, approved fit. The PP sample becomes the standard against which bulk production is measured. Evaluate this sample meticulously; check every seam, measurement, and detail. Once you approve the PP sample, the manufacturer proceeds to bulk cutting. This stage takes 7-14 days for final approval.
+      </p>
+
+      <h3 class="section__subtitle">Normal Sampling Iterations</h3>
+      <p class="section__text">
+        Most projects require 2-3 sample rounds to achieve approval. One round is rare unless your design is very simple. Four or more rounds indicate communication problems or capability issues. If you reach four rounds with the same issues recurring, consider whether this manufacturer is the right fit. Excessive sampling costs money and delays launch. Set expectations upfront with the manufacturer about the number of included sample rounds and costs for additional iterations.
+      </p>
+
+      <h3 class="section__subtitle">When to Walk Away</h3>
+      <p class="section__text">
+        Walk away from the sampling process if you encounter these red flags: manufacturer cannot achieve basic specifications after 3 rounds, quality issues persist despite specific feedback, communication is poor or responses are delayed, manufacturer resists making requested changes, or sample quality significantly varies from what was promised. Sampling is your trial run - if it's difficult now, production will be worse. Cut losses and find a better manufacturing partner.
+      </p>
+
+      <h3 class="section__subtitle">Sample Cost and Credit Policies</h3>
+      <p class="section__text">
+        Sample costs typically range from $50-200 per style depending on complexity. Most reputable manufacturers credit these costs against bulk orders, effectively making samples free when you proceed to production. Clarify the credit policy before starting - some deduct from final invoice, others apply as deposit credit. Ask whether sample costs are refundable if you decide not to proceed to production. SDF Clothing credits all sample costs against bulk orders to minimize your risk during the evaluation phase. Ensure you have professional tech packs ready - our <a href="/tech-pack-service">tech pack service</a> can help prepare detailed specifications.
+      </p>
+
+      <p class="section__text">
+        For comprehensive sampling support, SDF Clothing provides efficient sample development with 7-14 day turnaround per round. We provide detailed feedback on technical feasibility and suggest optimizations to improve manufacturability. Our team has produced thousands of samples for brands globally and understands the importance of getting samples right before bulk production. Learn more about our <a href="/sampling-service">sampling service</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Manufacturing Contracts -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">Manufacturing Contracts | What to Include</h2>
+      <p class="section__text">
+        Contracts protect both parties by establishing clear expectations and remedies. While small orders may proceed without formal contracts, larger orders or ongoing relationships benefit from written agreements. Contracts need not be overly complex but should cover essential terms. Having clear documentation prevents misunderstandings and provides recourse if problems arise.
+      </p>
+
+      <h3 class="section__subtitle">Product Specifications Reference</h3>
+      <p class="section__text">
+        The contract should reference the approved tech pack, pre-production sample, and all specifications. Include fabric composition, weight, construction details, measurements with tolerances, color specifications with Pantone references, labeling requirements, and packaging specifications. These specifications form the quality standard for production and inspection. Ambiguity in specifications leads to disputes - be as specific as possible.
+      </p>
+
+      <h3 class="section__subtitle">Quality Standards</h3>
+      <p class="section__text">
+        Define quality standards explicitly. Reference the approved sample as the quality benchmark. Specify acceptable quality level (AQL) | typically AQL 2.5 for major defects and AQL 4.0 for minor defects in garment manufacturing. Define defect allowances and replacement terms for goods exceeding these allowances. Include your right to inspection before shipment and procedures for addressing quality issues discovered after delivery. Establish responsibility for shipping damages.
+      </p>
+
+      <h3 class="section__subtitle">Delivery Terms</h3>
+      <p class="section__text">
+        Specify Incoterms clearly - FOB (Free On Board), CIF (Cost, Insurance, Freight), or DDP (Delivered Duty Paid). FOB is most common for international manufacturing; you take ownership once goods load on the vessel. Include delivery timeline with key milestones: sample approval date, fabric readiness date, production start date, and shipment date. Include remedies for delays beyond reasonable causes such as force majeure events.
+      </p>
+
+      <h3 class="section__subtitle">Payment Schedule</h3>
+      <p class="section__text">
+        Detail payment terms including deposit percentage (typically 30%), balance trigger (typically before shipment), and payment methods. Specify currency and any exchange rate provisions. Include provisions for price adjustments if specifications change significantly. For larger orders, consider using Letter of Credit which provides security for both parties. Clearly state when payments are due and any consequences for late payment.
+      </p>
+
+      <h3 class="section__subtitle">IP and Confidentiality Clauses</h3>
+      <p class="section__text">
+        Include intellectual property protection prohibiting the manufacturer from using your designs, patterns, or branding for other clients. Require return or destruction of all materials including patterns, samples, and documentation upon contract completion. Reference the separate NDA for additional confidentiality provisions. These clauses protect your brand identity and prevent manufacturers from producing your designs for competitors.
+      </p>
+
+      <h3 class="section__subtitle">Dispute Resolution</h3>
+      <p class="section__text">
+        Specify dispute resolution mechanisms including governing jurisdiction, mediation requirements, and arbitration procedures. International contracts should specify which country's laws apply and where disputes will be resolved. Many contracts specify arbitration in neutral locations like Singapore or Hong Kong for efficiency and neutrality. Clear dispute resolution procedures prevent costly litigation and provide a path forward if disagreements arise.
+      </p>
+
+      <p class="section__text">
+        For additional protection, SDF Clothing provides standard contract templates covering all essential terms. We recommend having contracts reviewed by legal counsel familiar with international trade law. Clear documentation protects both parties and enables successful long-term partnerships.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: Regional Guide -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <h2 class="section__title">Finding a Manufacturer by Region</h2>
+      <p class="section__text">
+        Different manufacturing regions offer distinct advantages suited to different brand needs. Choice depends on product category, target market, budget, and priorities. Consider total landed cost including duty, not just factory price, when comparing regions. For a broader look at manufacturer types, see our <a href="/clothing-manufacturers">clothing manufacturer guide</a>. The following regional guide helps you identify the best manufacturing hub for your specific requirements.
+      </p>
+
+      <div class="comparison-wrapper">
+        <table class="comparison" role="table" aria-label="Regional guide for clothing manufacturing">
+          <caption>Clothing Manufacturing by Region</caption>
+          <thead>
+            <tr>
+              <th>Region</th>
+              <th>Best For</th>
+              <th>Key Contact Point</th>
+              <th>Typical MOQ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td><strong>Bangladesh</strong></td>
+              <td>Basic garments, t-shirts, hoodies, casual wear, EU markets</td>
+              <td>BGMEA (Bangladesh Garment Manufacturers and Exporters Association)</td>
+              <td>300-1,000 pieces</td>
+            </tr>
+            <tr>
+              <td><strong>China</strong></td>
+              <td>Complex garments, technical apparel, fast fashion, quick turnaround</td>
+              <td>CCCT (China Chamber of Commerce for Import and Export of Textiles)</td>
+              <td>500-2,000 pieces</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>Vietnam</strong></td>
+              <td>Technical garments, performance wear, US markets, balanced cost-quality</td>
+              <td>VITAS (Vietnam Textile and Apparel Association)</td>
+              <td>500-1,500 pieces</td>
+            </tr>
+            <tr>
+              <td><strong>Turkey</strong></td>
+              <td>European proximity, quick turnaround, denim, woven garments</td>
+              <td>IHKIB (Istanbul Apparel Exporters Association)</td>
+              <td>300-1,000 pieces</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>India</strong></td>
+              <td>Cotton garments, ethnic wear, sustainable materials, competitive costs</td>
+              <td>AEPC (Apparel Export Promotion Council)</td>
+              <td>300-1,000 pieces</td>
+            </tr>
+            <tr>
+              <td><strong>Portugal</strong></td>
+              <td>Premium quality, European brands, quick turnaround, sustainable production</td>
+              <td>ATP (Associa |  | o T - xtil e Vestu - rio de Portugal)</td>
+              <td>300-1,000 pieces</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td><strong>USA</strong></td>
+              <td>Communication ease, speed, premium brands, domestic market</td>
+              <td>AAFA (American Apparel and Footwear Association)</td>
+              <td>100-300 pieces</td>
+            </tr>
+            <tr>
+              <td><strong>UK</strong></td>
+              <td>Premium quality, European brands, quick turnaround, domestic market</td>
+              <td>UKFT (UK Fashion and Textile Association)</td>
+              <td>100-300 pieces</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="section__text">
+        For brands seeking low MOQ with competitive pricing, Bangladesh offers excellent value. SDF Clothing exemplifies Bangladesh's advantages with 300-piece minimums, <a href="/clothing-manufacturer-bangladesh">GOTS certification</a>, and {companyAge} of experience serving global brands. Contact us for a free quote to experience Bangladesh manufacturing quality firsthand.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section">
+    <div class="section__container">
+      <h2 class="section__title">How to Find a Clothing Manufacturer FAQ</h2>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">Where can I find clothing manufacturers for my brand?</h3>
+          <p class="faq__answer">Five proven methods exist: direct outreach to country trade bodies like BGMEA for Bangladesh or AEPC for India (most reliable and free), Google search with specific terms like "knitwear factory Bangladesh" rather than generic searches, industry trade shows including Magic Las Vegas, Texworld NYC, and Canton Fair for face-to-face vetting, LinkedIn and industry networks for connecting with sourcing agents and factory representatives, and referrals from other brand founders which are often the most reliable source.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">How do I know if a clothing manufacturer is legitimate?</h3>
+          <p class="faq__answer">Verify legitimacy through eight key checks: confirm business registration with government databases, verify certifications directly with issuing organizations like GOTS, OEKO-TEX, and BSCI, request third-party audit reports from organizations like WRAP or client-commissioned audits, contact client references from brands similar to yours, request factory photos or video tours showing actual production facilities, place a sample order to test quality and communication, review payment terms carefully avoiding 100% upfront demands, and ensure a signed contract with clear terms before proceeding.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What questions should I ask a clothing manufacturer?</h3>
+          <p class="faq__answer">Ask twelve critical questions: what is your minimum order quantity per style, can you share client references in my product category, what certifications do you hold, what is your standard sample process and timeline, do you charge for samples and is the cost credited against bulk orders, what are your payment terms, how do you handle quality issues before shipment, do you subcontract any production, what is your on-time delivery rate, can I visit your factory, do you have NDA or confidentiality agreements, and what is your reorder lead time.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">How long does it take to find and start working with a manufacturer?</h3>
+          <p class="faq__answer">The timeline typically ranges from 2 to 4 months for first-time brands. Research and initial outreach takes 2-4 weeks, receiving and comparing quotes requires 1-2 weeks, sample development and approval takes 3-6 weeks including multiple iterations, contract negotiation and deposit payment takes 1-2 weeks, and production lead time adds 40-45 days. Using trade body referrals or warm introductions can shorten this to 6-8 weeks, while cold outreach may extend to 4-6 months.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">Should I use a sourcing agent to find a manufacturer?</h3>
+          <p class="faq__answer">Sourcing agents can be valuable for brands new to manufacturing or targeting unfamiliar countries. Agents provide local knowledge, language translation, factory vetting, and ongoing communication support. However, they add cost typically 5-15% of order value. For established brands or those comfortable with direct communication, working directly with manufacturers reduces costs. For first-time buyers or complex projects, a reputable <a href="/sourcing-agent-service">sourcing agent</a> can prevent costly mistakes and accelerate the process.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order quantity for most clothing manufacturers?</h3>
+          <p class="faq__answer">MOQ varies significantly by region and manufacturer type. Bangladesh and India typically offer 300-500 piece MOQs for basic garments. China often requires 500-1,000 pieces but offers lower MOQs for repeat orders. Vietnam generally requires 500-1,500 pieces. Turkey and Portugal range from 300-1,000 pieces. USA and UK manufacturers typically require 100-300 pieces but at significantly higher costs. SDF Clothing offers 300 piece minimums per style, making us ideal for <a href="/clothing-manufacturers-for-startups/">startup brands</a> testing new designs.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">How do I protect my designs when approaching manufacturers?</h3>
+          <p class="faq__answer">Protect your designs through five key measures: register your trademark before approaching factories, use non-disclosure agreements when sharing detailed designs or tech packs, work with certified manufacturers like BGMEA members who have accountability structures, keep comprehensive tech packs on file as proof of original design, and consider registering distinctive design elements in key markets. SDF Clothing provides <a href="/confidentiality/">confidentiality agreements</a> and respects intellectual property rights for all client projects.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">How do I compare quotes from different manufacturers?</h3>
+          <p class="faq__answer">Compare quotes across eight elements: FOB price per unit, fabric specifications ensuring identical materials across quotes, MOQ requirements and flexibility, lead time from deposit to shipment, payment terms and security, included services like sampling or quality inspection, certification status affecting retail access, and communication quality and responsiveness. The lowest price often cuts corners on quality or service - evaluate total value including reliability, not just unit cost.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">What is the best country to find clothing manufacturers?</h3>
+          <p class="faq__answer">The best country depends on your priorities. Bangladesh offers lowest costs for basic garments with 300-piece MOQ and duty advantages for EU markets. China provides speed and technical capability with lower MOQs but higher costs. Vietnam balances cost and technical capability with duty advantages for US markets. Turkey offers proximity to Europe with quick turnaround. Portugal provides quality and speed for premium European brands. India offers competitive costs and cotton expertise. USA and UK provide communication ease and speed but at significantly higher costs. Choose based on product type, target market, budget, and timeline.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">Can startup brands find manufacturers willing to work with them?</h3>
+          <p class="faq__answer">Yes, many manufacturers specialize in working with startup brands. Look for manufacturers advertising low MOQs, those explicitly mentioning startup support, and factories offering flexible terms. Bangladesh manufacturers like SDF Clothing built our business serving emerging brands with 300-piece minimums. Trade shows and online platforms like Maker's Row connect startups with manufacturer-friendly factories. Be prepared with professional communication, clear requirements, and realistic expectations. Start with 1-2 styles to build the relationship before expanding. Read our guide on <a href="/how-to-start-a-clothing-brand">how to start a clothing brand</a> for more tips.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="cta-box">
+        <h2 class="cta-box__title">Ready to Find a Manufacturing Partner You Can Trust?</h2>
+        <p class="cta-box__text">
+          SDF Clothing has served fashion brands from our Bangladesh factory since 1998. We offer 300-piece minimums, 13 international certifications, and transparent pricing. Our team provides dedicated support, regular production updates, and 98% on-time delivery. Get a free quote to experience reliable manufacturing partnership.
+        </p>
+        <div class="cta-box__ctas">
+          <a href={whatsappQuoteUrl} class="hero__cta hero__cta--primary" target="_blank" rel="noopener noreferrer">
+            Get Free Factory Quote
+          </a>
+          <a href="/contact/" class="hero__cta hero__cta--secondary">
+            Request Sample
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #e00;
+    color: #fff;
+    padding: 8px 16px;
+    z-index: 100;
+    transition: top 0.3s;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .breadcrumb {
+    padding: 1.5rem 0;
+    background: #0a0a0a;
+  }
+  .breadcrumb__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .breadcrumb__item a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+  .breadcrumb__item a:hover {
+    color: #e00;
+  }
+  .breadcrumb__item--current {
+    color: #fff;
+    font-size: 0.85rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    padding: 4rem 1.5rem;
+  }
+  .hero__container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .hero__label {
+    color: #e00;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .hero__title {
+    color: #fff;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 200;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .hero__description {
+    color: #aaa;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .hero__ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hero__cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .hero__cta--primary {
+    background: #e00;
+    color: #fff;
+  }
+  .hero__cta--primary:hover {
+    background: #c00;
+  }
+  .hero__cta--secondary {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #333;
+  }
+  .hero__cta--secondary:hover {
+    border-color: #e00;
+    color: #e00;
+  }
+
+  .section {
+    padding: 4rem 1.5rem;
+    background: #0a0a0a;
+  }
+  .section--alt {
+    background: #0f0f0f;
+  }
+  .section__container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .section__title {
+    color: #fff;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+  .section__subtitle {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  .section__text {
+    color: #aaa;
+    line-height: 1.9;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .section__text a {
+    color: #e00;
+    text-decoration: none;
+  }
+  .section__text a:hover {
+    text-decoration: underline;
+  }
+
+  .comparison-wrapper {
+    margin: 2rem 0;
+    overflow-x: auto;
+  }
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    background: #0a0a0a;
+    font-size: 0.9rem;
+  }
+  .comparison caption {
+    color: #aaa;
+    font-size: 0.85rem;
+    padding: 1rem 0;
+    text-align: left;
+  }
+  .comparison th,
+  .comparison td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .comparison th {
+    background: #e00;
+    color: #fff;
+    font-weight: 500;
+  }
+  .comparison td {
+    color: #fff;
+  }
+  .comparison__row--highlight {
+    background: #151515;
+  }
+  .comparison__row--highlight td {
+    color: #fff;
+  }
+
+  .faq {
+    margin-top: 2rem;
+  }
+  .faq__item {
+    background: #0f0f0f;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 3px solid #e00;
+  }
+  .faq__question {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+  .faq__answer {
+    color: #aaa;
+    line-height: 1.8;
+    margin: 0;
+  }
+  .faq__answer a {
+    color: #e00;
+    text-decoration: none;
+  }
+  .faq__answer a:hover {
+    text-decoration: underline;
+  }
+
+  .cta-box {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    border: 1px solid #1a1a1a;
+    border-top: 3px solid #e00;
+    padding: 3rem;
+    text-align: center;
+  }
+  .cta-box__title {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+  .cta-box__text {
+    color: #aaa;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .cta-box__ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 3rem 1rem;
+    }
+    .section {
+      padding: 3rem 1rem;
+    }
+    .comparison {
+      font-size: 0.8rem;
+    }
+    .comparison th,
+    .comparison td {
+      padding: 0.75rem 0.5rem;
+    }
+    .cta-box {
+      padding: 2rem 1rem;
+    }
+  }
+</style>
+
+</BaseLayout>
+
+

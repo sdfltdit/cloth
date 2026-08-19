@@ -1,0 +1,567 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "White Label vs Private Label vs OEM: Which Fits Your Brand?";
+const pageDescription = "White label, private label, and OEM apparel manufacturing compared — what each means, and MOQ, FOB pricing, and lead time for each.";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+
+  ogType="website"
+>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "White Label Clothing Manufacturing",
+  "provider": { "@id": "https://sdfltd.com/#org" },
+  "serviceType": "White Label Clothing Manufacturing",
+  "areaServed": "Worldwide",
+  "url": "https://sdfltd.com/white-label-manufacturer/",
+  "description": "White label clothing manufacturer — pre-designed styles ready to rebrand from 300 pieces. 20–30 day production timeline. GOTS certified. FOB Chittagong."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+    { "@type": "ListItem", "position": 2, "name": "White Label Manufacturer" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is white label clothing manufacturing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "White label clothing manufacturing means a factory produces pre-designed garment styles that multiple buyers can purchase and rebrand with their own label. The factory owns the designs. Buyers apply their brand name, logo, labels, and packaging to the garments. White label is faster and cheaper than private label because there is no design development phase — styles are already made and approved for production. The trade-off is that the same designs can be ordered by other buyers, meaning white label does not give you design exclusivity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between white label and private label clothing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "White label: pre-designed factory styles that you rebrand. No design exclusivity — same styles available to other buyers. Production starts in 5–10 days. Best for market testing and fast launch. Private label (OEM/ODM): custom-designed garments made to your specification or developed from your brief. Design is exclusively yours — the factory does not sell the same design to others. Requires sampling (7–14 days) and revision rounds. Best for building a differentiated brand. SDF offers both."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the minimum order quantity for white label?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SDF's white label MOQ is 300 pieces per style, with flexible size and colour distribution within that total. This minimum applies per style — you can split the 300 pieces across multiple sizes (e.g. 50 XS, 100 S, 100 M, 50 L)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How fast is white label production?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "White label production at SDF takes 20–30 days from order confirmation to FOB-ready goods. This is faster than private label (40–45 days) because there is no design development or sampling phase — styles are already approved and production-ready. Add 20–35 days ocean freight to your destination."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What customisation is available with white label?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "White label customisation at SDF includes: woven neck and hem labels with your brand name, care labels with your brand content, hang tags with your brand design, individual poly bag packaging, and colour selection from available colourways. White label does not include changes to the garment's construction, silhouette, seam placement, or fabric — those changes would move the order into private label territory."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What certifications does SDF's white label production carry?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All SDF production — including white label — is covered by our 13 active certifications: GOTS 7.0, OEKO-TEX Standard 100, ISO 9001:2015, BSCI, SEDEX SMETA, WRAP, SA8000, C-TPAT, GRS, OCS, RCS, BCI, and ISO 14001. White label garments produced in GOTS or OEKO-TEX certified fabric come with the corresponding transaction certificate."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .cta-button {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: #e00; color: #fff; padding: 0.85rem 1.75rem;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em;
+    text-decoration: none; min-height: 44px; transition: background 0.2s;
+  }
+  .cta-button:hover { background: #c00; }
+  .ghost-button {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: transparent; color: #fff;
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 0.85rem 1.75rem; font-size: 0.82rem;
+    text-decoration: none; min-height: 44px; transition: border-color 0.2s;
+  }
+  .ghost-button:hover { border-color: #fff; }
+  .grid-1px { display: grid; gap: 1px; background: #1a1a1a; }
+  .cell { background: #000; }
+  .faq-item { border-bottom: 1px solid #111; padding: 1.75rem 0; }
+  .faq-item:first-child { border-top: 1px solid #111; }
+  .label { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: #e00; margin-bottom: 0.9rem; }
+  .h2 { font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 200; color: #fff; line-height: 1.25; }
+  .body-text { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.9; }
+  .note { font-size: 0.78rem; color: rgba(255,255,255,0.38); line-height: 1.7; }
+  a.inline { color: #fff; border-bottom: 0.5px solid #444; text-decoration: none; }
+  a.inline:hover { border-color: #fff; }
+  .warning-box { border-left: 2px solid #e00; padding: 1.25rem 1.5rem; background: #0a0a0a; margin: 1.5rem 0; }
+  .tip-box { border-left: 2px solid #4caf50; padding: 1.25rem 1.5rem; background: #0a0a0a; margin: 1.5rem 0; }
+</style>
+
+<!-- ═══ HERO ═══ -->
+<section style="padding: 5rem 0 3.5rem; border-bottom: 1px solid #e00;">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem;">
+      <p style="font-size: 0.72rem; color: rgba(255,255,255,0.4);">
+        <a href="/" style="color: rgba(255,255,255,0.4); text-decoration: none;">Home</a>
+        <span style="margin: 0 0.5rem; color: #333;">›</span>
+        White Label Manufacturer
+      </p>
+    </nav>
+
+    <p class="label">White Label Manufacturing · Since 1998 · 20–30 Day Production</p>
+
+    <h1 style="font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 200; color: #fff; line-height: 1.15; margin-bottom: 1.5rem; max-width: 820px;">
+      White Label vs Private Label vs OEM —<br/>Which Model Fits Your Brand?
+    </h1>
+
+    <p style="font-size: 1rem; color: rgba(255,255,255,0.72); max-width: 660px; line-height: 1.9; margin-bottom: 0.9rem;">
+      All three models get finished apparel to market, but they differ in how much design work is already done for you. White label is the fastest route: SDF's pre-designed styles are production-ready, with no sampling phase or development time. Apply your brand labels, hang tags, and packaging, and your order ships in 20–30 days.
+    </p>
+    <p style="font-size: 0.85rem; color: rgba(255,255,255,0.42); max-width: 620px; line-height: 1.8; margin-bottom: 2.5rem;">
+      Best for market testing, seasonal drops, and fast brand launches. For custom-designed garments that are exclusively yours, see our <a href="/private-label-clothing-manufacturer/" class="inline">private label service</a>.
+    </p>
+
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <a href="/contact/" class="cta-button">Get a Quote</a>
+      <a href={`${WHATSAPP_URL}?text=Hi%20SDF%2C%20I%27m%20interested%20in%20white%20label%20clothing`} target="_blank" rel="noopener noreferrer" class="ghost-button">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KEY SPECS ═══ -->
+<section style="padding: 3.5rem 0; border-bottom: 1px solid #111;">
+  <div class="container">
+    <div class="grid-1px" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+      {[
+        { l:"MOQ per style",      v:"300 pcs",     d:"Flexible size split within total" },
+        { l:"Production time",    v:"20–30 days",  d:"From order confirmation to FOB" },
+        { l:"No sampling phase",  v:"0 days",      d:"Styles are pre-approved for production" },
+        { l:"Pricing",            v:"$6–18 FOB",   d:"Per piece depending on garment type" },
+        { l:"Certifications",     v:"13 active",   d:"Including GOTS, OEKO-TEX, BSCI" },
+        { l:"Payment",            v:"30% / 70%",   d:"T/T, L/C, or bank transfer" },
+      ].map(s => (
+        <div class="cell" style="padding: 1.5rem;">
+          <p style="font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: #e00; margin-bottom: 0.4rem;">{s.l}</p>
+          <p style="font-size: 1.35rem; font-weight: 200; color: #fff; margin-bottom: 0.3rem;">{s.v}</p>
+          <p class="note">{s.d}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT IS WHITE LABEL ═══ -->
+<section style="padding: 5.5rem 0; border-bottom: 1px solid #111;">
+  <div class="container">
+    <div style="max-width: 780px;">
+      <p class="label">What White Label Means</p>
+      <h2 class="h2" style="margin-bottom: 1.5rem;">
+        Pre-designed garments. Your brand. No design development.
+      </h2>
+      <p class="body-text" style="margin-bottom: 1.25rem;">
+        In white label clothing manufacturing, the factory owns a catalog of pre-designed, pre-approved garment styles. Buyers select styles from the catalog, apply their brand labels and packaging, and receive finished garments in 20–30 days. There is no design brief, no pattern development, and no sampling phase.
+      </p>
+      <p class="body-text" style="margin-bottom: 1.25rem;">
+        This makes white label significantly faster and cheaper than private label or OEM production. It is the right choice when speed to market matters more than design exclusivity — for a first product test, a seasonal range, or a quick response to market demand.
+      </p>
+
+      <div class="warning-box">
+        <p style="font-size: 0.8rem; color: #e00; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Honest limitation #1 — No design exclusivity</p>
+        <p class="body-text">White label does not give you design exclusivity. The same styles are available for other buyers to order and rebrand. If a competitor orders the same style, your garments will look identical except for the label. This is the fundamental trade-off of white label. If owning your design is important to your brand strategy, <a href="/private-label-clothing-manufacturer/" class="inline">private label or OEM</a> is the right choice.</p>
+      </div>
+
+      <div class="warning-box" style="margin-top: 1rem;">
+        <p style="font-size: 0.8rem; color: #e00; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Honest limitation #2 — Stock availability risk</p>
+        <p class="body-text">White label depends on the factory holding the raw materials for pre-designed styles. If a particular colourway or fabric batch runs out before your order is confirmed, your chosen style may not be available in that colour. This is uncommon but possible — particularly for popular neutral colours during peak season. To avoid this, confirm style and colourway availability before committing to a marketing campaign or pre-orders. We confirm stock availability within 24 hours of inquiry.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHITE LABEL vs PRIVATE LABEL ═══ -->
+<section style="padding: 5.5rem 0; border-bottom: 1px solid #111; background: #040404;">
+  <div class="container">
+    <p class="label">Comparison</p>
+    <h2 class="h2" style="margin-bottom: 0.75rem; max-width: 560px;">
+      White label vs private label vs OEM — which is right for you?
+    </h2>
+    <p class="body-text" style="max-width: 640px; margin-bottom: 2.5rem;">
+      The three models serve different stages and goals. Here is a direct comparison on the factors that matter most.
+    </p>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.83rem; min-width: 600px;">
+        <thead>
+          <tr style="border-bottom: 1px solid #e00;">
+            <th style="text-align: left; padding: 0.8rem 1rem 0.8rem 0; color: rgba(255,255,255,0.4); font-weight: 400; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">Factor</th>
+            <th style="text-align: left; padding: 0.8rem 1rem; color: rgba(255,255,255,0.4); font-weight: 400; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">White Label</th>
+            <th style="text-align: left; padding: 0.8rem 1rem; color: rgba(255,255,255,0.4); font-weight: 400; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">Private Label</th>
+            <th style="text-align: left; padding: 0.8rem 0; color: rgba(255,255,255,0.4); font-weight: 400; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">OEM</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { factor:"Time to first goods",  wl:"20–30 days",    pl:"55–70 days",      oem:"55–70 days" },
+            { factor:"Design exclusivity",   wl:"None",          pl:"Yes",             oem:"Yes" },
+            { factor:"Design development",   wl:"Not needed",    pl:"Factory develops",oem:"You provide" },
+            { factor:"Sampling required",    wl:"No",            pl:"Yes",             oem:"Yes" },
+            { factor:"Price per piece",      wl:"Lowest",        pl:"Medium",          oem:"Variable" },
+            { factor:"MOQ",                  wl:"300 pieces",    pl:"300 pieces",      oem:"300 pieces" },
+            { factor:"Customisation level",  wl:"Labels only",   pl:"Full design",     oem:"Full design" },
+            { factor:"Best for",             wl:"Market testing", pl:"Brand building", oem:"Brand building" },
+          ].map((row, i) => (
+            <tr style={`border-bottom: 1px solid #111; background: ${i % 2 === 0 ? '#000' : '#040404'}`}>
+              <td style="padding: 0.9rem 1rem 0.9rem 0; color: rgba(255,255,255,0.6); font-size: 0.8rem;">{row.factor}</td>
+              <td style="padding: 0.9rem 1rem; color: #fff; font-size: 0.82rem;">{row.wl}</td>
+              <td style="padding: 0.9rem 1rem; color: rgba(255,255,255,0.65); font-size: 0.82rem;">{row.pl}</td>
+              <td style="padding: 0.9rem 0; color: rgba(255,255,255,0.65); font-size: 0.82rem;">{row.oem}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHO WHITE LABEL IS RIGHT FOR ═══ -->
+<section style="padding: 5.5rem 0; border-bottom: 1px solid #111;">
+  <div class="container">
+    <p class="label">Who This Is Right For</p>
+    <h2 class="h2" style="margin-bottom: 0.75rem; max-width: 580px;">
+      Match the model to your current stage — not your most ambitious plan
+    </h2>
+    <p class="body-text" style="max-width: 660px; margin-bottom: 3rem;">
+      The right manufacturing model depends on where your brand actually is right now — not where you want it to be in three years. Most brands waste time and money by choosing private label when white label would serve them better at their current stage, or vice versa.
+    </p>
+    <div class="grid-1px" style="grid-template-columns: 1fr 1fr;">
+      <div class="cell" style="padding: 2.5rem; border-top: 2px solid #e00;">
+        <p class="label">White label is right for you if...</p>
+        {[
+          { s:"You want to test a product idea before committing to custom development", d:"White label lets you put a real product in customers' hands in 20–30 days. If it sells, you have validation. If it doesn't, you haven't lost a design development budget." },
+          { s:"You are launching your first brand and don't have a tech pack", d:"Private label and OEM require a tech pack or detailed brief. White label doesn't. Select a style, send your logo in vector format, confirm colourway and quantity. That's it." },
+          { s:"You need goods for a specific date that is less than 45 days away", d:"If your launch date is tight, white label is the only model that can realistically deliver. Private label with sampling takes 55–70 days minimum." },
+          { s:"You are adding a seasonal range to an existing line", d:"Established brands use white label for seasonal additions — a summer capsule, a collaboration drop — without diverting development capacity from their core private label range." },
+        ].map(item => (
+          <div style="padding: 1rem 0; border-bottom: 1px solid #0f0f0f;">
+            <p style="font-size: 0.84rem; font-weight: 500; color: #fff; margin-bottom: 0.4rem;">{item.s}</p>
+            <p class="note" style="line-height: 1.65;">{item.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="cell" style="padding: 2.5rem; border-top: 2px solid #333;">
+        <p class="label" style="color: rgba(255,255,255,0.4);">Private label / OEM is right for you if...</p>
+        {[
+          { s:"Your garment design is a core part of your brand identity", d:"If the fit, construction, or silhouette of your garment is what makes your brand different from competitors, you need private label. White label gives you someone else's block." },
+          { s:"You are building a brand you intend to scale or sell", d:"Investors and acquirers assess brand defensibility. A private label product owned by you — with exclusive design rights — has more value than a rebranded white label product." },
+          { s:"Your target retail price requires a specific quality level", d:"White label styles are produced at a fixed quality and construction spec. If your price point requires a specific GSM, seam type, or finish not available in the catalog, you need custom production." },
+          { s:"You have already tested with white label and know what sells", d:"The best brands use white label to validate, then switch to private label for their winning styles. This is the optimal path — test fast, then own what works." },
+        ].map(item => (
+          <div style="padding: 1rem 0; border-bottom: 1px solid #0f0f0f;">
+            <p style="font-size: 0.84rem; font-weight: 500; color: rgba(255,255,255,0.65); margin-bottom: 0.4rem;">{item.s}</p>
+            <p class="note" style="line-height: 1.65;">{item.d}</p>
+          </div>
+        ))}
+        <div style="margin-top: 1.5rem;">
+          <a href="/private-label-clothing-manufacturer/" class="inline" style="font-size: 0.82rem;">View our private label service →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT IS INCLUDED ═══ -->
+<section style="padding: 5.5rem 0; border-bottom: 1px solid #111;">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;">
+      <div>
+        <p class="label">What's Included</p>
+        <h2 class="h2" style="margin-bottom: 1.5rem;">
+          Your branding on our production-ready styles
+        </h2>
+        <p class="body-text" style="margin-bottom: 1.25rem;">
+          White label orders include everything needed to go from style selection to shipped goods with your brand on them. The garment construction, fabric, and silhouette are fixed — your branding is applied at every visible touch point.
+        </p>
+        <p class="body-text" style="margin-bottom: 1.25rem;">
+          You will need to supply your logo in vector format (AI, EPS, or PDF — not PNG), Pantone colour references for each colour in your brand identity, and hang tag artwork if you want printed tags. We handle everything else.
+        </p>
+        <p class="body-text">
+          Pricing includes FOB Chittagong — fabric, production, AQL 2.5 inspection, all branding elements below, and export documentation. No hidden charges at invoice.
+        </p>
+      </div>
+      <div>
+        <p class="label" style="margin-bottom: 1.25rem;">Included in every white label order</p>
+        {[
+          { item:"Woven neck label",          note:"Your brand name, logo, and sizing — sewn in" },
+          { item:"Woven or printed hem label", note:"Optional secondary label placement" },
+          { item:"Care label",                note:"GINETEX symbols + fibre content + country of origin" },
+          { item:"Hang tag",                  note:"Your design printed — if artwork supplied" },
+          { item:"Individual poly bag",       note:"Standard size for garment category" },
+          { item:"Master carton packing",     note:"With packing list and shipment markings" },
+          { item:"Export documentation",      note:"Commercial invoice, packing list, certificate of origin" },
+          { item:"AQL 2.5 inspection",        note:"In-house, before packing, every order" },
+        ].map(item => (
+          <div style="padding: 0.8rem 0; border-bottom: 1px solid #0f0f0f;">
+            <p style="font-size: 0.84rem; color: #fff; margin-bottom: 0.2rem;">
+              <span style="color: #4caf50; margin-right: 0.5rem;">✓</span>{item.item}
+            </p>
+            <p class="note" style="padding-left: 1.2rem;">{item.note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRODUCT RANGE ═══ -->
+<section style="padding: 5.5rem 0; border-bottom: 1px solid #111; background: #040404;">
+  <div class="container">
+    <p class="label">White Label Styles Available</p>
+    <h2 class="h2" style="margin-bottom: 0.75rem; max-width: 540px;">
+      Knitwear and woven styles — production-ready
+    </h2>
+    <p class="body-text" style="max-width: 640px; margin-bottom: 3rem;">
+      All white label styles are produced in-house on our own equipment. Fabric, construction, and fit are fixed per style. You choose colourway from available options and apply your branding.
+    </p>
+    <div class="grid-1px" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+      {[
+        { cat:"Knitwear Essentials",  items:["Classic crew neck T-shirt", "V-neck T-shirt", "Oversized T-shirt", "Long sleeve T-shirt", "Polo shirt (piqué)"] },
+        { cat:"Hoodies & Fleece",     items:["Pullover hoodie", "Zip-up hoodie", "Crewneck sweatshirt", "Jogger / sweatpant", "Hoodie + jogger set"] },
+        { cat:"Activewear",           items:["Performance T-shirt", "Sports shorts", "Leggings (women's)", "Sports bra", "Track jacket"] },
+        { cat:"Woven Basics",         items:["Oxford shirt", "Chino trouser", "Coach jacket", "Bomber jacket", "Casual shorts"] },
+      ].map(cat => (
+        <div class="cell" style="padding: 2rem;">
+          <p style="font-size: 0.72rem; font-weight: 600; color: #fff; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem;">{cat.cat}</p>
+          {cat.items.map(item => (
+            <div style="display: flex; gap: 0.6rem; padding: 0.35rem 0; font-size: 0.8rem; color: rgba(255,255,255,0.6);">
+              <span style="color: #e00; flex-shrink: 0; margin-top: 0.1rem;">·</span>
+              {item}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+    <p class="note" style="margin-top: 1.5rem;">Full style catalog with colourway options available on request. <a href="/contact/" class="inline">Contact us</a> to receive the current catalog.</p>
+  </div>
+</section>
+
+<!-- ═══ POD vs BULK WHITE LABEL ═══ -->
+<section style="padding: 5.5rem 0; border-bottom: 1px solid #111;">
+  <div class="container">
+    <div style="max-width: 780px;">
+      <p class="label">White Label vs Print-on-Demand</p>
+      <h2 class="h2" style="margin-bottom: 1.25rem;">
+        Why bulk white label produces a better product than print-on-demand
+      </h2>
+      <p class="body-text" style="margin-bottom: 1.25rem;">
+        Print-on-demand (POD) platforms like Printify and Printful are often presented alongside white label manufacturing as equivalent options. They are not. The business models, product quality, and brand outcomes are fundamentally different.
+      </p>
+      <p class="body-text" style="margin-bottom: 2.5rem;">
+        POD is appropriate for testing a graphic design concept with zero upfront cost. Bulk white label manufacturing is appropriate for building a real brand with real product quality. Here is why they are different in practice.
+      </p>
+      <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.83rem; min-width: 560px;">
+          <thead>
+            <tr style="border-bottom: 1px solid #e00;">
+              <th style="text-align: left; padding: 0.8rem 1rem 0.8rem 0; color: rgba(255,255,255,0.4); font-weight: 400; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">Factor</th>
+              <th style="text-align: left; padding: 0.8rem 1.5rem 0.8rem 0; color: rgba(255,255,255,0.4); font-weight: 400; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">Print-on-Demand</th>
+              <th style="text-align: left; padding: 0.8rem 0; color: rgba(255,255,255,0.4); font-weight: 400; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">Bulk White Label (SDF)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { factor:"Upfront cost",         pod:"Zero",                  wl:"MOQ × per-piece cost" },
+              { factor:"Cost per piece",        pod:"High (no volume price)", wl:"$6–18 FOB — 40–60% lower" },
+              { factor:"Fabric quality",        pod:"Supplier's stock blank", wl:"You select from catalog" },
+              { factor:"Garment construction",  pod:"Standard — no control",  wl:"Fixed spec per style" },
+              { factor:"Branding options",      pod:"Print only",             wl:"Woven labels, hang tags, packaging" },
+              { factor:"Woven label",           pod:"Not available",           wl:"Included standard" },
+              { factor:"Certification",         pod:"None",                    wl:"GOTS, OEKO-TEX, BSCI, 10 more" },
+              { factor:"Retailer onboarding",   pod:"Not supported",           wl:"BSCI / SEDEX docs available" },
+              { factor:"Production time",       pod:"3–10 days per order",     wl:"20–30 days bulk" },
+              { factor:"Unit economics at scale", pod:"Margin gets worse at scale", wl:"Margin improves at scale" },
+            ].map((row, i) => (
+              <tr style={`border-bottom: 1px solid #111; background: ${i % 2 === 0 ? '#000' : '#040404'}`}>
+                <td style="padding: 0.85rem 1rem 0.85rem 0; color: rgba(255,255,255,0.55); font-size: 0.8rem;">{row.factor}</td>
+                <td style="padding: 0.85rem 1.5rem 0.85rem 0; color: rgba(255,255,255,0.45); font-size: 0.8rem;">{row.pod}</td>
+                <td style="padding: 0.85rem 0; color: #fff; font-size: 0.8rem;">{row.wl}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="tip-box" style="margin-top: 2rem;">
+        <p style="font-size: 0.8rem; color: #4caf50; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem;">The right progression</p>
+        <p class="body-text">If you are testing a concept with zero budget: print-on-demand. If you have validated demand and are ready to build a real brand: bulk white label. If your brand identity depends on design ownership: private label. These are not competing options — they are sequential stages for a growing brand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section style="padding: 5.5rem 0; border-bottom: 1px solid #111;">
+  <div class="container">
+    <div style="max-width: 780px;">
+      <p class="label">Pricing Guide</p>
+      <h2 class="h2" style="margin-bottom: 1.5rem;">
+        FOB pricing — what you pay per piece to port loading
+      </h2>
+      <p class="body-text" style="margin-bottom: 2rem;">
+        White label pricing is typically 10–20% lower than private label because there are no design development costs and no sampling fees. All prices are FOB Chittagong and include fabric, production, AQL inspection, branding, and export packing.
+      </p>
+      <div class="grid-1px" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 2rem;">
+        {[
+          { garment:"Basic T-shirt",      moq:"300 pcs", price:"$6–10 FOB",  note:"Single jersey, 170–200 GSM" },
+          { garment:"Heavyweight T-shirt",moq:"300 pcs", price:"$8–13 FOB",  note:"220–260 GSM compact jersey" },
+          { garment:"Pullover hoodie",    moq:"300 pcs", price:"$12–18 FOB", note:"300–340 GSM fleece" },
+          { garment:"Crewneck sweat",     moq:"300 pcs", price:"$10–16 FOB", note:"280–320 GSM fleece" },
+          { garment:"Polo shirt",         moq:"300 pcs", price:"$8–14 FOB",  note:"Piqué knit, 200–220 GSM" },
+          { garment:"Oxford shirt",       moq:"300 pcs", price:"$9–15 FOB",  note:"Woven, 110–130 GSM poplin" },
+        ].map(p => (
+          <div class="cell" style="padding: 1.5rem;">
+            <p style="font-size: 0.82rem; font-weight: 500; color: #fff; margin-bottom: 0.3rem;">{p.garment}</p>
+            <p style="font-size: 1.1rem; font-weight: 200; color: #e00; margin-bottom: 0.25rem;">{p.price}</p>
+            <p class="note">{p.note}</p>
+            <p class="note">MOQ: {p.moq}</p>
+          </div>
+        ))}
+      </div>
+      <p class="note">Prices vary by order quantity, colourway count, and branding complexity. Send your style selection and quantity for an exact FOB quote within 48 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CERTIFICATIONS ═══ -->
+<section style="padding: 5.5rem 0; border-bottom: 1px solid #111; background: #040404;">
+  <div class="container">
+    <div style="max-width: 780px;">
+      <p class="label">Certifications</p>
+      <h2 class="h2" style="margin-bottom: 1.25rem;">
+        All 13 certifications apply to white label production
+      </h2>
+      <p class="body-text" style="margin-bottom: 1.25rem;">
+        White label orders are not a stripped-down service. Every white label order goes through our standard AQL 2.5 inspection and is produced under all 13 active certifications. GOTS and OEKO-TEX certified styles come with transaction certificates for your records.
+      </p>
+      <p class="body-text" style="margin-bottom: 1.5rem;">
+        For EU buyers: white label orders from GOTS-certified styles can support organic cotton claims on your packaging. For UK buyers: BSCI and SEDEX documentation is available for retailer onboarding requirements. For US buyers: C-TPAT certification applies to all shipments.
+      </p>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+        {["GOTS 7.0","OEKO-TEX Std 100","ISO 9001:2015","ISO 14001","BSCI","SEDEX SMETA","WRAP","SA8000","C-TPAT","GRS","OCS","RCS","BCI"].map(c => (
+          <span style="border: 1px solid #333; color: rgba(255,255,255,0.65); padding: 0.3rem 0.65rem; font-size: 0.7rem; letter-spacing: 0.04em;">{c}</span>
+        ))}
+      </div>
+      <p class="note" style="margin-top: 1rem;">Certificate numbers and verification links — <a href="/certifications" class="inline">certifications page</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section style="padding: 5.5rem 0; border-bottom: 1px solid #111;">
+  <div class="container">
+    <p class="label">Questions</p>
+    <h2 class="h2" style="margin-bottom: 3rem; max-width: 500px;">White label manufacturing — what buyers ask</h2>
+    <div style="max-width: 800px;">
+      <div class="faq-item">
+        <h3 style="font-size: 0.92rem; font-weight: 500; color: #fff; margin-bottom: 0.85rem;">What exactly is white label clothing manufacturing?</h3>
+        <p class="body-text">The factory produces pre-designed styles. You apply your brand labels and packaging. No design development. The trade-off: same styles available to other buyers — no design exclusivity. Best for market testing and fast launch.</p>
+      </div>
+      <div class="faq-item">
+        <h3 style="font-size: 0.92rem; font-weight: 500; color: #fff; margin-bottom: 0.85rem;">White label vs private label — which should I choose?</h3>
+        <p class="body-text">White label: faster (20–30 days), lower cost, no design phase, no exclusivity. Private label: slower (55–70 days), higher cost, custom design, exclusively yours. Market testing → white label. Building a long-term differentiated brand → private label.</p>
+      </div>
+      <div class="faq-item">
+        <h3 style="font-size: 0.92rem; font-weight: 500; color: #fff; margin-bottom: 0.85rem;">What is the MOQ?</h3>
+        <p class="body-text">300 pieces per style. Flexible size distribution within that total (e.g. 50 XS / 100 S / 100 M / 50 L). Applies per style — a 2-style order requires 600 pieces minimum.</p>
+      </div>
+      <div class="faq-item">
+        <h3 style="font-size: 0.92rem; font-weight: 500; color: #fff; margin-bottom: 0.85rem;">How fast is production?</h3>
+        <p class="body-text">20–30 days from order confirmation to FOB-ready goods. No sampling phase. Faster than private label (40–45 days) because styles are pre-approved. Add ocean freight to your destination (20–35 days depending on port).</p>
+      </div>
+      <div class="faq-item">
+        <h3 style="font-size: 0.92rem; font-weight: 500; color: #fff; margin-bottom: 0.85rem;">What customisation is possible?</h3>
+        <p class="body-text">Labels (woven neck, hem, care), hang tags, poly bag packaging, and colour selection from available colourways. Construction, silhouette, and fabric are fixed per style. Changes to construction or fabric = private label territory.</p>
+      </div>
+      <div class="faq-item">
+        <h3 style="font-size: 0.92rem; font-weight: 500; color: #fff; margin-bottom: 0.85rem;">Do certifications apply to white label orders?</h3>
+        <p class="body-text">Yes — all 13 certifications apply to every order, including white label. GOTS and OEKO-TEX transaction certificates issued per order for certified styles. BSCI and SEDEX documentation available for retailer onboarding.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RELATED SERVICES ═══ -->
+<section style="padding: 5.5rem 0; border-bottom: 1px solid #111;">
+  <div class="container">
+    <p class="label">Related Services</p>
+    <h2 class="h2" style="margin-bottom: 0.75rem; max-width: 500px;">
+      Other manufacturing models at SDF
+    </h2>
+    <p class="body-text" style="max-width: 580px; margin-bottom: 2.5rem;">
+      If white label is not the right fit for your stage or goals, these alternatives may be.
+    </p>
+    <div class="grid-1px" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+      {[
+        { href:"/private-label-clothing-manufacturer/", label:"Private Label",          desc:"Custom-designed, exclusively yours — factory develops from your brief" },
+        { href:"/clothing-manufacturers/",              label:"OEM Manufacturing",       desc:"You provide the tech pack, we source and produce to your exact spec" },
+        { href:"/cut-and-sew-service/",                 label:"CMT / Cut & Sew",         desc:"You supply the fabric — from 100 pieces per style" },
+        { href:"/branding-launch/",                     label:"Brand Launch Guide",       desc:"How to go from brand idea to first production run" },
+      ].map(s => (
+        <a href={s.href} style="display:block;background:#000;padding:1.75rem;text-decoration:none;border-top:2px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#e00'" onmouseout="this.style.borderColor='transparent'">
+          <p style="font-size:0.88rem;font-weight:500;color:#fff;margin-bottom:0.35rem;">{s.label}</p>
+          <p class="note" style="line-height:1.5;">{s.desc}</p>
+          <p style="font-size:0.72rem;color:#e00;margin-top:0.75rem;">View →</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section style="padding: 5.5rem 0;">
+  <div class="container">
+    <div style="border: 1px solid #e00; padding: 3.5rem; max-width: 720px;">
+      <p class="label">Get Started</p>
+      <h2 class="h2" style="margin-bottom: 1rem;">Select your styles. Quote in 48 hours.</h2>
+      <p class="body-text" style="margin-bottom: 0.75rem; max-width: 560px;">
+        Contact us with your style selection, colourway preferences, quantity, and branding assets. We will confirm availability, quote FOB pricing, and confirm the production timeline.
+      </p>
+      <p class="note" style="margin-bottom: 2.5rem;">We respond Monday to Saturday within 48 hours.</p>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+        <a href="/contact/" class="cta-button">Request a Quote</a>
+        <a href="/clothing-manufacturers/" class="inline" style="font-size: 0.83rem;">Full manufacturing services overview →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>

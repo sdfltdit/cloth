@@ -1,0 +1,987 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+import { PHONE, WHATSAPP_NUMBER, EMAIL, WHATSAPP_URL } from '../data/schema';
+export const prerender = true;
+
+const pageTitle = "Cotton Clothing Manufacturer | Organic SDF";
+const pageDescription = "Cotton clothing manufacturer in Bangladesh. Combed and ringspun cotton from 300 pieces. T-shirts, shirts, dresses. GOTS-certified factory. Free quote.";
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com/",
+        "name": "SDF Clothing",
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://sdfltd.com/#org",
+          "name": "SDF Clothing",
+          "url": "https://sdfltd.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://sdfltd.com/logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/sdfltd",
+            "https://www.linkedin.com/company/sdf-clothing"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "PHONE",
+            "contactType": "sales",
+            "areaServed": ["US", "UK", "AU", "CA", "DE", "FR", "NL", "SE"],
+            "availableLanguage": "English"
+          }
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://sdfltd.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Cotton Clothing Manufacturer"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order quantity for cotton clothing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our minimum order quantity for custom cotton clothing is 300 pieces per style. This minimum allows you to access factory-direct pricing while testing market response with manageable inventory. The 300-piece minimum can be distributed across sizes within a single colorway. Lower quantities are available for sampling and prototype development at higher per-piece costs for brands requiring smaller initial runs or needing to test multiple styles before committing to bulk production."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What cotton types do you offer for clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer combed cotton for enhanced softness and reduced pilling (140-180 GSM for t-shirts), ring-spun cotton for strength and durability (150-200 GSM), GOTS organic cotton for sustainable production (140-180 GSM), Supima cotton for premium quality and extra-long staple fibers (160-200 GSM), and recycled cotton for circular fashion initiatives (140-170 GSM). Cotton types can be selected based on product requirements, positioning, and sustainability goals. Each cotton type offers specific advantages for different applications."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What cotton clothing products can you manufacture?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We manufacture t-shirts in various weights and styles, casual shirts and button-ups, dresses from casual to formal, trousers and pants including chinos and casual styles, knitwear including sweaters and cardigans, and loungewear including pajamas and robes. We produce both woven and knit cotton garments, with different minimum order quantities for each category. Our facility handles both basic cotton items and more complex constructions requiring specialized sewing techniques."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer organic cotton clothing manufacturing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer GOTS-certified organic cotton clothing manufacturing from 300 pieces minimum. GOTS certification covers the entire supply chain from organic farming to final production, ensuring no synthetic pesticides, fertilizers, or harmful chemicals are used. Organic cotton costs approximately 15-20% more than conventional cotton but enables sustainability claims that appeal to eco-conscious consumers. We provide full GOTS certification documentation for marketing substantiation and retailer compliance requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certifications do you hold for cotton clothing production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We hold GOTS (Global Organic Textile Standard) for organic cotton production, OEKO-TEX Standard 100 for chemical safety in all cotton fabrics, BCI (Better Cotton Initiative) for responsible cotton sourcing, and ISO 9001 for quality management. These certifications ensure our cotton clothing meets international standards for sustainability, chemical safety, and quality. We can also arrange additional certifications such as Fair Trade or specific retailer compliance certifications as required by your distribution channels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does cotton clothing production take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard production timeline is 30-40 days from fabric receipt for basic cotton t-shirts and casual wear. Woven garments such as shirts and trousers typically require 35-45 days. Custom fabric development adds 15-20 days. Sampling takes 15-20 days before bulk production approval. Complex items with multiple components or specialized finishing may require 45-60 days production time. We recommend planning 60-75 days total from initial inquiry to delivery for first-time orders including sampling and production."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Cotton Clothing Manufacturing Service",
+      "description": "Custom cotton clothing manufacturing from 300 pieces including organic, combed, ring-spun cotton for t-shirts, shirts, dresses, and trousers",
+      "provider": {
+        "@id": "https://sdfltd.com/#org"
+      },
+      "areaServed": ["United States", "United Kingdom", "European Union", "Canada", "Australia"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Cotton Clothing Manufacturing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom Cotton Clothing Production"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "USD",
+              "minPrice": "6",
+              "maxPrice": "25"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Order Custom Cotton Clothing from SDF Clothing",
+      "description": "Step-by-step process for ordering custom cotton clothing from our Bangladesh manufacturing facility",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Submit Design Requirements",
+          "text": "Send your cotton clothing design, cotton type preference (organic, combed, ring-spun), product category, size chart, and target quantity via contact form"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Receive Detailed Quote",
+          "text": "Get pricing within 24-48 hours including fabric costs, production, customization, and shipping for your cotton clothing order"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve Samples",
+          "text": "Review cotton clothing samples for fit, fabric hand feel, construction quality, and finish details within 15-20 days before bulk production"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Bulk Production",
+          "text": "Production begins after sample approval with 30-40 day turnaround for standard cotton items"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Quality Inspection & Shipping",
+          "text": "Final quality check before shipment with tracking documentation for your cotton clothing order"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+
+  schema={pageSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/">Home</a></li>
+        <li class="breadcrumb__item breadcrumb__item--current">Cotton Clothing Manufacturer</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__content">
+        <div class="hero__label">Cotton Clothing Manufacturer | Since 1998 | Cotton Specialists</div>
+        <h1 class="hero__title">Cotton Clothing Manufacturer | Organic, Combed & Ring-Spun Cotton from 300 Pieces</h1>
+        <p class="hero__description">
+          SDF Clothing is a cotton clothing manufacturer in Bangladesh producing custom cotton garments with organic, combed, ring-spun, and Supima cotton. T-shirts, shirts, dresses, trousers, and knitwear from 300 pieces minimum. GOTS certified, 15-20 day sampling, 30-40 day production. Explore our <a href="/clothing-manufacturers/" style="color:#e00;text-decoration:none;">clothing manufacturers</a> and <a href="/clothing-manufacturer-bangladesh/" style="color:#e00;text-decoration:none;">Bangladesh clothing manufacturer</a>.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact/" class="hero__cta hero__cta--primary">Get Free Quote</a>
+          <a href={`${WHATSAPP_URL}?text=Hi%20SDF%20Clothing%2C%20I%20need%20a%20quote%20for%20cotton-clothing-manufacturer`} target="_blank" rel="noopener noreferrer" class="hero__cta hero__cta--secondary">WhatsApp Now</a>
+        </div>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value">300</span>
+          <span class="hero__stat-label">Pieces Minimum</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">140-320</span>
+          <span class="hero__stat-label">GSM Range</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">{companyAge}</span>
+          <span class="hero__stat-label">Years Experience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-value">30-40</span>
+          <span class="hero__stat-label">Days Production</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust__container">
+      <div class="trust__items">
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>GOTS Organic</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>OEKO-TEX Standard 100</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>BCI Cotton</span>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon">?</span>
+          <span>ISO 9001 Quality</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Introduction</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Cotton Clothing Manufacturer for Sustainable and Quality Brands</h2>
+      </div>
+      <div class="section__text">
+        <p>As a specialized cotton clothing manufacturer based in Bangladesh, SDF Clothing understands that cotton remains the world's most preferred natural fiber for clothing due to its comfort, breathability, and versatility. The cotton clothing market encompasses everything from basic t-shirts to sophisticated woven garments, requiring expertise across both knit and woven manufacturing. Our facility delivers on these requirements with minimum orders of 300 pieces, making professional cotton manufacturing accessible to emerging brands and established labels expanding their cotton collections.</p>
+        
+        <p>Bangladesh has established itself as a global hub for cotton garment manufacturing, with the country's textile industry built around cotton processing and garment production. Our cotton clothing production leverages this ecosystem, offering international brands access to vertically integrated supply chains from cotton sourcing to finished garments. The 300-piece minimum enables brands to test different cotton types and product categories without committing to large inventory positions, reducing risk while accessing factory-direct pricing.</p>
+        
+        <p>Our cotton clothing manufacturing addresses the diverse requirements of cotton garments: appropriate cotton selection for different applications (combed for softness, ring-spun for strength, organic for sustainability), pre-shrinking treatments to maintain fit after washing, durable construction that withstands repeated laundering, and finishing that enhances cotton's natural properties. We work with conventional cotton, organic cotton certified by GOTS, and recycled cotton to meet various sustainability and positioning requirements.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Product Range</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">What We Manufacture</h2>
+      </div>
+      <div class="section__text">
+        <p>Our cotton clothing production encompasses multiple product categories spanning both knit and woven garments. Each category maintains our commitment to quality cotton and durable construction while serving different market segments and fashion needs. We manufacture all categories from 300 pieces minimum, with the ability to mix categories within larger orders for comprehensive collections.</p>
+        
+        <p>Cotton t-shirts represent our highest-volume category, produced in weights ranging from 140-180 GSM for different seasons and uses. We manufacture basic crew neck t-shirts, V-neck variations, polo shirts with collars, and fashion t-shirts with various neckline treatments. T-shirt production uses circular knit cotton jersey for comfort and stretch. We offer both single jersey for lightweight summer t-shirts and heavier interlock for more substantial year-round t-shirts. T-shirts are ideal for promotional items, basic wardrobe staples, and casual wear collections.</p>
+        
+        <p>Cotton shirts and button-ups encompass casual shirts, dress shirts, and hybrid styles that bridge casual and formal. These woven garments use cotton poplin, oxford, or twill weaves depending on desired hand feel and structure. We produce short-sleeve casual shirts for warm weather, long-sleeve dress shirts with collar and cuff variations, and camp-collar shirts for relaxed styling. Shirts require specialized construction including collar attachment, cuff assembly, and buttonhole placement. Minimum order for shirts is 300 pieces per style, with complexity increasing price compared to t-shirts.</p>
+        
+        <p>Cotton dresses range from casual day dresses to more formal occasion wear. We produce A-line dresses, shirt dresses, wrap dresses, and bodycon styles in various cotton fabrics including lightweight voile for summer dresses and heavier canvas for structured styles. Dress construction may include features such as zippers, buttons, lining, and specialized seams. Cotton dresses are popular in women's collections and require careful attention to fit and drape. More complex dress styles may have minimums of 500 pieces due to increased construction complexity.</p>
+        
+        <p>Cotton trousers and pants include chinos, casual pants, dress trousers, and relaxed-fit styles. These woven garments use cotton twill, canvas, or denim depending on intended use and desired durability. We produce pants with various waist treatments including elastic waistbands for comfort and zip-fly closures for formal styling. Trousers require precise construction including pocket assembly, fly installation, and waistband attachment. The fit consistency across sizes is critical for trousers, requiring careful pattern grading. Trousers typically have minimums of 300 pieces per style.</p>
+        
+        <p>Cotton knitwear includes sweaters, cardigans, and pullovers produced from cotton yarns. Knitwear can be produced through cut-and-sew methods from cotton jersey fabric or through fully-fashioned knitting for premium items. We produce lightweight cotton sweaters for transitional seasons and heavier cable-knit styles for cold weather. Cotton knitwear offers natural breathability and softness, making it comfortable for extended wear. Knitwear production requires specialized machinery and expertise, with minimums typically starting at 300 pieces for cut-and-sew styles.</p>
+        
+        <p>Cotton loungewear and sleepwear include pajama sets, nightgowns, robes, and casual home wear. These garments prioritize comfort and use soft cotton fabrics such as flannel for warmth, lightweight jersey for breathability, or woven cotton for structure. Loungewear construction emphasizes comfort features such as elastic waistbands, loose fits, and soft seams. Sleepwear may require additional considerations such as flame resistance compliance for certain markets. Loungewear minimums are typically 300 pieces per style, with sets counted as single styles if components are ordered together.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Fabric GSM</th>
+              <th>Construction</th>
+              <th>Best For</th>
+              <th>Price Tier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>T-Shirts</td>
+              <td>140-180</td>
+              <td>Knit jersey, circular</td>
+              <td>Promotional, casual, basics</td>
+              <td>$</td>
+            </tr>
+            <tr>
+              <td>Shirts</td>
+              <td>120-160</td>
+              <td>Woven poplin, oxford</td>
+              <td>Casual, dress, formal</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>Dresses</td>
+              <td>100-180</td>
+              <td>Woven voile, canvas</td>
+              <td>Women's, day, occasion</td>
+              <td>$$$</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Trousers</td>
+              <td>200-320</td>
+              <td>Woven twill, denim</td>
+              <td>Casual, dress, chinos</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>Knitwear</td>
+              <td>180-280</td>
+              <td>Knit yarn, fully-fashioned</td>
+              <td>Sweaters, cardigans, pullovers</td>
+              <td>$$$</td>
+            </tr>
+          </tbody>
+          <caption>All categories available from 300 pieces minimum. Complex styles may require 500 pieces.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Production Process</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Our Manufacturing Process</h2>
+      </div>
+      <div class="section__text">
+        <p>Our cotton clothing manufacturing follows a structured process designed to ensure consistent quality across knit and woven garments. The process typically spans 60-75 days for first-time orders including sampling and production, with 45-60 days for repeat orders using approved fabrics and patterns. Cotton garments require particular attention to pre-shrinking and dimensional stability to ensure consistent fit after laundering.</p>
+        
+        <p>The process begins with specification review, where we analyze your requirements including cotton type preference (conventional, organic, or recycled), product category (knit or woven), fabric weight, size chart, and construction details. Our team provides feedback on technical feasibility and may suggest modifications to optimize manufacturability while maintaining design intent. This stage takes 2-3 days and ensures technical alignment before sampling begins. For cotton garments, we pay particular attention to fabric selection and pre-shrinking requirements.</p>
+        
+        <p>Fabric sourcing and development follows specification review, taking 10-15 days for standard fabrics and 15-20 days for custom fabric development. Cotton fabrics undergo pre-shrinking treatment before cutting to minimize dimensional changes after washing. We test fabrics for shrinkage in both warp and weft directions, ensuring that finished garments maintain their measurements after laundering. If you require custom fabric development for specific weaves, weights, or finishes, we coordinate with mills to produce sample yardage for testing and approval.</p>
+        
+        <p>Sample development for cotton clothing takes 15-20 days for basic items and 20-25 days for complex woven garments. Initial samples focus on construction and basic fit, with subsequent samples refining fit details, construction techniques, and finish quality. We provide detailed measurement reports comparing samples to your specifications and conduct wash testing to verify dimensional stability. Cotton samples require particular attention to seam construction and finish details to ensure they withstand repeated laundering. You may request multiple sample rounds to perfect the design.</p>
+        
+        <p>Dimensional stability testing is a critical step in cotton garment sampling that we conduct on all fabric lots. We measure garments before and after washing to verify that shrinkage remains within acceptable tolerances (typically less than 3% in either direction). This testing ensures that the fit customers experience in unwashed garments is maintained after home laundering. Dimensional stability testing is particularly important for 100% cotton garments, which have higher shrinkage potential than synthetic blends. This testing reduces returns due to fit changes after washing.</p>
+        
+        <p>Pattern grading for cotton garments requires careful attention to proportional scaling, particularly for woven items where fit consistency is critical. The relationship between various measurements must be maintained through grading to ensure consistent fit across sizes. Our pattern makers use graded measurement systems that account for these relationships, producing size sets from XS to 4XL that maintain proportional fit. Grading takes 3-5 days for basic items and 5-7 days for complex garments with multiple components. Grading includes verification of measurement consistency across the size range.</p>
+        
+        <p>Bulk production for cotton clothing spans 30-40 days for basic knit items and 35-45 days for woven garments. Cutting is performed with attention to grain direction for woven items to ensure consistent drape and minimize torque. Sewing lines are staffed by operators trained in specific garment types, with separate lines for knit t-shirts and woven shirts to ensure specialization. Quality checkpoints at each sewing operation verify seam integrity, stitch consistency, and construction accuracy. Throughout production, we conduct in-line testing of critical measurements and construction details.</p>
+        
+        <p>Final quality inspection uses AQL 2.5 standards for major defects and AQL 4.0 for minor defects, with additional testing for cotton-specific criteria. Inspection includes measurement verification against graded size charts, wash testing on random samples to verify dimensional stability, and construction quality verification. We also conduct visual inspection of stitching, finishing, and overall workmanship. Detailed inspection reports with photos are provided before shipment, and any defects found are rectified before goods leave our facility.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Materials</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Fabric & Cotton Type Options</h2>
+      </div>
+      <div class="section__text">
+        <p>Cotton type selection significantly impacts garment quality, comfort, durability, and sustainability profile. We offer multiple cotton options optimized for different applications, price points, and sustainability requirements. All cotton types are tested for quality and performance before use in production.</p>
+        
+        <p>Combed cotton undergoes an additional combing process that removes shorter fibers and impurities, resulting in smoother, stronger yarn. Combed cotton typically ranges from 140-180 GSM for t-shirts and lighter applications. The combing process produces fabric with superior softness, reduced pilling, and enhanced durability. Combed cotton is ideal for premium t-shirts, casual wear where comfort is prioritized, and garments that will undergo frequent washing. The additional processing adds approximately 10-15% to fabric cost compared to carded cotton but delivers noticeable quality improvement.</p>
+        
+        <p>Ring-spun cotton is produced through a spinning process that continuously twists and thins cotton fibers, creating stronger, smoother yarn than traditional open-end spinning. Ring-spun cotton typically ranges from 150-200 GSM and offers excellent strength and durability. The spinning process produces fabric with a softer hand feel and better color absorption than open-end cotton. Ring-spun cotton is ideal for t-shirts that require durability, casual shirts, and any application where fabric strength is important. Ring-spun cotton costs approximately 5-10% more than open-end cotton but delivers superior performance.</p>
+        
+        <p>GOTS organic cotton is grown without synthetic pesticides, fertilizers, or genetically modified organisms, and processed without harmful chemicals. GOTS certification covers the entire supply chain from farming to final production. Organic cotton typically ranges from 140-180 GSM and maintains the same performance characteristics as conventional cotton while offering environmental benefits. Organic cotton costs approximately 15-20% more than conventional cotton but enables sustainability claims that appeal to eco-conscious consumers and meet retailer requirements for organic products.</p>
+        
+        <p>Supima cotton is an extra-long staple cotton grown primarily in the United States, known for exceptional strength, softness, and color retention. Supima fibers are 35% longer than standard cotton, producing fabric with superior durability and resistance to pilling. Supima cotton typically ranges from 160-200 GSM and is ideal for premium positioning. The extra-long staple fibers create fabric with luxurious hand feel and excellent drape. Supima cotton costs approximately 25-30% more than standard cotton but delivers premium quality that justifies the price difference for high-end brands.</p>
+        
+        <p>Recycled cotton is produced from post-industrial or post-consumer cotton waste, processed back into fiber for new fabric production. Recycled cotton typically ranges from 140-170 GSM and offers sustainability benefits by reducing waste and water consumption compared to virgin cotton. The recycling process shortens fibers, affecting fabric strength, so recycled cotton is often blended with virgin cotton or other fibers to maintain performance. Recycled cotton is ideal for brands pursuing circular fashion initiatives and sustainability goals. Recycled cotton is priced similarly to conventional cotton when blended, with pure recycled cotton commanding premium pricing.</p>
+        
+        <p>BCI (Better Cotton Initiative) cotton is produced through a program that promotes sustainable cotton farming practices, reducing water and chemical use while improving farmer livelihoods. BCI cotton offers a more sustainable alternative to conventional cotton without the premium cost of organic certification. BCI cotton typically ranges from 140-180 GSM and maintains conventional cotton performance characteristics. BCI cotton costs approximately 5-10% more than conventional cotton but provides sustainability credentials that appeal to environmentally conscious brands and consumers.</p>
+        
+        <p>Cotton-polyester blends combine cotton's natural comfort with polyester's durability and wrinkle resistance. Typical blends range from 80/20 to 50/50 cotton-polyester ratios, with higher cotton content providing more natural feel. These blends typically range from 150-220 GSM and offer balanced performance at competitive prices. The polyester component reduces shrinkage compared to 100% cotton, improving dimensional stability. Cotton-polyester blends are ideal for shirts, trousers, and garments where wrinkle resistance and durability are priorities alongside comfort.</p>
+      </div>
+      <div class="comparison-wrapper">
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Cotton Type</th>
+              <th>GSM Range</th>
+              <th>Key Properties</th>
+              <th>Best For</th>
+              <th>Price Tier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comparison__row--highlight">
+              <td>Combed Cotton</td>
+              <td>140-180</td>
+              <td>Smooth, strong, reduced pilling</td>
+              <td>Premium t-shirts, comfort wear</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>Ring-Spun Cotton</td>
+              <td>150-200</td>
+              <td>Strong, durable, soft</td>
+              <td>Durable t-shirts, casual shirts</td>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>GOTS Organic Cotton</td>
+              <td>140-180</td>
+              <td>Sustainable, chemical-free</td>
+              <td>Eco-conscious, sustainability</td>
+              <td>$$$</td>
+            </tr>
+            <tr class="comparison__row--highlight">
+              <td>Supima Cotton</td>
+              <td>160-200</td>
+              <td>Extra-long staple, premium</td>
+              <td>Premium positioning, luxury</td>
+              <td>$$$$</td>
+            </tr>
+            <tr>
+              <td>Recycled Cotton</td>
+              <td>140-170</td>
+              <td>Circular, waste-reducing</td>
+              <td>Sustainability initiatives</td>
+              <td>$$</td>
+            </tr>
+          </tbody>
+          <caption>All cotton types pre-shrunk and tested for dimensional stability. Custom weights available.</caption>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Bangladesh Advantage</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Why Source Cotton Clothing from Bangladesh</h2>
+      </div>
+      <div class="section__text">
+        <p>Bangladesh has established itself as the world's second-largest garment exporter, with cotton garments representing the majority of production. The country's textile industry has developed comprehensive expertise in cotton processing, from spinning and weaving to garment manufacturing. This specialization, combined with competitive labor costs and established infrastructure, makes Bangladesh an ideal sourcing destination for cotton clothing.</p>
+        
+        <p>Labor costs in Bangladesh are significantly lower than in China, Vietnam, or Turkey, translating to 15-25% cost savings on finished cotton garments. However, the cost advantage does not come at the expense of quality. The Bangladeshi garment industry has developed particular expertise in cotton garment production, with operators skilled in handling cotton fabrics, constructing both knit and woven garments, and maintaining consistent quality. Our facility conducts regular training programs to ensure operators are proficient in the latest cotton garment construction techniques.</p>
+        
+        <p>Bangladesh's textile infrastructure includes spinning mills, knitting facilities, weaving operations, and garment factories, creating a vertically integrated supply chain for cotton garments. This integration reduces lead times and logistics costs compared to countries that rely on imported fabrics. The country has invested heavily in cotton processing capacity, reducing dependence on imported yarns and fabrics. Our relationships with local spinning mills ensure priority allocation and consistent quality for cotton yarns and fabrics.</p>
+        
+        <p>The country's export infrastructure includes experienced freight forwarders, customs brokers, and documentation specialists familiar with garment export requirements. Shipments from Bangladesh to major markets are routine, with multiple weekly sailings to Europe and North America. The established export infrastructure reduces the risk of delays and documentation errors. Bangladesh's garment industry has developed particular expertise in shipping to EU markets, leveraging duty-free access and established logistics relationships.</p>
+        
+        <p>Social compliance and workplace safety have improved significantly in Bangladesh's garment industry following comprehensive reforms after 2013. Our facility holds BSCI certification, demonstrating adherence to international labor standards including fair wages, reasonable working hours, and safe working conditions. These certifications are increasingly important to consumers and retailers who prioritize ethical sourcing. The improved compliance environment reduces reputational risk for brands sourcing from Bangladesh.</p>
+        
+        <p>Duty-free access to European markets through the Everything But Arms (EBA) arrangement provides Bangladesh garments with preferential tariff treatment, reducing import costs for EU customers. Similar preferential access exists for other markets including Canada, Australia, and Japan. This duty advantage can significantly impact landed costs for cotton garments, which are subject to standard garment duty rates in many markets. For brands targeting EU distribution, the duty savings can substantially improve overall margins.</p>
+        
+        <p>The Bangladesh garment industry has developed specialized expertise in cotton garment production across multiple categories. The country produces more t-shirts than any other country, indicating particular expertise in this category. This specialization extends to shirts, trousers, and other cotton garments. The industry's experience with international brands across various market segments means that quality expectations for cotton garments are well-understood and consistently met. This expertise reduces the learning curve for new styles and ensures consistent quality across production runs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">International Shipping</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Shipping to UK, USA, Australia & EU</h2>
+      </div>
+      <div class="section__text">
+        <p>We ship cotton clothing to major international markets including the United Kingdom, United States, Australia, and European Union countries. Each market has specific requirements for documentation, duties, and shipping timelines that we navigate routinely. Our experience with international cotton garment shipments ensures your goods arrive on time and with proper documentation for customs clearance.</p>
+        
+        <p>Shipments to the United Kingdom typically take 30-35 days by ocean freight, including transit time and customs clearance. Air freight options reduce this to 7-10 days at significantly higher cost. The UK applies import duties on garments from Bangladesh, though rates vary by garment type and fabric composition. Cotton garments typically fall under specific HS codes for cotton t-shirts, shirts, or trousers. We provide accurate classification and valuation to ensure proper duty calculation. Post-Brexit documentation requirements are handled to ensure smooth customs clearance.</p>
+        
+        <p>United States shipments take 25-30 days by ocean freight to West Coast ports and 35-40 days to East Coast ports. Air freight takes 5-7 days to major US airports. The US maintains normal trade relations with Bangladesh, with standard MFN duty rates applying to cotton garments. The US has specific labeling requirements for garments including fiber content in English and country of origin. We ensure all labels meet US Federal Trade Commission requirements. US customs may also inspect for compliance with textile fiber identification rules, which we address through proper documentation.</p>
+        
+        <p>For Australia-bound cotton clothing orders, ocean freight to Sydney, Melbourne, or Brisbane runs 20-25 days, with air freight available in 7-10 days for time-sensitive shipments. Bangladesh's free trade agreement with Australia removes duties on most garments as long as rules-of-origin requirements are met, which we build into our production process from the start. Australia's biosecurity rules are strict, so we handle packaging and documentation carefully to avoid clearance delays at the border.</p>
+        
+        <p>Cotton clothing exports to the EU benefit from duty-free access under the Everything But Arms arrangement for least-developed countries. Ocean freight runs 28-32 days to Northern European ports and 32-38 days to Southern European ports, with air freight available in 5-8 days. EU customs expect specific paperwork — certificates of origin, detailed commercial invoices, and conformity declarations for certain materials — plus textile labeling that lists fiber content percentages and care instructions in the destination country's language.</p>
+        
+        <p>Documentation for all markets includes commercial invoices, packing lists, bills of lading, certificates of origin, and any required certificates for regulated materials. For cotton garments, this may include GOTS certificates for organic cotton or BCI documentation for sustainable cotton. We provide all documentation in English and can arrange for translations if required by specific markets. Our documentation is prepared to meet both customs requirements and your internal accounting needs, with clear descriptions and accurate valuations.</p>
+        
+        <p>Incoterms can be structured according to your preferences, including FOB (Free On Board) Bangladesh for maximum control, CIF (Cost, Insurance, Freight) to destination port for convenience, or DDP (Delivered Duty Paid) for complete door-to-door service. For cotton garments, we typically recommend FOB for experienced importers, as the cost savings on ocean freight make FOB economically advantageous. CIF and DDP options are available for brands seeking simplified logistics or those new to international sourcing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Certifications</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Quality Standards & Certifications</h2>
+      </div>
+      <div class="section__text">
+        <p>Quality assurance and certification are fundamental to our cotton clothing manufacturing process. Cotton garments require particular attention to dimensional stability and construction durability due to cotton's natural properties and washing requirements. We maintain multiple certifications that verify our commitment to quality, sustainability, and social responsibility.</p>
+        
+        <p>GOTS (Global Organic Textile Standard) certification applies to our organic cotton production, verifying organic fiber content and ensuring environmentally and socially responsible production throughout the supply chain. GOTS covers the entire process from organic farming to final garment labeling, ensuring that organic claims are substantiated. If you choose organic cotton for your garments, GOTS certification provides credibility for organic marketing claims and is required by many retailers for organic textile products.</p>
+        
+        <p>OEKO-TEX Standard 100 certification applies to all our cotton fabrics, ensuring they are free from harmful substances including heavy metals, pesticides, and formaldehyde. This certification is particularly important for cotton garments that have prolonged skin contact. OEKO-TEX testing covers all fabric components including base materials, threads, trims, and buttons. We provide OEKO-TEX certificates for each material lot, enabling you to substantiate claims about chemical safety in your marketing materials.</p>
+        
+        <p>BCI (Better Cotton Initiative) certification applies to our conventional cotton sourcing, verifying that cotton is produced through sustainable farming practices that reduce water and chemical use while supporting farmer livelihoods. BCI provides a more sustainable alternative to conventional cotton without the premium cost of organic certification. BCI certification enables sustainability claims for brands seeking to improve their environmental impact without the cost premium of fully organic cotton.</p>
+        
+        <p>BSCI (Business Social Compliance Initiative) certification verifies our adherence to international labor standards including fair wages, reasonable working hours, prohibition of child labor, and safe working conditions. BSCI audits are conducted by independent third-party auditors and cover all aspects of social compliance. This certification is important for brands that prioritize ethical sourcing and need to demonstrate supply chain responsibility to stakeholders and consumers.</p>
+        
+        <p>ISO 9001 certification applies to our quality management system, ensuring consistent processes for production and quality control. ISO 9001 requires documented procedures for all critical processes, regular internal audits, and continuous improvement. This certification provides assurance that our quality systems are systematic and repeatable, reducing variability between production runs. For cotton garments, this means consistent fit, fabric quality, and construction across orders.</p>
+        
+        <p>Internal quality control processes supplement these certifications with day-to-day assurance specific to cotton garment production. We conduct in-line inspections during production, measuring garments at critical checkpoints to verify dimensional accuracy. Final inspection includes wash testing on random samples to verify dimensional stability, ensuring that garments maintain their fit after home laundering. We maintain records of all testing results, enabling traceability if issues arise after delivery. These internal processes ensure certifications translate to actual quality in finished cotton garments.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Getting Started</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">How to Get Started</h2>
+      </div>
+      <div class="section__text">
+        <p>Starting your cotton clothing production with SDF Clothing follows a structured process designed to ensure your cotton type and product requirements are met and quality expectations are understood from the outset. The process begins with providing detailed specifications, after which we guide you through sampling, dimensional stability testing, and production.</p>
+        
+        <p>Step one is to submit your technical specifications through our contact form or email. Essential information for cotton clothing includes: cotton type preference (conventional, organic, combed, ring-spun), product category (t-shirts, shirts, dresses, trousers, etc.), fabric weight requirement, size chart or target market sizing, construction details (for woven items), target quantity per style and color, and desired delivery timeline. If you have technical drawings, photos of reference samples, or existing products you want to replicate, include these for clarity.</p>
+        
+        <p>Step two involves our technical review and quotation process. Within 24-48 hours of receiving your specifications, we provide a detailed quotation including fabric costs, production costs, sampling costs, and estimated shipping costs. The quotation specifies lead times for sampling and production, minimum order quantities, and payment terms. For cotton garments, we may provide fabric swatch options for your selection and clarify specifications regarding pre-shrinking treatments. You may request revisions to the quotation to adjust specifications to meet budget targets.</p>
+        
+        <p>Step three is sample development and approval. After quotation acceptance, we proceed with sample development, typically taking 15-20 days for basic items and 20-25 days for complex woven garments. Samples are shipped to you for review, and we provide detailed measurement reports. For cotton garments, we recommend wash testing samples to verify dimensional stability and ensure fit is maintained after laundering. You may approve samples as-is, request modifications to fit or fabric, or proceed with additional sample rounds. Each sample round adds 7-10 days but ensures the final product meets expectations.</p>
+        
+        <p>Step four is production confirmation. Since cotton fabric can shrink and behave differently after washing, we verify dimensional stability on the approved sample before requiring a deposit—this protects both sides from sizing surprises once bulk cutting starts. Standard terms are 30% deposit to confirm the order and initiate fabric procurement, with the remaining 70% due before shipment. We share a production schedule marking cutting completion, sewing completion, and expected ship date, and send progress photos of the cotton fabric and garments as they move through the line.</p>
+        
+        <p>Step five is final inspection and shipment. Before shipment, we conduct final quality inspection using AQL standards with additional testing for cotton garment-specific criteria including dimensional stability. We provide an inspection report for your review. Once inspection is approved, we finalize packaging and prepare shipping documentation. Balance payment is required before release of shipping documents. We provide all necessary documentation including commercial invoice, packing list, bill of lading, certificates of origin, and any required certificates for regulated materials such as GOTS certificates for organic cotton.</p>
+        
+        <p>Throughout the process, our team provides technical guidance on cotton garment construction, cotton type selection, and fit optimization. We understand that cotton garments are staples in most fashion collections and require consistent quality to maintain customer satisfaction. Clear communication about cotton type expectations and dimensional requirements helps us deliver products that perform as intended through repeated wear and washing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <div class="section__header">
+        <span class="section__label">Frequently Asked Questions</span>
+        <div class="accent-line"></div>
+        <h2 class="section__title">Cotton Clothing Manufacturer FAQ</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item">
+          <h3 class="faq__question">What is the minimum order quantity for cotton clothing?</h3>
+          <p class="faq__answer">Our minimum order quantity for custom cotton clothing is 300 pieces per style. This minimum allows you to access factory-direct pricing while testing market response with manageable inventory. The 300-piece minimum can be distributed across sizes within a single colorway. Lower quantities are available for sampling and prototype development at higher per-piece costs for brands requiring smaller initial runs or needing to test multiple styles before committing to bulk production.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What cotton types do you offer for clothing manufacturing?</h3>
+          <p class="faq__answer">We offer combed cotton for enhanced softness and reduced pilling (140-180 GSM for t-shirts), ring-spun cotton for strength and durability (150-200 GSM), GOTS organic cotton for sustainable production (140-180 GSM), Supima cotton for premium quality and extra-long staple fibers (160-200 GSM), and recycled cotton for circular fashion initiatives (140-170 GSM). Cotton types can be selected based on product requirements, positioning, and sustainability goals. Each cotton type offers specific advantages for different applications.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What cotton clothing products can you manufacture?</h3>
+          <p class="faq__answer">We manufacture t-shirts in various weights and styles, casual shirts and button-ups, dresses from casual to formal, trousers and pants including chinos and casual styles, knitwear including sweaters and cardigans, and loungewear including pajamas and robes. We produce both woven and knit cotton garments, with different minimum order quantities for each category. Our facility handles both basic cotton items and more complex constructions requiring specialized sewing techniques.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">Do you offer organic cotton clothing manufacturing?</h3>
+          <p class="faq__answer">Yes. We offer GOTS-certified organic cotton clothing manufacturing from 300 pieces minimum. GOTS certification covers the entire supply chain from organic farming to final production, ensuring no synthetic pesticides, fertilizers, or harmful chemicals are used. Organic cotton costs approximately 15-20% more than conventional cotton but enables sustainability claims that appeal to eco-conscious consumers. We provide full GOTS certification documentation for marketing substantiation and retailer compliance requirements.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">What certifications do you hold for cotton clothing production?</h3>
+          <p class="faq__answer">We hold GOTS (Global Organic Textile Standard) for organic cotton production, OEKO-TEX Standard 100 for chemical safety in all cotton fabrics, BCI (Better Cotton Initiative) for responsible cotton sourcing, and ISO 9001 for quality management. These certifications ensure our cotton clothing meets international standards for sustainability, chemical safety, and quality. We can also arrange additional certifications such as Fair Trade or specific retailer compliance certifications as required by your distribution channels.</p>
+        </div>
+        
+        <div class="faq__item">
+          <h3 class="faq__question">How long does cotton clothing production take?</h3>
+          <p class="faq__answer">Standard production timeline is 30-40 days from fabric receipt for basic cotton t-shirts and casual wear. Woven garments such as shirts and trousers typically require 35-45 days. Custom fabric development adds 15-20 days. Sampling takes 15-20 days before bulk production approval. Complex items with multiple components or specialized finishing may require 45-60 days production time. We recommend planning 60-75 days total from initial inquiry to delivery for first-time orders including sampling and production.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cta">
+    <div class="section__container">
+      <h2 class="section__title">Ready to Order Custom Cotton Clothing?</h2>
+      <p class="section__text">
+        Contact SDF Clothing for custom cotton clothing manufacturing. We provide detailed quotes, production timelines, and sample development. Organic, combed, ring-spun cotton for t-shirts, shirts, dresses, and trousers available from 300 pieces minimum. GOTS certified with dimensional stability testing and OEKO-TEX certification.
+      </p>
+      <div class="section__ctas">
+        <a href="/contact/" class="section__cta section__cta--primary">Get Free Quote</a>
+        <a href="/sampling-service" class="section__cta section__cta--secondary">Request Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__container">
+      <p class="section__text--small">
+        Related pages: <a href="/organic-cotton-clothing-manufacturer/" style="color: var(--color-primary);">organic cotton clothing manufacturer</a>, <a href="/t-shirt-manufacturer" style="color: var(--color-primary);">t-shirt manufacturer</a>, <a href="/fabric-sourcing" style="color: var(--color-primary);">fabric sourcing</a>, <a href="/sustainable-clothing-manufacturer/" style="color: var(--color-primary);">sustainable clothing manufacturer</a>, <a href="/certifications" style="color: var(--color-primary);">certifications</a>, <a href="/tools/price-calculator/" style="color: var(--color-primary);">price calculator</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #e00;
+    --color-primary-dark: #b00;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #111;
+    --color-border: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .breadcrumb {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 var(--spacing-xs);
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb__item a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb__item a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb__item--current {
+    color: var(--color-text);
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .hero__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .hero__description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .hero__cta--primary {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
+  .hero__cta--primary:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .hero__cta--secondary {
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__cta--secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .hero__stat {
+    text-align: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-alt);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .hero__stat-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .trust__items {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .trust__icon {
+    font-size: 1.25rem;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .section--alt {
+    background-color: var(--color-bg-alt);
+  }
+
+  .section--cta {
+    background-color: var(--color-bg-alt);
+    text-align: center;
+  }
+
+  .section__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  .section__header {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .section__label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text p {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section__text--small {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .section__ctas {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+  }
+
+  .section__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .section__cta--primary {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
+  .section__cta--primary:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .section__cta--secondary {
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .section__cta--secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .comparison-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-lg) 0;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .comparison th,
+  .comparison td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison th {
+    background-color: var(--color-bg-alt);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .comparison td {
+    color: var(--color-text-muted);
+  }
+
+  .comparison__row--highlight {
+    background-color: var(--color-bg-alt);
+  }
+
+  .comparison caption {
+    caption-side: bottom;
+    padding: var(--spacing-sm) 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .faq {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .faq__item {
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-alt);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  .faq__question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .faq__answer {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .hero__container {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__stats {
+      order: -1;
+    }
+
+    .trust__items {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section__ctas {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,464 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCompanyAgeString } from '../utils/companyAge';
+export const prerender = true;
+
+const pageTitle = "Bangladesh vs China Manufacturing | 2026 Guide | SDF";
+const pageDescription = "Bangladesh vs China clothing manufacturing compared: costs, tariffs, MOQ, certifications. See why 300+ brands are switching to Bangladesh. Free guide 2026."
+const companyAge = getCompanyAgeString();
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": pageTitle,
+      "description": pageDescription,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://sdfltd.com/#website",
+        "url": "https://sdfltd.com",
+        "name": "SDF Clothing"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "description": "Comprehensive clothing manufacturing comparison resource helping brands make informed sourcing decisions between Bangladesh and China since 1998."
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Clothing Manufacturing Comparison Consulting",
+      "provider": { "@id": "https://sdfltd.com/#org" },
+      "areaServed": ["US", "GB", "AU", "CA", "DE"],
+      "description": "Bangladesh vs China clothing manufacturing compared: costs, tariffs, MOQ, certifications. See why 300+ brands are switching to Bangladesh. Free guide 2026."
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Switch from China to Bangladesh Manufacturing",
+      "step": [
+        { "@type": "HowToStep", "name": "Analyze Current Costs", "text": "Review your China manufacturing costs including FOB price, duties, and shipping" },
+        { "@type": "HowToStep", "name": "Calculate Bangladesh Savings", "text": "Use our tariff calculator to estimate duty and cost savings with Bangladesh" },
+        { "@type": "HowToStep", "name": "Request Bangladesh Quote", "text": "Submit designs to SDF Bangladesh for competitive pricing comparison" },
+        { "@type": "HowToStep", "name": "Approve Sample Quality", "text": "Review Bangladesh sample against China quality standards" },
+        { "@type": "HowToStep", "name": "Transition Production", "text": "Begin bulk production with lower MOQ and competitive pricing" },
+        { "@type": "HowToStep", "name": "Optimize Supply Chain", "text": "Adjust logistics and inventory for Bangladesh shipping timelines" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which is cheaper for clothing manufacturing: Bangladesh or China?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh is typically 15-30% cheaper than China for basic to mid-range garments due to lower labor costs. However, China can be competitive for very high-volume orders above 10,000 pieces per style due to economies of scale. Use our cost calculator above to compare specific scenarios."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do import duties differ between Bangladesh and China?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh currently enjoys duty-free access to EU markets under EBA (until November 2026) and UK markets under GSP. China pays 12% duty to EU and UK. For USA, both countries pay similar duties (15-32% depending on product), but Bangladesh avoids Section 301 tariffs that China faces. Use our tariff calculator to see exact duty savings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the MOQ differences between Bangladesh and China?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh typically offers lower MOQs: 300-1,000 pieces per style for mid-size factories, with some accepting as low as 100-200 pieces. Chinese factories typically require 500-2,000 pieces per style, with large factories often requiring 1,000+ pieces. Lower MOQ in Bangladesh makes it ideal for startups and small brands."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does quality compare between Bangladesh and China?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quality depends on the specific factory, not the country. Both have excellent and poor quality factories. Bangladesh has invested heavily in quality since 2013 and now has LEED-certified green factories supplying major brands like H&M, Zara, and Gap. China has broader specialist capabilities for technical garments. For knitwear and casual wear, Bangladesh quality is competitive."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which country has faster shipping to my market?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For EU and UK buyers: Bangladesh is geographically closer, with 22-28 days sea freight vs 28-35 days from China. For US East Coast: similar shipping times (30-40 days). For US West Coast: China is closer (14-20 days vs 25-30 days). Air freight times are similar from both countries. Use our shipping calculator to compare."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to Bangladesh duty-free access after 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh graduates from Least Developed Country status in November 2026, which will remove EU duty-free access under EBA. However, Bangladesh is negotiating new trade agreements with the EU. Many manufacturers are preparing for this transition. Working with certified manufacturers like SDF ensures compliance readiness. The duty advantage may change but cost advantages remain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which country is better for startup brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh is generally better for startup brands due to lower MOQ (300 pieces vs 1000+ in China), lower costs, and established support for small orders. China offers faster prototyping and more flexibility for complex designs but requires higher volume commitment. Startups testing designs benefit from Bangladesh's lower risk and cost structure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do communication and language compare?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bangladesh has strong English-speaking business culture due to British colonial history and export focus. Communication is generally clear and responsive. China manufacturers often use English-speaking staff but translation can occasionally cause misunderstandings. Bangladesh's cultural alignment with Western business practices facilitates smoother collaboration for US and EU brands."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sdfltd.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Bangladesh vs China Clothing Manufacturing"
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is Bangladesh always cheaper than China for clothing manufacturing?","acceptedAnswer":{"@type":"Answer","text":"Not universally — Bangladesh has a clear cost edge on basic, high-volume knitwear and simple woven garments, but the gap narrows or can reverse on complex, low-volume, or highly technical styles where China's denser local supply chain reduces sourcing time and cost."}},
+{"@type":"Question","name":"Why does Bangladesh have lower MOQs than many Chinese factories?","acceptedAnswer":{"@type":"Answer","text":"It varies by factory in both countries, but a meaningful share of Bangladesh's export-oriented factories built their production model specifically around serving smaller and mid-sized international brands, which naturally leads to lower per-style minimums than factories built primarily around large-volume programs."}},
+{"@type":"Question","name":"Does the EU/UK duty-free advantage apply to all garment categories from Bangladesh?","acceptedAnswer":{"@type":"Answer","text":"EBA and equivalent UK preferences cover most garment categories, but exact eligibility depends on the specific product code and rules-of-origin compliance. We confirm HS code and duty treatment for your exact product as part of every quote."}},
+{"@type":"Question","name":"Can I split an order between Bangladesh and China for different products?","acceptedAnswer":{"@type":"Answer","text":"Yes, many brands do exactly this — sourcing basics and high-volume knitwear from Bangladesh while keeping complex or low-volume technical pieces with a China-based supplier. There's no requirement to source your entire range from one country."}}
+]}
+</script>
+
+<meta name="keywords" content="Bangladesh vs China clothing manufacturing, clothing manufacturing comparison, tariff calculator, import duty calculator, MOQ comparison, sourcing strategy" />
+
+<script is:inline>
+  function calculateTariff() {
+    const fobPrice = parseFloat(document.getElementById('fob-price').value) || 0;
+    const quantity = parseFloat(document.getElementById('quantity').value) || 0;
+    const market = document.getElementById('market').value;
+    const product = document.getElementById('product').value;
+    
+    let bangladeshDuty = 0;
+    let chinaDuty = 0;
+    
+    // EU duties
+    if (market === 'eu') {
+      bangladeshDuty = 0; // EBA duty-free until Nov 2026
+      chinaDuty = 0.12; // 12% standard duty
+    }
+    // UK duties
+    else if (market === 'uk') {
+      bangladeshDuty = 0; // GSP duty-free
+      chinaDuty = 0.12; // 12% standard duty
+    }
+    // USA duties
+    else if (market === 'usa') {
+      if (product === 'tshirt') {
+        bangladeshDuty = 0.165; // 16.5%
+        chinaDuty = 0.165 + 0.075; // 16.5% + 7.5% Section 301
+      } else if (product === 'pants') {
+        bangladeshDuty = 0.20; // 20%
+        chinaDuty = 0.20 + 0.075; // 20% + 7.5% Section 301
+      } else {
+        bangladeshDuty = 0.20; // 20% average
+        chinaDuty = 0.20 + 0.075; // 20% + 7.5% Section 301
+      }
+    }
+    // Canada duties
+    else if (market === 'canada') {
+      bangladeshDuty = 0; // Duty-free for LDC
+      chinaDuty = 0.18; // 18% MFN
+    }
+    
+    const totalValueBD = fobPrice * quantity;
+    const totalValueChina = fobPrice * quantity * 1.15; // China typically 15% higher FOB
+    
+    const dutyBD = totalValueBD * bangladeshDuty;
+    const dutyChina = totalValueChina * chinaDuty;
+    
+    const totalCostBD = totalValueBD + dutyBD;
+    const totalCostChina = totalValueChina + dutyChina;
+    
+    const savings = totalCostChina - totalCostBD;
+    const savingsPercent = ((savings / totalCostChina) * 100).toFixed(1);
+    
+    document.getElementById('bd-total').textContent = '$' + totalCostBD.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('china-total').textContent = '$' + totalCostChina.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('savings').textContent = '$' + savings.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('savings-percent').textContent = savingsPercent + '%';
+  }
+  
+  function filterComparison(category) {
+    const rows = document.querySelectorAll('.comparison-row');
+    rows.forEach(row => {
+      if (category === 'all' || row.dataset.category === category) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+<!-- Hero Section -->
+<section style="padding:5rem 0 3rem;border-bottom:1px solid #e00;">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+      <p style="font-size:0.72rem;color:#FFFFFF;">
+        <a href="/" style="color:#FFFFFF;text-decoration:none;">Home</a>
+        <span style="margin:0 0.5rem;color:#333;">/</span>
+        Bangladesh vs China Comparison
+      </p>
+    </nav>
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Sourcing Strategy | Interactive Tools | 2026 Analysis</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:200;color:#fff;margin-bottom:1rem;line-height:1.2;">
+      Bangladesh vs China Clothing Manufacturing | Comprehensive Comparison
+    </h1>
+    <p style="color:#FFFFFF;max-width:640px;line-height:1.8;font-size:0.92rem;">
+      Make informed sourcing decisions with our interactive comparison tools. Calculate duty savings, compare MOQ requirements, analyze production costs, and evaluate quality factors. Bangladesh and China are the world's two largest garment exporters - understand which is right for your brand. Consider working with a <a href="/clothing-manufacturer-bangladesh/" style="color:#e00;text-decoration:none;">clothing manufacturer Bangladesh</a> for cost-effective production.
+    </p>
+  </div>
+</section>
+
+<!-- Quick Stats Comparison -->
+<section style="padding:4rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">At a Glance</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Key Metrics Comparison</h2>
+    </div>
+    
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;">
+      <div style="background:#050505;border:1px solid #1a1a1a;padding:2rem;">
+        <h3 style="font-size:0.9rem;color:#e00;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.1em;">Labor Cost</h3>
+        <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
+          <span style="color:#FFFFFF;font-size:0.88rem;">Bangladesh</span>
+          <span style="color:#e00;font-size:0.88rem;font-weight:500;">$100-150/mo</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <span style="color:#FFFFFF;font-size:0.88rem;">China</span>
+          <span style="color:#FFFFFF;font-size:0.88rem;">$400-600/mo</span>
+        </div>
+      </div>
+      
+      <div style="background:#050505;border:1px solid #1a1a1a;padding:2rem;">
+        <h3 style="font-size:0.9rem;color:#e00;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.1em;">Typical MOQ</h3>
+        <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
+          <span style="color:#FFFFFF;font-size:0.88rem;">Bangladesh</span>
+          <span style="color:#e00;font-size:0.88rem;font-weight:500;">300-1,000 pcs</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <span style="color:#FFFFFF;font-size:0.88rem;">China</span>
+          <span style="color:#FFFFFF;font-size:0.88rem;">500-2,000 pcs</span>
+        </div>
+      </div>
+      
+      <div style="background:#050505;border:1px solid #1a1a1a;padding:2rem;">
+        <h3 style="font-size:0.9rem;color:#e00;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.1em;">EU Duty</h3>
+        <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
+          <span style="color:#FFFFFF;font-size:0.88rem;">Bangladesh</span>
+          <span style="color:#e00;font-size:0.88rem;font-weight:500;">0% (EBA)</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <span style="color:#FFFFFF;font-size:0.88rem;">China</span>
+          <span style="color:#FFFFFF;font-size:0.88rem;">12%</span>
+        </div>
+      </div>
+      
+      <div style="background:#050505;border:1px solid #1a1a1a;padding:2rem;">
+        <h3 style="font-size:0.9rem;color:#e00;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.1em;">Lead Time</h3>
+        <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
+          <span style="color:#FFFFFF;font-size:0.88rem;">Bangladesh</span>
+          <span style="color:#e00;font-size:0.88rem;font-weight:500;">40-45 days</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <span style="color:#FFFFFF;font-size:0.88rem;">China</span>
+          <span style="color:#FFFFFF;font-size:0.88rem;">30-35 days</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tariff Calculator Section -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Interactive Tool</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Tariff & Duty Savings Calculator</h2>
+      <p style="color:#aaa;font-size:0.9rem;max-width:600px;margin:0 auto;">Calculate your potential savings by sourcing from Bangladesh vs China. Enter your order details below.</p>
+    </div>
+    
+    <div style="background:#050505;border:1px solid #1a1a1a;padding:3rem;max-width:800px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-bottom:2rem;">
+        <div>
+          <label style="display:block;color:#FFFFFF;font-size:0.85rem;margin-bottom:0.5rem;">FOB Price per Piece ($)</label>
+          <input type="number" id="fob-price" placeholder="e.g., 5.00" style="width:100%;padding:0.75rem;background:#000;border:1px solid #333;color:#fff;font-size:0.9rem;" >
+        </div>
+        <div>
+          <label style="display:block;color:#FFFFFF;font-size:0.85rem;margin-bottom:0.5rem;">Quantity (pieces)</label>
+          <input type="number" id="quantity" placeholder="e.g., 1000" style="width:100%;padding:0.75rem;background:#000;border:1px solid #333;color:#fff;font-size:0.9rem;" >
+        </div>
+        <div>
+          <label style="display:block;color:#FFFFFF;font-size:0.85rem;margin-bottom:0.5rem;">Target Market</label>
+          <select id="market" style="width:100%;padding:0.75rem;background:#000;border:1px solid #333;color:#fff;font-size:0.9rem;" >
+            <option value="eu">European Union</option>
+            <option value="uk">United Kingdom</option>
+            <option value="usa">United States</option>
+            <option value="canada">Canada</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;color:#FFFFFF;font-size:0.85rem;margin-bottom:0.5rem;">Product Type</label>
+          <select id="product" style="width:100%;padding:0.75rem;background:#000;border:1px solid #333;color:#fff;font-size:0.9rem;" >
+            <option value="tshirt">T-Shirt</option>
+            <option value="pants">Pants/Jeans</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      
+      <div style="background:#000;border:1px solid #333;padding:2rem;">
+        <h4 style="color:#fff;font-size:0.9rem;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:0.1em;">Calculated Total Cost (FOB + Duty)</h4>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;">
+          <div>
+            <p style="color:#aaa;font-size:0.8rem;margin-bottom:0.5rem;">Bangladesh Total</p>
+            <p id="bd-total" style="color:#e00;font-size:1.5rem;font-weight:200;">$0</p>
+          </div>
+          <div>
+            <p style="color:#aaa;font-size:0.8rem;margin-bottom:0.5rem;">China Total</p>
+            <p id="china-total" style="color:#fff;font-size:1.5rem;font-weight:200;">$0</p>
+          </div>
+          <div>
+            <p style="color:#aaa;font-size:0.8rem;margin-bottom:0.5rem;">Your Savings</p>
+            <p id="savings" style="color:#e00;font-size:1.5rem;font-weight:200;">$0</p>
+            <p id="savings-percent" style="color:#aaa;font-size:0.85rem;">0%</p>
+          </div>
+        </div>
+      </div>
+      
+      <p style="color:#666;font-size:0.75rem;margin-top:1.5rem;">* China FOB price estimated 15% higher than Bangladesh. Section 301 tariffs apply to USA imports from China. EBA duty-free access for Bangladesh to EU expires November 2026.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Comparison Table -->
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:3rem;">
+      <span class="section-label">Interactive Tool</span>
+      <div class="accent-line"></div>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1rem;">Detailed Comparison Table</h2>
+      <p style="color:#aaa;font-size:0.9rem;max-width:600px;margin:0 auto;">Filter by category to compare specific factors between Bangladesh and China.</p>
+    </div>
+    
+    <div style="margin-bottom:2rem;">
+      <button id="filter-all" style="background:#e00;color:#fff;padding:0.5rem 1rem;border:none;cursor:pointer;font-size:0.8rem;margin-right:0.5rem;">All</button>
+      <button id="filter-cost" style="background:#000;color:#fff;padding:0.5rem 1rem;border:1px solid #333;cursor:pointer;font-size:0.8rem;margin-right:0.5rem;">Cost</button>
+      <button id="filter-moq" style="background:#000;color:#fff;padding:0.5rem 1rem;border:1px solid #333;cursor:pointer;font-size:0.8rem;margin-right:0.5rem;">MOQ</button>
+      <button id="filter-quality" style="background:#000;color:#fff;padding:0.5rem 1rem;border:1px solid #333;cursor:pointer;font-size:0.8rem;margin-right:0.5rem;">Quality</button>
+      <button id="filter-logistics" style="background:#000;color:#fff;padding:0.5rem 1rem;border:1px solid #333;cursor:pointer;font-size:0.8rem;">Logistics</button>
+    </div>
+    
+    <div style="overflow-x:auto;">
+      
+<script is:inline>
+// Calculator inputs
+document.getElementById('fob-price').addEventListener('input', calculateTariff);
+document.getElementById('quantity').addEventListener('input', calculateTariff);
+document.getElementById('market').addEventListener('change', calculateTariff);
+document.getElementById('product').addEventListener('change', calculateTariff);
+// Filter buttons
+document.getElementById('filter-all').addEventListener('click', () => filterComparison('all'));
+document.getElementById('filter-cost').addEventListener('click', () => filterComparison('cost'));
+document.getElementById('filter-moq').addEventListener('click', () => filterComparison('moq'));
+document.getElementById('filter-quality').addEventListener('click', () => filterComparison('quality'));
+document.getElementById('filter-logistics').addEventListener('click', () => filterComparison('logistics'));
+</script>
+
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container" style="max-width:900px;margin:0 auto;padding:0 2rem;">
+    <p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Deeper Look</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1.5rem;">How the Two Really Compare</h2>
+    <p style="color:#FFFFFF;font-size:0.9rem;line-height:1.9;margin-bottom:1.25rem;">Cost is the headline reason brands compare Bangladesh and China, but the gap isn't uniform across every product. Bangladesh's cost advantage is strongest on basic, high-volume categories — t-shirts, hoodies, and simple woven items — where labor makes up a large share of the total. On complex, technical garments (structured outerwear, tailored pieces, garments needing specialized trims), China's more developed supporting-industry ecosystem can partly close that gap, since sourcing every component locally is faster there.</p>
+    <p style="color:#FFFFFF;font-size:0.9rem;line-height:1.9;margin-bottom:1.25rem;">MOQ is the other major differentiator. Bangladesh factories serving international brands, including SDF, commonly offer MOQs from 300 pieces per style. Many Chinese factories — especially larger, established ones — set higher minimums, often 1,000+ pieces per style per color, reflecting a supply base built more around large-volume programs. This matters most for startup and DTC brands testing a new style before committing to volume.</p>
+    <p style="color:#FFFFFF;font-size:0.9rem;line-height:1.9;">Trade terms shift the calculation further. Bangladesh's Least Developed Country status currently grants EU EBA and UK duty-free access on most garment categories, while China faces standard tariff rates (commonly 10-17% depending on the category and destination market) in the same markets. On a landed-cost basis, this duty gap can offset a meaningful part of any per-unit price difference — which is why the calculator above models duty alongside FOB price rather than FOB price alone.</p>
+  </div>
+</section>
+
+<section style="padding:5rem 0;border-bottom:1px solid #e00;">
+  <div class="container" style="max-width:900px;margin:0 auto;padding:0 2rem;">
+    <p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#e00;margin-bottom:0.75rem;">Common Questions</p>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#fff;margin-bottom:1.5rem;">Bangladesh vs China FAQ</h2>
+    <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+      <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Is Bangladesh always cheaper than China for clothing manufacturing?</h3>
+      <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Not universally — Bangladesh has a clear cost edge on basic, high-volume knitwear and simple woven garments, but the gap narrows or can reverse on complex, low-volume, or highly technical styles where China's denser local supply chain reduces sourcing time and cost.</p>
+    </div>
+    <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+      <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Why does Bangladesh have lower MOQs than many Chinese factories?</h3>
+      <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">It varies by factory in both countries, but a meaningful share of Bangladesh's export-oriented factories, SDF included, built their production model specifically around serving smaller and mid-sized international brands, which naturally leads to lower per-style minimums than factories built primarily around large-volume programs.</p>
+    </div>
+    <div style="border-bottom:1px solid #e00;padding:1.5rem 0;">
+      <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Does the EU/UK duty-free advantage apply to all garment categories from Bangladesh?</h3>
+      <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">EBA and equivalent UK preferences cover most garment categories, but exact eligibility depends on the specific product code and rules-of-origin compliance. We confirm HS code and duty treatment for your exact product as part of every quote.</p>
+    </div>
+    <div style="padding:1.5rem 0;">
+      <h3 style="font-size:1rem;font-weight:500;color:#fff;margin-bottom:0.75rem;">Can I split an order between Bangladesh and China for different products?</h3>
+      <p style="color:#FFFFFF;font-size:0.88rem;line-height:1.8;">Yes, many brands do exactly this — sourcing basics and high-volume knitwear from Bangladesh while keeping complex or low-volume technical pieces with a China-based supplier. There's no requirement to source your entire range from one country.</p>
+    </div>
+  </div>
+</section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-header {
+    text-align: center;
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e00;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .accent-line {
+    width: 60px;
+    height: 2px;
+    background: #e00;
+    margin: 0 auto 1.5rem;
+  }
+</style>
+

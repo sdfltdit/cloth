@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+const pageTitle = "Switching from China to Bangladesh: A Buyer's Guide";
+const pageDescription = "A practical guide to moving clothing production from China to Bangladesh: what changes in cost, MOQ, lead time, and quality.";
+const datePublished = "2024-06-01";
+const dateModified = new Date().toISOString().split("T")[0];
+
+// Article schema — passed to BaseLayout → BaseHead where it is merged
+// into the single @graph using set:html (correct Astro pattern).
+// Previously this was <script is:inline>{JSON.stringify(...)} which
+// HTML-encoded the JSON output, causing Google's "Missing '}'" parse error.
+const articleSchema = {
+  "@type": "Article",
+  "@id": Astro.url.href + "#article",
+  "headline": "Bangladesh vs China Clothing Manufacturing | Full Cost Comparison 2026",
+  "description": pageDescription,
+  "datePublished": datePublished,
+  "dateModified": dateModified,
+  "author": { "@type": "Organization", "@id": "https://sdfltd.com/#org", "name": "SDF Clothing" },
+  "publisher": { "@id": "https://sdfltd.com/#org" },
+  "url": Astro.url.href,
+  "mainEntityOfPage": { "@type": "WebPage", "@id": Astro.url.href },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://sdfltd.com/insights/" },
+      { "@type": "ListItem", "position": 3, "name": "Bangladesh vs China Manufacturing" }
+    ]
+  }
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+
+  datePublished={datePublished}
+  dateModified={dateModified}
+  schema={articleSchema}
+>
+
+  <div class="container" style="padding: 3rem 1.5rem 5rem;">
+
+    <nav aria-label="Breadcrumb" style="margin-bottom: 2.5rem;">
+      <p style="font-size: 0.72rem; color: #FFFFFF; letter-spacing: 0.1em; text-transform: uppercase;">
+        <a href="/" style="color: #e00; text-decoration: none;">Home</a>
+        <span style="margin: 0 0.5rem; color: #333;"> | </span>
+        <a href="/insights/" style="color: #aaa; text-decoration: none;">Insights</a>
+        <span style="margin: 0 0.5rem; color: #333;"> | </span>
+        <span style="color: #FFFFFF;">Bangladesh vs China Manufacturing</span>
+      </p>
+    </nav>
+
+    <article>
+
+      <header style="max-width: 760px; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid #1a1a1a;">
+        <span style="font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: #e00; display: block; margin-bottom: 1rem;">Sourcing Strategy</span>
+        <h1 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 200; color: #fff; line-height: 1.2; margin-bottom: 1.25rem; letter-spacing: 0.01em;">
+          Switching from China to Bangladesh: A Buyer's Transition Guide
+        </h1>
+        <p style="font-size: 1rem; color: #aaa; line-height: 1.9; margin: 0;">
+          China and Bangladesh are the world's two largest garment exporters. China produces about 35% of the world's clothing. Bangladesh produces about 7%. More brands are moving part or all of their production to Bangladesh for cost, duty, and capacity reasons. This guide walks through what actually changes, and how to make the move without disrupting your supply chain.
+        </p>
+      </header>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Cost Comparison</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Labor cost is the biggest difference between Bangladesh and China.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Bangladesh average garment worker wage: approximately $100-150 per month.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">China average garment worker wage: approximately $400-600 per month in coastal manufacturing cities.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">This wage gap directly affects your FOB price. A basic cotton t-shirt that costs $3.50 FOB in China typically costs $2.50-3.00 FOB in Bangladesh | a 15-30% saving per piece.</p>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Import Duty Advantage</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Bangladesh has a clear advantage for EU and UK buyers.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Bangladesh garments enter the EU duty-free under EBA. Standard EU duty on clothing from China is 12%.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Bangladesh garments enter the UK duty-free under UK DCTS. Standard UK duty on clothing from China is 12%.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">On a $10,000 shipment, duty savings alone are $1,200 for EU and UK buyers sourcing from Bangladesh instead of China. For USA buyers, both pay similar duties but Bangladesh avoids Section 301 tariffs.</p>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">MOQ Comparison</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Minimum order quantities are generally lower in Bangladesh than in large Chinese factories.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Large Chinese factories typically require 1,000-3,000 pieces per style because they run high-volume production lines.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">Mid-size Bangladesh factories typically accept 300-1,000 pieces per style. Some specialist factories accept as low as 100-200 pieces. Lower MOQ in Bangladesh means you can test a design before committing to large production.</p>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Lead Time Comparison</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Lead times are comparable. The difference is in shipping time.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Production lead time in both countries: 30-45 days for standard bulk orders.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Sea freight from China to UK: 28-35 days.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">Sea freight from Bangladesh (Chittagong) to UK: 22-28 days. Bangladesh is geographically closer to Europe, which reduces shipping time and freight cost slightly.</p>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Quality Comparison</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Quality in both countries depends entirely on which factory you choose. There are excellent and poor quality factories in both.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Bangladesh has invested heavily in quality since 2013. Today, Bangladesh has some of the world's most modern garment factories, many with LEED green building certification.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Bangladesh factories supply major global brands including H&M, Zara, Gap, Levi's, and Next. These brands apply strict quality standards.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">For technical garments like outerwear and tailored clothing, China has a broader base of specialist factories. For knitwear, t-shirts, casual wear, and activewear, Bangladesh is highly competitive on quality.</p>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Sustainability and Certification</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Bangladesh has a strong sustainability story that China cannot match at the same price point.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">Bangladesh has more LEED-certified green factories than any other country. GOTS organic certification, OEKO-TEX, BSCI, and SEDEX are widely available.</p>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">EU brands targeting eco-conscious consumers find it easier to tell a sustainability story with Bangladesh sourcing. The country has made significant improvements in factory safety, worker welfare, and environmental standards since 2013.</p>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">Which Is Better for Your Brand?</h2>
+      <div style="background: #050505; border: 1px solid #1a1a1a; border-left: 0.6px solid #e00; padding: 2rem; margin-bottom: 3rem;">
+        <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1rem;"><strong style="color: #fff;">Choose Bangladesh if:</strong> you sell to EU or UK markets and want duty-free access, you need low MOQ from 300 pieces, you are a startup or small fashion brand, sustainability is important, or cost savings are a priority.</p>
+        <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin: 0;"><strong style="color: #fff;">Choose China if:</strong> you need highly technical or complex garment construction, you are producing very high volumes above 10,000 pieces per style, or you need specific materials more readily available in China.</p>
+      </div>
+
+      <h2 style="font-size: 0.78rem; font-weight: 400; margin: 0 0 1.25rem; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">How to Start with a Bangladesh Manufacturer</h2>
+      <p style="color: #aaa; line-height: 1.8; font-size: 0.95rem; margin-bottom: 3rem;">The process is straightforward. Send your design or reference image, request a quote, approve a sample, and place your order. Most Bangladesh manufacturers respond within 24-48 hours and can start sampling within one week of deposit.</p>
+
+      <div style="text-align: center; padding: 2.5rem; border: 1px solid #1a1a1a; border-top: 0.6px solid #e00; background: #050505; margin-top: 3rem;">
+        <p style="color: #fff; font-size: 1rem; margin-bottom: 1.5rem; font-weight: 300;">
+          Considering switching from China to Bangladesh? Get a free comparative quote here. Tell us what you currently pay FOB and what you produce. We will show you what the same garment costs from our factory in Dhaka | including duty savings calculation for your market.
+        </p>
+        <a href="/contact/" style="display: inline-block; background: #e00; color: #fff; padding: 0.9rem 2.5rem; text-decoration: none; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; transition: background 0.2s;">
+          Get a Free Comparative Quote ?
+        </a>
+      </div>
+
+      <p style="font-size: 0.85rem; color: #aaa; margin-top: 1.5rem; line-height: 1.8;">
+        If you're weighing Bangladesh against other sourcing countries, our <a href="/clothing-manufacturers/" style="color: #e00; text-decoration: none;">complete clothing manufacturers guide</a> covers factory types, MOQ ranges, certifications, and sourcing methods across the categories we produce.
+      </p>
+
+    </article>
+
+  </div>
+
+    
+    </BaseLayout>
