@@ -133,9 +133,16 @@ const schema = [
           });
           const json = await res.json();
           if (json.ok) {
+            // Same fix as contact-form.js (22 Aug 2026): prefer customerId, the
+            // field the /api/contact Worker actually sends — json.referenceId
+            // alone was found to always be undefined there, silently showing
+            // buyers a blank reference. Falling back to referenceId in case
+            // this specific Worker (/api/agreement) genuinely uses that name;
+            // if neither is present, say so plainly instead of leaving it blank.
+            const refId = json.customerId || json.referenceId || '';
             form.style.display = 'none';
             document.getElementById('agr-success').style.display = 'block';
-            document.getElementById('agr-refid').textContent = json.referenceId || '';
+            document.getElementById('agr-refid').textContent = refId || 'Pending — check your email';
           } else {
             throw new Error('failed');
           }

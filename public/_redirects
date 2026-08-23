@@ -10,388 +10,688 @@
 # HTTP -> HTTPS and WWW -> non-WWW redirects
 # IMPORTANT: Cloudflare Pages' _redirects file only accepts
 # RELATIVE paths as the source (e.g. /about). Absolute-URL
-# sources like "https://www.sdfltd.com/*" are INVALID here and
-# will cause Cloudflare to silently skip the rest of the file
-# past the first invalid line (confirmed in deploy log,
-# 2026-07-22: "Skipping remaining 295 lines of file" - meaning
-# every rule below the old line 19 was NOT being applied).
-#
+# sources like "https://www.sdfltd.com/*" are INVALID here.
 # Domain-level http->https and www->non-www redirects must be
 # configured in the Cloudflare dashboard instead:
 #   - SSL/TLS -> Edge Certificates -> "Always Use HTTPS" (ON)
-#   - Rules -> Redirect Rules (or the legacy "Custom Pages" /
-#     domain redirect for www -> apex), OR add www.sdfltd.com
-#     as a second custom domain with a redirect rule pointing
-#     to the apex domain.
-# Verify both are active in the dashboard - this file cannot
-# enforce them.
+#   - Rules -> Redirect Rules, or add www.sdfltd.com as a
+#     second custom domain redirecting to the apex domain.
 # ------------------------------------------------------------
 
 # ------------------------------------------------------------
-# TRAILING SLASH CONSISTENCY — FULL COVERAGE
-# Every canonical page needs an explicit /path -> /path/ rule.
-# The previous version of this file only covered ~13 pages here,
-# leaving 85 real pages with no rule, so those requests fell
-# through to Astro's own routing and produced a second hop.
-# Generated from the 2026-07-22 Coverage Validation export.
+# TRAILING SLASH CONSISTENCY — for the pages that still exist
+# after the 2026-08-22 site prune (347 -> 44 pages).
 # ------------------------------------------------------------
 /about /about/ 301
-/bamboo-clothing-manufacturer /bamboo-clothing-manufacturer/ 301
-/bangladesh-vs-india-clothing-manufacturing /bangladesh-vs-india-clothing-manufacturing/ 301
-/bikini-manufacturer /bikini-manufacturer/ 301
-/blazer-manufacturer /blazer-manufacturer/ 301
-/careers /careers/ 301
-/cargo-pants-manufacturer /cargo-pants-manufacturer/ 301
-/case-studies /case-studies/ 301
-/cashmere-clothing-manufacturer /cashmere-clothing-manufacturer/ 301
-/clothing-brand-startup-costs /clothing-brand-startup-costs/ 301
-/clothing-manufacturer-argentina /clothing-manufacturer-argentina/ 301
-/clothing-manufacturer-austria /clothing-manufacturer-austria/ 301
-/clothing-manufacturer-cambodia /clothing-manufacturer-cambodia/ 301
-/clothing-manufacturer-egypt /clothing-manufacturer-egypt/ 301
-/clothing-manufacturer-for-small-business /clothing-manufacturer-for-small-business/ 301
-/clothing-manufacturer-greece /clothing-manufacturer-greece/ 301
-/clothing-manufacturer-israel /clothing-manufacturer-israel/ 301
-/clothing-manufacturer-poland /clothing-manufacturer-poland/ 301
-/clothing-manufacturer-saudi-arabia /clothing-manufacturer-saudi-arabia/ 301
-/clothing-manufacturer-south-africa /clothing-manufacturer-south-africa/ 301
-/clothing-manufacturer-switzerland /clothing-manufacturer-switzerland/ 301
-/clothing-manufacturers-for-women /clothing-manufacturers-for-women/ 301
-/coat-manufacturer /coat-manufacturer/ 301
-/confidentiality /confidentiality/ 301
-/corporate-uniform-manufacturer /corporate-uniform-manufacturer/ 301
-/dance-wear-manufacturer /dance-wear-manufacturer/ 301
-/dress-manufacturer /dress-manufacturer/ 301
-/dye-house-service /dye-house-service/ 301
-/eco-friendly-clothing-manufacturer /eco-friendly-clothing-manufacturer/ 301
-/editorial-policy /editorial-policy/ 301
-/ethical-clothing-manufacturer /ethical-clothing-manufacturer/ 301
-/faq /faq/ 301
-/fashion-manufacturers /fashion-manufacturers/ 301
-/garment-exporter /garment-exporter/ 301
-/hemp-clothing-manufacturer /hemp-clothing-manufacturer/ 301
-/hoodie-manufacturer /hoodie-manufacturer/ 301
-/hoodie-manufacturers /hoodie-manufacturers/ 301
-/insights /insights/ 301
-/knitting-service /knitting-service/ 301
-/knitwear-exporter /knitwear-exporter/ 301
-/lab-dip-service /lab-dip-service/ 301
-/leggings-manufacturer /leggings-manufacturer/ 301
-/linen-clothing-manufacturer /linen-clothing-manufacturer/ 301
-/maternity-clothing-manufacturer /maternity-clothing-manufacturer/ 301
-/medical-uniform-manufacturer /medical-uniform-manufacturer/ 301
-/modal-clothing-manufacturer /modal-clothing-manufacturer/ 301
-/modest-fashion-manufacturer /modest-fashion-manufacturer/ 301
-/organic-cotton-clothing-manufacturer /organic-cotton-clothing-manufacturer/ 301
-/overseas-vs-local-clothing-manufacturer /overseas-vs-local-clothing-manufacturer/ 301
-/pants-manufacturer /pants-manufacturer/ 301
-/petite-clothing-manufacturer /petite-clothing-manufacturer/ 301
-/philanthropy /philanthropy/ 301
-/pleated-skirt-manufacturer /pleated-skirt-manufacturer/ 301
-/print-on-demand-manufacturer /print-on-demand-manufacturer/ 301
-/printing-service /printing-service/ 301
-/public-notice /public-notice/ 301
-/recycled-clothing-manufacturer /recycled-clothing-manufacturer/ 301
-/shorts-manufacturer /shorts-manufacturer/ 301
-/silk-clothing-manufacturer /silk-clothing-manufacturer/ 301
-/skirts-manufacturer /skirts-manufacturer/ 301
-/sleepwear-manufacturer /sleepwear-manufacturer/ 301
-/small-batch-activewear-manufacturer /small-batch-activewear-manufacturer/ 301
-/small-batch-t-shirt-manufacturer /small-batch-t-shirt-manufacturer/ 301
-/socks-manufacturer /socks-manufacturer/ 301
-/sports-bra-manufacturer /sports-bra-manufacturer/ 301
-/sustainability /sustainability/ 301
-/sustainable-clothing-manufacturer /sustainable-clothing-manufacturer/ 301
-/sweater-manufacturer /sweater-manufacturer/ 301
-/sweatshirt-manufacturer /sweatshirt-manufacturer/ 301
-/tank-top-manufacturer /tank-top-manufacturer/ 301
-/tech-pack-guide /tech-pack-guide/ 301
-/tencel-clothing-manufacturer /tencel-clothing-manufacturer/ 301
-/terms /terms/ 301
-/underwear-manufacturer /underwear-manufacturer/ 301
-/wedding-dress-manufacturer /wedding-dress-manufacturer/ 301
-/white-label-manufacturer /white-label-manufacturer/ 301
-/wholesale-activewear-supplier /wholesale-activewear-supplier/ 301
-/wool-clothing-manufacturer /wool-clothing-manufacturer/ 301
-/work-process /work-process/ 301
-/workwear-manufacturer /workwear-manufacturer/ 301
-/yarn-sourcing /yarn-sourcing/ 301
-/yoga-pants-manufacturer /yoga-pants-manufacturer/ 301
-/yoga-wear-manufacturer /yoga-wear-manufacturer/ 301
-
-# ------------------------------------------------------------
-# KEYWORD CANNIBALIZATION CONSOLIDATION
-# (two pages were competing for the same primary keyword/intent;
-#  merged into one canonical page, redirecting the other here)
-# ------------------------------------------------------------
-/private-label-manufacturer /private-label-clothing-manufacturer/ 301
-/private-label-manufacturer/ /private-label-clothing-manufacturer/ 301
-/clothing-exporter /garment-exporter/ 301
-/clothing-exporter/ /garment-exporter/ 301
-
-# 2026-08-06: custom-clothing-manufacturer/ removed — its content was a
-# near-total subset of the homepage's own "Types of Clothing Manufacturing
-# We Offer" / OEM-ODM-private-label / certifications / shipping FAQ sections,
-# and both pages were competing for the same "Clothing Manufacturers" intent.
-/custom-clothing-manufacturer / 301
-/custom-clothing-manufacturer/ / 301
-
-# 2026-08-06: two thin /insights/ articles were near-duplicates (same head
-# keyword + same H1) of much more comprehensive pillar pages elsewhere on
-# the site. Merged into the pillar pages, redirecting the thin versions here.
-/insights/how-to-find-clothing-manufacturer /how-to-find-clothing-manufacturer/ 301
-/insights/how-to-find-clothing-manufacturer/ /how-to-find-clothing-manufacturer/ 301
-/insights/clothing-manufacturing-lead-time /guides/clothing-manufacturing-lead-time/ 301
-/insights/clothing-manufacturing-lead-time/ /guides/clothing-manufacturing-lead-time/ 301
-
-# ------------------------------------------------------------
-# HOMEPAGE VARIANTS
-# ------------------------------------------------------------
-/default.htm / 301
-/index.asp / 301
-/index.aspx / 301
-/en/index.html / 301
-/en/ / 301
-/en/csr.html /csr/ 301
-/en/about.html / 301
-
-# ------------------------------------------------------------
-# OLD BAD CONTENT PAGES → proper destinations
-# ------------------------------------------------------------
-/about.html / 301
-/accessories /products/ 301
-/accessories.html /products/ 301
-/apparel-producer /garments-manufacturers/ 301
-/apparel-producer.html /garments-manufacturers/ 301
-/clothess /clothing-manufacturers/ 301
-/clothing-manufacturing-company /clothing-manufacturers/ 301
-/clothing-manufacturing-company.html /clothing-manufacturers/ 301
-/clothing-manufacturers.html /clothing-manufacturers/ 301
-/clothing-manufacturing-lead-time /work-process/ 301
-/clothing-manufacturing-cost-bangladesh /clothing-manufacturing-cost-guide/ 301
-/clothing-suppliers /clothing-manufacturers/ 301
-/clothing-vendors /clothing-manufacturers/ 301
-/csr.html /csr/ 301
-/custom-clothing-manufacturing /clothing-manufacturers/ 301
-/dress-manufacturers /dress-manufacturer/ 301
-/eco /sustainability/ 301
-/eu-clothing-regulations-2026 / 301
-/fashion-manufacturers.html /clothing-manufacturers/ 301
-/finding-the-right-clothing-manufacturer-for-your-business /insights/how-to-find-clothing-manufacturer/ 301
-/finding-the-right-clothing-manufacturer-for-your-business.html /insights/how-to-find-clothing-manufacturer/ 301
-/garments /garments-manufacturers/ 301
-/garments.html /garments-manufacturers/ 301
-/garment-zoning-for-the-inspection-of-visual-defects.html /journal/ 301
-/how-to-choose-clothing-manufacturer /insights/how-to-find-clothing-manufacturer/ 301
-/journal-entry /journal/ 301
-/kids-clothing /kidswear-manufacturer/ 301
-/lifetimefitness /activewear-manufacturer/ 301
-/logistic-shipment /work-process/ 301
-/logistic-shipment.html /work-process/ 301
-/manufacturing-costs /clothing-manufacturing-cost-guide/ 301
-/news /journal/ 301
-/positions /careers/ 301
-/product /products/ 301
-/product/ /products/ 301
-/product.html /products/ 301
-/quality-assurance /certifications/ 301
-/quality-assurance.html /certifications/ 301
-/sample /sampling-service/ 301
-/sample-request /contact/ 301
-/sample-request/ /contact/ 301
-/tools/sample-request /contact/ 301
-/tools/sample-request/ /contact/ 301
-/service /products/ 301
-/service.html /products/ 301
-/skills-required-to-be-a-buying-house-qa.html /journal/ 301
-/sewing-operator-incentive-schemes-and-technology-solutions.html /journal/ 301
-/sewing-process-flow-chart-for-crew-neck-t-Shirt.html /journal/ 301
-/swimwear /swimwear-manufacturer/ 301
-/t-shirt /t-shirt-manufacturer/ 301
-/treams /terms/ 301
-/wholesale /wholesale-clothing-manufacturer/ 301
-/wholesalers-apparel /wholesale-clothing-manufacturer/ 301
-
-# ------------------------------------------------------------
-# OLD HTML PAGES — COUNTRY SPECIFIC
-# ------------------------------------------------------------
-/australia /clothing-manufacturer-australia/ 301
-/france /clothing-manufacturer-france/ 301
-/france.html /clothing-manufacturer-france/ 301
-/germany /clothing-manufacturer-germany/ 301
-/germany.html /clothing-manufacturer-germany/ 301
-/korea /clothing-manufacturer-south-korea/ 301
-/korea.html /clothing-manufacturer-south-korea/ 301
-/uk /clothing-manufacturer-uk/ 301
-/uk.html /clothing-manufacturer-uk/ 301
-/clothing-manufacturers-in-germany.html /clothing-manufacturer-germany/ 301
-/clothing-manufacturer-in-germany.html /clothing-manufacturer-germany/ 301
-/aus-activewear /clothing-manufacturer-australia/ 301
-
-# ------------------------------------------------------------
-# TOOLS PAGES
-# ------------------------------------------------------------
-/color-converter /tools/color-converter/ 301
-/lead-time-calculator /tools/ 301
-/moq-calculator /tools/moq-calculator/ 301
-/tools /tools/price-calculator/ 301
-/eu-readiness-checker /tools/eu-readiness-checker/ 301
-/textile-converter.html /tools/ 301
-
-# ------------------------------------------------------------
-# CLOTHING / PRODUCT SUB-FOLDER PAGES
-# ------------------------------------------------------------
-/clothing /clothing-manufacturers/ 301
-/clothing/ /clothing-manufacturers/ 301
-/clothing/index.html /clothing-manufacturers/ 301
-/clothing/clothing-stores.html /clothing-manufacturers/ 301
-/hoodies/ /hoodie-manufacturer/ 301
-/hoodies/index.html /hoodie-manufacturer/ 301
-/hoodies/black-hoodie /hoodie-manufacturer/ 301
-/hoodies/fruit-of-the-loom-sweatshirt.html /hoodie-manufacturer/ 301
-/lingerie/ / 301
-/lingerie/index.html / 301
-/t-shirt/ /t-shirt-manufacturer/ 301
-/t-shirt/index.html /t-shirt-manufacturer/ 301
-/t-shirt/clothing-stores.html /t-shirt-manufacturer/ 301
-
-# ------------------------------------------------------------
-# PAGES SUB-FOLDER
-# ------------------------------------------------------------
-/pages/index.html / 301
-/pages/service.html /products/ 301
-
-# ------------------------------------------------------------
-# WHATSAPP TRACKING URLs — specific paths
-# (template literal ${WHATSAPP_URL} got into URLs by mistake —
-#  source paths below must include the literal ${...} wrapper,
-#  since that is exactly what appears in the broken live URLs
-#  and what Google crawled. Previous version of this file was
-#  missing the ${} characters, so none of these rules matched.)
-# ------------------------------------------------------------
-/private-label-manufacturer/${WHATSAPP_URL} /contact/ 301
-/wholesale-hoodie-supplier/${WHATSAPP_URL} /contact/ 301
-/pet-clothing-manufacturer/private-label-pet-clothing/${WHATSAPP_URL} /contact/ 301
-/sustainable-clothing-manufacturer/${WHATSAPP_URL} /contact/ 301
-/clothing-manufacturer-france/${WHATSAPP_URL} /contact/ 301
-/clothing-manufacturer-germany/${WHATSAPP_URL} /contact/ 301
-/clothing-manufacturer-australia/${WHATSAPP_URL} /contact/ 301
-/clothing-manufacturer-norway/${WHATSAPP_URL} /contact/ 301
-
-# Wildcard catch-all for Norway WhatsApp template literal (${WHATSAPP_URL} encoded)
-# Must come AFTER specific static rules above
-/clothing-manufacturer-norway/* /contact/ 301
-
-# ------------------------------------------------------------
-# WHATSAPP TRACKING URLs — second variant (no ${} wrapper)
-# Found in 2026-07-23 GSC 404 export. Same historical template-
-# literal bug as above, but an older/different stale crawl
-# captured "WHATSAPP_URL" without the ${...} wrapper. Cloudflare
-# _redirects needs an exact-match rule per variant since it does
-# not do fuzzy/regex source matching.
-# ------------------------------------------------------------
-/private-label-manufacturer/WHATSAPP_URL /contact/ 301
-/wholesale-hoodie-supplier/WHATSAPP_URL /contact/ 301
-/pet-clothing-manufacturer/private-label-pet-clothing/WHATSAPP_URL /contact/ 301
-/sustainable-clothing-manufacturer/WHATSAPP_URL /contact/ 301
-/clothing-manufacturer-france/WHATSAPP_URL /contact/ 301
-
-# ------------------------------------------------------------
-# ORPHANED VIDEO ASSET — found repeatedly in GSC 404 reports
-# (both 2026-07-22 and 2026-07-23 exports, different query
-# params each time). No page in src/pages references this file -
-# it was likely removed in a past site redesign. Redirecting to
-# home cleans up the recurring 404 in GSC; this is not a "real"
-# page so there is no better destination.
-# ------------------------------------------------------------
-/assets/content/v/c77e6ba77f827f44.mp4 / 301
-
-# ------------------------------------------------------------
-# ADDITIONAL FIXES — found via 2026-07-22 Coverage Drilldown
-# cross-check against this file; these 404 URLs were not
-# covered by any existing rule above
-# ------------------------------------------------------------
-/account/sample/ /sampling-service/ 301
-/guides/eu-clothing-regulations-2026-2028 /insights/eu-clothing-regulations-2026-2028/ 301
-/eu-clothing-regulations-2026-2028 /insights/eu-clothing-regulations-2026-2028/ 301
-/eu-epr-explained /insights/eu-epr-explained/ 301
-/skirts-manufacturer/"/clothing-manufacturers-for-startups" /skirts-manufacturer/ 301
-
-# ------------------------------------------------------------
-# TRAILING SLASH — remaining country/core pages
-# (merged with the full list at the top of this file; kept here
-#  too since Cloudflare Pages matches top-to-bottom and either
-#  position works — listed once at the top is the source of truth)
-# ------------------------------------------------------------
-/clothing-manufacturers /clothing-manufacturers/ 301
-/clothing-manufacturer-australia /clothing-manufacturer-australia/ 301
-/clothing-manufacturer-canada /clothing-manufacturer-canada/ 301
-/clothing-manufacturer-france /clothing-manufacturer-france/ 301
-/clothing-manufacturer-germany /clothing-manufacturer-germany/ 301
-/clothing-manufacturer-italy /clothing-manufacturer-italy/ 301
-/clothing-manufacturer-japan /clothing-manufacturer-japan/ 301
-/clothing-manufacturer-netherlands /clothing-manufacturer-netherlands/ 301
-/clothing-manufacturer-norway /clothing-manufacturer-norway/ 301
-/clothing-manufacturer-sweden /clothing-manufacturer-sweden/ 301
-/clothing-manufacturer-uae /clothing-manufacturer-uae/ 301
-/clothing-manufacturer-uk /clothing-manufacturer-uk/ 301
-/clothing-manufacturer-usa /clothing-manufacturer-usa/ 301
-
-# ------------------------------------------------------------
-# TRAILING SLASH — additional pages found missing during
-# 2026-07-22 GSC Coverage cross-check (site grew since the
-# original v2 list was generated; these page routes existed
-# in src/pages but had no /path -> /path/ rule yet)
-# ------------------------------------------------------------
-/apparel-manufacturers /apparel-manufacturers/ 301
-/best-clothing-manufacturers-2026 /best-clothing-manufacturers-2026/ 301
+/agreement /agreement/ 301
+/all-services /all-services/ 301
+/booking /booking/ 301
 /branding-launch /branding-launch/ 301
-/clothing-manufacturer-belgium /clothing-manufacturer-belgium/ 301
-/clothing-manufacturer-brazil /clothing-manufacturer-brazil/ 301
-/clothing-manufacturer-czech-republic /clothing-manufacturer-czech-republic/ 301
-/clothing-manufacturer-denmark /clothing-manufacturer-denmark/ 301
-/clothing-manufacturer-europe /clothing-manufacturer-europe/ 301
-/clothing-manufacturer-finland /clothing-manufacturer-finland/ 301
-/clothing-manufacturer-india /clothing-manufacturer-india/ 301
-/clothing-manufacturer-indonesia /clothing-manufacturer-indonesia/ 301
-/clothing-manufacturer-malaysia /clothing-manufacturer-malaysia/ 301
-/clothing-manufacturer-mexico /clothing-manufacturer-mexico/ 301
-/clothing-manufacturer-new-zealand /clothing-manufacturer-new-zealand/ 301
-/clothing-manufacturer-philippines /clothing-manufacturer-philippines/ 301
-/clothing-manufacturer-singapore /clothing-manufacturer-singapore/ 301
-/clothing-manufacturer-spain /clothing-manufacturer-spain/ 301
-/clothing-manufacturer-thailand /clothing-manufacturer-thailand/ 301
-/clothing-manufacturer-vietnam /clothing-manufacturer-vietnam/ 301
-/clothing-manufacturers-for-startups /clothing-manufacturers-for-startups/ 301
+/careers /careers/ 301
+/certifications /certifications/ 301
+/clothing-manufacturers /clothing-manufacturers/ 301
+/confidentiality /confidentiality/ 301
+/contact /contact/ 301
 /cookies /cookies/ 301
-/full-package-production /full-package-production/ 301
-/garments-factory /garments-factory/ 301
-/guides/clothing-manufacturing-cost-bangladesh /clothing-manufacturing-cost-guide/ 301
-/guides/clothing-manufacturing-cost-bangladesh/ /clothing-manufacturing-cost-guide/ 301
-/insights/manufacturing-costs /clothing-manufacturing-cost-guide/ 301
-/insights/manufacturing-costs/ /clothing-manufacturing-cost-guide/ 301
-/guides/clothing-manufacturing-lead-time /guides/clothing-manufacturing-lead-time/ 301
-/insights/private-label-clothing-manufacturer /private-label-clothing-guide/ 301
-/insights/wholesale-clothing-manufacturer /insights/wholesale-manufacturing-partnership/ 301
-/low-moq-clothing-manufacturers /low-moq-clothing-manufacturers/ 301
-/pet-clothing-manufacturer/organic-pet-clothing-manufacturer/index /pet-clothing-manufacturer/organic-pet-clothing-manufacturer/ 301
-/sustainable-clothing-manufacturers /sustainable-clothing-manufacturers/ 301
-/textile-manufacturers /textile-manufacturers/ 301
+/csr /csr/ 301
+/cut-and-sew-service /cut-and-sew-service/ 301
+/fabric-sourcing /fabric-sourcing/ 301
+/faq /faq/ 301
+/nda /nda/ 301
+/privacy /privacy/ 301
+/products /products/ 301
+/public-notice /public-notice/ 301
+/sustainability /sustainability/ 301
+/tech-pack-service /tech-pack-service/ 301
+/terms /terms/ 301
 /tools/aql-calculator /tools/aql-calculator/ 301
+/tools/color-converter /tools/color-converter/ 301
+/tools/eu-readiness-checker /tools/eu-readiness-checker/ 301
 /tools/garment-cost-calculator /tools/garment-cost-calculator/ 301
 /tools/gsm-converter /tools/gsm-converter/ 301
 /tools/hs-code /tools/hs-code/ 301
+/tools /tools/ 301
 /tools/lead-time-calculator /tools/lead-time-calculator/ 301
+/tools/manufacturer-email-generator /tools/manufacturer-email-generator/ 301
+/tools/moq-calculator /tools/moq-calculator/ 301
+/tools/price-calculator /tools/price-calculator/ 301
+/tools/production-timeline /tools/production-timeline/ 301
+/tools/sample-decision-helper /tools/sample-decision-helper/ 301
+/tools/sample-timeline-estimator /tools/sample-timeline-estimator/ 301
+/tools/shrinkage-calculator /tools/shrinkage-calculator/ 301
 /tools/wash-care-label-generator /tools/wash-care-label-generator/ 301
-/top-50-clothing-manufacturers /top-50-clothing-manufacturers/ 301
-/top-apparel-manufacturers /insights/oem-vs-odm-vs-cmt/ 301
-/top-apparel-manufacturers/ /insights/oem-vs-odm-vs-cmt/ 301
-/top-fashion-manufacturers /top-fashion-manufacturers/ 301
-/top-garments-manufacturers /top-garments-manufacturers/ 301
-/white-label /white-label/ 301
+/verify /verify/ 301
+/visa-docs /visa-docs/ 301
+/white-label-manufacturer /white-label-manufacturer/ 301
+/work-process /work-process/ 301
+
+# ------------------------------------------------------------
+# 2026-08-22 SITE PRUNE — 303 pages removed (country pages,
+# product/garment-type manufacturer pages, comparison "vs"
+# pages, rankings, insights/journal/guides content, pet
+# clothing + garment labels + printing sub-sites, and extra
+# service-landing pages). Many of these were indexed by
+# Google, so instead of letting them 404 outright, each one
+# 301s to the closest surviving page. Review/adjust targets
+# as you see fit — these are sensible defaults, not final.
+# ------------------------------------------------------------
+/activewear-manufacturer /products/ 301
+/activewear-manufacturer/ /products/ 301
+/alibaba-verified-badge-vs-factory-audit-vs-no-verification /about/ 301
+/alibaba-verified-badge-vs-factory-audit-vs-no-verification/ /about/ 301
+/apparel-manufacturers /products/ 301
+/apparel-manufacturers/ /products/ 301
+/baby-clothing-manufacturer /products/ 301
+/baby-clothing-manufacturer/ /products/ 301
+/bamboo-clothing-manufacturer /products/ 301
+/bamboo-clothing-manufacturer/ /products/ 301
+/bangladesh-vs-china-clothing-manufacturing /about/ 301
+/bangladesh-vs-china-clothing-manufacturing/ /about/ 301
+/bangladesh-vs-china-vs-vietnam-vs-india-vs-turkey-sourcing /about/ 301
+/bangladesh-vs-china-vs-vietnam-vs-india-vs-turkey-sourcing/ /about/ 301
+/bangladesh-vs-india-clothing-manufacturing /about/ 301
+/bangladesh-vs-india-clothing-manufacturing/ /about/ 301
+/bangladesh-vs-vietnam-clothing-manufacturing /about/ 301
+/bangladesh-vs-vietnam-clothing-manufacturing/ /about/ 301
+/best-clothing-manufacturer-for-startups /about/ 301
+/best-clothing-manufacturer-for-startups/ /about/ 301
+/best-clothing-manufacturers-2026 /about/ 301
+/best-clothing-manufacturers-2026/ /about/ 301
+/best-clothing-manufacturers-for-small-business /about/ 301
+/best-clothing-manufacturers-for-small-business/ /about/ 301
+/bikini-manufacturer /products/ 301
+/bikini-manufacturer/ /products/ 301
+/blazer-manufacturer /products/ 301
+/blazer-manufacturer/ /products/ 301
+/board-shorts-manufacturer /products/ 301
+/board-shorts-manufacturer/ /products/ 301
+/bomber-jacket-manufacturer /products/ 301
+/bomber-jacket-manufacturer/ /products/ 301
+/bulk-clothing-manufacturer /products/ 301
+/bulk-clothing-manufacturer/ /products/ 301
+/cargo-pants-manufacturer /products/ 301
+/cargo-pants-manufacturer/ /products/ 301
+/case-studies /csr/ 301
+/case-studies/ /csr/ 301
+/cashmere-clothing-manufacturer /products/ 301
+/cashmere-clothing-manufacturer/ /products/ 301
+/childrens-clothing-manufacturer /products/ 301
+/childrens-clothing-manufacturer/ /products/ 301
+/clothing-brand-launch-checklist /faq/ 301
+/clothing-brand-launch-checklist/ /faq/ 301
+/clothing-brand-startup-costs /faq/ 301
+/clothing-brand-startup-costs/ /faq/ 301
+/clothing-factory /products/ 301
+/clothing-factory/ /products/ 301
+/clothing-manufacturer-argentina /contact/ 301
+/clothing-manufacturer-argentina/ /contact/ 301
+/clothing-manufacturer-australia /contact/ 301
+/clothing-manufacturer-australia/ /contact/ 301
+/clothing-manufacturer-austria /contact/ 301
+/clothing-manufacturer-austria/ /contact/ 301
+/clothing-manufacturer-bangladesh /contact/ 301
+/clothing-manufacturer-bangladesh/ /contact/ 301
+/clothing-manufacturer-belgium /contact/ 301
+/clothing-manufacturer-belgium/ /contact/ 301
+/clothing-manufacturer-brazil /contact/ 301
+/clothing-manufacturer-brazil/ /contact/ 301
+/clothing-manufacturer-bulgaria /contact/ 301
+/clothing-manufacturer-bulgaria/ /contact/ 301
+/clothing-manufacturer-cambodia /contact/ 301
+/clothing-manufacturer-cambodia/ /contact/ 301
+/clothing-manufacturer-canada /contact/ 301
+/clothing-manufacturer-canada/ /contact/ 301
+/clothing-manufacturer-china /contact/ 301
+/clothing-manufacturer-china/ /contact/ 301
+/clothing-manufacturer-croatia /contact/ 301
+/clothing-manufacturer-croatia/ /contact/ 301
+/clothing-manufacturer-cyprus /contact/ 301
+/clothing-manufacturer-cyprus/ /contact/ 301
+/clothing-manufacturer-czech-republic /contact/ 301
+/clothing-manufacturer-czech-republic/ /contact/ 301
+/clothing-manufacturer-denmark /contact/ 301
+/clothing-manufacturer-denmark/ /contact/ 301
+/clothing-manufacturer-egypt /contact/ 301
+/clothing-manufacturer-egypt/ /contact/ 301
+/clothing-manufacturer-estonia /contact/ 301
+/clothing-manufacturer-estonia/ /contact/ 301
+/clothing-manufacturer-europe /contact/ 301
+/clothing-manufacturer-europe/ /contact/ 301
+/clothing-manufacturer-finland /contact/ 301
+/clothing-manufacturer-finland/ /contact/ 301
+/clothing-manufacturer-for-small-brands /contact/ 301
+/clothing-manufacturer-for-small-brands/ /contact/ 301
+/clothing-manufacturer-for-small-business /contact/ 301
+/clothing-manufacturer-for-small-business/ /contact/ 301
+/clothing-manufacturer-france /contact/ 301
+/clothing-manufacturer-france/ /contact/ 301
+/clothing-manufacturer-germany /contact/ 301
+/clothing-manufacturer-germany/ /contact/ 301
+/clothing-manufacturer-greece /contact/ 301
+/clothing-manufacturer-greece/ /contact/ 301
+/clothing-manufacturer-hong-kong /contact/ 301
+/clothing-manufacturer-hong-kong/ /contact/ 301
+/clothing-manufacturer-hungary /contact/ 301
+/clothing-manufacturer-hungary/ /contact/ 301
+/clothing-manufacturer-india /contact/ 301
+/clothing-manufacturer-india/ /contact/ 301
+/clothing-manufacturer-indonesia /contact/ 301
+/clothing-manufacturer-indonesia/ /contact/ 301
+/clothing-manufacturer-ireland /contact/ 301
+/clothing-manufacturer-ireland/ /contact/ 301
+/clothing-manufacturer-israel /contact/ 301
+/clothing-manufacturer-israel/ /contact/ 301
+/clothing-manufacturer-italy /contact/ 301
+/clothing-manufacturer-italy/ /contact/ 301
+/clothing-manufacturer-japan /contact/ 301
+/clothing-manufacturer-japan/ /contact/ 301
+/clothing-manufacturer-latvia /contact/ 301
+/clothing-manufacturer-latvia/ /contact/ 301
+/clothing-manufacturer-lithuania /contact/ 301
+/clothing-manufacturer-lithuania/ /contact/ 301
+/clothing-manufacturer-luxembourg /contact/ 301
+/clothing-manufacturer-luxembourg/ /contact/ 301
+/clothing-manufacturer-malaysia /contact/ 301
+/clothing-manufacturer-malaysia/ /contact/ 301
+/clothing-manufacturer-malta /contact/ 301
+/clothing-manufacturer-malta/ /contact/ 301
+/clothing-manufacturer-mexico /contact/ 301
+/clothing-manufacturer-mexico/ /contact/ 301
+/clothing-manufacturer-morocco /contact/ 301
+/clothing-manufacturer-morocco/ /contact/ 301
+/clothing-manufacturer-netherlands /contact/ 301
+/clothing-manufacturer-netherlands/ /contact/ 301
+/clothing-manufacturer-new-zealand /contact/ 301
+/clothing-manufacturer-new-zealand/ /contact/ 301
+/clothing-manufacturer-norway /contact/ 301
+/clothing-manufacturer-norway/ /contact/ 301
+/clothing-manufacturer-pakistan /contact/ 301
+/clothing-manufacturer-pakistan/ /contact/ 301
+/clothing-manufacturer-philippines /contact/ 301
+/clothing-manufacturer-philippines/ /contact/ 301
+/clothing-manufacturer-poland /contact/ 301
+/clothing-manufacturer-poland/ /contact/ 301
+/clothing-manufacturer-portugal /contact/ 301
+/clothing-manufacturer-portugal/ /contact/ 301
+/clothing-manufacturer-romania /contact/ 301
+/clothing-manufacturer-romania/ /contact/ 301
+/clothing-manufacturer-russia /contact/ 301
+/clothing-manufacturer-russia/ /contact/ 301
+/clothing-manufacturer-saudi-arabia /contact/ 301
+/clothing-manufacturer-saudi-arabia/ /contact/ 301
+/clothing-manufacturer-singapore /contact/ 301
+/clothing-manufacturer-singapore/ /contact/ 301
+/clothing-manufacturer-slovakia /contact/ 301
+/clothing-manufacturer-slovakia/ /contact/ 301
+/clothing-manufacturer-slovenia /contact/ 301
+/clothing-manufacturer-slovenia/ /contact/ 301
+/clothing-manufacturer-south-africa /contact/ 301
+/clothing-manufacturer-south-africa/ /contact/ 301
+/clothing-manufacturer-south-korea /contact/ 301
+/clothing-manufacturer-south-korea/ /contact/ 301
+/clothing-manufacturer-spain /contact/ 301
+/clothing-manufacturer-spain/ /contact/ 301
+/clothing-manufacturer-sri-lanka /contact/ 301
+/clothing-manufacturer-sri-lanka/ /contact/ 301
+/clothing-manufacturer-sweden /contact/ 301
+/clothing-manufacturer-sweden/ /contact/ 301
+/clothing-manufacturer-switzerland /contact/ 301
+/clothing-manufacturer-switzerland/ /contact/ 301
+/clothing-manufacturer-taiwan /contact/ 301
+/clothing-manufacturer-taiwan/ /contact/ 301
+/clothing-manufacturer-thailand /contact/ 301
+/clothing-manufacturer-thailand/ /contact/ 301
+/clothing-manufacturer-turkey /contact/ 301
+/clothing-manufacturer-turkey/ /contact/ 301
+/clothing-manufacturer-uae /contact/ 301
+/clothing-manufacturer-uae/ /contact/ 301
+/clothing-manufacturer-uk /contact/ 301
+/clothing-manufacturer-uk/ /contact/ 301
+/clothing-manufacturer-usa /contact/ 301
+/clothing-manufacturer-usa/ /contact/ 301
+/clothing-manufacturer-vietnam /contact/ 301
+/clothing-manufacturer-vietnam/ /contact/ 301
+/clothing-manufacturers-for-startups /products/ 301
+/clothing-manufacturers-for-startups/ /products/ 301
+/clothing-manufacturers-for-women /products/ 301
+/clothing-manufacturers-for-women/ /products/ 301
+/clothing-manufacturing-cost-guide /faq/ 301
+/clothing-manufacturing-cost-guide/ /faq/ 301
+/coat-manufacturer /products/ 301
+/coat-manufacturer/ /products/ 301
+/corporate-uniform-manufacturer /products/ 301
+/corporate-uniform-manufacturer/ /products/ 301
+/cotton-clothing-manufacturer /products/ 301
+/cotton-clothing-manufacturer/ /products/ 301
+/cycling-apparel-manufacturer /products/ 301
+/cycling-apparel-manufacturer/ /products/ 301
+/dance-wear-manufacturer /products/ 301
+/dance-wear-manufacturer/ /products/ 301
+/denim-jacket-manufacturer /products/ 301
+/denim-jacket-manufacturer/ /products/ 301
+/denim-manufacturer /products/ 301
+/denim-manufacturer/ /products/ 301
+/digital-3d-sample-vs-physical-sample /about/ 301
+/digital-3d-sample-vs-physical-sample/ /about/ 301
+/direct-factory-vs-trading-company-vs-buying-agent /about/ 301
+/direct-factory-vs-trading-company-vs-buying-agent/ /about/ 301
+/dress-manufacturer /products/ 301
+/dress-manufacturer/ /products/ 301
+/dropshipping-service /all-services/ 301
+/dropshipping-service/ /all-services/ 301
+/dye-house-service /all-services/ 301
+/dye-house-service/ /all-services/ 301
+/dyeing-service /all-services/ 301
+/dyeing-service/ /all-services/ 301
+/eco-friendly-clothing-manufacturer /products/ 301
+/eco-friendly-clothing-manufacturer/ /products/ 301
+/ecommerce-clothing-manufacturer /products/ 301
+/ecommerce-clothing-manufacturer/ /products/ 301
+/editorial-policy /faq/ 301
+/editorial-policy/ /faq/ 301
+/email-marketing-guide /faq/ 301
+/email-marketing-guide/ /faq/ 301
+/embroidery-service /all-services/ 301
+/embroidery-service/ /all-services/ 301
+/ethical-clothing-manufacturer /products/ 301
+/ethical-clothing-manufacturer/ /products/ 301
+/eu-epr-explained /products/ 301
+/eu-epr-explained/ /products/ 301
+/fashion-consulting-service /all-services/ 301
+/fashion-consulting-service/ /all-services/ 301
+/fashion-manufacturers /products/ 301
+/fashion-manufacturers/ /products/ 301
+/faux-leather-clothing-manufacturer /products/ 301
+/faux-leather-clothing-manufacturer/ /products/ 301
+/finishing-service /all-services/ 301
+/finishing-service/ /all-services/ 301
+/fit-engineering-service /all-services/ 301
+/fit-engineering-service/ /all-services/ 301
+/freight-forwarder-vs-factory-arranged-shipping-vs-diy /about/ 301
+/freight-forwarder-vs-factory-arranged-shipping-vs-diy/ /about/ 301
+/fulfillment-service /all-services/ 301
+/fulfillment-service/ /all-services/ 301
+/full-package-fob-vs-cmt-vs-cm-only /about/ 301
+/full-package-fob-vs-cmt-vs-cm-only/ /about/ 301
+/full-package-production /clothing-manufacturers/ 301
+/full-package-production/ /clothing-manufacturers/ 301
+/garment-development-service /all-services/ 301
+/garment-development-service/ /all-services/ 301
+/garment-exporter /products/ 301
+/garment-exporter/ /products/ 301
+/garment-labels/buyer-guidelines /products/ 301
+/garment-labels/buyer-guidelines/ /products/ 301
+/garment-labels/compliance-and-certification /products/ 301
+/garment-labels/compliance-and-certification/ /products/ 301
+/garment-labels/faq /products/ 301
+/garment-labels/faq/ /products/ 301
+/garment-labels /products/ 301
+/garment-labels/ /products/ 301
+/garment-labels/materials-and-manufacturing /products/ 301
+/garment-labels/materials-and-manufacturing/ /products/ 301
+/garment-labels/placement-and-required-information /products/ 301
+/garment-labels/placement-and-required-information/ /products/ 301
+/garment-labels/quality-testing-and-defects /products/ 301
+/garment-labels/quality-testing-and-defects/ /products/ 301
+/garment-labels/types-of-garment-labels /products/ 301
+/garment-labels/types-of-garment-labels/ /products/ 301
+/garments-factory /products/ 301
+/garments-factory/ /products/ 301
+/garments-manufacturers /products/ 301
+/garments-manufacturers/ /products/ 301
+/gots-certified-clothing-manufacturer /products/ 301
+/gots-certified-clothing-manufacturer/ /products/ 301
+/gots-vs-oeko-tex-vs-bsci-certification-comparison /about/ 301
+/gots-vs-oeko-tex-vs-bsci-certification-comparison/ /about/ 301
+/grading-service /all-services/ 301
+/grading-service/ /all-services/ 301
+/guides/clothing-manufacturing-lead-time /faq/ 301
+/guides/clothing-manufacturing-lead-time/ /faq/ 301
+/hemp-clothing-manufacturer /products/ 301
+/hemp-clothing-manufacturer/ /products/ 301
+/hi-vis-workwear-manufacturer /products/ 301
+/hi-vis-workwear-manufacturer/ /products/ 301
+/hoodie-manufacturer /products/ 301
+/hoodie-manufacturer/ /products/ 301
+/hoodie-manufacturers /products/ 301
+/hoodie-manufacturers/ /products/ 301
+/how-to-create-a-tech-pack /products/ 301
+/how-to-create-a-tech-pack/ /products/ 301
+/how-to-find-clothing-manufacturer /products/ 301
+/how-to-find-clothing-manufacturer/ /products/ 301
+/how-to-scale-a-clothing-brand /products/ 301
+/how-to-scale-a-clothing-brand/ /products/ 301
+/how-to-start-a-clothing-brand /products/ 301
+/how-to-start-a-clothing-brand/ /products/ 301
+/in-house-qc-vs-third-party-inspection-vs-no-inspection /about/ 301
+/in-house-qc-vs-third-party-inspection-vs-no-inspection/ /about/ 301
+/inclusive-sizing-guide /faq/ 301
+/inclusive-sizing-guide/ /faq/ 301
+/insights/AQL-inspection-explained /faq/ 301
+/insights/AQL-inspection-explained/ /faq/ 301
+/insights/CPSIA-compliance-guide /faq/ 301
+/insights/CPSIA-compliance-guide/ /faq/ 301
+/insights/MOQ-meaning-clothing /faq/ 301
+/insights/MOQ-meaning-clothing/ /faq/ 301
+/insights/avoiding-clothing-manufacturer-scams /faq/ 301
+/insights/avoiding-clothing-manufacturer-scams/ /faq/ 301
+/insights/bangladesh-rmg-industry-data /faq/ 301
+/insights/bangladesh-rmg-industry-data/ /faq/ 301
+/insights/bangladesh-vs-china-manufacturing /faq/ 301
+/insights/bangladesh-vs-china-manufacturing/ /faq/ 301
+/insights/circular-fashion-guide /faq/ 301
+/insights/circular-fashion-guide/ /faq/ 301
+/insights/custom-socks-guide /faq/ 301
+/insights/custom-socks-guide/ /faq/ 301
+/insights/customs-clearance-guide /faq/ 301
+/insights/customs-clearance-guide/ /faq/ 301
+/insights/digital-product-passport-textile /faq/ 301
+/insights/digital-product-passport-textile/ /faq/ 301
+/insights/embroidery-problems-explained /faq/ 301
+/insights/embroidery-problems-explained/ /faq/ 301
+/insights/ethical-manufacturing-verification /faq/ 301
+/insights/ethical-manufacturing-verification/ /faq/ 301
+/insights/eu-clothing-regulations-2026 /faq/ 301
+/insights/eu-clothing-regulations-2026/ /faq/ 301
+/insights/fabric-cutting-explained /faq/ 301
+/insights/fabric-cutting-explained/ /faq/ 301
+/insights/fabric-gsm-explained /faq/ 301
+/insights/fabric-gsm-explained/ /faq/ 301
+/insights/fabric-types-glossary /faq/ 301
+/insights/fabric-types-glossary/ /faq/ 301
+/insights/fiber-blend-hs-classification-explained /faq/ 301
+/insights/fiber-blend-hs-classification-explained/ /faq/ 301
+/insights/garment-finishing-explained /faq/ 301
+/insights/garment-finishing-explained/ /faq/ 301
+/insights/garment-grading-explained /faq/ 301
+/insights/garment-grading-explained/ /faq/ 301
+/insights/garment-measurement-pom-explained /faq/ 301
+/insights/garment-measurement-pom-explained/ /faq/ 301
+/insights/garment-washing-explained /faq/ 301
+/insights/garment-washing-explained/ /faq/ 301
+/insights/gots-certification-explained /faq/ 301
+/insights/gots-certification-explained/ /faq/ 301
+/insights/gots-label-guide /faq/ 301
+/insights/gots-label-guide/ /faq/ 301
+/insights/how-to-calculate-landed-cost /faq/ 301
+/insights/how-to-calculate-landed-cost/ /faq/ 301
+/insights/how-to-negotiate-with-clothing-manufacturers /faq/ 301
+/insights/how-to-negotiate-with-clothing-manufacturers/ /faq/ 301
+/insights/incoterms-explained /faq/ 301
+/insights/incoterms-explained/ /faq/ 301
+/insights /products/ 301
+/insights/ /products/ 301
+/insights/international-size-chart-guide /faq/ 301
+/insights/international-size-chart-guide/ /faq/ 301
+/insights/knitting-defects-explained /faq/ 301
+/insights/knitting-defects-explained/ /faq/ 301
+/insights/lab-dip-explained /faq/ 301
+/insights/lab-dip-explained/ /faq/ 301
+/insights/low-moq-clothing-manufacturer /faq/ 301
+/insights/low-moq-clothing-manufacturer/ /faq/ 301
+/insights/oem-vs-odm-vs-cmt /faq/ 301
+/insights/oem-vs-odm-vs-cmt/ /faq/ 301
+/insights/pattern-fit-problems-explained /faq/ 301
+/insights/pattern-fit-problems-explained/ /faq/ 301
+/insights/payment-terms-LC-vs-TT /faq/ 301
+/insights/payment-terms-LC-vs-TT/ /faq/ 301
+/insights/printing-methods-compared /faq/ 301
+/insights/printing-methods-compared/ /faq/ 301
+/insights/sample-cost-explained /faq/ 301
+/insights/sample-cost-explained/ /faq/ 301
+/insights/shade-variation-explained /faq/ 301
+/insights/shade-variation-explained/ /faq/ 301
+/insights/shipment-delay-explained /faq/ 301
+/insights/shipment-delay-explained/ /faq/ 301
+/insights/sock-manufacturing-guide /faq/ 301
+/insights/sock-manufacturing-guide/ /faq/ 301
+/insights/stitch-quality-spi-explained /faq/ 301
+/insights/stitch-quality-spi-explained/ /faq/ 301
+/insights/sustainable-clothing-manufacturing /faq/ 301
+/insights/sustainable-clothing-manufacturing/ /faq/ 301
+/insights/tech-pack-template-guide /faq/ 301
+/insights/tech-pack-template-guide/ /faq/ 301
+/insights/wholesale-manufacturing-partnership /faq/ 301
+/insights/wholesale-manufacturing-partnership/ /faq/ 301
+/insights/yarn-quality-explained /faq/ 301
+/insights/yarn-quality-explained/ /faq/ 301
+/insights/yarn/buyer-guidelines /faq/ 301
+/insights/yarn/buyer-guidelines/ /faq/ 301
+/insights/yarn/count-twist-and-structure /faq/ 301
+/insights/yarn/count-twist-and-structure/ /faq/ 301
+/insights/yarn/faq /faq/ 301
+/insights/yarn/faq/ /faq/ 301
+/insights/yarn /faq/ 301
+/insights/yarn/ /faq/ 301
+/insights/yarn/quality-testing-and-defects /faq/ 301
+/insights/yarn/quality-testing-and-defects/ /faq/ 301
+/insights/yarn/sustainability-and-certification /faq/ 301
+/insights/yarn/sustainability-and-certification/ /faq/ 301
+/insights/yarn/types-and-spinning-methods /faq/ 301
+/insights/yarn/types-and-spinning-methods/ /faq/ 301
+/jacket-manufacturer /products/ 301
+/jacket-manufacturer/ /products/ 301
+/joggers-manufacturer /products/ 301
+/joggers-manufacturer/ /products/ 301
+/journal/annual-growth-2025 /faq/ 301
+/journal/annual-growth-2025/ /faq/ 301
+/journal/european-mill-partnership-2025 /faq/ 301
+/journal/european-mill-partnership-2025/ /faq/ 301
+/journal/gots-7-recertification-2026 /faq/ 301
+/journal/gots-7-recertification-2026/ /faq/ 301
+/journal /products/ 301
+/journal/ /products/ 301
+/journal/sourcing-summit-2025 /faq/ 301
+/journal/sourcing-summit-2025/ /faq/ 301
+/kids-clothing-manufacturer /products/ 301
+/kids-clothing-manufacturer/ /products/ 301
+/knitting-service /all-services/ 301
+/knitting-service/ /all-services/ 301
+/knitwear-exporter /products/ 301
+/knitwear-exporter/ /products/ 301
+/knitwear-factory /products/ 301
+/knitwear-factory/ /products/ 301
+/lab-dip-service /all-services/ 301
+/lab-dip-service/ /all-services/ 301
+/leather-clothing-manufacturer /products/ 301
+/leather-clothing-manufacturer/ /products/ 301
+/leggings-manufacturer /products/ 301
+/leggings-manufacturer/ /products/ 301
+/linen-clothing-manufacturer /products/ 301
+/linen-clothing-manufacturer/ /products/ 301
+/loungewear-manufacturer /products/ 301
+/loungewear-manufacturer/ /products/ 301
+/low-moq-clothing-manufacturers /products/ 301
+/low-moq-clothing-manufacturers/ /products/ 301
+/manufacturing-platform-alternative /products/ 301
+/manufacturing-platform-alternative/ /products/ 301
+/maternity-clothing-manufacturer /products/ 301
+/maternity-clothing-manufacturer/ /products/ 301
+/medical-uniform-manufacturer /products/ 301
+/medical-uniform-manufacturer/ /products/ 301
+/modal-clothing-manufacturer /products/ 301
+/modal-clothing-manufacturer/ /products/ 301
+/modest-fashion-manufacturer /products/ 301
+/modest-fashion-manufacturer/ /products/ 301
+/oeko-tex-certification-guide /faq/ 301
+/oeko-tex-certification-guide/ /faq/ 301
+/oem-clothing-manufacturer /products/ 301
+/oem-clothing-manufacturer/ /products/ 301
+/organic-cotton-clothing-manufacturer /products/ 301
+/organic-cotton-clothing-manufacturer/ /products/ 301
+/overseas-vs-local-clothing-manufacturer /about/ 301
+/overseas-vs-local-clothing-manufacturer/ /about/ 301
+/pants-manufacturer /products/ 301
+/pants-manufacturer/ /products/ 301
+/pattern-making-service /all-services/ 301
+/pattern-making-service/ /all-services/ 301
+/pet-clothing-manufacturer/dog-clothing-manufacturer-usa /products/ 301
+/pet-clothing-manufacturer/dog-clothing-manufacturer-usa/ /products/ 301
+/pet-clothing-manufacturer/dog-coat-manufacturer /products/ 301
+/pet-clothing-manufacturer/dog-coat-manufacturer/ /products/ 301
+/pet-clothing-manufacturer/dog-hoodie-manufacturer /products/ 301
+/pet-clothing-manufacturer/dog-hoodie-manufacturer/ /products/ 301
+/pet-clothing-manufacturer/equestrian-clothing-manufacturer /products/ 301
+/pet-clothing-manufacturer/equestrian-clothing-manufacturer/ /products/ 301
+/pet-clothing-manufacturer/how-to-start-pet-clothing-brand /products/ 301
+/pet-clothing-manufacturer/how-to-start-pet-clothing-brand/ /products/ 301
+/pet-clothing-manufacturer /products/ 301
+/pet-clothing-manufacturer/ /products/ 301
+/pet-clothing-manufacturer/organic-pet-clothing-manufacturer /products/ 301
+/pet-clothing-manufacturer/organic-pet-clothing-manufacturer/ /products/ 301
+/pet-clothing-manufacturer/pet-clothing-manufacturing-cost /products/ 301
+/pet-clothing-manufacturer/pet-clothing-manufacturing-cost/ /products/ 301
+/pet-clothing-manufacturer/private-label-pet-clothing /products/ 301
+/pet-clothing-manufacturer/private-label-pet-clothing/ /products/ 301
+/petite-clothing-manufacturer /products/ 301
+/petite-clothing-manufacturer/ /products/ 301
+/philanthropy /csr/ 301
+/philanthropy/ /csr/ 301
+/pleated-skirt-manufacturer /products/ 301
+/pleated-skirt-manufacturer/ /products/ 301
+/plus-size-clothing-manufacturer /products/ 301
+/plus-size-clothing-manufacturer/ /products/ 301
+/polo-shirt-manufacturer /products/ 301
+/polo-shirt-manufacturer/ /products/ 301
+/polyester-clothing-manufacturer /products/ 301
+/polyester-clothing-manufacturer/ /products/ 301
+/print-on-demand-manufacturer /products/ 301
+/print-on-demand-manufacturer/ /products/ 301
+/print-on-demand-vs-private-label /about/ 301
+/print-on-demand-vs-private-label/ /about/ 301
+/printing-service /all-services/ 301
+/printing-service/ /all-services/ 301
+/printing/screen-printing /products/ 301
+/printing/screen-printing/ /products/ 301
+/private-label-clothing-guide /faq/ 301
+/private-label-clothing-guide/ /faq/ 301
+/private-label-clothing-manufacturer /products/ 301
+/private-label-clothing-manufacturer/ /products/ 301
+/quality-inspection-service /all-services/ 301
+/quality-inspection-service/ /all-services/ 301
+/quality-inspection /products/ 301
+/quality-inspection/ /products/ 301
+/recycled-clothing-manufacturer /products/ 301
+/recycled-clothing-manufacturer/ /products/ 301
+/sample-service /all-services/ 301
+/sample-service/ /all-services/ 301
+/sampling-service /all-services/ 301
+/sampling-service/ /all-services/ 301
+/shirt-manufacturer /products/ 301
+/shirt-manufacturer/ /products/ 301
+/shopify-clothing-manufacturer /products/ 301
+/shopify-clothing-manufacturer/ /products/ 301
+/shorts-manufacturer /products/ 301
+/shorts-manufacturer/ /products/ 301
+/silk-clothing-manufacturer /products/ 301
+/silk-clothing-manufacturer/ /products/ 301
+/skirts-manufacturer /products/ 301
+/skirts-manufacturer/ /products/ 301
+/sleepwear-manufacturer /products/ 301
+/sleepwear-manufacturer/ /products/ 301
+/small-batch-activewear-manufacturer /products/ 301
+/small-batch-activewear-manufacturer/ /products/ 301
+/small-batch-clothing-manufacturer /products/ 301
+/small-batch-clothing-manufacturer/ /products/ 301
+/small-batch-hoodie-manufacturer /products/ 301
+/small-batch-hoodie-manufacturer/ /products/ 301
+/small-batch-streetwear-manufacturer /products/ 301
+/small-batch-streetwear-manufacturer/ /products/ 301
+/small-batch-swimwear-manufacturer /products/ 301
+/small-batch-swimwear-manufacturer/ /products/ 301
+/small-batch-t-shirt-manufacturer /products/ 301
+/small-batch-t-shirt-manufacturer/ /products/ 301
+/social-media-marketing-guide /faq/ 301
+/social-media-marketing-guide/ /faq/ 301
+/socks-manufacturer /products/ 301
+/socks-manufacturer/ /products/ 301
+/sourcing-agent-service /all-services/ 301
+/sourcing-agent-service/ /all-services/ 301
+/sports-bra-manufacturer /products/ 301
+/sports-bra-manufacturer/ /products/ 301
+/sportswear-manufacturer /products/ 301
+/sportswear-manufacturer/ /products/ 301
+/startup-clothing-manufacturer /products/ 301
+/startup-clothing-manufacturer/ /products/ 301
+/streetwear-manufacturer /products/ 301
+/streetwear-manufacturer/ /products/ 301
+/sustainable-clothing-manufacturer /products/ 301
+/sustainable-clothing-manufacturer/ /products/ 301
+/sustainable-clothing-manufacturers /products/ 301
+/sustainable-clothing-manufacturers/ /products/ 301
+/sustainable-fashion-manufacturing-guide /faq/ 301
+/sustainable-fashion-manufacturing-guide/ /faq/ 301
+/sweater-manufacturer /products/ 301
+/sweater-manufacturer/ /products/ 301
+/sweatshirt-manufacturer /products/ 301
+/sweatshirt-manufacturer/ /products/ 301
+/swimwear-manufacturer /products/ 301
+/swimwear-manufacturer/ /products/ 301
+/t-shirt-manufacturer /products/ 301
+/t-shirt-manufacturer/ /products/ 301
+/tank-top-manufacturer /products/ 301
+/tank-top-manufacturer/ /products/ 301
+/tech-pack-guide /faq/ 301
+/tech-pack-guide/ /faq/ 301
+/technical-outerwear-manufacturer /products/ 301
+/technical-outerwear-manufacturer/ /products/ 301
+/tencel-clothing-manufacturer /products/ 301
+/tencel-clothing-manufacturer/ /products/ 301
+/textile-manufacturers /products/ 301
+/textile-manufacturers/ /products/ 301
+/toddler-clothing-manufacturer /products/ 301
+/toddler-clothing-manufacturer/ /products/ 301
+/top-50-clothing-manufacturers /about/ 301
+/top-50-clothing-manufacturers/ /about/ 301
+/top-fashion-manufacturers /about/ 301
+/top-fashion-manufacturers/ /about/ 301
+/top-garments-manufacturers /about/ 301
+/top-garments-manufacturers/ /about/ 301
+/trims-sourcing /all-services/ 301
+/trims-sourcing/ /all-services/ 301
+/underwear-manufacturer /products/ 301
+/underwear-manufacturer/ /products/ 301
+/uniform-manufacturer /products/ 301
+/uniform-manufacturer/ /products/ 301
+/washing-service /all-services/ 301
+/washing-service/ /all-services/ 301
+/wedding-dress-manufacturer /products/ 301
+/wedding-dress-manufacturer/ /products/ 301
+/white-label /white-label-manufacturer/ 301
+/white-label/ /white-label-manufacturer/ 301
+/wholesale-activewear-supplier /products/ 301
+/wholesale-activewear-supplier/ /products/ 301
+/wholesale-clothing-manufacturer /products/ 301
+/wholesale-clothing-manufacturer/ /products/ 301
+/wholesale-clothing-supplier /products/ 301
+/wholesale-clothing-supplier/ /products/ 301
+/wholesale-hoodie-supplier /products/ 301
+/wholesale-hoodie-supplier/ /products/ 301
+/wholesale-polo-shirt-supplier /products/ 301
+/wholesale-polo-shirt-supplier/ /products/ 301
+/wholesale-t-shirt-supplier /products/ 301
+/wholesale-t-shirt-supplier/ /products/ 301
+/wool-clothing-manufacturer /products/ 301
+/wool-clothing-manufacturer/ /products/ 301
+/workwear-manufacturer /products/ 301
+/workwear-manufacturer/ /products/ 301
+/yarn-sourcing /all-services/ 301
+/yarn-sourcing/ /all-services/ 301
+/yoga-pants-manufacturer /products/ 301
+/yoga-pants-manufacturer/ /products/ 301
+/yoga-wear-manufacturer /products/ 301
+/yoga-wear-manufacturer/ /products/ 301
+
+# ------------------------------------------------------------
+# Legacy redirects (pre-existing) — 3 of these previously
+# pointed at pages that were just deleted above, so their
+# targets are updated to still-live pages.
+# ------------------------------------------------------------
+/top-apparel-manufacturers /faq/ 301
+/top-apparel-manufacturers/ /faq/ 301
+/insights/quality-control-checklist /all-services/ 301
+/insights/quality-control-checklist/ /all-services/ 301
+/insights/EU-EPR-2026-guide /products/ 301
+/insights/EU-EPR-2026-guide/ /products/ 301
 /private-label-vs-white-label-vs-oem-vs-odm /white-label-manufacturer/ 301
 /private-label-vs-white-label-vs-oem-vs-odm/ /white-label-manufacturer/ 301
-/insights/quality-control-checklist /quality-inspection-service/ 301
-/insights/quality-control-checklist/ /quality-inspection-service/ 301
-/insights/EU-EPR-2026-guide /eu-epr-explained/ 301
-/insights/EU-EPR-2026-guide/ /eu-epr-explained/ 301

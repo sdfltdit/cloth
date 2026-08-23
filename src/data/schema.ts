@@ -221,7 +221,7 @@ export const schemaOrganization = {
     }
   ],
 
-  "certification": [
+  "hasCertification": [
     {
       "@type": "Certification",
       "name": "GOTS — Global Organic Textile Standard",

@@ -27,14 +27,15 @@
   }
 
   // Keywords to link mapping
+  // 2026-08-22 site prune: removed keywords whose target page no longer
+  // exists (garments/apparel/textile-manufacturers, t-shirt/hoodie
+  // manufacturer, garments factory — pages deleted in the cleanup) and
+  // three that were already pointing at non-existent URLs before the
+  // cleanup (sample request, manufacturing cost, production lead time,
+  // eu regulations — typo'd/never-built /guides/ paths). Every remaining
+  // URL below resolves to a real page.
   const linkMapFull = {
     'clothing manufacturers': '/clothing-manufacturers/',
-    'garments manufacturers': '/garments-manufacturers/',
-    'apparel manufacturers': '/apparel-manufacturers/',
-    't-shirt manufacturer': '/t-shirt-manufacturer/',
-    'hoodie manufacturer': '/hoodie-manufacturer/',
-    'textile manufacturers': '/textile-manufacturers/',
-    'garments factory': '/garments-factory/',
     'sustainability': '/sustainability/',
     'certifications': '/certifications/',
     'contact': '/contact/',
@@ -43,7 +44,6 @@
     'moq calculator': '/tools/moq-calculator/',
     'price calculator': '/tools/price-calculator/',
     'lead time calculator': '/tools/lead-time-calculator/',
-    'sample request': '/tools/sample-request/',
     'eu compliance': '/tools/eu-readiness-checker/',
     'bangladesh clothing': '/clothing-manufacturers/',
     'private label': '/products/',
@@ -56,10 +56,7 @@
     'fashion brands': '/products/',
     'international buyers': '/contact/',
     'bulk orders': '/products/',
-    'custom clothing': '/products/',
-    'manufacturing cost': '/guides/clothing-manufacturing-cost-bangladesh/',
-    'production lead time': '/guides/clothing-manufacturing-lead-time/',
-    'eu regulations': '/guides/eu-clothing-regulations-2026-2028/'
+    'custom clothing': '/products/'
   };
 
   // ── Two separate protections (the first one alone is NOT enough — see note) ──

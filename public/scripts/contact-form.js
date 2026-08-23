@@ -4,6 +4,21 @@
  * Overlay: viewport-unit cascade (vh→svh→dvh), safe-area aware,
  * sticky header/footer with scrollable body — tested for short
  * viewports, notch devices, and small phones (iPhone SE / 320px).
+ *
+ * ─────────────────────────────────────────────────────────────
+ * FIX (22 Aug 2026): the Worker's successful response returns the
+ * real, D1-backed Customer ID as `{ ok: true, customerId }` — but
+ * this file was reading `json.referenceId`, a field the Worker
+ * never sends. That made `result.referenceId` always null, so
+ * EVERY submission silently fell back to the local, fake
+ * generateFallbackId() below — a random ID that was never written
+ * to D1 and could never be looked up by anyone, including the
+ * WhatsApp bot. Customers were being shown an ID that didn't
+ * exist. Now reads `json.customerId` (with `json.referenceId` kept
+ * as a legacy fallback in case an older Worker deploy is briefly
+ * live), and no longer fabricates a fake-looking ID if the server
+ * genuinely didn't return one — see showThankYou() below.
+ * ─────────────────────────────────────────────────────────────
  */
 
 (function () {
@@ -11,15 +26,20 @@
 
   const WA_NUMBER = '8801819172080';
 
-  /* 1. Reference ID */
-  function generateRefId() {
+  /* 1. Fallback ID — ONLY used in the rare case the server responds
+   * ok:true but genuinely omits a customerId (e.g. a future Worker
+   * bug). Deliberately NOT formatted to look like a real Customer ID
+   * (no "SDF-" prefix), so it can never be confused with — or mistakenly
+   * typed into the WhatsApp bot as — a real, lookupable Customer ID.
+   */
+  function generateFallbackId() {
     const now  = new Date();
     const date = now.toISOString().slice(0, 10).replace(/-/g, '');
     const time = String(now.getHours()).padStart(2, '0')
                + String(now.getMinutes()).padStart(2, '0')
                + String(now.getSeconds()).padStart(2, '0');
     const rand = Math.floor(1000 + Math.random() * 9000);
-    return 'SDF-' + date + '-' + time + '-' + rand;
+    return 'PENDING-' + date + '-' + time + '-' + rand;
   }
 
   /* 2. Device info */
@@ -148,27 +168,48 @@
    *    space is actually available — no fragile calc() chains.
    *  - Header and footer are flex-shrink:0 (always fully visible);
    *    only the middle content area scrolls. This guarantees the
-   *    Close button and reference ID are NEVER cut off, regardless
+   *    Close button and Customer ID are NEVER cut off, regardless
    *    of screen height.
    *  - Safe-area insets are respected for notch / home-indicator
    *    devices via env(safe-area-inset-*).
+   *
+   * `customerId` here is the REAL, D1-backed ID from the Worker
+   * (e.g. "SDF000067US") — the same ID the WhatsApp bot can look up.
+   * `alreadySubmitted` + `duplicateMessage` cover the case where this
+   * email/phone already has an inquiry on file (Worker's cooldown/
+   * dedupe logic) — shown with slightly different copy so it's clear
+   * this isn't a brand-new submission.
    */
-  function showThankYou(geo, device, fillSeconds, referenceId) {
-    const refId   = referenceId || generateRefId();
-    const waText  = encodeURIComponent('Hi, my reference ID is ' + refId);
-    const waUrl   = 'https://wa.me/' + WA_NUMBER + '?text=' + waText;
-    const browser = getBrowserInfo();
-    const conn    = getConnectionType();
-    const tz      = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
-    const lang    = navigator.language || 'Unknown';
-    const scr     = window.screen.width + ' x ' + window.screen.height;
-    const timeStr = new Date().toLocaleString('en-GB', {
+  function showThankYou(geo, device, fillSeconds, customerId, alreadySubmitted, duplicateMessage) {
+    const hasRealId = !!customerId;
+    const refId    = customerId || generateFallbackId();
+    const waText   = hasRealId
+      ? encodeURIComponent('Hi, my Customer ID is ' + refId)
+      : encodeURIComponent('Hi, I submitted an inquiry but did not receive my Customer ID — could you help me look it up?');
+    const waUrl    = 'https://wa.me/' + WA_NUMBER + '?text=' + waText;
+    const browser  = getBrowserInfo();
+    const conn     = getConnectionType();
+    const tz       = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
+    const lang     = navigator.language || 'Unknown';
+    const scr      = window.screen.width + ' x ' + window.screen.height;
+    const timeStr  = new Date().toLocaleString('en-GB', {
       day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'
     });
     const referrer = document.referrer || window.location.hostname + '/';
     const fillStr  = fillSeconds > 0 ? fillSeconds.toFixed(1) + 's' : '-';
     const location = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
     const TOTAL    = 48 * 3600;
+
+    const headline = alreadySubmitted
+      ? 'Already On File'
+      : 'Message Received';
+    const noticeText = alreadySubmitted
+      ? (duplicateMessage || "We're already working on your inquiry — no need to submit again.")
+      : (hasRealId
+          ? 'Please check your inbox — a confirmation email is on its way.'
+          : "We've received your inquiry, but couldn't confirm your Customer ID here — it will be emailed to you shortly.");
+    const idLabel = hasRealId ? 'Customer ID' : 'Status';
+    const idValue = hasRealId ? refId : 'Pending — check email';
 
     const overlay = document.createElement('div');
     overlay.id = 'sdf-thankyou';
@@ -282,18 +323,18 @@
     <div style="width:30px;height:30px;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;">✓</div>
     <div style="flex:1;min-width:0;">
       <p style="font-size:0.6rem;letter-spacing:0.13em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin:0 0 2px;">Submission confirmed</p>
-      <p style="font-size:1.05rem;font-weight:700;color:#fff;margin:0;">Message Received</p>
+      <p style="font-size:1.05rem;font-weight:700;color:#fff;margin:0;">${headline}</p>
     </div>
     <div class="sdf-ref-badge" style="text-align:right;flex-shrink:0;">
-      <p style="font-size:0.55rem;color:rgba(255,255,255,0.45);margin:0 0 1px;letter-spacing:0.08em;text-transform:uppercase;">Reference</p>
-      <p style="font-size:0.63rem;font-family:monospace;color:#fff;margin:0;">${refId}</p>
+      <p style="font-size:0.55rem;color:rgba(255,255,255,0.45);margin:0 0 1px;letter-spacing:0.08em;text-transform:uppercase;">${idLabel}</p>
+      <p style="font-size:0.63rem;font-family:monospace;color:#fff;margin:0;">${idValue}</p>
     </div>
   </div>
 
   <!-- INBOX NOTICE -->
   <div style="display:flex;align-items:center;gap:10px;padding:0.7rem 1rem;background:rgba(204,0,0,0.12);border-bottom:0.5px solid #1e1e1e;">
     <span style="font-size:1.05rem;line-height:1;flex-shrink:0;">📩</span>
-    <p style="font-size:0.78rem;font-weight:700;color:#fff;margin:0;line-height:1.5;">Please check your inbox — a confirmation email is on its way.</p>
+    <p style="font-size:0.78rem;font-weight:700;color:#fff;margin:0;line-height:1.5;">${noticeText}</p>
   </div>
 
   <!-- SCROLLABLE BODY -->
@@ -342,7 +383,7 @@
     <div style="padding:0.8rem 1rem;display:flex;gap:0.85rem;align-items:center;">
       <div style="flex:1;min-width:0;">
         <p style="font-size:0.57rem;letter-spacing:0.15em;text-transform:uppercase;color:#cc0000;margin:0 0 0.3rem;">Scan to follow up</p>
-        <p style="font-size:0.66rem;color:rgba(255,255,255,0.35);margin:0 0 4px;line-height:1.5;">Opens WhatsApp with your reference ID pre-filled.</p>
+        <p style="font-size:0.66rem;color:rgba(255,255,255,0.35);margin:0 0 4px;line-height:1.5;">Opens WhatsApp with your Customer ID pre-filled.</p>
         <p style="font-size:0.58rem;font-family:monospace;color:rgba(255,255,255,0.2);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${refId}</p>
       </div>
       <canvas id="sdf-qr" width="76" height="76" style="display:block;flex-shrink:0;border:3px solid #fff;border-radius:4px;"></canvas>
@@ -408,16 +449,26 @@
     if (qrEl) drawQR(qrEl, waUrl);
   }
 
-  /* 8. Contact API submit */
+  /* 8. Contact API submit
+   * Reads `json.customerId` — the REAL field the Worker sends on success.
+   * `json.referenceId` is checked only as a legacy fallback (harmless if
+   * absent) in case an older cached Worker deploy briefly responds with
+   * a different shape during a rollout.
+   */
   async function submitContact(data) {
     const res  = await fetch('https://sdfltd.com/api/contact', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify(data),
     });
-    if (!res.ok) return { success: false, referenceId: null };
+    if (!res.ok) return { success: false, customerId: null, alreadySubmitted: false, message: null };
     const json = await res.json();
-    return { success: json.ok === true, referenceId: json.referenceId || null };
+    return {
+      success: json.ok === true,
+      customerId: json.customerId || json.referenceId || null,
+      alreadySubmitted: json.alreadySubmitted === true,
+      message: json.message || null,
+    };
   }
 
   /* 9. Main submit handler */
@@ -460,7 +511,7 @@
     data['_referrer']     = document.referrer || window.location.hostname + '/';
     data['_fill_time']    = fillSeconds.toFixed(1) + 's';
 
-    let result = { success: false, referenceId: null };
+    let result = { success: false, customerId: null, alreadySubmitted: false, message: null };
     try { result = await submitContact(data); } catch { /* skip */ }
 
     submit.disabled    = false;
@@ -468,7 +519,7 @@
 
     if (result.success) {
       form.reset();
-      showThankYou(geo, device, fillSeconds, result.referenceId);
+      showThankYou(geo, device, fillSeconds, result.customerId, result.alreadySubmitted, result.message);
     } else {
      alert('Whoops! Even we get tired sometimes 😅 Give it a moment and try again, or hit us up on WhatsApp we\'re always around.');
     }

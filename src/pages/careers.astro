@@ -925,7 +925,10 @@ const talentAreas = [
                 sessionStorage.setItem('sdf_cv_name',  nameVal);
                 sessionStorage.setItem('sdf_cv_email', emailVal);
                 sessionStorage.setItem('sdf_cv_area',  areaVal);
-                sessionStorage.setItem('sdf_cv_ref',   d.referenceId || '');
+                // Same defensive fix as contact-form.js / agreement.astro (22 Aug
+                // 2026 finding): prefer customerId in case this Worker uses the
+                // same field name as /api/contact, fall back to referenceId.
+                sessionStorage.setItem('sdf_cv_ref',   d.customerId || d.referenceId || '');
               } catch(err){}
               if (d.duplicate) {
                 showDuplicate(d.previousRef, d.previousDate, d.previousArea);
