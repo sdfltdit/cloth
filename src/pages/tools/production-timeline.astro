@@ -1,0 +1,930 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Production Timeline Calculator | SDF Clothing";
+const pageDescription = "Free clothing production timeline calculator. Enter your launch date and get every deadline mapped backwards — tech pack, sampling, production, QC, and freight.";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+
+  dateModified={new Date().toISOString().split("T")[0]}
+>
+
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://sdfltd.com/tools/production-timeline#app",
+      "name": "Clothing Production Timeline Calculator",
+      "url": "https://sdfltd.com/tools/production-timeline",
+      "description": "Free production timeline calculator for clothing brands. Enter a target launch or in-hand date and get every milestone mapped backwards — tech pack submission, proto sampling, pre-production sample approval, bulk production start, QC, packing, and sea or air freight transit. Built for brands sourcing from Bangladesh.",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Fashion Production Planning Tool",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "featureList": [
+        "Launch date reverse-engineering",
+        "Season preset shortcuts",
+        "Live countdown to start deadline",
+        "Status-based color coding per milestone",
+        "Milestone done tracker",
+        "Sea and air freight options",
+        "OEM, ODM, CMT, and private label support",
+        "Urgency alerts when timeline is at risk"
+      ],
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "provider": {
+        "@type": "Organization",
+        "name": "SDF Clothing",
+        "url": "https://sdfltd.com",
+        "@id": "https://sdfltd.com/#org"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "https://sdfltd.com/tools" },
+        { "@type": "ListItem", "position": 3, "name": "Production Timeline Calculator" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does clothing production take from Bangladesh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A standard OEM order of 500 to 2,000 pieces from Bangladesh takes roughly 90 days from tech pack confirmation to goods arriving in your warehouse by sea freight — around 3 to 5 days for order confirmation, 14 to 18 days for proto sampling, 7 days for buyer review, 7 to 10 days for the pre-production sample, 40 days for bulk cut and sew, and 40 to 43 days for sea freight from Chittagong. ODM and private label orders are somewhat faster because the factory starts from existing patterns."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When do I need to start production to hit a Christmas launch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For goods in a US warehouse by 1 December by sea freight from Bangladesh, a container typically needs to leave Chittagong around 10 to 15 October. Working back from there, bulk production needs to start by around 1 September, pre-production sample sign-off by 20 August, and tech pack submission by early-to-mid July at the latest."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a pre-production sample and why does it matter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A pre-production sample (PP sample) is made in the actual bulk fabric and confirmed trims, after the first proto sample has been approved. It is the final check before cutting begins on the full order. Any issues found at this stage are far cheaper to fix than after the bulk run is complete."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use air freight from Bangladesh if my timeline is too tight?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Air freight from Dhaka takes roughly 5 to 7 days compared with 40 to 43 days by sea from Chittagong. The trade-off is cost — air freight runs approximately four to five times more per kilogram than sea, which can add significantly to your landed cost per unit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the biggest cause of delays in clothing production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The single most common cause is an incomplete tech pack at the start, which forces the factory to ask clarifying questions before they can begin — sometimes delaying the sample by one to two weeks before anything is cut. The second is slow sample approval: every additional revision round adds 12 to 18 days."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --r: #e00;
+    --rd: #c00;
+    --g: #22c55e;
+    --y: #f59e0b;
+    --b: #60a5fa;
+    --border: rgba(255,255,255,0.08);
+    --surface: #0d0d0d;
+    --text: rgba(255,255,255,0.65);
+    --muted: rgba(255,255,255,0.35);
+    --label: rgba(255,255,255,0.68);
+  }
+
+  .tool-page { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* Breadcrumb */
+  .crumb-nav ol { display:flex; gap:0.5rem; list-style:none; font-size:0.7rem; color:var(--muted); flex-wrap:wrap; margin-bottom:2rem; }
+  .crumb-nav a { color:var(--muted); text-decoration:none; }
+  .crumb-nav a:hover { color:#fff; }
+  .crumb-sep { color:rgba(255,255,255,0.15); }
+
+  /* Hero */
+  .hero { margin-bottom:2rem; }
+  .hero-eyebrow { font-size:0.66rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--r); font-weight:600; margin-bottom:0.75rem; display:block; }
+  .hero h1 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:200; color:#fff; letter-spacing:0.02em; line-height:1.15; margin:0 0 0.8rem; }
+  .hero h1 em { font-style:normal; color:var(--r); }
+  .hero-sub { font-size:0.9rem; color:var(--text); max-width:560px; line-height:1.85; margin-bottom:1.25rem; }
+  .pill-row { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:0; }
+  .pill { font-size:0.67rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--muted); border:0.5px solid rgba(255,255,255,0.1); padding:0.28rem 0.7rem; border-radius:100px; }
+
+  /* App layout */
+  .app {
+    display:grid; grid-template-columns:290px 1fr;
+    border:0.5px solid var(--border); border-radius:6px; overflow:hidden;
+    margin:2rem 0 3rem;
+  }
+  @media(max-width:720px){ .app { grid-template-columns:1fr; } }
+
+  /* Left panel */
+  .left {
+    background:var(--surface); border-right:0.5px solid var(--border);
+    padding:1.25rem 1rem; display:flex; flex-direction:column; gap:1rem;
+    overflow-y:auto;
+  }
+  @media(max-width:720px){ .left { border-right:none; border-bottom:0.5px solid var(--border); } }
+
+  .sec-lbl { font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:0.45rem; display:block; }
+
+  /* Countdown */
+  .cd-box { background:#000; border:0.5px solid var(--border); border-radius:5px; padding:1rem 0.75rem; text-align:center; }
+  .cd-num { font-size:2.8rem; font-weight:200; line-height:1; margin-bottom:0.2rem; transition:color 0.3s; }
+  .cd-sub { font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.3s; }
+  .cd-bar { height:3px; border-radius:100px; margin-top:0.75rem; transition:background 0.3s, width 0.5s; }
+
+  /* Season grid */
+  .sg { display:grid; grid-template-columns:1fr 1fr; gap:0.4rem; }
+  .sb {
+    background:#000; border:0.5px solid var(--border); border-radius:4px;
+    padding:0.55rem 0.5rem; font-size:0.7rem; color:var(--text);
+    cursor:pointer; text-align:center; font-family:inherit; line-height:1.35;
+    transition:all 0.15s;
+  }
+  .sb:hover { border-color:var(--r); color:var(--r); }
+  .sb.active { border-color:var(--r); background:rgba(238,0,0,0.07); color:var(--r); }
+  .sb strong { display:block; font-size:0.65rem; font-weight:600; margin-bottom:0.15rem; }
+  .sb:focus-visible { outline:2px solid var(--r); outline-offset:2px; }
+
+  /* Inputs */
+  .ig { display:flex; flex-direction:column; gap:0.35rem; }
+  .ig label { font-size:0.65rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+  .ig input, .ig select {
+    background:#000; color:#fff; border:0.5px solid var(--border);
+    padding:0.65rem 0.75rem; font-size:0.84rem; width:100%;
+    border-radius:4px; font-family:inherit; appearance:none; -webkit-appearance:none;
+    outline:none; color-scheme:dark; min-height:40px; transition:border-color 0.18s;
+  }
+  .ig input:focus, .ig select:focus { border-color:var(--r); outline:2px solid rgba(238,0,0,0.18); outline-offset:2px; }
+  .ig select option { background:#111; }
+
+  /* Alert pill */
+  .ap {
+    border-radius:4px; padding:0.65rem 0.75rem; font-size:0.76rem;
+    line-height:1.55; display:flex; align-items:flex-start; gap:0.5rem;
+    border:0.5px solid; transition:all 0.3s;
+  }
+  .ap-icon { flex-shrink:0; font-size:0.9rem; margin-top:1px; }
+  .ap-g { background:rgba(34,197,94,0.07); border-color:rgba(34,197,94,0.3); color:#15803d; }
+  .ap-y { background:rgba(245,158,11,0.07); border-color:rgba(245,158,11,0.3); color:#b45309; }
+  .ap-r { background:rgba(238,0,0,0.07); border-color:rgba(238,0,0,0.3); color:#b91c1c; }
+
+  /* Right panel */
+  .right { background:#000; padding:1.25rem 1.1rem; min-height:420px; }
+
+  .empty-state {
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    height:100%; min-height:340px; gap:0.75rem; text-align:center; color:var(--muted);
+  }
+  .empty-icon { font-size:2.5rem; opacity:0.2; }
+  .empty-state p { font-size:0.84rem; max-width:200px; line-height:1.65; }
+
+  /* Summary */
+  .sum-row { display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem; margin-bottom:1rem; }
+  @media(max-width:480px){ .sum-row { grid-template-columns:1fr; } }
+  .sc { border-radius:4px; padding:0.75rem 0.85rem; border:0.5px solid; }
+  .sc-lbl { font-size:0.61rem; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.3rem; }
+  .sc-val { font-size:1.25rem; font-weight:200; line-height:1; }
+
+  /* Summary color states */
+  .sc-green { background:rgba(34,197,94,0.07); border-color:rgba(34,197,94,0.3); }
+  .sc-green .sc-lbl { color:#15803d; } .sc-green .sc-val { color:#22c55e; }
+  .sc-amber { background:rgba(245,158,11,0.07); border-color:rgba(245,158,11,0.3); }
+  .sc-amber .sc-lbl { color:#b45309; } .sc-amber .sc-val { color:#f59e0b; }
+  .sc-red { background:rgba(238,0,0,0.07); border-color:rgba(238,0,0,0.3); }
+  .sc-red .sc-lbl { color:#b91c1c; } .sc-red .sc-val { color:#ef4444; }
+  .sc-neutral { background:var(--surface); border-color:var(--border); }
+  .sc-neutral .sc-lbl { color:var(--muted); } .sc-neutral .sc-val { color:#fff; }
+
+  /* Progress bar */
+  .pbar-wrap { margin-bottom:1.1rem; }
+  .pbar-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem; }
+  .pbar-lbl { font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+  .pbar-pct { font-size:0.72rem; font-weight:500; transition:color 0.3s; }
+  .pbar-track { height:5px; background:rgba(255,255,255,0.07); border-radius:100px; overflow:hidden; }
+  .pbar-fill { height:100%; border-radius:100px; transition:width 0.7s cubic-bezier(.25,.8,.25,1), background 0.4s; }
+  .pbar-phases { display:flex; gap:0.85rem; margin-top:0.5rem; flex-wrap:wrap; }
+  .pbar-phase { display:flex; align-items:center; gap:0.3rem; font-size:0.65rem; color:var(--muted); }
+  .phase-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+
+  /* Milestones */
+  .ms-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:0.85rem; }
+  .ms-hl { font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+  .ms-meta { font-size:0.7rem; color:var(--muted); }
+
+  .ms-list { position:relative; display:flex; flex-direction:column; }
+  .ms-list::before { content:''; position:absolute; left:10px; top:10px; bottom:10px; width:0.5px; background:var(--border); z-index:0; }
+
+  .ms-item { display:flex; gap:0.85rem; padding-bottom:0.85rem; position:relative; }
+  .ms-item:last-child { padding-bottom:0; }
+
+  .ms-dot-col { flex-shrink:0; width:20px; display:flex; justify-content:center; padding-top:4px; z-index:1; }
+  .ms-dot { width:10px; height:10px; border-radius:50%; border:1.5px solid; flex-shrink:0; transition:all 0.2s; }
+
+  /* Dot colors */
+  .dot-done     { background:var(--g); border-color:var(--g); box-shadow:0 0 0 3px rgba(34,197,94,0.15); }
+  .dot-past     { background:var(--g); border-color:var(--g); }
+  .dot-critical { background:#ef4444; border-color:#ef4444; box-shadow:0 0 8px rgba(239,68,68,0.5); }
+  .dot-warning  { background:var(--y); border-color:var(--y); box-shadow:0 0 6px rgba(245,158,11,0.4); }
+  .dot-ok       { background:transparent; border-color:rgba(255,255,255,0.2); }
+  .dot-launch   { background:var(--r); border-color:var(--r); box-shadow:0 0 10px rgba(238,0,0,0.5); }
+
+  /* Milestone cards */
+  .ms-card { border-radius:4px; border:0.5px solid; padding:0.75rem 0.9rem; transition:border-color 0.2s, background 0.2s; }
+
+  .mc-done     { background:rgba(34,197,94,0.06); border-color:rgba(34,197,94,0.3); }
+  .mc-past     { background:rgba(34,197,94,0.04); border-color:rgba(34,197,94,0.15); }
+  .mc-critical { background:rgba(239,68,68,0.06); border-color:rgba(239,68,68,0.3); }
+  .mc-warning  { background:rgba(245,158,11,0.05); border-color:rgba(245,158,11,0.25); }
+  .mc-ok       { background:var(--surface); border-color:var(--border); }
+  .mc-launch   { background:rgba(238,0,0,0.06); border-color:rgba(238,0,0,0.3); }
+
+  .ms-date { font-size:0.67rem; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.2rem; font-weight:500; }
+  .date-done     { color:#16a34a; }
+  .date-past     { color:#16a34a; }
+  .date-critical { color:#ef4444; }
+  .date-warning  { color:#d97706; }
+  .date-ok       { color:var(--muted); }
+  .date-launch   { color:var(--r); }
+
+  .ms-title { font-size:0.88rem; font-weight:500; color:#fff; line-height:1.3; margin-bottom:0.25rem; }
+  .ms-desc  { font-size:0.76rem; color:var(--muted); line-height:1.65; margin-bottom:0.5rem; }
+
+  .ms-bottom { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.4rem; }
+  .ms-right  { display:flex; align-items:center; gap:0.4rem; }
+
+  /* Badges */
+  .badge { font-size:0.62rem; padding:0.18rem 0.55rem; border-radius:100px; border:0.5px solid; display:inline-flex; align-items:center; gap:0.25rem; letter-spacing:0.05em; }
+  .bg-factory { border-color:rgba(238,0,0,0.3); color:#b91c1c; }
+  .bg-buyer   { border-color:rgba(255,255,255,0.18); color:var(--muted); }
+  .bg-ship    { border-color:rgba(96,165,250,0.3); color:#60a5fa; }
+  .bg-launch  { border-color:rgba(34,197,94,0.3); color:#22c55e; }
+
+  /* Status chips */
+  .chip { font-size:0.62rem; padding:0.18rem 0.55rem; border-radius:100px; border:0.5px solid; font-weight:500; }
+  .chip-done     { background:rgba(34,197,94,0.12); border-color:rgba(34,197,94,0.4); color:#16a34a; }
+  .chip-past     { background:rgba(34,197,94,0.08); border-color:rgba(34,197,94,0.25); color:#16a34a; }
+  .chip-critical { background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.35); color:#ef4444; }
+  .chip-warning  { background:rgba(245,158,11,0.1); border-color:rgba(245,158,11,0.35); color:#d97706; }
+  .chip-ok       { background:var(--surface); border-color:var(--border); color:var(--muted); }
+  .chip-launch   { background:rgba(238,0,0,0.1); border-color:rgba(238,0,0,0.35); color:var(--r); }
+
+  /* Mark done button */
+  .chk-btn {
+    background:none; border:0.5px solid var(--border); border-radius:4px;
+    padding:0.2rem 0.55rem; font-size:0.62rem; color:var(--muted); cursor:pointer;
+    font-family:inherit; display:flex; align-items:center; gap:0.25rem;
+    transition:all 0.15s; white-space:nowrap;
+  }
+  .chk-btn:hover { border-color:var(--g); color:var(--g); }
+  .chk-btn.done { border-color:rgba(34,197,94,0.5); color:var(--g); background:rgba(34,197,94,0.08); }
+  .chk-btn:focus-visible { outline:2px solid var(--g); outline-offset:2px; }
+
+  /* CTA box */
+  .cta-box {
+    background:var(--surface); border:0.5px solid var(--border);
+    border-radius:5px; padding:1rem 1.1rem;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:0.75rem; flex-wrap:wrap; margin-top:1rem;
+  }
+  .cta-box p { font-size:0.78rem; color:var(--text); line-height:1.6; flex:1; }
+  .btn-solid {
+    background:var(--r); color:#fff; border:none; padding:0.7rem 1.25rem;
+    font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase;
+    border-radius:3px; font-family:inherit; cursor:pointer; white-space:nowrap;
+    text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem;
+    transition:background 0.18s; min-height:40px;
+  }
+  .btn-solid:hover { background:var(--rd); }
+  .btn-solid:focus-visible { outline:2px solid #fff; outline-offset:2px; }
+  .whatsapp-btn {
+    background:transparent; color:var(--g); border:0.5px solid rgba(34,197,94,0.4);
+    padding:0.7rem 1.1rem; font-size:0.72rem; letter-spacing:0.12em;
+    text-transform:uppercase; border-radius:3px; font-family:inherit;
+    cursor:pointer; white-space:nowrap; text-decoration:none;
+    display:inline-flex; align-items:center; gap:0.35rem;
+    transition:background 0.18s; min-height:40px;
+  }
+  .whatsapp-btn:hover { background:rgba(34,197,94,0.08); }
+  .cta-btns { display:flex; gap:0.5rem; flex-wrap:wrap; }
+
+  .disclaimer { font-size:0.69rem; color:var(--muted); line-height:1.7; margin-top:0.85rem; padding-top:0.85rem; border-top:0.5px solid var(--border); }
+
+  /* SEO content */
+  .seo { border-top:0.5px solid var(--border); padding-top:3rem; }
+  .seo h2 { font-size:1.3rem; font-weight:300; color:#fff; margin:2.5rem 0 0.9rem; letter-spacing:0.03em; }
+  .seo h2:first-child { margin-top:0; }
+  .seo h3 { font-size:0.97rem; font-weight:500; color:#fff; margin:1.75rem 0 0.55rem; }
+  .seo p { font-size:0.875rem; color:var(--text); line-height:1.9; margin-bottom:1rem; }
+  .seo ul { margin:0.75rem 0 1rem; padding:0; list-style:none; }
+  .seo li { font-size:0.875rem; color:var(--text); line-height:1.8; padding-left:1.2rem; position:relative; margin-bottom:0.3rem; }
+  .seo li::before { content:'—'; position:absolute; left:0; color:var(--r); }
+  .seo a { color:var(--r); text-decoration:none; }
+  .seo a:hover { text-decoration:underline; }
+  .last-updated { font-size:0.69rem; color:var(--muted); margin-bottom:2rem; }
+
+  .data-table { width:100%; border-collapse:collapse; margin:1.25rem 0; font-size:0.82rem; }
+  .data-table th { font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); padding:0.6rem 0.75rem; border-bottom:0.5px solid var(--border); text-align:left; font-weight:400; }
+  .data-table td { padding:0.65rem 0.75rem; color:var(--text); border-bottom:0.5px solid rgba(255,255,255,0.04); vertical-align:top; }
+  .data-table tr:last-child td { border-bottom:none; }
+  .data-table td:first-child { color:#fff; font-weight:500; }
+
+  .season-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.5px; background:var(--border); margin:1.25rem 0; border-radius:3px; overflow:hidden; }
+  @media(max-width:460px){ .season-grid { grid-template-columns:1fr; } }
+  .sg-item { background:#000; padding:0.9rem 1rem; }
+  .sg-item strong { color:#fff; font-size:0.82rem; display:block; margin-bottom:0.2rem; }
+  .sg-item span { color:var(--muted); font-size:0.76rem; line-height:1.6; }
+
+  /* FAQ accordion */
+  .faq-list { margin:1.25rem 0; }
+  .faq-item { border-bottom:0.5px solid var(--border); }
+  .faq-item:first-child { border-top:0.5px solid var(--border); }
+  .faq-btn {
+    width:100%; background:none; border:none; color:#fff; cursor:pointer;
+    padding:1rem 0; font-size:0.88rem; font-weight:500; font-family:inherit;
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    text-align:left; line-height:1.45; transition:color 0.15s;
+  }
+  .faq-btn:hover { color:var(--r); }
+  .faq-btn:focus-visible { outline:2px solid var(--r); outline-offset:3px; }
+  .faq-icon {
+    flex-shrink:0; width:22px; height:22px; border:0.5px solid rgba(255,255,255,0.2);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem; color:rgba(255,255,255,0.4); transition:all 0.22s;
+  }
+  .faq-btn[aria-expanded="true"] .faq-icon { border-color:var(--r); color:var(--r); transform:rotate(45deg); }
+  .faq-answer { overflow:hidden; max-height:0; transition:max-height 0.38s ease, padding 0.2s ease; font-size:0.85rem; color:var(--text); line-height:1.9; }
+  .faq-answer.open { max-height:500px; padding-bottom:1rem; }
+  .faq-answer p { margin:0; }
+
+  @media(prefers-reduced-motion:reduce){
+    .pbar-fill, .faq-answer, .faq-icon { transition:none; }
+  }
+</style>
+
+<div class="tool-page">
+
+  <nav class="crumb-nav" aria-label="Breadcrumb">
+    <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+        <meta itemprop="position" content="1" />
+      </li>
+      <li class="crumb-sep">/</li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/tools/" itemprop="item"><span itemprop="name">Free Tools</span></a>
+        <meta itemprop="position" content="2" />
+      </li>
+      <li class="crumb-sep">/</li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span style="color:#fff;" itemprop="name">Production Timeline Calculator</span>
+        <meta itemprop="position" content="3" />
+      </li>
+    </ol>
+  </nav>
+
+  <div class="hero">
+    <span class="hero-eyebrow">Free Tool · No Signup Required</span>
+    <h1>When do you need to<br><em>start</em> your order?</h1>
+    <p class="hero-sub">Pick your launch date. This tool works backwards through every stage your clothing manufacturer handles — tech pack, sampling, bulk production, and freight — and tells you exactly when each step has to happen. Most brands miss their season not because the factory was slow, but because they started 30 to 60 days too late.</p>
+    <div class="pill-row">
+      <span class="pill">Works backwards from launch</span>
+      <span class="pill">OEM / ODM / CMT / Private label</span>
+      <span class="pill">Sea &amp; air freight</span>
+      <span class="pill">Live status colors</span>
+      <span class="pill">Milestone tracker</span>
+    </div>
+  </div>
+
+  <div class="app">
+
+    <!-- LEFT PANEL -->
+    <div class="left">
+
+      <div>
+        <span class="sec-lbl">Days until start deadline</span>
+        <div class="cd-box">
+          <div class="cd-num" id="cd-num" style="color:var(--muted)">—</div>
+          <div class="cd-sub" id="cd-sub" style="color:var(--muted)">Select a launch date</div>
+          <div class="cd-bar" id="cd-bar" style="background:var(--border);width:100%;"></div>
+        </div>
+      </div>
+
+      <div>
+        <span class="sec-lbl">Quick season presets</span>
+        <div class="sg">
+          <button class="sb" data-date="2026-12-01" type="button"><strong>Christmas</strong>1 Dec 2026</button>
+          <button class="sb" data-date="2027-03-01" type="button"><strong>Spring / SS</strong>1 Mar 2027</button>
+          <button class="sb" data-date="2027-08-01" type="button"><strong>Back to school</strong>1 Aug 2027</button>
+          <button class="sb" data-date="2026-11-15" type="button"><strong>Black Friday</strong>15 Nov 2026</button>
+        </div>
+      </div>
+
+      <div class="ig">
+        <label for="launch-date">Or enter your own date</label>
+        <input type="date" id="launch-date" aria-label="Target launch or in-hand date" />
+      </div>
+
+      <div class="ig">
+        <label for="ship-mode">Shipping mode</label>
+        <select id="ship-mode" aria-label="Select shipping mode">
+          <option value="sea">Sea freight — ~40 days from Chittagong</option>
+          <option value="air">Air freight — ~5 days from Dhaka</option>
+        </select>
+      </div>
+
+      <div class="ig">
+        <label for="svc-type">Production type</label>
+        <select id="svc-type" aria-label="Select production type">
+          <option value="oem">OEM — I have my own tech pack</option>
+          <option value="odm">ODM — Need design assistance</option>
+          <option value="cmt">CMT — I supply my own fabric</option>
+          <option value="private">Private Label</option>
+        </select>
+      </div>
+
+      <div class="ig">
+        <label for="order-qty">Order quantity</label>
+        <select id="order-qty" aria-label="Select order quantity">
+          <option value="small">300–500 pieces</option>
+          <option value="medium" selected>500–2,000 pieces</option>
+          <option value="large">2,000–10,000 pieces</option>
+          <option value="xlarge">10,000+ pieces</option>
+        </select>
+      </div>
+
+      <div id="alert-pill" style="display:none;" aria-live="polite"></div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right">
+
+      <div class="empty-state" id="empty-state" aria-label="Empty state">
+        <div class="empty-icon" aria-hidden="true">⏱</div>
+        <p>Pick a launch date or season preset to build your production timeline</p>
+      </div>
+
+      <div id="results-panel" style="display:none;" aria-live="polite">
+
+        <div class="sum-row" id="sum-row"></div>
+
+        <div class="pbar-wrap">
+          <div class="pbar-top">
+            <span class="pbar-lbl">Production journey</span>
+            <span class="pbar-pct" id="pbar-pct"></span>
+          </div>
+          <div class="pbar-track">
+            <div class="pbar-fill" id="pbar-fill" style="width:0%;"></div>
+          </div>
+          <div class="pbar-phases">
+            <span class="pbar-phase"><span class="phase-dot" style="background:rgba(255,255,255,0.3)"></span>Tech pack</span>
+            <span class="pbar-phase"><span class="phase-dot" style="background:var(--y)"></span>Sampling</span>
+            <span class="pbar-phase"><span class="phase-dot" style="background:var(--r)"></span>Bulk production</span>
+            <span class="pbar-phase"><span class="phase-dot" style="background:var(--b)"></span>Freight</span>
+            <span class="pbar-phase"><span class="phase-dot" style="background:var(--g)"></span>Launched</span>
+          </div>
+        </div>
+
+        <div class="ms-header">
+          <span class="ms-hl">Every deadline, in order</span>
+          <span class="ms-meta" id="ms-meta"></span>
+        </div>
+
+        <div class="ms-list" id="ms-list" aria-label="Production milestones"></div>
+
+        <div class="cta-box">
+          <p id="cta-text">SDF Clothing offers 14-day sample turnaround and 40-day bulk production from a confirmed order. Production slots fill 60–90 days ahead of peak season.</p>
+          <div class="cta-btns">
+            <a href="/contact/" class="btn-solid" title="Book your production slot at SDF Clothing">
+              Book a Slot →
+            </a>
+            <a href="https://wa.me/8801819172080?text=Hi%20SDF%2C%20I%20used%20your%20production%20timeline%20calculator%20and%20want%20to%20discuss%20a%20slot." target="_blank" rel="noopener noreferrer" class="whatsapp-btn" title="WhatsApp SDF Clothing">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp Us
+            </a>
+          </div>
+        </div>
+
+        <p class="disclaimer">Estimates based on SDF Clothing's standard production schedule from Dhaka, Bangladesh. Actual dates depend on tech pack completeness, fabric availability, sample approval speed, and confirmed order timing. Sea freight: 38–45 days from Chittagong. Air freight: 5–7 days from Dhaka. Add 3–7 days for destination customs clearance. All timelines assume working days, excluding Bangladesh public holidays.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO CONTENT -->
+  <div class="seo">
+
+    <p class="last-updated">Last updated: 13 June 2026</p>
+
+    <h2>How Long Does Clothing Production Actually Take From Bangladesh?</h2>
+    <p>New brands consistently underestimate this. A standard OEM order of 500 to 2,000 pieces from Bangladesh takes around 90 days from the point your tech pack is confirmed to the moment goods arrive in your warehouse by sea freight. That's not 90 days of the factory being busy — it's 90 days of specific, sequential steps where each one has to be done before the next can begin.</p>
+
+    <table class="data-table">
+      <thead><tr><th>Stage</th><th>Who acts</th><th>Typical duration</th></tr></thead>
+      <tbody>
+        <tr><td>Tech pack review and order confirmation</td><td>Buyer and factory</td><td>3–5 days</td></tr>
+        <tr><td>30% deposit payment</td><td>Buyer</td><td>1–2 days</td></tr>
+        <tr><td>Proto / first sample</td><td>Factory</td><td>12–18 days</td></tr>
+        <tr><td>Buyer review and revision feedback</td><td>Buyer</td><td>5–7 days</td></tr>
+        <tr><td>Pre-production sample (bulk fabric)</td><td>Factory</td><td>7–10 days</td></tr>
+        <tr><td>PP sample sign-off</td><td>Buyer</td><td>3–5 days</td></tr>
+        <tr><td>Bulk cut and sew production</td><td>Factory</td><td>30–50 days</td></tr>
+        <tr><td>Final QC, packing, and export documents</td><td>Factory</td><td>3–5 days</td></tr>
+        <tr><td>Sea freight (Chittagong to destination)</td><td>Freight forwarder</td><td>38–45 days</td></tr>
+        <tr><td>Customs clearance</td><td>Buyer's broker</td><td>3–7 days</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Seasonal Deadlines That Catch Brands Out</h2>
+    <p>Working backwards from common retail seasons — assuming one round of proto sample revisions. Add two to three weeks if you expect a second round.</p>
+
+    <div class="season-grid">
+      <div class="sg-item"><strong>Christmas / Holiday (US, in-hand 1 Dec)</strong><span>Tech pack by early-to-mid July. Container leaves Chittagong around 10–15 October.</span></div>
+      <div class="sg-item"><strong>Spring / Summer (EU, in-hand 1 Mar)</strong><span>Tech pack by early November of the previous year. Container departure around 20–25 January.</span></div>
+      <div class="sg-item"><strong>Back to School (US, in-hand 1 Aug)</strong><span>Tech pack by early-to-mid April. Container departure around 15–20 June.</span></div>
+      <div class="sg-item"><strong>Black Friday (US, in-hand 15 Nov)</strong><span>Tech pack by mid-to-late June. Container departure around 25–30 September.</span></div>
+    </div>
+
+    <h2>The Two Things That Delay Most Orders</h2>
+    <p>In practice, two issues cause the majority of missed deadlines — and both sit on the buyer's side. The first is an incomplete tech pack at the start. If the factory has to ask for missing measurements or construction details before cutting the sample, that back-and-forth adds one to two weeks before a single stitch is sewn. The second is slow sample approval. Each extra revision round adds 12 to 18 days. Brands that review samples promptly and send precise written comments consistently get their orders finished faster.</p>
+
+    <h2>OEM, ODM, CMT, or Private Label — What's the Difference?</h2>
+    <ul>
+      <li><strong style="color:#fff;">OEM</strong> — you provide a complete tech pack; the factory builds exactly to it. The longest lead time, the most design control.</li>
+      <li><strong style="color:#fff;">ODM</strong> — the factory has existing patterns you modify and brand. Sampling starts faster. Good for brands scaling without a design team.</li>
+      <li><strong style="color:#fff;">CMT</strong> — you source and ship the fabric; the factory only cuts, sews, and finishes. Removes factory fabric sourcing time but shifts that risk to you.</li>
+      <li><strong style="color:#fff;">Private Label</strong> — the factory has finished styles you relabel. The fastest route to market, with the least customisation.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false">
+          How long does clothing production take from Bangladesh?
+          <i class="faq-icon" aria-hidden="true">+</i>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>A standard OEM order of 500 to 2,000 pieces takes roughly 90 days from tech pack approval to goods in your warehouse by sea freight — about 3 to 5 days for order confirmation, 14 to 18 days for proto sampling, 7 days for buyer review, 7 to 10 days for the pre-production sample, 40 days bulk production, and 40 to 43 days sea freight from Chittagong.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false">
+          When do I need to start for a Christmas launch?
+          <i class="faq-icon" aria-hidden="true">+</i>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>For goods in a US warehouse by 1 December via sea freight, a container needs to leave Chittagong around 10 to 15 October. Working back: bulk production starts around 1 September, pre-production sample sign-off by 20 August, and tech pack submission by early-to-mid July. The calculator above gives exact dates for your setup.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false">
+          What is a pre-production sample and why does it matter?
+          <i class="faq-icon" aria-hidden="true">+</i>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>A PP sample is made in actual bulk fabric with confirmed trims, after the proto sample is approved. It's the final check before cutting the full order. Issues found at PP stage are far cheaper to fix than after the bulk run is complete.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false">
+          Can I use air freight if my timeline is too tight?
+          <i class="faq-icon" aria-hidden="true">+</i>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>Yes — air freight from Dhaka takes 5 to 7 days versus 40 to 43 by sea. Air runs roughly four to five times more per kilogram. If your window is very tight, a hybrid approach — sea for most of the order, air for a smaller opening quantity — can make commercial sense depending on your margin.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false">
+          What causes the most delays in garment production?
+          <i class="faq-icon" aria-hidden="true">+</i>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>An incomplete tech pack is the biggest cause — the factory has to ask for missing details before cutting the sample, which adds one to two weeks before any work begins. Second is slow sample approval: each extra revision adds 12 to 18 days. Brands that approve quickly with precise written comments get their orders finished faster, consistently.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" type="button" aria-expanded="false">
+          What other free tools help with planning a clothing order?
+          <i class="faq-icon" aria-hidden="true">+</i>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>The <a href="/tools/garment-cost-calculator" title="Garment cost calculator">Garment Cost Calculator</a> shows your full landed cost and margin once you have a quote. The <a href="/tools/manufacturer-email-generator" title="Manufacturer email generator">Manufacturer Email Generator</a> builds the right message for every stage of your factory conversation. And if you're shipping to the EU, the <a href="/tools/eu-readiness-checker" title="GPSR compliance checker">GPSR Compliance Checker</a> covers what documentation your factory needs to provide. For the reasoning behind each stage shown above, see our clothing manufacturing lead time guide.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  const doneMap = {};
+
+  function sub(d, n) { const x = new Date(d); x.setDate(x.getDate() - n); return x; }
+  function fmtLong(d) { return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); }
+  function fmtShort(d) { return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); }
+  function gap(a, b) { return Math.round((b - a) / 86400000); }
+
+  function getStatus(date, today, isDone, isPast, isLaunch) {
+    if (isLaunch) return 'launch';
+    if (isDone)   return 'done';
+    if (isPast)   return 'past';
+    const d = gap(today, date);
+    if (d <= 7)  return 'critical';
+    if (d <= 21) return 'warning';
+    return 'ok';
+  }
+
+  const STATUS = {
+    done:     { dot: 'dot-done',     card: 'mc-done',     dateClass: 'date-done',     chip: 'chip-done',     chipText: 'Done ✓' },
+    past:     { dot: 'dot-past',     card: 'mc-past',     dateClass: 'date-past',     chip: 'chip-past',     chipText: 'Past' },
+    critical: { dot: 'dot-critical', card: 'mc-critical', dateClass: 'date-critical', chip: 'chip-critical', chipText: 'This week' },
+    warning:  { dot: 'dot-warning',  card: 'mc-warning',  dateClass: 'date-warning',  chip: 'chip-warning',  chipText: 'Coming up' },
+    ok:       { dot: 'dot-ok',       card: 'mc-ok',       dateClass: 'date-ok',       chip: 'chip-ok',       chipText: 'Upcoming' },
+    launch:   { dot: 'dot-launch',   card: 'mc-launch',   dateClass: 'date-launch',   chip: 'chip-launch',   chipText: 'Launch' }
+  };
+
+  function calc() {
+    const dv = document.getElementById('launch-date').value;
+    const emptyEl = document.getElementById('empty-state');
+    const resEl   = document.getElementById('results-panel');
+    const apEl    = document.getElementById('alert-pill');
+
+    if (!dv) {
+      emptyEl.style.display = 'flex';
+      resEl.style.display   = 'none';
+      apEl.style.display    = 'none';
+      const cdNum = document.getElementById('cd-num');
+      cdNum.textContent = '—'; cdNum.style.color = 'var(--muted)';
+      document.getElementById('cd-sub').textContent = 'Select a launch date';
+      document.getElementById('cd-sub').style.color = 'var(--muted)';
+      document.getElementById('cd-bar').style.background = 'var(--border)';
+      return;
+    }
+
+    const launch = new Date(dv);
+    const svc    = document.getElementById('svc-type').value;
+    const qty    = document.getElementById('order-qty').value;
+    const ship   = document.getElementById('ship-mode').value;
+    const today  = new Date(); today.setHours(0, 0, 0, 0);
+
+    const freight  = ship === 'air' ? 7 : 43;
+    const customs  = 5;
+    const prod     = { small: 30, medium: 40, large: 52, xlarge: 68 }[qty];
+    const samp     = (svc === 'odm' || svc === 'private') ? 13 : 18;
+    const pp       = svc === 'cmt' ? 0 : 10;
+    const ppR      = svc === 'cmt' ? 0 : 5;
+    const br       = 7, conf = 4, tpd = (svc === 'oem' || svc === 'cmt') ? 3 : 0;
+    const total    = tpd + conf + samp + br + pp + ppR + prod + freight + customs;
+
+    const portArr  = sub(launch, customs);
+    const shipDep  = sub(portArr, freight);
+    const exF      = sub(shipDep, 3);
+    const bulkS    = sub(exF, prod);
+    const ppApp    = sub(bulkS, ppR);
+    const ppRdy    = sub(ppApp, pp);
+    const prApp    = pp > 0 ? sub(ppRdy, br) : sub(bulkS, br);
+    const prRdy    = sub(prApp, samp);
+    const oc       = sub(prRdy, conf);
+    const tpDue    = sub(oc, tpd + 1);
+    const startDate = (svc === 'oem' || svc === 'cmt') ? tpDue : oc;
+    const dts      = gap(today, startDate);
+
+    /* ── Countdown ── */
+    const cdNum = document.getElementById('cd-num');
+    const cdSub = document.getElementById('cd-sub');
+    const cdBar = document.getElementById('cd-bar');
+    if (dts < 0) {
+      cdNum.textContent = Math.abs(dts); cdNum.style.color = '#ef4444';
+      cdSub.textContent = 'days overdue'; cdSub.style.color = '#ef4444';
+      cdBar.style.background = '#ef4444'; cdBar.style.width = '100%';
+    } else if (dts <= 14) {
+      cdNum.textContent = dts; cdNum.style.color = '#f59e0b';
+      cdSub.textContent = 'days to start deadline'; cdSub.style.color = '#f59e0b';
+      cdBar.style.background = '#f59e0b';
+      cdBar.style.width = Math.round((dts / 14) * 100) + '%';
+    } else {
+      cdNum.textContent = dts; cdNum.style.color = '#22c55e';
+      cdSub.textContent = 'days until you must start'; cdSub.style.color = '#22c55e';
+      cdBar.style.background = '#22c55e';
+      cdBar.style.width = Math.min(100, Math.round((dts / 90) * 100)) + '%';
+    }
+
+    /* ── Alert pill ── */
+    apEl.style.display = 'block';
+    if (dts < 0) {
+      apEl.className = 'ap ap-r';
+      apEl.innerHTML = '<span class="ap-icon">⚠</span><span>Start deadline passed <strong>' + Math.abs(dts) + ' days ago</strong>. Contact SDF now for fast-track options.</span>';
+    } else if (dts <= 14) {
+      apEl.className = 'ap ap-y';
+      apEl.innerHTML = '<span class="ap-icon">⚡</span><span>Only <strong>' + dts + ' days</strong> left to start. Check SDF slot availability today.</span>';
+    } else {
+      apEl.className = 'ap ap-g';
+      apEl.innerHTML = '<span class="ap-icon">✓</span><span>Timeline achievable — start by <strong>' + fmtShort(startDate) + '</strong> and you\'ll make it.</span>';
+    }
+
+    /* ── Summary cards ── */
+    const startClass = dts < 0 ? 'sc-red' : dts <= 14 ? 'sc-amber' : 'sc-green';
+    document.getElementById('sum-row').innerHTML =
+      '<div class="sc ' + startClass + '"><div class="sc-lbl">Must start by</div><div class="sc-val">' + fmtShort(startDate) + '</div></div>' +
+      '<div class="sc sc-neutral"><div class="sc-lbl">Total lead time</div><div class="sc-val">' + total + ' days</div></div>' +
+      '<div class="sc sc-neutral"><div class="sc-lbl">Your launch date</div><div class="sc-val">' + fmtShort(launch) + '</div></div>';
+
+    /* ── Progress bar ── */
+    const elapsed = Math.max(0, gap(startDate, today));
+    const pct = Math.min(100, Math.round((elapsed / total) * 100));
+    const barColor = pct >= 75 ? '#22c55e' : pct >= 35 ? 'var(--r)' : 'rgba(255,255,255,0.3)';
+    setTimeout(() => {
+      const fill = document.getElementById('pbar-fill');
+      fill.style.width = pct + '%';
+      fill.style.background = barColor;
+      const pbarPct = document.getElementById('pbar-pct');
+      pbarPct.textContent = pct + '% of journey elapsed';
+      pbarPct.style.color = barColor;
+    }, 60);
+
+    /* ── Build milestones ── */
+    const ms = [];
+    if (svc === 'oem' || svc === 'cmt') {
+      ms.push({ date: tpDue, title: 'Submit tech pack / spec sheet', desc: 'Complete measurements, BOM, fabric spec, and artwork files. Missing details delay sampling by 1–2 weeks before a single stitch is sewn.', badgeClass: 'bg-buyer', badgeLabel: 'Your action', key: 'tp', canCheck: true });
+    }
+    ms.push({ date: oc, title: 'Order confirmation + 30% deposit', desc: 'Confirm quantities, colourways, size ratio, and incoterms. Sampling begins only after payment clears — every day of delay here matters.', badgeClass: 'bg-buyer', badgeLabel: 'Your action', key: 'oc', canCheck: true });
+    ms.push({ date: prRdy, title: 'Proto sample ready', desc: (svc === 'odm' || svc === 'private') ? 'SDF delivers first prototype from existing base pattern — faster than OEM.' : 'SDF delivers first prototype from your tech pack for fit, construction, and fabric review.', badgeClass: 'bg-factory', badgeLabel: 'SDF action', key: 'pr' });
+    ms.push({ date: prApp, title: 'Proto sample approval', desc: 'Review against your spec and send precise written approval or revision comments. Each extra revision round adds 12–18 days to your schedule.', badgeClass: 'bg-buyer', badgeLabel: 'Your action', key: 'pa', canCheck: true });
+    if (pp > 0) {
+      ms.push({ date: ppRdy, title: 'Pre-production sample ready', desc: 'Final sample in actual bulk fabric with confirmed trims. Your last checkpoint before the full production run begins.', badgeClass: 'bg-factory', badgeLabel: 'SDF action', key: 'ppr' });
+      ms.push({ date: ppApp, title: 'PP sample sign-off', desc: 'Written approval is mandatory. Bulk production cannot start without it. Aim to review within 5 days to protect your bulk start date.', badgeClass: 'bg-buyer', badgeLabel: 'Your action', key: 'ppa', canCheck: true });
+    }
+    ms.push({ date: bulkS, title: 'Bulk production starts', desc: 'Fabric cut, sewing lines assigned, trims staged. ' + prod + ' production days from this point. SDF sends weekly progress updates.', badgeClass: 'bg-factory', badgeLabel: 'SDF action', key: 'bs' });
+    ms.push({ date: exF, title: 'Ex-factory — final QC + packing', desc: 'AQL inspection, carton packing, and export documentation. Balance payment (70%) due before the shipment is released.', badgeClass: 'bg-factory', badgeLabel: 'SDF action', key: 'ef' });
+    ms.push({ date: shipDep, title: ship === 'air' ? 'Air shipment departs Dhaka' : 'Sea container departs Chittagong', desc: ship === 'air' ? 'Via Dhaka Hazrat Shahjalal International Airport — transit approximately 5–7 days.' : 'FCL or LCL container from Chittagong port — transit approximately 40–43 days.', badgeClass: 'bg-ship', badgeLabel: 'Logistics', key: 'sh' });
+    ms.push({ date: launch, title: '🎯 Goods in hand — launch ready', desc: 'Goods arrive, clear customs, and reach your warehouse or 3PL. Ready for your launch, retail drop, Amazon FBA, or wholesale delivery.', badgeClass: 'bg-launch', badgeLabel: 'Your launch', key: 'la', isLaunch: true });
+
+    /* Progress meta */
+    const totalActions  = ms.filter(m => m.canCheck).length;
+    const doneCount     = ms.filter(m => m.canCheck && doneMap[m.key]).length;
+    document.getElementById('ms-meta').textContent = doneCount + ' / ' + totalActions + ' actions done';
+
+    /* Render milestones */
+    const listEl = document.getElementById('ms-list');
+    listEl.innerHTML = '';
+
+    ms.forEach(m => {
+      const isDone  = !!doneMap[m.key];
+      const isPast  = today > m.date && !m.isLaunch;
+      const st      = getStatus(m.date, today, isDone, isPast, m.isLaunch);
+      const col     = STATUS[st];
+
+      const item = document.createElement('div');
+      item.className = 'ms-item';
+
+      /* Dot */
+      const dotCol = document.createElement('div');
+      dotCol.className = 'ms-dot-col';
+      const dot = document.createElement('div');
+      dot.className = 'ms-dot ' + col.dot;
+      dotCol.appendChild(dot);
+
+      /* Card body */
+      const bodyEl = document.createElement('div');
+      bodyEl.style.flex = '1';
+
+      const card = document.createElement('div');
+      card.className = 'ms-card ' + col.card;
+
+      const dateEl = document.createElement('div');
+      dateEl.className = 'ms-date ' + col.dateClass;
+      dateEl.textContent = fmtLong(m.date);
+
+      const titleEl = document.createElement('div');
+      titleEl.className = 'ms-title';
+      titleEl.textContent = m.title;
+
+      const descEl = document.createElement('div');
+      descEl.className = 'ms-desc';
+      descEl.textContent = m.desc;
+
+      const bottomEl = document.createElement('div');
+      bottomEl.className = 'ms-bottom';
+
+      const badge = document.createElement('span');
+      badge.className = 'badge ' + m.badgeClass;
+      badge.textContent = m.badgeLabel;
+
+      const rightEl = document.createElement('div');
+      rightEl.className = 'ms-right';
+
+      const chip = document.createElement('span');
+      chip.className = 'chip ' + col.chip;
+      chip.textContent = col.chipText;
+      rightEl.appendChild(chip);
+
+      if (m.canCheck) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'chk-btn' + (isDone ? ' done' : '');
+        btn.setAttribute('aria-pressed', String(isDone));
+        btn.textContent = isDone ? '✓ Done' : 'Mark done';
+        btn.addEventListener('click', () => {
+          doneMap[m.key] = !doneMap[m.key];
+          calc();
+        });
+        rightEl.appendChild(btn);
+      }
+
+      bottomEl.appendChild(badge);
+      bottomEl.appendChild(rightEl);
+
+      card.appendChild(dateEl);
+      card.appendChild(titleEl);
+      card.appendChild(descEl);
+      card.appendChild(bottomEl);
+      bodyEl.appendChild(card);
+      item.appendChild(dotCol);
+      item.appendChild(bodyEl);
+      listEl.appendChild(item);
+    });
+
+    /* CTA text */
+    const sampleLabel = (svc === 'odm' || svc === 'private') ? '13-day' : '14-day';
+    document.getElementById('cta-text').textContent = dts < 0
+      ? 'Your start deadline has passed. Contact SDF Clothing now — we assess urgent orders quickly and offer air freight where the timeline allows.'
+      : 'SDF offers ' + sampleLabel + ' sample turnaround and ' + prod + '-day bulk production. Slots fill ' + (total > 90 ? '90' : '60') + ' days ahead of peak season — worth locking yours in early.';
+
+    emptyEl.style.display = 'none';
+    resEl.style.display   = 'block';
+  }
+
+  /* Season presets */
+  document.querySelectorAll('.sb').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.sb').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('launch-date').value = btn.getAttribute('data-date');
+      calc();
+    });
+  });
+
+  /* Live inputs */
+  document.getElementById('launch-date').addEventListener('input', () => {
+    document.querySelectorAll('.sb').forEach(b => b.classList.remove('active'));
+    calc();
+  });
+  document.getElementById('ship-mode').addEventListener('change', calc);
+  document.getElementById('svc-type').addEventListener('change', calc);
+  document.getElementById('order-qty').addEventListener('change', calc);
+
+  /* FAQ accordion */
+  document.querySelectorAll('.faq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.faq-btn').forEach(b => {
+        b.setAttribute('aria-expanded', 'false');
+        b.nextElementSibling.classList.remove('open');
+      });
+      if (!isOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        btn.nextElementSibling.classList.add('open');
+      }
+    });
+  });
+</script>
+
+</BaseLayout>

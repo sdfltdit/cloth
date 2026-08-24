@@ -1,0 +1,1418 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export const prerender = true;
+
+const pageTitle = "Fabric Shrinkage Calculator | Free Tool | SDF";
+const pageDescription = "Free fabric shrinkage calculator for textile professionals — warp, weft, relaxation, and total shrinkage with cutting allowances. ISO 6330 / AATCC 135 based.";
+const canonicalURL = "https://sdfltd.com/tools/shrinkage-calculator/";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalURL}>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Fabric Shrinkage Calculator — Free Warp, Weft & Total Shrinkage Tool",
+  "description": "Free fabric shrinkage calculator for textile professionals. Calculate warp, weft, relaxation, and total shrinkage with pattern cutting allowances and buyer tolerance checks.",
+  "url": "https://sdfltd.com/tools/shrinkage-calculator/",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "@id": "https://sdfltd.com/#website"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://sdfltd.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://sdfltd.com/all-services/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Fabric Shrinkage Calculator"
+      }
+    ]
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Fabric Shrinkage Calculator — Free Warp, Weft & Total Shrinkage Tool",
+  "description": "Calculate warp, weft, relaxation, and total fabric shrinkage percentages. Includes pattern cutting allowances, finished measurement estimation, and buyer tolerance verification for garment and textile production.",
+  "url": "https://sdfltd.com/tools/shrinkage-calculator/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@id": "https://sdfltd.com/#org"
+  },
+  "keywords": "fabric shrinkage calculator, warp shrinkage, weft shrinkage, relaxation shrinkage, textile shrinkage, garment shrinkage, pattern allowance, ISO 6330, AATCC 135, cotton shrinkage, shrinkage percentage"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Calculate Fabric Shrinkage for Garment Production",
+  "description": "Step-by-step guide to calculating fabric shrinkage percentages for accurate pattern making and buyer tolerance compliance.",
+  "totalTime": "PT3M",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Select Your Fabric Type and Construction",
+      "text": "Choose the fiber content (cotton, polyester, wool, etc.) and fabric construction (woven, knit, denim, terry, fleece). These two factors have the greatest influence on expected shrinkage values."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Enter GSM and Yarn Count",
+      "text": "Input the fabric weight in grams per square meter (GSM) and the yarn count. Heavier GSM fabrics typically shrink more. Yarn count helps refine the estimate, especially for cotton and linen fabrics."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Set Wash Conditions",
+      "text": "Select the wash temperature (30°C to 90°C), number of wash cycles, and drying method. Higher temperatures and tumble drying increase shrinkage significantly for natural fibers."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Enter Initial Measurement and Buyer Tolerance",
+      "text": "Input the original fabric measurement in centimeters — typically 100cm for standard testing — and enter your buyer's maximum acceptable shrinkage tolerance (commonly 5% for garments)."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Read Results and Apply Pattern Allowances",
+      "text": "The calculator shows warp, weft, relaxation, and total shrinkage percentages, pattern cutting allowances in centimeters, estimated finished measurement, and a pass/fail verdict against your buyer's tolerance."
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is fabric shrinkage and why does it occur?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fabric shrinkage is the reduction in fabric dimensions after washing or drying. It occurs due to fiber relaxation, release of residual stresses from manufacturing processes, and fiber swelling when exposed to water and heat. Different fibers have different shrinkage characteristics based on their chemical structure and processing history."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between warp and weft shrinkage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Warp shrinkage occurs along the lengthwise direction of fabric (parallel to the selvage), while weft shrinkage occurs across the width (perpendicular to the selvage). These values often differ due to differences in yarn tension during weaving, yarn construction, and fabric structure. Warp shrinkage is typically higher than weft shrinkage in most woven fabrics."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I calculate pattern cutting allowance for shrinkage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pattern cutting allowance is calculated by adding the expected shrinkage percentage to your finished garment measurements. For example, if you need a 50cm finished length and expect 5% shrinkage, cut the pattern at 52.5cm (50cm multiplied by 1.05). Always add a small safety margin of 0.5 to 1% to account for testing variations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is relaxation shrinkage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Relaxation shrinkage occurs when fibers and yarns release internal stresses accumulated during manufacturing processes like spinning, weaving, and finishing. This type of shrinkage happens primarily during the first wash and is irreversible. It is distinct from swelling shrinkage caused by fiber water absorption and is crucial to account for in pattern making."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does wash temperature affect fabric shrinkage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Higher wash temperatures generally increase shrinkage, especially for natural fibers like cotton and wool. Hot water at 60 to 90°C can cause significant fiber swelling and relaxation, leading to higher shrinkage percentages. Cold or warm washes at 30 to 40°C minimize shrinkage. Synthetic fibers like polyester show minimal temperature-dependent shrinkage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the standard test method for measuring fabric shrinkage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The industry standard test methods include AATCC 135, ISO 6330, and ISO 3759. These involve marking a specified dimension, usually 50cm by 50cm, on the fabric, washing it under specified conditions, drying it, and remeasuring. Shrinkage is calculated as original minus final divided by original, multiplied by 100. Multiple wash cycles, typically 5 to 10, are used to determine total shrinkage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does drying method affect shrinkage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tumble drying with heat typically causes the highest shrinkage due to combined heat and mechanical agitation. Line drying allows fibers to relax under tension, resulting in less shrinkage. Flat drying minimizes distortion and provides the most controlled shrinkage results. For accurate testing, use the same drying method specified in the buyer's requirements or care label."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are acceptable shrinkage limits for garment production?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Acceptable shrinkage limits vary by fabric type and buyer requirements. Generally, woven cotton should stay under 5% total shrinkage, knits under 8 to 10%, and synthetics under 3%. Premium buyers may require tighter tolerances of 2 to 3% for woven cotton. Always confirm specific tolerance requirements with your buyer before production."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can fabric shrinkage be prevented or reduced?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Shrinkage can be reduced through pre-shrinking treatments like sanforizing, heat setting for synthetics, and mechanical relaxation. However, it cannot be completely eliminated. The best approach is to account for expected shrinkage in pattern making and communicate clear care instructions to end consumers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do different fabric constructions affect shrinkage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Knit fabrics typically have higher shrinkage than woven fabrics due to their looped structure and higher elasticity. Tight weaves like plain weave show less shrinkage than loose weaves. Denim and canvas have more controlled shrinkage due to their tight construction and finishing processes. Terry and fleece fabrics show the highest shrinkage due to their looped and brushed structures."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is sanforizing and how does it reduce fabric shrinkage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sanforizing is a mechanical pre-shrinking process applied to woven fabrics, particularly cotton and denim, before garment production. The fabric is compressed using a rubber belt and moisture, which causes the fibers to shrink in a controlled way. Sanforized fabrics are guaranteed to have residual shrinkage of less than 1%, making them much more stable for garment production. Look for the Sanforized trademark or check the fabric spec sheet to confirm treatment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is fabric shrinkage tested for Bangladesh garment exports?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bangladesh garment factories typically test fabric shrinkage according to ISO 6330 or AATCC 135 as specified by the international buyer. Fabric samples of at least 50cm by 50cm are prepared, washed at the buyer's specified temperature, dried by the specified method, and remeasured. Shrinkage results must fall within buyer tolerance, typically 3 to 5% for woven fabrics and 5 to 8% for knits, before bulk production is approved."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  .shrinkage-page {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+  }
+
+  .shrinkage-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .shrinkage-section {
+    padding: 3rem 0;
+    border-bottom: 1px solid #111;
+  }
+
+  .shrinkage-section--no-border {
+    border-bottom: none;
+  }
+
+  .breadcrumb {
+    font-size: 0.72rem;
+    color: #888;
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+
+  .breadcrumb a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb a:hover {
+    color: #fff;
+  }
+
+  .section-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #e00;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 200;
+    color: #fff;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .page-subtitle {
+    font-size: 0.95rem;
+    color: #aaa;
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .content-h2 {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 1.25rem;
+    margin-top: 0;
+  }
+
+  .content-h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #fff;
+    margin: 2rem 0 1rem;
+  }
+
+  .content-h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #e00;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+  }
+
+  .content-prose {
+    font-size: 0.95rem;
+    color: #bbb;
+    line-height: 1.8;
+    max-width: 800px;
+    margin-bottom: 1.25rem;
+  }
+
+  .calc-block {
+    background-color: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .calc-block-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #e00;
+    margin-bottom: 1.5rem;
+  }
+
+  .input-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-input,
+  .form-select {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #333;
+    min-height: 44px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus,
+  .form-select:focus {
+    outline: none;
+    border-color: #e00;
+  }
+
+  .form-helper {
+    font-size: 0.72rem;
+    color: #555;
+    margin-top: 0.35rem;
+  }
+
+  .calc-btn {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 1.5rem auto 0;
+    background-color: #e00;
+    color: #fff;
+    padding: 1rem 2.5rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    min-height: 44px;
+    border: 1px solid #e00;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .calc-btn:hover {
+    background-color: #000;
+    color: #e00;
+  }
+
+  .result-box {
+    display: none;
+    margin-top: 2rem;
+  }
+
+  .result-box--visible {
+    display: block;
+  }
+
+  .result-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background-color: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    margin-bottom: 1rem;
+  }
+
+  .result-cell {
+    background-color: #050505;
+    padding: 1.25rem;
+  }
+
+  .result-cell-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-cell-value {
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+  }
+
+  .result-cell-value--highlight {
+    color: #e00;
+  }
+
+  .result-cell-sub {
+    font-size: 0.78rem;
+    color: #555;
+  }
+
+  .pass-fail {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+  }
+
+  .pass-fail--pass {
+    color: #22c55e;
+  }
+
+  .pass-fail--fail {
+    color: #e00;
+  }
+
+  .result-explanation {
+    background-color: #050505;
+    border: 1px solid #1a1a1a;
+    padding: 1.25rem;
+    font-size: 0.85rem;
+    color: #aaa;
+    line-height: 1.7;
+  }
+
+  .error-message {
+    background-color: #1a0000;
+    border: 1px solid #e00;
+    padding: 1rem 1.25rem;
+    font-size: 0.85rem;
+    color: #e00;
+    margin-top: 1rem;
+    display: none;
+  }
+
+  .error-message--visible {
+    display: block;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .info-card {
+    background-color: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    padding: 1.5rem;
+  }
+
+  .info-card-text {
+    font-size: 0.85rem;
+    color: #aaa;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    border: 1px solid #1a1a1a;
+    margin-top: 1.5rem;
+  }
+
+  .shrinkage-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    min-width: 560px;
+  }
+
+  .shrinkage-table th {
+    background-color: #0a0a0a;
+    color: #e00;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #222;
+  }
+
+  .shrinkage-table td {
+    padding: 0.65rem 1rem;
+    color: #ccc;
+    border-bottom: 1px solid #111;
+    vertical-align: middle;
+  }
+
+  .shrinkage-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .shrinkage-table tr:hover td {
+    background-color: #080808;
+  }
+
+  .shrinkage-table td:first-child {
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .method-card {
+    background-color: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    padding: 1.5rem;
+  }
+
+  .method-card-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #e00;
+    padding: 0.2rem 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .method-card-text {
+    font-size: 0.85rem;
+    color: #aaa;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .bd-box {
+    background-color: #050505;
+    border: 1px solid #1a1a1a;
+    padding: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .bd-note {
+    background-color: #0a0000;
+    border-left: 2px solid #e00;
+    padding: 1rem 1.25rem;
+    margin-top: 1.25rem;
+    font-size: 0.85rem;
+    color: #bbb;
+    line-height: 1.7;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .tool-link {
+    display: block;
+    background-color: #0a0a0a;
+    border: 1px solid #222;
+    padding: 1.25rem;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .tool-link:hover {
+    border-color: #e00;
+  }
+
+  .tool-link-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #e00;
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .tool-link-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #fff;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .tool-link-desc {
+    font-size: 0.78rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #111;
+  }
+
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    padding: 1.25rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    min-height: 44px;
+    font-family: inherit;
+  }
+
+  .faq-question:hover {
+    color: #e00;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: transform 0.2s;
+    color: #e00;
+  }
+
+  .faq-icon--open {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    display: none;
+    padding-bottom: 1.25rem;
+  }
+
+  .faq-answer--visible {
+    display: block;
+  }
+
+  .faq-answer p {
+    font-size: 0.9rem;
+    color: #aaa;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .faq-answer a {
+    color: #e00;
+    text-decoration: none;
+  }
+
+  .faq-answer a:hover {
+    text-decoration: underline;
+  }
+
+  .cta-box {
+    background-color: #0a0000;
+    border: 1px solid #330000;
+    padding: 2.5rem;
+    text-align: center;
+  }
+
+  .cta-title {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-text {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background-color: #e00;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.875rem 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+    min-height: 44px;
+  }
+
+  .cta-btn:hover {
+    background-color: #c00;
+  }
+
+  @media (max-width: 1024px) {
+    .result-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .input-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .result-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .shrinkage-section {
+      padding: 2rem 0;
+    }
+
+    .calc-block {
+      padding: 1.5rem;
+    }
+
+    .form-input,
+    .form-select {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .result-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .result-cell-value {
+      font-size: 1.4rem;
+    }
+  }
+</style>
+
+<div class="shrinkage-page">
+
+  <!-- HERO -->
+  <section class="shrinkage-section shrinkage-section--no-border">
+    <div class="shrinkage-container" style="text-align: center;">
+      <nav aria-label="Breadcrumb" class="breadcrumb" style="text-align: left;">
+        <a href="/">Home</a>
+        <span aria-hidden="true" style="margin: 0 0.5rem;">›</span>
+        <a href="/all-services/">Tools</a>
+        <span aria-hidden="true" style="margin: 0 0.5rem;">›</span>
+        <span aria-current="page">Shrinkage Calculator</span>
+      </nav>
+      <span class="section-label">Free Textile Industry Tool</span>
+      <h1 class="page-title">Fabric Shrinkage Calculator</h1>
+      <p class="page-subtitle">Calculate warp, weft, relaxation, and total fabric shrinkage percentages instantly. Get pattern cutting allowances, finished measurement estimates, and buyer tolerance compliance checks — free for clothing manufacturers and textile professionals worldwide.</p>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="shrinkage-section" aria-label="Fabric Shrinkage Calculator Tool">
+    <div class="shrinkage-container">
+
+      <div class="calc-block">
+        <p class="calc-block-title">Fabric Specifications</p>
+        <div class="input-grid">
+          <div class="form-group">
+            <label class="form-label" for="fabric-type">Fabric Type</label>
+            <select id="fabric-type" class="form-select" aria-required="true">
+              <option value="">Select fabric type</option>
+              <option value="cotton">100% Cotton</option>
+              <option value="polyester">100% Polyester</option>
+              <option value="wool">100% Wool</option>
+              <option value="silk">100% Silk</option>
+              <option value="linen">Linen</option>
+              <option value="viscose">Viscose / Rayon</option>
+              <option value="nylon">Nylon</option>
+              <option value="cotton-polyester">Cotton-Polyester Blend</option>
+              <option value="cotton-elastane">Cotton-Elastane Blend</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="construction">Construction</label>
+            <select id="construction" class="form-select" aria-required="true">
+              <option value="">Select construction</option>
+              <option value="woven">Woven</option>
+              <option value="knit">Knit</option>
+              <option value="denim">Denim</option>
+              <option value="terry">Terry</option>
+              <option value="fleece">Fleece</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="gsm">GSM (g/m²)</label>
+            <input type="number" id="gsm" class="form-input" placeholder="e.g., 180" min="0" step="1" aria-describedby="gsm-hint">
+            <p class="form-helper" id="gsm-hint">Fabric weight in grams per square meter</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="weave-type">Weave / Knit Structure</label>
+            <select id="weave-type" class="form-select">
+              <option value="">Select structure</option>
+              <option value="plain">Plain</option>
+              <option value="twill">Twill</option>
+              <option value="satin">Satin</option>
+              <option value="rib">Rib</option>
+              <option value="interlock">Interlock</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="yarn-count">Yarn Count</label>
+            <input type="number" id="yarn-count" class="form-input" placeholder="e.g., 30" min="0" step="0.1" aria-describedby="yarn-hint">
+            <p class="form-helper" id="yarn-hint">Ne or Tex — e.g., 30, 40, 60</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="buyer-tolerance">Buyer Tolerance (%)</label>
+            <input type="number" id="buyer-tolerance" class="form-input" placeholder="e.g., 5" min="0" max="20" step="0.5" value="5" aria-describedby="tolerance-hint">
+            <p class="form-helper" id="tolerance-hint">Maximum acceptable total shrinkage from your buyer</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-block">
+        <p class="calc-block-title">Wash &amp; Test Conditions</p>
+        <div class="input-grid">
+          <div class="form-group">
+            <label class="form-label" for="temperature">Wash Temperature</label>
+            <select id="temperature" class="form-select" aria-required="true">
+              <option value="">Select temperature</option>
+              <option value="30">30°C — Cold wash</option>
+              <option value="40">40°C — Warm wash</option>
+              <option value="60">60°C — Hot wash</option>
+              <option value="90">90°C — Very hot wash</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="drying-method">Drying Method</label>
+            <select id="drying-method" class="form-select" aria-required="true">
+              <option value="">Select drying method</option>
+              <option value="tumble-dry">Tumble Dry (highest shrinkage)</option>
+              <option value="line-dry">Line Dry</option>
+              <option value="flat-dry">Flat Dry (lowest shrinkage)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="wash-cycles">Wash Cycles</label>
+            <input type="number" id="wash-cycles" class="form-input" placeholder="e.g., 5" min="1" max="50" step="1" value="5" aria-describedby="cycles-hint">
+            <p class="form-helper" id="cycles-hint">Standard: 5 cycles per ISO 6330 / AATCC 135</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="initial-measurement">Initial Measurement (cm)</label>
+            <input type="number" id="initial-measurement" class="form-input" placeholder="e.g., 100" min="0" step="0.1" value="100" aria-describedby="measurement-hint">
+            <p class="form-helper" id="measurement-hint">Original fabric dimension before washing</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="error-message" id="error-message" role="alert">
+        Please select Fabric Type, Construction, Wash Temperature, and Drying Method to calculate shrinkage.
+      </div>
+
+      <button id="calculate-btn" class="calc-btn" type="button" aria-label="Calculate fabric shrinkage">
+        Calculate Shrinkage
+      </button>
+
+      <div id="result-box" class="result-box" aria-live="polite" aria-atomic="true">
+        <h2 class="content-h2" style="margin-top: 2rem; margin-bottom: 1rem;">Your Shrinkage Results</h2>
+        <div class="result-grid">
+          <div class="result-cell">
+            <p class="result-cell-label">Warp Shrinkage</p>
+            <p id="warp-shrinkage" class="result-cell-value result-cell-value--highlight"></p>
+            <p class="result-cell-sub">Lengthwise direction</p>
+          </div>
+          <div class="result-cell">
+            <p class="result-cell-label">Weft Shrinkage</p>
+            <p id="weft-shrinkage" class="result-cell-value result-cell-value--highlight"></p>
+            <p class="result-cell-sub">Widthwise direction</p>
+          </div>
+          <div class="result-cell">
+            <p class="result-cell-label">Relaxation Shrinkage</p>
+            <p id="relaxation-shrinkage" class="result-cell-value"></p>
+            <p class="result-cell-sub">First wash release</p>
+          </div>
+          <div class="result-cell">
+            <p class="result-cell-label">Total Shrinkage</p>
+            <p id="total-shrinkage" class="result-cell-value result-cell-value--highlight"></p>
+            <p class="result-cell-sub">Combined effect</p>
+          </div>
+          <div class="result-cell">
+            <p class="result-cell-label">Pattern Allowance — Warp</p>
+            <p id="pattern-allowance-warp" class="result-cell-value"></p>
+            <p class="result-cell-sub">Add to cut length</p>
+          </div>
+          <div class="result-cell">
+            <p class="result-cell-label">Pattern Allowance — Weft</p>
+            <p id="pattern-allowance-weft" class="result-cell-value"></p>
+            <p class="result-cell-sub">Add to cut width</p>
+          </div>
+          <div class="result-cell">
+            <p class="result-cell-label">Finished Measurement</p>
+            <p id="finished-measurement" class="result-cell-value"></p>
+            <p class="result-cell-sub">After washing</p>
+          </div>
+          <div class="result-cell">
+            <p class="result-cell-label">Buyer Tolerance Check</p>
+            <p id="tolerance-check" class="pass-fail"></p>
+            <p class="result-cell-sub" id="tolerance-sub"></p>
+          </div>
+        </div>
+        <div class="result-explanation" id="result-explanation"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHAT IS FABRIC SHRINKAGE -->
+  <section class="shrinkage-section">
+    <div class="shrinkage-container">
+      <span class="section-label">Understanding Fabric Shrinkage</span>
+      <h2 class="content-h2">What is Fabric Shrinkage and Why Does it Matter?</h2>
+      <p class="content-prose">Fabric shrinkage is the reduction in a fabric's dimensions — length, width, or both — that occurs after washing, drying, or exposure to moisture and heat. For garment manufacturers, accurately predicting and accounting for shrinkage is one of the most critical steps in production. Failure to plan for shrinkage leads to finished garments that are smaller than specified, failing buyer measurements, causing costly returns, rejects, and repeat orders.</p>
+      <p class="content-prose">Shrinkage occurs because textile fibers, yarns, and fabric structures are placed under tension during spinning, weaving, knitting, and finishing processes. When the fabric is washed, these internal stresses release, and the fibers return toward their natural, relaxed state — which is shorter. The higher the tension applied during manufacturing, and the more hygroscopic (moisture-absorbing) the fiber, the greater the shrinkage.</p>
+      <p class="content-prose">For garment exporters in Bangladesh, India, and other major manufacturing countries, buyer specifications typically require total shrinkage to be within 3% to 5% for woven fabrics and 5% to 8% for knits after five wash cycles at the specified temperature. Exceeding these limits during pre-shipment testing can result in shipment holds, rejections, and financial penalties.</p>
+
+      <h3 class="content-h3">The Four Types of Fabric Shrinkage</h3>
+      <div class="info-grid">
+        <div class="info-card">
+          <h4 class="content-h4">Relaxation Shrinkage</h4>
+          <p class="info-card-text">The most significant and irreversible type. Occurs during the first wash as fibers release mechanical stresses built up during production. Cotton, linen, and viscose are most affected. Relaxation shrinkage cannot be recovered — it is permanent from the first contact with water.</p>
+        </div>
+        <div class="info-card">
+          <h4 class="content-h4">Consolidation Shrinkage</h4>
+          <p class="info-card-text">Occurs in knit fabrics when the looped yarn structure tightens after washing. The fabric consolidates into a denser, smaller structure. Knits always show higher total shrinkage than woven fabrics due to this mechanism, which is why knit buyers typically accept higher tolerances of 5% to 8%.</p>
+        </div>
+        <div class="info-card">
+          <h4 class="content-h4">Swelling Shrinkage</h4>
+          <p class="info-card-text">Caused by fiber swelling when water molecules are absorbed. Cellulosic fibers like cotton and linen swell most, pushing neighboring fibers apart in one direction and compressing the fabric in the other. Higher wash temperatures amplify swelling shrinkage significantly.</p>
+        </div>
+        <div class="info-card">
+          <h4 class="content-h4">Felting Shrinkage</h4>
+          <p class="info-card-text">Specific to wool and other animal hair fibers. The microscopic scales on wool fiber surfaces interlock during washing agitation and cannot be undone. Felting shrinkage is irreversible and can be extreme — untreated wool can shrink 30% or more in a single hot wash. Machine-washable wool receives anti-felting treatments to prevent this.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO USE THE CALCULATOR -->
+  <section class="shrinkage-section">
+    <div class="shrinkage-container">
+      <span class="section-label">Step-by-Step Guide</span>
+      <h2 class="content-h2">How to Use This Shrinkage Calculator</h2>
+      <p class="content-prose">This calculator uses fabric type, construction, GSM, wash conditions, and drying method to estimate shrinkage percentages based on industry-standard reference values. Here is what each input means and how the results should be interpreted.</p>
+
+      <div class="method-grid">
+        <div class="method-card">
+          <span class="method-card-badge">Step 1</span>
+          <h3 class="content-h3" style="margin-top: 0.5rem; font-size: 0.95rem;">Select Fabric Type and Construction</h3>
+          <p class="method-card-text">Fiber content and fabric construction are the two strongest predictors of shrinkage. A 100% cotton knit will shrink considerably more than a polyester woven. Select the combination that best matches your fabric. If you have a blend, select the closest blend option.</p>
+        </div>
+        <div class="method-card">
+          <span class="method-card-badge">Step 2</span>
+          <h3 class="content-h3" style="margin-top: 0.5rem; font-size: 0.95rem;">Enter GSM and Yarn Count</h3>
+          <p class="method-card-text">GSM (grams per square meter) indicates fabric weight. Heavier fabrics generally have more yarn mass and can store more stress, leading to slightly higher shrinkage. Yarn count helps refine the estimate for woven fabrics — finer yarns (higher Ne counts) tend to shrink less than coarser yarns.</p>
+        </div>
+        <div class="method-card">
+          <span class="method-card-badge">Step 3</span>
+          <h3 class="content-h3" style="margin-top: 0.5rem; font-size: 0.95rem;">Set Wash Temperature and Drying Method</h3>
+          <p class="method-card-text">Use the wash temperature and drying method specified in the buyer's care label requirement or purchase order. For garment testing, the most common is 40°C machine wash with tumble dry or line dry. Higher temperatures dramatically increase natural fiber shrinkage. Always match test conditions to real-world consumer use.</p>
+        </div>
+        <div class="method-card">
+          <span class="method-card-badge">Step 4</span>
+          <h3 class="content-h3" style="margin-top: 0.5rem; font-size: 0.95rem;">Read Results and Apply to Patterns</h3>
+          <p class="method-card-text">The calculator provides warp and weft shrinkage separately so you can apply the correct allowance to length and width independently. Add the pattern allowance values to your cut dimensions. For example, if warp shrinkage is 4.5% and you need a 70cm finished panel length, cut at 73.2cm. The buyer tolerance check tells you instantly whether your fabric meets requirements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRY REFERENCE TABLE -->
+  <section class="shrinkage-section">
+    <div class="shrinkage-container">
+      <span class="section-label">ISO 6330 / AATCC 135 Reference</span>
+      <h2 class="content-h2">Industry Standard Shrinkage Limits by Fabric Type</h2>
+      <p class="content-prose">The following shrinkage limits are widely used by international buyers in the USA, UK, EU, Canada, and Australia as the acceptable range for fabric supplied from garment manufacturers. Values are based on 5 wash cycles at 40°C with tumble drying unless otherwise noted. Use this table as a benchmark when interpreting your calculator results.</p>
+
+      <div class="table-wrapper">
+        <table class="shrinkage-table">
+          <caption style="caption-side: top; text-align: left; padding: 0.75rem 1rem; font-size: 0.72rem; color: #666; background-color: #0a0a0a; border-bottom: 1px solid #1a1a1a;">Fabric Shrinkage Reference Limits — 5 Wash Cycles, 40°C, Tumble Dry</caption>
+          <thead>
+            <tr>
+              <th scope="col">Fabric Type</th>
+              <th scope="col">Warp Limit</th>
+              <th scope="col">Weft Limit</th>
+              <th scope="col">Total Limit</th>
+              <th scope="col">Buyer Tolerance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>100% Cotton (Woven)</td><td>3–5%</td><td>2–4%</td><td>5–8%</td><td>5%</td></tr>
+            <tr><td>100% Cotton (Knit)</td><td>5–8%</td><td>4–6%</td><td>8–12%</td><td>8%</td></tr>
+            <tr><td>Polyester/Cotton Blend</td><td>2–4%</td><td>1–3%</td><td>3–6%</td><td>5%</td></tr>
+            <tr><td>100% Polyester</td><td>1–2%</td><td>0.5–1.5%</td><td>1.5–3%</td><td>3%</td></tr>
+            <tr><td>100% Wool</td><td>4–6%</td><td>3–5%</td><td>6–10%</td><td>5%</td></tr>
+            <tr><td>100% Silk</td><td>2–4%</td><td>1–3%</td><td>3–6%</td><td>4%</td></tr>
+            <tr><td>Linen (Woven)</td><td>3–5%</td><td>2–4%</td><td>5–8%</td><td>5%</td></tr>
+            <tr><td>Viscose / Rayon</td><td>4–7%</td><td>3–6%</td><td>7–12%</td><td>8%</td></tr>
+            <tr><td>Nylon</td><td>1–3%</td><td>0.5–2%</td><td>1.5–4%</td><td>3%</td></tr>
+            <tr><td>Denim (Cotton)</td><td>3–5%</td><td>2–4%</td><td>5–8%</td><td>5%</td></tr>
+            <tr><td>Fleece</td><td>5–8%</td><td>4–7%</td><td>9–13%</td><td>8%</td></tr>
+            <tr><td>Terry Towel</td><td>6–10%</td><td>5–8%</td><td>10–15%</td><td>10%</td></tr>
+            <tr><td>Cotton-Elastane Blend</td><td>4–6%</td><td>3–5%</td><td>6–10%</td><td>8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size: 0.75rem; color: #555; margin-top: 0.75rem; line-height: 1.6;">Note: Actual buyer tolerances vary by brand and purchase order. Always confirm with your buyer before production. Values above are indicative industry ranges.</p>
+    </div>
+  </section>
+
+  <!-- SHRINKAGE CONTROL METHODS -->
+  <section class="shrinkage-section">
+    <div class="shrinkage-container">
+      <span class="section-label">Production Guidance</span>
+      <h2 class="content-h2">How to Control and Reduce Fabric Shrinkage</h2>
+      <p class="content-prose">Understanding your fabric's shrinkage behavior is only the first step. In commercial garment production, multiple techniques are used to minimize shrinkage, make it predictable, and account for it accurately in pattern making. Here are the primary methods used in the industry.</p>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h4 class="content-h4">Sanforizing</h4>
+          <p class="info-card-text">A mechanical pre-shrinking process applied to woven cotton and denim fabrics before they leave the mill. The fabric is compressed between a rubber belt and a heated cylinder while moist, forcing controlled pre-shrinkage. Sanforized fabrics are certified to have residual shrinkage under 1%, making them highly stable for garment production. Look for the Sanforized trademark on fabric spec sheets when sourcing.</p>
+        </div>
+        <div class="info-card">
+          <h4 class="content-h4">Heat Setting (Synthetics)</h4>
+          <p class="info-card-text">Polyester, nylon, and other thermoplastic fibers are heat-set at temperatures above their glass transition point during finishing. This locks the fiber molecules in a stable orientation, dramatically reducing heat-induced shrinkage in subsequent washing. Heat-set polyester fabrics typically show total shrinkage under 2% even at 60°C.</p>
+        </div>
+        <div class="info-card">
+          <h4 class="content-h4">Compressive Relaxation (Knits)</h4>
+          <p class="info-card-text">Knit fabrics are passed through a compressive relaxation machine (or "compactor") that mechanically shortens the fabric while maintaining its structure. This pre-shrinks the knit, reducing post-wash shrinkage significantly. Compacted knits are essential for buyer tolerance compliance when producing T-shirts, polos, and underwear at scale.</p>
+        </div>
+        <div class="info-card">
+          <h4 class="content-h4">Pattern Cutting Allowance</h4>
+          <p class="info-card-text">When pre-shrinking treatments are not available or complete, pattern cutting allowances compensate for expected shrinkage. Add the predicted shrinkage percentage to each cut dimension. Warp and weft allowances must be applied independently — garments shrink differently in length versus width. This calculator provides both values automatically.</p>
+        </div>
+        <div class="info-card">
+          <h4 class="content-h4">Fabric Pre-Washing</h4>
+          <p class="info-card-text">For small-scale or specialty production where mechanical pre-shrinking is unavailable, the fabric can be pre-washed before cutting. This triggers most of the relaxation shrinkage before the garment is constructed. Pre-washing is labor-intensive and can affect fabric handle, but it is the most reliable way to remove shrinkage potential for certain natural fiber fabrics.</p>
+        </div>
+        <div class="info-card">
+          <h4 class="content-h4">Buyer Communication</h4>
+          <p class="info-card-text">Always share shrinkage test reports with your buyer before bulk cutting. If your fabric's shrinkage exceeds buyer tolerance, negotiate either a pattern allowance agreement or alternative fabric sourcing. Surprises at pre-shipment inspection are far more costly than early disclosure. Document all shrinkage test results using the ISO 3759 labeling system for traceability.</p>
+        </div>
+      </div>
+
+      <div class="bd-box">
+        <h3 class="content-h3" style="margin-top: 0;">Fabric Shrinkage Testing at Bangladesh Garment Factories</h3>
+        <p class="content-prose" style="max-width: 100%;">Bangladesh's garment sector produces over 40 billion USD worth of ready-made garments annually, and quality control — including shrinkage testing — is a contractual requirement for virtually every export order. International buyers and third-party labs (Bureau Veritas, SGS, Intertek, QIMA) routinely conduct fabric shrinkage tests at mills and garment factories in Dhaka, Gazipur, Narayanganj, and Chittagong before approving bulk fabric for production.</p>
+        <p class="content-prose" style="max-width: 100%; margin-bottom: 0;">Most buyers specify testing to ISO 6330 or AATCC 135. Test samples are prepared per ISO 3759 (a minimum 50cm × 50cm marked area), washed at buyer-specified temperatures (commonly 40°C), dried by the specified method, and remeasured. Results must fall within the buyer's tolerance — typically 5% for woven cotton and 8% for cotton knits — before bulk fabric is released for cutting.</p>
+        <div class="bd-note">
+          SDF Clothing tests all incoming fabric for shrinkage compliance before cutting begins. Our quality team uses ISO 6330 protocols at 40°C with tumble dry to match the end-consumer use conditions for our export markets in the USA, UK, and EU. <a href="/all-services/" style="color: #e00; text-decoration: none;">Learn more about our fabric testing process →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED TOOLS -->
+  <section class="shrinkage-section">
+    <div class="shrinkage-container">
+      <span class="section-label">More Free Tools</span>
+      <h2 class="content-h2">Other Free Garment &amp; Textile Calculators</h2>
+      <p class="content-prose">Use these tools alongside your shrinkage calculator for complete fabric quality management in garment production.</p>
+      <div class="tools-grid">
+        <a href="/tools/aql-calculator/" class="tool-link" aria-label="AQL Calculator — ISO 2859-1 sample size and accept/reject numbers">
+          <span class="tool-link-label">Quality</span>
+          <span class="tool-link-name">AQL Calculator</span>
+          <span class="tool-link-desc">Calculate inspection sample size and accept/reject numbers per ISO 2859-1</span>
+        </a>
+        <a href="/tools/gsm-converter/" class="tool-link" aria-label="GSM Calculator — Calculate fabric weight in grams per square meter">
+          <span class="tool-link-label">Fabric</span>
+          <span class="tool-link-name">GSM Calculator</span>
+          <span class="tool-link-desc">Calculate fabric weight in grams per square meter from sample dimensions</span>
+        </a>
+        <a href="/tools/wash-care-label-generator/" class="tool-link" aria-label="Wash Care Label Generator — ISO 3758 wash care symbols">
+          <span class="tool-link-label">Labeling</span>
+          <span class="tool-link-name">Wash Care Label Generator</span>
+          <span class="tool-link-desc">Generate ISO 3758 compliant wash care symbols for garment labels</span>
+        </a>
+        <a href="/tools/production-timeline/" class="tool-link" aria-label="Production Timeline Calculator — Map every production deadline">
+          <span class="tool-link-label">Production</span>
+          <span class="tool-link-name">Production Timeline Calculator</span>
+          <span class="tool-link-desc">Map every deadline from tech pack to final inspection based on your launch date</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="shrinkage-section shrinkage-section--no-border">
+    <div class="shrinkage-container">
+      <span class="section-label">Common Questions</span>
+      <h2 class="content-h2">Frequently Asked Questions About Fabric Shrinkage</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-1">
+          What is fabric shrinkage and why does it occur?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-1" role="region">
+          <p>Fabric shrinkage is the reduction in fabric dimensions — length, width, or both — that occurs after washing or drying. It happens because fibers and yarns are placed under tension during spinning, weaving, and finishing processes. When the fabric contacts water and heat, these stresses release and the fibers contract toward their natural resting length. Natural fibers like cotton, wool, and linen shrink most because they absorb water and swell, while synthetic fibers like polyester show minimal shrinkage.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-2">
+          What is the difference between warp and weft shrinkage?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-2" role="region">
+          <p>Warp shrinkage occurs along the lengthwise direction of the fabric, running parallel to the selvage edge. Weft shrinkage occurs across the width, running perpendicular to the selvage. These values differ because warp yarns are under greater tension during weaving than weft yarns, and that stored tension releases differently after washing. For most woven cotton fabrics, warp shrinkage is 1 to 2 percentage points higher than weft shrinkage. Knit fabrics can show significant shrinkage in both directions due to their looped structure.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-3">
+          How do I calculate pattern cutting allowance for shrinkage?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-3" role="region">
+          <p>To calculate pattern cutting allowance, divide your finished measurement by (1 minus the shrinkage rate expressed as a decimal). For example, if you need a 70cm finished panel length with 5% warp shrinkage, the cut length should be 70 divided by 0.95, which equals 73.7cm. The simpler approximation — multiply finished length by (1 + shrinkage percentage / 100) — gives 73.5cm, which is close enough for most applications. Apply warp allowance to length and weft allowance to width independently, as shrinkage differs in each direction.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
+          What is relaxation shrinkage?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-4" role="region">
+          <p>Relaxation shrinkage is the irreversible dimensional change that occurs when fibers and yarns release the mechanical stresses built up during spinning, weaving, knitting, and finishing. It happens predominantly during the first wash and cannot be reversed by subsequent laundering. For cotton woven fabrics, relaxation shrinkage typically accounts for 2 to 3 percentage points of total shrinkage. It is distinct from swelling shrinkage, which occurs due to water absorption, and from felting shrinkage in wool.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-5">
+          How does wash temperature affect fabric shrinkage?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-5" role="region">
+          <p>Wash temperature has a significant effect on natural fiber shrinkage. Washing cotton at 60°C typically causes 30 to 50% more shrinkage than washing at 30°C, because higher temperatures accelerate fiber swelling and stress release. Wool is especially sensitive — a single 60°C wash can cause irreversible felting shrinkage exceeding 20%. Polyester and nylon are largely unaffected by wash temperature up to 60°C, as their molecular structure does not swell with water. Always use the temperature specified in your buyer's test method for accurate shrinkage predictions.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-6">
+          What is the standard test method for measuring fabric shrinkage?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-6" role="region">
+          <p>The two primary standards are ISO 6330 (used globally and by most international buyers) and AATCC 135 (used predominantly in the United States). Both involve cutting a fabric specimen of at least 50cm by 50cm, marking benchmark points exactly 50cm apart in both warp and weft directions per ISO 3759, washing under the specified conditions, drying by the specified method, and remeasuring the distance between benchmarks. Shrinkage is calculated as the original minus the final distance, divided by the original, multiplied by 100. Standard test programs run 5 wash cycles, though some buyers specify 10.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-7">
+          How does drying method affect shrinkage?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-7" role="region">
+          <p>Drying method is the second most influential factor after fiber type. Tumble drying applies both heat and mechanical agitation simultaneously, causing the highest shrinkage in natural fibers — up to 30 to 50% more than line drying. Line drying allows fabric to hang under gravity, which can cause some lengthwise extension while reducing overall shrinkage. Flat drying on a horizontal surface produces the most controlled and lowest shrinkage because there is no tension or agitation. Always match your test drying method to the consumer care label instructions that will be applied to the finished garment.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-8">
+          What are acceptable shrinkage limits for garment production?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-8" role="region">
+          <p>Acceptable shrinkage limits are set by buyers in their quality manuals or purchase orders. As a general industry guide: woven cotton should not exceed 5% total shrinkage; cotton knits should not exceed 8%; cotton-elastane blends can be up to 8%; synthetic fabrics should stay under 3%; and wool under 5% (machine-washable treated wool). Premium and luxury brands often set tighter tolerances, sometimes 2 to 3% for woven cotton. Fast fashion brands may accept up to 7% for cotton. Always get written confirmation of your buyer's tolerance before bulk fabric approval.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-9">
+          Can fabric shrinkage be prevented or reduced?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-9" role="region">
+          <p>Shrinkage cannot be completely eliminated from natural fiber fabrics, but it can be significantly reduced and controlled. Sanforizing reduces residual shrinkage in woven cotton to under 1%. Heat setting stabilizes polyester and nylon. Compressive relaxation machines ("compactors") reduce knit shrinkage. Chemical anti-shrink treatments are available for wool. For small production runs without access to pre-shrinking equipment, pre-washing the fabric before cutting is an effective alternative. The most reliable production approach combines pre-treated fabric with well-calculated pattern allowances as a safety margin.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-10">
+          How do different fabric constructions affect shrinkage?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-10" role="region">
+          <p>Fabric construction has a major influence on shrinkage. Knit fabrics shrink more than woven fabrics because their looped yarn structure has more freedom to contract. Among woven structures, plain weave (highest yarn interlacing frequency) shows less shrinkage than twill or satin weave. Open structures like terry and fleece show the highest shrinkage due to looped or brushed yarn surfaces. Denim shrinks in a controlled way because of its tight twill construction and typically receives sanforizing treatment. Heavier GSM fabrics contain more yarn mass and can release more tension, often showing slightly higher shrinkage than lighter fabrics of the same fiber type.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-11">
+          What is sanforizing and how does it reduce fabric shrinkage?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-11" role="region">
+          <p>Sanforizing is a patented mechanical pre-shrinking process applied to woven fabrics — primarily cotton and denim — at the finishing stage of fabric production. The fabric is moistened with steam or water, then fed between a thick rubber belt and a heated drum. As the rubber belt compresses, it forces the fabric to pre-shrink in the lengthwise direction by a controlled amount. Sanforized fabrics carry a certification guaranteeing residual shrinkage of 1% or less. When sourcing fabric for export garment production, always check the fabric spec sheet for sanforizing certification to reduce pattern allowance requirements and improve finished measurement consistency.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-12">
+          How is fabric shrinkage tested for Bangladesh garment exports?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-12" role="region">
+          <p>Bangladesh garment manufacturers test fabric shrinkage according to ISO 6330 or AATCC 135 as specified by the international buyer. Fabric samples are prepared per ISO 3759 with marked benchmark areas of at least 50cm by 50cm, washed at the buyer-specified temperature — most commonly 40°C — dried by the specified method, conditioned at standard atmospheric conditions for 24 hours, and then remeasured. The shrinkage results must fall within buyer tolerance before bulk fabric is approved for production cutting. Third-party labs including SGS, Bureau Veritas, Intertek, and QIMA operate testing facilities in Bangladesh for independent verification.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="shrinkage-section shrinkage-section--no-border">
+    <div class="shrinkage-container">
+      <div class="cta-box">
+        <h2 class="cta-title">Need Garments Manufactured with Controlled Shrinkage?</h2>
+        <p class="cta-text">SDF Clothing produces export-quality garments from Bangladesh with fabric shrinkage testing at every stage. Contact our team for a production quote.</p>
+        <a href="/contact/" class="cta-btn" aria-label="Contact SDF Clothing for garment manufacturing with shrinkage compliance">Get a Free Quote</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const shrinkageFactors = {
+    fabricType: {
+      cotton:            { warp: 4.5, weft: 3.5, relaxation: 2.0 },
+      polyester:         { warp: 1.5, weft: 1.0, relaxation: 0.5 },
+      wool:              { warp: 5.0, weft: 4.0, relaxation: 2.5 },
+      silk:              { warp: 3.0, weft: 2.0, relaxation: 1.5 },
+      linen:             { warp: 4.0, weft: 3.0, relaxation: 2.0 },
+      viscose:           { warp: 5.5, weft: 4.5, relaxation: 3.0 },
+      nylon:             { warp: 2.0, weft: 1.5, relaxation: 1.0 },
+      'cotton-polyester':{ warp: 3.0, weft: 2.0, relaxation: 1.5 },
+      'cotton-elastane': { warp: 5.0, weft: 4.0, relaxation: 2.5 }
+    },
+    construction: {
+      woven:  { multiplier: 1.0 },
+      knit:   { multiplier: 1.3 },
+      denim:  { multiplier: 0.9 },
+      terry:  { multiplier: 1.4 },
+      fleece: { multiplier: 1.35 }
+    },
+    temperature: {
+      30: { multiplier: 0.7 },
+      40: { multiplier: 0.85 },
+      60: { multiplier: 1.0 },
+      90: { multiplier: 1.2 }
+    },
+    dryingMethod: {
+      'tumble-dry': { multiplier: 1.2 },
+      'line-dry':   { multiplier: 0.9 },
+      'flat-dry':   { multiplier: 0.85 }
+    }
+  };
+
+  const fabricTypeLabels = {
+    cotton: '100% Cotton', polyester: '100% Polyester', wool: '100% Wool',
+    silk: '100% Silk', linen: 'Linen', viscose: 'Viscose/Rayon',
+    nylon: 'Nylon', 'cotton-polyester': 'Cotton-Polyester Blend', 'cotton-elastane': 'Cotton-Elastane Blend'
+  };
+
+  const constructionLabels = {
+    woven: 'Woven', knit: 'Knit', denim: 'Denim', terry: 'Terry', fleece: 'Fleece'
+  };
+
+  function calculateShrinkage() {
+    const fabricType     = document.getElementById('fabric-type').value;
+    const construction   = document.getElementById('construction').value;
+    const temperature    = document.getElementById('temperature').value;
+    const dryingMethod   = document.getElementById('drying-method').value;
+    const washCycles     = parseInt(document.getElementById('wash-cycles').value) || 5;
+    const buyerTolerance = parseFloat(document.getElementById('buyer-tolerance').value) || 5;
+    const initialMeasurement = parseFloat(document.getElementById('initial-measurement').value) || 100;
+
+    const errorEl = document.getElementById('error-message');
+
+    if (!fabricType || !construction || !temperature || !dryingMethod) {
+      errorEl.classList.add('error-message--visible');
+      document.getElementById('result-box').classList.remove('result-box--visible');
+      return;
+    }
+
+    errorEl.classList.remove('error-message--visible');
+
+    const base = shrinkageFactors.fabricType[fabricType];
+    const constrMult = shrinkageFactors.construction[construction].multiplier;
+    const tempMult   = shrinkageFactors.temperature[temperature].multiplier;
+    const dryMult    = shrinkageFactors.dryingMethod[dryingMethod].multiplier;
+    const cycleFactor = Math.min(1 + (washCycles - 5) * 0.05, 1.5);
+
+    const warpShrinkage       = base.warp * constrMult * tempMult * dryMult * cycleFactor;
+    const weftShrinkage       = base.weft * constrMult * tempMult * dryMult * cycleFactor;
+    const relaxationShrinkage = base.relaxation * constrMult;
+    const totalShrinkage      = Math.sqrt(warpShrinkage * warpShrinkage + weftShrinkage * weftShrinkage);
+
+    const patternAllowanceWarp = (initialMeasurement * warpShrinkage / 100).toFixed(2);
+    const patternAllowanceWeft = (initialMeasurement * weftShrinkage / 100).toFixed(2);
+    const finishedMeasurement  = (initialMeasurement * (1 - totalShrinkage / 100)).toFixed(2);
+    const tolerancePassed      = totalShrinkage <= buyerTolerance;
+
+    document.getElementById('warp-shrinkage').textContent       = warpShrinkage.toFixed(2) + '%';
+    document.getElementById('weft-shrinkage').textContent       = weftShrinkage.toFixed(2) + '%';
+    document.getElementById('relaxation-shrinkage').textContent = relaxationShrinkage.toFixed(2) + '%';
+    document.getElementById('total-shrinkage').textContent      = totalShrinkage.toFixed(2) + '%';
+    document.getElementById('pattern-allowance-warp').textContent = patternAllowanceWarp + ' cm';
+    document.getElementById('pattern-allowance-weft').textContent = patternAllowanceWeft + ' cm';
+    document.getElementById('finished-measurement').textContent = finishedMeasurement + ' cm';
+
+    const toleranceEl  = document.getElementById('tolerance-check');
+    const toleranceSubEl = document.getElementById('tolerance-sub');
+    toleranceEl.textContent = tolerancePassed ? 'PASS' : 'FAIL';
+    toleranceEl.className   = 'pass-fail ' + (tolerancePassed ? 'pass-fail--pass' : 'pass-fail--fail');
+    toleranceSubEl.textContent = tolerancePassed
+      ? `Within ${buyerTolerance}% tolerance`
+      : `Exceeds ${buyerTolerance}% by ${(totalShrinkage - buyerTolerance).toFixed(2)}%`;
+
+    const fabricLabel      = fabricTypeLabels[fabricType] || fabricType;
+    const constructLabel   = constructionLabels[construction] || construction;
+    const tempLabel        = temperature + '°C';
+    const dryLabel         = dryingMethod.replace(/-/g, ' ');
+    const cutLength        = (parseFloat(initialMeasurement) + parseFloat(patternAllowanceWarp)).toFixed(1);
+    const cutWidth         = (parseFloat(initialMeasurement) + parseFloat(patternAllowanceWeft)).toFixed(1);
+
+    let explanation = `For ${fabricLabel} (${constructLabel}) washed at ${tempLabel} with ${dryLabel} for ${washCycles} cycles: `;
+    explanation += `warp shrinkage is ${warpShrinkage.toFixed(2)}% and weft shrinkage is ${weftShrinkage.toFixed(2)}%. `;
+    explanation += `To achieve a ${initialMeasurement}cm finished measurement, cut at ${cutLength}cm (length) and ${cutWidth}cm (width). `;
+
+    if (!tolerancePassed) {
+      explanation += `Total shrinkage of ${totalShrinkage.toFixed(2)}% exceeds buyer tolerance of ${buyerTolerance}%. Consider using sanforized or pre-shrunk fabric, or discuss a pattern allowance adjustment with your buyer.`;
+    } else {
+      explanation += `Total shrinkage of ${totalShrinkage.toFixed(2)}% is within the ${buyerTolerance}% buyer tolerance. This fabric meets requirements.`;
+    }
+
+    document.getElementById('result-explanation').textContent = explanation;
+    document.getElementById('result-box').classList.add('result-box--visible');
+    document.getElementById('result-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.getElementById('calculate-btn').addEventListener('click', calculateShrinkage);
+
+  document.querySelectorAll('.faq-question').forEach((button) => {
+    button.addEventListener('click', () => {
+      const answer   = button.nextElementSibling;
+      const icon     = button.querySelector('.faq-icon');
+      const isOpen   = button.getAttribute('aria-expanded') === 'true';
+
+      button.setAttribute('aria-expanded', String(!isOpen));
+      answer.classList.toggle('faq-answer--visible');
+      icon.classList.toggle('faq-icon--open');
+    });
+  });
+</script>
+
+</BaseLayout>

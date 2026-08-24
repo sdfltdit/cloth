@@ -1,0 +1,464 @@
+---
+import { getYearsExperiencePlus } from '../data/company';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Clothing Product Catalog",
+    "description": "Complete product catalog of everything SDF Clothing manufactures — knit garments, woven items, trims, and accessories, produced in Dhaka, Bangladesh.",
+    "url": "https://sdfltd.com/products",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Products" }
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What product categories does SDF Clothing manufacture?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We manufacture comprehensive product ranges including knit garments (T-shirts, hoodies, polos, joggers, sweatshirts), woven garments (shirts, trousers, dresses, jackets, skirts), trims and accessories (labels, hang tags, buttons, zippers, drawcords, packaging), and specialty categories (activewear, streetwear, sustainable ranges, kids clothing, modest fashion, workwear)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the minimum order quantity for fashion manufacturing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our MOQ starts at 300 pieces per style per color for knit and woven garments."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does fashion manufacturing take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The complete fashion manufacturing process takes 60-90 days from order confirmation to delivery. Sampling requires 14 days for proto, fit, and pre-production samples."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you handle private label production?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we specialize in private label clothing production with complete branding, labeling, and NDA protection."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What certifications does SDF Clothing hold?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SDF Clothing holds GOTS, OEKO-TEX, ISO 9001, BSCI, SEDEX, WRAP, SA8000, and ZDHC certifications."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer sample services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we provide proto samples, fit samples, and pre-production samples. Sampling takes 14 days with unlimited revisions until approval."
+        }
+      }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="Clothing Product Catalog | T-Shirts, Hoodies & More | SDF"
+  description="Browse everything SDF Clothing manufactures: knit, woven, denim, activewear, trims and accessories. MOQ 300 pieces per style, GOTS certified, factory-direct."
+
+  schema={schema}
+>
+
+  <!-- Particles -->
+  <div class="particles" aria-hidden="true">
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- ── BREADCRUMB ── -->
+    <nav aria-label="Breadcrumb" style="max-width:1200px;margin:0 auto;padding:1rem 1.5rem 0;font-size:0.75rem;color:rgba(255,255,255,0.5);letter-spacing:0.05em;">
+      <ol style="list-style:none;display:flex;gap:0.4rem;align-items:center;">
+        <li><a href="/" style="color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e00'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Home</a></li>
+        <li style="color:rgba(255,255,255,0.3);">/</li>
+        <li style="color:#fff;">Products</li>
+      </ol>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <section style="padding:5rem 0 4rem;text-align:center;position:relative;">
+      <div style="max-width:860px;margin:0 auto;padding:0 1.5rem;">
+        <div class="section-header" style="margin-bottom:2rem;">
+          <span class="section-label">Product Catalog</span>
+          <div class="accent-line" style="margin:0 auto 1.5rem;"></div>
+          <h1 style="font-size:clamp(2rem,4vw,3.2rem);font-weight:300;letter-spacing:0.04em;margin-bottom:1.5rem;">
+            Clothing Product Catalog: What We Manufacture
+          </h1>
+          <p style="font-size:0.92rem;color:rgba(255,255,255,0.75);line-height:1.9;max-width:780px;margin:0 auto 2rem;">
+            SDF Clothing is a vertically integrated garment manufacturer producing knit garments, woven items, trims, and accessories from our Dhaka facility for fashion brands across the EU, UK, USA, Canada, and Australia. This catalog covers every product category we manufacture, from fabric sourcing through finished garments, with pricing from 300 pieces per style and full customization options.
+          </p>
+          <a href="/contact/" class="btn-primary">Get a Free Quote</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── KNIT GARMENTS ── -->
+    <section id="knit-garments" style="padding:4rem 0;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
+        <div class="section-header" style="margin-bottom:3rem;">
+          <span class="section-label">Category 01</span>
+          <div class="accent-line"></div>
+          <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;margin-bottom:1.25rem;">Knit Garment Manufacturing</h2>
+          <p style="font-size:0.88rem;color:rgba(255,255,255,0.75);line-height:1.9;max-width:900px;">
+            Our knit production covers diverse fabric types including single jersey, french terry, fleece, pique, interlock, and rib structures. Our knit clothing manufacturer capabilities span GSM ranges from 140 to 450 GSM, accommodating lightweight summer tees through heavyweight winter hoodies. We produce T-shirt manufacturing with 100% cotton, organic cotton, cotton-polyester blends, and performance fabrics. Our hoodie and sweatshirt manufacturing includes pullover and zip-up styles in fleece and french terry fabrics. Our MOQ for knit garments starts at 300 pieces per style per color, with FOB Bangladesh pricing ranging from $2.50 to $18 per piece. See T-shirt, hoodie, and knitwear specifications below.
+          </p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">
+
+          {[
+            { name: "T-Shirts", desc: "Basic and premium cotton tees, organic cotton options, performance fabrics with moisture-wicking properties" },
+            { name: "Polo Shirts", desc: "Classic pique knit, performance mesh fabrics, custom collar and cuff options, embroidered logos" },
+            { name: "Hoodies", desc: "Pullover and zip-up styles, fleece and french terry fabrics, heavyweight winter options" },
+            { name: "Sweatshirts", desc: "Crewneck and quarter zip, fleece-lined options, raglan and set-in sleeve constructions" },
+            { name: "Leggings", desc: "High waist and compression styles, performance fabrics with four-way stretch, seamless options" },
+            { name: "Joggers", desc: "Athletic and casual styles, cuffed and elastic waistbands, side stripe and cargo options" },
+          ].map(item => (
+            <div class="snake-card" style="padding:1.75rem;">
+              <h3 style="font-size:0.9rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem;color:#fff;">{item.name}</h3>
+              <div style="width:24px;height:1px;background:#e00;margin-bottom:1rem;"></div>
+              <p style="font-size:0.82rem;color:rgba(255,255,255,0.7);line-height:1.8;">{item.desc}</p>
+            </div>
+          ))}
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WOVEN GARMENTS ── -->
+    <section id="woven-garments" style="padding:4rem 0;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
+        <div class="section-header" style="margin-bottom:3rem;">
+          <span class="section-label">Category 02</span>
+          <div class="accent-line"></div>
+          <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;margin-bottom:1.25rem;">Woven Garment Manufacturing</h2>
+          <p style="font-size:0.88rem;color:rgba(255,255,255,0.75);line-height:1.9;max-width:900px;">
+            We produce woven garments using advanced cutting and sewing techniques for structured apparel. Our woven garment manufacturer expertise spans fabric types including poplin, twill, oxford, denim, canvas, and blended materials. Shirt manufacturing capabilities cover dress shirts with premium cotton fabrics, casual button-downs in various weaves, and flannel shirts for winter collections. Our woven garment MOQ starts at 300 pieces per style with FOB Bangladesh pricing ranging from $3.50 to $25 per piece. See shirt, denim, and blazer specifications below.
+          </p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">
+
+          {[
+            { name: "Dress Shirts", desc: "Formal and casual button-downs, premium cotton fabrics, custom collar and cuff styles" },
+            { name: "Chino Trousers", desc: "Classic flat-front pants, stretch and non-stretch options, various rise styles" },
+            { name: "Denim Jeans", desc: "Classic and stretch denim, various washes and finishes, custom detailing options" },
+            { name: "Blazers", desc: "Structured and unstructured styles, lining options, custom button and lapel designs" },
+            { name: "Jackets", desc: "Bomber and denim styles, lightweight windbreakers, insulated winter options" },
+            { name: "Dresses", desc: "Shift and wrap styles, A-line and bodycon silhouettes, coordinated blouse options" },
+          ].map(item => (
+            <div class="snake-card" style="padding:1.75rem;">
+              <h3 style="font-size:0.9rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem;color:#fff;">{item.name}</h3>
+              <div style="width:24px;height:1px;background:#e00;margin-bottom:1rem;"></div>
+              <p style="font-size:0.82rem;color:rgba(255,255,255,0.7);line-height:1.8;">{item.desc}</p>
+            </div>
+          ))}
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TRIMS & ACCESSORIES ── -->
+    <section id="trims-accessories" style="padding:4rem 0;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
+        <div class="section-header" style="margin-bottom:3rem;">
+          <span class="section-label">Category 03</span>
+          <div class="accent-line"></div>
+          <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;margin-bottom:1.25rem;">Trims and Accessories</h2>
+          <p style="font-size:0.88rem;color:rgba(255,255,255,0.75);line-height:1.9;max-width:900px;">
+            We supply complete trim packages with essential components for garment production. Our trim sourcing service provides custom labels including main labels, size labels, and care labels with woven, printed, and heat transfer options. Hang tags available in paper, fabric, leather, and PVC materials. Buttons and snaps sourced in plastic, metal, wooden, and coconut shell materials. Zippers from YKK, SBS, and quality metal suppliers in various styles. Visit our <a href="/all-services/" style="color:#e00;">trims sourcing</a> page for complete trim catalog.
+          </p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">
+
+          {[
+            { name: "Labels", desc: "Custom main, size, and care labels in woven, printed, and heat transfer options" },
+            { name: "Hang Tags", desc: "Paper, fabric, leather, and PVC tags with custom die-cut shapes and finishes" },
+            { name: "Buttons", desc: "Plastic, metal, wooden, and coconut shell options with custom engraving" },
+            { name: "Zippers", desc: "YKK and quality metal zippers in invisible, metal, plastic, and waterproof styles" },
+            { name: "Drawcords", desc: "Cotton and polyester cords with custom tipping and end caps in various colors" },
+            { name: "Packaging", desc: "Polybags, hangtags, hangers, and branded boxes for complete presentation" },
+          ].map(item => (
+            <div class="snake-card" style="padding:1.75rem;">
+              <h3 style="font-size:0.9rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem;color:#fff;">{item.name}</h3>
+              <div style="width:24px;height:1px;background:#e00;margin-bottom:1rem;"></div>
+              <p style="font-size:0.82rem;color:rgba(255,255,255,0.7);line-height:1.8;">{item.desc}</p>
+            </div>
+          ))}
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SPECIALTY CATEGORIES ── -->
+    <section id="specialty-categories" style="padding:4rem 0;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
+        <div class="section-header" style="margin-bottom:3rem;">
+          <span class="section-label">Category 04</span>
+          <div class="accent-line"></div>
+          <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;margin-bottom:1.25rem;">Specialty Manufacturing Categories</h2>
+          <p style="font-size:0.88rem;color:rgba(255,255,255,0.75);line-height:1.9;max-width:900px;">
+            We serve diverse market segments with specialized production capabilities. Our activewear and athleisure manufacturing focuses on performance fabrics with moisture-wicking, four-way stretch, and antimicrobial properties. Sustainable and organic ranges include GOTS certified organic cotton, GRS recycled polyester, and eco-friendly dyeing processes. Kids and baby clothing manufacturing ensures safety compliance with OEKO-TEX certification. See activewear, streetwear, sustainable, and kids' clothing specifications below.
+          </p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">
+
+          {[
+            { name: "Activewear", desc: "Performance fabrics with moisture-wicking, four-way stretch, antimicrobial properties" },
+            { name: "Streetwear", desc: "Heavyweight cotton and fleece fabrics, oversized fits, contemporary urban styling" },
+            { name: "Sustainable", desc: "GOTS organic cotton, GRS recycled polyester, eco-friendly dyeing processes" },
+            { name: "Kids & Baby", desc: "OEKO-TEX certified fabrics, child-safe construction, compliance with safety standards" },
+            { name: "Modest Fashion", desc: "Full-coverage garments with contemporary styling, religious and modest wear markets" },
+            { name: "Workwear", desc: "Corporate, hospitality, and industrial uniforms with durable, branded apparel" },
+          ].map(item => (
+            <div class="snake-card" style="padding:1.75rem;">
+              <h3 style="font-size:0.9rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem;color:#fff;">{item.name}</h3>
+              <div style="width:24px;height:1px;background:#e00;margin-bottom:1rem;"></div>
+              <p style="font-size:0.82rem;color:rgba(255,255,255,0.7);line-height:1.8;">{item.desc}</p>
+            </div>
+          ))}
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── MANUFACTURING PROCESS ── -->
+    <section style="padding:4rem 0;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
+        <div class="section-header" style="margin-bottom:3rem;max-width:700px;">
+          <span class="section-label">How It Works</span>
+          <div class="accent-line"></div>
+          <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;margin-bottom:1.25rem;">Custom Manufacturing Process for Fashion Brands</h2>
+          <p style="font-size:0.88rem;color:rgba(255,255,255,0.75);line-height:1.9;">
+            Our custom apparel manufacturer process begins with concept development and moves through delivery with comprehensive oversight. Sampling timeline averages 14 days with unlimited revisions until approval. Bulk production typically takes 60–90 days. Quality inspection follows AQL 2.5 standards with in-line QC, pre-shipment inspection, and final QC before packaging. Visit our <a href="/work-process/" style="color:#e00;">work process</a> page for detailed manufacturing workflow information.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;border:1px solid #e00;">
+          {[
+            { step: "01", label: "Consultation" },
+            { step: "02", label: "Tech Pack" },
+            { step: "03", label: "Sampling" },
+            { step: "04", label: "Production" },
+            { step: "05", label: "Quality Control" },
+            { step: "06", label: "Shipping" },
+          ].map(item => (
+            <div style="padding:2rem 1.5rem;background:#000;border:1px solid rgba(255,0,0,0.2);text-align:center;">
+              <div style="font-size:0.6rem;letter-spacing:0.3em;color:#ff7373;margin-bottom:0.5rem;">{item.step}</div>
+              <div style="font-size:0.85rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;">{item.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STATS ── -->
+    <section style="padding:4rem 0;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
+        <div class="section-header" style="margin-bottom:3rem;max-width:700px;">
+          <span class="section-label">Why Choose Us</span>
+          <div class="accent-line"></div>
+          <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;margin-bottom:1.25rem;">Why Choose Our Manufacturing Services</h2>
+          <p style="font-size:0.88rem;color:rgba(255,255,255,0.75);line-height:1.9;">
+            Our {getYearsExperiencePlus()} years experience spans serving 200+ international fashion brands across EU, UK, USA, Canada, and Australia markets. We hold 13 international certifications including GOTS, OEKO-TEX, ISO 9001, BSCI, SEDEX, WRAP, SA8000, and others ensuring compliance and quality. Our 75,000 sq ft facility houses dedicated production lines with 500+ skilled professionals. Visit our <a href="/about/" style="color:#e00;">about</a> and <a href="/certifications" style="color:#e00;">certifications</a> pages for detailed company information.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;">
+          {[
+            { value: "27+", label: "Years Experience" },
+            { value: "13", label: "Certifications" },
+            { value: "200+", label: "Brand Clients" },
+            { value: "98%", label: "On-Time Delivery" },
+          ].map(stat => (
+            <div class="snake-card" style="padding:2rem;text-align:center;">
+              <div style="font-size:2.5rem;font-weight:200;color:#e00;letter-spacing:0.02em;line-height:1;">{stat.value}</div>
+              <div style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-top:0.5rem;">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section style="padding:4rem 0;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="max-width:800px;margin:0 auto;padding:0 1.5rem;">
+        <div class="section-header" style="margin-bottom:3rem;">
+          <span class="section-label">FAQ</span>
+          <div class="accent-line"></div>
+          <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;">Product Catalog FAQ</h2>
+        </div>
+
+        <div class="faq-list">
+          {[
+            {
+              q: "What product categories does SDF Clothing manufacture?",
+              a: "We manufacture comprehensive product ranges including knit garments (T-shirts, hoodies, polos, joggers, sweatshirts), woven garments (shirts, trousers, dresses, jackets, skirts), trims and accessories (labels, hang tags, buttons, zippers, drawcords, packaging), and specialty categories (activewear, streetwear, sustainable ranges, kids clothing, modest fashion, workwear). We also provide private label services with full customization options."
+            },
+            {
+              q: "What is the minimum order quantity for fashion manufacturing?",
+              a: "Our MOQ starts at 300 pieces per style per color for knit and woven garments. This low minimum order quantity enables startup fashion brands and small collections to access professional manufacturing without committing to large volumes. For specialty items like accessories or custom trims, MOQs may vary. Contact us for specific MOQ information based on your product requirements."
+            },
+            {
+              q: "How long does fashion manufacturing take?",
+              a: "The complete fashion manufacturing process takes 60-90 days from order confirmation to delivery. Sampling requires 14 days for proto, fit, and pre-production samples. Bulk production ranges from 45-60 days depending on order complexity and quantity. Shipping adds 5-10 days for sea freight or 3-5 days for air freight. Rush production options are available for urgent orders with expedited timelines."
+            },
+            {
+              q: "Do you handle private label production?",
+              a: "Yes, we specialize in private label clothing production. We provide complete private label services including custom labeling, hang tags, packaging, and branding. Your brand identity is applied throughout manufacturing with NDA protection for intellectual property. Private label production enables fashion brands to build their identity without manufacturing infrastructure investment."
+            },
+            {
+              q: "What certifications does SDF Clothing hold?",
+              a: "We hold international certifications including GOTS for organic textiles, OEKO-TEX for chemical safety, ISO 9001 for quality management, BSCI for social compliance, SEDEX for ethical trading, WRAP for responsible production, SA8000 for social accountability, and ZDHC for chemical management. These certifications ensure compliance with EU, UK, and USA market requirements."
+            },
+            {
+              q: "Do you offer sample services?",
+              a: "Yes, we provide comprehensive sample services including proto samples, fit samples, and pre-production samples. Sampling typically takes 14 days with unlimited revisions until approval. Sample costs vary based on fabric complexity and customization requirements. Pre-production samples are included with bulk orders at no additional cost."
+            },
+          ].map((item, i) => (
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false" aria-controls={`faq-answer-${i}`}>
+                <span>{item.q}</span>
+                <svg class="faq-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <path d="M8 3v10M3 8h10"/>
+                </svg>
+              </button>
+              <div class="faq-answer" id={`faq-answer-${i}`}>
+                <p>{item.a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PRODUCT CATEGORY DIRECTORY ── -->
+    <section style="padding:4rem 0;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="max-width:1100px;margin:0 auto;padding:0 1.5rem;">
+        <span class="section-label" style="display:block;margin-bottom:0.5rem;">Product Directory</span>
+        <div class="accent-line" style="margin-bottom:1.5rem;"></div>
+        <h2 style="font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:300;margin-bottom:1.5rem;">Browse Every Product Category</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.75rem;">
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Garment Exporter</a>
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Knitwear Factory</a>
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Blazer Manufacturer</a>
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Denim Jacket Manufacturer</a>
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Polo Shirt Manufacturer</a>
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Pants Manufacturer</a>
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Skirts Manufacturer</a>
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Swimwear Manufacturer</a>
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Bikini Manufacturer</a>
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Sports Bra Manufacturer</a>
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Wool Clothing Manufacturer</a>
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Loungewear Manufacturer</a>
+          <a href="/products/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Small Batch T-Shirt Manufacturer</a>
+          <a href="/all-services/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Embroidery Service</a>
+          <a href="/all-services/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Finishing Service</a>
+          <a href="/all-services/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Trims Sourcing</a>
+          <a href="/all-services/" style="color:rgba(255,255,255,0.75);text-decoration:none;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">Sourcing Agent Service</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── LEARN: FABRIC, SIZING & INDUSTRY DATA ── -->
+    <section style="padding:4rem 0;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="max-width:1100px;margin:0 auto;padding:0 1.5rem;">
+        <span class="section-label" style="display:block;margin-bottom:0.5rem;">Learn</span>
+        <div class="accent-line" style="margin-bottom:1.5rem;"></div>
+        <h2 style="font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:300;margin-bottom:1.5rem;">Fabric, Sizing & Industry Reference Guides</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.75rem;">
+          Fabric Types Glossary
+          Fabric GSM Explained
+          International Size Chart Guide
+          Bangladesh RMG Industry Data
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section style="padding:5rem 0;border-top:1px solid rgba(255,255,255,0.08);text-align:center;">
+      <div style="max-width:700px;margin:0 auto;padding:0 1.5rem;">
+        <span class="section-label" style="display:block;margin-bottom:0.5rem;">Get Started</span>
+        <div class="accent-line" style="margin:0 auto 1.5rem;"></div>
+        <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;margin-bottom:1.25rem;">
+          Start Your Fashion Brand With SDF Clothing
+        </h2>
+        <p style="font-size:0.88rem;color:rgba(255,255,255,0.75);line-height:1.9;margin-bottom:2.5rem;">
+          Get started with our manufacturing services for your clothing brand. Complete product catalog with knit garments, woven items, trims, and accessories. Custom apparel from 300 pieces with GOTS and OEKO-TEX certification.
+        </p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <a href="/contact/" class="btn-primary">Request Free Quote →</a>
+          <a href="/all-services" class="btn-secondary">View All Services →</a>
+        </div>
+        <p style="margin-top:2rem;font-size:0.8rem;color:rgba(255,255,255,0.5);">
+          Visit our <a href="/clothing-manufacturers/" style="color:#e00;">clothing manufacturers</a> guide, <a href="/faq/" style="color:#e00;">FAQ</a> section, and <a href="/all-services" style="color:#e00;">all services</a> page for comprehensive information.
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FAQ + Section Header Scripts -->
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        // Close all
+        document.querySelectorAll('.faq-question').forEach(b => {
+          b.setAttribute('aria-expanded', 'false');
+          b.nextElementSibling?.classList.remove('open');
+        });
+        // Toggle current
+        if (!expanded) {
+          btn.setAttribute('aria-expanded', 'true');
+          btn.nextElementSibling?.classList.add('open');
+        }
+      });
+    });
+
+    // Section header scroll animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
+  </script>
+
+  <!-- Stats mobile responsive -->
+  <style>
+    @media (max-width: 600px) {
+      /* stats grid to 2 col */
+      .stat-grid-4 { grid-template-columns: repeat(2,1fr) !important; }
+    }
+  </style>
+
+</BaseLayout>

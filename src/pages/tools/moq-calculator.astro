@@ -1,0 +1,265 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+const pageTitle = "MOQ Calculator | Minimum Order Quantity for Clothing";
+const pageDescription = "Calculate minimum order quantities for clothing manufacturing in Bangladesh. Instant MOQ estimates for startups and established brands.";
+
+const toolFaqs = [
+  {
+    question: "What is MOQ and why do manufacturers require it?",
+    answer: "MOQ (Minimum Order Quantity) is the smallest quantity a factory will produce per style. Manufacturers set MOQs because fabric is bought by the roll and production lines are set up per style, so very small runs aren't cost-efficient to produce."
+  },
+  {
+    question: "Can I mix sizes and colors within the MOQ?",
+    answer: "Yes. At SDF, the MOQ applies per style, not per size or color — you can typically mix sizes and up to 4 colors within your 300-piece minimum, as shown in the calculator results."
+  },
+  {
+    question: "Why does complex embroidery or all-over print raise the MOQ?",
+    answer: "Complex decoration (heavy embroidery, all-over prints) requires more setup time and higher minimums from trim and print suppliers, which the calculator reflects with its complexity multiplier."
+  },
+  {
+    question: "Is the MOQ different for organic or bamboo fabric?",
+    answer: "Yes. Organic cotton, bamboo, and modal fabrics are produced in smaller batches by mills, so factories often need a higher minimum order to justify sourcing them — the calculator's fabric multiplier accounts for this."
+  }
+];
+const toolFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": toolFaqs.map(f => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+  }))
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+	<!-- JSON-LD Schema -->
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebApplication",
+		"name": "MOQ Calculator",
+		"description": "Calculate minimum order quantities for clothing manufacturing in Bangladesh",
+		"url": "https://sdfltd.com/tools/moq-calculator",
+		"applicationCategory": "BusinessApplication",
+		"operatingSystem": "Any",
+		"offers": {
+			"@type": "Offer",
+			"price": "0",
+			"priceCurrency": "USD"
+		}
+	}
+	</script>
+	<script type="application/ld+json" set:html={JSON.stringify(toolFaqSchema)} />
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		"url": "https://sdfltd.com/tools/moq-calculator/",
+		"name": "MOQ Calculator",
+		"breadcrumb": {
+			"@type": "BreadcrumbList",
+			"itemListElement": [
+				{
+					"@type": "ListItem",
+					"position": 1,
+					"name": "Home",
+					"item": "https://sdfltd.com/"
+				},
+				{
+					"@type": "ListItem",
+					"position": 2,
+					"name": "Tools",
+					"item": "https://sdfltd.com/tools/"
+				},
+				{
+					"@type": "ListItem",
+					"position": 3,
+					"name": "MOQ Calculator"
+				}
+			]
+		}
+	}
+	</script>
+
+	<section class="py-20 px-4">
+		<div class="container mx-auto max-w-4xl">
+			<div class="text-center mb-12">
+				<h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+					MOQ Calculator for Clothing Manufacturing
+				</h1>
+				<p class="text-white/80 text-lg">
+					Instantly calculate minimum order quantities for your clothing production needs in Bangladesh
+				</p>
+			</div>
+
+			<div class="snake-card p-8 max-w-2xl mx-auto">
+				<form id="moqCalculator" class="space-y-6">
+					<div>
+						<label style="display:block; font-size:0.65rem; letter-spacing:0.14em; text-transform:uppercase; color:#FFFFFF; margin-bottom:0.45rem;">Garment Category</label>
+						<select id="garmentType" style="background:#000; border:1px solid #e00; color:#fff; padding:0.65rem 0.9rem; font-size:0.82rem; width:100%; outline:none; font-family:inherit; appearance:none;" onfocus="this.style.borderColor='#e00'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+							<option value="t-shirts">T-Shirts</option>
+							<option value="polo-shirts">Polo Shirts</option>
+							<option value="hoodies">Hoodies & Sweatshirts</option>
+							<option value="jeans">Denim Jeans</option>
+							<option value="trousers">Trousers & Pants</option>
+							<option value="dresses">Dresses</option>
+							<option value="skirts">Skirts</option>
+							<option value="jackets">Jackets & Coats</option>
+						</select>
+					</div>
+
+					<div>
+						<label style="display:block; font-size:0.65rem; letter-spacing:0.14em; text-transform:uppercase; color:#FFFFFF; margin-bottom:0.45rem;">Complexity Level</label>
+						<select id="complexity" style="background:#000; border:1px solid #e00; color:#fff; padding:0.65rem 0.9rem; font-size:0.82rem; width:100%; outline:none; font-family:inherit; appearance:none;" onfocus="this.style.borderColor='#e00'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+							<option value="basic">Basic (Solid colors, simple construction)</option>
+							<option value="moderate">Moderate (Prints, some embroidery)</option>
+							<option value="complex">Complex (All-over prints, heavy embroidery)</option>
+						</select>
+					</div>
+
+					<div>
+						<label style="display:block; font-size:0.65rem; letter-spacing:0.14em; text-transform:uppercase; color:#FFFFFF; margin-bottom:0.45rem;">Fabric Type</label>
+						<select id="fabricType" style="background:#000; border:1px solid #e00; color:#fff; padding:0.65rem 0.9rem; font-size:0.82rem; width:100%; outline:none; font-family:inherit; appearance:none;" onfocus="this.style.borderColor='#e00'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+							<option value="cotton">100% Cotton</option>
+							<option value="polyester">Polyester Blend</option>
+							<option value="organic">Organic Cotton</option>
+							<option value="bamboo">Bamboo Fabric</option>
+							<option value="modal">Modal Fabric</option>
+						</select>
+					</div>
+
+					<button type="submit" style="background:transparent; border: 0.6px solid #e00; color: #e00; padding: 0.85rem 2rem; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s; font-family: inherit; width: 100%;" onmouseover="this.style.background='#e00';this.style.color='#000'" onmouseout="this.style.background='transparent';this.style.color='#e00'">Calculate MOQ</button>
+				</form>
+
+				<div id="result" class="hidden mt-8 p-6 bg-black ">
+					<h3 class="text-xl font-bold text-white mb-4">Your MOQ Estimate</h3>
+					<div id="moqResult" class="space-y-3"></div>
+				</div>
+			</div>
+
+			<div class="mt-12 text-center">
+				<p class="text-white/70 mb-4">
+					Need a custom quote for larger quantities? <a href="/contact/" class="text-[#e00] hover:text-[#e00]">Contact us</a> for bulk pricing.
+				</p>
+			</div>
+
+			<!-- HOW TO USE THIS TOOL (static, server-rendered) -->
+			<div class="mt-16 max-w-2xl mx-auto">
+				<h2 class="text-2xl font-bold text-white mb-4">How to Use This Tool</h2>
+				<ol style="color:rgba(255,255,255,0.85);line-height:1.9;font-size:0.9rem;padding-left:1.2rem;">
+					<li style="margin-bottom:0.6rem;">Choose your garment category — different garment types have different base minimums.</li>
+					<li style="margin-bottom:0.6rem;">Select complexity level. Basic solid-color garments carry the lowest MOQ; heavy embroidery or all-over prints raise it.</li>
+					<li style="margin-bottom:0.6rem;">Pick your fabric type. Standard cotton and polyester keep MOQ lowest; organic, bamboo, and modal fabrics need larger minimums.</li>
+					<li style="margin-bottom:0.6rem;">Click "Calculate MOQ" to see your estimated minimum order quantity, size/color flexibility, and production time.</li>
+				</ol>
+			</div>
+
+			<!-- FAQ (static, server-rendered) -->
+			<div class="mt-16 max-w-2xl mx-auto">
+				<h2 class="text-2xl font-bold text-white mb-4">MOQ FAQ</h2>
+				<div style="display:flex;flex-direction:column;gap:1px;background:#000000;">
+					{toolFaqs.map(faq => (
+						<div style="background:#000;padding:1.25rem;">
+							<div style="font-size:0.9rem;color:#fff;margin-bottom:0.4rem;font-weight:500;">{faq.question}</div>
+							<div style="font-size:0.85rem;color:rgba(255,255,255,0.85);line-height:1.7;">{faq.answer}</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section style="padding:3rem 0;">
+		<div class="container mx-auto max-w-4xl">
+			<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#000000;">
+				
+					<div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.4rem;">Guide</div>
+					<div style="font-size:0.85rem;color:#fff;">What Does MOQ Mean?</div>
+				
+				<a href="/products/" style="background:#000;padding:1.5rem;text-decoration:none;display:block;transition:background 0.2s;" onmouseover="this.style.background='#0a0a0a'" onmouseout="this.style.background='#000'">
+					<div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.4rem;">Guide</div>
+					<div style="font-size:0.85rem;color:#fff;">Low MOQ Clothing Manufacturers</div>
+				</a>
+				<a href="/contact/" style="background:#000;padding:1.5rem;text-decoration:none;display:block;transition:background 0.2s;" onmouseover="this.style.background='#0a0a0a'" onmouseout="this.style.background='#000'">
+					<div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.4rem;">Quote</div>
+					<div style="font-size:0.85rem;color:#fff;">Request Free Quote</div>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		document.getElementById('moqCalculator').addEventListener('submit', function(e) {
+			e.preventDefault();
+			
+			const garmentType = document.getElementById('garmentType').value;
+			const complexity = document.getElementById('complexity').value;
+			const fabricType = document.getElementById('fabricType').value;
+			
+			// Base MOQ calculations
+			const baseMOQ = {
+				't-shirts': 300,
+				'polo-shirts': 300,
+				'hoodies': 200,
+				'jeans': 200,
+				'trousers': 300,
+				'dresses': 150,
+				'skirts': 200,
+				'jackets': 100
+			};
+			
+			const complexityMultiplier = {
+				'basic': 1,
+				'moderate': 1.2,
+				'complex': 1.5
+			};
+			
+			const fabricMultiplier = {
+				'cotton': 1,
+				'polyester': 1,
+				'organic': 1.3,
+				'bamboo': 1.4,
+				'modal': 1.5
+			};
+			
+			let moq = baseMOQ[garmentType] * complexityMultiplier[complexity] * fabricMultiplier[fabricType];
+			moq = Math.round(moq);
+			
+			// Display result
+			const resultDiv = document.getElementById('result');
+			const resultContent = document.getElementById('moqResult');
+			
+			resultContent.innerHTML = `
+				<div class="flex justify-between items-center py-2 border-b border-neutral-900">
+					<span class="text-white/70">Minimum Order Quantity:</span>
+					<span class="text-2xl font-bold text-[#e00]">${moq} pieces</span>
+				</div>
+				<div class="flex justify-between items-center py-2 border-b border-neutral-900">
+					<span class="text-white/70">Size Breakdown:</span>
+					<span class="text-white">Available (S, M, L, XL, XXL)</span>
+				</div>
+				<div class="flex justify-between items-center py-2 border-b border-neutral-900">
+					<span class="text-white/70">Color Options:</span>
+					<span class="text-white">Up to 4 colors per order</span>
+				</div>
+				<div class="flex justify-between items-center py-2">
+					<span class="text-white/70">Production Time:</span>
+					<span class="text-white">30-45 days</span>
+				</div>
+				<div class="mt-4 p-4 bg-black ">
+					<p class="text-sm text-white/70">
+						<strong>Note:</strong> This is an estimate. Final MOQ may vary based on specific requirements, 
+						availability, and order complexity. Contact us for exact pricing.
+					</p>
+				</div>
+			`;
+			
+			resultDiv.classList.remove('hidden');
+		});
+	</script>
+
+</BaseLayout>

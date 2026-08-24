@@ -1,0 +1,385 @@
+---
+import { getYearsExperiencePhrase } from '../data/company';
+
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogType?: string;
+  canonicalUrl?: string;
+  datePublished?: string;
+  dateModified?: string;
+  schema?: object | object[];
+  noindex?: boolean;
+  includeContactHints?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage = "https://sdfltd.com/factory.jpg",
+  ogType = "website",
+  canonicalUrl,
+  noindex = false,
+  datePublished,
+  dateModified,
+  schema,
+  includeContactHints = false
+} = Astro.props;
+
+// ── FIX 1: Canonical auto-generated if not provided, strips www, adds trailing slash ──
+const canonical = canonicalUrl
+  ? new URL(canonicalUrl, Astro.site).toString()
+  : new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).toString();
+
+const siteName = "SDF Clothing";
+const yearsExpPhrase = getYearsExperiencePhrase();
+
+// ── FIX 2: All Organisation @id uses "#org" sitewide ─────────────────────────
+// Previously BaseHead used "#organization" but about.astro inline JSON-LD used
+// "#org". Two different IDs for the same entity breaks Knowledge Graph linking.
+// Standardised to "#org" everywhere (matches about.astro inline JSON-LD).
+const baseSchemas = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization","LocalBusiness","ManufacturingBusiness"],
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "alternateName": ["SDF Ltd", "SDF Garments", "SDF Clothing Manufacturers", "SDF Clothing Manufacturer Bangladesh"],
+      "naics": "315",
+      "isicV4": "1410",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "value": 500
+      },
+      "knowsAbout": [
+        "Clothing Manufacturing",
+        "Garment Manufacturing Bangladesh",
+        "Private Label Clothing Manufacturing",
+        "OEM Apparel Manufacturing",
+        "CMT Garment Services",
+        "GOTS Certified Organic Cotton Production",
+        "Sustainable Clothing Manufacturing",
+        "Ethical Clothing Manufacturing",
+        "Low MOQ Clothing Production",
+        "T-Shirt Manufacturing",
+        "Hoodie Manufacturing",
+        "Activewear Manufacturing",
+        "Knitwear Manufacturing Bangladesh",
+        "Cut and Sew Manufacturing",
+        "Custom Apparel Manufacturing"
+      ],
+      "url": "https://sdfltd.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://sdfltd.com/logo-small.webp",
+        "width": 200,
+        "height": 60
+      },
+      "image": "https://sdfltd.com/factory.jpg",
+      "description": "SDF Clothing is a Bangladesh-based clothing manufacturer providing OEM, private label, and CMT services to fashion brands across EU, UK, USA, Canada, and Australia. Established 1998, GOTS certified.",
+      "priceRange": "$$",
+      "foundingDate": "1998-08-22",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "House 125, Road 01, Baridhara DOHS",
+        "addressLocality": "Dhaka",
+        "postalCode": "1212",
+        "addressCountry": "BD"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 23.7956,
+        "longitude": 90.4203
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "telephone": "+8801819172080",
+          "email": "contact@sdfltd.com",
+          "availableLanguage": ["English"]
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/clothing_manufacturerss",
+        "https://www.facebook.com/ClothingManufacturers/",
+        "https://x.com/clothing_makers",
+        "https://www.linkedin.com/company/clothing-manufacturers",
+        "https://www.pinterest.com/clothing1manufacturers/",
+        "https://au.pinterest.com/sdfltdclothingnsw/",
+        "https://clothing-manufacturers.tumblr.com/",
+        "https://medium.com/@stonedeadfashion",
+        "https://www.reddit.com/user/clothing-makers/",
+        "https://www.slideshare.net/sdfashion1",
+        "https://www.quora.com/profile/SDF-Clothing-1",
+        "https://www.wikidata.org/wiki/Q139678386",
+        "https://clutch.co/profile/sdf-clothing",
+        "https://theorg.com/org/clothing-manufacturer-sdf",
+        "https://brandfetch.com/sdfltd.com",
+        "https://www.salary.com/research/company/sdf-clothing-ltd-salary",
+        "https://biz.prlog.org/sdf-clothing/",
+        "https://thetextilenetwork.com/company/sdf-clothing",
+        "https://yourstory.com/companies/sdf-clothing",
+        "https://siachen.com/sdfclothing/"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Clothing Manufacturing Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "T-Shirt & Knitwear Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Woven Apparel Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Activewear & Sportswear Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Private Label Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "OEM Garment Manufacturing" } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://sdfltd.com/#website",
+      "url": "https://sdfltd.com",
+      "name": "SDF Clothing",
+      "alternateName": ["SDF", "SDF Ltd", "SDF Clothing Ltd", "SDF Clothing Bangladesh"],
+      "description": "SDF Clothing manufactures custom apparel for fashion brands worldwide from our factory in Dhaka, Bangladesh. OEM, private label, and CMT production with GOTS certification since 1998.",
+      "publisher": { "@id": "https://sdfltd.com/#org" }
+    }
+  ]
+};
+
+// ── Schema merge — page-specific schemas added to base graph ──────────────────
+let finalSchema;
+if (schema) {
+  const pageSchemas = Array.isArray(schema) ? schema : [schema];
+  const graph = [...baseSchemas["@graph"]];
+
+  const replaceBaseOrg = (node: Record<string, unknown>) => {
+    const idx = graph.findIndex((n: Record<string, unknown>) => {
+      const t = Array.isArray(n["@type"]) ? n["@type"] : [n["@type"] ?? ""];
+      return t.includes("Organization") || t.includes("LocalBusiness");
+    });
+    if (idx >= 0) graph.splice(idx, 1, node);
+    else graph.push(node);
+  };
+
+  for (const s of pageSchemas) {
+    if (s["@graph"]) {
+      for (const node of s["@graph"]) {
+        const nodeTypes = Array.isArray(node["@type"]) ? node["@type"] : [node["@type"] ?? ""];
+        const { "@context": _ctx, ...rest } = node;
+        if (nodeTypes.includes("Organization") || nodeTypes.includes("LocalBusiness")) {
+          replaceBaseOrg(rest);
+        } else if (nodeTypes.includes("WebSite")) {
+          // Replace base WebSite with page-specific version if provided
+          const wsIdx = graph.findIndex((n: Record<string, unknown>) => {
+            const t = Array.isArray(n["@type"]) ? n["@type"] : [n["@type"] ?? ""];
+            return t.includes("WebSite");
+          });
+          if (wsIdx >= 0) graph.splice(wsIdx, 1, rest);
+          else graph.push(rest);
+        } else {
+          graph.push(rest);
+        }
+      }
+      continue;
+    }
+
+    if (!s["@type"]) continue;
+
+    const types = Array.isArray(s["@type"]) ? s["@type"] : [s["@type"]];
+    const { "@context": _ctx, ...rest } = s;
+
+    if (types.includes("Organization") || types.includes("LocalBusiness")) {
+      replaceBaseOrg(rest);
+    } else if (types.includes("WebSite")) {
+      const wsIdx = graph.findIndex((n: Record<string, unknown>) => {
+        const t = Array.isArray(n["@type"]) ? n["@type"] : [n["@type"] ?? ""];
+        return t.includes("WebSite");
+      });
+      if (wsIdx >= 0) graph.splice(wsIdx, 1, rest);
+      else graph.push(rest);
+    } else {
+      graph.push(rest);
+    }
+  }
+
+  finalSchema = { "@context": "https://schema.org", "@graph": graph };
+} else {
+  finalSchema = baseSchemas;
+}
+---
+
+<!-- CORE -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
+<meta name="googlebot" content="index, follow" />
+<meta name="bingbot" content="index, follow" />
+<meta name="author" content="Chowdhury Remon, SDF Clothing" />
+<meta name="publisher" content="SDF Clothing" />
+<!-- FIX 3: meta generator tag removed — no need to expose Astro version publicly -->
+<meta name="copyright" content={`© ${new Date().getFullYear()} SDF Clothing`} />
+<meta name="webmcp-tools" content="search,browse,cart">
+
+<!-- OPEN GRAPH -->
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
+<meta property="og:image:secure_url" content={new URL(ogImage, Astro.site).toString()} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:alt" content="SDF Clothing — clothing manufacturers Bangladesh since 1998" />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="en_US" />
+
+<!-- TWITTER / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@clothing_makers" />
+<meta name="twitter:creator" content="@clothing_makers" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL(ogImage, Astro.site).toString()} />
+<meta name="twitter:image:alt" content="SDF Clothing — clothing manufacturers Bangladesh since 1998" />
+
+<!-- APPLE -->
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="SDF Clothing" />
+<meta name="format-detection" content="telephone=no" />
+
+<!-- GEO -->
+<meta name="geo.region" content="BD-C" />
+<meta name="geo.placename" content="Dhaka, Bangladesh" />
+<meta name="geo.position" content="23.7956;90.4203" />
+<meta name="ICBM" content="23.7956, 90.4203" />
+
+<!-- ARTICLE DATES -->
+{datePublished && <meta property="article:published_time" content={datePublished} />}
+{dateModified && <meta property="article:modified_time" content={dateModified} />}
+{datePublished && <meta property="article:author" content="https://sdfltd.com/about/" />}
+
+<!-- FONT PRELOAD — regular (400) is the LCP-blocking weight: it's what the
+     hero subtitle (.index__hero-subtitle) actually renders in, since that
+     selector declares no font-weight override and falls back to body's
+     default 400. It gets fetchpriority="high" alone so it doesn't compete
+     for bandwidth with the other three weights, which matter for elements
+     below/after the LCP node (h1=300, headings=500, nav-logo=600) and load
+     at the browser's default priority instead. -->
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-regular.woff2" crossorigin fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-v13-latin-300.woff2" crossorigin />
+
+<!-- CRITICAL FONT-FACE — declared inline in <head> so the font-family mapping
+     is available immediately, without waiting on global.css (which now loads
+     non-blocking). Preloading the font file alone is not enough: the browser
+     also needs this @font-face rule before it can paint text in Inter rather
+     than the fallback font, which is what was driving the LCP render delay.
+     Safe to declare here even if the same rule also exists in another
+     stylesheet — duplicate @font-face rules do not conflict or error; the
+     browser simply uses whichever resolves first, which is now this one. -->
+<style is:inline>
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/inter-v13-latin-regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('/fonts/inter-v13-latin-300.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/inter-v13-latin-500.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/inter-v13-latin-600.woff2') format('woff2');
+  }
+
+  /* Metric-matched fallback: makes the local Arial/system fallback occupy
+     the exact same box as Inter (values from @capsizecss/metrics, the same
+     table Next.js's next/font uses), so when Inter finishes loading and
+     swaps in there's no text reflow. This was an open gap — PageSpeed was
+     flagging the Inter woff2 file itself as a layout-shift culprit
+     (hero-subtitle CLS ~0.035) because no override existed anywhere in the
+     codebase before this. Add 'Inter Fallback' after 'Inter' wherever the
+     font-family is declared (done for body/.index below) to use it. */
+  @font-face {
+    font-family: 'Inter Fallback';
+    src: local('Arial');
+    font-display: swap;
+    ascent-override: 90.49%;
+    descent-override: 22.56%;
+    line-gap-override: 0%;
+    size-adjust: 107.06%;
+  }
+</style>
+
+<!-- FAVICONS -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+<!-- PWA -->
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="msapplication-TileColor" content="#000000" />
+<meta name="msapplication-TileImage" content="/mstile-144x144.png" />
+<meta name="msapplication-config" content="none" />
+
+<!-- PRECONNECT -->
+<link rel="dns-prefetch" href="https://wa.me" />
+{includeContactHints && (
+  <Fragment>
+    <link rel="dns-prefetch" href="https://ipinfo.io" />
+    <link rel="dns-prefetch" href="https://ipapi.co" />
+  </Fragment>
+)}
+
+<!-- llms.txt -->
+<link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt" />
+
+<!-- CLS Prevention — placed before JSON-LD so layout-critical CSS for the hero (LCP element) parses first -->
+<style>
+  .index__hero { min-height: 90vh; }
+  .index__hero-title { font-size: clamp(2rem,5vw,4rem); font-weight: 300; line-height: 1.15; }
+  .index__hero-subtitle { font-size: clamp(1rem,2vw,1.25rem); line-height: 1.8; max-width: 700px; }
+  .hero-image-container { aspect-ratio: 16/9; width: 100%; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+
+<!-- JSON-LD — merged base + page-specific schemas -->
+<script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
+
+<!-- SERVICE WORKER -->
+<script src="/scripts/sw-register.js" defer data-cfasync="false"></script>

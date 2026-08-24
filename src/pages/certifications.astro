@@ -1,0 +1,550 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    // FIX: was "9 Standards" — page actually lists 13 certifications
+    "name": "Certified Clothing Manufacturer | 13 International Certifications | SDF Clothing",
+    // FIX: was "9 international standards"
+    "description": "SDF Clothing holds 13 international certifications — GOTS, OEKO-TEX, ISO 9001, ISO 14001, BSCI, SEDEX, WRAP, GRS, BCI, SA8000, ZDHC, C-TPAT, and LEED. Fully compliant for EU, UK, USA markets.",
+    // FIX: was https://www.sdfltd.com/certifications/ (www) — now Astro.url.href non-www
+    "url": "https://sdfltd.com/certifications/",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Certifications" }
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://sdfltd.com/certifications/#faq",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What certifications does a certified clothing manufacturer need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A certified clothing manufacturer typically needs GOTS for organic products, OEKO-TEX for chemical safety, ISO 9001 for quality management, BSCI for social compliance, and WRAP for ethical manufacturing. These certifications ensure compliance with EU, UK, and USA market requirements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is GOTS certification important for clothing manufacturers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GOTS certification is required for brands selling organic clothing in EU and US markets. It verifies organic fiber content from farm to final product, ensuring traceability and environmental compliance throughout the supply chain. Verify at global-standard.org."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does OEKO-TEX certification mean for garment production?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OEKO-TEX Standard 100 certification means every garment component is tested for harmful substances. It is a legal requirement for children's wear in the EU and trusted globally by consumers seeking safe, chemical-free clothing production."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do ISO certifications benefit clothing buyers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ISO 9001 certification guarantees consistent quality management, while ISO 14001 ensures environmental compliance. These standards help buyers reduce defects, improve workflows, and ensure product consistency across production runs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which certifications are required for EU and UK markets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For EU and UK markets, GOTS (for organic), OEKO-TEX (for chemical safety), BSCI or SEDEX (for social compliance), and ISO 14001 are typically required. ZDHC is mandated by major brands including Adidas and H&M. These certifications ensure compliance with EU EPR 2026 and UK Modern Slavery Act requirements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I verify a manufacturer's certifications?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Verify certifications by checking certificate numbers directly with issuing bodies: GOTS at global-standard.org, OEKO-TEX at oeko-tex.com, ISO at iso.org, WRAP at wrapcompliance.org, and SA8000 at sa-intl.org. Request audit reports and current validity periods to confirm active compliance."
+        }
+      }
+    ]
+  }
+];
+
+const certifications = [
+  {
+    icon: "🌿",
+    name: "GOTS - Global Organic Textile Standard",
+    what: "GOTS certifies the entire organic textile supply chain from harvesting of raw materials through environmentally and socially responsible manufacturing to labeling. It ensures organic fibers are tracked and verified at every stage, covering both ecological criteria (no toxic chemicals, wastewater treatment) and social criteria (fair wages, safe working conditions, no child or forced labor).",
+    country: "Legally required for EU organic textile labeling under EU Regulation 834/2007. Required for USDA NOP organic claims in USA. Mandatory for organic textile imports into India under NPOP. Recognized by Japan's JAS organic standard for textile imports.",
+    ifNot: "Brands cannot legally use \"organic\" claims on garments in EU and USA markets. Products may be rejected at customs, face fines, or be required to remove organic labeling. Retailers like H&M, Zara, and C&A mandate GOTS certification for organic product lines.",
+    audit: "Annual on-site audits by GOTS-approved certification bodies (Control Union, Ecocert, IMO, etc.) with unannounced inspections possible. Transaction certificates (TCs) issued for each shipment to trace organic fiber flow.",
+    benefit: "Transaction certificate traceability enables you to verify organic fiber percentage in every shipment, preventing fiber substitution fraud common in the industry."
+  },
+  {
+    icon: "🔬",
+    name: "OEKO-TEX Standard 100",
+    what: "OEKO-TEX Standard 100 tests every component of a textile product (threads, buttons, zippers, prints, coatings) against a comprehensive list of regulated and non-regulated harmful substances. It certifies that products are free from carcinogenic dyes, heavy metals, formaldehyde, pesticides, and phthalates, with stricter limits for baby products (Product Class I) than adult products (Product Class II-IV).",
+    country: "Legal requirement for children's wear (Product Class I) under EU REACH Regulation Annex XVII. Required for textile imports into China under GB 18401-2010. Mandatory for eco-labeling in South Korea and Japan's Eco Mark program. Recognized by US CPSC for CPSIA compliance verification.",
+    ifNot: "Children's garments cannot be sold in EU without REACH compliance testing. Products may be detained at customs for chemical testing, causing shipment delays of 2-4 weeks. Major retailers (Target, Walmart, Amazon) require OEKO-TEX certification for textile suppliers to avoid product recalls.",
+    audit: "Annual testing by OEKO-TEX institutes (Hohenstein, Testex, etc.) with sample testing from production. Certification valid for 1 year with mandatory renewal testing. Random re-testing possible based on market surveillance.",
+    benefit: "Four product classes (I: babies, II: skin contact, III: no skin contact, IV: home textiles) allow you to match certification level to your product category, avoiding over-certification costs while ensuring regulatory compliance."
+  },
+  {
+    icon: "🏆",
+    name: "ISO 9001 Quality Management",
+    what: "ISO 9001 is the world's most recognized quality management system standard, requiring organizations to demonstrate ability to consistently provide products that meet customer and regulatory requirements. It mandates documented processes, quality objectives, management review, internal audits, corrective actions, and continuous improvement across all production stages from raw material inspection to final delivery.",
+    country: "Mandatory prerequisite for EU government textile procurement contracts under EU Public Procurement Directive. Required for automotive textile suppliers under IATF 16949. Mandated by many Middle Eastern government tenders. Recognized by US Department of Defense for military textile contracts.",
+    ifNot: "Cannot bid on government contracts in EU, UK, Canada, and Australia. Major automotive brands (Ford, GM, Toyota) require ISO 9001 for all textile suppliers. Lack of certification signals higher risk of quality inconsistencies and may result in supplier rejection during vendor onboarding.",
+    audit: "Annual surveillance audits by accredited certification bodies (SGS, TÜV, Bureau Veritas) with full recertification every 3 years. Internal audits required every 6 months. Management review meetings conducted quarterly.",
+    benefit: "Documented non-conformance tracking system provides data-driven insights to identify and eliminate recurring quality issues before they become costly production problems."
+  },
+  {
+    icon: "🤝",
+    name: "BSCI - Business Social Compliance Initiative",
+    what: "BSCI (now amfori BSCI) is a leading supply chain monitoring system promoting ethical working conditions and social compliance. It audits factories against 11 performance areas including fair remuneration, occupational health and safety, no child labor, no forced labor, no discrimination, freedom of association, working hours, and environmental protection.",
+    country: "Mandatory for German retail chains under German Supply Chain Due Diligence Act (Lieferkettensorgfaltspflichtengesetz). Required by major European retailers including C&A, H&M, Zara, and Primark. Recognized by UK Modern Slavery Act compliance frameworks.",
+    ifNot: "Cannot supply German retailers or major European brands. Risk of being blacklisted from EU supply chains. Non-compliant factories may face legal action under Germany's Supply Chain Act with fines up to 2% of global turnover.",
+    audit: "Audits every 12-24 months depending on performance rating (A-E). Follow-up audits required for non-compliant findings within 3-6 months. Unannounced audits possible for high-risk suppliers.",
+    benefit: "Shared database platform allows multiple buyers to access the same audit report, reducing your audit costs by up to 70% while ensuring consistent social compliance standards."
+  },
+  {
+    icon: "📊",
+    name: "SEDEX - Supplier Ethical Data Exchange",
+    what: "SEDEX is a membership organization providing a platform for sharing ethical supply chain data. It uses SMETA (Sedex Members Ethical Trade Audit) methodology to audit labor standards, health and safety, business ethics, and environment. Note: SEDEX is not a certification but a platform for audit data sharing; factories undergo SMETA audits which are then shared with member buyers.",
+    country: "Mandatory for UK retailers under UK Modern Slavery Act 2015. Required by major UK brands including Marks & Spencer, Tesco, and Sainsbury's. Recognized by Australian Modern Slavery Act compliance. Required by many US Fortune 500 companies for supplier due diligence.",
+    ifNot: "Cannot supply UK retailers or companies with Modern Slavery Act reporting requirements. Risk of supply chain disruptions during customer due diligence. Non-participation signals lack of transparency to socially conscious consumers.",
+    audit: "SMETA audits every 12-24 months based on buyer requirements. Two-pillar (labor + health & safety) or four-pillar (including environment + business ethics) audits available. Unannounced audits possible for high-risk suppliers.",
+    benefit: "Centralized audit database allows you to access historical audit performance data across multiple suppliers, enabling data-driven supplier selection and risk assessment."
+  },
+  {
+    icon: "🌱",
+    name: "LEED Green Building Certification",
+    what: "LEED (Leadership in Energy and Environmental Design) certifies that our factory building meets rigorous sustainability standards in energy efficiency, water conservation, waste reduction, indoor environmental quality, and sustainable materials. It validates that our manufacturing facility operates with minimal environmental impact through renewable energy use, efficient HVAC systems, water recycling, and responsible construction practices.",
+    country: "Required for EU Extended Producer Responsibility (EPR) 2026 textile waste compliance. Mandated by US federal government green procurement under Executive Order 13693. Required for participation in many EU retailer sustainability programs including H&M Conscious and Zara Join Life.",
+    ifNot: "Cannot participate in government green procurement contracts. Excluded from major retailer sustainability programs. May face higher carbon taxes in EU under Carbon Border Adjustment Mechanism (CBAM) when fully implemented for textiles.",
+    audit: "LEED certification is valid for the building life with performance verification required every 3 years. Annual energy and water usage reporting through LEED Dynamic Plaque platform. Recertification required every 5 years for ongoing compliance.",
+    benefit: "LEED-certified facilities qualify for tax incentives and green building rebates in over 30 countries, reducing overall production costs that we pass on to you through competitive pricing."
+  },
+  {
+    icon: "✅",
+    name: "WRAP - Worldwide Responsible Accredited Production",
+    what: "WRAP is the world's largest factory-based certification program for sewn products, certifying compliance with 12 principles based on local laws and ILO conventions. These include no child labor, no forced labor, no discrimination, fair wages, safe working conditions, freedom of association, no harassment or abuse, compliance with hours of work, environmental compliance, customs compliance, and security requirements.",
+    country: "Mandatory for US retailers including Walmart, Disney, Costco, Target, and Kmart. Required by major US brands like Gildan, Fruit of the Loom, and Jockey. Recognized by California Transparency in Supply Chains Act compliance. Required by Canadian retailers under Canada's Modern Slavery Act.",
+    ifNot: "Cannot supply major US retailers or brands. Products may be rejected by US Customs under C-TPAT requirements for non-compliant suppliers. Risk of supply chain exclusion from North American markets where WRAP is the de facto social compliance standard.",
+    audit: "Initial certification audit followed by annual surveillance audits. Unannounced inspections possible. Full recertification every 3 years. Monitoring reports updated monthly on WRAP's public facility database.",
+    benefit: "WRAP certification includes C-TPAT compliance verification, enabling faster customs clearance and reduced inspection rates for shipments to US markets, saving 3-5 days on average delivery times."
+  },
+  {
+    icon: "💧",
+    name: "ZDHC - Zero Discharge of Hazardous Chemicals",
+    what: "ZDHC (Zero Discharge of Hazardous Chemicals) is a global initiative eliminating hazardous chemicals from textile production. It requires manufacturers to use chemicals from the ZDHC Manufacturing Restricted Substances List (MRSL), implement wastewater testing, and transition to safer chemical alternatives. Our certification demonstrates compliance with ZDHC Gateway chemical management requirements and InCheck reporting.",
+    country: "Required for EU REACH Annex XIV authorization of hazardous substances. Mandatory for compliance with EU Water Framework Directive. Required by major brands including Adidas, Nike, H&M, and Levi's as part of their chemical management policies. Recognized by China's textile wastewater discharge standards GB 4287-2012.",
+    ifNot: "Cannot supply major global brands with chemical management requirements. Risk of product recalls due to chemical contamination. May face regulatory penalties for wastewater discharge violations. Excluded from sustainable fashion platforms and indices.",
+    audit: "Quarterly wastewater testing through ZDHC ClearStream program. Annual chemical inventory audits via InCheck platform. Continuous monitoring through ZDHC Gateway chemical database. Level 3 certification requires annual verification by approved third-party auditors.",
+    benefit: "ZDHC Gateway transparency provides real-time access to our chemical inventory, enabling you to verify chemical safety claims without conducting your own expensive laboratory testing."
+  },
+  {
+    icon: "👥",
+    name: "SA8000 Social Accountability Standard",
+    what: "SA8000 is one of the world's leading social certification standards, based on ILO conventions, UN Declaration of Human Rights, and national laws. It certifies compliance across nine areas: child labor, forced labor, health and safety, freedom of association, right to collective bargaining, discrimination, disciplinary practices, working hours, and remuneration. It requires payment of living wages, not just minimum wages.",
+    country: "Recognized by Germany's Green Button 2.0 textile label. Required by EU retailers with advanced ethical sourcing policies. Recognized by US Fair Trade certification programs. Accepted by Canadian government procurement for textile contracts.",
+    ifNot: "Cannot supply premium ethical brands or participate in advanced sustainability programs. Risk of negative publicity from NGOs targeting non-certified suppliers. May face exclusion from B Corp supply chain requirements.",
+    audit: "Annual surveillance audits by SAAS-accredited certification bodies. Full recertification every 3 years. Unannounced audits possible. Quarterly reporting on corrective action progress required.",
+    benefit: "SA8000 requires living wage verification, ensuring your products support worker livelihoods rather than merely meeting legal minimums - a powerful story for conscious consumers."
+  },
+  {
+    icon: "🌍",
+    name: "ISO 14001 Environmental Management",
+    what: "ISO 14001 is the international standard for Environmental Management Systems (EMS). It certifies that our factory has a systematic approach to managing environmental responsibilities — covering waste reduction, energy use, water consumption, chemical handling, and carbon footprint. Certification requires setting measurable environmental targets and demonstrating continuous improvement.",
+    country: "Required by German supply chain due diligence legislation for high-risk supplier categories. Mandated by UK procurement frameworks under Greening Government Commitments. Recognized by EU Taxonomy Regulation for sustainable finance classification. Required by major retailers including M&S, ASOS, and Next for supplier environmental compliance.",
+    ifNot: "Cannot supply major UK and EU retailers with environmental procurement policies. Risk of failing EU CSRD (Corporate Sustainability Reporting Directive) supply chain assessments. Excluded from sustainable investment indices and ESG-rated supply chains.",
+    audit: "Annual surveillance audits by ISO-accredited certification bodies (SGS, TÜV, Bureau Veritas). Full recertification every 3 years. Internal EMS audits required at least annually. Environmental performance data reviewed in management review meetings.",
+    benefit: "ISO 14001 documentation provides quantified environmental data — energy consumption, water usage, waste diversion rates — that brands can include directly in their own sustainability reporting and EU CSRD disclosures."
+  },
+  {
+    icon: "♻️",
+    name: "GRS - Global Recycled Standard",
+    what: "GRS (Global Recycled Standard) certifies the recycled content of materials and products, and tracks the chain of custody from raw material processing to the final product. It applies to all recycled materials including recycled polyester (rPET from plastic bottles), recycled cotton, and recycled nylon. Minimum 20% recycled content required for partial GRS certification; 50% for full certification.",
+    country: "Required by EU Ecodesign for Sustainable Products Regulation (ESPR) for recycled content claims. Mandated by major brands including H&M, Adidas, Nike, and Patagonia for recycled material sourcing. Required by UK retailer sustainability programs including M&S Plan A and ASOS Responsible Edit.",
+    ifNot: "Cannot legally claim 'recycled' material content on product labels in EU markets. Risk of greenwashing allegations from consumer authorities. Excluded from major brand sustainable sourcing programs requiring certified recycled content.",
+    audit: "Annual transaction certificates (TCs) issued for each GRS shipment. Annual scope certificate audits by GOTS-approved certification bodies. Recycled material percentage verified at each production stage in the supply chain.",
+    benefit: "GRS certification allows your brand to use legally defensible recycled content claims — 'made from X% recycled polyester' — that EU consumers and regulators now expect and verify."
+  },
+  {
+    icon: "🌱",
+    name: "BCI - Better Cotton Initiative",
+    what: "BCI (Better Cotton Initiative) is the world's largest cotton sustainability programme, covering over 2.5 million cotton farmers across 23 countries. BCI-licensed producers commit to better environmental and social practices — reducing water and chemical use, improving soil health, and ensuring fair labour conditions. BCI cotton is not physically traced but sourced through a mass balance system.",
+    country: "Required by major EU retailers under voluntary sustainability commitments. Recognized by the EU Sustainable Cotton Challenge. Adopted by fashion brands including H&M, IKEA, Levi's, Gap, and Marks & Spencer as part of their responsible sourcing targets.",
+    ifNot: "Cannot supply BCI member brands' sustainable cotton programs. Risk of exclusion from retailer preferred supplier lists that mandate BCI or equivalent standards. Reduced access to sustainability-focused buyer relationships.",
+    audit: "Annual self-assessment reports submitted to BCI. Field-level verification conducted by BCI field facilitators. Mass balance accounting audited through the supply chain via BCI's online traceability platform.",
+    benefit: "BCI certification demonstrates commitment to responsible cotton sourcing across the supply chain — supporting brand claims about sustainable sourcing and meeting major retailer supplier requirements without the cost premium of GOTS organic cotton."
+  },
+  {
+    icon: "🛃",
+    name: "C-TPAT - Customs Trade Partnership Against Terrorism",
+    what: "C-TPAT (Customs-Trade Partnership Against Terrorism) is a US Customs and Border Protection (CBP) voluntary supply chain security programme. C-TPAT certified factories have implemented minimum security criteria covering physical security, access controls, personnel security, procedural security, cargo security, and information technology security. Membership provides documented evidence that factory security meets US CBP standards.",
+    country: "Required for priority processing by US Customs and Border Protection. Mandatory for suppliers to major US retailers including Walmart, Target, and JCPenney. Required by US Department of Defense procurement contracts for textile and apparel items. Recognized under the Container Security Initiative for reduced inspection rates at US ports.",
+    ifNot: "Higher inspection rates at US ports — typically 5-15% inspection rate vs below 1% for C-TPAT certified exporters. Slower customs clearance adding 2-5 days to delivery timelines. Risk of exclusion from US retailer preferred supplier programmes requiring C-TPAT or equivalent certification.",
+    audit: "Initial application and security profile submission to CBP. Periodic validation visits from CBP Supply Chain Security Specialists. Annual self-assessment revalidation. Risk-based escalation to enhanced validation for non-compliant findings.",
+    benefit: "C-TPAT membership provides your US customers with documented cargo security assurance — reducing the risk of shipment holds, customs examinations, and delivery delays that affect your brand's retail launch timelines."
+  }
+];
+
+const verificationSteps = [
+  {
+    name: "GOTS Verification",
+    steps: [
+      { label: "Step 1", text: "Visit", link: { href: "https://global-standard.org/find-suppliers-shops-and-inputs/certifiedsuppliers", display: "global-standard.org/certifiedsuppliers" } },
+      { label: "Step 2", text: 'Search by our license number or company name "SDF Clothing"' },
+      { label: "Certificate format", text: 'GOTS license numbers typically follow format "License Number" (e.g., 12345 or CB-12345)' },
+      { label: "What to verify", text: "Certification status, validity period, product scope, and certification body" }
+    ]
+  },
+  {
+    name: "OEKO-TEX Verification",
+    steps: [
+      { label: "Step 1", text: "Visit", link: { href: "https://www.oeko-tex.com/en/certificate-search", display: "oeko-tex.com/certificate-search" } },
+      { label: "Step 2", text: "Enter our certificate number or company name" },
+      { label: "Certificate format", text: 'OEKO-TEX certificate numbers follow format "123456 TESTEX" or similar with institute code' },
+      { label: "What to verify", text: "Validity period, product class (I-IV), and test results" }
+    ]
+  },
+  {
+    name: "ISO 9001 Verification",
+    steps: [
+      { label: "Step 1", text: "Visit our certification body's verification portal (SGS, TÜV, or Bureau Veritas)" },
+      { label: "Step 2", text: "Search by certificate number or company name" },
+      { label: "Certificate format", text: 'ISO certificates typically follow format "ISO 9001:2015/CN/123456" with country and number' },
+      { label: "What to verify", text: "Certification body accreditation, validity, and scope of certification" }
+    ]
+  },
+  {
+    name: "BSCI Verification",
+    steps: [
+      { label: "Step 1", text: "Visit", link: { href: "https://platform.amfori.org", display: "platform.amfori.org" }, suffix: " (requires membership)" },
+      { label: "Step 2", text: "Request audit report directly from us with producer ID" },
+      { label: "Report format", text: "BSCI audit reports include producer ID and audit date" },
+      { label: "What to verify", text: "Audit rating (A-E), corrective actions, and performance history" }
+    ]
+  },
+  {
+    name: "SEDEX Verification",
+    steps: [
+      { label: "Step 1", text: "Visit", link: { href: "https://www.sedex.com", display: "sedex.com" }, suffix: " (requires membership)" },
+      { label: "Step 2", text: "Search by our Sedex membership number (ZC number)" },
+      { label: "Format", text: 'Sedex numbers follow "ZC" format (e.g., ZC123456)' },
+      { label: "What to verify", text: "SMETA audit reports, corrective actions, and audit history" }
+    ]
+  },
+  {
+    name: "WRAP Verification",
+    steps: [
+      { label: "Step 1", text: "Visit", link: { href: "https://wrapcompliance.org/certification/facility-monitor-list/", display: "wrapcompliance.org/facility-monitor-list" } },
+      { label: "Step 2", text: "Search by facility name or certificate number" },
+      { label: "Certificate format", text: "WRAP certificate numbers typically 8-10 digits" },
+      { label: "What to verify", text: "Certification status, facility location, and principle compliance" }
+    ]
+  },
+  {
+    name: "ZDHC Verification",
+    steps: [
+      { label: "Step 1", text: "Visit", link: { href: "https://gateway.zdhc.org", display: "gateway.zdhc.org" } },
+      { label: "Step 2", text: "Search for our facility name in the InCheck or ClearStream databases" },
+      { label: "Format", text: "ZDHC Gateway uses facility names and locations for verification" },
+      { label: "What to verify", text: "Chemical inventory, wastewater test results, and compliance level (1-3)" }
+    ]
+  },
+  {
+    name: "SA8000 Verification",
+    steps: [
+      { label: "Step 1", text: "Visit", link: { href: "https://sa-intl.org/certification-directory", display: "sa-intl.org/certification-directory" } },
+      { label: "Step 2", text: "Search by certificate number or company name" },
+      { label: "Certificate format", text: "SA8000 certificates include SAAS accreditation and certificate number" },
+      { label: "What to verify", text: "Certification body, validity period, and scope of certification" }
+    ]
+  }
+];
+
+const faqs = [
+  {
+    q: "What certifications does a certified clothing manufacturer need?",
+    a: "A certified clothing manufacturer typically needs GOTS for organic products, OEKO-TEX for chemical safety, ISO 9001 for quality management, BSCI for social compliance, and WRAP for ethical manufacturing. These certifications ensure compliance with EU, UK, and USA market requirements."
+  },
+  {
+    q: "Why is GOTS certification important for clothing manufacturers?",
+    a: 'GOTS certification is required for brands selling organic clothing in EU and US markets. It verifies organic fiber content from farm to final product, ensuring traceability and environmental compliance throughout the supply chain. Verify at <a href="https://global-standard.org" style="color:#e00;">global-standard.org</a>.'
+  },
+  {
+    q: "What does OEKO-TEX certification mean for garment production?",
+    a: 'OEKO-TEX Standard 100 certification means every garment component is tested for harmful substances. It is a legal requirement for children\'s wear in the EU and trusted globally by consumers seeking safe, chemical-free clothing production. Learn more at <a href="https://oeko-tex.com" style="color:#e00;">oeko-tex.com</a>.'
+  },
+  {
+    q: "How do ISO certifications benefit clothing buyers?",
+    a: 'ISO 9001 certification guarantees consistent quality management, while ISO 14001 ensures environmental compliance. These standards help buyers reduce defects, improve workflows, and ensure product consistency across production runs. Visit <a href="https://iso.org" style="color:#e00;">iso.org</a> for verification.'
+  },
+  {
+    q: "Which certifications are required for EU and UK markets?",
+    a: "For EU and UK markets, GOTS (for organic), OEKO-TEX (for safety), BSCI, and ZDHC are typically required. SEDEX membership is also mandated by many UK retailers. These certifications ensure compliance with EU EPR 2026 and UK Modern Slavery Act requirements."
+  },
+  {
+    q: "How can I verify a manufacturer's certifications?",
+    a: "Verify certifications by checking certificate numbers directly with issuing bodies like GOTS (global-standard.org), OEKO-TEX (oeko-tex.com), and ISO (iso.org). Request audit reports and validity periods to ensure current compliance."
+  }
+];
+---
+
+<BaseLayout
+  title="Certified Clothing Manufacturer | 13 Certifications | SDF"
+  description="SDF Clothing holds 13 international certifications — GOTS, OEKO-TEX, ISO 9001, BSCI, SEDEX, WRAP, GRS, SA8000 and more. Compliant for EU, UK, and USA markets."
+
+  ogImage="https://sdfltd.com/factory.jpg"
+  ogImageType="image/webp"
+  schema={schema}
+>
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Breadcrumb" style="padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+    <div class="container">
+      <ol style="display:flex;align-items:center;gap:0.5rem;list-style:none;font-size:0.75rem;color:rgba(255,255,255,0.5);">
+        <li><a href="/" style="color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e00'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Home</a></li>
+        <li style="color:rgba(255,255,255,0.3);">/</li>
+        <li style="color:#fff;">Certifications</li>
+      </ol>
+    </div>
+  </nav>
+
+  <div class="page-content">
+
+    <!-- Hero Section -->
+    <section style="padding: 5rem 0 3.5rem; border-bottom: 1px solid rgba(255,255,255,0.06);">
+      <div class="container">
+        <div class="section-header" style="max-width:800px;">
+          <span class="section-label">Excellence</span>
+          <div class="accent-line"></div>
+          <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;margin-bottom:1.5rem;">
+            Certified Clothing Manufacturer With 13 International Certifications
+          </h1>
+          <p style="color:rgba(255,255,255,0.75);font-size:1rem;line-height:1.8;max-width:700px;">
+            We provide compliant apparel production with verified standards. Our GOTS certified factory and OEKO-TEX certified manufacturer status ensure chemical-free clothing production for EU, UK, USA markets. We are an ethical clothing manufacturer with social compliance certification and sustainable certified factory operations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Certification Matters -->
+    <section style="padding: 4rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+      <div class="container">
+        <div class="section-header" style="max-width:800px;">
+          <h2 style="font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;margin-bottom:1.25rem;">
+            Why Certification Matters for Global Clothing Buyers
+          </h2>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.95rem;line-height:1.8;">
+            When sourcing from a certified manufacturer, you gain verified assurance of quality, ethics, and compliance. Our ISO certified garment factory meets international standards, protecting your brand from supply chain risks and ensuring market access across EU, UK, and USA regulations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications Grid -->
+    <section style="padding: 4rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+      <div class="container">
+        <div class="section-header" style="margin-bottom:2.5rem;">
+          <h2 style="font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;">
+            Our Certified Clothing Manufacturing Standards Explained
+          </h2>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:2rem;">
+          {certifications.map((cert) => (
+            <div class="cert-card" style="padding:2rem;border-radius:0;">
+              <div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;">
+                <span style="font-size:2rem;line-height:1;flex-shrink:0;">{cert.icon}</span>
+                <h3 style="font-size:1.1rem;font-weight:500;letter-spacing:0.04em;color:#fff;">{cert.name}</h3>
+              </div>
+
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
+                <div>
+                  <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.5rem;font-weight:500;">What it means:</p>
+                  <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);line-height:1.75;">{cert.what}</p>
+                </div>
+                <div>
+                  <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.5rem;font-weight:500;">Country requirements:</p>
+                  <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);line-height:1.75;">{cert.country}</p>
+                </div>
+                <div>
+                  <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.5rem;font-weight:500;">If not certified:</p>
+                  <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);line-height:1.75;">{cert.ifNot}</p>
+                </div>
+                <div>
+                  <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.5rem;font-weight:500;">Audit frequency:</p>
+                  <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);line-height:1.75;">{cert.audit}</p>
+                </div>
+                <div style="grid-column: 1 / -1;">
+                  <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#e00;margin-bottom:0.5rem;font-weight:500;">Unique buyer benefit:</p>
+                  <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);line-height:1.75;">{cert.benefit}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Verify Certifications -->
+    <section style="padding: 4rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+      <div class="container">
+        <div class="section-header" style="margin-bottom:2.5rem;">
+          <span class="section-label">Transparency</span>
+          <div class="accent-line"></div>
+          <h2 style="font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;margin-bottom:1rem;">
+            How to Verify Our Certifications
+          </h2>
+          <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;line-height:1.8;max-width:650px;">
+            Independent verification is essential for supply chain transparency. Follow these steps to verify our certifications directly with the issuing bodies.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;">
+          {verificationSteps.map((v) => (
+            <div class="snake-card" style="padding:1.75rem;">
+              <h3 style="font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;color:#e00;margin-bottom:1.25rem;font-weight:500;">{v.name}</h3>
+              <dl style="display:flex;flex-direction:column;gap:0.85rem;">
+                {v.steps.map((step) => (
+                  <div>
+                    <dt style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:0.2rem;font-weight:600;">{step.label}</dt>
+                    <dd style="font-size:0.82rem;color:rgba(255,255,255,0.85);line-height:1.65;">
+                      {step.text}{step.link && <> <a href={step.link.href} target="_blank" rel="noopener noreferrer" style="color:#e00;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">{step.link.display}</a></>}{step.suffix && step.suffix}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ))}
+        </div>
+
+        <!-- Need Verification Documents CTA -->
+        <div class="snake-card" style="margin-top:2rem;padding:2rem;text-align:center;">
+          <h3 style="font-size:1rem;font-weight:400;margin-bottom:0.75rem;">Need Verification Documents?</h3>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.75);margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;">
+            Contact us to request copies of our current certificates, audit reports, and validity periods. We provide complete documentation for your due diligence process.
+          </p>
+          <a href="/contact/" class="btn-primary">Request Verification Documents</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Market Requirements Section -->
+    <section style="padding: 4rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+      <div class="container">
+        <div class="section-header" style="max-width:800px;">
+          <h2 style="font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;margin-bottom:1.25rem;">
+            Certifications Required for EU, UK, and USA Markets
+          </h2>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.95rem;line-height:1.8;">
+            Each market has specific certification requirements. We ensure compliant apparel production for all three major markets. Our GOTS certified factory meets EU organic standards, while our OEKO-TEX certified manufacturer status fulfills USA chemical safety requirements.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Protection Section -->
+    <section style="padding: 4rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+      <div class="container">
+        <div class="section-header" style="max-width:800px;">
+          <h2 style="font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;margin-bottom:1.25rem;">
+            How Our Certifications Protect Your Brand and Customers
+          </h2>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.95rem;line-height:1.8;">
+            Partnering with an ethical manufacturer reduces supply chain risks. Our social compliance certification and sustainable certified factory operations protect your brand reputation. Learn more about our <a href="/about/" style="color:#e00;text-decoration:none;">company history</a> or view our <a href="/products" style="color:#e00;text-decoration:none;">product catalog</a> to see our capabilities.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="padding: 4rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+      <div class="container">
+        <div class="section-header" style="margin-bottom:2.5rem;">
+          <span class="section-label">FAQ</span>
+          <div class="accent-line"></div>
+          <h2 style="font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;">
+            Frequently Asked Questions About Our Certifications
+          </h2>
+        </div>
+
+        <div style="max-width:800px;">
+          {faqs.map((faq, i) => (
+            <div class="faq-item">
+              <button
+                class="faq-question"
+                aria-expanded="false"
+                aria-controls={`faq-answer-${i}`}
+                id={`faq-question-${i}`}
+              >
+                {faq.q}
+                <span class="faq-icon" aria-hidden="true" style="font-size:1.2rem;color:#ff3333;margin-left:1rem;background:#000;">+</span>
+              </button>
+              <div
+                class="faq-answer"
+                id={`faq-answer-${i}`}
+                role="region"
+                aria-labelledby={`faq-question-${i}`}
+                set:html={faq.a}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="padding: 5rem 0;">
+      <div class="container" style="text-align:center;">
+        <div class="section-header" style="margin-bottom:2rem;">
+          <h2 style="font-size:clamp(1.5rem,3vw,2.5rem);font-weight:300;margin-bottom:1rem;">
+            Ready to Work With Us?
+          </h2>
+          <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;max-width:500px;margin:0 auto 2rem;line-height:1.8;">
+            Get a free quote for your project. Our team will respond within 48 hours. Learn about our <a href="/work-process/" style="color:#e00;text-decoration:none;">private label process</a> to begin your inquiry.
+          </p>
+        </div>
+        <a href="/contact/" class="btn-primary">Get Your Free Quote</a>
+      </div>
+    </section>
+
+  </div>
+
+<script>
+  // Section header scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const answerId = btn.getAttribute('aria-controls');
+      const answer = document.getElementById(answerId);
+      const icon = btn.querySelector('.faq-icon');
+
+      btn.setAttribute('aria-expanded', String(!expanded));
+      answer?.classList.toggle('open', !expanded);
+      if (icon) icon.textContent = expanded ? '+' : '×';
+    });
+  });
+</script>
+</BaseLayout>

@@ -1,0 +1,526 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface RelatedLink {
+  eyebrow: string;
+  label: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  breadcrumbLabel: string;
+  metaDescription: string;
+  excerpt: string;
+  canonical: string;
+  datePublished: string;
+  dateModified?: string;
+  dateDisplay: string;
+  category: string;
+  catSlug: string;
+  catColor: string;
+  tags: string[];
+  readTime: string;
+  related: RelatedLink[];
+}
+
+const {
+  title,
+  breadcrumbLabel,
+  metaDescription,
+  excerpt,
+  canonical,
+  datePublished,
+  dateModified,
+  dateDisplay,
+  category,
+  catSlug,
+  catColor,
+  tags,
+  readTime,
+  related,
+} = Astro.props;
+
+const dm = dateModified ?? datePublished;
+
+function hexToRgb(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `${r},${g},${b}`;
+}
+const catRgb = hexToRgb(catColor);
+
+// ─── inline SVG icon map (matches /journal/ index) ──────────────────────────
+const ICONS: Record<string, string> = {
+  certification: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>`,
+  expansion:     `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`,
+  people:        `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+  innovation:    `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+  financial:     `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+  award:         `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  partnership:   `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
+  event:         `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+};
+
+const pageTitle = `${title} | SDF Clothing Journal`;
+
+// ─── JSON-LD structured data ─────────────────────────────────────────────────
+const jsonLD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://sdfltd.com/#org",
+      "name": "SDF Clothing",
+      "url": "https://sdfltd.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Kafrul",
+        "addressLocality": "Dhaka",
+        "addressCountry": "BD"
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": `${canonical}#article`,
+      "url": canonical,
+      "headline": title,
+      "description": metaDescription,
+      "datePublished": datePublished,
+      "dateModified": dm,
+      "articleSection": category,
+      "keywords": tags.join(", "),
+      "inLanguage": "en",
+      "author": { "@id": "https://sdfltd.com/#org" },
+      "publisher": { "@id": "https://sdfltd.com/#org" },
+      "mainEntityOfPage": { "@id": `${canonical}#article` },
+      "isPartOf": { "@id": "https://sdfltd.com/journal/#blog" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${canonical}#breadcrumb`,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sdfltd.com" },
+        { "@type": "ListItem", "position": 2, "name": "Journal", "item": "https://sdfltd.com/journal/" },
+        { "@type": "ListItem", "position": 3, "name": title }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={metaDescription}
+  canonicalUrl={canonical}
+  ogType="article"
+  datePublished={datePublished}
+  dateModified={dm}
+>
+  <!-- ── head injections ─────────────────────────────────────────────── -->
+  <!-- BaseLayout already handles canonical, robots (standard), og:title, og:description, og:url, og:site_name, og:locale, twitter tags -->
+
+  <link rel="alternate" hreflang="en" href={canonical} />
+
+  <meta property="article:section" content={category} />
+  {tags.map(t => <meta property="article:tag" content={t} />)}
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
+
+  <!-- ── styles ──────────────────────────────────────────────────────── -->
+  <style>
+    .aw {
+      --red:        #ee0000;
+      --card-bg:    #111111;
+      --card-hover: #161616;
+      --border:     rgba(255,255,255,0.08);
+      --border-md:  rgba(255,255,255,0.14);
+      --white:      #ffffff;
+      --muted:      rgba(255,255,255,0.48);
+      --muted-md:   rgba(255,255,255,0.68);
+      --ink:        #000000;
+      --font:       'Inter', system-ui, sans-serif;
+      --mono:       'Inter', ui-monospace, monospace;
+
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 1.5rem 7rem;
+      background: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── breadcrumb ──────────────────────────────────── */
+    .bc {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 1.75rem 0 0;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .bc a { color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .bc a:hover { color: var(--red); }
+    .bc-sep { color: var(--muted); font-size: 0.8rem; }
+    .bc-current {
+      color: var(--red);
+      font-weight: 600;
+      max-width: 280px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ── article header ──────────────────────────────── */
+    .art-head {
+      padding: 2.5rem 0 2.25rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+    .art-stitch {
+      width: 2.5rem;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 1.1rem;
+    }
+    .art-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .cat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 0.3rem 0.65rem;
+      border: 1px solid;
+      line-height: 1;
+      color: var(--accent);
+      border-color: var(--accent-border);
+    }
+    .post-date {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .art-h1 {
+      font-family: var(--font);
+      font-size: clamp(1.85rem, 5.5vw, 2.75rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.1rem;
+    }
+    .art-lead {
+      font-family: var(--font);
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: var(--muted-md);
+      font-style: italic;
+    }
+
+    /* ── prose body ──────────────────────────────────── */
+    .art-body {
+      font-family: var(--font);
+      font-size: 1rem;
+      line-height: 1.78;
+      color: var(--muted-md);
+    }
+    .art-body p { margin: 0 0 1.4rem; }
+    .art-body h2 {
+      font-family: var(--font);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin: 2.6rem 0 1.1rem;
+      line-height: 1.3;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .art-body h2::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 2px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+    .art-body h3 {
+      font-family: var(--font);
+      font-size: 1.08rem;
+      font-weight: 650;
+      color: var(--white);
+      margin: 1.8rem 0 0.7rem;
+      letter-spacing: -0.01em;
+    }
+    .art-body strong { color: var(--white); font-weight: 650; }
+    .art-body em { color: var(--muted-md); }
+    .art-body a {
+      color: var(--red);
+      text-decoration: underline;
+      text-decoration-color: rgba(238,0,0,0.35);
+      text-underline-offset: 2px;
+    }
+    .art-body a:hover { text-decoration-color: var(--red); }
+    .art-body ul, .art-body ol {
+      margin: 0 0 1.4rem;
+      padding-left: 1.3rem;
+    }
+    .art-body li { margin-bottom: 0.55rem; line-height: 1.7; }
+    .art-body li::marker { color: var(--red); }
+    .art-body li > strong:first-child { color: var(--white); }
+
+    /* ── stat grid (inline infographic) ──────────────── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin: 1.85rem 0 2.1rem;
+    }
+    .stat-grid .sg-item {
+      background: var(--card-bg);
+      padding: 1.1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .stat-grid .sg-val {
+      font-family: var(--mono);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .stat-grid .sg-lbl {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* ── info grid (icon + title + body cards) ───────── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin: 1.85rem 0 2.1rem;
+    }
+    .info-grid .ig-item {
+      background: var(--card-bg);
+      padding: 1.25rem 1.3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .info-grid .ig-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: repeating-linear-gradient(
+        to bottom,
+        var(--accent) 0px, var(--accent) 7px,
+        transparent   7px, transparent  14px
+      );
+      opacity: 0.85;
+    }
+    .info-grid .ig-icon {
+      font-size: 1.2rem;
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.55rem;
+    }
+    .info-grid .ig-title {
+      font-family: var(--font);
+      font-size: 0.92rem;
+      font-weight: 650;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+    .info-grid .ig-body {
+      font-family: var(--font);
+      font-size: 0.825rem;
+      line-height: 1.62;
+      color: var(--muted-md);
+    }
+
+    /* ── pull callout ─────────────────────────────────── */
+    .callout {
+      border-left: 3px solid var(--red);
+      background: var(--card-bg);
+      padding: 1.25rem 1.5rem;
+      margin: 2.1rem 0;
+      font-size: 0.94rem;
+      line-height: 1.72;
+      color: var(--muted-md);
+    }
+    .callout strong { color: var(--white); }
+    .callout-label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── footer / related ─────────────────────────────── */
+    .art-foot {
+      margin-top: 3.25rem;
+      padding-top: 2.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .art-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 2.5rem;
+    }
+    .art-tags .tag {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      white-space: nowrap;
+    }
+    .related-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 1.75rem;
+    }
+    .related-grid a {
+      display: block;
+      background: var(--card-bg);
+      padding: 1.1rem 1.25rem;
+      color: var(--white);
+      text-decoration: none;
+      font-family: var(--font);
+      font-size: 0.92rem;
+      font-weight: 650;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      transition: background 0.15s, color 0.15s;
+    }
+    .related-grid a:hover { background: var(--card-hover); color: rgba(255,255,255,0.8); }
+    .related-grid .rl-eyebrow {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.45rem;
+      font-weight: 700;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .back-link:hover { color: var(--white); }
+  </style>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       ARTICLE
+  ══════════════════════════════════════════════════════════════════════ -->
+  <div class="aw" style={`--accent: ${catColor}; --accent-border: ${catColor}40;`}>
+
+    <!-- ── breadcrumb ─────────────────────────────────────────────────── -->
+    <nav aria-label="Breadcrumb">
+      <ol class="bc">
+        <li><a href="/">Home</a></li>
+        <li class="bc-sep" aria-hidden="true">›</li>
+        <li><a href="/products/">Journal</a></li>
+        <li class="bc-sep" aria-hidden="true">›</li>
+        <li><span class="bc-current" aria-current="page">{breadcrumbLabel}</span></li>
+      </ol>
+    </nav>
+
+    <!-- ── article header ─────────────────────────────────────────────── -->
+    <header class="art-head">
+      <div class="art-stitch" aria-hidden="true"></div>
+      <div class="art-badge-row">
+        <span class="cat-badge">
+          <span set:html={ICONS[catSlug]} />
+          {category}
+        </span>
+        <time class="post-date" datetime={datePublished}>{dateDisplay}</time>
+        <span class="post-date" aria-hidden="true">·</span>
+        <span class="post-date">{readTime} read</span>
+      </div>
+      <h1 class="art-h1">{title}</h1>
+      <p class="art-lead">{excerpt}</p>
+    </header>
+
+    <!-- ── article body (content passed from page) ───────────────────── -->
+    <div class="art-body">
+      <slot />
+    </div>
+
+    <!-- ── footer ──────────────────────────────────────────────────────── -->
+    <footer class="art-foot">
+      <div class="art-tags" aria-label="Tags">
+        {tags.map(t => <span class="tag">{t}</span>)}
+      </div>
+
+      <div class="related-label">Continue Reading</div>
+      <div class="related-grid">
+        {related.map(r => (
+          <a href={r.href}>
+            <span class="rl-eyebrow">{r.eyebrow}</span>
+            {r.label}
+          </a>
+        ))}
+      </div>
+
+      <a href="/products/" class="back-link">← All Journal Entries</a>
+    </footer>
+
+  </div><!-- /.aw -->
+
+</BaseLayout>
