@@ -259,16 +259,6 @@ export const schemaOrganization = {
     },
     {
       "@type": "Certification",
-      "name": "OCS — Organic Content Standard",
-      "issuedBy": { "@type": "Organization", "name": "Control Union" }
-    },
-    {
-      "@type": "Certification",
-      "name": "RCS — Recycled Claim Standard",
-      "issuedBy": { "@type": "Organization", "name": "Control Union" }
-    },
-    {
-      "@type": "Certification",
       "name": "C-TPAT — Customs-Trade Partnership Against Terrorism",
       "issuedBy": { "@type": "Organization", "name": "U.S. Customs and Border Protection" }
     },
@@ -301,7 +291,11 @@ export const schemaOrganization = {
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tech Pack Development", "description": "Full technical package development from sketch or reference to production-ready spec.", "url": SITE_URL + "/tech-pack-service" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sustainable Organic Manufacturing", "description": "GOTS certified organic cotton and GRS certified recycled fabric production.", "url": SITE_URL + "/sustainability" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Full Package Production", "description": "End-to-end manufacturing from yarn spinning and fabric production to finished garment delivery — no outsourcing." } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Low MOQ Manufacturing", "description": "Starting from 300 pieces per style. All production in-house, zero outsourcing. Ideal for startup fashion brands." } }
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Low MOQ Manufacturing", "description": "Starting from 300 pieces per style. All production in-house, zero outsourcing. Ideal for startup fashion brands." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Yarn Sourcing", "description": "Cotton, polyester, recycled, and organic yarn sourcing for knit and woven fabric production.", "url": SITE_URL + "/all-services" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Knitting and Dyeing Service", "description": "In-house knitting and Pantone-matched, GOTS certified fabric dyeing.", "url": SITE_URL + "/all-services" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Trims and Accessories Sourcing", "description": "Labels, hang tags, buttons, zippers, drawcords, and branded packaging materials.", "url": SITE_URL + "/all-services" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Garment Finishing and Packaging", "description": "Pressing, folding, polybagging, and retail-ready finishing and packaging.", "url": SITE_URL + "/all-services" } }
     ]
   },
 
@@ -344,7 +338,14 @@ export const schemaOrganization = {
     "FOB Export Bangladesh",
     "EU GSP Duty-Free Compliance",
     "UK DCTS Trade Compliance",
-    "EU Digital Product Passport Compliance"
+    "EU Digital Product Passport Compliance",
+    "Yarn Sourcing",
+    "Trims and Accessories Sourcing",
+    "Garment Packaging",
+    "Vertically Integrated Garment Manufacturing",
+    "Apparel Manufacturer",
+    "Garments Manufacturer",
+    "Fashion Manufacturer"
   ],
 
   // NOTE: "award" array below intentionally lists certification short names as industry recognition signals.
@@ -358,8 +359,6 @@ export const schemaOrganization = {
     "BSCI Social Compliance Certified",
     "SEDEX SMETA Audited Supplier",
     "GRS Global Recycled Standard Certified",
-    "OCS Organic Content Standard Certified",
-    "RCS Recycled Claim Standard Certified",
     "C-TPAT Certified Importer",
     "WRAP Certified Production Facility",
     "SA8000 Social Accountability Certified",

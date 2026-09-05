@@ -11,16 +11,14 @@ export interface Props {
   datePublished?: string;
   dateModified?: string;
   schema?: object | object[];
-  hreflangRegion?: string;
   noindex?: boolean;
   includeContactHints?: boolean;
 }
 
-const { title, description, ogImage, ogType, canonicalUrl, datePublished, dateModified, schema, hreflangRegion, noindex, includeContactHints } = Astro.props;
+const { title, description, ogImage, ogType, canonicalUrl, datePublished, dateModified, schema, noindex, includeContactHints } = Astro.props;
 const canonical = canonicalUrl
   ? new URL(canonicalUrl, Astro.site).toString()
   : new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).toString();
-const hreflangFallback = new URL('/clothing-manufacturers/', Astro.site).toString();
 ---
 
 <!DOCTYPE html>
@@ -39,23 +37,13 @@ const hreflangFallback = new URL('/clothing-manufacturers/', Astro.site).toStrin
       includeContactHints={includeContactHints}
     />
 
-    <!-- Hreflang -->
-    {hreflangRegion ? (
-      <Fragment>
-        <link rel="alternate" hreflang="x-default" href={hreflangFallback} />
-        <link rel="alternate" hreflang="en" href={hreflangFallback} />
-        <link rel="alternate" hreflang={`en-${hreflangRegion}`} href={canonical} />
-      </Fragment>
-    ) : (
-      <Fragment>
-        <link rel="alternate" hreflang="x-default" href={canonical} />
-        <link rel="alternate" hreflang="en" href={canonical} />
-        <link rel="alternate" hreflang="en-US" href={canonical} />
-        <link rel="alternate" hreflang="en-GB" href={canonical} />
-        <link rel="alternate" hreflang="en-AU" href={canonical} />
-        <link rel="alternate" hreflang="en-CA" href={canonical} />
-      </Fragment>
-    )}
+    <!-- Hreflang: single global English site, no region-specific page variants exist,
+         so we only need x-default + en pointing at each page's own canonical URL.
+         (Previously declared en-US/en-GB/en-AU/en-CA here too, all pointing at the same
+         URL — that only covered 4 of the 16+ markets this site actually serves and
+         didn't reflect any real alternate-language/region pages, so it was simplified.) -->
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <link rel="alternate" hreflang="en" href={canonical} />
 
     <link rel="alternate" type="text/plain" title="SDF Clothing AI Reference" href="/llms.txt" />
     <link rel="alternate" type="text/plain" title="SDF Clothing AI Reference Full" href="/llms-full.txt" />
